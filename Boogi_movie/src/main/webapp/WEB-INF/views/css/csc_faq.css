@@ -1,0 +1,71 @@
+.csc_faq_search {
+	vertical-align: middle;
+	text-align: center;
+	font-weight: bold;
+	background: #3333FF;
+	border-radius: 5px;
+	width: 80%;
+	height: 100px;
+	color:white;
+	margin-left: 50px;
+	position:relative;
+}
+
+.inner {
+	position:absolute;
+	top: 50%;
+	left: 50%;
+ 	transform: translate(-50%, -50%);
+}
+
+.csc_faq_search input[value="검색"] {
+	background: #3333FF;
+	color: white;
+}
+
+.csc_faq_sel {
+	display: flex;
+	justify-content: right;
+}
+
+/* 테이블 행 */
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size:0.9em;
+  
+}
+
+th {
+  background-color: #1b1b1b;
+  color: #ddd;
+}
+
+/* 테이블 올렸을 때 */
+tbody tr:hover {
+  background-color: #d3d3d3;
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+/* 테이블 비율 */
+th:nth-child(1),
+td:nth-child(1) {
+  width: 15%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 20%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 45%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+	width: 20%;
+}

@@ -19,7 +19,7 @@
 </head>
 <body>
 		<header>
-			<jsp:include page="/inc/admin_header.jsp"></jsp:include>
+			<jsp:include page="${pageContext.request.contextPath}//admin_header.jsp"></jsp:include>
 		</header>
 	<div id="wrap">
 		

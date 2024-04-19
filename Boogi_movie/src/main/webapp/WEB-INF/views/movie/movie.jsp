@@ -18,8 +18,11 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+		<header>
+			<jsp:include page="/inc/admin_header.jsp"></jsp:include>
+		</header>
 	<div id="wrap">
-		<header> 헤더 영역</header>
+		
 		<article>
 			<video src="./home.mp4" autoplay muted>
 			</video>
@@ -30,22 +33,22 @@
 				<div class="list">
 					<input type="button" value="뒤로">
 					<div class="movie">
-						<img src="../imageMovie/1.jpg">
+						<img src="${pageContext.request.contextPath}/images/movie_1.jpg">
 						<p>범죄도시</p>
 						<input type="button" value="예매하기"> <input type="button"
 							value="상세보기">
 					</div>
 					<div class="movie">
-						<img src="../imageMovie/2.jpg"> 팬더
+						<img src="${pageContext.request.contextPath}/images/movie_2.jpg"> 팬더
 					</div>
 					<div class="movie">
-						<img src="../imageMovie/3.jpg">
+						<img src="${pageContext.request.contextPath}/images/movie_3.jpg">
 					</div>
 					<div class="movie">
-						<img src="../imageMovie/4.jpg">
+						<img src="${pageContext.request.contextPath}/images/movie_4.jpg">
 					</div>
 					<div class="movie">
-						<img src="../imageMovie/5.jpg">
+						<img src="${pageContext.request.contextPath}/images/movie_5.jpg">
 					</div>
 					<input type="button" value="앞으로">
 				</div>
@@ -54,27 +57,27 @@
 				<h1>박스오피스 순위</h1>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="../imageMovie/1.jpg" class="d-block w-100" alt="..." >
+						<img src="${pageContext.request.contextPath}/images/movie_1.jpg" class="d-block w-100" alt="..." >
 						<div class="lank">
-						 <img src="../imageMovie/1st.png">
+						 <img src="${pageContext.request.contextPath}/images/movie_1st.png">
 <!-- 						 대충해놓음 -->
 						 
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img src="../imageMovie/2.jpg" class="d-block w-100" alt="...">
+						<img src="${pageContext.request.contextPath}/images/movie_1.jpg" class="d-block w-100" alt="...">
 					</div>
 					<div class="carousel-item">
-						<img src="../imageMovie/3.jpg" class="d-block w-100" alt="...">
+						<img src="${pageContext.request.contextPath}/images/movie_2.jpg" class="d-block w-100" alt="...">
 					</div>
 				</div>
 				<button class="carousel-control-prev" type="button"
 					data-bs-target="#carouselExample" data-bs-slide="prev">
-					 <img src="../imageMovie/left.png">
+					 <img src="${pageContext.request.contextPath}/images/movie_left.png">
 				</button>
 				<button class="carousel-control-next" type="button"
 					data-bs-target="#carouselExample" data-bs-slide="next">
-					 <img src="../imageMovie/right.png">
+					 <img src="${pageContext.request.contextPath}/images/movie_right.png">
 				</button>
 			</div>
 	

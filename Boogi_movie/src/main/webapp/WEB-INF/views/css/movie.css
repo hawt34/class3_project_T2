@@ -2,11 +2,11 @@
 * {
 	margin: 0;
 	padding: 0;
-	border: 1px solid skyblue; 
+/* 	border: 1px solid skyblue;  */
 }
 
 body {
-	background-color: #fffde7;
+/* 	background-color: #fffde7; */
 }
 
 #wrap {
@@ -15,16 +15,14 @@ body {
 }
 
 header {
-	width: 1200px;
-	height: 100px;
-	background-color: #ffe082;
+/* 	background-color: #ffe082; */
 }
 
 article {
 	position: relative;
 	width: 1200px;
 	height: 800px;
-	background-color: #ffd54f;
+/* 	background-color: #ffd54f; */
 	overflow: hidden;
 }
 

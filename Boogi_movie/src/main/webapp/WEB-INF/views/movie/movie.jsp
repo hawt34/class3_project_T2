@@ -62,19 +62,19 @@
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img src="../image/2.jpg" class="d-block w-100" alt="...">
+						<img src="../imageMovie/2.jpg" class="d-block w-100" alt="...">
 					</div>
 					<div class="carousel-item">
-						<img src="../image/3.jpg" class="d-block w-100" alt="...">
+						<img src="../imageMovie/3.jpg" class="d-block w-100" alt="...">
 					</div>
 				</div>
 				<button class="carousel-control-prev" type="button"
 					data-bs-target="#carouselExample" data-bs-slide="prev">
-					 <img src="../image/left.png">
+					 <img src="../imageMovie/left.png">
 				</button>
 				<button class="carousel-control-next" type="button"
 					data-bs-target="#carouselExample" data-bs-slide="next">
-					 <img src="../image/right.png">
+					 <img src="../imageMovie/right.png">
 				</button>
 			</div>
 	

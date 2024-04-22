@@ -25,67 +25,71 @@ body {
 </head>
 <body>
 
+<header>
+	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
+</header>
 
-<div class="sidebar1">
-	<jsp:include page="../sidebar/sidebar.jsp"></jsp:include>
-</div>
 
 
 <div class="container1">
-
+<div class="container2">
 		
 
 	
-	<div class="row box1">
-		<div class="top">
-			<h2>예매내역</h2>
+	<div class="row">
+		<div class="col-md-2 box1">
+			<jsp:include page="../sidebar/sidebar.jsp"></jsp:include>
+		</div><!-- sidebar1 -->
+<!-- 			<div class="col-10 top"> -->
+<!-- 			</div>top -->
+			<!-- 탭 메뉴 -->
+			<!-- 내용 -->
+		<div class="col-md-10 box-in">
+			<div class="row">
+				<div class="col-10">
+				
+					<h2>예매내역</h2>
+				</div>
+				<div class="col-2">
 					<select>
 						<option selected>1주일</option>
 						<option value="1">1개월</option>
 						<option value="2">3개월</option>
 						<option value="3">기간 설정</option>
 					</select>
-		</div><!-- top -->
-		<!-- 탭 메뉴 -->
-		<ul class="nav nav-tabs" id="myTab" role="tablist">
-			<li class="nav-item" role="presentation">
-				<button class="nav-link active" id="userinfo-tab" data-bs-toggle="tab"
-					data-bs-target="#userinfo" type="button" role="tab" aria-controls="userinfo"
-					aria-selected="true">예매내역</button>
-			</li>
-		</ul>
-		<!-- 내용 -->
-		<div class="box-in">
-			<div class="box2">
-<!-- 				<div class="poster"> -->
-					<img src="../image/img1.jpg" width="20%" height="100%">
-<!-- 					<div class="title"><h4>범죄도시4</h4></div> -->
-<!-- 				</div> -->
-				
-			</div>	
+				</div><!-- col-2 -->
+			</div><!--  하위 row -->
+			
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="userinfo-tab" data-bs-toggle="tab"
+						data-bs-target="#userinfo" type="button" role="tab" aria-controls="userinfo"
+						aria-selected="true">예매내역</button>
+				</li>
+			</ul>
+			
+			
+			
+				<div class="box2">
+						<img src="../image/img1.jpg" width="200px" height="250px">
+				</div>	
+				<hr>
+				<div class="box2">
+					<img src="../image/img2.jpg" width="200px" height="250px">
+				</div>	
+				<hr>
+				<div class="box2">
+					<img src="../image/img3.jpg" width="200px" height="250px">
+				</div>	
+				<hr>
+				<div class="box2">
+					<img src="../image/img4.jpg" width="200px" height="250px">
+				</div>	
 			<hr>
-			<div class="box2">
-				<img src="../image/img2.jpg" width="20%" height="100%">
-				
-				
-			</div>	
-			<hr>
-			<div class="box2">
-				<img src="../image/img3.jpg" width="20%" height="100%">
-				
-				
-			</div>	
-			<hr>
-			<div class="box2">
-				<img src="../image/img4.jpg" width="20%" height="100%">
-				
-				
-			</div>	
-			<hr>
-		</div><!-- box-in -->
+		</div><!-- col-md-10 -->
 	</div><!-- row box1 -->
-
-</div> <!-- contaier -->
+</div><!-- container2 -->
+</div> <!-- container -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 

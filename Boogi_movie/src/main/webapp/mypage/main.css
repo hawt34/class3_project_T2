@@ -2,10 +2,15 @@
 
 .container1{
 	height : 900px;
-	width: 1000px; /* 해상도 1200*/
+	width: 1200px; /* 해상도 1200*/
 /* 	min-width: 1200px; 페이지 최소 너비를 1200으로 설정 해상도 1200 */
 	margin-top: 15%; /* 중앙정렬 해상도 1200*/
 	margin-left: 20%;
+}
+
+.container2{
+	width: 80%;
+	height: 100px;
 }
 
 /* .text1{ */

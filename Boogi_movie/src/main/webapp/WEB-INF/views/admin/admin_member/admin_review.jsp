@@ -167,7 +167,6 @@ td:nth-child(6) {
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
@@ -178,7 +177,6 @@ td:nth-child(6) {
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
@@ -189,7 +187,6 @@ td:nth-child(6) {
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>

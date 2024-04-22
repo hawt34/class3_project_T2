@@ -34,8 +34,8 @@
 
 .btn-group-vertical {
 	background: white;
-	border-top: 3px solid black;
-	border-bottom: 3px solid black;
+	border-top: 3px solid skyblue;
+	border-bottom: 3px solid skyblue;
 }
 
 .sideVar_title {
@@ -48,6 +48,10 @@
 .admin_aside_name{
 	font-weight: bold;
 }
+a{
+	text-decoration: none;
+	color: black;	
+}
 </style>
 <div class="sideVar">
 	<!--  사이드바 영역  -->
@@ -55,7 +59,7 @@
 		<div class="btn-group-vertical">
 			<!-- 사이드바 타이틀 -->
 			<div class="sideVar_title">
-				<h4 class="admin_aside_name">관리자페이지</h4>
+				<a href="../admin_main/admin_main.jsp"><h4 class="admin_aside_name">관리자페이지</h4></a>
 			</div>
 			<div class="btn-group dropright">
 				<!-- 마우스 오버 전 카테고리 -->
@@ -64,9 +68,9 @@
 				</button>
 				<div class="dropdown-menu">
 					<!-- 마우스 오버 후 서브메뉴 -->
-					<a class="dropdown-item" href="#">회원정보관리</a> <a
-						class="dropdown-item" href="#">리뷰관리</a> <a class="dropdown-item"
-						href="#">예매관리</a>
+					<a class="dropdown-item" href="../admin_member/admin_member.jsp">회원정보관리</a> 
+					<a class="dropdown-item" href="../admin_member/admin_review.jsp">리뷰관리</a> 
+					<a class="dropdown-item" href="../admin_member/admin_reserve.jsp">예매관리</a>
 				</div>
 			</div>
 			<div class="btn-group dropright">
@@ -74,9 +78,8 @@
 					<h5>영화</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">영화정보관리</a> <a
-						class="dropdown-item" href="#">상영일정관리</a> <a class="dropdown-item"
-						href="#">박스오피스조회</a>
+					<a class="dropdown-item" href="../admin_movie/admin_movie.jsp">영화정보관리</a> 
+					<a class="dropdown-item" href="../admin_movie/admin_moviePlan.jsp">상영일정관리</a>
 				</div>
 			</div>
 			<div class="btn-group">

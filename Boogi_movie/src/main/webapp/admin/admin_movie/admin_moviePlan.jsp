@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 - 영화관리</title>
+<title>관리자페이지 - 회원관리</title>
 <link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 링크 -->
 <link
@@ -50,15 +50,15 @@ th:nth-child(1), td:nth-child(1) {
 }
 
 th:nth-child(2), td:nth-child(2) {
-	width: 15%;
+	width: 5%;
 }
 
 th:nth-child(3), td:nth-child(3) {
-	width: 10%;
+	width: 15%;
 }
 
 th:nth-child(4), td:nth-child(4) {
-	width: 10%;
+	width: 20%;
 }
 
 th:nth-child(5), td:nth-child(5) {
@@ -71,19 +71,21 @@ th:nth-child(6), td:nth-child(6) {
 th:nth-child(7), td:nth-child(7) {
 	width: 10%;
 }
+th:nth-child(8), td:nth-child(8) {
+	width: 15%;
+}
 
-
-.admin_movie_head {
+.admin_member_head {
 	margin: 50px 0;
 	text-align: right;
 }
 
-.admin_movie_body {
-	margin-bottom: 30px;
+.admin_member_body {
+	margin-bottom: 100px;
 	clear: right;
 }
 
-.admin_movie_search {
+.admin_member_search {
 	height: 50px;
 	width: 360px;
 	background: #black;
@@ -92,7 +94,7 @@ th:nth-child(7), td:nth-child(7) {
 	margin-bottom: 20px;
 }
 
-.admin_movie_search>input[type=text] {
+.admin_member_search>input[type=text] {
 	font-size: 18px;
 	height: 46px;
 	width: 150px;
@@ -100,7 +102,7 @@ th:nth-child(7), td:nth-child(7) {
 	outline: none;
 }
 
-.admin_movie_search>select {
+.admin_member_search>select {
 	font-size: 18px;
 	height: 46px;
 	width: 100px;
@@ -108,7 +110,7 @@ th:nth-child(7), td:nth-child(7) {
 	padding-left: 10px;
 }
 
-.admin_movie_search > button {
+.admin_member_search>button {
 	width: 90px;
 	height: 46px;
 	background: black;
@@ -116,15 +118,8 @@ th:nth-child(7), td:nth-child(7) {
 	color: white;
 	font-weight: bold;
 }
-.admin_movie_footer > button {
-	width: 90px;
-	height: 46px;
-	background: black;
-	outline: none;
-	color: white;
-	font-weight: bold;
-}
-.admin_movie_title {
+
+.admin_member_title {
 	float: left;
 	font-size: 30px;
 	margin-left: 100px;
@@ -138,6 +133,8 @@ th:nth-child(7), td:nth-child(7) {
 	</header>
 
 	<main>
+		<!-- 메인이랑 바디 사이 -->
+		<div class="admin_main_between"></div>
 
 		<div class="row">
 
@@ -149,76 +146,93 @@ th:nth-child(7), td:nth-child(7) {
 			<div class="col-md-10">
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
-				<div class="admin_movie_head">
-					<div class="admin_movie_title">영화관리</div>
-					<div class="admin_movie_search">
+				<div class="admin_member_head">
+					<div class="admin_member_title">회원정보관리</div>
+					<div class="admin_member_search">
 						<select>
-							<option>영화명</option>
-							<option>상영상태</option>
-						</select> 
-						<input type="text" placeholder="검색어 입력">
+							<option>이름</option>
+							<option>아이디</option>
+						</select> <input type="text" placeholder="검색어 입력">
 						<button>검색</button>
 					</div>
 				</div>
 
 				<!-- 바디 부분 여기 표 넣을거임 -->
-				<div class="admin_movie_body">
+				<div class="admin_member_body">
 					<table>
 						<thead>
 							<tr>
-								<th>영화코드</th>
-								<th>영화제목</th>
-								<th>상영시간</th>
-								<th>상영일</th>
-								<th>종영일</th>
-								<th>상영상태</th>
-								<th>수정/삭제</th>
+								<th>이름</th>
+								<th>나이</th>
+								<th>회원ID</th>
+								<th>이메일</th>
+								<th>가입일</th>
+								<th>탈퇴일</th>
+								<th>회원상태</th>
+								<th>회원정보수정</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>1231221</td>
-								<td>윙카</td>
-								<td>126분</td>
-								<td>2024-04-12</td>
-								<td>2024-06-19</td>
-								<td>현재상영작</td>
+								<td>박종민</td>
+								<td>28살</td>
+								<td>admin</td>
+								<td>admin@gmail.com</td>
+								<td>2024-04-19</td>
+								<td></td>
+								<td>회원</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
 							<tr>
-								<td>1231221</td>
-								<td>윙카</td>
-								<td>126분</td>
-								<td>2024-04-12</td>
-								<td>2024-06-19</td>
-								<td>현재상영작</td>
+								<td>전준혁</td>
+								<td>29살</td>
+								<td>junhyuk</td>
+								<td>junhyuk@gmail.com</td>
+								<td>2024-04-19</td>
+								<td></td>
+								<td>회원</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
 							<tr>
-								<td>1231221</td>
-								<td>윙카</td>
-								<td>126분</td>
-								<td>2024-04-12</td>
-								<td>2024-06-19</td>
-								<td>현재상영작</td>
+								<td>전준혁</td>
+								<td>29살</td>
+								<td>junhyuk</td>
+								<td>junhyuk@gmail.com</td>
+								<td>2024-04-19</td>
+								<td></td>
+								<td>회원</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
 							<tr>
-								<td>1231221</td>
-								<td>윙카</td>
-								<td>126분</td>
-								<td>2024-04-12</td>
-								<td>2024-06-19</td>
-								<td>현재상영작</td>
+								<td>전준혁</td>
+								<td>29살</td>
+								<td>junhyuk</td>
+								<td>junhyuk@gmail.com</td>
+								<td>2024-04-19</td>
+								<td></td>
+								<td>회원</td>
+								<td>
+									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary">삭제</button>
+								</td>
+							</tr>
+							<tr>
+								<td>전준혁</td>
+								<td>29살</td>
+								<td>junhyuk</td>
+								<td>junhyuk@gmail.com</td>
+								<td>2024-04-19</td>
+								<td>2024-04-20</td>
+								<td>탈퇴</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
@@ -226,10 +240,6 @@ th:nth-child(7), td:nth-child(7) {
 							</tr>
 						</tbody>
 					</table>
-				</div>
-				
-				<div class="admin_movie_footer" align="center">
-					<button onclick="movieForm()">영화등록</button>
 				</div>
 
 			</div>
@@ -241,12 +251,5 @@ th:nth-child(7), td:nth-child(7) {
 		<jsp:include page="../admin_main/admin_footer.jsp"></jsp:include>
 	</footer>
 
-	<script type="text/javascript">
-		function movieForm() {
-			window.open("admin_movie_form.jsp", "movieForm", "width=1000, height=800, top=100, left=400");
-		}
-	
-	
-	</script>
 </body>
 </html>

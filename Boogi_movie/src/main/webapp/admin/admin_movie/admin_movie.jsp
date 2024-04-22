@@ -153,8 +153,8 @@ th:nth-child(7), td:nth-child(7) {
 					<div class="admin_movie_title">영화관리</div>
 					<div class="admin_movie_search">
 						<select>
-							<option>영화명</option>
-							<option>상영상태</option>
+							<option>이름</option>
+							<option>아이디</option>
 						</select> 
 						<input type="text" placeholder="검색어 입력">
 						<button>검색</button>

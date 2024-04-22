@@ -9,9 +9,9 @@
 <link href="admin_aside.css" rel="stylesheet">
 <link href="admin_footer.css" rel="stylesheet">
 <link href="admin_header.css" rel="stylesheet">
-<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <style>
-/* @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Kaushan+Script&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Kaushan+Script&display=swap');
 
 a {
    text-decoration: none;

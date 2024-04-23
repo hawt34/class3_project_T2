@@ -28,16 +28,6 @@ main {
   font-style: normal;
 }
 
-body {
-    color : #151619;
-    line-height: 1.5em;
-    margin: 0px;
-}
-main {
-  font-family: "Gowun Dodum", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
 .admin_main_center{
 	margin-top: 60px;
 }

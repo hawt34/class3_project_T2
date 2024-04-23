@@ -5,15 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/css/movie_info.css"
-	rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/Resources/css/movie_info.css" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 <body>
 	<header>
-		<jsp:include page="/inc/admin_header.jsp"></jsp:include>
+<%-- 		<jsp:include page="/inc/admin_header.jsp"></jsp:include> --%>
 	</header>
 	<div id="wrap">
 

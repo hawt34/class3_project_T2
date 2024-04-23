@@ -2,11 +2,12 @@
 
 .container1{
 	height : 900px;
-	width: 1000px; /* 해상도 1200*/
+	width: 1200px; /* 해상도 1200*/
 /* 	min-width: 1200px; 페이지 최소 너비를 1200으로 설정 해상도 1200 */
 /* 	margin: 0 auto; 중앙정렬 해상도 1200 */
-	margin-top: 15%;
-	margin-left: 20%;
+/* 	margin-top: 15%; */
+/* 	margin-left: 20%; */
+/* 	    display: flex; */
 }
 .admin_header_left{
    float:left;
@@ -20,15 +21,20 @@
    color: white;
    border-radius: 10px;
 }
-
-.box-in{
-	height: 900px;
+select{
+	float: right;
 }
-
-.box2{
+/* .box1{ */
+/* 	margin-top: 10px; */
+/* 	height: 900px; */
+/* } */
+/* .box-in{ */
+/* 	margin-top: 10px; */
+/* } */
+/* .box2{ */
 /* 	height: 25%; */
-	margin-top: 20px;
-}
+/* 	margin-top: 20px; */
+/* } */
 
 select{
 	float: right;

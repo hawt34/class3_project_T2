@@ -39,7 +39,7 @@ body {
 				
 		
 		
-			<div class="row box1">
+			<div class="row box1">  
 			<h2>취소내역 / 안내</h2>
 						<!-- 탭 메뉴 -->
 				<ul class="nav nav-tabs" id="myTab" role="tablist">

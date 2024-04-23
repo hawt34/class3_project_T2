@@ -10,10 +10,22 @@
 <link href="${pageContext.request.contextPath}/css/member_default.css" rel="stylesheet" type="text/css">
 
 <body>
+
+<header>
+	<jsp:include page="${pageContext.request.contextPath}/admin/admin_main/admin_header.jsp"></jsp:include>
+</header>
+
+
+
+<section class="member_section">
+	<div class="member_title">
+	    <h1>회원가입</h1>
+	    <hr>
+    </div>
 <form action="action_page.php" method="post">
-  <div class="container">
-    <h1>회원가입</h1>
-    <hr>
+  <div class="member_row">
+  	
+
     <div class="form_item">
     	<label for="name"><b>이름</b></label>
     	<input type="text"  name="name" id="name" required value="가입확인할때 받은 이름">
@@ -54,16 +66,20 @@
 				<label><input type="checkbox" id="cb_all">전체선택</label>
 			</div>
 		</div>
-<div class="regist_fianl">
+	<div class="regist_fianl">
 		<hr>
 		<button type="submit" class="registerbtn">가입하기</button>
 	<div class="container signin">
-		<p>아이디가 이미 있으신가요? <a href="#">돌아가기</a>.</p>
+		<p>이미 가입하셨나요? <a href="#">돌아가기</a>.</p>
 	</div>
 </div>
 </div>
 </form>
-	
+</section>
+
+	<footer>
+		<jsp:include page="${pageContext.request.contextPath}/admin/admin_main/admin_footer.jsp"></jsp:include>
+	</footer>
 
 
 

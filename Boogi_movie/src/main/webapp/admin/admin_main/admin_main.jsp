@@ -106,7 +106,7 @@ main {
 						<div class="admin_main_title">
 							<h1>⊙ 관리자페이지 Home (o゜▽゜)o☆</h1>
 						</div>
-
+					
 						<div class="admin_dashboard">
 							<div class="admin_main_center_card" onclick="location.href='#'">
 								<div class="admin_main_card" align="left">◇금일 예매 현황</div>

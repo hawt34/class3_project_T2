@@ -3,12 +3,19 @@
 * {box-sizing: border-box}
 
 /* Add padding to containers */
-.container {
-  padding: 16px;
-  max-width : 400px;
-  margin : 0 auto;
+
+.box1 {
+	padding: 16px;
+	max-width : 400px;
+	width: 40%;
+	margin-top: 100px;
 }
 
+.member_row{
+	width: 70%;
+	margin-left : 350px;	
+}
+	
 /* Full-width input fields */
 input[type=text], input[type=password]{
   width: 100%;
@@ -18,6 +25,7 @@ input[type=text], input[type=password]{
   border: none;
   background: #f1f1f1;
 }
+
 .movTaste{
   width: 100%;
   padding: 15px 15px 15px 0;
@@ -100,3 +108,15 @@ input[type=checkbox] {
     margin-right: 5px; /* 체크박스와 텍스트 사이의 간격 조절 */
 }
 
+.member_title{
+	margin-left : 350px;	
+	margin-top : 100px;
+	margin-bottom : 100px;
+	
+}	
+
+.member_section{
+	width:1200px;
+	margin-left : 200px;
+	margin-bottom : 100px;
+}

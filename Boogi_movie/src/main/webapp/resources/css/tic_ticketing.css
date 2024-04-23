@@ -3,11 +3,16 @@
 	@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap');
 
 	
+	
+	
+	
 	body {
 		font-family: "Nanum Gothic Coding", monospace;
 		font-weight: 400;
 		font-style: normal;
+		 margin: 0px;
 	}
+	
 		/* 스크롤바 설정*/
 	.scroll::-webkit-scrollbar{
 		width: 18px;
@@ -27,21 +32,17 @@
 		background-color: rgba(0,0,0,0);
 	}
 	
-	
-	
-	
-	.container-xl{
-		max-width : 80%;
-		box-sizing: border-box;
-		margin : auto;
-		border : solid 3px black;
+	.tic{
+		padding-right : 0!important;
+		padding-left : 0!important;
 	}
+	
 	
 	.tic_movie{
 		background-color : white;
 		height : 800px;
-		padding : inherit;
 		border : solid 3px black;
+		margin-right:0;
 	}
 	
 	.tic_theater{
@@ -52,6 +53,7 @@
 		border : solid 3px black;
 		
 	}
+	
 	
 	.tic_final{
 		background-color : white;
@@ -67,8 +69,8 @@
 	}
 	
 	.list{
-		height: calc(90% - 6px); /* 내부 padding과 border 높이를 고려한 계산 */
-		padding : 20px;
+		height: calc(90% - 20px); /* 내부 padding과 border 높이를 고려한 계산 */
+		padding : 5px;
 	}
 		
 		
@@ -77,13 +79,41 @@
 		list-style-type : none;
 	}
 	
+	
+	ul{
+		padding-left: 5px!important;
+	}
+	
 	.daylist{
 		height : 10%;
 		border-bottom : solid 3px black;
 		display: flex; /* Flexbox 설정 */
-		justify-content: center; /* 수직 가운데 정렬 */
 		align-items: center; /* 버튼을 수직으로 가운데 정렬 */
 		
+	}
+	
+	.scroll_button {
+	    cursor: pointer;
+	    padding: 5px;
+	    border: none;
+	    width: 50px;
+	    height: 50px;
+	    top: 50%;
+	    transform: translateY(-50%);
+	}
+	
+	.scroll-button.left {
+    	left: 0;
+	}
+	
+	.scroll-button.right {
+    	right: 0;
+	}
+	
+	
+	button img{
+		height:100%;
+		width: 100%;
 	}
 	
 	.daylist button {
@@ -91,7 +121,7 @@
 	}
 	
 	.movielist{
-		height : calc(90% - 50px);
+		height : calc(90% - 100px);
 		padding-left : 20px;
 		overflow-y: scroll; 
 		white-space: nowrap;
@@ -100,23 +130,22 @@
 	.select_container {
 		 margin-top: -15px;
 		 position : relative;
-		 width: 30%;
-		 height: 3%;
-		 margin-left : 225px;
+		 height: 10%;
+		 margin-left : 140px;
+		 width : 200px;
 	}
 	
 	
 	.movie_atrbt{
-		width : 50px;
 		height : 80px;
 		
 	}
-	
 	
 	.theaterlist {
 	    overflow-y: scroll; /* 세로 스크롤이 필요할 때만 스크롤을 표시합니다. */
 		max-height: 100%; /* 부모 요소의 높이에 맞게 조절합니다. */
 		white-space: nowrap;
+		padding-left : 10px;
 	}
 	
 	.daylist {
@@ -131,7 +160,7 @@
 	
 	.finalmovielist{
 		height : calc(90% - 50px);
-		padding-left : 20px;
+		padding-left : 10px;
 		overflow-y: scroll; 
 		white-space: nowrap;
 	}
@@ -252,4 +281,33 @@ select[multiple] {
   background-color: #eee;
   background-image: linear-gradient(to top, #ddd, #eee 33%);
 }  
+}
+
+.side_var{
+	margin-right : 50px;
+	
+}
+
+.tic_main{
+	width : 1200px;
+	margin-left : 250px;
+}
+
+
+.tic_title{
+	margin-left : 350px;	
+	margin-top : 100px;
+	margin-bottom : 100px;
+}
+
+.tic_row{
+	margin-bottom : 100px;
+	margin-left : 300px;
+}
+	
+.tic_button{
+	text-align : right;
+	width : 20%;
+	height : 20%;
+	margin-bottom : 100px;
 }

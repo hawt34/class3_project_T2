@@ -7,30 +7,29 @@
 <title>회원가입</title>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
-<link href="${pageContext.request.contextPath}/css/member_default.css" rel="stylesheet" type="text/css">
-
+<link href="${pageContext.request.contextPath}/resources/css/member_default.css" rel="stylesheet" type="text/css">
 <body>
 
+
+
+
 <header>
-	<jsp:include page="${pageContext.request.contextPath}/admin/admin_main/admin_header.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
-
-
 
 <section class="member_section">
 	<div class="member_title">
-	    <h1>회원가입</h1>
+	    <h3>회원가입</h3>
 	    <hr>
     </div>
 <form action="action_page.php" method="post">
-  <div class="member_row">
-  	
-
-    <div class="form_item">
-    	<label for="name"><b>이름</b></label>
-    	<input type="text"  name="name" id="name" required value="가입확인할때 받은 이름">
-    	<span></span>
-    </div>
+	<div class="member_row">
+		
+	    <div class="form_item">
+	    	<label for="name"><b>이름</b></label>
+	    	<input type="text"  name="name" id="name" required value="가입확인할때 받은 이름">
+	    	<span></span>
+	    </div>
 	
 	
 	<label for="id"><b>아이디</b></label>
@@ -58,27 +57,25 @@
     <input type="text" placeholder="전화번호 입력" name="phoneNum" id="phoneNum" placeholder="-제외한 전화번호를 입력해주세요" required >
     
 		<div class="form_item">
-		<label for="movTaste"><b>영화취향</b></label>
-			<div class="movTaste">
-				<label><input type="checkbox" name="movTaste" value="공포">공포</label>
-				<label><input type="checkbox" name="movTaste" value="코믹">코믹</label>
-				<label><input type="checkbox" name="movTaste" value="시사">시사</label>
-				<label><input type="checkbox" id="cb_all">전체선택</label>
+			<label for="movTaste"><b>영화취향</b></label>
+				<div class="movTaste">
+					<label><input type="checkbox" name="movTaste" value="공포">공포</label>
+					<label><input type="checkbox" name="movTaste" value="코믹">코믹</label>
+					<label><input type="checkbox" name="movTaste" value="시사">시사</label>
+					<label><input type="checkbox" id="cb_all">전체선택</label>
+				</div>
 			</div>
-		</div>
-	<div class="regist_fianl">
-		<hr>
-		<button type="submit" class="registerbtn">가입하기</button>
-	<div class="container signin">
-		<p>이미 가입하셨나요? <a href="#">돌아가기</a>.</p>
+		<div class="regist_fianl">
+			<hr>
+			<button type="submit" class="btn btn-outline-primary">가입하기</button>
+			<button type="button" class="btn btn-outline-primary">돌아가기</button>
 	</div>
-</div>
 </div>
 </form>
 </section>
 
 	<footer>
-		<jsp:include page="${pageContext.request.contextPath}/admin/admin_main/admin_footer.jsp"></jsp:include>
+		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
 
@@ -128,3 +125,4 @@
 	</script>
 </body>
 </html>
+  	

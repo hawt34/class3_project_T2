@@ -130,13 +130,13 @@ body {
 				      
 				<div class="col-md-1"></div>
 				<div class="col-md-2" align="center">
-					<img src="../../image/부기2.png">
+					<img src="${pageContext.request.contextPath}/resources/images/topBoogi.png">
 				</div>
 				<div class="col-md-5" align="center">
 					<a class="kaushan-script-regular" href="#">Boogie Movie</a>
 				</div>
 				<div class="col-md-2" align="center">
-					<img src="../../image/부기2.png">
+					<img src="${pageContext.request.contextPath}/resources/images/topBoogi.png">
 				</div>
 				<div class="col-md-1"></div>
 			</div>

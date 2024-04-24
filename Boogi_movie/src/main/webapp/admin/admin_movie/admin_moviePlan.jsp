@@ -50,15 +50,15 @@ th:nth-child(1), td:nth-child(1) {
 }
 
 th:nth-child(2), td:nth-child(2) {
-	width: 5%;
+	width: 7%;
 }
 
 th:nth-child(3), td:nth-child(3) {
-	width: 15%;
+	width: 25%;
 }
 
 th:nth-child(4), td:nth-child(4) {
-	width: 20%;
+	width: 10%;
 }
 
 th:nth-child(5), td:nth-child(5) {
@@ -75,42 +75,22 @@ th:nth-child(8), td:nth-child(8) {
 	width: 15%;
 }
 
-.admin_member_head {
+.admin_plan_head {
 	margin: 50px 0;
 	text-align: right;
 }
 
-.admin_member_body {
+.admin_plan_body {
 	margin-bottom: 100px;
-	clear: right;
 }
 
-.admin_member_search {
-	height: 50px;
-	width: 360px;
+.admin_moviePlan_search {
+	height: 35px;
+	width: 80%;
 	background: #black;
-	float: right;
-	margin-right: 100px;
-	margin-bottom: 20px;
+	text-align: center;
 }
-
-.admin_member_search>input[type=text] {
-	font-size: 18px;
-	height: 46px;
-	width: 150px;
-	padding: 5px;
-	outline: none;
-}
-
-.admin_member_search>select {
-	font-size: 18px;
-	height: 46px;
-	width: 100px;
-	outline: none;
-	padding-left: 10px;
-}
-
-.admin_member_search>button {
+.admin_plan_search>button {
 	width: 90px;
 	height: 46px;
 	background: black;
@@ -119,125 +99,171 @@ th:nth-child(8), td:nth-child(8) {
 	font-weight: bold;
 }
 
-.admin_member_title {
+.admin_plan_title {
 	float: left;
 	font-size: 30px;
 	margin-left: 100px;
+	margin-bottom: 30px;
+}
+.admin_plan_body_search{
+	margin-bottom: 30px;
 }
 </style>
 </head>
 <body>
 
 	<header>
-		<jsp:include page="${pageContext.request.contextPath}/inc/admin_header.jsp"></jsp:include>
+		<jsp:include page="/inc/admin_header.jsp"></jsp:include>
 	</header>
 
 	<main>
 		<!-- 메인이랑 바디 사이 -->
-		<div class="admin_main_between"></div>
-
 		<div class="row">
 
 			<div class="col-md-2">
 				<!-- 사이드바 영역 -->
-				<jsp:include page="${pageContext.request.contextPath}/inc/admin_aside.jsp"></jsp:include>
+					<jsp:include page="/admin/admin_main/admin_aside.jsp"></jsp:include>
 			</div>
 
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
-				<div class="admin_member_head">
-					<div class="admin_member_title">회원정보관리</div>
-					<div class="admin_member_search">
-						<select>
-							<option>이름</option>
-							<option>아이디</option>
-						</select> <input type="text" placeholder="검색어 입력">
-						<button>검색</button>
-					</div>
+				<div class="admin_plan_head">
+					<div class="admin_plan_title">상영일정관리</div>
+					
 				</div>
-
+				
 				<!-- 바디 부분 여기 표 넣을거임 -->
-				<div class="admin_member_body">
-					<table>
+				<div class="admin_plan_body">
+					<table class="admin_plan_body_search">
 						<thead>
 							<tr>
-								<th>이름</th>
-								<th>나이</th>
-								<th>회원ID</th>
-								<th>이메일</th>
-								<th>가입일</th>
-								<th>탈퇴일</th>
-								<th>회원상태</th>
-								<th>회원정보수정</th>
+								<th>극장</th>
+								<th>상영관</th>
+								<th>영화제목</th>
+								<th>상영날짜</th>
+								<th>상영시작시간</th>
+								<th>상영종료시간</th>
+								<th>상영일정수정</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>박종민</td>
-								<td>28살</td>
-								<td>admin</td>
-								<td>admin@gmail.com</td>
+								<td>
+									<div>
+										<select class="admin_moviePlan_search">
+											<option value="극장선택">극장선택</option>
+											<option value="부산진구">부산진구</option>
+											<option value="해운대구">해운대구</option>
+											<option value="북구">북구</option>
+											<option value="남구">남구</option>
+											<option value="서구">서구</option>
+										</select> 
+									</div>
+								</td>
+								<td>
+									<div>
+										<select class="admin_moviePlan_search">
+											<option value="-관">-관</option>
+											<option value="1관">1관</option>
+											<option value="2관">2관</option>
+											<option value="3관">3관</option>
+											<option value="4관">4관</option>
+											<option value="5관">5관</option>
+											<option value="6관">6관</option>
+										</select> 
+									</div>
+								</td>
+								<td>
+									<div>
+										<select class="admin_moviePlan_search">
+											<option value="영화제목">영화제목</option>
+											<option value="윙카">윙카</option>
+											<option value="파묘">파묘</option>
+											<option value="전준혁">전준혁</option>
+											<option value="센과치히로">센과치히로</option>
+											<option value="현실을 살아라">현실을 살아라</option>
+										</select> 
+									</div>
+								</td>
+								<td>
+									<input type="date" class="admin_moviePlan_search">
+								</td>
+								<td>
+									<input type="time" class="admin_moviePlan_search">
+								</td>
+								<td>
+									<input type="text" class="admin_moviePlan_search" readonly>
+								</td>
+								<td>
+									<button type="button" class="btn btn-outline-primary">등록하기</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<table>
+						<thead>
+							<tr>
+								<th>극장</th>
+								<th>상영관</th>
+								<th>영화제목</th>
+								<th>상영날짜</th>
+								<th>상영시작시간</th>
+								<th>상영종료시간</th>
+								<th>상영일정등록</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>서면점</td>
+								<td>3관</td>
+								<td>윙카</td>
 								<td>2024-04-19</td>
-								<td></td>
-								<td>회원</td>
+								<td>15:12</td>
+								<td>17:18</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
 							<tr>
-								<td>전준혁</td>
-								<td>29살</td>
-								<td>junhyuk</td>
-								<td>junhyuk@gmail.com</td>
+								<td>서면점</td>
+								<td>3관</td>
+								<td>윙카</td>
 								<td>2024-04-19</td>
-								<td></td>
-								<td>회원</td>
+								<td>15:12</td>
+								<td>17:18</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
 							<tr>
-								<td>전준혁</td>
-								<td>29살</td>
-								<td>junhyuk</td>
-								<td>junhyuk@gmail.com</td>
+								<td>서면점</td>
+								<td>3관</td>
+								<td>윙카</td>
 								<td>2024-04-19</td>
-								<td></td>
-								<td>회원</td>
+								<td>15:12</td>
+								<td>17:18</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
 							<tr>
-								<td>전준혁</td>
-								<td>29살</td>
-								<td>junhyuk</td>
-								<td>junhyuk@gmail.com</td>
+								<td>서면점</td>
+								<td>3관</td>
+								<td>윙카</td>
 								<td>2024-04-19</td>
-								<td></td>
-								<td>회원</td>
+								<td>15:12</td>
+								<td>17:18</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
-							<tr>
-								<td>전준혁</td>
-								<td>29살</td>
-								<td>junhyuk</td>
-								<td>junhyuk@gmail.com</td>
-								<td>2024-04-19</td>
-								<td>2024-04-20</td>
-								<td>탈퇴</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
-								</td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>
@@ -248,7 +274,7 @@ th:nth-child(8), td:nth-child(8) {
 	</main>
 
 	<footer>
-		<jsp:include page="${pageContext.request.contextPath}/inc/admin_footer.jsp"></jsp:include>
+		<jsp:include page="/inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
 </body>

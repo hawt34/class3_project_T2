@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지 - 영화관리</title>
+<link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -133,7 +134,7 @@ th:nth-child(7), td:nth-child(7) {
 <body>
 
 	<header>
-		<jsp:include page="${pageContext.request.contextPath}/inc/admin_header.jsp"></jsp:include>
+		<jsp:include page="/inc/admin_header.jsp"></jsp:include>
 	</header>
 
 	<main>
@@ -142,18 +143,18 @@ th:nth-child(7), td:nth-child(7) {
 
 			<div class="col-md-2">
 				<!-- 사이드바 영역 -->
-				<jsp:include page="${pageContext.request.contextPath}/inc/admin_aside.jsp"></jsp:include>
+				<jsp:include page="/admin/admin_main/admin_aside.jsp"></jsp:include>
 			</div>
 
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_movie_head">
 					<div class="admin_movie_title">영화관리</div>
 					<div class="admin_movie_search">
 						<select>
-							<option>이름</option>
-							<option>아이디</option>
+							<option>영화명</option>
+							<option>상영상태</option>
 						</select> 
 						<input type="text" placeholder="검색어 입력">
 						<button>검색</button>
@@ -237,7 +238,7 @@ th:nth-child(7), td:nth-child(7) {
 	</main>
 
 	<footer>
-		<jsp:include page="${pageContext.request.contextPath}/inc/admin_footer.jsp"></jsp:include>
+		<jsp:include page="/inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
 	<script type="text/javascript">

@@ -145,9 +145,9 @@ body {
 		<!--  여기 부턴 헤더 네비바 영역 -->
 		<div class="header_low" align="center">
 			<div class="dropdown">
-				<button class="dropdown-btn">영화</button>
+				<button class="dropdown-btn" onclick="location.href='#'">영화</button>
 				<div class="dropdown-submenu">
-					<a href="#none">현재상영작</a> <a href="#none">상영예정작</a>
+					<a href="#">현재상영작</a> <a href="#none">상영예정작</a>
 				</div>
 			</div>
 			<div class="dropdown">

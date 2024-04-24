@@ -36,17 +36,18 @@ select{
 /* .box-in{ */
 /* 	margin-top: 10px; */
 /* } */
-/* .box2{ */
-/* 	height: 25%; */
-/* 	margin-top: 20px; */
-/* } */
-.paybox1{
-	
+.box2{
+	margin: 0;
 }
 
+.paybox1{
+	  display: flex;
+/* 	  margin-top: 10px; */
+}
+h5{
+	
+	  display: flex;
+}
 .title{
 	float: bottom;
 }
-/* .poster{ */
-/* 	float: left; */
-/* } */

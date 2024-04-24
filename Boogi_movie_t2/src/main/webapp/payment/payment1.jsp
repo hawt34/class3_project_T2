@@ -5,115 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<style type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/theater.css" type="text/css">
 
- 	body { 
-		margin: 0; 
- 		padding:0; 
- 	} 
-
-	.payment_all {
-		width: 1200px;
-		margin: 0 auto;
-	}
-
- 	.col2 {  
- 		
- 	}  
-	
-	
-/* 	할인 적용 아코디언 */
-	input[id *= "payment_discount"] {
-		display: none;
-	}
-	
-	input[id *= "payment_discount"] + label {
-		display: block;
-		padding: 10px;
-		border: 1px solid black;
-		color: black;
-		background-color: #D3D3D3;
-		cursor: pointer;
-	}
-	
-	input[id *= "payment_discount"] + label  + div {
-		max-height: 0;
-		transition: all  .35s;
-		overflow: hidden;
-		background: white;
-		border: 1px solid black;
-		border-top: none;
-	
-	}
-	
-	input[id *= "payment_discount"] + label  + div p {
-		display: inline-block;
-	}
-	
-	input[id *= "payment_discount"]:checked + label + div {
-		max-height:200px;
-		padding: 20px;
-	}
-	
-/* 	결제 수단 선택 탭 */
-	fieldset {
-		padding: 20px;
-	}
-	
-	form {
-		margin: 20px 0;;
-	}
-	
-	.payment_method {
-		
-	}
-	
-	input[id *= "payment_method"] + label {
-		cursor: pointer;
-	}
-	
-	.conbox {
- 		width: 0 auto;
- 		height: 0 auto; 
-		display: none;  
-		padding: 12px;
-		margin: 12px 12px;
-	}
-	
-	input[id="payment_method1"]:checked ~.payment_method1_div {
-		display:block;
-				
-	}
-	
-	input[id="payment_method2"]:checked ~.payment_method2_div {
-		display:block;
-	}
-	
-	input[id="payment_method3"]:checked ~.payment_method3_div {
-		display:block;
-	}
-	
-	input[id="payment_method4"]:checked ~.payment_method4_div {
-		display:block;
-	}
-	
-	.payment_status{
-		border: 1px solid black;	
-		border-radius: 20px;
-		height: 0 auto; 
-		padding: 12px;		
-		
-	}
-	
-	.payment_status_box {
-		border: 1px solid black;
-		border-radius: 10px;
-		margin: 10px 0;
-		padding: 8px;
-	}
-	
-	
-</style>
 <title>Insert title here</title>
 
 </head>
@@ -128,7 +21,7 @@
 				<input type="reset" value="초기화">
 				<input type="radio" name="payment_subtab" id="payment_discount1">
 				<label for="payment_discount1">부기무비 포인트</label>
-				<div>
+				<div class="payment_discount_div">
 					* 예매 취소 시 유효기간이 지난 멤버십 포인트는 복구되지 않습니다.
 					<hr>
 					<div class="input-group mb-3 w-50" >
@@ -136,10 +29,10 @@
 						<input type="text" class="form-control" placeholder="사용할 포인트" aria-describedby="button-addon2">
 						<button class="btn btn-outline-secondary" type="button" id="button-addon2">적용</button>
 					</div>
-				</div>
+				</div><br>
 				<input type="radio" name="payment_subtab" id="payment_discount2">
 				<label for="payment_discount2">부기무비 쿠폰</label>
-				<div>
+				<div class="payment_discount_div">
 					<button type="button" class="btn btn-secondary btn-sm">내 쿠폰 조회</button>
 					<button type="button" class="btn btn-secondary btn-sm">쿠폰 등록하기</button>
 					<hr>

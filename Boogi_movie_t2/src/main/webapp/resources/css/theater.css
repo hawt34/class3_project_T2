@@ -1,0 +1,76 @@
+/* 전체 공통 */
+
+body {
+	margin: 0;
+	padding: 0;	
+}
+
+/* ========================================= */
+/* theater_main */
+
+.theater_all {
+	width: 1400px;
+	margin: auto;
+}
+
+.theater_top_content {
+	margin: 20px;
+	padding: 20px;
+}
+
+
+.nav-link {
+	border: 1px solid gray;
+	margin: 5px;
+	color: black;
+}
+.nav-link:hover {
+	background-color: skyblue;
+	color: black;
+}
+
+/* ========================================= */
+/* theater_detail */
+
+.theater_detail_all {
+	width: 1400px;
+	margin: auto;
+	
+}
+.theater-info {
+	margin: 25px 5px;  padding:30px 5px;
+}
+.mp {
+	padding:30px 5px;
+}
+#col1 {
+	margin-top: 25px;  padding:30px 5px;
+/* 		background-color: #FFBF00; */
+	border: solid #FFBF00;
+	border-radius: 20px;
+}
+#col2 {
+	margin-top: 25px;  padding:30px 5px;
+/* 		background-color: #FFBF00; */
+	border: solid #FFBF00;
+	border-radius: 20px;
+}
+ table {
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  th, td {
+      border: 1px solid lightgray;
+      padding: 8px;
+  }
+
+  #id1 {
+      background-color: lightgray;
+  }
+  .row {
+padding: 10px;    
+  }
+  table{
+  	text-align: center;
+  }

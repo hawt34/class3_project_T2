@@ -2,12 +2,17 @@
 
 .container1{
 	height : 900px;
-	width: 1200px; /* 해상도 1200*/
+	width: 1400px; /* 해상도 1200*/
 /* 	min-width: 1200px; 페이지 최소 너비를 1200으로 설정 해상도 1200 */
 /* 	margin: 0 auto; 중앙정렬 해상도 1200 */
 /* 	margin-top: 15%; */
 /* 	margin-left: 20%; */
 /* 	    display: flex; */
+}
+
+.container2{
+/* 	margin-left: auto; */
+	margin-top: 20px;
 }
 .admin_header_left{
    float:left;
@@ -35,9 +40,8 @@ select{
 /* 	height: 25%; */
 /* 	margin-top: 20px; */
 /* } */
-
-select{
-	float: right;
+.paybox1{
+	
 }
 
 .title{

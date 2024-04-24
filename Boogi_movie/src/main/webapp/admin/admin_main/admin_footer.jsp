@@ -20,5 +20,5 @@
 <div align="center" class="admin_footer">
 	<p>사업자번호: 0000000000 | 사업자명: 전준혁 | 전화번호 000-0000-0000</p>
 	<p>회사주소: 부산광역시 부산진구 삼한골든게이트 7층 304호</p>
-	<img src="../../image/부기2.png" class="footer_image">
+	<img src="../image/부기2.png" class="footer_image">
 </div>

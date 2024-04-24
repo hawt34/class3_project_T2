@@ -35,8 +35,8 @@
 
 .btn-group-vertical {
 	background: white;
-	border-top: 3px solid skyblue;
-	border-bottom: 3px solid skyblue;
+	border-top: 3px solid black;
+	border-bottom: 3px solid black;
 }
 
 .sideVar_title {

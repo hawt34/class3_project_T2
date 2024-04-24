@@ -9,10 +9,28 @@
 </head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
 " rel="stylesheet" type="text/css" />
-
+<link href="${pageContext.request.contextPath}/resources/css/tic_choose_seat.css" rel="stylesheet" type="text/css">
 <body>
 
-<div class="box1">
+
+
+<header>
+	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
+</header>
+
+
+<section class="choose_seat_section">
+	<div class="choose_seat_title">
+		<h3>좌석 선택</h3>
+		<hr>
+	</div>
+	<div class="row">
+	
+	<div class="col-md-2">
+		<jsp:include page="../inc/admin_aside.jsp"></jsp:include>
+	</div>
+	
+<div class="box1 col-md-10">
 <div class="choose_person">
 	<div class="asdf">
 	<label class="person_option">일반</label>
@@ -648,32 +666,47 @@
 	<div class="seat 16" onclick="toggleSeat(this)" value="K16">K16</div>
 		
 	</div>
-</div>
-	<div class="final_pay row">
-		<div class="col-md-4 pay_movie_img">
-			<img src="../images/movie_image.jpg" width="150" height="250">
+		<div class="final_pay row" style="margin-top: 50px; margin-left: 100px;">
+	
+		<div class="col-md-3 pay_movie_img">
+			<img src="${pageContext.request.contextPath}/resources/images/tic_movie_image.jpg" width="100" height="150">
 			<label class="movie_ex">범죄도시4</label>
 		</div>
+		
 		<div class="col-md-3 pay_theater">
-			
 			<div class="theater_ex">서면 상상마당 cgv 7관</div>
 		</div>
-		<div class="col-md-2 pay_seat">
 			
+		
+		<div class="col-md-2 pay_seat">
 			<div class="seat_ex">E5</div>
 		</div>
-		<div class="col-md-3 pay_fee">
 			
-			<div class="fee_ex">25,000원</div>
-		</div>	
-	</div>
-		<div class="pay_button">
-			<input type="button" value="결제" class="pay_ex">
+			
+		<div class="col-md-2 pay_fee">
+			<div class="fee_ex">13,000원</div>
 		</div>
+			
+		<div class="col-md-2 pay_button">
+			<button type="submit" class="btn btn-outline-primary">결제</button>
+		</div>
+			
+	</div>
+</div>
+</div>
+
+
+</div>
+</section>
 		
 		
 
-</div>
+
+<footer style="margin-top: 100px;">
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
+</footer>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
 "></script>
 </body>

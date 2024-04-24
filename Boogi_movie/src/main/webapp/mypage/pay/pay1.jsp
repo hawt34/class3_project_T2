@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="pay1.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_pay1.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,19 +71,19 @@ body {
 			
 			
 				<div class="box2">
-						<img src="../image/img1.jpg" width="200px" height="250px">
+						<img src="${pageContext.request.contextPath}/resources/images/myp_img1.jpg" width="200px" height="250px">
 				</div>	
 				<hr>
 				<div class="box2">
-					<img src="../image/img2.jpg" width="200px" height="250px">
+					<img src="${pageContext.request.contextPath}/resources/images/myp_img2.jpg" width="200px" height="250px">
 				</div>	
 				<hr>
 				<div class="box2">
-					<img src="../image/img3.jpg" width="200px" height="250px">
+					<img src="${pageContext.request.contextPath}/resources/images/myp_img3.jpg" width="200px" height="250px">
 				</div>	
 				<hr>
 				<div class="box2">
-					<img src="../image/img4.jpg" width="200px" height="250px">
+					<img src="${pageContext.request.contextPath}/resources/images/myp_img4.jpg" width="200px" height="250px">
 				</div>	
 			<hr>
 		</div><!-- col-md-10 -->

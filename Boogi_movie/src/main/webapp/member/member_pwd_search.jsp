@@ -7,12 +7,19 @@
 <title>비밀번호 찾기</title>
 </head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
-<link href="${pageContext.request.contextPath}/css/member_default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/member_default.css" rel="stylesheet" type="text/css">
 <body>
-<form action="action_page.php" method="post">
-<div class="container">
-    <h1>비밀번호 찾기</h1>
+<header>
+	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
+</header>
+<section class="member_section">
+<div class="member_title">
+    <h3>비밀번호 찾기</h3>
     <hr>
+    </div>
+<form action="action_page.php" method="post">
+<div class="member_row">
+	
     <div class="form_item">
     	<label for="id"><b>아이디</b></label>
     	<input type="text"  name="id" id="id" required>
@@ -26,9 +33,13 @@
 </div>
 <div class="regist_final">
 	<hr>
-	<button type="submit" class="registerbtn">비밀번호 찾기</button>
+	<button type="submit" class="btn btn-outline-primary">비밀번호 찾기</button>
 </div>
 </form>
+</section>
+<footer>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
+</footer>
 </body>
 </html>
 

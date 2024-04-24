@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지 - 영화관리</title>
-<link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -134,7 +133,7 @@ th:nth-child(7), td:nth-child(7) {
 <body>
 
 	<header>
-		<jsp:include page="../admin_main/admin_header.jsp"></jsp:include>
+		<jsp:include page="${pageContext.request.contextPath}/inc/admin_header.jsp"></jsp:include>
 	</header>
 
 	<main>
@@ -143,7 +142,7 @@ th:nth-child(7), td:nth-child(7) {
 
 			<div class="col-md-2">
 				<!-- 사이드바 영역 -->
-				<jsp:include page="../admin_main/admin_aside.jsp"></jsp:include>
+				<jsp:include page="${pageContext.request.contextPath}/inc/admin_aside.jsp"></jsp:include>
 			</div>
 
 			<div class="col-md-10">
@@ -238,7 +237,7 @@ th:nth-child(7), td:nth-child(7) {
 	</main>
 
 	<footer>
-		<jsp:include page="../admin_main/admin_footer.jsp"></jsp:include>
+		<jsp:include page="${pageContext.request.contextPath}/inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
 	<script type="text/javascript">

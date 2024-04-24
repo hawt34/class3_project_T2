@@ -85,7 +85,7 @@ main {
 
 				<div class="col-md-2">
 					<!-- 사이드바 영역 -->
-					<jsp:include page="admin_aside.jsp"></jsp:include>
+					<jsp:include page="${pageContext.request.contextPath}/inc/admin_aside.jsp"></jsp:include>
 				</div>
 
 				<!--  메인 중앙 영역  -->

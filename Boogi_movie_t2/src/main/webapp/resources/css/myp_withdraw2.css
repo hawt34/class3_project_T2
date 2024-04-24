@@ -2,24 +2,20 @@
 
 .container1{
 	height : 900px;
-	width: 1000px; /* 해상도 1200*/
+	width: 1400px; /* 해상도 1200*/
 /* 	min-width: 1200px; 페이지 최소 너비를 1200으로 설정 해상도 1200 */
-	margin-top: 15%; /* 중앙정렬 해상도 1200*/
-	margin-left: 20%;
 }
-
-.box1{
-/* 	position: relative; */
-	height: 60%;
+.container2{
+	margin-top: 20px;
 }
+/* .box1{ */
+/* 	margin-left: 10px; */
+/* } */
 
 .box2{
 	height: 40%;
 }
 
-.text1{
-	margin-left: 30px;
-}
 
 .text2{
 	margin-left: 30px;
@@ -81,12 +77,8 @@ blockquote{
 blockquote.bluejeans{
   border-left-color: #5e9de6;
   border-right-color: #4b8ad6;
+  margin-top: 20px;
 }
-
-/* ------ 버튼 --------------------*/
-
-
-
 
 
 /* --------------------  버튼  ----------------------*/

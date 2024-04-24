@@ -39,6 +39,7 @@ body {
 			</div>
 				<div class="col-md-10 box1">
 				<h2>상품권 / 기프트카드</h2>
+				<hr>
 					<!-- 탭 메뉴 -->
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item" role="presentation">

@@ -45,6 +45,7 @@ body {
 				<div class="row">
 					<div class="col-10">
 						<h2>예매내역</h2>
+						<hr>
 					</div>
 					<div class="col-2">
 <!-- 						<select> -->
@@ -220,7 +221,9 @@ body {
 		</div><!-- row box1 -->
 	</div><!-- container2 -->
 </div> <!-- container -->
-
+	<footer>
+		<jsp:include page="${pageContext.request.contextPath}/admin/admin_main/admin_footer.jsp"></jsp:include>
+	</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>

@@ -25,18 +25,20 @@ body {
 <body>
 
 
+<header>
+	<jsp:include page="inc/admin_header.jsp"></jsp:include>
+</header>
 <div class="container1">
 	<div class="container2">
-		<header>
-			<jsp:include page="inc/admin_header.jsp"></jsp:include>
-		</header>
 	
 		<div class="row">
-			<div class="col-2">
+			<div class="col-md-2">
 				<jsp:include page="sidebar/sidebar.jsp"></jsp:include>
 			</div>	
 		
-			<div class="col-10">
+			<div class="col-md-10">
+			<h2>마이페이지</h2>
+			<hr>
 				<blockquote class="bluejeans">
 					<br>
 <!-- 					<h3><span class="Cbluejeans">김현경님</span></h3>   -->
@@ -56,19 +58,11 @@ body {
 				</blockquote>
 			</div><!-- col-md-10 -->
 		</div><!-- row -->
-			
-	<!-- 		<div class="col-md-6"> -->
-	<!-- 			<div class="d-flex" style="margin-top: 15px; height: 250px;"> -->
-	<!-- 				<div class="vr"></div> -->
-	<!-- 			</div> -->
-				
-				
-				
-	<!-- 	</div>row box1 -->
 		
 		<hr>
-		<div class="row">
-			<div class="col-md-8 box2">
+		
+		<div class="row ">
+			<div class="col-md-7 box2">
 				<h2>예매내역</h2>
 				<table class="table2 table table-hover " >
 					
@@ -139,7 +133,7 @@ body {
 				  </tbody>
 				</table>
 			</div><!-- col-md-8 box2 -->
-			<div class="col-4 col-md-4">
+			<div class="col-md-3">
 			
 				<h2>MY 극장</h2>
 					<div class="list-group">
@@ -179,6 +173,8 @@ body {
 					</div><!-- list-group -->
 			</div><!-- col-4 col-md-4-->
 		</div> <!-- row -->
+		
+		
 	</div><!-- container2 -->
 </div><!-- container -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

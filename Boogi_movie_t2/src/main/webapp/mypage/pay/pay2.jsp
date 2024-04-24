@@ -35,6 +35,7 @@ body {
 			</div>
 			<div class="col-md-10">
 				<h2>취소내역 / 안내</h2>
+				<hr>
 						<!-- 탭 메뉴 -->
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item" role="presentation">

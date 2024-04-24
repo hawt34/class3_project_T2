@@ -1,17 +1,29 @@
 @charset "EUC-KR";
+* {box-sizing: border-box}
 
 .container1{
 	height : 900px;
 	width: 1400px; /* 해상도 1200*/
 /* 	min-width: 1200px; 페이지 최소 너비를 1200으로 설정 해상도 1200 */
 }
-.text1{
-	text-align: center;
+
+.container2{
+	margin-top: 20px;
 }
 
+.box1{
+}
 
+.box2{
+	width: 70%;
+	margin-left : 350px;	
+}
+.box3{
+	margin-bottom: 10px;
+}
 
-/* --------------------  버튼  ----------------------*/
+/* ============= 버튼 ================= */
+
 .content {
 /*   padding: 2em 1em 5em; */
 /*   z-index: 1; */
@@ -116,3 +128,24 @@
 .btn-gradient.blue:active   {background: #5e9de6;}
 
 /*---------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

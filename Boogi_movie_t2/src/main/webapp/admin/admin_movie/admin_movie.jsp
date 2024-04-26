@@ -124,6 +124,7 @@ th:nth-child(7), td:nth-child(7) {
 	color: white;
 	font-weight: bold;
 }
+
 .admin_movie_title {
 	float: left;
 	font-size: 30px;

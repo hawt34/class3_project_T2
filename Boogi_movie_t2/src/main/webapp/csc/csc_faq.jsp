@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>FAQ</title>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/csc_faq.css">
-<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/csc_faq.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
 
 </head>
 <body>

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/sidebar.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/csc_main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/csc_main.css">
 
 </head>
 <body>

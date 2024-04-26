@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/oneOnone.css">
-<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/oneOnone.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
 </head>
 <body>
 <div class="container">

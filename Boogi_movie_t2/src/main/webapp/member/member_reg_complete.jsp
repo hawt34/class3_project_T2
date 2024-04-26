@@ -9,6 +9,12 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
 " rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath }/css/member_reg_complete.css" rel="stylesheet">
+<style>
+	.message{
+		margin-left : 500px;
+	}
+</style>
+	
 </head>
 <body>
 
@@ -25,12 +31,14 @@
 	</div>
 	<div class="col-md-10" style="margin-top : 100px;">
 		<div class="message">
-			이연태님 회원가입을 환영합니다!
+			<h3>이연태님 회원가입을 환영합니다!</h3>
 			<br>
-		</div>
+			<br>
 		<button type="button" class="btn btn-outline-primary">메인</button>
 		<button type="button" class="btn btn-outline-primary">영화</button>
 		<button type="button" class="btn btn-outline-primary">예매</button>
+		</div>
+		
 	</div>
 </div>
   

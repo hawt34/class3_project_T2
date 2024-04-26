@@ -65,11 +65,17 @@
 	    justify-content: center; /* 요소를 가운데 정렬합니다. */
 	    text-align: center;
 		margin-top: 50px; /* 위쪽 여백 설정 */
-		margin-bottom: 70px; /* 아래쪽 여백 설정 */
+		margin-bottom: 40px;
 		margin-left: auto; /* 왼쪽 여백을 자동으로 설정 */
 		margin-right: auto; /* 오른쪽 여백을 자동으로 설정 */
 	}
-
+	
+	.person_info{
+		text-align : center;
+		margin-bottom : 40px;		
+	}
+	
+	
 	.asdf label, .asdf select {
 	    margin-bottom: 5px;
 	}

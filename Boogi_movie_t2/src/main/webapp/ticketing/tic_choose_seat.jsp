@@ -33,24 +33,9 @@
 <div class="box1 col-md-10">
 <div class="choose_person">
 	<div class="asdf">
-	<label class="person_option">일반</label>
-	
-	<div class="custom-select">
-  	<select>
-	    <option value="0">0명</option>
-	    <option value="1">1명</option>
-	    <option value="2">2명</option>
-	    <option value="3">3명</option>
-	    <option value="4">4명</option>
-	    <option value="5">5명</option>
-	    <option value="6">6명</option>
-	    <option value="7">7명</option>
-	    <option value="8">8명</option>
-  	</select>
-	</div>     
-	
-	<label class="person_option">청소년</label>
-	<div class="custom-select">
+		<label class="person_option">일반</label>
+		
+		<div class="custom-select">
 	  	<select>
 		    <option value="0">0명</option>
 		    <option value="1">1명</option>
@@ -62,38 +47,56 @@
 		    <option value="7">7명</option>
 		    <option value="8">8명</option>
 	  	</select>
+		</div>     
+		
+		<label class="person_option">청소년</label>
+		<div class="custom-select">
+		  	<select>
+			    <option value="0">0명</option>
+			    <option value="1">1명</option>
+			    <option value="2">2명</option>
+			    <option value="3">3명</option>
+			    <option value="4">4명</option>
+			    <option value="5">5명</option>
+			    <option value="6">6명</option>
+			    <option value="7">7명</option>
+			    <option value="8">8명</option>
+		  	</select>
+		</div>
+		
+		<label class="person_option">경로</label>
+		<div class="custom-select">
+		  	<select>
+			    <option value="0">0명</option>
+			    <option value="1">1명</option>
+			    <option value="2">2명</option>
+			    <option value="3">3명</option>
+			    <option value="4">4명</option>
+			    <option value="5">5명</option>
+			    <option value="6">6명</option>
+			    <option value="7">7명</option>
+			    <option value="8">8명</option>
+		  	</select>
+		</div>
+		
+		<label class="person_option">우대</label>
+		<div class="custom-select">
+		  	<select>
+			    <option value="0">0명</option>
+			    <option value="1">1명</option>
+			    <option value="2">2명</option>
+			    <option value="3">3명</option>
+			    <option value="4">4명</option>
+			    <option value="5">5명</option>
+			    <option value="6">6명</option>
+			    <option value="7">7명</option>
+			    <option value="8">8명</option>
+		  	</select>
+		</div>
 	</div>
-	
-	<label class="person_option">경로</label>
-	<div class="custom-select">
-	  	<select>
-		    <option value="0">0명</option>
-		    <option value="1">1명</option>
-		    <option value="2">2명</option>
-		    <option value="3">3명</option>
-		    <option value="4">4명</option>
-		    <option value="5">5명</option>
-		    <option value="6">6명</option>
-		    <option value="7">7명</option>
-		    <option value="8">8명</option>
-	  	</select>
-	</div>
-	
-	<label class="person_option">우대</label>
-	<div class="custom-select">
-	  	<select>
-		    <option value="0">0명</option>
-		    <option value="1">1명</option>
-		    <option value="2">2명</option>
-		    <option value="3">3명</option>
-		    <option value="4">4명</option>
-		    <option value="5">5명</option>
-		    <option value="6">6명</option>
-		    <option value="7">7명</option>
-		    <option value="8">8명</option>
-	  	</select>
-	</div>     
-	</div>
+	<div class="person_info">
+		<h3>일반 3명 , 경로 2명</h3>
+	</div>    
 	
 	
 	<div class="center">

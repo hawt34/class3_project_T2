@@ -165,8 +165,8 @@ div {
 }
 
 .container{
-   width: 1000px;
-   margin : 0 auto; /* 가운데 정렬 */
+   width: 1200px;
+   margin : 100px auto!important; /* 가운데 정렬 */
 }
    
 .row{

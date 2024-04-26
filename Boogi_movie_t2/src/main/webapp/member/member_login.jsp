@@ -15,7 +15,7 @@
 </header>
 
 <div class="row container">
-	<h1>로그인</h1>
+	<h3>로그인</h3>
 	<hr>
 	<div class="col input-box">
 		<form action="/action_page.php" method="post">

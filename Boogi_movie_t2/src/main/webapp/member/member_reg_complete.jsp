@@ -13,14 +13,14 @@
 <body>
 
 <header>
-	<jsp:include page="admin_header.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 
 	
 <div class="row container">
 	<div class="col-md-2">
 		<div class="side_var">
-			<jsp:include page="admin_aside.jsp"></jsp:include>
+			<jsp:include page="../inc/admin_aside.jsp"></jsp:include>
 		</div>
 	</div>
 	<div class="col-md-10" style="margin-top : 100px;">
@@ -35,7 +35,7 @@
 </div>
   
 <footer>
-	<jsp:include page="admin_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
 </body>
 </html>

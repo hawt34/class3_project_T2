@@ -47,7 +47,7 @@
 		<hr>		
 		<div id="theater-event">
 			<h1>극장 이벤트</h1>
-			<a href=""><img src="${pageContext.request.contextPath}/resources/images/theater_ex.jpg"></a>
+			<a href="${pageContext.request.contextPath}/resources/images/theater_event_ex2.jpg"><img src="${pageContext.request.contextPath}/resources/images/theater_event_ex1.jpg"></a>
 		</div>
 		
 	</div>	

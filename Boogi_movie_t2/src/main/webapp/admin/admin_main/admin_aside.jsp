@@ -92,8 +92,8 @@ a{
 					<h5>극장</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">극장관리</a> <a class="dropdown-item"
-						href="#">상영관관리</a>
+					<a class="dropdown-item" href="#">극장 관리</a> 
+					<a class="dropdown-item" href="#">상영관 관리</a>
 				</div>
 			</div>
 			<div class="btn-group">
@@ -101,8 +101,7 @@ a{
 					<h5>스토어</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">스토어관리</a> <a
-						class="dropdown-item" href="#">결제내역</a>
+					<a class="dropdown-item" href="#">스토어 관리</a>
 				</div>
 			</div>
 			<div class="btn-group">
@@ -119,7 +118,16 @@ a{
 					<h5>이벤트</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">이벤트관리</a>
+					<a class="dropdown-item" href="#">이벤트 관리</a>
+				</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn" data-toggle="dropdown">
+					<h5>결제</h5>
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">영화 결제 관리</a>
+					<a class="dropdown-item" href="#">스토어 결제 관리</a>
 				</div>
 			</div>
 		</div>

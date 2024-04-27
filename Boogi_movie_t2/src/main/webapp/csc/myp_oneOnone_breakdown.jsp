@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>1 대 1 문의 내역</title>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/oneOnone_breakdown.css">
-<link rel="stylesheet" href="css/csc_sidebar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/myp_oneOnone_breakdown.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_sidebar.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -112,33 +112,33 @@ td:nth-child(5) {
 						</thead>
 						<tbody>
 							<tr>
-								<td>윙카</td>
-								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>2024-04-19</td>
+								<td>3</td>
+								<td>예매가 안되요</td>
+								<td>admin</td>
+								<td>예매/결제</td>
+								<td>미확인</td>
 <!-- 								<td> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">수정</button> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">삭제</button> -->
 <!-- 								</td> -->
 							</tr>
 							<tr>
-								<td>윙카</td>
-								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>2024-04-19</td>
+								<td>2</td>
+								<td>영화 언제 개봉하나요?</td>
+								<td>hong123</td>
+								<td>영화</td>
+								<td>확인</td>
 <!-- 								<td> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">수정</button> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">삭제</button> -->
 <!-- 								</td> -->
 							</tr>
 							<tr>
-								<td>윙카</td>
+								<td>1</td>
 								<td>junhyuk</td>
 								<td>이거 리뷰 써지는거냐?</td>
 								<td>4.8점</td>
-								<td>2024-04-19</td>
+								<td>미확인</td>
 <!-- 								<td> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">수정</button> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">삭제</button> -->
@@ -168,33 +168,33 @@ td:nth-child(5) {
 						</thead>
 						<tbody>
 							<tr>
-								<td>윙카</td>
-								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>2024-04-19</td>
+								<td>3</td>
+								<td>예매가 안되요</td>
+								<td>admin</td>
+								<td>예매/결제</td>
+								<td>답변</td>
 <!-- 								<td> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">수정</button> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">삭제</button> -->
 <!-- 								</td> -->
 							</tr>
 							<tr>
-								<td>윙카</td>
-								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>2024-04-19</td>
+								<td>2</td>
+								<td>영화 언제 개봉하나요?</td>
+								<td>hong123</td>
+								<td>영화</td>
+								<td>답변</td>
 <!-- 								<td> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">수정</button> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">삭제</button> -->
 <!-- 								</td> -->
 							</tr>
 							<tr>
-								<td>윙카</td>
+								<td>1</td>
 								<td>junhyuk</td>
 								<td>이거 리뷰 써지는거냐?</td>
 								<td>4.8점</td>
-								<td>2024-04-19</td>
+								<td>답변</td>
 <!-- 								<td> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">수정</button> -->
 <!-- 									<button type="button" class="btn btn-outline-primary">삭제</button> -->

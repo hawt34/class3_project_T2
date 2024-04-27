@@ -5,89 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <title>FAQ</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/csc_faq.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
-
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_faq.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_sidebar.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
 </head>
 <body>
+<div>
+	<jsp:include page="header.jsp"></jsp:include>
+</div>
 <div class="container">
 <div class="row">
 	<!-- 사이드바 영역 -->
-	<div class="col-3">
-	<div class="sideVar">
-	<!--  사이드바 영역  -->
-	<div class="admin_middle_left" align="center">
-		<div class="btn-group-vertical">
-			<!-- 사이드바 타이틀 -->
-			<div class="sideVar_title">
-				<h4 class="admin_aside_name">관리자페이지</h4>
-			</div>
-			<div class="btn-group dropright">
-				<!-- 마우스 오버 전 카테고리 -->
-				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>회원</h5>
-				</button>
-				<div class="dropdown-menu">
-					<!-- 마우스 오버 후 서브메뉴 -->
-					<a class="dropdown-item" href="#">회원정보관리</a> 
-					<a class="dropdown-item" href="#">리뷰관리</a> 
-					<a class="dropdown-item" href="#">예매관리</a>
-				</div>
-			</div>
-			<div class="btn-group dropright">
-				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>영화</h5>
-				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">영화정보관리</a> 
-					<a class="dropdown-item" href="#">상영일정관리</a> 
-					<a class="dropdown-item" href="#">박스오피스조회</a>
-				</div>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>극장</h5>
-				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">극장관리</a> 
-					<a class="dropdown-item" href="#">상영관관리</a>
-				</div>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>스토어</h5>
-				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">스토어관리</a> 
-					<a class="dropdown-item" href="#">결제내역</a>
-				</div>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>고객센터</h5>
-				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">공지사항</a> 
-					<a class="dropdown-item" href="#">자주묻는질문</a> 
-					<a class="dropdown-item" href="#">1:1문의</a>
-				</div>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>이벤트</h5>
-				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">이벤트관리</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
-		
+	<div class="col-md-2">
+		<jsp:include page="csc_sidebar.jsp"></jsp:include>		
 	</div>
 	<!-- content 영역 - FAQ -->
-	<div class="col-9">
+	<div class="col-md-10">
 		<div class="row">
 			<h1>FAQ</h1>
 		<hr>
@@ -104,6 +41,7 @@
 					</form>
 				</div>
 			</div>
+			<!-- 검색창 끝 -->
 		</div>
 		<div class="row mt-3">
 			<div class="csc_faq_sel">
@@ -119,56 +57,34 @@
 		</div>
 		<hr>
 		<!-- 자주묻는 질문 게시판 -->
-		<div class="row">
-			<table>
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>구분</th>
-						<th>제목</th>
-						<th>작성일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td>살라</td>
-						<td>23살</td>
-						<td>23살</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>김백수</td>
-						<td>21살</td>
-						<td>21살</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>홍길동</td>
-						<td>25살</td>
-						<td>25살</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>아무개</td>
-						<td>20살</td>
-						<td>20살</td>
-					</tr>
-				</tbody>
-			</table>
+		<div class="csc_accordion" >
+			<input type="checkbox" id="answer1">
+			<label for="answer1">제목<em></em></label>
+			<div><p>본문내용을 여기다 넣을 겁니다.
+				꽁꽁얼어 붙은 한강 위로 고양이가 걸어다닙니다.</p> 
+			</div>
+			<input type="checkbox" id="answer2">
+			<label for="answer2">제목<em></em></label>
+			<div><p>본문내용을 여기다 넣을 겁니다.
+				꽁꽁얼어 붙은 한강 위로 고양이가 걸어다닙니다.</p> 
+			</div>
+			<input type="checkbox" id="answer3">
+			<label for="answer3">제목<em></em></label>
+			<div><p>본문내용을 여기다 넣을 겁니다.
+				꽁꽁얼어 붙은 한강 위로 고양이가 걸어다닙니다.</p> 
+			</div>
 		</div>
+			
+			
 		<!-- 페이지네이션-페이징 -->
 		<hr>
-		<div class="row">
-			<div>
-			</div>
-		</div>	
+		
 
 
 
 	</div>
 </div>
 </div>
-<script type="text/javascript" src="..//js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

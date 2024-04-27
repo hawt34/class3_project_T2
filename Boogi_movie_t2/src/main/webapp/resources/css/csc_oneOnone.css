@@ -17,12 +17,16 @@
 	font-size:0.6em;
 	border: 1px black solid;
 	padding: 5px;
+	overflow-y:scroll;
+	
 }
 
 span {
 	font-size:0.6em;
 	padding-left: 45px;
 	color:#FF0000;
+	display: block;
+	margin-bottom: 10px;
 }
 
 span::before {
@@ -33,9 +37,7 @@ textarea {
 	resize: none;
 }
 
-#space {
-	height:100px;
-}
+
 
 .submit_button {
 	text-align: center;

@@ -2,16 +2,17 @@
 	vertical-align: middle;
 	text-align: center;
 	font-weight: bold;
-	background: #3333FF;
+	background: #99CCFF;
 	border-radius: 5px;
-	width: 80%;
+	width: 300px;
 	height: 100px;
-	color:white;
-	margin-left: 50px;
+	color: white;
+	margin-left: 5px;
 	position:relative;
 }
 
 .inner {
+	width:300px;
 	position:absolute;
 	top: 50%;
 	left: 50%;
@@ -28,44 +29,62 @@
 	justify-content: right;
 }
 
-/* 테이블 행 */
-th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-size:0.9em;
-  
+/* faq 게시판 형식 */
+
+
+input[id*="answer"]{
+	display: none;
 }
 
-th {
-  background-color: #1b1b1b;
-  color: #ddd;
+input[id*="answer"] + label {
+	display:block;
+	padding:20px;
+	border: solid 3px #232188;
+	border-bottom: 0;
+	border-radius:4px;
+	color:#fff;
+	font-weight:900;
+	background: #99CCFF;
+	cursor: pointer;
+	position: relative;
+}
+input[id*="answer"] + label em{
+	position: absolute;
+	top:50%;
+	right: 18px;
+	display: inline-block;
+	width:50px;
+	height:30px;
+	margin-top: -15px;
+	background: url("../images/arrowDown.png") 0 0 no-repeat;
+	
 }
 
-/* 테이블 올렸을 때 */
-tbody tr:hover {
-  background-color: #d3d3d3;
-  opacity: 0.9;
-  cursor: pointer;
+input[id*="answer"] + label + div {
+	max-height: 0;
+	transition:all .35s;
+	overflow:hidden;
+	background: #ebf8ff;
+	font-size:14px;
 }
 
-/* 테이블 비율 */
-th:nth-child(1),
-td:nth-child(1) {
-  width: 15%;
+input[id*="answer"] + label + div  p {
+	display: inline-block;
+	padding:20px;
+}
+input[id*="answer"]:checked + label + div {
+	max-height: 100px;
+}
+input[id*="answer"]:checked + label em{
+	position: absolute;
+	top:50%;
+	right: 18px;
+	display: inline-block;
+	width:50px;
+	height:30px;
+	margin-top: -15px;
+	background: url("../images/cloud.png") 0 0 no-repeat;
+	
 }
 
-th:nth-child(2),
-td:nth-child(2) {
-  width: 20%;
-}
 
-th:nth-child(3),
-td:nth-child(3) {
-  width: 45%;
-}
-
-th:nth-child(4),
-td:nth-child(4) {
-	width: 20%;
-}

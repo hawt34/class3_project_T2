@@ -5,90 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/oneOnone.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_oneOnone.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_sidebar.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
 </head>
 <body>
+<div>
+	<jsp:include page="header.jsp"></jsp:include>
+</div>
 <div class="container">
 	<div class="row">
 		<!--사이드바 영역  -->
 		<div class="col-3">
-			<div class="sideVar">
-			<!--  사이드바 영역  -->
-			<div class="admin_middle_left" align="center">
-				<div class="btn-group-vertical">
-					<!-- 사이드바 타이틀 -->
-					<div class="sideVar_title">
-						<h4 class="admin_aside_name">관리자페이지</h4>
-					</div>
-					<div class="btn-group dropright">
-						<!-- 마우스 오버 전 카테고리 -->
-						<button type="button" class="btn" data-toggle="dropdown">
-							<h5>회원</h5>
-						</button>
-						<div class="dropdown-menu">
-							<!-- 마우스 오버 후 서브메뉴 -->
-							<a class="dropdown-item" href="#">회원정보관리</a> 
-							<a class="dropdown-item" href="#">리뷰관리</a> 
-							<a class="dropdown-item" href="#">예매관리</a>
-						</div>
-					</div>
-					<div class="btn-group dropright">
-						<button type="button" class="btn" data-toggle="dropdown">
-							<h5>영화</h5>
-						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">영화정보관리</a> 
-							<a class="dropdown-item" href="#">상영일정관리</a> 
-							<a class="dropdown-item" href="#">박스오피스조회</a>
-						</div>
-					</div>
-					<div class="btn-group">
-						<button type="button" class="btn" data-toggle="dropdown">
-							<h5>극장</h5>
-						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">극장관리</a> 
-							<a class="dropdown-item" href="#">상영관관리</a>
-						</div>
-					</div>
-					<div class="btn-group">
-						<button type="button" class="btn" data-toggle="dropdown">
-							<h5>스토어</h5>
-						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">스토어관리</a> 
-							<a class="dropdown-item" href="#">결제내역</a>
-						</div>
-					</div>
-					<div class="btn-group">
-						<button type="button" class="btn" data-toggle="dropdown">
-							<h5>고객센터</h5>
-						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">공지사항</a> 
-							<a class="dropdown-item" href="#">자주묻는질문</a> 
-							<a class="dropdown-item" href="#">1:1문의</a>
-						</div>
-					</div>
-					<div class="btn-group">
-						<button type="button" class="btn" data-toggle="dropdown">
-							<h5>이벤트</h5>
-						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">이벤트관리</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			</div>
-			<div class="row">
-				<div class="text-center fw-bold mt-2">
-					부기무비 고객센터<br>
-					<small>051-000-0000</small>
-				</div>
-			</div>
+			<jsp:include page="csc_sidebar.jsp"></jsp:include>				
 		</div>
 		<!-- content 영역 -->
 		<div class="col-9">
@@ -105,7 +38,7 @@
 			<hr>
 			<div id="csc_agree">
 				<div class="csc_check_scope">
-					<input type="checkbox" id="csc_checkbox">
+					<input type="checkbox" id="csc_checkbox" required>
 					<label for="csc_checkbox">개인정보 수집에 대한 동의</label>
 				</div>
 				<hr>
@@ -171,27 +104,20 @@
 				<div class="row mb-2">
 					<label for="client_content" class="col-2 col-form-label inquiry_warning_star" >내용</label>
 					<div class="col-sm-10">
-						<textarea class="form-control" rows="3" id="client_content" required ></textarea>
+						<textarea class="form-control" rows="10" id="client_content" required ></textarea>
 					</div>
 				</div>
 				<hr>
 				<div class="submit_button">
 					<input type="button" value="문의">
-					
-					
 				</div>	
 				
 			<!--  -->				
 			</div>
 			</form>
-			<form id="space">
-			</form>
 		</div>
 	</div>
 </div>
-
-
-
 
 
 

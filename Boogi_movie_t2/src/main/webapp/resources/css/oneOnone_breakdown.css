@@ -1,0 +1,12 @@
+.mp_inquiry {
+	margin-top: 15px;
+	display: flex;
+	vertical-align: middle;
+	font-size: 2em;
+	margin-bottom: 15px;
+}
+
+.mp_inquiry::before {
+	content:url("../images/randomIcon.png");
+}
+

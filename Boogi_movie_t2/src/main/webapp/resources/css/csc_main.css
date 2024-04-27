@@ -11,41 +11,33 @@
 	
 }
 
-a {
-	text-decoration: none;
-	color:black;
-}
-
 .csc_ffs {
 	text-align: center;
 	vertical-align:text-top;
+	
 }
 
 
 .csc_ffs_ps {
-	width:150px;
+	width:200px;
 	height:100px;
 	display: inline-block;
-	border-right:1px solid;
 } 
 .csc_ffs_modify {
-	width:150px;
+	width:200px;
 	height:100px;
 	display: inline-block;
-	border-right:1px solid;
 } 
 .csc_ffs_ticketing {
-	width:150px;
+	width:200px;
 	height:100px;
 	display: inline-block;
-	border-right:1px solid;
-	padding-top: 0;
+	
 } 
 .csc_ffs_faq {
-	width:150px;
+	width:200px;
 	height:100px;
 	display: inline-block;
-	border-right:1px solid;
 } 
 
 hr{
@@ -54,23 +46,53 @@ hr{
 	background-color: gray;
 }
 
+/* 작은 박스-inquiry */
 .csc_main_sbt {
 	font-size:1.5em;
 }
-
-
-.csc_main_table {
-	margin-top:12px;
-	border-top:3px solid gray;
-	border-bottom:3px solid gray;
-}
-#the_plus {
-	margin-left: 40px;
+/* '더보기' */
+.the_plus {
+	text-decoration:none;
+/* 	margin-left: 130px; */
 	font-size:0.7em;
+	float: right;
+	color: black;
 }
 
+.csc_main_inquiry {
+	margin-top:30px;
+	margin-left:30px;
+	width:400px;
+}
+
+/* 작은 박스-notice */
+
+.csc_main_shortBox {
+	font-size:1.5em;
+}
 .csc_main_notice {
 	margin-top:30px;
 	margin-left:30px;
+	width:400px;
 }
 
+.csc_shortBox_border {
+	border-top: 1px solid black;
+	margin-top:5px;
+}
+.aTag {
+	text-decoration: none;
+	color:black;
+}
+ul li {
+	margin-bottom: 5px;
+}
+
+.csc_main_InquiryUl {
+	margin-top: 5px;
+	list-style-image: url("https://i.ibb.co/6Ng1m3P/thumb.png");
+}
+.csc_main_noticeUl {
+	margin-top: 5px;
+/* 	list-style-image: url("https://i.ibb.co/6Ng1m3P/thumb.png"); */
+}

@@ -1,7 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
-/* 	border: 1px solid skyblue; */
+	border: 1px solid skyblue;
 }
 
 body {
@@ -10,182 +10,107 @@ body {
 }
 
 #wrap {
-	width: 1200px;
+	width: 1400px;
 	margin: 0 auto;
 }
 
 article {
-	position: relative; width : 1200px;
-	height: 300px;
+	width : 1400px;
+	height: 100px;
 	/* 	background-color: #ffd54f; */
-	overflow: hidden;
-	width: 1200px;
 }
 
-article  img {
-	float: right;
-	width: 600px;
-	height: 300px;
-}
 
-@font-face {
-  font-family: neon;
-  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
-}
-
-.container {
-  display: table-cell;
-  width:600px;
-  height:300px;	
-	text-align: left;
-}
-
-.neon {
-  font-family: neon;
-  color: #FB4264;
-  margin-top: 60px;
-  font-size: 150px;
-  line-height: 20px;
-}
-
-.flux {
-  font-family: neon;
-  color: #426DFB;
-  font-size: 150px;
-  margin-top: 110px;
-  line-height: 20px;
-}
-
-.neon {
-  animation: neon 1s ease infinite;
-  -moz-animation: neon 1s ease infinite;
-  -webkit-animation: neon 1s ease infinite;
-}
-
-@keyframes neon {
-  0%,
-  100% {
-    text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
-    color: #FED128;
-  }
-  50% {
-    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
-    color: #806914;
-  }
-}
-
-.flux {
-  animation: flux 2s linear infinite;
-  -moz-animation: flux 2s linear infinite;
-  -webkit-animation: flux 2s linear infinite;
-  -o-animation: flux 2s linear infinite;
-}
-
-@keyframes flux {
-  0%,
-  100% {
-    text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
-    color: #28D7FE;
-  }
-  50% {
-    text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
-    color: #146C80;
-  }
-}
 
 section {
-	overflow: hidden;
-	width: 100%;
-	height: 1000px;
+	width: 1400px;
+	height: 1100px;
 /* 	background-color: #ffca28; */
-	display: flex;
-	flex-wrap: wrap;
-	margin-top: 40px;
+	
+}
+/* .content { */
+/* 	width: 1400px; */
+/* 	margin-top: 10px; */
+/* 	height: 1000px; */
+		
+/* } */
+
+.snackList {
+	padding-top: 10px;	
 }
 
-section h1 {
-	position: relative;
-	text-align: center; /* 가운데 정렬 */
-	font-size: 32px; /* 폰트 크기 수정 */
-	width: 100%; /* 너비 조정 */
-	white-space: nowrap;
+.snack_name {
+	font-size: 28px;
+	text-align: center;
 }
-.snackList {
-	display: flex;
-	margin-top: 50px;
+.snack_info{
+	font-size: 20px;
+	float: right;
+	margin-top: 20px;
+	width: 200px;
+	height: 180px;
+}
+.form-select {
+	width:100px;
+    margin: 5px; /* 각 select 요소 사이의 간격 조정 */
+    text-align: center;
+}
+.snack1 img, .snack2 img, .snack3 img {
+    width: 200px;
+    height: 200px;
 }
 .snack1 {
-    width: 280px;
+    width: 500px;
     height: 300px;
-    float:left;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
+
 .snack1 .buttons { text-align: center; }
 
 .snack2 {
-    width: 280px;
+    width: 500px;
     height: 300px;
-    margin-left: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .snack2 .buttons { text-align: center; }
 
 .snack3 {
-    width: 280px;
+    width: 500px;
     height: 300px;
-	margin-left: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .snack3 .buttons { text-align: center; }
 
-.snack4 {
-    width: 280px;
-    height: 300px;
-    margin-left: 20px;
+.pay{
+	text-align:center;
+	font-size: 25px;
+	margin-top:30px;
 	float: right;
+	width: 700px;
+	height: 900px;
+	
 }
-.snack4 .buttons { text-align: center; }
-
-
-.goodsList {
-	display: flex;
-	margin-top: 50px;
-}
-.goods1 {
-    width: 300px;
-    height: 300px;
-    float:left;
-}
-.goods1 .buttons { text-align: center; }
-
-.goods2 {
-    width: 300px;
-    height: 300px;
-    margin-left: 20px;
-}
-.goods2 .buttons { text-align: center; }
-
-.goods3 {
-    width: 300px;
-    height: 300px;
-	float: right;
-	margin-left: 20px;
-}
-.goods3 .buttons { text-align: center; }
-.goods4 {
-    width: 280px;
-    height: 300px;
-    margin-left: 20px;
-	float: right;
-}
-.goods4 .buttons { text-align: center; }
-
-
-
-
-.content {
-	width: 100%;
+#cartTable {
+    width: 700px; /* 테이블의 너비를 부모 요소의 100%로 설정 */
+    /* 다른 스타일을 적용하거나 필요에 따라 높이(height)를 조절할 수 있습니다. */
+	border-collapse: separate;
+    border-spacing: 10px; /* 원하는 간격으로 조절 가능합니다 */
+	height: 600px;
 }
 
+#cartTable th,
+#cartTable td {
+    padding: 10px; /* 셀 내부 여백을 조절하여 텍스트와 테두리 간의 간격을 조절합니다 */
+}
 
-
+.pay_buttons{
+	width:700px;
+	height: 200px;
+	margin-top: 30px;
+}
 
 
 

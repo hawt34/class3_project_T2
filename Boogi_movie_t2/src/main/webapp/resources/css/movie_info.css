@@ -1,7 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
-	border: 1px solid skyblue;
+/* 	border: 1px solid skyblue; */
 }
 
 body {
@@ -10,32 +10,25 @@ body {
 }
 
 #wrap {
-	width: 1200px;
+	width: 1400px;
 	margin: 0 auto;
 }
 
 article {
-	position: relative;
-	width: 1200px;
-	height: 800px;
+	margin-top:40px;
+	width: 1400px;
+	height: 600px;
 	/* 	background-color: #ffd54f; */
-	overflow: hidden;
+/* 	overflow: hidden; */
 }
 
-article video {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	max-width: 100%;
-	max-height: 100%;
-}
+
 
 section {
 	overflow: hidden;
-	width: 100%;
-	height: 1000px;
-	background-color: #ffca28;
+	width: 1400px;
+	height: 1100px;
+/* 	background-color: #ffca28; */
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -49,41 +42,87 @@ section h1 {
 }
 
 .content {
-	width: 100%;
+	width: 1400px;
 }
 
 .movie {
-	width: 300px;
+	padding-top: 30px;
+	width: 350px;
 	height: 600px;
 	float: left;
+	text-align: center;
 }
 
-.movie .poster-wrapper {
-	width: 100%; /* 이미지와 버튼을 감싸는 div의 너비를 100%로 설정 */
-	text-align: center; /* 내부 요소를 가운데 정렬 */
-}
 
 .movie img {
 	width: 300px;
-	height: 400px;
+	height: 500px;
 }
 
 .movie input[type="button"] {
-	margin-top: 10px; /* 버튼과 이미지 사이의 간격 조절 */
-	margin-left: 20px;
+	display: inline-block;
 }
 
 .movieInfo {
+	padding-top: 30px;
 	float: right;
-	width: 800px;
+	width: 1000px;
 	height: 600px;
 }
 
-.reviewContents {
-	width: 1200px;
-	margin-top: 10px;
-	height: 400px;
+.movieInfo ul li {
+    font-size: 24px; /* 텍스트 크기 조정 */
 }
+.movieInfo input[type="button"] {
+	position: absolute;
+	margin-left: 20px;
+	bottom: 30px;
+}
+
+.reviewContents {
+	width: 1400px;
+	margin-top: 10px;
+	height: 600px;
+}
+.reviewContents input[type="button"] {
+    margin-left: 20px; /* 오른쪽 마진을 20px로 설정합니다. */
+}
+
+.star-rating {	
+	margin-left:20px;
+ 	width: 1400px;
+ 	height: 100px;
+ 	font-size: 50px;
+    display: flex;
+ }
+.star {
+    appearance: none;
+    padding: 1px;
+ }
+
+.star::after {
+     content: '☆';
+     color: red;
+     font-size: 80px;
+}
+
+.star:hover::after,
+.star:has(~ .star:hover)::after,
+.star:checked::after,
+.star:has(~ .star:checked)::after {
+ content: '★';
+ }
+
+.star:hover ~ .star::after {
+ content: '☆';
+}
+.review textarea.form-control{
+	margin-left: 20px; 	
+	width: 500px;
+	height: 100px; /* 높이를 원하는 크기로 조절하세요 */
+	border: 2px solid black;
+}
+
 
 footer {
 	width: 100%;

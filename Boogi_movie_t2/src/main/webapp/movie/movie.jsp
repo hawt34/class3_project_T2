@@ -37,12 +37,11 @@
 			</div>
 			<div class="list">
 				<div class="movie">
-					<img
-						src="${pageContext.request.contextPath}/resources/images/movie_1.jpg">
+					<img src="${pageContext.request.contextPath}/resources/images/movie_1.jpg">
 					<p>범죄도시</p>
 					<button type="button" class="btn btn-outline-primary">예매하기
 					</button>
-					<button type="button" class="btn btn-outline-primary">상세보기
+					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movie_info_1.jsp'">상세보기
 					</button>
 				</div>
 				<div class="movie">

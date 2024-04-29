@@ -20,44 +20,52 @@
 			font-style: normal;
 		}
 		
-.button-container {
-            display: flex;
-            justify-content: center;
+/* .button-container { */
+/*             display: flex; */
+/*             justify-content: center; */
             
-        }
+/*         } */
 	</style>
 </head>
 <body>
 <header>
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
+
+
 	<div class="container1">
 		<div class="container2">
 		<div class="row">
 			<div class="col-md-2">
-				<jsp:include page="../sidebar/sidebar.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div><!-- col-md-2 사이드바임 -->
-		
-				<div class="col-md-10 text1"><h1>탈퇴처리되었습니다.</h1>
-					<div class="button-container">
-						<section class="content">
-						  <div class="box bg-1">
-						    <button class="button button--round-s button--ujarak button--border-medium button--text-thick" onclick="location.href='mainpage.jsp'">메인페이지</button>
-						  </div>
-						  <div class="box bg-1">
-						    <button class="button button--round-s button--ujarak button--border-medium button--text-thick" onclick="location.href='mainpage.jsp'">회원가입</button>
-						  </div>
-						  <div class="box bg-1">
-						    <button class="button button--round-s button--ujarak button--border-medium button--text-thick" onclick="location.href='mainpage.jsp'">로그인</button>
-						  </div>
-						</section>
-				    </div>  <!-- button-container -->
-			    </div><!-- "col-md-10 text1" -->
+				<div class="col-md-10">
+					<h2>회원탈퇴</h2>
+					<hr>
+					<div class="box1">
+						<h1>탈퇴처리되었습니다.</h1>
+						<div class="row">
+							<div class="col-md-4"> </div>
+							<div class="col-md-4">
+								<section class="content">
+									<div class="d-grid gap-2 d-md-block box2">
+									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='../main.jsp'">메인페이지</button>
+									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='../../member/member_reg_member.jsp'">회원가입</button>
+									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='../../member/member_login.jsp'">로그인</button>
+									</div>
+								</section>
+						    </div><!-- col-md-4 -->
+							<div class="col-md-4"> </div>
+					    </div><!-- row -->
+					</div>  
+			    </div><!-- "col-md-10" -->
 		    </div><!-- row -->
     	</div> <!-- container2 -->
     </div> <!-- container1 -->
     
-      
+<footer>
+	<jsp:include page="../inc/myp_footer.jsp"></jsp:include>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>

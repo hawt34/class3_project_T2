@@ -1,53 +1,23 @@
 @charset "EUC-KR";
 
 .container1{
-	height : 900px;
+	height : 1300px;
 	width: 1400px; /* 해상도 1200*/
-/* 	min-width: 1200px; 페이지 최소 너비를 1200으로 설정 해상도 1200 */
-/* 	margin: 0 auto; 중앙정렬 해상도 1200 */
-/* 	margin-top: 15%; */
-/* 	margin-left: 20%; */
-/* 	    display: flex; */
 }
 
 .container2{
-/* 	margin-left: auto; */
 	margin-top: 20px;
 }
-.admin_header_left{
-   float:left;
+.box1{
+	margin: 0px;
 }
-.btn-group:hover .dropdown-menu {
-   display:block; 
-   margin-left: 130px; 
-}
-.btn-group:hover  .btn{
-   background: black;
-   color: white;
-   border-radius: 10px;
-}
-select{
-	float: right;
-}
-/* .box1{ */
-/* 	margin-top: 10px; */
-/* 	height: 900px; */
-/* } */
-/* .box-in{ */
-/* 	margin-top: 10px; */
-/* } */
 .box2{
-	margin: 0;
+	margin-bottom: 20px;
 }
-
+.box3{
+	text-align: center;
+}
 .paybox1{
-	  display: flex;
-/* 	  margin-top: 10px; */
-}
-h5{
-	
-	  display: flex;
-}
-.title{
-	float: bottom;
+	margin-left: 0px;
+	display: flex;
 }

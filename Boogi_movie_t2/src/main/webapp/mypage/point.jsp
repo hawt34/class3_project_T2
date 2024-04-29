@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_point.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +17,27 @@ body {
 	font-weight: 400;
 	font-style: normal;
 }
+.container1{
+	height : 900px;
+	width: 1400px; /* 해상도 1200*/
+/* 	min-width: 1200px; 페이지 최소 너비를 1200으로 설정 해상도 1200 */
+/* 	margin: 0 auto; 중앙정렬 해상도 1200 */
+/* 	margin-top: 15%; */
+/* 	margin-left: 20%; */
+/* 	    display: flex; */
+}
 
+.container2{
+/* 	margin-left: auto; */
+	margin-top: 20px;
+}
+
+
+
+.box1{
+	height: 400px;
+	
+}
 
 </style>
 </head>
@@ -29,17 +48,16 @@ body {
 </header>
 <div class="container1">
 	<div class="container2">
-		<div class="row">
-		
+		<div class="row box1">
 			<div class="col-md-2">
-				<jsp:include page="sidebar/sidebar.jsp"></jsp:include>
+				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
 			</div>	<!-- col-md-2 사이드바  -->
-			
 			<div class="col-md-10">
 				<h2>포인트</h2>
 				<hr>
 				<!-- 탭 메뉴 -->
-				
+				<div class="row">
+				<div class="col-10">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item" role="presentation">
 						<button class="nav-link active" id="userinfo-tab" data-bs-toggle="tab"
@@ -51,18 +69,16 @@ body {
 							data-bs-target="#myreview" type="button" role="tab"
 							aria-controls="myreview" aria-selected="false">사용내역</button>
 					</li>
+				</ul>
+				</div>
 					<div class="col-md-2 selectbox1">
 						<select class="form-select form-select-sm" aria-label=".form-select-sm example">
 						  <option selected>최근 1주일</option>
 						  <option value="1">최근 1개월</option>
 						  <option value="2">최근 3개월</option>
 						</select>
-					</div>
-					
-					
-				</ul>
-				
-								
+					</div><!-- col-md-2 selectbox1 -->
+				</div>
 					<!-- 내용 -->
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="userinfo" role="tabpanel"aria-labelledby="userinfo-tab">
@@ -74,11 +90,10 @@ body {
 						      <th scope="col">구매 극장</th>
 						      <th scope="col">적립일</th>
 						      <th scope="col">적립</th>
-						      
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <tr  class="table-primary">
+						    <tr  class="table-secondary">
 						      <th scope="row">1</th>
 							      <td>매표</td>
 							      <td>서면점</td>
@@ -92,14 +107,13 @@ body {
 						        <td>2024 / 04 / 01</td>
 						        <td>540점</td>
 						    </tr>
-						    <tr  class="table-primary">
+						    <tr  class="table-secondary">
 						      <th scope="row">3</th>
 			          			<td>매점</td>
 					            <td>삼정타워점</td>
 					            <td>2024 / 04 / 01</td>
 					            <td>120점</td>
 					         </tr>
-					         
 							<tr>
 						      <th scope="row">4</th>
 					            <td>매표</td>
@@ -107,15 +121,13 @@ body {
 			            		<td>2024 / 02 / 18</td>
 			            		<td>820점</td>
 			          		</tr>
-			          		
-			          		<tr  class="table-primary">
+			          		<tr  class="table-secondary">
 						      <th scope="row">5</th>
 				              	<td>매표</td>
 				              	<td>아시아드</td>
 				              	<td>2024 / 02 / 08</td>
 				              	<td>430점</td>
 			         		</tr>
-			          		
 			          		<tr>
 						      <th scope="row">6</th>
 			            		<td>매점</td>
@@ -127,31 +139,101 @@ body {
 						</table>
 						</div><!-- tab-pane -->
 						<div class="tab-pane fade" id="myreview" role="tabpanel"aria-labelledby="myreview-tab">
-							<textarea class="textarea1" rows="13" cols="110" readonly>
-ㅇㅇ							
-						</textarea>		
-							
+							<table class="table2 table table-hover" >
+							  <thead>
+							    <tr>
+							      <th scope="col">#</th>
+							      <th scope="col">사용 구분</th>
+							      <th scope="col">사용 극장</th>
+							      <th scope="col">사용일</th>
+							      <th scope="col">사용</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr  class="table-secondary">
+							      <th scope="row">1</th>
+								      <td>매표</td>
+								      <td>서면점</td>
+								      <td>2024 / 04 / 24</td>
+								      <td>750점</td>
+							    </tr>      
+							    <tr>
+							      <th scope="row">2</th>
+							        <td>매표</td>
+							        <td>삼정타워점</td>
+							        <td>2024 / 04 / 01</td>
+							        <td>540점</td>
+							    </tr>
+							    <tr  class="table-secondary">
+							      <th scope="row">3</th>
+				          			<td>매점</td>
+						            <td>삼정타워점</td>
+						            <td>2024 / 04 / 01</td>
+						            <td>120점</td>
+						         </tr>
+								<tr>
+							      <th scope="row">4</th>
+						            <td>매표</td>
+									<td>아시아드</td>
+				            		<td>2024 / 02 / 18</td>
+				            		<td>820점</td>
+				          		</tr>
+				          		
+				          		<tr  class="table-secondary">
+							      <th scope="row">5</th>
+					              	<td>매표</td>
+					              	<td>아시아드</td>
+					              	<td>2024 / 02 / 08</td>
+					              	<td>430점</td>
+				         		</tr>
+				          		<tr>
+							      <th scope="row">6</th>
+				            		<td>매점</td>
+				            		<td>아시아드</td>
+				            		<td>2024 / 02 / 08</td>
+				            		<td>250점</td>
+						          </tr>
+							  </tbody>
+							</table>
 						</div><!-- tab-pane  -->
 					</div><!-- tab-content -->
-			
-			
-			
-			
 			</div><!-- col-md-10 -->
-		</div><!-- row -->
+		</div><!-- row 첫줄-->
+			<div class="row ">
+				<div class="col-md-2"> </div>
+					<!-- 탭 메뉴 -->
+				<div class="col-md-10">
+				<hr>
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link active" id="userinfo-tab" data-bs-toggle="tab"
+								data-bs-target="#userinfo" type="button" role="tab" aria-controls="userinfo"
+								aria-selected="true">적립안내</button>
+						</li>
+					</ul>
+					<!-- 내용 -->
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="userinfo" role="tabpanel"aria-labelledby="userinfo-tab">
+							<textarea class="textarea1" rows="13" cols="110" readonly>
+					
+					
+		영화 예매 시
+		온라인(모바일, 홈페이지)을 통한 티켓 구매 시 유료영화관람금액(실 결제 금액)에 영화 예매 시점에
+		해당하는 포인트를 적립할 수 있습니다.
+		포인트 적립은 유료 구매 시에만 가능하며, 상영일 익일에 적립 및 내역 확인 가능합니다.
+		
+		매점 이용 시
+		매점 상품 구매 시 유료결제금액의 0.5%에 해당하는 포인트를 적립할 수 있습니다.
+						</textarea>
+					</div><!-- tab-pane -->
+					</div><!-- tab-content -->
+				</div><!-- col-md-10 -->
+			</div><!-- row 두번째 줄 -->
 	</div><!-- container2 -->
 </div><!-- container1 -->
-	
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+<footer>
+	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>

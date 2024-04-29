@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class MovieController {
-	@GetMapping("movie")
-	public String movie() {
+public class StoreController {
+	@GetMapping("boogi_store")
+	public String store() {
 		
-		return "movie/movie";
+		return "store/boogi_store";
 	}
 }

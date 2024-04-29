@@ -79,9 +79,7 @@ body {
 					<h5>고객센터</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">공지사항</a> 
-					<a class="dropdown-item" href="#">자주묻는질문</a> 
-					<a class="dropdown-item" href="#">1:1문의</a>
+					<a class="dropdown-item" href="#">1:1문의내역</a>
 				</div>
 			</div>
 			<div class="btn-group">

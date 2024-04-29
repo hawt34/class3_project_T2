@@ -64,9 +64,9 @@
 				</button>
 				<div class="dropdown-menu">
 					<!-- 마우스 오버 후 서브메뉴 -->
-					<a class="dropdown-item" href="admin">회원정보관리</a> 
-					<a class="dropdown-item" href="#">리뷰관리</a> 
-					<a class="dropdown-item" href="#">예매관리</a>
+					<a class="dropdown-item" href="admin_member">회원정보관리</a> 
+					<a class="dropdown-item" href="admin_review">리뷰관리</a> 
+					<a class="dropdown-item" href="admin_reserve">예매관리</a>
 				</div>
 			</div>
 			<div class="btn-group dropright">
@@ -74,8 +74,8 @@
 					<h5>영화</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">영화정보관리</a> 
-					<a class="dropdown-item" href="#">상영일정관리</a> 
+					<a class="dropdown-item" href="admin_movie">영화정보관리</a> 
+					<a class="dropdown-item" href="admin_moviePlan">상영일정관리</a> 
 					<a class="dropdown-item" href="#">박스오피스조회</a>
 				</div>
 			</div>
@@ -84,8 +84,8 @@
 					<h5>극장</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">극장관리</a> 
-					<a class="dropdown-item" href="#">상영관관리</a>
+					<a class="dropdown-item" href="admin_theater">극장관리</a> 
+					<a class="dropdown-item" href="admin_booth">상영관관리</a>
 				</div>
 			</div>
 			<div class="btn-group">
@@ -93,7 +93,7 @@
 					<h5>스토어</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">스토어관리</a> 
+					<a class="dropdown-item" href="admin_store">스토어관리</a> 
 				</div>
 			</div>
 			<div class="btn-group">
@@ -101,7 +101,7 @@
 					<h5>결제관리</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">결제관리</a>
+					<a class="dropdown-item" href="admin_pay">결제관리</a>
 				</div>
 			</div>
 			<div class="btn-group">
@@ -109,9 +109,9 @@
 					<h5>고객센터</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">공지사항</a> 
-					<a class="dropdown-item" href="#">자주묻는질문</a> 
-					<a class="dropdown-item" href="#">1:1문의</a>
+					<a class="dropdown-item" href="admin_notice">공지사항</a> 
+					<a class="dropdown-item" href="admin_FAQ">자주묻는질문</a> 
+					<a class="dropdown-item" href="admin_oneOneone">1:1문의</a>
 				</div>
 			</div>
 			<div class="btn-group">
@@ -119,7 +119,7 @@
 					<h5>이벤트</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">이벤트관리</a>
+					<a class="dropdown-item" href="admin_event">이벤트관리</a>
 				</div>
 			</div>
 		</div>

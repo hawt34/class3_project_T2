@@ -7,10 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IncController {
 	
-	@GetMapping("./")
-	public String home() {
-		return "movie/movie";
-	}
 	
 	// csc 연결
 	@GetMapping("csc_main")

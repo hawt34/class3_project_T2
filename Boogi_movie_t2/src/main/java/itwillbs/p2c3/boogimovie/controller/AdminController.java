@@ -45,8 +45,6 @@ public class AdminController {
 		return "admin/admin_csc/admin_oneOneone_detail";
 	}
 	
-	
-	
 	// 관리자 회원 페이지
 	@GetMapping("admin_reserve")
 	public String adminReserve() {
@@ -88,5 +86,42 @@ public class AdminController {
 	public String adminEventDetail() {
 		return "admin/admin_event/admin_event_detail";
 	}
+	
+	// 관리자 결제 페이지
+	@GetMapping("admin_pay")
+	public String adminPay() {
+		return "admin/admin_pay/admin_pay";
+	}
+	
+	// 관리자 스토어 페이지
+	@GetMapping("admin_store")
+	public String adminStore() {
+		return "admin/admin_store/admin_store";
+	}
+	@GetMapping("admin_store_form")
+	public String adminStoreForm() {
+		return "admin/admin_store/admin_store_form";
+	}
+	
+	// 관리자 극장 페이지
+	@GetMapping("admin_theater")
+	public String adminTheater() {
+		return "admin/admin_theater/admin_theater";
+	}
+	@GetMapping("admin_theater_form")
+	public String adminTheaterForm() {
+		return "admin/admin_theater/admin_theater_form";
+	}
+	@GetMapping("admin_booth_form")
+	public String adminBoothForm() {
+		return "admin/admin_theater/admin_booth_form";
+	}
+	@GetMapping("admin_booth")
+	public String adminBooth() {
+		return "admin/admin_theater/admin_booth";
+	}
+	
+	
+	
 	
 }

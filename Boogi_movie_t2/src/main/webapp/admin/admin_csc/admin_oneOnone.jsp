@@ -84,17 +84,9 @@
 	  width: 10%;
 	}
 	.admin_ono_head {
-	margin: 50px 0;
+	margin: 30px 0;
 	text-align: right;
 	border
-	}
-	
-	.admin_ono_search > td {
-		height: 50px;
-		background: #black;
-		margin-right: 100px;
-		margin-bottom: 20px;
-		
 	}
 	
 	.admin_ono_title {
@@ -109,14 +101,14 @@
 		<jsp:include page="/inc/admin_header.jsp"></jsp:include>
 	</header>
 	
-	<div class="container">
+<!-- 	<div class="container"> -->
 		<div class="row">
 			<!-- side 영역 -->
 			<div class="col-2">
 				<jsp:include page="/admin/admin_main/admin_aside.jsp"></jsp:include>
 			</div>
 			<!-- content 영역 -->
-			<div class="col-10">
+			<div class="col-9">
 				<div class="admin_ono_head">
 					<div class="admin_ono_title">고객센터관리</div>
 						<div class="admin_ono_search">
@@ -192,7 +184,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+<!-- 	</div> -->
 	
 	<footer>
 		<jsp:include page="/inc/admin_footer.jsp"></jsp:include>

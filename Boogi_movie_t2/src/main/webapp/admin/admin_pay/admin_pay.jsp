@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지 - 결제관리</title>
-<link href="../admin_main/admin_main.css" rel="stylesheet">
+<!-- <link href="../admin_main/admin_main.css" rel="stylesheet"> -->
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -41,7 +41,7 @@
 					<div class="admin_movie_search">
 						<select>
 							<option>예매</option>
-							<option>스낵</option>
+							<option>스토어</option>
 						</select> 
 					</div>
 				</div>

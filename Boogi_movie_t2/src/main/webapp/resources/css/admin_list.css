@@ -69,7 +69,6 @@ th:nth-child(7), td:nth-child(7) {
 .admin_movie_search {
 	height: 50px;
 	width: 360px;
-	background: black;
 	float: right;
 	margin-right: 100px;
 	margin-bottom: 20px;

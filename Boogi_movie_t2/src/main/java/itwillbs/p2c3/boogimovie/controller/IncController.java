@@ -1,8 +1,6 @@
 package itwillbs.p2c3.boogimovie.controller;
 
-<<<<<<< HEAD
-public class IncController {
-=======
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -32,22 +30,13 @@ public class IncController {
 		return "csc/csc_oto";
 	}
 	
-	// admin 연결
-	@GetMapping("admin_main")
-	public String adminMain() {
-		return "admin/admin_main/admin_main";
-	}
-	
-	
 	// event 연결
 	@GetMapping("event_main")
 	public String eventMain() {
 		return "event/event_movie";
 	}
 	
-	
-	
-	
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
-	
 }
+	
+	
+	

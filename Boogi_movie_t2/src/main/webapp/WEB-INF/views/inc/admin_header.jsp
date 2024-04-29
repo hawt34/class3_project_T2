@@ -119,8 +119,10 @@ body {
 	<div class="header">
 		<!--  여기가 헤더 탑 로그인 자리 -->
 		<div align="right" class="header_top">
-			<a href="#"> 로그인 | </a> <a href="#"> 로그아웃 | </a> <a href="#">
-				회원가입 | </a> <a href="#"> 관리자페이지 </a>
+			<a href="member_login"> 로그인 | </a> 
+			<a href="member_logout"> 로그아웃 | </a> 
+			<a href="member_reg_member"> 회원가입 | </a> 
+			<a href="admin_main"> 관리자페이지 </a>
 		</div>
 		<!--  부기무비 타이틀 영역 -->
 		<div class="header_middle">
@@ -131,7 +133,7 @@ body {
 					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png">
 				</div>
 				<div class="col-md-5" align="center">
-					<img src="${pageContext.request.contextPath}/resources/images/boogi_title.png" onclick="location.href='#'">
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_title.png" onclick="location.href='./'">
 				</div>
 				<div class="col-md-2" align="center">
 					<img src="${pageContext.request.contextPath}/resources/images/boogi_walk.png">

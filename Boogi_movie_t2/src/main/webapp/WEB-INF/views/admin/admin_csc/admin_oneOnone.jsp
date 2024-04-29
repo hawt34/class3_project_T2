@@ -187,11 +187,8 @@
 <!-- 	</div> -->
 	
 	<footer>
-<<<<<<< HEAD
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
-=======
-		<jsp:include page="/WEB-INF/views/admin/admin_main/admin_footer.jsp"></jsp:include>
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
+
 	</footer>
 	
 </body>

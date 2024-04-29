@@ -55,7 +55,7 @@
 		<div class="btn-group-vertical">
 			<!-- 사이드바 타이틀 -->
 			<div class="sideVar_title">
-				<h4 class="admin_aside_name">관리자페이지</h4>
+				<h4 class="admin_aside_name" onclick="location.href='admin_main'">관리자페이지</h4>
 			</div>
 			<div class="btn-group dropright">
 				<!-- 마우스 오버 전 카테고리 -->
@@ -64,7 +64,7 @@
 				</button>
 				<div class="dropdown-menu">
 					<!-- 마우스 오버 후 서브메뉴 -->
-					<a class="dropdown-item" href="#">회원정보관리</a> 
+					<a class="dropdown-item" href="admin">회원정보관리</a> 
 					<a class="dropdown-item" href="#">리뷰관리</a> 
 					<a class="dropdown-item" href="#">예매관리</a>
 				</div>

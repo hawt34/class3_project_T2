@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IncController {
 	
+	@GetMapping("./")
+	public String home() {
+		return "movie/movie";
+	}
+	
+	// csc 연결
 	@GetMapping("csc_main")
 	public String cscMain() {
 		return "csc/csc_main";
@@ -22,6 +28,21 @@ public class IncController {
 	public String cscOto() {
 		return "csc/csc_oto";
 	}
+	
+	// admin 연결
+	@GetMapping("admin_main")
+	public String adminMain() {
+		return "admin/admin_main/admin_main";
+	}
+	
+	
+	// event 연결
+	@GetMapping("event_main")
+	public String eventMain() {
+		return "event/event_movie";
+	}
+	
+	
 	
 	
 	

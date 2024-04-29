@@ -12,13 +12,13 @@
 <body>
 	
 	<header>
-		<jsp:include page="../../inc/admin_header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 	</header>
 	
 	<div class="row box">
 		<div class="col-md-2" style="margin-right : 80px;">
 		<!-- 사이드바 영역 -->
-			<jsp:include page="../../inc/admin_aside.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
 		</div>
 		
 		
@@ -73,7 +73,7 @@
     
     
 	<footer>
-		<jsp:include page="../../inc/admin_footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
 </body>
 </html>

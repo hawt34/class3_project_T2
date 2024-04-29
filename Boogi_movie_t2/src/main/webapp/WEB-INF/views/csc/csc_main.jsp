@@ -16,7 +16,7 @@
 </head>
 <body>
 <div>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 </div>
 
 <div class="container">
@@ -27,27 +27,29 @@
 		</div>
 		<!-- content - csc 메인 화면 영역 -->
 		<div class="col-10">
-			<h1>고객센터 메인</h1>
-			<hr>
+			<div id="csc_mainTitle">
+				<h1>고객센터 메인</h1>
+				<hr>
+			</div>
 		<div>
 			<div id="csc_mainShort_title">자주 찾는 서비스</div>
 			<hr>
 			<div class="row">
 				<div class="csc_ffs">
 					<div class="csc_ffs_ps">
-						<a href="#" class="aTag"><img src="images/boogiSad.png"><br>
+						<a href="#" class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiSad.png"><br>
 						아이디/비밀번호<br>찾기</a>
 					</div>
 					<div class="csc_ffs_modify">
-						<a href="#"class="aTag"><img src="images/boogiHappy.png"><br>
+						<a href="#"class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiHappy.png"><br>
 						회원정보<br>수정</a>
 					</div>
 					<div class="csc_ffs_ticketing">
-						<a href="#" class="aTag"><img src="images/boogiLovely.png"><br>
+						<a href="#" class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiLovely.png"><br>
 						영화 예매<br>결제</a>
 					</div>
 					<div class="csc_ffs_faq">
-						<a href="#" class="aTag"><img src="images/boogiCurious.png"><br>
+						<a href="#" class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiCurious.png"><br>
 						자주 묻는<br> 질문</a>
 					</div>
 				</div>
@@ -61,7 +63,7 @@
 			<div class="col">
 				<div class="csc_main_inquiry">
 					<div class="csc_main_shortBox">
-						자주묻는질문 Best <a href="#" class="the_plus">더 보기</a>
+						자주묻는질문 Best <a href="csc_faq" class="the_plus">더 보기</a>
 					</div>
 					<div class="csc_shortBox_border">
 						<ul class="csc_main_InquiryUl">
@@ -78,7 +80,7 @@
 			<div class="col">
 				<div class="csc_main_notice">
 					<div class="csc_main_shortBox">
-						최근 공지사항 <a href="#" class="the_plus">더 보기</a>
+						최근 공지사항 <a href="csc_notice" class="the_plus">더 보기</a>
 					</div>
 					<div class="csc_shortBox_border">
 						<ul class="csc_main_noticeUl">
@@ -96,8 +98,9 @@
 	</div>
 </div>	
 	
-
-	
+<div>
+	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
+</div>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

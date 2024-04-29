@@ -65,15 +65,15 @@
 			<div class="tab-content">
 				<!-- 극장별 상세 정보탭 -->
 				<div class="tab-pane active" id="theater-detail-info" role="tabpanel" aria-labelledby="theater-detail-info-tab" tabindex="0">
-					<jsp:include page="/theater/theater_detail_info.jsp"></jsp:include>
+					<jsp:include page="theater_detail_info.jsp"></jsp:include>
 				</div>
 				<!-- 극장별 상영시간표 탭 -->	
 				<div class="tab-pane" id="theater-timetable" role="tabpanel" aria-labelledby="theater-timetable-tab" tabindex="0">
-					<jsp:include page="/theater/theater_detail_timetable.jsp"></jsp:include>
+					<jsp:include page="theater_detail_timetable.jsp"></jsp:include>
 				</div>
 				<!-- 극장별 관람료 탭(내용 고정) -->	
 				<div class="tab-pane" id="theater-price" role="tabpanel" aria-labelledby="theater-price-tab" tabindex="0">
-					<jsp:include page="/theater/theater_detail_price.jsp"></jsp:include>
+					<jsp:include page="theater_detail_price.jsp"></jsp:include>
 				</div>
 			</div>
 		</div>

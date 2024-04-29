@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FAQ 등록폼</title>
+<title>상영관 등록폼</title>
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -14,36 +14,39 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-	crossorigin="anonymous">
-</script>
-
+	crossorigin="anonymous"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<h4 class="mb-4">FAQ등록</h4>
+				<h4 class="mb-4">해운대점 상영관등록</h4>
 				<form class="validation-form" novalidate action="#" method="post">
 					<div class="mb-3">
-						<label for="movie_director">작성자</label> 
+						<label for="movie_code">상영관코드</label> 
+						<input type="text" id="movie_code" class="form-control" required />
+						<div class="invalid-feedback">상영관코드를 입력해주세요.</div>
+					</div>
+					<div class="mb-3">
+						<label for="movie_name">상영관명</label> 
+						<input type="text" id="movie_name" class="form-control" required />
+						<div class="invalid-feedback">상영관명을 입력해주세요.</div>
+					</div>
+					<div class="mb-3">
+						<label for="movie_director">상영관위치</label> 
 						<input type="text" id="movie_director" class="form-control" required />
-						<div class="invalid-feedback">작성자를 입력해주세요.</div>
+						<div class="invalid-feedback">상영관위치를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_name">글제목</label> 
-						<input type="text" id="movie_name" class="form-control" required />
-						<div class="invalid-feedback">글제목을 입력해주세요.</div>
+						<label for="movie_createDate">상영관크기</label> 
+						<input type="text" id="movie_createDate" class="form-control" required />
+						<div class="invalid-feedback">상영관크기를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_name">이미지</label> 
-						<input type="text" id="movie_name" class="form-control" required />
-						<div class="invalid-feedback">이미지를 입력해주세요.</div>
-					</div>
-					<div class="mb-3">
-						<label for="movie_story">내용</label> 
-						<textArea id="movie_story" class="form-control" rows="10px" required></textArea>
-						<div class="invalid-feedback">내용을 입력해주세요.</div>
+						<label for="movie_genre">운영시간</label> 
+						<input type="text" id="movie_genre" class="form-control" required />
+						<div class="invalid-feedback">운영시간을 입력해주세요.</div>
 					</div>
 					
 					<hr class="mb-4">

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 - 극장 관리</title>
+<title>관리자페이지 - 상영관 관리</title>
 <link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 링크 -->
 <link
@@ -37,7 +37,7 @@
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_movie_head">
-					<div class="admin_movie_title">극장관리</div>
+					<div class="admin_movie_title">상영관관리</div>
 					<div class="admin_movie_search">
 						<select>
 							<option>해운대점</option>
@@ -57,10 +57,10 @@
 						<thead>
 			
 							<tr>
-								<th>극장코드</th>
-								<th>극장 이름</th>
-								<th>극장 위치</th>
-								<th>극장 크기</th>
+								<th>상영관 코드</th>
+								<th>상영관 이름</th>
+								<th>상영관 위치</th>
+								<th>상영관 크기</th>
 								<th>운영 시간</th>
 								<th>운영 상태</th>
 								<th>수정/삭제</th>

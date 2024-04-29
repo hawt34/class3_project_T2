@@ -40,10 +40,8 @@
 	width: 150px;
 }
 
-.col-md-5>a {
-	text-decoration: none;
-	color: skyblue;
-	font-size: 130px;
+.col-md-5>img {
+	width: 800px;
 }
 
 .header_middle {
@@ -130,13 +128,13 @@ body {
 				      
 				<div class="col-md-1"></div>
 				<div class="col-md-2" align="center">
-					<img src="${pageContext.request.contextPath}/resources/images/topBoogi.png">
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png">
 				</div>
 				<div class="col-md-5" align="center">
-					<a class="kaushan-script-regular" href="#">Boogie Movie</a>
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_title.png" onclick="location.href='#'">
 				</div>
 				<div class="col-md-2" align="center">
-					<img src="${pageContext.request.contextPath}/resources/images/topBoogi.png">
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_walk.png">
 				</div>
 				<div class="col-md-1"></div>
 			</div>

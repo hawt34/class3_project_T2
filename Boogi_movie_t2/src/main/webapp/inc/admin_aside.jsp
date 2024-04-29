@@ -98,6 +98,14 @@
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
+					<h5>결제관리</h5>
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">결제관리</a>
+				</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn" data-toggle="dropdown">
 					<h5>고객센터</h5>
 				</button>
 				<div class="dropdown-menu">
@@ -112,15 +120,6 @@
 				</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="#">이벤트관리</a>
-				</div>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>결제관리</h5>
-				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">영화 결제 관리</a>
-					<a class="dropdown-item" href="#">스토어 결제 관리</a>
 				</div>
 			</div>
 		</div>

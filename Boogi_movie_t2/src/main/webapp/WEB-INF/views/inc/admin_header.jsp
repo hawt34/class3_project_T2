@@ -147,7 +147,7 @@ body {
 			<div class="dropdown">
 				<button class="dropdown-btn" onclick="location.href='#'">영화</button>
 				<div class="dropdown-submenu">
-					<a href="#">현재상영작</a> <a href="#none">상영예정작</a>
+					<a href="movie">현재상영작</a> <a href="movieFuture">상영예정작</a>
 				</div>
 			</div>
 			<div class="dropdown">

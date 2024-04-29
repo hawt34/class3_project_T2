@@ -181,23 +181,39 @@ body {
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->
 					</div><!-- modal fade 모달 div 끝 -->
-					<ol class="list-group list-group-numbered" >
-					  <li class="list-group-item d-flex justify-content-between align-items-start">
-					    <div class="ms-2 me-auto">
-					      <div class="fw-bold ">서면</div>
-					    </div>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-start">
-					    <div class="ms-2 me-auto">
-					      <div class="fw-bold">아시아드</div>
-					    </div>
-					  </li>
-					  <li class="list-group-item d-flex justify-content-between align-items-start">
-					    <div class="ms-2 me-auto">
-					      <div class="fw-bold">삼정타워</div>
-					    </div>
-					  </li>
-					</ol>
+<!-- 					<ol class="list-group list-group-numbered" > -->
+<!-- 					  <li class="list-group-item d-flex justify-content-between align-items-start"> -->
+<!-- 					    <div class="ms-2 me-auto"> -->
+<!-- 					      <div class="fw-bold ">서면</div> -->
+<!-- 					    </div> -->
+<!-- 					  </li> -->
+<!-- 					  <li class="list-group-item d-flex justify-content-between align-items-start"> -->
+<!-- 					    <div class="ms-2 me-auto"> -->
+<!-- 					      <div class="fw-bold">아시아드</div> -->
+<!-- 					    </div> -->
+<!-- 					  </li> -->
+<!-- 					  <li class="list-group-item d-flex justify-content-between align-items-start"> -->
+<!-- 					    <div class="ms-2 me-auto"> -->
+<!-- 					      <div class="fw-bold">삼정타워</div> -->
+<!-- 					    </div> -->
+<!-- 					  </li> -->
+<!-- 					</ol> -->
+					<table class="table3 table table-bordered">
+						<tr>
+							<td>서면</td>
+						</tr>
+						<tr>
+							<td>아시아드</td>
+						</tr>
+						<tr>
+							<td>삼정타워</td>
+						</tr>
+					</table>
+					
+					
+					
+					
+					
 				</div><!-- col-md-3-->
 		</div> <!-- row -->
 	</div><!-- container2 -->

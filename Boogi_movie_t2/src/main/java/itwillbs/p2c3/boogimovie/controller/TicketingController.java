@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class TicketingController {
-	
 	@GetMapping("tic_ticketing")
 	public String ticketing() {
 		System.out.println("tic_ticketing()");

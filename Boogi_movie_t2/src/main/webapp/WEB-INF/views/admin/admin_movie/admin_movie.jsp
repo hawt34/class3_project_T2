@@ -135,7 +135,7 @@ th:nth-child(7), td:nth-child(7) {
 <body>
 
 	<header>
-		<jsp:include page="/inc/admin_header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 	</header>
 
 	<main>
@@ -144,7 +144,7 @@ th:nth-child(7), td:nth-child(7) {
 
 			<div class="col-md-2">
 				<!-- 사이드바 영역 -->
-				<jsp:include page="/admin/admin_main/admin_aside.jsp"></jsp:include>
+				<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
 			</div>
 
 			<div class="col-md-9">
@@ -239,7 +239,7 @@ th:nth-child(7), td:nth-child(7) {
 	</main>
 
 	<footer>
-		<jsp:include page="/inc/admin_footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
 	<script type="text/javascript">

@@ -24,7 +24,7 @@
 <body>
 
 	<header>
-		<jsp:include page="/inc/admin_header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 	</header>
 
 	<main>
@@ -64,7 +64,7 @@
 	</main>
 
 	<footer>
-		<jsp:include page="/inc/admin_footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
 </body>

@@ -98,14 +98,14 @@
 </head>
 <body>
 	<header>
-		<jsp:include page="/inc/admin_header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 	</header>
 	
 <!-- 	<div class="container"> -->
 		<div class="row">
 			<!-- side 영역 -->
 			<div class="col-2">
-				<jsp:include page="/admin/admin_main/admin_aside.jsp"></jsp:include>
+				<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
 			</div>
 			<!-- content 영역 -->
 			<div class="col-9">
@@ -187,7 +187,7 @@
 <!-- 	</div> -->
 	
 	<footer>
-		<jsp:include page="/inc/admin_footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/admin/admin_main/admin_footer.jsp"></jsp:include>
 	</footer>
 	
 </body>

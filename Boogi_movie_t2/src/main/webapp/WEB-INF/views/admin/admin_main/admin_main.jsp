@@ -74,7 +74,7 @@ main {
 <body>
 
 	<header>
-		<jsp:include page="/inc/admin_header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 	</header>
 
 	<main>
@@ -85,7 +85,7 @@ main {
 
 				<div class="col-md-2">
 					<!-- 사이드바 영역 -->
-					<jsp:include page="/admin/admin_main/admin_aside.jsp"></jsp:include>
+					<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
 				</div>
 
 				<!--  메인 중앙 영역  -->
@@ -139,7 +139,7 @@ main {
 	</main>
 
 	<footer>
-		<jsp:include page="/inc/admin_footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
 	<script type="text/javascript">

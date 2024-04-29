@@ -169,9 +169,9 @@ body {
 				</div>
 			</div>
 			<div class="dropdown">
-				<button class="dropdown-btn">고객센터</button>
+				<button class="dropdown-btn" onclick="location.href='csc_main'">고객센터</button>
 				<div class="dropdown-submenu">
-					<a href="#none">공지사항</a> <a href="#none">자주묻는질문</a> <a href="#none">1:1상담센터</a>
+					<a href="csc_notice">공지사항</a> <a href="csc_faq">자주묻는질문</a> <a href="csc_oto">1:1문의</a>
 				</div>
 			</div>
 			<div class="dropdown">

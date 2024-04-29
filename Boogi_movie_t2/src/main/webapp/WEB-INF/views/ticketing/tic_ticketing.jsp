@@ -23,7 +23,7 @@
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 
-
+<form action="tic_choose_seat" method="post">
 <section class="tic_main">
 	<div class="tic_title">
 		<h3>영화 예매</h3>
@@ -32,7 +32,9 @@
 	<div class="row asdf">
 		
 		<!-- 본문 시작 -->
+		
 		<div class="col-md-12">
+
 			<div class="row tic_row">
 			<!-- tic_movie영역 시작 -->
 				<div class="col-md-3 tic" style="padding-left: 20px; padding-right: 20px;">
@@ -134,7 +136,12 @@
 	<div class="tic_button">
 		<button type="submit" class="btn btn-outline-primary">좌석 선택</button>
 	</div>
+	
 </section>
+</form>				
+			
+		
+		
 
 
 <footer>

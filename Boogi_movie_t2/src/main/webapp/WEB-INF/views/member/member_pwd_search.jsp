@@ -17,7 +17,7 @@
     <h3>비밀번호 찾기</h3>
     <hr>
     </div>
-<form action="action_page.php" method="post">
+<form action="member_search_pwd_result" method="post">
 <div class="member_row">
 	
     <div class="form_item">
@@ -25,6 +25,7 @@
     	<input type="text"  name="id" id="id" required>
     	<span></span>
     </div>
+    
     <div class="form_item">
     	<label for="tel"><b>전화번호</b></label>
     	<input type="text"  name="tel" id="tel" required>

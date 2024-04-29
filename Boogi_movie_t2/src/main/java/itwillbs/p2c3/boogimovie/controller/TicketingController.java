@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class TicketingController {
-<<<<<<< HEAD
-
+	
 	@GetMapping("tic_ticketing")
 	public String ticketing() {
 		System.out.println("tic_ticketing()");
@@ -25,7 +24,5 @@ public class TicketingController {
 		return "ticketing/tic_choose_seat";
 	}
 	
-=======
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	
 }

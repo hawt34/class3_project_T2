@@ -34,8 +34,8 @@
 			<h3>귀하의 아이디는 434xxx01 입니다!</h3>
 			<br>
 			<br>
-		<button type="button" class="btn btn-outline-primary">로그인</button>
-		<button type="button" class="btn btn-outline-primary">패스워드 찾기</button>
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='member_login'">로그인</button>
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='member_search_pwd'">패스워드 찾기</button>
 		</div>
 		
 	</div>

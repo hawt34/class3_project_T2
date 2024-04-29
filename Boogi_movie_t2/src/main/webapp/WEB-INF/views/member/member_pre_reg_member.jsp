@@ -27,6 +27,7 @@
 		    	<input type="text"  name="name" id="name" required>
 		    	<span></span>
 		    </div>
+		    
 		    <div class="form_item">
 		    	<label for="birth"><b>생년월일</b></label>
 		    	<input type="text"  name="birth" id="birth" required>

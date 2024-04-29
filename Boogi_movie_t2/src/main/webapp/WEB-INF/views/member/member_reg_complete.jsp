@@ -34,9 +34,8 @@
 			<h3>이연태님 회원가입을 환영합니다!</h3>
 			<br>
 			<br>
-		<button type="button" class="btn btn-outline-primary">메인</button>
-		<button type="button" class="btn btn-outline-primary">영화</button>
-		<button type="button" class="btn btn-outline-primary">예매</button>
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='/'">영화</button>
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='tic_ticketing'">예매</button>
 		</div>
 		
 	</div>

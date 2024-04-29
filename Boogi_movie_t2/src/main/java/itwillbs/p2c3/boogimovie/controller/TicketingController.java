@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class TicketingController {
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	@GetMapping("tic_ticketing")
 	public String ticketing() {
 		System.out.println("tic_ticketing()");

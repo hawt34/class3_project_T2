@@ -121,8 +121,10 @@
 
 
 
-
-
+<!-- footer -->
+<div>
+	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
+</div>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

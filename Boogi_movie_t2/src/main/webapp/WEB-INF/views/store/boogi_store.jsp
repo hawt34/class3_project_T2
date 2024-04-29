@@ -20,7 +20,6 @@
 	</header>
 	<div id="wrap">
 		<section>
-			
 			<div class="content">
 				<h1>부기 스낵</h1>
 				<div class="snackList">

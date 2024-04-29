@@ -24,7 +24,7 @@
 				<h1>부기 스낵</h1>
 				<div class="snackList">
 					<div class="snack1">
-						<div class= "snack_name">부기팝콘</div>
+						<div class= "snack_name">부기 팝콘</div>
 						<div class= "snack_info"><p>고소한 부기팝콘</p> 가격 개당 5000원</div>
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_pop.jpg">
 						<select class="form-select" >
@@ -40,12 +40,21 @@
 			  				<option value="6">9개</option>
 			  			</select>	
 						<div class="buttons">
-							<button type="button" class="btn btn-outline-primary">담기</button>
-							<button type="button" class="btn btn-outline-primary">결제하기</button>
+							<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
+							<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+			  					<div class="offcanvas-header">
+			    				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">장바구니</h5>
+			    				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			  				</div>
+			  				<div class="offcanvas-body">
+			  					<button type="button" class="btn btn-outline-primary" onclick="history.back()">뒤로</button>
+			    				<button type="button" class="btn btn-outline-primary">결제하기</button>	
+			 	 			</div>
+							</div>
 						</div>
 					</div>
 					<div class="snack2">
-						<div class= "snack_name">부기콜라</div>
+						<div class= "snack_name">부기 콜라</div>
 						<div class= "snack_info"><p>시원한 부기콜라</p>  가격 개당 2000원</div>
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_col.jpg">
 						<select class="form-select" >
@@ -61,12 +70,23 @@
 			  				<option value="6">9개</option>
 			  			</select>		
 						<div class="buttons">
-							<button type="button" class="btn btn-outline-primary">담기</button>
-							<button type="button" class="btn btn-outline-primary">결제하기</button>
+							<div class="buttons">
+							<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
+							<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+			  					<div class="offcanvas-header">
+			    				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">장바구니</h5>
+			    				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			  				</div>
+			  				<div class="offcanvas-body">
+			  					<button type="button" class="btn btn-outline-primary" onclick="history.back()">뒤로</button>
+			    				<button type="button" class="btn btn-outline-primary">결제하기</button>	
+			 	 			</div>
+							</div>
+							</div>
 						</div>
 					</div>
 					<div class="snack3">
-						<div class= "snack_name">부기세트</div>
+						<div class= "snack_name">부기 세트</div>
 						<div class= "snack_info"><p>고소한 부기팝콘 +</p> <p>부기 콜라2잔</p> 세트 가격 8000원</div>
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_popCol.jpg">
 						<select class="form-select" >
@@ -82,12 +102,24 @@
 			  				<option value="6">9개</option>
 			  			</select>	
 						<div class="buttons">
-							<button type="button" class="btn btn-outline-primary">담기</button>
-							<button type="button" class="btn btn-outline-primary">결제하기</button>
+							<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
+							<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+			  					<div class="offcanvas-header">
+			    				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">장바구니</h5>
+			    				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			  				</div>
+			  				<div class="offcanvas-body">
+			  					<button type="button" class="btn btn-outline-primary" onclick="history.back()">뒤로</button>
+			    				<button type="button" class="btn btn-outline-primary">결제하기</button>	
+			 	 			</div>
+							</div>
 						</div>
 					</div>
 				</div>
-
+				<div class="basket_buttons">
+					<button type="button" class="btn btn-outline-primary">장바구니 확인하기</button>
+					<button type="button" class="btn btn-outline-primary">결제하기</button>
+				</div>
 			</div>
 		</section>
 		<footer> 

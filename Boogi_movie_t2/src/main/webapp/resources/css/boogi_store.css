@@ -1,7 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
-	border: 1px solid skyblue;
+/* 	border: 1px solid skyblue; */
 }
 
 body {
@@ -78,8 +78,13 @@ section {
 }
 .snack3 .buttons { text-align: center; }
 
-
-
+.basket_buttons {
+	margin-top: 10px;
+	text-align: center; /* 수평 가운데 정렬 */
+}
+.basket_buttons button {
+	display: inline-block;
+}
 
 footer {
 	width: 100%;

@@ -19,7 +19,7 @@
 	    <h3>가입 확인하기</h3>
 	    <hr>
     </div>
-	<form action="action_page.php" method="post">
+	<form action="member_reg_member" method="post">
 		<div class="member_row">
 	
 		    <div class="form_item">
@@ -36,7 +36,7 @@
 		<div class="regist_final">
 			<hr>
 			<button type="submit" class="btn btn-outline-primary">가입 확인하기</button>
-			<button type="button" class="btn btn-outline-primary">돌아가기</button>
+			<button type="button" class="btn btn-outline-primary" onclick="history.back()">돌아가기</button>
 		</div>
 	</form>
 </section>

@@ -23,55 +23,6 @@
 			<div class="content">
 				<h1>부기 스낵</h1>
 				<div class="snackList">
-					<div class="pay">결제하기
-						 <table id="cartTable" class="table-primary">
-				             <thead>
-						        <tr>
-						            <th>빈칸</th>
-						            <th>구매 수량</th>
-						            <th>가 격</th>
-						            <th>취소</th>
-						            <th>열 5</th>
-						        </tr>
-						    </thead>
-						    <tbody>
-						        <tr>
-						            <td>부기 팝콘</td>
-						            <td>개</td>
-						            <td>원</td>
-						            <td>취소</td>
-						        </tr>
-						        <tr>
-						            <td>부기 콜라</td>
-						            <td>개</td>
-						            <td>원</td>
-						            <td>취소</td>
-						        </tr>
-						        <tr>
-						            <td>부기 세트</td>
-						            <td>개</td>
-						            <td>원</td>
-						            <td>취소</td>
-						        </tr>
-						        <tr>
-						            <td>행 4, 열 1</td>
-						            <td>행 4, 열 2</td>
-						            <td>행 4, 열 3</td>
-						            <td>행 4, 열 4</td>
-						        </tr>
-						        <tr>
-						            <td>행 5, 열 1</td>
-						            <td>행 5, 열 2</td>
-						            <td>행 5, 열 3</td>
-						            <td>행 5, 열 4</td>
-						        </tr>
-						    </tbody>
-				        </table>
-				        <div class="pay_buttons">
-							<button type="button" class="btn btn-outline-primary">취소</button>
-							<button type="button" class="btn btn-outline-primary">결제하기</button>
-						</div>	
-						</div>
 					<div class="snack1">
 						<div class= "snack_name">부기팝콘</div>
 						<div class= "snack_info"><p>고소한 부기팝콘</p> 가격 개당 5000원</div>

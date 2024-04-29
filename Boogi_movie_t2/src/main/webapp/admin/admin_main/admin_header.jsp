@@ -37,7 +37,7 @@
 }
 
 .col-md-2>img {
-	width: 150px;
+	width: 10%;
 }
 
 .col-md-5>a {

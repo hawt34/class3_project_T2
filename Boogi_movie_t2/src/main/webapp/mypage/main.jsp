@@ -133,7 +133,7 @@ body {
 							<h2>MY 극장</h2>
 						</div><!-- col-5 -->
 						<div class="col-2">
-							<img src="${pageContext.request.contextPath}/resources/images/myp_mytheater.png" data-bs-toggle="modal" data-bs-target="#exampleModal" width="30px" height="30px">
+							<img src="${pageContext.request.contextPath}/resources/images/myp_mytheater.png" data-bs-toggle="modal" data-bs-target="#exampleModal" width="25px" height="25px">
 						</div><!-- col-7 -->
 					</div>	<!-- row -->				
 					<!-- Modal -->

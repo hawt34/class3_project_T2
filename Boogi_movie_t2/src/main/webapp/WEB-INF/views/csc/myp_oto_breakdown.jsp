@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>1 대 1 문의 내역</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/myp_oneOnone_breakdown.css">
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/myp_oneOnone_breakdown.css"> --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_sidebar.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -53,7 +53,7 @@ td:nth-child(2) {
 
 th:nth-child(3),
 td:nth-child(3) {
-  width: 15%;
+  width: 10%;
 }
 th:nth-child(4),
 td:nth-child(4) {
@@ -61,12 +61,12 @@ td:nth-child(4) {
 }
 th:nth-child(5),
 td:nth-child(5) {
-  width: 20%;
+  width: 10%;
 }
-/* th:nth-child(6), */
-/* td:nth-child(6) { */
-/*   width: 20%; */
-/* } */
+ th:nth-child(6),
+ td:nth-child(6) {
+   width: 15%;
+}
 
 
 </style>
@@ -107,7 +107,7 @@ td:nth-child(5) {
 								<th>작성자</th>
 								<th>문의유형</th>
 								<th>상태</th>
-<!-- 								<th>수정/삭제</th> -->
+								<th>수정</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -117,10 +117,9 @@ td:nth-child(5) {
 								<td>admin</td>
 								<td>예매/결제</td>
 								<td>미확인</td>
-<!-- 								<td> -->
-<!-- 									<button type="button" class="btn btn-outline-primary">수정</button> -->
-<!-- 									<button type="button" class="btn btn-outline-primary">삭제</button> -->
-<!-- 								</td> -->
+								<td>
+									<button type="button" class="btn btn-outline-primary">수정</button>
+								</td>
 							</tr>
 							<tr>
 								<td>2</td>
@@ -128,10 +127,9 @@ td:nth-child(5) {
 								<td>hong123</td>
 								<td>영화</td>
 								<td>확인</td>
-<!-- 								<td> -->
-<!-- 									<button type="button" class="btn btn-outline-primary">수정</button> -->
-<!-- 									<button type="button" class="btn btn-outline-primary">삭제</button> -->
-<!-- 								</td> -->
+								<td>
+									<button type="button" class="btn btn-outline-primary">수정</button>
+								</td>
 							</tr>
 							<tr>
 								<td>1</td>
@@ -139,10 +137,9 @@ td:nth-child(5) {
 								<td>이거 리뷰 써지는거냐?</td>
 								<td>4.8점</td>
 								<td>미확인</td>
-<!-- 								<td> -->
-<!-- 									<button type="button" class="btn btn-outline-primary">수정</button> -->
-<!-- 									<button type="button" class="btn btn-outline-primary">삭제</button> -->
-<!-- 								</td> -->
+								<td>
+									<button type="button" class="btn btn-outline-primary">수정</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>

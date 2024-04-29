@@ -98,7 +98,7 @@
 </head>
 <body>
 	<header>
-		<jsp:include page="/inc/admin_header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 	</header>
 	
 <!-- 	<div class="container"> -->

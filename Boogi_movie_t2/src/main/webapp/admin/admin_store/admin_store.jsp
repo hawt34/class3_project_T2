@@ -36,9 +36,9 @@
 			<div class="col-md-9">
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
-				<div class="admin_movie_head">
-					<div class="admin_movie_title">스토어 관리</div>
-					<div class="admin_movie_search">
+				<div class="admin_store_head">
+					<div class="admin_store_title">스토어 관리</div>
+					<div class="admin_store_search">
 						<select>
 							<option>음료류</option>
 							<option>치킨류</option>
@@ -51,7 +51,7 @@
 
 				<!-- 바디 부분 여기 표 넣을거임 -->
 				
-				<div class="admin_movie_body">
+				<div class="admin_store_body">
 					<table>
 						<thead>
 			
@@ -117,7 +117,7 @@
 					</table>
 				</div>
 				
-				<div class="admin_movie_footer" align="center">
+				<div class="admin_store_footer" align="center">
 					<button onclick="Form()">스낵 등록</button>
 				</div>
 

@@ -35,8 +35,8 @@
 
 .btn-group-vertical {
 	background: white;
-	border-top: 3px solid skyblue;
-	border-bottom: 3px solid skyblue;
+	border-top: 3px solid black;
+	border-bottom: 3px solid black;
 }
 
 .sideVar_title {
@@ -58,13 +58,16 @@ a{
 }
 
 </style>
+<!-- 메인에 있는 aside -->
 <div class="sideVar">
 	<!--  사이드바 영역  -->
 	<div class="admin_middle_left" align="right">
 		<div class="btn-group-vertical">
 			<!-- 사이드바 타이틀 -->
 			<div class="sideVar_title">
-				<a href="${pageContext.request.contextPath}/admin/admin_main/admin_main.jsp"><h4 class="admin_aside_name">관리자페이지</h4></a>
+				<a href="${pageContext.request.contextPath}/admin/admin_main/admin_main.jsp">
+					<h4 class="admin_aside_name">관리자페이지</h4>
+				</a>
 			</div>
 			<div class="btn-group dropright">
 				<!-- 마우스 오버 전 카테고리 -->
@@ -109,8 +112,9 @@ a{
 					<h5>고객센터</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">공지사항</a> <a class="dropdown-item"
-						href="#">자주묻는질문</a> <a class="dropdown-item" href="#">1:1문의</a>
+					<a class="dropdown-item" href="#">공지사항</a> 
+					<a class="dropdown-item" href="#">자주묻는질문</a> 
+					<a class="dropdown-item" href="#">1:1문의</a>
 				</div>
 			</div>
 			<div class="btn-group">

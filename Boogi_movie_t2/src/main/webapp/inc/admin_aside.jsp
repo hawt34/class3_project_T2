@@ -64,9 +64,9 @@
 				</button>
 				<div class="dropdown-menu">
 					<!-- 마우스 오버 후 서브메뉴 -->
-					<a class="dropdown-item" href="#">회원정보관리</a> <a
-						class="dropdown-item" href="#">리뷰관리</a> <a class="dropdown-item"
-						href="#">예매관리</a>
+					<a class="dropdown-item" href="#">회원정보관리</a> 
+					<a class="dropdown-item" href="#">리뷰관리</a> 
+					<a class="dropdown-item" href="#">예매관리</a>
 				</div>
 			</div>
 			<div class="btn-group dropright">
@@ -74,9 +74,9 @@
 					<h5>영화</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">영화정보관리</a> <a
-						class="dropdown-item" href="#">상영일정관리</a> <a class="dropdown-item"
-						href="#">박스오피스조회</a>
+					<a class="dropdown-item" href="#">영화정보관리</a> 
+					<a class="dropdown-item" href="#">상영일정관리</a> 
+					<a class="dropdown-item" href="#">박스오피스조회</a>
 				</div>
 			</div>
 			<div class="btn-group">
@@ -84,8 +84,8 @@
 					<h5>극장</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">극장관리</a> <a class="dropdown-item"
-						href="#">상영관관리</a>
+					<a class="dropdown-item" href="#">극장관리</a> 
+					<a class="dropdown-item" href="#">상영관관리</a>
 				</div>
 			</div>
 			<div class="btn-group">
@@ -93,8 +93,7 @@
 					<h5>스토어</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">스토어관리</a> <a
-						class="dropdown-item" href="#">결제내역</a>
+					<a class="dropdown-item" href="#">스토어관리</a> 
 				</div>
 			</div>
 			<div class="btn-group">
@@ -102,8 +101,9 @@
 					<h5>고객센터</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">공지사항</a> <a class="dropdown-item"
-						href="#">자주묻는질문</a> <a class="dropdown-item" href="#">1:1문의</a>
+					<a class="dropdown-item" href="#">공지사항</a> 
+					<a class="dropdown-item" href="#">자주묻는질문</a> 
+					<a class="dropdown-item" href="#">1:1문의</a>
 				</div>
 			</div>
 			<div class="btn-group">
@@ -112,6 +112,15 @@
 				</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="#">이벤트관리</a>
+				</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn" data-toggle="dropdown">
+					<h5>결제관리</h5>
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">영화 결제 관리</a>
+					<a class="dropdown-item" href="#">스토어 결제 관리</a>
 				</div>
 			</div>
 		</div>

@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IncController {
 	
 	@GetMapping("csc_main")
-	public String cscMain() {
+	public String cscMain_header() {
 		return "csc/csc_main";
 	}
 	@GetMapping("csc_faq")
-	public String cscFaq() {
+	public String cscFaq_header() {
 		return "csc/csc_faq";
 	}
 	@GetMapping("csc_notice")
-	public String cscNotice() {
+	public String cscNotice_header() {
 		return "csc/csc_notice";
 	}
 	@GetMapping("csc_oto")
-	public String cscOto() {
+	public String cscOto_header() {
 		return "csc/csc_oto";
 	}
 	

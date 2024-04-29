@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_oneOnone.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_oto.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_sidebar.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

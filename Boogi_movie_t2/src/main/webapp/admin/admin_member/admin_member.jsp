@@ -141,7 +141,7 @@ th:nth-child(8), td:nth-child(8) {
 				<jsp:include page="/admin/admin_main/admin_aside.jsp"></jsp:include>
 			</div>
 
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_member_head">

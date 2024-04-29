@@ -83,92 +83,139 @@
 	td:nth-child(6) {
 	  width: 20%;
 	}
+	.admin_ono_head {
+	margin: 50px 0;
+	text-align: right;
+	border
+	}
 	
+	.admin_ono_search {
+		height: 50px;
+		width: 200px;
+		background: #black;
+		margin-right: 100px;
+		margin-bottom: 20px;
+		
+	}
+	
+	.admin_ono_search>input[type=text] {
+		font-size: 18px;
+		height: 46px;
+		width: 150px;
+		padding: 5px;
+		outline: none;
+		
+	}
+	
+/* 	.admin_ono_search>select { */
+/* 		font-size: 18px; */
+/* 		height: 46px; */
+/* 		width: 300px; */
+/* 		outline: none; */
+/* 		padding-left: 10px; */
+/* 	} */
+	
+/* 	.admin_ono_search>button { */
+/* 		width: 90px; */
+/* 		height: 46px; */
+/* 		background: black; */
+/* 		outline: none; */
+/* 		color: white; */
+/* 		font-weight: bold; */
+/* 	} */
+	
+	.admin_ono_title {
+		float: left;
+		font-size: 30px;
+		margin-left: 100px;
+	}
 </style>
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<!-- side 영역 -->
-		<div class="col-2">
-			<jsp:include page="/admin/admin_main/admin_aside.jsp"></jsp:include>		
-		</div>
-		<!-- content 영역 -->
-		<div class="col-10">
-		<h1>1대1 문의된 내용</h1>
-		<hr>
-			<!-- 문의 유형 카테고리 -->	
-			<div>
-				<h3>문의</h3>
-				<div class="admin_csc_selectBox">
-					<select class="form-select form-select-sm w-25" aria-label="Default select example">
-						<option selected>문의 유형 선택</option>
-						<option value="영화">영화</option>
-						<option value="극장">극장</option>
-						<option value="예매/결제">예매/결제</option>
-						<option value="쿠폰">쿠폰</option>
-						<option value="회원정보">회원정보</option>
-					</select>
-					<select class="form-select form-select-sm w-25" aria-label="Default select example">
-						<option selected>문의 지점 선택</option>
-						<option value="부산진구">부산진구</option>
-						<option value="해운대구">해운대구</option>
-						<option value="북구">북구</option>
-						<option value="남구">남구</option>
-						<option value="서구">서구</option>
-					</select>
+	<header>
+		<jsp:include page="/inc/admin_header.jsp"></jsp:include>
+	</header>
+	
+	<div class="container">
+		<div class="row">
+			<!-- side 영역 -->
+			<div class="col-2">
+				<jsp:include page="/admin/admin_main/admin_aside.jsp"></jsp:include>
+			</div>
+			<!-- content 영역 -->
+			<div class="col-10">
+				<div class="admin_ono_head">
+					<div class="admin_ono_title">고객센터관리</div>
+					<div class="admin_ono_search" align="right">
+				<!-- 문의 유형 카테고리 -->
+						<select class="form-select form-select-sm"
+							aria-label="Default select example">
+							<option selected>문의 유형 선택</option>
+							<option value="영화">영화</option>
+							<option value="극장">극장</option>
+							<option value="예매/결제">예매/결제</option>
+							<option value="쿠폰">쿠폰</option>
+							<option value="회원정보">회원정보</option>
+						</select> 
+						<select class="form-select form-select-sm"
+							aria-label="Default select example">
+							<option selected>문의 지점 선택</option>
+							<option value="부산진구">부산진구</option>
+							<option value="해운대구">해운대구</option>
+							<option value="북구">북구</option>
+							<option value="남구">남구</option>
+							<option value="서구">서구</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="admin_review_body">
+					<table>
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>문의유형</th>
+								<th>문의지점</th>
+								<th>작성일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>윙카</td>
+								<td>junhyuk</td>
+								<td>이거 리뷰 써지는거냐?</td>
+								<td>4.8점</td>
+								<td>2024-04-19</td>
+								<td>2024.04.26~</td>
+							</tr>
+							<tr>
+								<td>윙카</td>
+								<td>junhyuk</td>
+								<td>이거 리뷰 써지는거냐?</td>
+								<td>4.8점</td>
+								<td>2024-04-19</td>
+								<td>2024.04.26~</td>
+							</tr>
+							<tr>
+								<td>윙카</td>
+								<td>junhyuk</td>
+								<td>이거 리뷰 써지는거냐?</td>
+								<td>4.8점</td>
+								<td>2024-04-19</td>
+								<td>2024.04.26~</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
-			<hr>
-			<div class="admin_review_body">
-				<table>
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>문의유형</th>
-							<th>문의지점</th>
-							<th>작성일</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>윙카</td>
-							<td>junhyuk</td>
-							<td>이거 리뷰 써지는거냐?</td>
-							<td>4.8점</td>
-							<td>2024-04-19</td>
-							<td>
-								2024.04.26~
-							</td>
-						</tr>
-						<tr>
-							<td>윙카</td>
-							<td>junhyuk</td>
-							<td>이거 리뷰 써지는거냐?</td>
-							<td>4.8점</td>
-							<td>2024-04-19</td>
-							<td>
-								2024.04.26~
-							</td>
-						</tr>
-						<tr>
-							<td>윙카</td>
-							<td>junhyuk</td>
-							<td>이거 리뷰 써지는거냐?</td>
-							<td>4.8점</td>
-							<td>2024-04-19</td>
-							<td>2024.04.26~</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			
-		
-		
 		</div>
 	</div>
-</div>
+	
+	<footer>
+		<jsp:include page="/inc/admin_footer.jsp"></jsp:include>
+	</footer>
+	
 </body>
 </html>

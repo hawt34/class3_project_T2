@@ -17,6 +17,62 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_list.css" rel="stylesheet" type="text/css">
+<style>
+.admin_store_head {
+	margin: 50px 0;
+	text-align: right;
+}
+.admin_store_search {
+	height: 50px;
+	width: 360px;
+	background: #black;
+	float: right;
+	margin-right: 100px;
+	margin-bottom: 20px;
+}
+
+.admin_store_search>input[type=text] {
+	font-size: 18px;
+	height: 46px;
+	width: 150px;
+	padding: 5px;
+	outline: none;
+}
+
+.admin_store_search>select {
+	font-size: 18px;
+	height: 46px;
+	width: 100px;
+	outline: none;
+	padding-left: 10px;
+}
+
+.admin_store_search>button {
+	width: 90px;
+	height: 46px;
+	background: black;
+	outline: none;
+	color: white;
+	font-weight: bold;
+}
+
+.admin_store_title {
+	float: left;
+	font-size: 30px;
+	margin-left: 100px;
+}
+	
+.admin_store_footer > button {
+	width: 90px;
+	height: 46px;
+	background: black;
+	outline: none;
+	color: white;
+	font-weight: bold;
+	margin: 20px auto;
+
+}
+</style>
 </head>
 <body>
 

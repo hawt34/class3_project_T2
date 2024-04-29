@@ -79,7 +79,6 @@ th:nth-child(7), td:nth-child(7) {
 }
 
 .admin_movie_body {
-	margin-bottom: 30px;
 	clear: right;
 }
 
@@ -123,6 +122,7 @@ th:nth-child(7), td:nth-child(7) {
 	outline: none;
 	color: white;
 	font-weight: bold;
+	margin: 20px auto;
 }
 
 .admin_movie_title {

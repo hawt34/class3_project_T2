@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/resources/css/movie.css"
+<link href="${pageContext.request.contextPath}/resources/css/movieFuture.css"
 	rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -36,70 +36,48 @@
 			</div>
 			<div class="list">
 				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_1.jpg">
-					<p>범죄도시</p>
-					<button type="button" class="btn btn-outline-primary">예매하기
+					<img src="${pageContext.request.contextPath}/resources/images/movieF1.jpg">
+					<p>범죄의 재구성</p>
+					<button type="button" class="btn btn-outline-primary">찜하기
 					</button>
-					<button type="button" class="btn btn-outline-primary"  onclick="window.location.href='movieInfo1'">상세보기
+					<button type="button" class="btn btn-outline-primary">상세보기
 					</button>
 				</div>
 				<div class="movie">
 					<img
-						src="${pageContext.request.contextPath}/resources/images/movie_2.jpg">
-					<p>쿵푸팬더</p>
-					<button type="button" class="btn btn-outline-primary">예매하기
+						src="${pageContext.request.contextPath}/resources/images/movieF2.jpg">
+					<p>다크 나이트</p>
+					<button type="button" class="btn btn-outline-primary">찜하기
 					</button>
 					<button type="button" class="btn btn-outline-primary">상세보기
 					</button>
 				</div>
 				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_3.jpg">
-					<p>bts</p>
-					<button type="button" class="btn btn-outline-primary">예매하기
+					<img src="${pageContext.request.contextPath}/resources/images/movieF3.jpg">
+					<p>노팅힐</p>
+					<button type="button" class="btn btn-outline-primary">찜하기
 					</button>
 					<button type="button" class="btn btn-outline-primary">상세보기
 					</button>
 				</div>
 				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_4.jpg">
-					<p>페이커는 신이고 무적이다</p>
-					<button type="button" class="btn btn-outline-primary">예매하기
+					<img src="${pageContext.request.contextPath}/resources/images/movieF4.jpg">
+					<p>쇼생크탈출</p>
+					<button type="button" class="btn btn-outline-primary">찜하기
 					</button>
 					<button type="button" class="btn btn-outline-primary">상세보기
 					</button>
 				</div>
 				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_5.jpg">
-					<p>파묘</p>
-					<button type="button" class="btn btn-outline-primary">예매하기
+					<img src="${pageContext.request.contextPath}/resources/images/movieF5.jpg">
+					<p>타짜</p>
+					<button type="button" class="btn btn-outline-primary">찜하기
 					</button>
 					<button type="button" class="btn btn-outline-primary">상세보기
 					</button>
 				</div>
 			</div>
-			<div id="carouselExample" class="carousel slide">
-				<h1>박스오피스 순위</h1>
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img src="${pageContext.request.contextPath}/resources/images/movie_1.jpg" class="d-block w-100" alt="..." >
-						<div class="carousel-caption">1st</div>
-					</div>
-					<div class="carousel-item">
-						<img src="${pageContext.request.contextPath}/resources/images/movie_2.jpg" class="d-block w-100" alt="...">
-						<div class="carousel-caption">2rd</div>
-					</div>
-					<div class="carousel-item">
-						<img src="${pageContext.request.contextPath}/resources/images/movie_3.jpg" class="d-block w-100" alt="...">
-						<div class="carousel-caption">3rd</div>
-					</div>
-				</div>
-				<button class="carousel-control-prev" type="button"	data-bs-target="#carouselExample" data-bs-slide="prev">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_left.png">
-				</button>
-				<button class="carousel-control-next" type="button"	data-bs-target="#carouselExample" data-bs-slide="next">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_right.png">
-				</button>
-			</div>
+			
 		</section>
 		<footer>
 			<jsp:include page="../inc/admin_footer.jsp"></jsp:include>

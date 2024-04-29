@@ -37,13 +37,11 @@
 }
 
 .col-md-2>img {
-	width: 10%;
+	width: 150px;
 }
 
-.col-md-5>a {
-	text-decoration: none;
-	color: skyblue;
-	font-size: 130px;
+.col-md-5>img {
+	width: 800px;
 }
 
 .header_middle {
@@ -130,13 +128,13 @@ body {
 				      
 				<div class="col-md-1"></div>
 				<div class="col-md-2" align="center">
-					<img src="../image/부기2.png">
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png">
 				</div>
 				<div class="col-md-5" align="center">
-					<a class="kaushan-script-regular" href="#">Boogie Movie</a>
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_title.png" onclick="location.href='#'">
 				</div>
 				<div class="col-md-2" align="center">
-					<img src="../image/부기2.png">
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_walk.png">
 				</div>
 				<div class="col-md-1"></div>
 			</div>
@@ -145,9 +143,9 @@ body {
 		<!--  여기 부턴 헤더 네비바 영역 -->
 		<div class="header_low" align="center">
 			<div class="dropdown">
-				<button class="dropdown-btn">영화</button>
+				<button class="dropdown-btn" onclick="location.href='#'">영화</button>
 				<div class="dropdown-submenu">
-					<a href="#none">현재상영작</a> <a href="#none">상영예정작</a>
+					<a href="#">현재상영작</a> <a href="#none">상영예정작</a>
 				</div>
 			</div>
 			<div class="dropdown">

@@ -29,7 +29,7 @@
 	}
 	
 	/* 테이블 css */
-	table {
+	.admin_ono_body > table {
 	  border-collapse: collapse;
 	  width: 90%;
 	  margin: 0rem auto;
@@ -59,7 +59,7 @@
 	/* 테이블 비율 */
 	th:nth-child(1),
 	td:nth-child(1) {
-	  width: 15%;
+	  width: 10%;
 	}
 	
 	th:nth-child(2),
@@ -69,7 +69,7 @@
 	
 	th:nth-child(3),
 	td:nth-child(3) {
-	  width: 20%;
+	  width: 25%;
 	}
 	th:nth-child(4),
 	td:nth-child(4) {
@@ -77,11 +77,11 @@
 	}
 	th:nth-child(5),
 	td:nth-child(5) {
-	  width: 20%;
+	  width: 10%;
 	}
 	th:nth-child(6),
 	td:nth-child(6) {
-	  width: 20%;
+	  width: 10%;
 	}
 	.admin_ono_head {
 	margin: 50px 0;
@@ -89,40 +89,13 @@
 	border
 	}
 	
-	.admin_ono_search {
+	.admin_ono_search > td {
 		height: 50px;
-		width: 200px;
 		background: #black;
 		margin-right: 100px;
 		margin-bottom: 20px;
 		
 	}
-	
-	.admin_ono_search>input[type=text] {
-		font-size: 18px;
-		height: 46px;
-		width: 150px;
-		padding: 5px;
-		outline: none;
-		
-	}
-	
-/* 	.admin_ono_search>select { */
-/* 		font-size: 18px; */
-/* 		height: 46px; */
-/* 		width: 300px; */
-/* 		outline: none; */
-/* 		padding-left: 10px; */
-/* 	} */
-	
-/* 	.admin_ono_search>button { */
-/* 		width: 90px; */
-/* 		height: 46px; */
-/* 		background: black; */
-/* 		outline: none; */
-/* 		color: white; */
-/* 		font-weight: bold; */
-/* 	} */
 	
 	.admin_ono_title {
 		float: left;
@@ -146,36 +119,44 @@
 			<div class="col-10">
 				<div class="admin_ono_head">
 					<div class="admin_ono_title">고객센터관리</div>
-					<div class="admin_ono_search" align="right">
-				<!-- 문의 유형 카테고리 -->
-						<select class="form-select form-select-sm"
-							aria-label="Default select example">
-							<option selected>문의 유형 선택</option>
-							<option value="영화">영화</option>
-							<option value="극장">극장</option>
-							<option value="예매/결제">예매/결제</option>
-							<option value="쿠폰">쿠폰</option>
-							<option value="회원정보">회원정보</option>
-						</select> 
-						<select class="form-select form-select-sm"
-							aria-label="Default select example">
-							<option selected>문의 지점 선택</option>
-							<option value="부산진구">부산진구</option>
-							<option value="해운대구">해운대구</option>
-							<option value="북구">북구</option>
-							<option value="남구">남구</option>
-							<option value="서구">서구</option>
-						</select>
+						<div class="admin_ono_search">
+							<table>
+								<tr>
+									<td>
+							<!-- 문의 유형 카테고리 -->
+										<select class="form-select form-select-sm"
+											aria-label="Default select example">
+											<option selected>문의 유형 선택</option>
+											<option value="영화">영화</option>
+											<option value="극장">극장</option>
+											<option value="예매/결제">예매/결제</option>
+											<option value="쿠폰">쿠폰</option>
+											<option value="회원정보">회원정보</option>
+										</select> 
+									</td>
+									<td>
+										<select class="form-select form-select-sm"
+											aria-label="Default select example">
+											<option selected>문의 지점 선택</option>
+											<option value="부산진구">부산진구</option>
+											<option value="해운대구">해운대구</option>
+											<option value="북구">북구</option>
+											<option value="남구">남구</option>
+											<option value="서구">서구</option>
+										</select>
+									</td>
+								</tr>
+							</table>
+						</div>
 					</div>
-				</div>
 				
-				<div class="admin_review_body">
+				<div class="admin_ono_body">
 					<table>
 						<thead>
 							<tr>
 								<th>번호</th>
-								<th>제목</th>
 								<th>작성자</th>
+								<th>문의내용</th>
 								<th>문의유형</th>
 								<th>문의지점</th>
 								<th>작성일</th>

@@ -2,7 +2,7 @@
 * {box-sizing: border-box}
 
 .container1{
-	height : 900px;
+	height : 1100px;
 	width: 1400px; /* 해상도 1200*/
 /* 	min-width: 1200px; 페이지 최소 너비를 1200으로 설정 해상도 1200 */
 }
@@ -12,15 +12,15 @@
 }
 
 .box1{
+	margin-left : 200px;	
+	
 }
 
 .box2{
-	width: 70%;
-	margin-left : 350px;	
+	margin-left : 425px;	
+/* 	margin-top: 10px; */
 }
-.box3{
-	margin-bottom: 10px;
-}
+
 
 /* ============= 버튼 ================= */
 
@@ -30,126 +30,16 @@
 /*   max-width: 1000px; */
 /*   margin: 0 auto; */
   display: flex; /* 가로로 정렬 */
+/*   justify-content: center; 가운데 정렬 */
   flex-direction: row; /* 수평으로 배치 */
-  justify-content: center; /* 가운데 정렬 */
   margin-top: 2em; /* 위쪽 여백 추가 */
 }
 
-
-/* Common button styles */
-.button {
-  float: left;
-  min-width: 150px;
-  max-width: 250px;
-  display: block;
-  margin: 1em;
-  padding: 1em 2em;
-  border: none;
-  background: none;
-  color: #5e9de6;
-  vertical-align: middle;
-  position: relative;
-  z-index: 1;
-  -webkit-backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
-}
-.button:focus {
-  outline: none;
-}
-.button > span {
-  vertical-align: middle;
-}
-
-/* Text color adjustments (we could stick to the "inherit" but that does not work well in Safari) */
-/* 버튼 폰트컬러, 보더컬러*/
-.bg-1 .button {
-  color: #5e9de6;
-  border-color: #5e9de6;
-}
-
-/* Typography and Roundedness */
-.button--text-upper {
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.button--ujarak {
-	-webkit-transition: border-color 0.4s, color 0.4s;
-	transition: border-color 0.4s, color 0.4s;
-  	font-size: 16px;
-	border-radius: 5px;
-	border: 2px solid;
-	font-weight: 400;
-  
-}
-
-.button--ujarak::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #5e9de6;
-  z-index: -1;
-  opacity: 0;
-  -webkit-transform: scale3d(0.7, 1, 1);
-  transform: scale3d(0.7, 1, 1);
-  -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
-  transition: transform 0.4s, opacity 0.4s;
-  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-.button--ujarak.button--round-s::before {
-  border-radius: 2px;
-}
-.button--ujarak.button--inverted::before {
-  background: #5e9de6;
-}
-.button--ujarak,
-.button--ujarak::before {
-  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-.button--ujarak:hover {
-  color: #fff;
-  border-color: #5e9de6;
-}
-.button--ujarak.button--inverted:hover {
-  color: #37474F;
-  border-color: #fff;
-}
-.button--ujarak:hover::before {
-  opacity: 1;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
-.btn-gradient.blue:active   {background: #5e9de6;}
-
-/*---------------------------------------------------------------------------*/
-
-
-
+/* ================================== */
 
 
 * {box-sizing: border-box}
 
-/* Add padding to containers */
-
-.box1 {
-	padding: 16px;
-	max-width : 400px;
-	width: 40%;
-	margin-top: 100px;
-}
-
-.member_row{
-	width: 70%;
-	margin-left : 350px;	
-}
-	
-/* Full-width input fields */
 input[type=text], input[type=password]{
   width: 100%;
   padding: 15px;
@@ -175,98 +65,5 @@ input[type=text]:focus, input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
-
-/* Overwrite default styles of hr */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-/* Set a style for the submit/register button */
-.registerbtn {
-	background-color: #04AA6D;
-	color: white;
-	padding: 15px; /* 텍스트 입력 필드와 동일한 패딩 */
-	margin: 8px 0;
-	border: none;
-	cursor: pointer;
-	width: 100%;
-	opacity: 0.9;
-	
-}
-
-.registerbtn:hover {
-  opacity:1;
-}
-
-/* Add a blue text color to links */
-a {
-  color: dodgerblue;
-}
-
-/* Set a grey background color and center the text of the "sign in" section */
-.signin {
-  background-color: #f1f1f1;
-  text-align: center;
-}
-
-body {
-  font-size: 12px; /* 원하는 폰트 크기로 조절 */
-  line-height: 1; /* 원하는 높이로 조절 */
-}
-
-li{
-	list-style-type : none	
-}
-
-.regist_final{
-	padding: 16px;
-	max-width: 400px;
-	margin: 0 auto;
-	
-}
-
-input[type=checkbox] {
-    display: inline-block; /* 인라인 요소로 설정하여 가로로 배치 */
-    margin-right: 21px; /* 각 체크박스 사이의 간격 조절 */
-	width: 30px; /* 체크박스의 가로 크기 조절 */
-	height: 30px; /* 체크박스의 세로 크기 조절 */
-}
-
-.movTaste label {
-    margin-right: 17px; /* 각 요소들 사이의 간격 조절 */
-}
-
-.movTaste label input[type=checkbox] {
-    margin-right: 5px; /* 체크박스와 텍스트 사이의 간격 조절 */
-}
-
-.member_title{
-	margin-left : 350px;	
-	margin-top : 100px;
-	margin-bottom : 100px;
-	
-}	
-
-.member_section{
-	width:1200px;
-	margin-left : 200px;
-	margin-bottom : 100px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

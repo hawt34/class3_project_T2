@@ -76,35 +76,37 @@
 </head>
 <body>
 	<div class="container">
-		<table>
-			<tr>
-				<td>제목</td>
-				<td>이거 어떻게 해요?</td>
-				<td>작성자</td>
-				<td>admin</td>
-			</tr>
-			<tr>
-				<td>문의 유형</td>
-				<td><span>[영화]</span></td>
-				<td>문의 지점</td>
-				<td>[부산센텀]</td>
-			</tr>
-			<tr>
-				<td>작성일</td>
-				<td>~~~~</td>
-				<td colspan="2"></td>
-			</tr>
-			<tr>
-				<td colspan="4">
-					<textarea rows="20" cols="100" style="resize: none"></textarea>
-				</td>
-			</tr>
-			
-		</table>
-		<!-- 답변 버튼 -->
-		<div class="detail_button">
-			<input type="button" value="답변">
-		</div>
+		<form action="" method="post">
+			<table>
+				<tr>
+					<td>제목</td>
+					<td>이거 어떻게 해요?</td>
+					<td>작성자</td>
+					<td>admin</td>
+				</tr>
+				<tr>
+					<td>문의 유형</td>
+					<td><span>[영화]</span></td>
+					<td>문의 지점</td>
+					<td>[부산센텀]</td>
+				</tr>
+				<tr>
+					<td>작성일</td>
+					<td>~~~~</td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<textarea rows="50" cols="100" style="resize: none"></textarea>
+					</td>
+				</tr>
+				
+			</table>
+			<!-- 답변 버튼 -->
+			<div class="detail_button">
+				<input type="submit" value="답변">
+			</div>
+		</form>
 	</div>
 </body>
 </html>

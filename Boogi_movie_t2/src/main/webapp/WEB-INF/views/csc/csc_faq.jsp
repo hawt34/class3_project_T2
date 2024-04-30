@@ -26,10 +26,12 @@
 		<!-- content 영역 - FAQ -->
 		<div class="col-md-10">
 			<div class="row">
-				<h1>FAQ</h1>
+				<div id="csc_mainTitle">
+					<h1>FAQ</h1>
+				</div>
 			<hr>
 			</div>
-			<!-- 검색영역 -->
+			<!-- 검색창 -->
 			<div class="row">
 				<div class="csc_faq_search">
 					<div class="inner">
@@ -41,8 +43,9 @@
 						</form>
 					</div>
 				</div>
-				<!-- 검색창 끝 -->
 			</div>
+			<!-- 검색창 끝 -->
+			<!-- 구분 카테고리 시작 -->
 			<div class="row mt-3">
 				<div class="csc_faq_sel">
 					<select class="form-select form-select-sm w-25" aria-label="Small select example">

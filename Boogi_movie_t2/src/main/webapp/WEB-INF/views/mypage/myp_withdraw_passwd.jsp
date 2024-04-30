@@ -79,7 +79,7 @@ input[type=text]:focus, input[type=password]:focus {
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
 			</div><!-- row box1  -->
 			
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<h2>회원탈퇴</h2>
 				<hr>
 				<div class="text1">

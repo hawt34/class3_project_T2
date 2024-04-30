@@ -36,7 +36,7 @@ body {
 			<div class="col-md-2">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
 			</div>
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<h2>쿠폰</h2>
 				<hr>
 				<!-- 탭 메뉴 -->

@@ -11,61 +11,61 @@ public class MypageController {
 	
 	@GetMapping("myp_main")
 	public String myp_main() {
-		System.out.println("myp_main");
+//		System.out.println("myp_main");
 		return "mypage/myp_main";
 	}
 	
 	@GetMapping("myp_point")
 	public String myp_point() {
-		System.out.println("myp_point");
+//		System.out.println("myp_point");
 		return "mypage/myp_point";
 	}
 	
 	@GetMapping("myp_info_modify")
 	public String myp_info_modify() {
-		System.out.println("myp_info_modify()");
+//		System.out.println("myp_info_modify()");
 		return "mypage/myp_info_modify";
 	}
 	
 	@GetMapping("myp_coupon")
 	public String myp_coupon() {
-		System.out.println("myp_coupon()");
+//		System.out.println("myp_coupon()");
 		return "mypage/myp_coupon";
 	}
 
 	@GetMapping("myp_reservation")
 	public String myp_reservation() {
-		System.out.println("myp_reservation()");
+//		System.out.println("myp_reservation()");
 		return "mypage/myp_reservation";
 	}
 
 	@GetMapping("myp_cancel")
 	public String myp_cancel() {
-		System.out.println("myp_cancel()");
+//		System.out.println("myp_cancel()");
 		return "mypage/myp_cancel";
 	}
 	
 	@GetMapping("myp_withdraw_info")
 	public String myp_withdraw_info() {
-		System.out.println("myp_withdraw_info()");
+//		System.out.println("myp_withdraw_info()");
 		return "mypage/myp_withdraw_info";
 	}
 	
 	@GetMapping("myp_withdraw_passwd")
 	public String myp_withdraw_passwd() {
-		System.out.println("myp_withdraw_passwd()");
+//		System.out.println("myp_withdraw_passwd()");
 		return "mypage/myp_withdraw_passwd";
 	}
 	
 	@GetMapping("myp_withdraw_finish")
 	public String myp_withdraw_finish() {
-		System.out.println("myp_withdraw_finish()");
+//		System.out.println("myp_withdraw_finish()");
 		return "mypage/myp_withdraw_finish";
 	}
 	
 	@RequestMapping(value = "myp_oto_breakdown", method = {RequestMethod.POST, RequestMethod.GET})
 	public String myp_oto_breakdown() {
-		System.out.println("myp_withdraw_finish()");
+//		System.out.println("myp_withdraw_finish()");
 		return "mypage/myp_oto_breakdown";
 	}
 		

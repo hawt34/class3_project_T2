@@ -33,7 +33,7 @@ body {
 			<div class="col-md-2 sidebar1">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
 			</div>
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<div class="row">
 					<div class="col-10">
 						<h2>취소내역 / 안내</h2>
@@ -55,6 +55,7 @@ body {
 							aria-controls="userinfo" aria-selected="true">취소한 영화 목록</button>
 						</li>
 					</ul>
+					
 				<!-- 내용 -->
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show active" id="userinfo2" role="tabpanel" aria-labelledby="userinfo-tab">
@@ -134,7 +135,7 @@ body {
 			<div class="row ">
 				<div class="col-md-2"> </div>
 					<!-- 탭 메뉴 -->
-				<div class="col-md-10">
+				<div class="col-md-9">
 				<hr>
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item" role="presentation">
@@ -152,7 +153,7 @@ body {
 					<!-- 내용 -->
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="userinfo" role="tabpanel"aria-labelledby="userinfo-tab">
-							<textarea class="textarea1" rows="13" cols="110" readonly>
+							<textarea class="textarea1" rows="13" cols="110" style="width: 100%" readonly>
 					
 			신용카드
 			결제 후 3일 이내 취소 시 승인 취소 가능, 3일 이후 매입 취소시 영업일 기준 3~5일 소요
@@ -198,22 +199,22 @@ body {
 						</textarea>
 					</div><!-- tab-pane -->
 					<div class="tab-pane fade" id="myreview" role="tabpanel"aria-labelledby="myreview-tab">
-						<textarea class="textarea1" rows="13" cols="110" readonly>
+						<textarea class="textarea1" rows="13" cols="110" style="width: 100%" readonly>
 								
-				현장 취소를 하는 경우
-				상영시간 이전까지만 가능하며, 상영시간 이후 취소나 환불은 되지 않습니다.
-				
-				홈페이지에서 예매 취소할 경우
-				부분 취소는 불가능합니다. (ex. 4장을 인터넷으로 예매한 경우 4장 모두 취소만 가능)
-				홈페이지 예매 취소는 상영시간 20분전까지 가능합니다.(단, 씨네&포레관, 씨네&리빙룸, SUITE CINEMA 제외)
-				상영시간 이후 취소나 환불은 되지 않습니다
-				
-				모바일 앱/웹(m.cgv.co.kr)에서 예매 취소할 경우
-				부분 취소는 불가합니다.(ex. 4장을 인터넷으로 예매한 경우 4장 모두 취소만 가능)
-				모바일 앱/웹 예매 취소는 상영시간 15분전까지 가능합니다.(단, 씨네&포레관, 씨네&리빙룸, SUITE CINEMA 제외)
-				상영시간 이후 취소나 환불은 되지 않습니다.
-				
-				단, 일부 행사의 경우 행사 당일 취소, 변경 불가 합니다.
+			현장 취소를 하는 경우
+			상영시간 이전까지만 가능하며, 상영시간 이후 취소나 환불은 되지 않습니다.
+			
+			홈페이지에서 예매 취소할 경우
+			부분 취소는 불가능합니다. (ex. 4장을 인터넷으로 예매한 경우 4장 모두 취소만 가능)
+			홈페이지 예매 취소는 상영시간 20분전까지 가능합니다.(단, 씨네&포레관, 씨네&리빙룸, SUITE CINEMA 제외)
+			상영시간 이후 취소나 환불은 되지 않습니다
+			
+			모바일 앱/웹(m.cgv.co.kr)에서 예매 취소할 경우
+			부분 취소는 불가합니다.(ex. 4장을 인터넷으로 예매한 경우 4장 모두 취소만 가능)
+			모바일 앱/웹 예매 취소는 상영시간 15분전까지 가능합니다.(단, 씨네&포레관, 씨네&리빙룸, SUITE CINEMA 제외)
+			상영시간 이후 취소나 환불은 되지 않습니다.
+			
+			단, 일부 행사의 경우 행사 당일 취소, 변경 불가 합니다.
 								
 							</textarea>		
 						</div><!-- tab-pane  -->

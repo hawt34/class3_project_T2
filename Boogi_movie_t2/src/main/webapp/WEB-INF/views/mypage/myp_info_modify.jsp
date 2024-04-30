@@ -32,7 +32,7 @@ body {
 			<div class="col-md-2">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
 			</div>	<!-- col-md-2 사이드바  -->
-				<div class="col-md-10">
+				<div class="col-md-9">
 					<h2>회원정보수정</h2>
 					<hr>
 				<div class="box1">
@@ -76,6 +76,8 @@ body {
 				    	<input type="text" placeholder="전화번호 입력" required>
 				    </div><!-- form item -->
 				</div><!-- box1 -->
+				
+				
 				<div class="d-grid gap-2 col-3 box2">
 					  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='myp_main'">수정완료</button>
 				</div>

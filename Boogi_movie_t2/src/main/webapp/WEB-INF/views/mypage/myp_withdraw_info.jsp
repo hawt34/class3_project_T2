@@ -34,7 +34,7 @@ body {
 			<div class="col-md-2">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
 			</div><!-- row box1  -->
-			<div class="col-md-10 box1">
+			<div class="col-md-9 box1">
 				<h2>회원탈퇴</h2>
 				<hr>
 				<blockquote class="bluejeans">

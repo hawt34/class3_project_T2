@@ -1,10 +1,18 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import itwillbs.p2c3.boogimovie.VO.memberVO;
+import itwillbs.p2c3.boogimovie.service.PreRegMemberProService;
 
 @Controller
 public class MemberController {
@@ -49,9 +57,30 @@ public class MemberController {
 		return "member/member_reg_complete";
 	}
 	
-	@GetMapping("member_reg_member")
-	public String memberRegMember() {
+	@PostMapping(value = "member_reg_member")
+	public String memberRegMember(memberVO member, Model model, HttpServletRequest request) {
 		System.out.println("member_reg_member()");
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		if(member == null) {
+			model.addAttribute("msg", "가입 여부를 확인해주세요.");
+			model.addAttribute("targetURL", "member_pre_reg_member");
+			return "error/fail";
+		}
+		
+		PreRegMemberProService service = new PreRegMemberProService();
+		boolean IsRegisteredMember = service.IsRegisteredMember(member);
+		
+		if(IsRegisteredMember) {
+			model.addAttribute("msg", "이미 가입한 회원입니다.");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		
 		
 		return "member/member_reg_member";
@@ -70,5 +99,10 @@ public class MemberController {
 		
 		return "member/member_pwd_search_result";
 	}
+	
+	
+	
+	
+	
 	
 }

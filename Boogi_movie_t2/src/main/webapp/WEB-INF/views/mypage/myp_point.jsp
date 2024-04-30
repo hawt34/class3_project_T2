@@ -50,7 +50,7 @@ body {
 			<div class="col-md-2">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
 			</div>	<!-- col-md-2 사이드바  -->
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<h2>포인트</h2>
 				<hr>
 				<!-- 탭 메뉴 -->
@@ -200,7 +200,7 @@ body {
 			<div class="row ">
 				<div class="col-md-2"> </div>
 					<!-- 탭 메뉴 -->
-				<div class="col-md-10">
+				<div class="col-md-9">
 				<hr>
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item" role="presentation">
@@ -212,16 +212,16 @@ body {
 					<!-- 내용 -->
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="userinfo" role="tabpanel"aria-labelledby="userinfo-tab">
-							<textarea class="textarea1" rows="13" cols="110" readonly>
+							<textarea class="textarea1" rows="13" cols="110" style="width: 100%" readonly>
 					
-					
-		영화 예매 시
-		온라인(모바일, 홈페이지)을 통한 티켓 구매 시 유료영화관람금액(실 결제 금액)에 영화 예매 시점에
-		해당하는 포인트를 적립할 수 있습니다.
-		포인트 적립은 유료 구매 시에만 가능하며, 상영일 익일에 적립 및 내역 확인 가능합니다.
-		
-		매점 이용 시
-		매점 상품 구매 시 유료결제금액의 0.5%에 해당하는 포인트를 적립할 수 있습니다.
+							
+				영화 예매 시
+				온라인(모바일, 홈페이지)을 통한 티켓 구매 시 유료영화관람금액(실 결제 금액)에 영화 예매 시점에
+				해당하는 포인트를 적립할 수 있습니다.
+				포인트 적립은 유료 구매 시에만 가능하며, 상영일 익일에 적립 및 내역 확인 가능합니다.
+				
+				매점 이용 시
+				매점 상품 구매 시 유료결제금액의 0.5%에 해당하는 포인트를 적립할 수 있습니다.
 						</textarea>
 					</div><!-- tab-pane -->
 					</div><!-- tab-content -->

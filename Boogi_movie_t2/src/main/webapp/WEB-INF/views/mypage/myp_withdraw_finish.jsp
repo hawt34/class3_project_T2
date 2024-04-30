@@ -34,14 +34,14 @@
 			<div class="col-md-2">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
 			</div><!-- col-md-2 사이드바임 -->
-				<div class="col-md-10">
+				<div class="col-md-9">
 					<h2>회원탈퇴</h2>
 					<hr>
 					<div class="box1">
 						<h2>탈퇴처리되었습니다.</h2>
 						<div class="row">
-							<div class="col-md-4"> </div>
-							<div class="col-md-4">
+							<div class="col-md-3"> </div>
+							<div class="col-md-5">
 								<section class="content">
 									<div class="d-grid gap-2 d-md-block box2">
 									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='myp_main'">메인페이지</button>
@@ -50,7 +50,7 @@
 									</div>
 								</section>
 						    </div><!-- col-md-4 -->
-							<div class="col-md-4"> </div>
+							<div class="col-md-3"> </div>
 					    </div><!-- row -->
 					</div>  
 			    </div><!-- "col-md-10" -->

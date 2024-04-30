@@ -32,7 +32,7 @@ body {
 			<div class="col-md-2">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
 			</div>	
-			<div class="col-md-9 ">
+			<div class="col-md-9">
 				<h2>마이페이지</h2>
 				<hr>
 				<blockquote class="bluejeans">
@@ -41,27 +41,24 @@ body {
 						<h3>김현경님</h3>
 						<h4>2024년 고객님의 회원등급은 VIP입니다.</h4>
 					</div>
-					<section class="content">
-						<div class="box col-6">
-							<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='myp_info_modify'">회원정보수정</button>
+<!-- 					<section class="content"> -->
+						<div class="col-6 box3">
+							<button type="button" class="btn btn-outline-primary btn-lg" style="left: 20px" onclick="location.href='myp_info_modify'">회원정보수정</button>
 						</div>
-						<div class="box col-6">
-							<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href=''#'">VIP라운지</button>
-						</div>
-					</section>
+<!-- 					</section> -->
 				</blockquote>
 				<hr>
 			</div><!-- col-md-10 -->
 		</div><!-- row -->
 		<div class="row ">
 			<div class="col-md-2"> </div>
-				<div class="col-md-7">
+				<div class="col-md-6">
 				<div class="row">
 					<div class="col-10">
 						<h2>예매내역</h2>
 					</div>
 					<div class="col-2 box2">
-						<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='myp_reservation'">+ 더보기</button>
+						<button type="button" class="btn btn-outline-primary" onclick="location.href='myp_reservation'">+ 더보기</button>
 					</div>
 				</div><!-- row -->
 					<table class="table2 table table-hover " >

@@ -90,7 +90,7 @@ a{
 				</button>
 			</div>
 			<div class="btn-group">
-				<button type="button" class="btn" data-toggle="dropdown">
+				<button type="button" class="btn" data-toggle="dropdown" onclick="location.href='myp_oto_breakdown'">
 					<h5>문의내역</h5>
 				</button>
 			</div>

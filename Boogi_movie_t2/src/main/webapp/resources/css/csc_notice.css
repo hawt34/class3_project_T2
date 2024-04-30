@@ -103,3 +103,7 @@ span {
 .csc_searcher {
 	display: inline;
 }
+
+#csc_mainTitle {
+	margin-top: 20px;
+}

@@ -1,9 +1,13 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +15,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import itwillbs.p2c3.boogimovie.VO.memberVO;
 import itwillbs.p2c3.boogimovie.service.PreRegMemberProService;
+import itwillbs.p2c3.boogimovie.service.RegMemberProService;
+import itwillbs.p2c3.boogimovie.vo.memberVO;
 
 @Controller
 public class MemberController {
+	
+	@Autowired
+	private RegMemberProService regMemberProService;
+	
 	
 	@GetMapping("member_login")
 	public String memberLogin() {
@@ -50,9 +59,27 @@ public class MemberController {
 	}
 	
 	@PostMapping("member_reg_complete")
-	public String memberRegComplete() {
+	public String memberRegComplete(memberVO member, Model model, HttpServletResponse response) {
 		System.out.println("member_reg_complete()");
 		
+		int insertCount = regMemberProService.regMember(member);
+		
+		
+		if(insertCount < 1) {
+			model.addAttribute("msg", "회원가입 실패");
+			
+			return "error/fail";
+		}
+		
+		try {
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print("<script>");
+			out.print("alert('회원가입성공');");
+			out.print("</script>");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return "member/member_reg_complete";
 	}
@@ -81,7 +108,7 @@ public class MemberController {
 			return "error/fail";
 		}
 		
-		
+		model.addAttribute("member", member);
 		
 		return "member/member_reg_member";
 	}
@@ -100,8 +127,14 @@ public class MemberController {
 		return "member/member_pwd_search_result";
 	}
 	
-	
-	
+	@PostMapping("LoginPro")
+	public String memberLoginPro(memberVO member) {
+		System.out.println("memberLoginPro()");
+		boolean isCorrectMember = false; 
+		
+		
+		return "/";
+	}
 	
 	
 	

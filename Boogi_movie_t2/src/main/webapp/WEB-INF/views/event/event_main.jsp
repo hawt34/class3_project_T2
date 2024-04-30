@@ -42,11 +42,11 @@ main {
 /* item에 hidden 처리하기. */
 .item {
 	width: 300px;
-	aspect-ratio: 8/5;
+	aspect-ratio: 10/6;
 	position: relative;
  	overflow: hidden; 
 	border-radius: 10px;
-	margin: 20px 0px;
+	margin: 30px 0px;
 }
 
 .item:after {
@@ -153,7 +153,7 @@ main {
 		<div class="container">
 			<div class="item">
 				<div class="imgBox">
-					<img src="../resources/images/event_sum2.jpg" alt="썸네일" />
+					<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" />
 				</div>
 				<div class="textBox">
 					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
@@ -162,7 +162,7 @@ main {
 			</div>
 			<div class="item">
 				<div class="imgBox">
-					<img src="../resources/images/event_sum2.jpg" alt="썸네일" />
+					<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" />
 				</div>
 				<div class="textBox">
 					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
@@ -171,7 +171,7 @@ main {
 			</div>
 			<div class="item">
 				<div class="imgBox">
-					<img src="../resources/images/event_sum2.jpg" alt="썸네일" />
+					<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" />
 				</div>
 				<div class="textBox">
 					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
@@ -180,7 +180,7 @@ main {
 			</div>
 			<div class="item">
 				<div class="imgBox">
-					<img src="../resources/images/event_sum2.jpg" alt="썸네일" />
+					<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" />
 				</div>
 				<div class="textBox">
 					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
@@ -189,7 +189,7 @@ main {
 			</div>
 			<div class="item">
 				<div class="imgBox">
-					<img src="../resources/images/event_sum3.jpg" alt="썸네일" />
+					<img src="${pageContext.request.contextPath}/resources/images/event_sum.jpg" alt="썸네일" />
 				</div>
 				<div class="textBox">
 					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
@@ -198,7 +198,7 @@ main {
 			</div>
 			<div class="item">
 				<div class="imgBox">
-					<img src="../resources/images/event_sum3.jpg" alt="썸네일" />
+					<img src="${pageContext.request.contextPath}/resources/images/event_sum.jpg" alt="썸네일" />
 				</div>
 				<div class="textBox">
 					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
@@ -207,7 +207,7 @@ main {
 			</div>
 			<div class="item">
 				<div class="imgBox">
-					<img src="../resources/images/event_sum3.jpg" alt="썸네일" />
+					<img src="${pageContext.request.contextPath}/resources/images/event_sum.jpg" alt="썸네일" />
 				</div>
 				<div class="textBox">
 					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
@@ -216,7 +216,7 @@ main {
 			</div>
 			<div class="item">
 				<div class="imgBox">
-					<img src="../resources/images/event_sum3.jpg" alt="썸네일" />
+					<img src="${pageContext.request.contextPath}/resources/images/event_sum.jpg" alt="썸네일" />
 				</div>
 				<div class="textBox">
 					<p class="textBox__name">팝콘할인해줘! 이벤트</p>

@@ -27,12 +27,6 @@ public class IncController {
 	}
 	
 	
-	// event 연결
-	@GetMapping("event_main")
-	public String eventMain() {
-		return "event/event_movie";
-	}
-	
 }
 	
 	

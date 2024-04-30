@@ -77,6 +77,9 @@ td:nth-child(6) {
 	font-size: 30px;
 	margin: 20px 0;
 }
+#myp_title {
+	margin-top: 20px;
+}
 
 </style>
 </head>
@@ -92,7 +95,9 @@ td:nth-child(6) {
 		</div>
 		<!-- content 영역 -->
 		<div class="col-10">
-			<h1>1 대 1 문의 내역</h1>
+			<div id="myp_title">
+				<h1>1 대 1 문의 내역</h1>
+			</div>
 			<hr>
 			<div class="mp_wrap">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">

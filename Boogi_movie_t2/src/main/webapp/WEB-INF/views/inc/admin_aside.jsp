@@ -111,7 +111,7 @@
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="admin_notice">공지사항</a> 
 					<a class="dropdown-item" href="admin_FAQ">자주묻는질문</a> 
-					<a class="dropdown-item" href="admin_oneOneone">1:1문의</a>
+					<a class="dropdown-item" href="admin_oneOnone">1:1문의</a>
 				</div>
 			</div>
 			<div class="btn-group">

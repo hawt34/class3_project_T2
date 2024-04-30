@@ -139,14 +139,11 @@ td:nth-child(8) {
 				<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
 			</div>
 			
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<!--  메인 중앙 영역  -->
 					<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_reserve_head">
 					<div class="admin_reserve_title">예매관리</div>
-					<div>
-					여기 날짜 선택 기능 넣을거임
-					</div>
 					<div class="admin_reserve_search">
 						<select>
 							<option>이름</option>
@@ -183,33 +180,10 @@ td:nth-child(8) {
 								<td>G13,G14</td>
 								<td>결제완료</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세</button>
+									<button type="button" class="btn btn-outline-primary" onclick="reserveDetail()">상세</button>
 								</td>
 							</tr>
-							<tr>
-								<td>121</td>
-								<td>junhyuk</td>
-								<td>파묘</td>
-								<td>2024-04-19</td>
-								<td>해운대점</td>
-								<td>G13,G14</td>
-								<td>결제완료</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">상세</button>
-								</td>
-							</tr>
-							<tr>
-								<td>121</td>
-								<td>junhyuk</td>
-								<td>파묘</td>
-								<td>2024-04-19</td>
-								<td>해운대점</td>
-								<td>G13,G14</td>
-								<td>결제완료</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">상세</button>
-								</td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>
@@ -223,5 +197,10 @@ td:nth-child(8) {
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
+	<script type="text/javascript">
+		function reserveDetail() {
+			window.open("admin_reserve_detail", "movieForm", "width=1000, height=800, top=100, left=400");
+		}
+	</script>
 </body>
 </html>

@@ -131,7 +131,7 @@ td:nth-child(6) {
 				<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
 			</div>
 			
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<!--  메인 중앙 영역  -->
 					<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_review_head">
@@ -167,7 +167,6 @@ td:nth-child(6) {
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
@@ -178,7 +177,6 @@ td:nth-child(6) {
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
@@ -189,7 +187,6 @@ td:nth-child(6) {
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>

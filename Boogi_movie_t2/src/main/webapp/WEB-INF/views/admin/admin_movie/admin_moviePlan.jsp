@@ -143,9 +143,9 @@ th:nth-child(8), td:nth-child(8) {
 								<th>상영관</th>
 								<th>영화제목</th>
 								<th>상영날짜</th>
-								<th>상영시작시간</th>
-								<th>상영종료시간</th>
-								<th>상영일정수정</th>
+								<th>상영회차</th>
+								<th>상영시간</th>
+								<th>상영일정등록</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -191,10 +191,19 @@ th:nth-child(8), td:nth-child(8) {
 									<input type="date" class="admin_moviePlan_search">
 								</td>
 								<td>
-									<input type="time" class="admin_moviePlan_search">
+									<div>
+										<select class="admin_moviePlan_search">
+											<option value="1회차">1회차</option>
+											<option value="2회차">2회차</option>
+											<option value="3회차">3회차</option>
+											<option value="4회차">4회차</option>
+											<option value="5회차">5회차</option>
+											<option value="6회차">6회차</option>
+										</select> 
+									</div>
 								</td>
 								<td>
-									<input type="text" class="admin_moviePlan_search" readonly>
+									<input type="text" placeholder="12:00" class="admin_moviePlan_search" readonly>
 								</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">등록하기</button>
@@ -210,8 +219,8 @@ th:nth-child(8), td:nth-child(8) {
 								<th>상영관</th>
 								<th>영화제목</th>
 								<th>상영날짜</th>
-								<th>상영시작시간</th>
-								<th>상영종료시간</th>
+								<th>상영회차</th>
+								<th>상영시간</th>
 								<th>상영일정등록</th>
 							</tr>
 						</thead>
@@ -221,46 +230,10 @@ th:nth-child(8), td:nth-child(8) {
 								<td>3관</td>
 								<td>윙카</td>
 								<td>2024-04-19</td>
-								<td>15:12</td>
-								<td>17:18</td>
+								<td>3회차</td>
+								<td>12:00</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>서면점</td>
-								<td>3관</td>
-								<td>윙카</td>
-								<td>2024-04-19</td>
-								<td>15:12</td>
-								<td>17:18</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>서면점</td>
-								<td>3관</td>
-								<td>윙카</td>
-								<td>2024-04-19</td>
-								<td>15:12</td>
-								<td>17:18</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>서면점</td>
-								<td>3관</td>
-								<td>윙카</td>
-								<td>2024-04-19</td>
-								<td>15:12</td>
-								<td>17:18</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="moviePlanEdit()">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
@@ -277,6 +250,11 @@ th:nth-child(8), td:nth-child(8) {
 	<footer>
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
-
+	
+	<script type="text/javascript">
+		function moviePlanEdit() {
+			window.open("admin_moviePlan_edit", "movieForm", "width=1000, height=800, top=100, left=400");
+		}
+	</script>
 </body>
 </html>

@@ -185,7 +185,7 @@ th:nth-child(7), td:nth-child(7) {
 								<td>2024-06-19</td>
 								<td>현재상영작</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="movieForm()">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
@@ -197,31 +197,7 @@ th:nth-child(7), td:nth-child(7) {
 								<td>2024-06-19</td>
 								<td>현재상영작</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>1231221</td>
-								<td>윙카</td>
-								<td>126분</td>
-								<td>2024-04-12</td>
-								<td>2024-06-19</td>
-								<td>현재상영작</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>1231221</td>
-								<td>윙카</td>
-								<td>126분</td>
-								<td>2024-04-12</td>
-								<td>2024-06-19</td>
-								<td>현재상영작</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="movieForm()">수정</button>
 									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
@@ -244,10 +220,8 @@ th:nth-child(7), td:nth-child(7) {
 
 	<script type="text/javascript">
 		function movieForm() {
-			window.open("admin_movie_form.jsp", "movieForm", "width=1000, height=800, top=100, left=400");
+			window.open("admin_movie_form", "movieForm", "width=1000, height=800, top=100, left=400");
 		}
-	
-	
 	</script>
 </body>
 </html>

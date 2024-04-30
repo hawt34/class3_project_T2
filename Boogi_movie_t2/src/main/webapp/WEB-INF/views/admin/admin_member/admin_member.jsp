@@ -182,7 +182,6 @@ th:nth-child(8), td:nth-child(8) {
 								<td>회원</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -195,7 +194,6 @@ th:nth-child(8), td:nth-child(8) {
 								<td>회원</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -208,7 +206,6 @@ th:nth-child(8), td:nth-child(8) {
 								<td>회원</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -221,7 +218,6 @@ th:nth-child(8), td:nth-child(8) {
 								<td>회원</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -234,7 +230,6 @@ th:nth-child(8), td:nth-child(8) {
 								<td>탈퇴</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
 								</td>
 							</tr>
 						</tbody>

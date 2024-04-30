@@ -36,9 +36,9 @@ public class AdminController {
 	public String adminNoticeDetail() {
 		return "admin/admin_csc/admin_notice_detail";
 	}
-	@GetMapping("admin_oneOneone")
-	public String adminOneOne() {
-		return "admin/admin_csc/admin_oneOneone";
+	@GetMapping("admin_oneOnone")
+	public String adminOnOne() {
+		return "admin/admin_csc/admin_oneOnone";
 	}
 	@GetMapping("admin_oneOneone_detail")
 	public String adminOneOneDetail() {
@@ -49,6 +49,10 @@ public class AdminController {
 	@GetMapping("admin_reserve")
 	public String adminReserve() {
 		return "admin/admin_member/admin_reserve";
+	}
+	@GetMapping("admin_reserve_detail")
+	public String adminReserveDetail() {
+		return "admin/admin_member/admin_reserve_detail";
 	}
 	@GetMapping("admin_review")
 	public String adminReview() {
@@ -63,6 +67,10 @@ public class AdminController {
 	@GetMapping("admin_moviePlan")
 	public String adminMoviePlan() {
 		return "admin/admin_movie/admin_moviePlan";
+	}
+	@GetMapping("admin_moviePlan_edit")
+	public String adminMoviePlanEdit() {
+		return "admin/admin_movie/admin_moviePlan_edit";
 	}
 	@GetMapping("admin_movie")
 	public String adminMovie() {

@@ -145,7 +145,7 @@ body {
 		<!--  여기 부턴 헤더 네비바 영역 -->
 		<div class="header_low" align="center">
 			<div class="dropdown">
-				<button class="dropdown-btn" onclick="location.href='#'">영화</button>
+				<button class="dropdown-btn" onclick="location.href='movie'">영화</button>
 				<div class="dropdown-submenu">
 					<a href="movie">현재상영작</a> <a href="movieFuture">상영예정작</a>
 				</div>
@@ -179,7 +179,8 @@ body {
 			<div class="dropdown">
 				<button class="dropdown-btn" onclick="location.href='event_main'">이벤트</button>
 				<div class="dropdown-submenu">
-					<a href="#none">이벤트코너</a> 
+					<a href="event_main">이벤트코너</a> 
+					<a href="boogi_store">스토어</a> 
 				</div>
 			</div>
 		</div>

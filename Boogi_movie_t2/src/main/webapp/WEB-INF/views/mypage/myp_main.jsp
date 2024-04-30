@@ -24,7 +24,7 @@ body {
 </head>
 <body>
 <header>
-	<jsp:include page="inc/admin_header.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 <div class="container1">
 	<div class="container2">
@@ -43,10 +43,10 @@ body {
 					</div>
 					<section class="content">
 						<div class="box col-6">
-							<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='info_modify.jsp'">회원정보수정</button>
+							<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='myp_info_modify'">회원정보수정</button>
 						</div>
 						<div class="box col-6">
-							<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='membership.jsp'">VIP라운지</button>
+							<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href=''#'">VIP라운지</button>
 						</div>
 					</section>
 				</blockquote>
@@ -61,7 +61,7 @@ body {
 						<h2>예매내역</h2>
 					</div>
 					<div class="col-2 box2">
-						<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='pay/pay1.jsp'">+ 더보기</button>
+						<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='myp_reservation'">+ 더보기</button>
 					</div>
 				</div><!-- row -->
 					<table class="table2 table table-hover " >
@@ -181,39 +181,17 @@ body {
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->
 					</div><!-- modal fade 모달 div 끝 -->
-<!-- 					<ol class="list-group list-group-numbered" > -->
-<!-- 					  <li class="list-group-item d-flex justify-content-between align-items-start"> -->
-<!-- 					    <div class="ms-2 me-auto"> -->
-<!-- 					      <div class="fw-bold ">서면</div> -->
-<!-- 					    </div> -->
-<!-- 					  </li> -->
-<!-- 					  <li class="list-group-item d-flex justify-content-between align-items-start"> -->
-<!-- 					    <div class="ms-2 me-auto"> -->
-<!-- 					      <div class="fw-bold">아시아드</div> -->
-<!-- 					    </div> -->
-<!-- 					  </li> -->
-<!-- 					  <li class="list-group-item d-flex justify-content-between align-items-start"> -->
-<!-- 					    <div class="ms-2 me-auto"> -->
-<!-- 					      <div class="fw-bold">삼정타워</div> -->
-<!-- 					    </div> -->
-<!-- 					  </li> -->
-<!-- 					</ol> -->
 					<table class="table3 table table-bordered">
 						<tr>
-							<td>서면</td>
+							<td><a href="#">서면</a></td>
 						</tr>
 						<tr>
-							<td>아시아드</td>
+							<td><a href="#">아시아드</a></td>
 						</tr>
 						<tr>
-							<td>삼정타워</td>
+							<td><a href="#">삼정타워</a></td>
 						</tr>
 					</table>
-					
-					
-					
-					
-					
 				</div><!-- col-md-3-->
 		</div> <!-- row -->
 	</div><!-- container2 -->

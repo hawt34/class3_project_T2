@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_withdraw1.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_withdraw_info.css">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,7 +68,7 @@ body {
 				<div class="row position-relative box2">
 					  <div class="position-absolute top-50 start-50 translate-middle ">
 						<section class="content">
-							<button type="button" class="btn btn-outline-primary btn-lg " onclick="location.href='withdraw2.jsp'">회원탈퇴하시겠습니까?</button>
+							<button type="button" class="btn btn-outline-primary btn-lg " onclick="location.href='myp_withdraw_passwd'">회원탈퇴하시겠습니까?</button>
 						</section>
 					</div> <!-- position-absolute top-50 start-50 translate-middle -->
 				</div> <!-- row position-relative box2 -->

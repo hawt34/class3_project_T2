@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_withdraw3.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_withdraw_finish.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,11 +20,6 @@
 			font-style: normal;
 		}
 		
-/* .button-container { */
-/*             display: flex; */
-/*             justify-content: center; */
-            
-/*         } */
 	</style>
 </head>
 <body>
@@ -43,15 +38,15 @@
 					<h2>회원탈퇴</h2>
 					<hr>
 					<div class="box1">
-						<h1>탈퇴처리되었습니다.</h1>
+						<h2>탈퇴처리되었습니다.</h2>
 						<div class="row">
 							<div class="col-md-4"> </div>
 							<div class="col-md-4">
 								<section class="content">
 									<div class="d-grid gap-2 d-md-block box2">
-									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='../main.jsp'">메인페이지</button>
-									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='../../member/member_reg_member.jsp'">회원가입</button>
-									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='../../member/member_login.jsp'">로그인</button>
+									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='myp_main'">메인페이지</button>
+									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='member_reg_member'">회원가입</button>
+									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='member_login'">로그인</button>
 									</div>
 								</section>
 						    </div><!-- col-md-4 -->

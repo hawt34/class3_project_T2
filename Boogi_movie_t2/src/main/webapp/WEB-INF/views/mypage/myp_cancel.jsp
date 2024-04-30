@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_pay2.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_cancel.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,10 +54,6 @@ body {
 							<button class="nav-link active" id="userinfo-tab" data-bs-toggle="tab"data-bs-target="#userinfo2" type="button" role="tab" 
 							aria-controls="userinfo" aria-selected="true">취소한 영화 목록</button>
 						</li>
-						<li class="nav-item" role="presentation">
-							<button class="nav-link" id="myreview-tab" data-bs-toggle="tab" data-bs-target="#myreview2" type="button" role="tab"
-							aria-controls="myreview" aria-selected="false">환불조회</button>
-						</li>
 					</ul>
 				<!-- 내용 -->
 				<div class="tab-content" id="myTabContent">
@@ -68,8 +64,9 @@ body {
 						      <th scope="col">#</th>
 						      <th scope="col">영화</th>
 						      <th scope="col">날짜</th>
-						      <th scope="col">시간</th>
-						      <th scope="col">극장</th>
+						      <th scope="col">상영시간</th>
+						      <th scope="col">상영관</th>
+						      <th scope="col">인원정보</th>
 						      <th scope="col">가격</th>
 						    </tr>
 						  </thead>
@@ -79,7 +76,8 @@ body {
 							      <td>듄2</td>
 							      <td>2024 / 04 / 16</td>
 							      <td>17:00 ~ 19:20</td>
-							      <td>서면</td>
+							      <td>서면 8관</td>
+							      <td>1명 / H9</td>
 							      <td>15,000원</td>
 						    </tr>      
 						    <tr>
@@ -87,7 +85,8 @@ body {
 						        <td>아바타3</td>
 						        <td>2024 / 03 / 29</td>
 						        <td>18:20 ~ 20:15</td>
-						        <td>서면</td>
+						        <td>서면 3관</td>
+						        <td>2명 / I9 I10</td>
 						        <td>15,000원</td>
 						    </tr>
 						    <tr  class="table-secondary">
@@ -95,7 +94,8 @@ body {
 					            <td>토이스토리</td>
 					            <td>2024 / 01 / 18</td>
 					            <td>21:10 ~ 23:10</td>
-					            <td>서면</td>
+					            <td>서면 2관</td>
+					            <td>2명 / G13 G14</td>
 					            <td>12,000원</td>
 					         </tr>
 							<tr>
@@ -103,7 +103,8 @@ body {
 								<td>파묘</td>
 			          			<td>2024 / 03 / 18</td>
 			            		<td>12:10 ~ 14:30</td>
-			           			<td>아시아드</td>
+			           			<td>아시아드 1관</td>
+			           			<td>3명 / J9 J10 J11</td>
 			            		<td>12,000원</td>
 			          		</tr>
 			          		<tr  class="table-secondary">
@@ -111,7 +112,8 @@ body {
 						      	<td>폴라익스프레스</td>
 				              	<td>2013 / 12 / 25</td>
 								<td>21:00 ~ 23:10</td>
-				            	<td>아시아드</td>
+				            	<td>아시아드 5관</td>
+				            	<td>2명 / K14 K15</td>
 				            	<td>9,000원</td>
 			         		</tr>
 			          		<tr>
@@ -119,76 +121,13 @@ body {
 			          			<td>엘리멘탈</td>
 			            		<td>2023 / 10 / 29</td>
 					            <td>19:35 ~ 22:10</td>
-					            <td>삼정타워</td>
+					            <td>삼정타워 11관</td>
+					            <td>1명 / H15</td>
 					            <td>12,000원</td>
 					          </tr>
 						  </tbody>
 						</table>
 					</div><!-- 첫번째 탭 -->
-					<div class="tab-pane fade" id="myreview2" role="tabpanel" aria-labelledby="myreview-tab">
-						<table class="table2 table table-hover" >
-						  <thead>
-						    <tr>
-						      <th scope="col">#</th>
-						      <th scope="col">구매일</th>
-						      <th scope="col">상품명</th>
-						      <th scope="col">결제금액</th>
-						      <th scope="col">받으신분</th>
-						      <th scope="col">상태</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						    <tr  class="table-secondary">
-						      <th scope="row">1</th>
-							      <td>2024 / 04 / 16</td>
-							      <td>1만원 상품권</td>
-							      <td>10,000원</td>
-							      <td>김현경</td>
-							      <td>미완료</td>
-						    </tr>      
-						    <tr>
-						      <th scope="row">2</th>
-						        <td>2024 / 03 / 29</td>
-						        <td>3만원 상품권</td>
-						        <td>30,000원</td>
-						        <td>어쩌고</td>
-						        <td>완료</td>
-						    </tr>
-						    <tr  class="table-secondary">
-						      <th scope="row">3</th>
-			          			<td>2024 / 03 / 18</td>
-					            <td>5만원 상품권</td>
-					            <td>50,000원</td>
-					            <td>저쩌고</td>
-					            <td>완료</td>
-					         </tr>
-							<tr>
-						      <th scope="row">4</th>
-					            <td>2024 / 01 / 18</td>
-								<td>5만원 상품권</td>
-			            		<td>50,000원</td>
-			            		<td>홍길동</td>
-			           			<td>완료</td>
-			          		</tr>
-			          		<tr  class="table-secondary">
-						      <th scope="row">5</th>
-				              	<td>2013 / 12 / 25</td>
-						      	<td>3만원 상품권</td>
-				            	<td>30,000원</td>
-								<td>이순신</td>
-				            	<td>완료</td>
-			         		</tr>
-			          		<tr>
-						      <th scope="row">6</th>
-			            		<td>2023 / 10 / 29</td>
-			          			<td>1만원 상품권</td>
-					            <td>10,000원</td>
-					            <td>김뫄뫄</td>
-					            <td>완료</td>
-					          </tr>
-						  </tbody>
-						</table>
-					</div><!-- 두번째 탭 내용 -->
 				</div><!--  tab-content -->
 			</div><!-- col-md-10 -->
 		</div><!-- row 첫번째 줄-->

@@ -67,12 +67,12 @@ a{
 		<div class="btn-group-vertical">
 			<!-- 사이드바 타이틀 -->
 			<div class="sideVar_title">
-				<a href="${pageContext.request.contextPath}/admin/admin_main/admin_main.jsp"><h4 class="admin_aside_name">마이페이지</h4></a>
+				<a href="myp_main"><h4 class="admin_aside_name">마이페이지</h4></a>
 			</div>
 			<div class="btn-group dropright">
 				<!-- 마우스 오버 전 카테고리 -->
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>포인트</h5>
+					<h5><a href="myp_point">포인트</a></h5>
 				</button>
 			</div>
 			<div class="btn-group dropright">
@@ -80,28 +80,28 @@ a{
 					<h5>결제내역</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/admin/admin_movie/admin_movie.jsp">예매내역</a> 
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/admin/admin_movie/admin_moviePlan.jsp">취소내역</a>
+					<a class="dropdown-item" href="myp_reservation">예매내역</a> 
+					<a class="dropdown-item" href="myp_cancel">취소내역</a>
 				</div>
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>쿠폰</h5>
+					<h5><a href="myp_coupon">쿠폰</a></h5>
 				</button>
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>문의내역</h5>
+					<h5><a href="#">문의내역</a></h5>
 				</button>
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>정보수정</h5>
+					<h5><a href="myp_info_modify">정보수정</a></h5>
 				</button>
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>회원탈퇴</h5>
+					<h5><a href="myp_withdraw_info">회원탈퇴</a></h5>
 				</button>
 			</div>
 		</div>

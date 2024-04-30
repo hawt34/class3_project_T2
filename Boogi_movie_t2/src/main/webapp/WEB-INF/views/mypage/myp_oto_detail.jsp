@@ -71,6 +71,9 @@
 </style>
 </head>
 <body>
+<header>
+	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
+</header>
 	<div class="container">
 		<form action="" method="post">
 			<table>

@@ -4,14 +4,10 @@
 	height : 900px;
 	width: 1400px; /* 해상도 1200*/
 }
-/* .text1{ */
-/* 	text-align: center; */
-/* } */
 
 .container2{
 	margin-top: 20px;
 }
-
 
 h1{
 	text-align: center;
@@ -23,7 +19,6 @@ h1{
 
 .box2{
 	margin-left: 20px;
-/* 	padding-right: 0px; */
 }
 /* --------------------  버튼  ----------------------*/
 .content {

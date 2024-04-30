@@ -9,5 +9,7 @@ public interface MemberMapper {
 	
 	int insertMember(MemberVO member);
 		
+	MemberVO preRegMember(MemberVO member);
 	
+	MemberVO isCorrectMember(MemberVO member);
 }

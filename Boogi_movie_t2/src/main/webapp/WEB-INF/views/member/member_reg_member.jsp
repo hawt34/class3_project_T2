@@ -23,7 +23,7 @@
 	    <h3>회원가입</h3>
 	    <hr>
     </div>
-<form action="/" method="post">
+<form action="member_reg_complete" method="post">
 	<div class="member_row">
 		
 	    <div class="form_item">
@@ -55,14 +55,14 @@
     
     <label for="phoneNum"><b>전화번호</b></label>
 
-    <input type="text" placeholder="전화번호 입력" name="phoneNum" id="phoneNum" placeholder="-제외한 전화번호를 입력해주세요" required >
+    <input type="text" placeholder="전화번호 입력" name="tel" id="tel" placeholder="-제외한 전화번호를 입력해주세요" required >
     
 		<div class="form_item">
-			<label for="movTaste"><b>영화취향</b></label>
-				<div class="movTaste">
-					<label><input type="checkbox" name="movTaste" value="공포">공포</label>
-					<label><input type="checkbox" name="movTaste" value="코믹">코믹</label>
-					<label><input type="checkbox" name="movTaste" value="시사">시사</label>
+			<label for="movie_genre"><b>영화취향</b></label>
+				<div class="movie_genre">
+					<label><input type="checkbox" name="movie_genre" value="공포">공포</label>
+					<label><input type="checkbox" name="movie_genre" value="코믹">코믹</label>
+					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
 					<label><input type="checkbox" id="cb_all">전체선택</label>
 				</div>
 			</div>

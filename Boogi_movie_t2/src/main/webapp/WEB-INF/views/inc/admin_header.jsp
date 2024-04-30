@@ -120,7 +120,7 @@ body {
 		<div align="right" class="header_top">
 			<a href="member_login"> 로그인 | </a> 
 			<a href="member_logout"> 로그아웃 | </a> 
-			<a href="member_reg_member"> 회원가입 | </a> 
+			<a href="member_pre_reg_member"> 회원가입 | </a> 
 			<a href="admin_main"> 관리자페이지 </a>
 		</div>
 		<!--  부기무비 타이틀 영역 -->

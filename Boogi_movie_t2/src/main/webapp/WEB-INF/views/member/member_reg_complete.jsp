@@ -31,10 +31,10 @@
 	</div>
 	<div class="col-md-10" style="margin-top : 100px;">
 		<div class="message">
-			<h3>이연태님 회원가입을 환영합니다!</h3>
+			<h3>${member_name }님 회원가입을 환영합니다!</h3>
 			<br>
 			<br>
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='/'">영화</button>
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='./'">영화</button>
 		<button type="button" class="btn btn-outline-primary" onclick="location.href='tic_ticketing'">예매</button>
 		</div>
 		

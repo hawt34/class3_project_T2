@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import itwillbs.p2c3.boogimovie.service.LoginProService;
 import itwillbs.p2c3.boogimovie.service.PreRegMemberProService;
 import itwillbs.p2c3.boogimovie.service.RegMemberProService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
@@ -22,8 +24,10 @@ public class MemberController {
 	
 	@Autowired
 	private RegMemberProService regMemberProService;
-	
-	
+	@Autowired
+	private PreRegMemberProService preRegMeberProService;
+	@Autowired
+	private LoginProService loginProService;
 	@GetMapping("member_login")
 	public String memberLogin() {
 		System.out.println("MemberLogin()");
@@ -57,42 +61,39 @@ public class MemberController {
 	}
 	
 	@PostMapping("member_reg_complete")
-	public String memberRegComplete(MemberVO member, Model model, HttpServletResponse response) {
+	public String memberRegComplete(MemberVO member, Model model) {
 		System.out.println("member_reg_complete()");
-		
 		int insertCount = regMemberProService.regMember(member);
 		
-		
 		if(insertCount < 1) {
-			model.addAttribute("msg", "회원가입 실패");
-			
+			model.addAttribute("msg", "회원가입실패");
 			return "error/fail";
 		}
 		
-		try {
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
-			out.print("<script>");
-			out.print("alert('회원가입성공');");
-			out.print("</script>");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		model.addAttribute("member_name", member.getName());
 		
 		return "member/member_reg_complete";
 	}
 	
-	@PostMapping(value = "member_reg_member")
-	public String memberRegMember() {
+	@RequestMapping(value = "member_reg_member")
+	public String memberRegMember(MemberVO inputMember, Model model) {
 		System.out.println("member_reg_member()");
+		boolean isRegistedMember = false;
+		isRegistedMember = preRegMeberProService.IsRegisteredMember(inputMember);
+		System.out.println("controller" + inputMember);
+		if(isRegistedMember) {
+			model.addAttribute("msg" , "이미 가입한 회원입니다.");
+			model.addAttribute("targetURL" , "member_login");
+			return "error/fail";
+		}
 		
-		
-		PreRegMemberProService service = new PreRegMemberProService();
-		
-		
+		model.addAttribute("member", inputMember);
 		
 		return "member/member_reg_member";
 	}
+		
+		
+		
 	
 	@PostMapping("member_search_id_result")
 	public String memberIdSearchResult() {
@@ -109,12 +110,17 @@ public class MemberController {
 	}
 	
 	@PostMapping("LoginPro")
-	public String memberLoginPro(MemberVO member) {
+	public String memberLoginPro(MemberVO inputMember, HttpSession session, Model model) {
 		System.out.println("memberLoginPro()");
-		boolean isCorrectMember = false; 
+		boolean isCorrectMember = false;
+		isCorrectMember =  loginProService.isCorrectUser(inputMember);
+		if(!isCorrectMember) {
+			model.addAttribute("msg", "로그인 실패!");
+			return "error/fail";
+		}
+		session.setAttribute("sId", inputMember.getId());
 		
-		
-		return "/";
+		return "./";
 	}
 	
 	

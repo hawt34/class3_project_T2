@@ -18,6 +18,6 @@ public class RegMemberProService {
 		
 		
 		
-		return 0; 
+		return mapper.insertMember(member); 
 	}
 }

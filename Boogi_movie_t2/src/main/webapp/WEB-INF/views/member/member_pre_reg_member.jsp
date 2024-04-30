@@ -9,6 +9,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/member_default.css" rel="stylesheet" type="text/css">
 <body>
+
 <header>
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>

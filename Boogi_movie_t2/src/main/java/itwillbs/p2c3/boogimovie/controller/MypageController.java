@@ -60,4 +60,12 @@ public class MypageController {
 		System.out.println("myp_withdraw_finish()");
 		return "mypage/withdraw_finish";
 	}
+	
+	@PostMapping("myp_oto_breakdown")
+	public String myp_oto_breakdown() {
+//		System.out.println("myp_withdraw_finish()");
+		return "mypage/myp_oto_breakdown";
+	}
+	
+	
 }

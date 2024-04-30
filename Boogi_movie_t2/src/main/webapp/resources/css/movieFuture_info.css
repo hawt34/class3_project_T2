@@ -1,7 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
- 	border: 1px solid skyblue; 
+/*  	border: 1px solid skyblue;  */
 }
 
 body {
@@ -27,7 +27,7 @@ article {
 section {
 /* 	overflow: hidden; */
 	width: 1400px;
-	height: 500px;
+	height: 550px;
 /* 	background-color: #ffca28; */
 	display: flex;
 /* 	flex-wrap: wrap; */
@@ -49,7 +49,7 @@ section h1 {
 .movie {
 	padding-top: 30px;
 	width: 350px;
-	height: 400px;
+	height: 500px;
 	float: left;
 	text-align: center;
 }

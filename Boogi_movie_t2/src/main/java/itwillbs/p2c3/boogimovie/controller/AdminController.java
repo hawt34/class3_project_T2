@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AdminController {
 
+	
 	// admin 메인 연결
 	@GetMapping("admin_main")
 	public String adminMain() {

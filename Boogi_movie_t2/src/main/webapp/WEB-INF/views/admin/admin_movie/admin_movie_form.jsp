@@ -39,6 +39,20 @@ body {
 	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
+.col-md-6>select {
+	width: 250px;
+	padding: 5px;
+	border: 1px solid #999;
+	font-family: url('http://i.ibb.co/98Vbb8L/gnb-bg.gif') no-repeat 95% 50%;
+	border-radius: 2px;
+	-webkit-appearance: none;
+	-mox-appearance: none;
+	appearance: none;
+	text-align: center;
+}
+.form-control{
+	border: 1px solid #bbb;
+}
 </style>
 </head>
 <body>
@@ -77,20 +91,27 @@ body {
 						<input type="text" id="movie_runtime" class="form-control" required />
 						<div class="invalid-feedback">상영시간을 입력해주세요.</div>
 					</div>
-					<div class="mb-3">
-						<label for="movie_rate">관람등급</label> 
-						<input type="text" id="movie_rate" class="form-control" required />
-						<div class="invalid-feedback">관람등급을 입력해주세요.</div>
-					</div>
-					<div class="col-md-8 mb-3">
-						<label for="root">상영상태</label> <select
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<label for="movie_rate">관람등급</label> 
+							<select class="custom-select d-block w-100" id="movie_rate">
+							<option value="관람등급">관람등급을 선택하세요</option>
+							<option value="전체이용가">전체이용가</option>
+							<option value="15세관람가">15세관람가</option>
+							<option value="19세관람가">19세관람가</option>
+							</select>
+							<div class="invalid-feedback">관람등급을 입력해주세요.</div>
+						</div>
+						<div class="col-md-6">
+							<label for="root">상영상태</label> <select
 							class="custom-select d-block w-100" id="root">
-							<option value="상영상태">상영상태</option>
+							<option value="상영상태">상영상태를 선택하세요</option>
 							<option value="개봉예정작">개봉예정작</option>
 							<option value="현재상영작">현재상영작</option>
 							<option value="상영종료">상영종료</option>
-						</select>
-						<div class="invalid-feedback">상영상태를 선택해주세요.</div>
+							</select>
+							<div class="invalid-feedback">상영상태를 선택해주세요.</div>
+						</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_startDate">개봉일</label> 

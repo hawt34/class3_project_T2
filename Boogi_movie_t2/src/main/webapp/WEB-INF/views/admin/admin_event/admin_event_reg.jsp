@@ -39,18 +39,6 @@ body {
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
 
-.mb-3>select {
-	width: 250px;
-	padding: 5px;
-	border: 1px solid #999;
-	font-family: url('http://i.ibb.co/98Vbb8L/gnb-bg.gif') no-repeat 95% 50%;
-	border-radius: 2px;
-	-webkit-appearance: none;
-	-mox-appearance: none;
-	appearance: none;
-	text-align: center;
-}
-
 .subject {
 	margin-bottom: 5px;
 	width: 300px;
@@ -60,7 +48,7 @@ body {
 	margin: 0 auto;
 }
 .mb-3>input {
-	width: 250px;
+	width: 530px;
 	padding: 5px;
 	border: 1px solid #999;
 	font-family: url('http://i.ibb.co/98Vbb8L/gnb-bg.gif') no-repeat 95% 50%;
@@ -68,7 +56,6 @@ body {
 	-webkit-appearance: none;
 	-mox-appearance: none;
 	appearance: none;
-	text-align: center;
 }
 .space{
 	margin-top: 50px;
@@ -79,63 +66,42 @@ body {
 </style>
 </head>
 <body>
-<div class="container">
+	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<h4 class="mb-4">예매내역 - 상세</h4>
+				<h4 class="mb-4">이벤트등록</h4>
 				<hr>
 				<form class="validation-form" novalidate action="#" method="post">
-					<div class="row mb-3">
-						<div class="col-md-6">
-							<div class="subject">결제번호</div>
-							<input type="text" id="pay_num" class="form-control" placeholder='결제번호' readonly />
-						</div>
-						<div class="col-md-6">
-							<div class="subject">예매코드</div>
-							<input type="text" id="res_code" class="form-control" placeholder='12341234' readonly />
-						</div>
+					<div class="mb-3">
+						<label for="movie_director">작성자</label> 
+						<input type="text" id="movie_director" class="form-control" required />
+						<div class="invalid-feedback">작성자를 입력해주세요.</div>
 					</div>
-					<div class="row mb-3">
-						<div class="col-md-6">
-							<div class="subject">회원ID</div>
-							<input type="text" id="member_id" class="form-control" placeholder='admin' readonly />
-						</div>
-						<div class="col-md-6">
-							<div class="subject">영화명</div>
-							<input type="text" id="movie_name" class="form-control" placeholder='홍길동전' readonly />
-						</div>
+					<div class="mb-3">
+						<label for="event_title">글제목</label> 
+						<input type="text" id="event_title" class="form-control" required />
+						<div class="invalid-feedback">글제목을 입력해주세요.</div>
 					</div>
-					<div class="row mb-3">
-						<div class="col-md-6">
-							<div class="subject">상영일</div>
-							<input type="text" id="movie_date" class="form-control" placeholder='홍길동전' readonly />
-						</div>
-						<div class="col-md-6">
-							<div class="subject">극장정보</div>
-							<input type="text" id="theaterInfo" class="form-control" placeholder='홍길동전' readonly />
-						</div>
+					<div class="mb-3">
+						<label for="event_sumnail">썸네일</label> 
+						<input type="text" id="event_sumnail" class="form-control" required />
+						<div class="invalid-feedback">이미지를 입력해주세요.</div>
 					</div>
-					<div class="row mb-3">
-						<div class="col-md-6">
-							<div class="subject">예매좌석</div>
-							<input type="text" id="res_seat" class="form-control" placeholder='홍길동전' readonly />
-						</div>
-						<div class="col-md-6">
-							<div class="subject">결제금액</div>
-							<input type="text" id="pay_amount" class="form-control" placeholder='홍길동전' readonly />
-						</div>
+					<div class="mb-3">
+						<label for="event_img">본문이미지</label> 
+						<input type="text" id="event_img" class="form-control" required />
+						<div class="invalid-feedback">이미지를 입력해주세요.</div>
 					</div>
-					<div class="row mb-3">
-						<div class="col-md-6">
-							<div class="subject">결제상태</div>
-							<input type="text" id="pay_status" class="form-control" placeholder='홍길동전' readonly />
-						</div>
-						<div class="col-md-6">
-						</div>
-					</div>
+<!-- 					<div class="mb-3"> -->
+<!-- 						<label for="event_content">내용</label>  -->
+<!-- 						<textArea id="event_content" class="form-control" rows="10px" required></textArea> -->
+<!-- 						<div class="invalid-feedback">내용을 입력해주세요.</div> -->
+<!-- 					</div> -->
 					<div class="space"></div>
 					<hr class="mb-4">
 					<div class="mb-4" align="center">
+						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" >
+						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="window.close()">
 					</div>
 				</form>

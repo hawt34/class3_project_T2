@@ -8,52 +8,71 @@ body {
 /* ========================================= */
 /* theater_main */
 
-.theater_all {
+article {
 	width: 1400px;
 	margin: auto;
 }
 
-.theater_top_content {
+.theater_top{
+	text-align: center;
 	margin: 20px;
+	padding: 20px;
+	
+}
+
+.theater_fav{
+	margin: 20px auto;
+	border-radius: 30px;
+	width: 500px;
+	height: 100px auto;
 	padding: 20px;
 }
 
-
 .nav-link {
-	border: 1px solid gray;
+	width: 120px;
+	border: 1px solid #0d6efd;
 	margin: 5px;
-	color: black;
+	color:#0d6efd;
 }
 .nav-link:hover {
-	background-color: skyblue;
-	color: black;
+	background-color: #0d6efd;
+	color: white;
+}
+.form-check{
+	text-align: left;
 }
 
+.theater_main_cont{
+	margin: 30px 0px;;
+}
+
+table {
+	text-align: center;
+}
 /* ========================================= */
 /* theater_detail */
 
 .theater_detail_all {
 	width: 1400px;
 	margin: auto;
-	
 }
+
+.theater_top{
+	margin: auto;
+}
+
+
 .theater-info {
-	margin: 25px 5px;  padding:30px 5px;
+	margin: 25px 5px;  
+	padding:30px 5px;
 }
 .mp {
 	padding:30px 5px;
 }
-#col1 {
-	margin-top: 25px;  padding:30px 5px;
-/* 		background-color: #FFBF00; */
-	border: solid #FFBF00;
-	border-radius: 20px;
-}
-#col2 {
-	margin-top: 25px;  padding:30px 5px;
-/* 		background-color: #FFBF00; */
-	border: solid #FFBF00;
-	border-radius: 20px;
+.col2 {
+	margin-top: 25px;  
+	padding:30px 5px;
+	background-image: url("../images/CINEMA4.jpg");
 }
  table {
       border-collapse: collapse;
@@ -68,9 +87,37 @@ body {
   #id1 {
       background-color: lightgray;
   }
+  
   .row {
-padding: 10px;    
+	padding: 10px;    
   }
+  
   table{
   	text-align: center;
   }
+  
+  /* ========================================= */
+/* theater_detail_timetable */
+.theater-info{
+	margin: auto;
+	width: 1200px;
+}
+
+.theater_info_timetable_subject {
+	height: 30px;
+	background-color: lightgray;
+	margin-top: 20px;
+}
+
+.sct_btn {
+	border: 1px solid gray;
+	height: 50px;
+	
+	
+}
+
+.sct_booth_num {
+	border: 1px solid gray;	
+	height: 50px;
+	width: 70px; 
+}

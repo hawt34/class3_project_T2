@@ -7,14 +7,13 @@
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/resources/css/boogi_store.css"
 	rel="stylesheet" type="text/css">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
 " rel="stylesheet" type="text/css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 <body>
-	
 	<header>
 		<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 	</header>
@@ -40,16 +39,25 @@
 			  				<option value="6">9개</option>
 			  			</select>	
 						<div class="buttons">
-							<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
+							<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
 							<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 			  					<div class="offcanvas-header">
 			    				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">장바구니</h5>
 			    				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-			  				</div>
-			  				<div class="offcanvas-body">
-			  					<button type="button" class="btn btn-outline-primary" onclick="history.back()">뒤로</button>
+			  					</div>
+			  					<div class="offcanvas-body">
+									<div class="payBox" >
+				 	 					<ul class="list-group list-group-flush">
+				 	 						<li class="list-group-item">종목 및 합계</li>
+  											<li class="list-group-item">부기 팝콘</li>
+  											<li class="list-group-item">부기 콜라</li>
+										    <li class="list-group-item">부기 세트</li>
+										    <li class="list-group-item">합계</li>
+										</ul>
+				 	 				</div>
+				 	 			</div>
+			  					<button type="button" class="btn btn-outline-primary" onclick="">취소</button>
 			    				<button type="button" class="btn btn-outline-primary">결제하기</button>	
-			 	 			</div>
 							</div>
 						</div>
 					</div>
@@ -71,14 +79,23 @@
 			  			</select>		
 						<div class="buttons">
 							<div class="buttons">
-							<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
+							<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
 							<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 			  					<div class="offcanvas-header">
 			    				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">장바구니</h5>
 			    				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			  				</div>
 			  				<div class="offcanvas-body">
-			  					<button type="button" class="btn btn-outline-primary" onclick="history.back()">뒤로</button>
+			  					<div class="payBox" >
+				 	 					<ul class="list-group list-group-flush">
+				 	 						<li class="list-group-item">종목 및 합계</li>
+  											<li class="list-group-item">부기 팝콘</li>
+  											<li class="list-group-item">부기 콜라</li>
+										    <li class="list-group-item">부기 세트</li>
+										    <li class="list-group-item">합계</li>
+										</ul>
+				 	 			</div>
+			  					<button type="button" class="btn btn-outline-primary" onclick="">취소</button>
 			    				<button type="button" class="btn btn-outline-primary">결제하기</button>	
 			 	 			</div>
 							</div>
@@ -102,14 +119,23 @@
 			  				<option value="6">9개</option>
 			  			</select>	
 						<div class="buttons">
-							<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
+							<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
 							<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 			  					<div class="offcanvas-header">
 			    				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">장바구니</h5>
 			    				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			  				</div>
 			  				<div class="offcanvas-body">
-			  					<button type="button" class="btn btn-outline-primary" onclick="history.back()">뒤로</button>
+			  					<div class="payBox" >
+				 	 					<ul class="list-group list-group-flush">
+				 	 						<li class="list-group-item">종목 및 합계</li>
+  											<li class="list-group-item">부기 팝콘</li>
+  											<li class="list-group-item">부기 콜라</li>
+										    <li class="list-group-item">부기 세트</li>
+										    <li class="list-group-item">합계</li>
+										</ul>
+				 	 				</div>
+			  					<button type="button" class="btn btn-outline-primary" onclick="">취소</button>
 			    				<button type="button" class="btn btn-outline-primary">결제하기</button>	
 			 	 			</div>
 							</div>
@@ -117,10 +143,29 @@
 					</div>
 				</div>
 				<div class="basket_buttons">
-					<button type="button" class="btn btn-outline-primary">장바구니 확인하기</button>
+					<div class="buttons">
+							<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니 확인하기</button>
+							<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+			  					<div class="offcanvas-header">
+			    				<h5 class="offcanvas-title" id="offcanvasScrollingLabel"></h5>
+			    				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			  				</div>
+			  				<div class="offcanvas-body">
+			  					<div class="payBox" >
+				 	 					<ul class="list-group list-group-flush">
+				 	 						<li class="list-group-item">종목 및 합계</li>
+  											<li class="list-group-item">부기 팝콘</li>
+  											<li class="list-group-item">부기 콜라</li>
+										    <li class="list-group-item">부기 세트</li>
+										    <li class="list-group-item">합계</li>
+										</ul>
+				 	 				</div>
+							 </div>
+				</div>			 	 				
 					<button type="button" class="btn btn-outline-primary">결제하기</button>
 				</div>
 			</div>
+		</div>	
 		</section>
 		<footer> 
 			<jsp:include page="../inc/admin_footer.jsp"></jsp:include> 
@@ -129,6 +174,6 @@
 
 </body>
 	<script>
-	
+ 
 	</script>
 </html>

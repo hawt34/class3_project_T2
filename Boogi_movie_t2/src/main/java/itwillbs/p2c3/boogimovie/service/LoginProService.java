@@ -1,10 +1,10 @@
 package itwillbs.p2c3.boogimovie.service;
 
-import itwillbs.p2c3.boogimovie.vo.memberVO;
+import itwillbs.p2c3.boogimovie.vo.MemberVO;
 
 public class LoginProService {
 	
-	public boolean isCorrectUser(memberVO member) {
+	public boolean isCorrectUser(MemberVO member) {
 		boolean selectResult = false;
 		
 		

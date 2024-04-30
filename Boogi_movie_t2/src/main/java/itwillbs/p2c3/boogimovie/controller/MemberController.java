@@ -2,9 +2,7 @@ package itwillbs.p2c3.boogimovie.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import itwillbs.p2c3.boogimovie.service.PreRegMemberProService;
 import itwillbs.p2c3.boogimovie.service.RegMemberProService;
-import itwillbs.p2c3.boogimovie.vo.memberVO;
+import itwillbs.p2c3.boogimovie.vo.MemberVO;
 
 @Controller
 public class MemberController {
@@ -59,7 +57,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("member_reg_complete")
-	public String memberRegComplete(memberVO member, Model model, HttpServletResponse response) {
+	public String memberRegComplete(MemberVO member, Model model, HttpServletResponse response) {
 		System.out.println("member_reg_complete()");
 		
 		int insertCount = regMemberProService.regMember(member);
@@ -85,30 +83,13 @@ public class MemberController {
 	}
 	
 	@PostMapping(value = "member_reg_member")
-	public String memberRegMember(memberVO member, Model model, HttpServletRequest request) {
+	public String memberRegMember() {
 		System.out.println("member_reg_member()");
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
 		
-		if(member == null) {
-			model.addAttribute("msg", "가입 여부를 확인해주세요.");
-			model.addAttribute("targetURL", "member_pre_reg_member");
-			return "error/fail";
-		}
 		
 		PreRegMemberProService service = new PreRegMemberProService();
-		boolean IsRegisteredMember = service.IsRegisteredMember(member);
 		
-		if(IsRegisteredMember) {
-			model.addAttribute("msg", "이미 가입한 회원입니다.");
-			model.addAttribute("targetURL", "member_login");
-			return "error/fail";
-		}
 		
-		model.addAttribute("member", member);
 		
 		return "member/member_reg_member";
 	}
@@ -128,7 +109,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("LoginPro")
-	public String memberLoginPro(memberVO member) {
+	public String memberLoginPro(MemberVO member) {
 		System.out.println("memberLoginPro()");
 		boolean isCorrectMember = false; 
 		

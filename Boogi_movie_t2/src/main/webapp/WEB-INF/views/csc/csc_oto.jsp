@@ -14,9 +14,9 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-<div>
+<header>
 	<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
-</div>
+</header>
 <div class="container">
 	<div class="row">
 		<!--사이드바 영역  -->
@@ -122,9 +122,9 @@
 
 
 <!-- footer -->
-<div>
+<footer>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
-</div>
+</footer>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

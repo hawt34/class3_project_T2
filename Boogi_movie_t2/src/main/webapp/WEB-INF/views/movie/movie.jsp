@@ -30,10 +30,9 @@
 		</article>
 		<section>
 			<div class="nowMovie">
-				<button type="button" class="btn btn-outline-primary">현재
+				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movie'">현재
 					상영작</button>
-				<button type="button" class="btn btn-outline-primary">상영
-					예정작</button>
+				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFuture'">상영예정작</button>
 			</div>
 			<div class="list">
 				<div class="movie">
@@ -41,7 +40,7 @@
 					<p>범죄도시</p>
 					<button type="button" class="btn btn-outline-primary">예매하기
 					</button>
-					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movie_info_1.jsp'">상세보기
+					<button type="button" class="btn btn-outline-primary"  onclick="window.location.href='movieInfo1'">상세보기
 					</button>
 				</div>
 				<div class="movie">
@@ -50,7 +49,7 @@
 					<p>쿵푸팬더</p>
 					<button type="button" class="btn btn-outline-primary">예매하기
 					</button>
-					<button type="button" class="btn btn-outline-primary">상세보기
+					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieInfo2'">상세보기
 					</button>
 				</div>
 				<div class="movie">
@@ -58,7 +57,7 @@
 					<p>bts</p>
 					<button type="button" class="btn btn-outline-primary">예매하기
 					</button>
-					<button type="button" class="btn btn-outline-primary">상세보기
+					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieInfo3'">상세보기
 					</button>
 				</div>
 				<div class="movie">
@@ -66,7 +65,7 @@
 					<p>페이커는 신이고 무적이다</p>
 					<button type="button" class="btn btn-outline-primary">예매하기
 					</button>
-					<button type="button" class="btn btn-outline-primary">상세보기
+					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieInfo4'">상세보기
 					</button>
 				</div>
 				<div class="movie">
@@ -74,7 +73,7 @@
 					<p>파묘</p>
 					<button type="button" class="btn btn-outline-primary">예매하기
 					</button>
-					<button type="button" class="btn btn-outline-primary">상세보기
+					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieInfo5'">상세보기
 					</button>
 				</div>
 			</div>

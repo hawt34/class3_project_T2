@@ -3,6 +3,8 @@ package itwillbs.p2c3.boogimovie.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MypageController {
@@ -60,4 +62,17 @@ public class MypageController {
 		System.out.println("myp_withdraw_finish()");
 		return "mypage/withdraw_finish";
 	}
+	
+	@RequestMapping(value = "myp_oto_breakdown", method = {RequestMethod.POST, RequestMethod.GET})
+	public String myp_oto_breakdown() {
+//		System.out.println("myp_withdraw_finish()");
+		return "mypage/myp_oto_breakdown";
+	}
+	
+	@GetMapping("myp_oto_modifyForm")
+	public String myp_oto_modifyForm() {
+		return "mypage/myp_oto_modifyForm";
+	}
+	
+	
 }

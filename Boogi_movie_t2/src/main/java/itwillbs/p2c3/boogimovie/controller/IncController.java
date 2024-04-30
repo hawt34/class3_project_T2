@@ -26,11 +26,6 @@ public class IncController {
 		return "csc/csc_oto";
 	}
 	
-	// event 연결
-	@GetMapping("event_main")
-	public String eventMain() {
-		return "event/event_movie";
-	}
 	
 }
 	

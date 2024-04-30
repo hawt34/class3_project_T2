@@ -177,10 +177,9 @@ body {
 				</div>
 			</div>
 			<div class="dropdown">
-				<button class="dropdown-btn">이벤트</button>
+				<button class="dropdown-btn" onclick="location.href='event_main'">이벤트</button>
 				<div class="dropdown-submenu">
-					<a href="#none">영화</a> <a href="#none">극장</a> <a href="#none">할인/제휴</a>
-					<a href="#none">시사회</a>
+					<a href="#none">이벤트코너</a> 
 				</div>
 			</div>
 		</div>

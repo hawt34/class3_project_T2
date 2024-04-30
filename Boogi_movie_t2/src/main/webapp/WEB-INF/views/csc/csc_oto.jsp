@@ -26,7 +26,9 @@
 		<!-- content 영역 -->
 		<div class="col-9">
 			<form method="post" action="myp_oto_breakdown">
-				<h1 class="csc-title">1 대 1 문의</h1>
+				<div id="csc_mainTitle">
+					<h1 class="csc-title">1 대 1 문의</h1>
+				</div>
 				<hr>
 				<div class="csc_explain w-75">
 					<p><small>고객님의 문의에 답변하는 직원은 고객 여러분의 가족 중 한 사람일 수 있습니다.<br>
@@ -125,6 +127,5 @@
 <footer>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </footer>
-<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -165,8 +165,8 @@ body {
 			<div class="dropdown">
 				<button class="dropdown-btn">마이페이지</button>
 				<div class="dropdown-submenu">
-					<a href="#none">예매내역</a> <a href="#none">결제내역</a> <a href="#none">포인트내역</a>
-					<a href="#none">회원등급</a> <a href="#none">회원정보수정</a> <a href="#none">할인/쿠폰</a>
+					<a href="myp_reservation">예매내역</a> <a href="myp_cancel">취소내역</a> <a href="myp_point">포인트내역</a>
+					<a href="myp_point">회원등급</a> <a href="myp_info_modify">회원정보수정</a> <a href="myp_coupon">할인/쿠폰</a>
 				</div>
 			</div>
 			<div class="dropdown">

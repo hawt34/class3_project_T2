@@ -67,7 +67,7 @@ a{
 		<div class="btn-group-vertical">
 			<!-- 사이드바 타이틀 -->
 			<div class="sideVar_title">
-				<a href="${pageContext.request.contextPath}/admin/admin_main/admin_main.jsp"><h4 class="admin_aside_name">고객센터</h4></a>
+				<a href="csc_main"><h4 class="admin_aside_name">고객센터</h4></a>
 			</div>
 			<div class="btn-group dropright">
 				<!-- 마우스 오버 전 카테고리 -->

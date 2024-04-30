@@ -10,8 +10,8 @@
 		width:850px;
 		height:auto;
 		margin: 0 auto;
-		border:1px solid #6699FF;
-		border-width: 5px;
+/* 		border:1px solid #6699FF; */
+/* 		border-width: 5px; */
 		padding: 10px;
 		
 	}

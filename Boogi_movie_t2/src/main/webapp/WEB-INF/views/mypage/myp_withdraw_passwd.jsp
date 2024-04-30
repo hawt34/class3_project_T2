@@ -21,7 +21,6 @@ body {
 .container1{
 	height : 900px;
 	width: 1400px; /* 해상도 1200*/
-/* 	min-width: 1200px; 페이지 최소 너비를 1200으로 설정 해상도 1200 */
 }
 
 .container2{
@@ -90,7 +89,7 @@ input[type=text]:focus, input[type=password]:focus {
 				    	<input type="text" required>
 				    </div><!-- form item -->
 					<section class="content">
-						<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='withdraw3.jsp'">회원탈퇴하기</button>
+						<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='myp_withdraw_finish'">회원탈퇴하기</button>
 					</section>
 				</div><!-- text1 -->
 			</div><!-- col-md-10 box1 -->

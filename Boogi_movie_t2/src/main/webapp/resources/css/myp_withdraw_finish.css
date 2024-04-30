@@ -15,6 +15,7 @@ h1{
 
 .box1{
 	margin-top: 120px;
+	text-align: center;
 }
 
 .box2{
@@ -22,11 +23,8 @@ h1{
 }
 /* --------------------  버튼  ----------------------*/
 .content {
-/*   width: 500px; */
-/*   margin: 0 auto; */
   display: flex; /* 가로로 정렬 */
   flex-direction: row; /* 수평으로 배치 */
-/*   justify-content: center; 가운데 정렬 */
   margin-top: 2em; /* 위쪽 여백 추가 */
 }
 

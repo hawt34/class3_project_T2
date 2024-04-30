@@ -32,8 +32,6 @@ body {
 	margin-top: 20px;
 }
 
-
-
 .box1{
 	height: 400px;
 	
@@ -44,7 +42,7 @@ body {
 <body>
 
 <header>
-	<jsp:include page="inc/admin_header.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 <div class="container1">
 	<div class="container2">

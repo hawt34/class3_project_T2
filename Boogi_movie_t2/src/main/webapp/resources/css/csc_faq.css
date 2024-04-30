@@ -1,3 +1,7 @@
+#csc_mainTitle {
+	margin-top: 20px;
+}
+
 .csc_faq_search {
 	vertical-align: middle;
 	text-align: center;
@@ -87,4 +91,8 @@ input[id*="answer"]:checked + label em{
 	
 }
 
-
+input[value="검색"] {
+	margin-top: 10px;
+	padding: 2px 5px;
+	border-radius: 3px;		
+}

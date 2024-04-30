@@ -67,7 +67,7 @@ th:nth-child(6),
 td:nth-child(6) { 
    width: 15%;  
 } 
-img {
+.myp_inquiry > img {
 	width:27px;
 	height:27px;
 }
@@ -76,6 +76,9 @@ img {
 	font-weight: bold;
 	font-size: 30px;
 	margin: 20px 0;
+}
+#myp_title {
+	margin-top: 20px;
 }
 
 </style>
@@ -92,7 +95,9 @@ img {
 		</div>
 		<!-- content 영역 -->
 		<div class="col-10">
-			<h1>1 대 1 문의 내역</h1>
+			<div id="myp_title">
+				<h1>1 대 1 문의 내역</h1>
+			</div>
 			<hr>
 			<div class="mp_wrap">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -171,8 +176,8 @@ img {
 								<th>제목</th>
 								<th>작성자</th>
 								<th>문의유형</th>
+								<th>문의지점</th>
 								<th>상태</th>
-<!-- 								<th>수정</th> -->
 							</tr>
 						</thead>
 						<tbody>
@@ -181,32 +186,30 @@ img {
 								<td>예매가 안되요</td>
 								<td>admin</td>
 								<td>예매/결제</td>
-								<td>답변</td>
-<!-- 								<td> -->
-<!-- 									<button type="button" class="btn btn-outline-primary" onclick="">수정</button> -->
-<!-- 								</td> -->
+								<td>센텀점</td>
+								<td>
+									답변
+								</td>
 							</tr>
 							<tr>
 								<td>2</td>
 								<td>영화 언제 개봉하나요?</td>
 								<td>hong123</td>
 								<td>영화</td>
-								<td>답변</td>
-<!-- 								<td> -->
-<!-- 									<button type="button" class="btn btn-outline-primary">수정</button> -->
-<!-- 									<button type="button" class="btn btn-outline-primary">삭제</button> -->
-<!-- 								</td> -->
+								<td>부산점</td>
+								<td>
+									답변
+								</td>
 							</tr>
 							<tr>
 								<td>1</td>
 								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>답변</td>
-<!-- 								<td> -->
-<!-- 									<button type="button" class="btn btn-outline-primary">수정</button> -->
-<!-- 									<button type="button" class="btn btn-outline-primary">삭제</button> -->
-<!-- 								</td> -->
+								<td>RHekfl115</td>
+								<td>맴버십</td>
+								<td>광안리점</td>
+								<td>
+									미답변
+								</td>
 							</tr>
 						</tbody>
 					</table>

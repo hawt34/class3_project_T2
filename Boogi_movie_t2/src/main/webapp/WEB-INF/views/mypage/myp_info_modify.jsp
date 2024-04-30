@@ -24,7 +24,7 @@ body {
 </head>
 <body>
 <header>
-	<jsp:include page="inc/admin_header.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 <div class="container1">
 	<div class="container2">
@@ -77,7 +77,7 @@ body {
 				    </div><!-- form item -->
 				</div><!-- box1 -->
 				<div class="d-grid gap-2 col-3 box2">
-					  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='main.jsp'">수정완료</button>
+					  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='myp_main'">수정완료</button>
 				</div>
 			</div><!-- col-md-10 -->
 		</div><!-- row  -->	

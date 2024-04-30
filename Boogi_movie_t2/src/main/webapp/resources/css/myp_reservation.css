@@ -8,16 +8,19 @@
 .container2{
 	margin-top: 20px;
 }
+
 .box1{
 	margin: 0px;
 }
+
 .box2{
 	margin-bottom: 20px;
 }
+
 .box3{
 	text-align: center;
 }
+
 .paybox1{
-	margin-left: 0px;
 	display: flex;
 }

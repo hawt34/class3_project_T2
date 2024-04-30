@@ -21,22 +21,15 @@
 /* 	margin-top: 10px; */
 }
 
-
 /* ============= 버튼 ================= */
 
 .content {
-/*   padding: 2em 1em 5em; */
-/*   z-index: 1; */
-/*   max-width: 1000px; */
-/*   margin: 0 auto; */
   display: flex; /* 가로로 정렬 */
-/*   justify-content: center; 가운데 정렬 */
   flex-direction: row; /* 수평으로 배치 */
   margin-top: 2em; /* 위쪽 여백 추가 */
 }
 
 /* ================================== */
-
 
 * {box-sizing: border-box}
 
@@ -58,8 +51,6 @@ input[type=text], input[type=password]{
   display: flex; /* 요소들을 가로로 정렬하기 위해 flexbox 사용 */
   align-items: center; /* 체크박스와 텍스트를 수직 중앙 정렬 */
 }
-
-
 
 input[type=text]:focus, input[type=password]:focus {
   background-color: #ddd;

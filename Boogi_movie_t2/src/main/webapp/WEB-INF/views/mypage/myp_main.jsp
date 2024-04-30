@@ -32,7 +32,7 @@ body {
 			<div class="col-md-2">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
 			</div>	
-			<div class="col-md-10">
+			<div class="col-md-9 box3">
 				<h2>마이페이지</h2>
 				<hr>
 				<blockquote class="bluejeans">
@@ -53,7 +53,7 @@ body {
 				<hr>
 			</div><!-- col-md-10 -->
 		</div><!-- row -->
-		<div class="row ">
+		<div class="row box3">
 			<div class="col-md-2"> </div>
 				<div class="col-md-7">
 				<div class="row">

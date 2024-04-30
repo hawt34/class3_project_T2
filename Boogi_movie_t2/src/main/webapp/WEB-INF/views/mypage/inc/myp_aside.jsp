@@ -25,7 +25,7 @@ body {
 
 .btn-group:hover .dropdown-menu {
 	display: block;
-	margin-left: 130px;
+	margin-left: 110px;
 }
 
 .btn-group:hover .btn {

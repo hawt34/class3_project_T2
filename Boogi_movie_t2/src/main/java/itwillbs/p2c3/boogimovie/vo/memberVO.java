@@ -1,4 +1,4 @@
-package itwillbs.p2c3.boogimovie.VO;
+package itwillbs.p2c3.boogimovie.vo;
 
 import java.sql.Date;
 
@@ -9,15 +9,14 @@ public class memberVO {
 	private String email;
 	private String tel;
 	private String addr;
-	private String movie;
+	private String movie_genre;
 	private String status;
 	private String my_theater;
 	private String point;
-	private String accumulate_point;
-	private String grade;
 	private Date reg_date;
 	private Date withdraw_date;
 	private String birth;
+	
 	
 	public memberVO() {}
 
@@ -69,13 +68,6 @@ public class memberVO {
 		this.addr = addr;
 	}
 
-	public String getMovie() {
-		return movie;
-	}
-
-	public void setMovie(String movie) {
-		this.movie = movie;
-	}
 
 	public String getStatus() {
 		return status;
@@ -101,21 +93,6 @@ public class memberVO {
 		this.point = point;
 	}
 
-	public String getAccumulate_point() {
-		return accumulate_point;
-	}
-
-	public void setAccumulate_point(String accumulate_point) {
-		this.accumulate_point = accumulate_point;
-	}
-
-	public String getGrade() {
-		return grade;
-	}
-
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
 
 	public Date getReg_date() {
 		return reg_date;
@@ -141,9 +118,24 @@ public class memberVO {
 		this.birth = birth;
 	}
 
-	public memberVO(String id, String name, String pwd, String email, String tel, String addr, String movie,
-			String status, String my_theater, String point, String accumulate_point, String grade, Date reg_date,
-			Date withdraw_date, String birth) {
+	public String getMovie_genre() {
+		return movie_genre;
+	}
+
+	public void setMovie_genre(String movie_genre) {
+		this.movie_genre = movie_genre;
+	}
+
+	@Override
+	public String toString() {
+		return "memberVO [id=" + id + ", name=" + name + ", pwd=" + pwd + ", email=" + email + ", tel=" + tel
+				+ ", addr=" + addr + ", movie_genre=" + movie_genre + ", status=" + status + ", my_theater="
+				+ my_theater + ", point=" + point + ", reg_date=" + reg_date + ", withdraw_date=" + withdraw_date
+				+ ", birth=" + birth + "]";
+	}
+
+	public memberVO(String id, String name, String pwd, String email, String tel, String addr, String movie_genre,
+			String status, String my_theater, String point, Date reg_date, Date withdraw_date, String birth) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -151,25 +143,16 @@ public class memberVO {
 		this.email = email;
 		this.tel = tel;
 		this.addr = addr;
-		this.movie = movie;
+		this.movie_genre = movie_genre;
 		this.status = status;
 		this.my_theater = my_theater;
 		this.point = point;
-		this.accumulate_point = accumulate_point;
-		this.grade = grade;
 		this.reg_date = reg_date;
 		this.withdraw_date = withdraw_date;
 		this.birth = birth;
 	}
 
-	@Override
-	public String toString() {
-		return "memberVO [id=" + id + ", name=" + name + ", pwd=" + pwd + ", email=" + email + ", tel=" + tel
-				+ ", addr=" + addr + ", movie=" + movie + ", status=" + status + ", my_theater=" + my_theater
-				+ ", point=" + point + ", accumulate_point=" + accumulate_point + ", grade=" + grade + ", reg_date="
-				+ reg_date + ", withdraw_date=" + withdraw_date + ", birth=" + birth + "]";
-	}
 	
-	
-	
+
+
 }

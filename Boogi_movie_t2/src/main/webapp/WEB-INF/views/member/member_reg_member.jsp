@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,7 @@
 		
 	    <div class="form_item">
 	    	<label for="name"><b>이름</b></label>
-	    	<input type="text"  name="name" id="name" required value="가입확인할때 받은 이름">
+	    	<input type="text"  name="name" id="name" required  value="${member.name }" readonly="readonly">
 	    	<span></span>
 	    </div>
 	
@@ -42,7 +43,7 @@
     <input type="password" placeholder="비밀번호 확인" name="pwd2" id="pwd2" required>
     
     <label for="birth"><b>생년월일</b></label>
-    <input type="text" placeholder="생년월일" name="birth" id="birth" required value="가입확인할때 받은 생년월일">	
+    <input type="text" placeholder="생년월일" name="birth" id="birth" required value="${member.birth }" readonly="readonly">	
     
     <label for="postCode"><b>주소</b></label>
     <input type="text" id="postCode" name="postCode" size="6" readonly onclick="search_address()" placeholder="클릭 시 주소검색">

@@ -63,16 +63,13 @@ public class MypageController {
 		return "mypage/myp_withdraw_finish";
 	}
 	
-<<<<<<< HEAD
-//	@PostMapping("myp_oto_breakdown")
-//	public String myp_oto_breakdown() {
-=======
 	@RequestMapping(value = "myp_oto_breakdown", method = {RequestMethod.POST, RequestMethod.GET})
 	public String myp_oto_breakdown() {
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
-//		System.out.println("myp_withdraw_finish()");
-//		return "mypage/myp_oto_breakdown";
-//	}
+		System.out.println("myp_withdraw_finish()");
+		return "mypage/myp_oto_breakdown";
+	}
+		
+		
 	@GetMapping("myp_oto_detail")
 	public String myp_oto_detail() {
 //		System.out.println("myp_withdraw_finish()");

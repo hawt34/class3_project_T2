@@ -30,7 +30,6 @@
 				<div class="list">
 					<div class="movie">
 						<img src="${pageContext.request.contextPath}/resources/images/movieF4.jpg">
-						<button type="button" class="btn btn-outline-primary">예매하기</button>
 					</div>
 					<div class="movieInfo">
 						<ul>

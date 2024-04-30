@@ -91,7 +91,7 @@ a{
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5><a href="#">문의내역</a></h5>
+					<h5><a href="myp_oto_breakdown">문의내역</a></h5>
 				</button>
 			</div>
 			<div class="btn-group">

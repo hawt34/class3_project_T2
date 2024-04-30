@@ -16,13 +16,12 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
 <style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Kaushan+Script&display=swap');
 
 .kaushan-script-regular {
-	font-family: "Kaushan Script", cursive;
-	font-weight: 400;
+	font-family: "Gowun Dodum", sans-serif;
 	font-style: normal;
+	font-weight: bold;
 }
 
 .header {
@@ -177,9 +176,9 @@ body {
 				</div>
 			</div>
 			<div class="dropdown">
-				<button class="dropdown-btn" onclick="location.href='event_main'">이벤트</button>
+				<button class="dropdown-btn" onclick="location.href='event'">이벤트</button>
 				<div class="dropdown-submenu">
-					<a href="event_main">이벤트코너</a> 
+					<a href="event">이벤트코너</a> 
 					<a href="boogi_store">스토어</a> 
 				</div>
 			</div>

@@ -40,7 +40,7 @@
 					<p>범죄의 재구성</p>
 					<button type="button" class="btn btn-outline-primary">찜하기
 					</button>
-					<button type="button" class="btn btn-outline-primary">상세보기
+					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo1'">상세보기
 					</button>
 				</div>
 				<div class="movie">
@@ -49,7 +49,7 @@
 					<p>다크 나이트</p>
 					<button type="button" class="btn btn-outline-primary">찜하기
 					</button>
-					<button type="button" class="btn btn-outline-primary">상세보기
+					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo2'">상세보기
 					</button>
 				</div>
 				<div class="movie">
@@ -57,7 +57,7 @@
 					<p>노팅힐</p>
 					<button type="button" class="btn btn-outline-primary">찜하기
 					</button>
-					<button type="button" class="btn btn-outline-primary">상세보기
+					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo3'">상세보기
 					</button>
 				</div>
 				<div class="movie">
@@ -65,7 +65,7 @@
 					<p>쇼생크탈출</p>
 					<button type="button" class="btn btn-outline-primary">찜하기
 					</button>
-					<button type="button" class="btn btn-outline-primary">상세보기
+					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo4'">상세보기
 					</button>
 				</div>
 				<div class="movie">
@@ -73,7 +73,7 @@
 					<p>타짜</p>
 					<button type="button" class="btn btn-outline-primary">찜하기
 					</button>
-					<button type="button" class="btn btn-outline-primary">상세보기
+					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo5'">상세보기
 					</button>
 				</div>
 			</div>

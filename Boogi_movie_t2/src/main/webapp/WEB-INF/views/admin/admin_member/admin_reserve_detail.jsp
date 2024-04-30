@@ -16,7 +16,6 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
 <style>
-
 body {
 	min-height: 50vh;
 	background: -webkit-gradient(linear, left bottom, right top, from(#92b5db),
@@ -28,7 +27,7 @@ body {
 }
 
 .input-form {
-	max-width: 680px;
+	max-width: 600px;
 	margin-top: 80px;
 	padding: 32px;
 	background: #fff;
@@ -39,6 +38,41 @@ body {
 	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
+
+.mb-3>select {
+	width: 250px;
+	padding: 5px;
+	border: 1px solid #999;
+	font-family: url('http://i.ibb.co/98Vbb8L/gnb-bg.gif') no-repeat 95% 50%;
+	border-radius: 2px;
+	-webkit-appearance: none;
+	-mox-appearance: none;
+	appearance: none;
+	text-align: center;
+}
+
+.subject {
+	margin-bottom: 5px;
+	width: 300px;
+}
+
+.mb-3 {
+	margin: 0 auto;
+}
+.mb-3>input {
+	width: 250px;
+	padding: 5px;
+	border: 1px solid #999;
+	font-family: url('http://i.ibb.co/98Vbb8L/gnb-bg.gif') no-repeat 95% 50%;
+	border-radius: 2px;
+	-webkit-appearance: none;
+	-mox-appearance: none;
+	appearance: none;
+	text-align: center;
+}
+.space{
+	margin-top: 50px;
+}
 </style>
 </head>
 <body>
@@ -46,52 +80,73 @@ body {
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">예매내역 상세페이지</h4>
+				<hr>
 				<form class="validation-form" novalidate action="#" method="post">
-					<div class="mb-3">
-						<label for="pay_num">결제번호</label> 
-						<input type="text" id="pay_num" class="form-control" placeholder='결제번호' readonly />
-					</div>
-					<div class="mb-3">
-						<label for="res_code">예매코드</label> 
-						<input type="text" id="res_code" class="form-control" placeholder='예매코드' readonly />
-					</div>
-					<div class="mb-3">
-						<label for="member_id">회원ID</label> 
-						<input type="text" id="member_id" class="form-control" placeholder='여기아이디' readonly />
-					</div>
-					<div class="mb-3">
-						<label for="movie_name">영화명</label> 
-						<input type="text" id="movie_name" class="form-control"  placeholder='영화명' readonly />
-					</div>
-					<div class="mb-3">
-						<label for="res_date">상영일</label> 
-						<input type="text" id="res_date" class="form-control"  placeholder='상영일+회차' readonly />
-					</div>
-					<div class="mb-3">
-						<label for="res_theaterInfo">극장정보</label> 
-						<input type="text" id="res_theaterInfo" class="form-control"  placeholder='화명점/3관' readonly />
-					</div>
-					<div class="mb-3">
-						<label for="res_seatInfo">예매좌석</label> 
-						<input type="text" id="res_seatInfo" class="form-control"  placeholder='D3' readonly  />
-					</div>
-					<div class="mb-3">
-						<label for="pay_bill">결제금액</label> 
-						<input type="text" id="pay_bill" class="form-control"  placeholder='35,000' readonly />
-					</div>
-					<div class="mb-3">
-						<label for="pay_status">결제상태</label> 
-						<input type="text" id="pay_status" class="form-control"  placeholder='결제완료' readonly />
-					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<div class="subject">결제번호</div>
+							<input type="text" id="pay_num" class="form-control" placeholder='결제번호' readonly />
+						</div>
+						<div class="col-md-6">
+							<div class="subject">예매코드</div>
 							
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<div class="subject">회원ID</div>
+							
+						</div>
+						<div class="col-md-6">
+							<div class="subject">영화명</div>
+							
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<div class="subject">상영일</div>
+							
+						</div>
+						<div class="col-md-6">
+							<div class="subject">극장정보</div>
+							<select name="" id="" class="form-control"></select>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<div class="subject">예매좌석</div>
+							
+						</div>
+						<div class="col-md-6">
+							<div class="subject">결제금액</div>
+							<select name="" id="" class="form-control"></select>
+						</div>
+					</div>
+					<div class="space"></div>
 					<hr class="mb-4">
-					
+					<div class="mb-4" align="center">
+						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="window.close()">
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<div class="subject">결제상태</div>
+							
+						</div>
+						<div class="col-md-6">
+							<div class="subject">결제금액</div>
+							<select name="" id="" class="form-control"></select>
+						</div>
+					</div>
+					<div class="space"></div>
+					<hr class="mb-4">
 					<div class="mb-4" align="center">
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="window.close()">
 					</div>
 				</form>
 			</div>
 		</div>
+	</div>
+	
 		<footer class="my-3 text-center text-small">
 			<p class="mb-1">&copy; Boogi Movie</p>
 		</footer>

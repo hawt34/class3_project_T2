@@ -81,11 +81,14 @@ img {
 </style>
 </head>
 <body>
+<header>
+	<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
+</header>
 <div class="container">
 	<div class="row">
 		<!--사이드 바  -->
 		<div class="col-2">
-			<jsp:include page="${pageContext.request.contextPath }/mypage/sidebar/sidebar.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/mypage/inc/myp_aside.jsp"></jsp:include>
 		</div>
 		<!-- content 영역 -->
 		<div class="col-10">
@@ -115,7 +118,7 @@ img {
 								<th>제목</th>
 								<th>작성자</th>
 								<th>문의유형</th>
-								<th>상태</th>
+								<th>문의지점</th>
 								<th>수정</th>
 							</tr>
 						</thead>
@@ -125,9 +128,9 @@ img {
 								<td>예매가 안되요</td>
 								<td>admin</td>
 								<td>예매/결제</td>
-								<td>미확인</td>
+								<td>어디점</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="location.href='myp_oto_modifyForm'">수정</button>
 								</td>
 							</tr>
 							<tr>
@@ -135,7 +138,7 @@ img {
 								<td>영화 언제 개봉하나요?</td>
 								<td>hong123</td>
 								<td>영화</td>
-								<td>확인</td>
+								<td>누구점</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary">수정</button>
 								</td>
@@ -217,5 +220,8 @@ img {
 	</div>
 </div>
 
+<footer>
+	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
+</footer>
 </body>
 </html>

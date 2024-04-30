@@ -31,7 +31,7 @@
 				<h1>영화 상세페이지</h1>
 				<div class="list">
 					<div class="movie">
-						<img src="${pageContext.request.contextPath}/resources/images/movie_1.jpg">
+						<img src="${pageContext.request.contextPath}/resources/images/movie_2.jpg">
 						<button type="button" class="btn btn-outline-primary">예매하기</button>
 					</div>
 					<div class="movieInfo">
@@ -44,7 +44,7 @@
 							<li><span>총관객수 : </span></li>
 						</ul>
 						
-						<h2>줄거리: 마동석 앞에서 너나 나나 한방감!</h2>
+						<h2>팬더의 핵펀치!</h2>
 						<button type="button" class="btn btn-outline-primary">뒤로가기</button>
 					</div>	
 				</div>

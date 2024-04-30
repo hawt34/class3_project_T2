@@ -14,9 +14,9 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-<div>
+<header>
 	<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
-</div>
+</header>
 <!-- main -->
 <div class="container">
 	<div class="row">
@@ -45,7 +45,8 @@
 					<div class="csc_local">서면 상상마당</div>
 					
 					<div class="csc_search">
-						<form>
+						<!--공지 찾는 검색창  -->
+						<form method="post">
 							<input type="text" placeholder="검색어를 입력해주세요"> 
 								<i class="bi bi-search searchIcon"></i>
 							<div class="csc_searcher">
@@ -104,14 +105,13 @@
 
 
 
-			<!-- content 영역 -->
 		</div>
 	</div>
 </div>
 <!-- footer -->
-<div>
+<footer>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
-</div>
+</footer>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/movie_info1.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/movieFuture_info.css" rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link
@@ -31,8 +29,7 @@
 				<h1>영화 상세페이지</h1>
 				<div class="list">
 					<div class="movie">
-						<img src="${pageContext.request.contextPath}/resources/images/movie_1.jpg">
-						<button type="button" class="btn btn-outline-primary">예매하기</button>
+						<img src="${pageContext.request.contextPath}/resources/images/movieF2.jpg">
 					</div>
 					<div class="movieInfo">
 						<ul>
@@ -44,27 +41,12 @@
 							<li><span>총관객수 : </span></li>
 						</ul>
 						
-						<h2>줄거리: 마동석 앞에서 너나 나나 한방감!</h2>
+						<h2>줄거리: 파묘 아직 안 봄..</h2>
 						<button type="button" class="btn btn-outline-primary">뒤로가기</button>
 					</div>	
 				</div>
 			</div>
-			<div class="reviewContents">
-				<div class="star-rating">
-				    <input type="radio" class="star" value="1">
-    				<input type="radio" class="star" value="2">
-				    <input type="radio" class="star" value="3">
-				    <input type="radio" class="star" value="4">
-				    <input type="radio" class="star" value="5">
-				</div>
-				<button type="button" class="btn btn-outline-primary">별점주기</button>
-				<div class="review">
-  				<label for="exampleFormControlTextarea1" class="form-label"></label>
-  				<h2>관람평</h2>
-  				<textarea class="form-control"  rows="3"  cols="2"></textarea>
-				</div>	
-				<button type="button" class="btn btn-outline-primary">저장하기</button>
-			</div>
+			
 		</section>
 		<footer> 
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>

@@ -1,8 +1,5 @@
 package itwillbs.p2c3.boogimovie.controller;
 
-<<<<<<< HEAD
-public class IncController {
-=======
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -27,6 +24,5 @@ public class IncController {
 	}
 	
 	
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	
 }

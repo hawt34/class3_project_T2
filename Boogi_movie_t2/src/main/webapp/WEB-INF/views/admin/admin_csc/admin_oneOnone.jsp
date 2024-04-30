@@ -13,7 +13,8 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+</script>
 <style type="text/css">
 	.admin_csc_selectBox {
 		display: flex;
@@ -187,11 +188,7 @@
 <!-- 	</div> -->
 	
 	<footer>
-<<<<<<< HEAD
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
-=======
-		<jsp:include page="/WEB-INF/views/admin/admin_main/admin_footer.jsp"></jsp:include>
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	</footer>
 	
 </body>

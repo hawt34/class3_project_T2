@@ -69,16 +69,14 @@ public class MypageController {
 		return "mypage/myp_oto_breakdown";
 	}
 		
-		
-	@GetMapping("myp_oto_detail")
-	public String myp_oto_detail() {
-//		System.out.println("myp_withdraw_finish()");
-		return "mypage/myp_oto_detail";
-	}
 	
 	@GetMapping("myp_oto_modifyForm")
 	public String myp_oto_modifyForm() {
 		return "mypage/myp_oto_modifyForm";
+	}
+	@GetMapping("myp_oto_detail")
+	public String myp_oto_detail() {
+		return "mypage/myp_oto_detail";
 	}
 	
 	

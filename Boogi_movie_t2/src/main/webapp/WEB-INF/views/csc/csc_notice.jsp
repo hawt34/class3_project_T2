@@ -26,7 +26,9 @@
 		</div>
 		<!-- content 영역 - 게시판 형식의 공지/뉴스 -->
 		<div class="col-10">
-			<h1>공지사항</h1>
+			<div id="csc_mainTitle">
+				<h1>공지사항</h1>
+			</div>
 			<hr>
 			<div class="row">
 			
@@ -100,9 +102,9 @@
 			<!-- 페이지네이션-페이징 -->
 			<hr>
 			<div class="row">
-				<div></div>
+				
 			</div>
-
+			<!-- 페이지네이션 끝 -->
 
 
 		</div>

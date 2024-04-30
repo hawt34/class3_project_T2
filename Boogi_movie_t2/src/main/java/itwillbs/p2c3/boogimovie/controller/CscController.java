@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CscController {
 	
-//	@GetMapping("csc_main")
-//	public String csc_main() {
-//		return "csc/csc_main";
-//	}
 	
 	
 	

@@ -13,54 +13,155 @@
 
 <body>
 	<header>
-		<%-- 상단 로그인 메뉴 영역 --%>
-		<%-- inc/top.jsp 페이지 삽입(<jsp:include> 태그 사용) --%>
-		<%-- <jsp:include> 태그에서 상대 주소 지정 시 / 는 webapp 디렉토리를 가리킴 --%>
-		
+		<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 	</header>
 	<article>
+	<h1>전체 극장</h1>
+	<hr>
 	<div class="theater_all">
-		<div id="theater_top">
-			<h1>전체 극장</h1>
-			<hr>
-			<div class="theater_top_content">
-				<nav class="nav nav-pills nav-justified">
-					 <a class="nav-link" href="#">해운대점</a>
-					 <a class="nav-link" href="#">광안리점</a>
-					 <a class="nav-link" href="#">서면점</a>
-					 <a class="nav-link" href="#">남포점</a>
-					 <a class="nav-link" href="#">부산대점</a>
-					 <a class="nav-link" href="#">동래점</a>
-					 <a class="nav-link" href="#">수영점</a>
-					 <a class="nav-link" href="#">노포점</a>
-					 <a class="nav-link" href="#">기장점</a>
-				</nav>
-				<div class="theater_top_content">
-					<h4>마이 극장 정보</h4>
-					 <!-- 비로그인 상태 -->
-					<input type="button" class="btn btn-outline-primary btn-sm" value="로그인하기">
-					 <!-- 로그인 상태 -->
-					<input type="button" class="btn btn-outline-primary btn-sm" value="마이 극장 관리">
-				</div>	
-			</div>	
+		<div class="theater_top">
+			<nav class="nav justify-content-center theater_name">
+				 <a class="nav-link" href="#">해운대점</a>
+				 <a class="nav-link" href="#">광안리점</a>
+				 <a class="nav-link" href="#">서면점</a>
+				 <a class="nav-link" href="#">남포점</a>
+				 <a class="nav-link" href="#">부산대점</a>
+				 <a class="nav-link" href="#">동래점</a>
+				 <a class="nav-link" href="#">수영점</a>
+				 <a class="nav-link" href="#">노포점</a>
+				 <a class="nav-link" href="#">기장점</a>
+				 <a class="nav-link" href="#">사상점</a>
+				 <div class="dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">MY 극장</a>
+					<ul class="dropdown-menu">
+						 <!-- 비로그인 상태 -->
+						<li><input type="button" class="btn btn-outline-primary btn-sm" value="로그인하기"></li>
+						<!-- 로그인 상태 -->
+						<!-- 나의극장 관리 모달 버튼 -->
+						<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">MY 극장 관리</button>
+						<!-- 체크된 MY극장 리스트 -->
+						<li><a class="dropdown-item" href="#">기장점</a></li>
+						<li><a class="dropdown-item" href="#">서면점</a></li>
+					</ul>
+				</div>
+			</nav>
+					
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">MY 극장 관리</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="check1">
+								<label class="form-check-label" for="check1">해운대점</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="check2">
+								<label class="form-check-label" for="check2">광안리점</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="check3">
+								<label class="form-check-label" for="check3">서면점</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="check4">
+								<label class="form-check-label" for="check4">남포점</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="check5">
+								<label class="form-check-label" for="check5">부산대점</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="check6">
+								<label class="form-check-label" for="check6">동래점</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="check7">
+								<label class="form-check-label" for="check7">수영점</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="check8">
+								<label class="form-check-label" for="check8">노포점</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="check9">
+								<label class="form-check-label" for="check9">기장점</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="check10">
+								<label class="form-check-label" for="check10">사상점</label>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-primary">저장</button>
+		      			</div>
+					</div>
+		  		</div>
+		  	</div>
+			
 		</div>
-		<hr>		
-		<div id="theater-event">
-			<h1>극장 이벤트</h1>
-			<a href="${pageContext.request.contextPath}/resources/images/theater_event_ex2.jpg"><img src="${pageContext.request.contextPath}/resources/images/theater_event_ex1.jpg"></a>
+		<!-- 극장 관련 이벤트 불러오기 -->
+		<div class="theater_main_cont" id="theater-event">
+			<h3>극장 이벤트</h3>
+			<a href="${pageContext.request.contextPath}/images/theater_event_ex2.jpg"><img src="${pageContext.request.contextPath}/images/theater_event_ex1.jpg"></a>
 		</div>
-		
-	</div>	
-	
-	
+		<div class="theater_main_cont" id="theater-notice">
+			<div class="row">
+	    		<div class="col-11">
+	     			<h3>극장 공지사항</h3>	
+	   			</div>
+	    		<div class="col">
+	      			더보기 
+	      			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+ 						<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+					</svg>
+	   			</div>
+	   		</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col" width="">극장</th>
+						<th scope="col">제목</th>
+						<th scope="col">등록일</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td scope="row">해운대점</td>
+						<td>Mark</td>
+						<td>Otto</td>
+					</tr>
+					<tr>
+						<td scope="row">서면점</td>
+						<td>Jacob</td>
+						<td>Thornton</td>
+					</tr>
+					<tr>
+						<td scope="row">동래점</td>
+						<td>Larry the Bird</td>
+						<td>@twitter</td>
+					</tr>
+					<tr>
+						<td scope="row">남포점</td>
+						<td>Larry the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>	
 	</article>
 	<footer>
-		<%-- 하단 웹사이트 정보 영역 --%>
-		<%-- inc/bottom.jsp 페이지 삽입(<jsp:include> 태그 사용) --%>
+		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
 </body>
 </html>

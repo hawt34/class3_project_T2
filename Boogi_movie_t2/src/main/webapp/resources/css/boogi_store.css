@@ -85,6 +85,12 @@ section {
 .basket_buttons button {
 	display: inline-block;
 }
+.payBox{
+	width: 360px;
+	height: 600px;
+	border: 1px solid skyblue; 
+	
+}
 
 footer {
 	width: 100%;

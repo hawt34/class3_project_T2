@@ -23,7 +23,7 @@
 	    <h3>회원가입</h3>
 	    <hr>
     </div>
-<form action="member_reg_complete" method="post">
+<form action="member_reg_member_pro" method="post">
 	<div class="member_row">
 		
 	    <div class="form_item">

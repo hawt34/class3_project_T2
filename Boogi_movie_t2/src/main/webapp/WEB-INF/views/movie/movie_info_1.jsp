@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,15 +37,15 @@
 					</div>
 					<div class="movieInfo">
 						<ul>
-							<li><span>기본 정보 : </span> </li>
-							<li><span>개봉 : 	</span>  </li>
-							<li><span>감독 : </span></li>
-							<li><span>배우 : </span> </li>
-							<li><span>등급 : </span> </li>
-							<li><span>총관객수 : </span></li>
+						<c:forEach var= "movie" items="${movieInfo}">
+							<li><span>제목 : ${movie.movie_name}  </span> </li>
+							<li><span>개봉 : ${movie_open_date} 	</span>  </li>
+							<li><span>감독 : ${movie.movie_director} </span></li>
+							<li><span>줄거리 : ${movie.movie_summary}</span> </li>
+							<li><span>등급 : ${movie.movie_grade}  </span> </li>
+							
+						</c:forEach>	
 						</ul>
-						
-						<h2>줄거리: 마동석 앞에서 너나 나나 한방감!</h2>
 						<button type="button" class="btn btn-outline-primary">뒤로가기</button>
 					</div>	
 				</div>

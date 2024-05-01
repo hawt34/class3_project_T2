@@ -64,20 +64,20 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "myp_oto_breakdown", method = {RequestMethod.POST, RequestMethod.GET})
-	public String myp_oto_breakdown() {
+	public String mypOtoBreakdown() {
 //		System.out.println("myp_withdraw_finish()");
 		return "mypage/myp_oto_breakdown";
 	}
 		
 	
 	@GetMapping("myp_oto_modifyForm")
-	public String myp_oto_modifyForm() {
+	public String mypOtoModifyForm() {
 		return "mypage/myp_oto_modifyForm";
 	}
-	@GetMapping("myp_oto_detail")
-	public String myp_oto_detail() {
-		return "mypage/myp_oto_detail";
-	}
+//	@GetMapping("myp_oto_detail")
+//	public String myp_oto_detail() {
+//		return "mypage/myp_oto_detail";
+//	}
 	
 	
 }

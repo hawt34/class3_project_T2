@@ -70,14 +70,18 @@ table {
 	margin: 25px 5px;  
 	padding:30px 5px;
 }
+
+
 .theater_detail_subtab {
 	padding:30px 5px;
 }
+
 .col2 {
 	margin-top: 25px;  
 	padding:30px 5px;
 	background-image: url("../images/CINEMA4.jpg");
 }
+
  table {
       border-collapse: collapse;
       width: 100%;
@@ -100,11 +104,11 @@ table {
   	text-align: center;
   }
   
-  /* ========================================= */
+/* ========================================= */
 /* theater_detail_timetable */
 .theater-info{
 	margin: auto;
-	width: 1200px;
+	width: 1400px;
 }
 
 .theater_info_timetable_subject {

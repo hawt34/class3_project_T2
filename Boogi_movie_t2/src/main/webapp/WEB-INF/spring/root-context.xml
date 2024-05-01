@@ -12,8 +12,8 @@
 	<!-- id 속성에 객체를 다룰 id(변수명 역할), class 속성에 해당 객체의 타입 지정 -->
 	<!-- <bean> 태그 사이에는 <property> 태그를 통해 필요한 데이터(속성) 설정(name 속성은 변경 금지) -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-		<property name="jdbcUrl" value="jdbc:mysql://itwillbs.com:3306/c3d2401t2"></property>
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://itwillbs.com:3306/c3d2401t2"></property>
 		<property name="username" value="c3d2401t2"></property>
 		<property name="password" value="1234"></property>
 	</bean>

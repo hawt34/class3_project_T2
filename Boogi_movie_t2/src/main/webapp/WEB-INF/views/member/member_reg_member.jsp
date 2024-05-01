@@ -28,47 +28,47 @@
 		
 	    <div class="form_item">
 	    	<label for="name"><b>이름</b></label>
-	    	<input type="text"  name="name" id="name" required  value="${member.member_name }" readonly="readonly">
+	    	<input type="text"  name="member_name" id="member_name" required  value="${member.member_name }" readonly="readonly">
 	    	<span></span>
 	    </div>
 	
 	
 	<label for="id"><b>아이디</b></label>
-    <input type="text" placeholder="아이디 입력" name="id" id="id" required autocapitalize="off">
+    <input type="text" placeholder="아이디 입력" name="member_id" id="member_id" required autocapitalize="off">
 	
     <label for="pwd"><b>비밀번호</b></label>
-    <input type="password" placeholder="비밀번호 입력" name="pwd" id="pwd" required>
+    <input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd" required>
 
     <label for="pwd2"><b>비밀번호 확인</b></label>
-    <input type="password" placeholder="비밀번호 확인" name="pwd2" id="pwd2" required>
+    <input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2" required>
     
     <label for="birth"><b>생년월일</b></label>
-    <input type="text" placeholder="생년월일" name="birth" id="birth" required value="${member.member_birth }" readonly="readonly">	
+    <input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.member_birth }" readonly="readonly">	
     
     <label for="postCode"><b>주소</b></label>
     <input type="text" id="postCode" name="postCode" size="6" readonly onclick="search_address()" placeholder="클릭 시 주소검색">
 	<input type="text" id="address1" name="address1" placeholder="기본주소" size="25" readonly onclick="search_address()"><br>
 	<input type="text" id="address2" name="address2" placeholder="상세주소" size="25" pattern="^.{2,20}$" maxlength="20">
     
-    <label for="email"><b>Email</b></label>
+    <label for="member_email"><b>Email</b></label>
     <input type="text" placeholder="이메일 입력" name="email" id="email" required>
     
-    <label for="phoneNum"><b>전화번호</b></label>
+    <label for="member_tel"><b>전화번호</b></label>
 
-    <input type="text" placeholder="전화번호 입력" name="tel" id="tel" placeholder="-제외한 전화번호를 입력해주세요" required >
+    <input type="text" placeholder="전화번호 입력" name="member_tel" id="member_tel" placeholder="-제외한 전화번호를 입력해주세요" required >
     
 		<div class="form_item">
-			<label for="movie_genre"><b>영화취향</b></label>
-				<div class="movie_genre">
-					<label><input type="checkbox" name="movie_genre" value="공포">공포</label>
-					<label><input type="checkbox" name="movie_genre" value="코믹">코믹</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
+			<label for="member_movie_genre"><b>영화취향</b></label>
+				<div class="member_movie_genre">
+					<label><input type="checkbox" name="member_movie_genre" value="공포">공포</label>
+					<label><input type="checkbox" name="member_movie_genre" value="코믹">코믹</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
 				</div>
 			</div>
 		<div class="regist_fianl">

@@ -23,7 +23,7 @@
 			<input type="text" id="id" name="member_id" placeholder="아이디를 입력하세요">
 	
 			<label for="pwd">비밀번호</label>
-			<input type="text" id="pwd" name="member_pwd" placeholder="비밀번호를 입력하세요">
+			<input type="password" id="pwd" name="member_pwd" placeholder="비밀번호를 입력하세요">
 		
 	  
 			<button type="submit" class="btn btn-outline-primary">로그인</button>

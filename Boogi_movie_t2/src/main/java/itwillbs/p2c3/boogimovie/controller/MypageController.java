@@ -81,17 +81,10 @@ public class MypageController {
 	public String mypOtoModifyForm() {
 		return "mypage/myp_oto_modifyForm";
 	}
-<<<<<<< HEAD
 	@GetMapping("myp_oto_detail")
 	public String mypOtoDetail() {
 		return "mypage/myp_oto_detail";
 	}
-=======
-//	@GetMapping("myp_oto_detail")
-//	public String myp_oto_detail() {
-//		return "mypage/myp_oto_detail";
-//	}
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	
 	
 }

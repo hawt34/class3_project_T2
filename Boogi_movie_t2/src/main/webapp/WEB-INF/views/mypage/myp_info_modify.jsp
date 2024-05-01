@@ -38,7 +38,7 @@ body {
 				<div class="box1">
 	    			<label for="name">이름</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" name="name" id="name" value="${member.name}" placeholder="이름을 입력" required>
+				    	<input type="text" name="name" id="name" placeholder="이름을 입력" required>
 				    </div><!-- form item -->
 				
 	    			<label for="id">아이디</label>

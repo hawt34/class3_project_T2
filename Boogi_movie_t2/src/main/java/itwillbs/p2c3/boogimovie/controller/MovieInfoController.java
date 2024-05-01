@@ -1,13 +1,32 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import itwillbs.p2c3.boogimovie.service.MovieInfoService;
+import itwillbs.p2c3.boogimovie.vo.MovieVO;
 
 
 @Controller
 public class MovieInfoController {
+	@Autowired
+	private MovieInfoService service;
+	
+	
 	@GetMapping("movieInfo1")
-	public String movieInfo1() {
+	public String movieInfo1(Model model) {
+		
+		
+		List<MovieVO> movieInfo = service.getMovieList();
+		model.addAttribute("movieInfo", movieInfo);
+		System.out.println(movieInfo);
+		
+		
+		
 		
 		return "movie/movie_info_1";
 	}

@@ -26,7 +26,7 @@
 						<div class= "snack_name">부기 팝콘</div>
 						<div class= "snack_info"><p>고소한 부기팝콘</p> 가격 개당 5000원</div>
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_pop.jpg">
-						<select class="form-select" >
+						<select id="popcorn" class="form-select" >
 			 				<option selected>수량을 선택해주세요</option>
 			  				<option value="1">1개</option>
 			  				<option value="2">2개</option>
@@ -49,9 +49,9 @@
 									<div class="payBox" >
 				 	 					<ul class="list-group list-group-flush">
 				 	 						<li class="list-group-item">종목 및 합계</li>
-  											<li class="list-group-item">부기 팝콘</li>
-  											<li class="list-group-item">부기 콜라</li>
-										    <li class="list-group-item">부기 세트</li>
+  											<li class="list-group-item">부기 팝콘 <span id="boogiPopQty">0</span> 개</li>
+  											<li class="list-group-item">부기 콜라 <span id="boogiColaQty">0</span> 개</li>
+										    <li class="list-group-item">부기 세트 <span id="boogiSetQty">0</span> 개</li>
 										    <li class="list-group-item">합계</li>
 										</ul>
 				 	 				</div>
@@ -65,7 +65,7 @@
 						<div class= "snack_name">부기 콜라</div>
 						<div class= "snack_info"><p>시원한 부기콜라</p>  가격 개당 2000원</div>
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_col.jpg">
-						<select class="form-select" >
+						<select id = "cola" class="form-select" >
 			 				<option selected>수량을 선택해주세요</option>
 			  				<option value="1">1개</option>
 			  				<option value="2">2개</option>
@@ -89,9 +89,9 @@
 			  					<div class="payBox" >
 				 	 					<ul class="list-group list-group-flush">
 				 	 						<li class="list-group-item">종목 및 합계</li>
-  											<li class="list-group-item">부기 팝콘</li>
-  											<li class="list-group-item">부기 콜라</li>
-										    <li class="list-group-item">부기 세트</li>
+  											<li class="list-group-item">부기 팝콘 <span id="boogiPopQty">0</span> 개 </li>
+  											<li class="list-group-item">부기 콜라 <span id="boogiColaQty">0</span> 개 </li>
+										    <li class="list-group-item">부기 세트 <span id="boogiSetQty">0</span> 개 </li>
 										    <li class="list-group-item">합계</li>
 										</ul>
 				 	 			</div>
@@ -106,7 +106,7 @@
 						<div class= "snack_name">부기 세트</div>
 						<div class= "snack_info"><p>고소한 부기팝콘 +</p> <p>부기 콜라2잔</p> 세트 가격 8000원</div>
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_popCol.jpg">
-						<select class="form-select" >
+						<select  id = "set" class="form-select" >
 			 				<option selected>수량을 선택해주세요</option>
 			  				<option value="1">1개</option>
 			  				<option value="2">2개</option>
@@ -129,9 +129,9 @@
 			  					<div class="payBox" >
 				 	 					<ul class="list-group list-group-flush">
 				 	 						<li class="list-group-item">종목 및 합계</li>
-  											<li class="list-group-item">부기 팝콘</li>
-  											<li class="list-group-item">부기 콜라</li>
-										    <li class="list-group-item">부기 세트</li>
+  											<li class="list-group-item">부기 팝콘 <span id="boogiPopQty">0</span> 개 </li>
+  											<li class="list-group-item">부기 콜라 <span id="boogiColaQty">0</span> 개 </li>
+										    <li class="list-group-item">부기 세트 <span id="boogiSetQty">0</span> 개 </li>
 										    <li class="list-group-item">합계</li>
 										</ul>
 				 	 				</div>
@@ -154,9 +154,9 @@
 			  					<div class="payBox" >
 				 	 					<ul class="list-group list-group-flush">
 				 	 						<li class="list-group-item">종목 및 합계</li>
-  											<li class="list-group-item">부기 팝콘</li>
-  											<li class="list-group-item">부기 콜라</li>
-										    <li class="list-group-item">부기 세트</li>
+  											<li class="list-group-item">부기 팝콘 <span id="boogiPopQty">0</span> 개 </li>
+  											<li class="list-group-item">부기 콜라 <span id="boogiColaQty">0</span> 개 </li>
+										    <li class="list-group-item">부기 세트 <span id="boogiSetQty">0</span> 개 </li>
 										    <li class="list-group-item">합계</li>
 										</ul>
 				 	 				</div>
@@ -174,6 +174,28 @@
 
 </body>
 	<script>
- 
+	$(document).ready(function() {
+        $('#popcorn').change(function() {
+            const selectedQuantity = $(this).val();
+            console.log('선택된 팝콘 수량:', selectedQuantity);
+            $('#boogiPopQty').text(selectedQuantity); 
+        });
+    });
+	
+	$(document).ready(function() {
+        $('#cola').change(function() {
+            const selectedQuantity = $(this).val();
+            console.log('선택된 콜라 수량:', selectedQuantity);
+            $('#boogiColaQty').text(selectedQuantity); 
+        });
+    });
+	$(document).ready(function() {
+        $('#set').change(function() {
+            const selectedQuantity = $(this).val();
+            $('#boogiSetQty').text(selectedQuantity); 
+        });
+    });
+	
+	
 	</script>
 </html>

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/theater.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theater.css" type="text/css">
 </head>
 
 <body>
@@ -26,10 +26,10 @@
 				 <a class="nav-link" href="#">서면점</a>
 				 <a class="nav-link" href="#">남포점</a>
 				 <a class="nav-link" href="#">부산대점</a>
-				 <a class="nav-link" href="#">동래점</a>
+				 <a class="nav-link" href="#">사직점</a>
 				 <a class="nav-link" href="#">수영점</a>
-				 <a class="nav-link" href="#">노포점</a>
-				 <a class="nav-link" href="#">기장점</a>
+				 <a class="nav-link" href="#">덕천점</a>
+				 <a class="nav-link" href="#">정관점</a>
 				 <a class="nav-link" href="#">사상점</a>
 				 <div class="dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">MY 극장</a>
@@ -38,9 +38,9 @@
 						<li><input type="button" class="btn btn-outline-primary btn-sm" value="로그인하기"></li>
 						<!-- 로그인 상태 -->
 						<!-- 나의극장 관리 모달 버튼 -->
-						<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">MY 극장 관리</button>
+						<li><button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">MY 극장 관리</button></li>
 						<!-- 체크된 MY극장 리스트 -->
-						<li><a class="dropdown-item" href="#">기장점</a></li>
+						<li><a class="dropdown-item" href="#">정관점</a></li>
 						<li><a class="dropdown-item" href="#">서면점</a></li>
 					</ul>
 				</div>
@@ -77,7 +77,7 @@
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="" id="check6">
-								<label class="form-check-label" for="check6">동래점</label>
+								<label class="form-check-label" for="check6">사직점</label>
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="" id="check7">
@@ -85,11 +85,11 @@
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="" id="check8">
-								<label class="form-check-label" for="check8">노포점</label>
+								<label class="form-check-label" for="check8">덕천점</label>
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="" id="check9">
-								<label class="form-check-label" for="check9">기장점</label>
+								<label class="form-check-label" for="check9">정관점</label>
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="" id="check10">
@@ -102,9 +102,9 @@
 		      			</div>
 					</div>
 		  		</div>
-		  	</div>
-			
-		</div>
+		  	</div> <!-- 모달 끝 -->
+		</div><!-- theater_top 끝 -->
+		
 		<!-- 극장 관련 이벤트 불러오기 -->
 		<div class="theater_main_cont" id="theater-event">
 			<h3>극장 이벤트</h3>

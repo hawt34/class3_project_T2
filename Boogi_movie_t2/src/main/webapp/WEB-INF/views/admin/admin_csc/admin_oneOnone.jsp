@@ -84,6 +84,10 @@
 	td:nth-child(6) {
 	  width: 10%;
 	}
+	th:nth-child(7),
+	td:nth-child(7) {
+	  width: 10%;
+	}
 	.admin_ono_head {
 	margin: 30px 0;
 	text-align: right;
@@ -153,6 +157,7 @@
 								<th>문의유형</th>
 								<th>문의지점</th>
 								<th>작성일</th>
+								<th>답변</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -163,6 +168,9 @@
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>2024.04.26~</td>
+								<td>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_oneOnone_reply()">답변하기</button>
+								</td>
 							</tr>
 							<tr>
 								<td>윙카</td>
@@ -171,6 +179,9 @@
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>2024.04.26~</td>
+								<td>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_oneOnone_reply()">답변하기</button>
+								</td>
 							</tr>
 							<tr>
 								<td>윙카</td>
@@ -179,24 +190,30 @@
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>2024.04.26~</td>
+								<td>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_oneOnone_reply()">답변하기</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-<!-- 	</div> -->
 	
 	<footer>
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	</footer>
+	
+	<script type="text/javascript">
+		function admin_oneOnone_reply() {
+			window.open("admin_oneOneone_detail", "_self");
+		}
+		function admin_notice_withdraw() {
+			location.href="admin_notice_delete";
+		}
+	
+	
+	</script>
 	
 </body>
 </html>

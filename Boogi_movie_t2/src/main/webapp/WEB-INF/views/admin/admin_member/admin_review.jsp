@@ -167,7 +167,7 @@ td:nth-child(6) {
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="reviewWithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -177,7 +177,7 @@ td:nth-child(6) {
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="reviewWithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -187,7 +187,7 @@ td:nth-child(6) {
 								<td>4.8점</td>
 								<td>2024-04-19</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="reviewWithdraw()">삭제</button>
 								</td>
 							</tr>
 						</tbody>
@@ -203,5 +203,10 @@ td:nth-child(6) {
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
+	<script type="text/javascript">
+		function reviewWithdraw(){
+			location.href = "admin_review_delete";
+		} 
+	</script>
 </body>
 </html>

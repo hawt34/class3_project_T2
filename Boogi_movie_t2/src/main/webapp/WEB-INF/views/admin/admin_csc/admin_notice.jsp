@@ -66,10 +66,10 @@
 								<td>2024-03-12</td>
 								<td>홍길동</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세보기</button>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -78,10 +78,10 @@
 								<td>2024-05-22</td>
 								<td>박종민</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세보기</button>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -90,10 +90,10 @@
 								<td>2024-01-44</td>
 								<td>이연태</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세보기</button>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw()">삭제</button>
 								</td>
 							</tr>
 							
@@ -103,7 +103,7 @@
 				</div>
 				
 				<div class="admin_movie_footer" align="center">
-					<button onclick="movieForm()">공지사항 등록</button>
+					<button onclick="admin_notice()">등록하기</button>
 				</div>
 
 			</div>
@@ -116,8 +116,11 @@
 	</footer>
 
 	<script type="text/javascript">
-		function movieForm() {
-			window.open("admin_movie_form.jsp", "movieForm", "width=1000, height=800, top=100, left=400");
+		function admin_notice() {
+			window.open("admin_notice_form", "_self");
+		}
+		function admin_notice_withdraw() {
+			location.href="admin_notice_delete";
 		}
 	
 	

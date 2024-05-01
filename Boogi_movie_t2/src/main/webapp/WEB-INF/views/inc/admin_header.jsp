@@ -136,7 +136,7 @@ body {
 			<c:if test="${empty sId}">
 					<a href="member_pre_reg_member"> 회원가입 | </a> 
 			</c:if>
-			
+				
 			<c:if test="${sId eq 'admin'}">
 				<a href="admin_main"> 관리자페이지 </a>
 			</c:if>

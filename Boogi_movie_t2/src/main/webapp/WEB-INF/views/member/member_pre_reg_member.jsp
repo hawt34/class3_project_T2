@@ -25,13 +25,13 @@
 	
 		    <div class="form_item">
 		    	<label for="name"><b>이름</b></label>
-		    	<input type="text"  name="name" id="name" required>
+		    	<input type="text"  name="member_name" id="member_name" required>
 		    	<span></span>
 		    </div>
 		    
 		    <div class="form_item">
 		    	<label for="birth"><b>생년월일</b></label>
-		    	<input type="text"  name="birth" id="birth" required>
+		    	<input type="text"  name="member_birth" id="member_birth" required>
 		    	<span></span>
 		    </div>
 		</div>

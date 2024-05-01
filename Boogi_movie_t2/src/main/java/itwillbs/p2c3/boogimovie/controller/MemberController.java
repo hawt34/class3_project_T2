@@ -1,9 +1,5 @@
 package itwillbs.p2c3.boogimovie.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +24,7 @@ public class MemberController {
 	private PreRegMemberProService preRegMeberProService;
 	@Autowired
 	private LoginProService loginProService;
+	
 	@GetMapping("member_login")
 	public String memberLogin() {
 		System.out.println("MemberLogin()");
@@ -70,7 +67,7 @@ public class MemberController {
 			return "error/fail";
 		}
 		
-		model.addAttribute("member_name", member.getName());
+		model.addAttribute("member_name", member.getMember_name());
 		
 		return "member/member_reg_complete";
 	}
@@ -78,9 +75,10 @@ public class MemberController {
 	@RequestMapping(value = "member_reg_member")
 	public String memberRegMember(MemberVO inputMember, Model model) {
 		System.out.println("member_reg_member()");
+		System.out.println("controller" + inputMember);
 		boolean isRegistedMember = false;
 		isRegistedMember = preRegMeberProService.IsRegisteredMember(inputMember);
-		System.out.println("controller" + inputMember);
+		
 		if(isRegistedMember) {
 			model.addAttribute("msg" , "이미 가입한 회원입니다.");
 			model.addAttribute("targetURL" , "member_login");
@@ -111,16 +109,16 @@ public class MemberController {
 	
 	@PostMapping("LoginPro")
 	public String memberLoginPro(MemberVO inputMember, HttpSession session, Model model) {
-		System.out.println("memberLoginPro()");
+		System.out.println("Controller inputMember : " + inputMember);
 		boolean isCorrectMember = false;
 		isCorrectMember =  loginProService.isCorrectUser(inputMember);
 		if(!isCorrectMember) {
 			model.addAttribute("msg", "로그인 실패!");
 			return "error/fail";
 		}
-		session.setAttribute("sId", inputMember.getId());
-		
-		return "./";
+		session.setAttribute("sId", inputMember.getMember_id());
+		System.out.println(session.getAttribute("sId"));
+		return "movie/movie";
 	}
 	
 	

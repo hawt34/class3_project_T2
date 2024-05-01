@@ -28,7 +28,7 @@
 		
 	    <div class="form_item">
 	    	<label for="name"><b>이름</b></label>
-	    	<input type="text"  name="name" id="name" required  value="${member.name }" readonly="readonly">
+	    	<input type="text"  name="name" id="name" required  value="${member.member_name }" readonly="readonly">
 	    	<span></span>
 	    </div>
 	
@@ -43,7 +43,7 @@
     <input type="password" placeholder="비밀번호 확인" name="pwd2" id="pwd2" required>
     
     <label for="birth"><b>생년월일</b></label>
-    <input type="text" placeholder="생년월일" name="birth" id="birth" required value="${member.birth }" readonly="readonly">	
+    <input type="text" placeholder="생년월일" name="birth" id="birth" required value="${member.member_birth }" readonly="readonly">	
     
     <label for="postCode"><b>주소</b></label>
     <input type="text" id="postCode" name="postCode" size="6" readonly onclick="search_address()" placeholder="클릭 시 주소검색">
@@ -63,7 +63,12 @@
 					<label><input type="checkbox" name="movie_genre" value="공포">공포</label>
 					<label><input type="checkbox" name="movie_genre" value="코믹">코믹</label>
 					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" id="cb_all">전체선택</label>
+					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
 				</div>
 			</div>
 		<div class="regist_fianl">

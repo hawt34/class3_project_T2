@@ -69,18 +69,7 @@
 								<td>12,000원</td>
 								<td>결제완료</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">취소</button>
-								</td>
-							</tr>
-							<tr>
-								<td>1231221</td>
-								<td>박종민</td>
-								<td>예매</td>
-								<td>2024-02-22 09:00</td>
-								<td>34,000원</td>
-								<td>결제취소</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">취소</button>
+									<button type="button" class="btn btn-outline-primary" onclick="pay_cancel()">취소</button>
 								</td>
 							</tr>
 							<tr>
@@ -91,7 +80,7 @@
 								<td>32,000원</td>
 								<td>결제완료</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">취소</button>
+									<button type="button" class="btn btn-outline-primary" onclick="pay_cancel()">취소</button>
 								</td>
 							</tr>
 							<tr>
@@ -102,7 +91,7 @@
 								<td>32,000원</td>
 								<td>결제완료</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">취소</button>
+									<button type="button" class="btn btn-outline-primary" onclick="pay_cancel()">취소</button>
 								</td>
 							</tr>
 							<tr>
@@ -113,18 +102,7 @@
 								<td>32,000원</td>
 								<td>결제완료</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">취소</button>
-								</td>
-							</tr>
-							<tr>
-								<td>1231221</td>
-								<td>admin</td>
-								<td>예매</td>
-								<td>2024-04-12 20:00</td>
-								<td>32,000원</td>
-								<td>결제완료</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">취소</button>
+									<button type="button" class="btn btn-outline-primary" onclick="pay_cancel()">취소</button>
 								</td>
 							</tr>
 							
@@ -143,8 +121,8 @@
 	</footer>
 
 	<script type="text/javascript">
-		function movieForm() {
-			window.open("admin_movie_form.jsp", "movieForm", "width=1000, height=800, top=100, left=400");
+		function pay_cancel() {
+			location.href = "admin_pay_cancel";
 		}
 	
 	

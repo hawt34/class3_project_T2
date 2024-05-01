@@ -130,8 +130,8 @@
 								<td>3,000원</td>
 								<td>판매중</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="store_form()">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="store_delete()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -141,8 +141,8 @@
 								<td>7,000원</td>
 								<td>판매중</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="store_form()">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="store_delete()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -152,8 +152,8 @@
 								<td>8,000원</td>
 								<td>판매 중지</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="store_form()">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="store_delete()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -163,8 +163,8 @@
 								<td>322,300원</td>
 								<td>판매중</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="store_form()">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="store_delete()">삭제</button>
 								</td>
 							</tr>
 						
@@ -174,7 +174,7 @@
 				</div>
 				
 				<div class="admin_store_footer" align="center">
-					<button onclick="Form()">스낵 등록</button>
+					<button onclick="store_form()">스낵 등록</button>
 				</div>
 
 			</div>
@@ -187,9 +187,13 @@
 	</footer>
 
 	<script type="text/javascript">
-		function movieForm() {
-			window.open("admin_movie_form.jsp", "movieForm", "width=1000, height=800, top=100, left=400");
+		function store_form() {
+			window.open("admin_store_form", "_self");
 		}
+		function store_delete() {
+			location.href="admin_store_delete";
+		}
+		
 	
 	
 	</script>

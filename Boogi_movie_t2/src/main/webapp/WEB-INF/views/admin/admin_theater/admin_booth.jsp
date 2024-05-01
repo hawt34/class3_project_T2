@@ -77,8 +77,8 @@
 								<td>09 : 00 ~ 22 : 00</td>
 								<td>운영 중</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="boothForm()">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -89,8 +89,8 @@
 								<td>09 : 00 ~ 22 : 00</td>
 								<td>운영 중</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="boothForm()">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -101,8 +101,8 @@
 								<td>09 : 00 ~ 22 : 00</td>
 								<td>운영 중</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="boothForm()">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -113,8 +113,8 @@
 								<td>09 : 00 ~ 22 : 00</td>
 								<td>미운영</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="boothForm()">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -125,8 +125,8 @@
 								<td>09 : 00 ~ 22 : 00</td>
 								<td>운영 중</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="boothForm()">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw()">삭제</button>
 								</td>
 							</tr>
 							
@@ -135,7 +135,7 @@
 				</div>
 				
 				<div class="admin_movie_footer" align="center">
-					<button onclick="Form()">상영관 등록</button>
+					<button onclick="boothForm()">상영관 등록</button>
 				</div>
 
 			</div>
@@ -148,8 +148,11 @@
 	</footer>
 
 	<script type="text/javascript">
-		function movieForm() {
-			window.open("admin_movie_form.jsp", "movieForm", "width=1000, height=800, top=100, left=400");
+		function boothForm() {
+			window.open("admin_booth_form", "_self");
+		}
+		function boothWithdraw() {
+			location.href="admin_booth_delete";
 		}
 	
 	

@@ -136,81 +136,83 @@ th:nth-child(8), td:nth-child(8) {
 				
 				<!-- 바디 부분 여기 표 넣을거임 -->
 				<div class="admin_plan_body">
-					<table class="admin_plan_body_search">
-						<thead>
-							<tr>
-								<th>극장</th>
-								<th>상영관</th>
-								<th>영화제목</th>
-								<th>상영날짜</th>
-								<th>상영회차</th>
-								<th>상영시간</th>
-								<th>상영일정등록</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<div>
-										<select class="admin_moviePlan_search">
-											<option value="극장선택">극장선택</option>
-											<option value="부산진구">부산진구</option>
-											<option value="해운대구">해운대구</option>
-											<option value="북구">북구</option>
-											<option value="남구">남구</option>
-											<option value="서구">서구</option>
-										</select> 
-									</div>
-								</td>
-								<td>
-									<div>
-										<select class="admin_moviePlan_search">
-											<option value="-관">-관</option>
-											<option value="1관">1관</option>
-											<option value="2관">2관</option>
-											<option value="3관">3관</option>
-											<option value="4관">4관</option>
-											<option value="5관">5관</option>
-											<option value="6관">6관</option>
-										</select> 
-									</div>
-								</td>
-								<td>
-									<div>
-										<select class="admin_moviePlan_search">
-											<option value="영화제목">영화제목</option>
-											<option value="윙카">윙카</option>
-											<option value="파묘">파묘</option>
-											<option value="전준혁">전준혁</option>
-											<option value="센과치히로">센과치히로</option>
-											<option value="현실을 살아라">현실을 살아라</option>
-										</select> 
-									</div>
-								</td>
-								<td>
-									<input type="date" class="admin_moviePlan_search">
-								</td>
-								<td>
-									<div>
-										<select class="admin_moviePlan_search">
-											<option value="1회차">1회차</option>
-											<option value="2회차">2회차</option>
-											<option value="3회차">3회차</option>
-											<option value="4회차">4회차</option>
-											<option value="5회차">5회차</option>
-											<option value="6회차">6회차</option>
-										</select> 
-									</div>
-								</td>
-								<td>
-									<input type="text" placeholder="12:00" class="admin_moviePlan_search" readonly>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">등록하기</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					<form action = "admin_moviePlan_reg" method = "post">
+						<table class="admin_plan_body_search">
+							<thead>
+								<tr>
+									<th>극장</th>
+									<th>상영관</th>
+									<th>영화제목</th>
+									<th>상영날짜</th>
+									<th>상영회차</th>
+									<th>상영시간</th>
+									<th>상영일정등록</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<div>
+											<select class="admin_moviePlan_search">
+												<option value="극장선택">극장선택</option>
+												<option value="부산진구">부산진구</option>
+												<option value="해운대구">해운대구</option>
+												<option value="북구">북구</option>
+												<option value="남구">남구</option>
+												<option value="서구">서구</option>
+											</select> 
+										</div>
+									</td>
+									<td>
+										<div>
+											<select class="admin_moviePlan_search">
+												<option value="-관">-관</option>
+												<option value="1관">1관</option>
+												<option value="2관">2관</option>
+												<option value="3관">3관</option>
+												<option value="4관">4관</option>
+												<option value="5관">5관</option>
+												<option value="6관">6관</option>
+											</select> 
+										</div>
+									</td>
+									<td>
+										<div>
+											<select class="admin_moviePlan_search">
+												<option value="영화제목">영화제목</option>
+												<option value="윙카">윙카</option>
+												<option value="파묘">파묘</option>
+												<option value="전준혁">전준혁</option>
+												<option value="센과치히로">센과치히로</option>
+												<option value="현실을 살아라">현실을 살아라</option>
+											</select> 
+										</div>
+									</td>
+									<td>
+										<input type="date" class="admin_moviePlan_search">
+									</td>
+									<td>
+										<div>
+											<select class="admin_moviePlan_search">
+												<option value="1회차">1회차</option>
+												<option value="2회차">2회차</option>
+												<option value="3회차">3회차</option>
+												<option value="4회차">4회차</option>
+												<option value="5회차">5회차</option>
+												<option value="6회차">6회차</option>
+											</select> 
+										</div>
+									</td>
+									<td>
+										<input type="text" placeholder="12:00" class="admin_moviePlan_search" readonly>
+									</td>
+									<td>
+										<button type="submit" class="btn btn-outline-primary">등록하기</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
 					<br>
 					<table>
 						<thead>
@@ -234,7 +236,7 @@ th:nth-child(8), td:nth-child(8) {
 								<td>12:00</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary" onclick="moviePlanEdit()">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="moviePlanWithdraw()">삭제</button>
 								</td>
 							</tr>
 							
@@ -253,8 +255,13 @@ th:nth-child(8), td:nth-child(8) {
 	
 	<script type="text/javascript">
 		function moviePlanEdit() {
-			window.open("admin_moviePlan_edit", "movieForm", "width=1000, height=800, top=100, left=400");
+			window.open("admin_moviePlan_form", "_self", "width=1000, height=800, top=100, left=400");
 		}
+		
+		function moviePlanWithdraw() {
+			location.href = "admin_moviePlan_delete";
+		}
+
 	</script>
 </body>
 </html>

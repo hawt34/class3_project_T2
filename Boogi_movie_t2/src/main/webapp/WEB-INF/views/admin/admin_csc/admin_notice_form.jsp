@@ -22,7 +22,7 @@
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">공지사항등록</h4>
-				<form class="validation-form" novalidate action="#" method="post">
+				<form class="validation-form" novalidate action="admin_notice_pro" method="post">
 					<div class="mb-3">
 						<label for="movie_director">작성자</label> 
 						<input type="text" id="movie_director" class="form-control" required />
@@ -49,7 +49,7 @@
 					<div class="mb-4" align="center">
 						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" >
 						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
-						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="window.close()">
+						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
 				</form>
 			</div>

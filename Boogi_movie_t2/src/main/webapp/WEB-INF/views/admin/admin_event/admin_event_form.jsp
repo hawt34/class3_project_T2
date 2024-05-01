@@ -24,34 +24,38 @@
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">이벤트등록</h4>
-				<form class="validation-form" novalidate action="#" method="post">
-					<div class="mb-3">
+				<form class="validation-form" novalidate action="admin_event_pro" method="post">
+										<div class="mb-3">
 						<label for="movie_director">작성자</label> 
 						<input type="text" id="movie_director" class="form-control" required />
 						<div class="invalid-feedback">작성자를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_name">글제목</label> 
-						<input type="text" id="movie_name" class="form-control" required />
+						<label for="event_title">글제목</label> 
+						<input type="text" id="event_title" class="form-control" required />
 						<div class="invalid-feedback">글제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_name">이미지</label> 
-						<input type="text" id="movie_name" class="form-control" required />
+						<label for="event_sumnail">썸네일</label> 
+						<input type="text" id="event_sumnail" class="form-control" required />
 						<div class="invalid-feedback">이미지를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_story">내용</label> 
-						<textArea id="movie_story" class="form-control" rows="10px" required></textArea>
-						<div class="invalid-feedback">내용을 입력해주세요.</div>
+						<label for="event_img">본문이미지</label> 
+						<input type="text" id="event_img" class="form-control" required />
+						<div class="invalid-feedback">이미지를 입력해주세요.</div>
 					</div>
+<!-- 					<div class="mb-3"> -->
+<!-- 						<label for="movie_story">내용</label>  -->
+<!-- 						<textArea id="movie_story" class="form-control" rows="10px" required></textArea> -->
+<!-- 						<div class="invalid-feedback">내용을 입력해주세요.</div> -->
+<!-- 					</div> -->
 					
 					<hr class="mb-4">
 					
 					<div class="mb-4" align="center">
-						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" >
-						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
-						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="window.close()">
+						<input type="submit" value="수정하기" class="btn btn-primary btn-lg btn-block" >
+						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
 				</form>
 			</div>
@@ -75,6 +79,7 @@
 	        }, false);
 	      });
 	    }, false);
+	    
  	</script>
 </body>
 </html>

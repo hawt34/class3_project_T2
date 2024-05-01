@@ -98,7 +98,7 @@
 				</tr>
 			</table>
 		</div>
-		<form action="" method="post">
+		<form action="admin_oneOneone_detail_Pro" method="post">
 			<table>
 				<tr>
 					<td>제목</td>
@@ -128,7 +128,7 @@
 			<div class="detail_button">
 				<input type="submit" value="답변하기">
 				<input type="reset" value="다시쓰기">
-				<input type="button" value="돌아가기">
+				<input type="button" value="돌아가기" onclick="history.back()">
 			</div>
 		</form>
 	</div>

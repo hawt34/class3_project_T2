@@ -75,7 +75,8 @@
 	<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 </header>
 	<div class="container">
-		<form action="" method="post">
+		<form action="myp_oto_modifyPro" method="post">
+			<input type="hidden" value="${param.board_num}">
 			<table>
 				<tr>
 					<td>제목</td>

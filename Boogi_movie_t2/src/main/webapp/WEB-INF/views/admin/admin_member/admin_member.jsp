@@ -181,7 +181,7 @@ th:nth-child(8), td:nth-child(8) {
 								<td></td>
 								<td>회원</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_member_edit()">수정</button>
 								</td>
 							</tr>
 							<tr>
@@ -193,7 +193,7 @@ th:nth-child(8), td:nth-child(8) {
 								<td></td>
 								<td>회원</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_member_edit()">수정</button>
 								</td>
 							</tr>
 							<tr>
@@ -205,31 +205,7 @@ th:nth-child(8), td:nth-child(8) {
 								<td></td>
 								<td>회원</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-								</td>
-							</tr>
-							<tr>
-								<td>전준혁</td>
-								<td>29살</td>
-								<td>junhyuk</td>
-								<td>junhyuk@gmail.com</td>
-								<td>2024-04-19</td>
-								<td></td>
-								<td>회원</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-								</td>
-							</tr>
-							<tr>
-								<td>전준혁</td>
-								<td>29살</td>
-								<td>junhyuk</td>
-								<td>junhyuk@gmail.com</td>
-								<td>2024-04-19</td>
-								<td>2024-04-20</td>
-								<td>탈퇴</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="admin_member_edit()">수정</button>
 								</td>
 							</tr>
 						</tbody>
@@ -244,6 +220,11 @@ th:nth-child(8), td:nth-child(8) {
 	<footer>
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
+	<script type="text/javascript">
+		function admin_member_edit() {
+			window.open("admin_member_editForm", "_self");
+		}
+	</script>
 
 </body>
 </html>

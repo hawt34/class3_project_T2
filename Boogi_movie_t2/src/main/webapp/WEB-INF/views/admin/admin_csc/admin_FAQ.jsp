@@ -49,7 +49,7 @@
 								<th>제목</th>
 								<th>등록일</th>
 								<th>작성자</th>
-								<th>상세보기/수정</th>
+								<th>상세보기</th>
 								<th>삭제</th>
 							</tr>
 						</thead>
@@ -60,11 +60,10 @@
 								<td>2023-11-12</td>
 								<td>어드민</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세보기</button>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="FAQform()">상세보기</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="FAQwithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -73,11 +72,10 @@
 								<td>2023-12-22</td>
 								<td>어드민</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세보기</button>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="FAQform()">상세보기</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="FAQwithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -86,11 +84,10 @@
 								<td>2023-11-12</td>
 								<td>어드민</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세보기</button>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="FAQform()">상세보기</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="FAQwithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -99,11 +96,10 @@
 								<td>2023-11-12</td>
 								<td>어드민</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세보기</button>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="FAQform()">상세보기</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="FAQwithdraw()">삭제</button>
 								</td>
 							</tr>
 						
@@ -111,7 +107,7 @@
 						</tbody>
 					</table>
 				<div class="admin_movie_footer" align="center">
-					<button onclick="movieForm()">FAQ 등록</button>
+					<button onclick="FAQform()">FAQ 등록</button>
 				</div>
 				
 				</div>
@@ -126,8 +122,11 @@
 	</footer>
 
 	<script type="text/javascript">
-		function movieForm() {
-			window.open("admin_movie_form.jsp", "movieForm", "width=1000, height=800, top=100, left=400");
+		function FAQform() {
+			window.open("admin_FAQ_form", "_self");
+		}
+		function FAQwithdraw() {
+			location.href="admin_FAQ_delete";
 		}
 	
 	

@@ -186,7 +186,7 @@ th:nth-child(7), td:nth-child(7) {
 								<td>현재상영작</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary" onclick="movieForm()">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="movieWithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -198,7 +198,7 @@ th:nth-child(7), td:nth-child(7) {
 								<td>현재상영작</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary" onclick="movieForm()">수정</button>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="movieWithdraw()">삭제</button>
 								</td>
 							</tr>
 						</tbody>
@@ -220,7 +220,11 @@ th:nth-child(7), td:nth-child(7) {
 
 	<script type="text/javascript">
 		function movieForm() {
-			window.open("admin_movie_form", "movieForm", "width=1000, height=800, top=100, left=400");
+			window.open("admin_movie_form", "_self");
+		}
+		
+		function movieWithdraw(){
+			location.href = "admin_movie_delete";
 		}
 	</script>
 </body>

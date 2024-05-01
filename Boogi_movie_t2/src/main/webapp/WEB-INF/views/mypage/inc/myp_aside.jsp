@@ -70,12 +70,6 @@ a{
 				<a href="myp_main"><h4 class="admin_aside_name">마이페이지</h4></a>
 			</div>
 			<div class="btn-group dropright">
-				<!-- 마우스 오버 전 카테고리 -->
-				<button type="button" class="btn" data-toggle="dropdown">
-					<h5><a href="myp_point">포인트</a></h5>
-				</button>
-			</div>
-			<div class="btn-group dropright">
 				<button type="button" class="btn" data-toggle="dropdown">
 					<h5>결제내역</h5>
 				</button>
@@ -83,6 +77,12 @@ a{
 					<a class="dropdown-item" href="myp_reservation">예매내역</a> 
 					<a class="dropdown-item" href="myp_cancel">취소내역</a>
 				</div>
+			</div>
+			<div class="btn-group dropright">
+				<!-- 마우스 오버 전 카테고리 -->
+				<button type="button" class="btn" data-toggle="dropdown">
+					<h5><a href="myp_point">포인트</a></h5>
+				</button>
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">

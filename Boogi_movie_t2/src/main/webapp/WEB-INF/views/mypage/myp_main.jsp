@@ -75,7 +75,9 @@ body {
 					  <tbody>
 					    <tr  class="table-secondary">
 					      <th scope="row">1</th>
-						      <td>듄2</td>
+						      <td>듄2
+<%-- 						          <input type="text" value="${}" name="title" id="title" readonly> --%>
+						      </td>
 						      <td>2024 / 04 / 16</td>
 						      <td>17:00 ~ 19:20</td>
 						      <td>서면</td>

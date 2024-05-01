@@ -6,9 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TheaterController {
 	
-	@GetMapping("theater_main")
-	public String theater_main() {
-		System.out.println("theater_main");
+	@GetMapping("theater")
+	public String theater() {
+		System.out.println("theater");
 		return "theater/theater_main";
+	}
+	
+	@GetMapping("theater_detail")
+	public String theater_detail() {
+		System.out.println("theater_detail");
+		return "theater/theater_detail";
 	}
 }

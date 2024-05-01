@@ -11,6 +11,10 @@
 
 </head>
 <body>
+	<header>
+		<jsp:include page="../inc/admin_header.jsp"></jsp:include>
+	</header>
+	<article>
 	<div class="payment_all">
 		<h1>빠른 예매</h1>
 		<hr>
@@ -137,5 +141,9 @@
 			</div>
 		</div>
 	</div>
+	</article>
+	<footer>
+		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

@@ -31,7 +31,7 @@
 	</div>
 	<div class="col-md-10" style="margin-top : 100px;">
 		<div class="message">
-			<h3>귀하의 아이디는 434xxx01 입니다!</h3>
+			<h3>귀하의 아이디는 ${replaceMemberId } 입니다!</h3>
 			<br>
 			<br>
 		<button type="button" class="btn btn-outline-primary" onclick="location.href='member_login'">로그인</button>

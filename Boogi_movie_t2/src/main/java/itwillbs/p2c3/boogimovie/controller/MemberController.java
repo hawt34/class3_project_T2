@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import itwillbs.p2c3.boogimovie.service.LoginProService;
+import itwillbs.p2c3.boogimovie.service.MemberIdSearchProService;
 import itwillbs.p2c3.boogimovie.service.PreRegMemberProService;
 import itwillbs.p2c3.boogimovie.service.RegMemberProService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
@@ -24,6 +25,8 @@ public class MemberController {
 	private PreRegMemberProService preRegMeberProService;
 	@Autowired
 	private LoginProService loginProService;
+	@Autowired
+	private MemberIdSearchProService memberIdSearchProService; 
 	
 	@GetMapping("member_login")
 	public String memberLogin() {
@@ -93,9 +96,18 @@ public class MemberController {
 		
 		
 	
-	@PostMapping("member_search_id_result")
-	public String memberIdSearchResult() {
+	@GetMapping("member_search_id_result")
+	public String memberIdSearchResult(Model model, HttpSession session) {
 		System.out.println("memberIdSearchResult()");
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		session.removeAttribute("member");
+		String replaceMemberId = 
+				member.getMember_id()
+				.substring(0, member.getMember_id().length() - 5) + "****" 
+						+ member.getMember_id()
+						.substring(member.getMember_id().length() - 1);
+		model.addAttribute("replaceMemberId", replaceMemberId);
+		
 		
 		return "member/member_id_search_result";
 	}
@@ -136,5 +148,17 @@ public class MemberController {
 		System.out.println("회원가입처리완료");
 		
 		return "member/member_reg_complete";
+	}
+	
+	@PostMapping("member_search_id_result_pro")
+	public String memberSearchIdResultPro(MemberVO inputMember,HttpSession session) {
+		MemberVO outputMember = memberIdSearchProService.memberIdSearch(inputMember);
+		
+		
+		session.setAttribute("member", outputMember);
+		
+		
+		
+		return "redirect:/member_search_id_result";
 	}
 }

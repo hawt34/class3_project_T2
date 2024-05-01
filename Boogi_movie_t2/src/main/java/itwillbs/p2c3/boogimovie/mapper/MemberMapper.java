@@ -12,4 +12,5 @@ public interface MemberMapper {
 	MemberVO preRegMember(MemberVO member);
 	
 	MemberVO isCorrectMember(MemberVO member);
+	
 }

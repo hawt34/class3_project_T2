@@ -18,17 +18,17 @@
 	<h3>아이디 찾기</h3>
     <hr>
 </div>
-<form action="member_search_id_result" method="post">
+<form action="member_search_id_result_pro" method="post">
 <div class="member_row">
 
     <div class="form_item">
-    	<label for="name"><b>이름</b></label>
-    	<input type="text"  name="name" id="name" required>
+    	<label for="member_name"><b>이름</b></label>
+    	<input type="text"  name="member_name" id="member_name" required>
     	<span></span>
     </div>
     <div class="form_item">
-    	<label for="birth"><b>생년월일</b></label>
-    	<input type="text"  name="birth" id="birth" required>
+    	<label for="member_birth"><b>생년월일</b></label>
+    	<input type="text"  name="member_birth" id="member_birth" required>
     	<span></span>
     </div>
 

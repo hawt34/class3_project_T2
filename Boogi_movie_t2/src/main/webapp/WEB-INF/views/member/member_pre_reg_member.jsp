@@ -32,7 +32,7 @@
 		    <div class="form_item">
 		    	<label for="member_birth"><b>생년월일</b></label>
 		    	<input type="text"  maxlength="6" name="member_birth" id="member_birth" required placeholder="생년월일6자리 입력해주세요">
-		    	<span></span>
+		    	<span id="birth_span"></span>
 		    </div>
 		</div>
 		<div class="regist_final">
@@ -50,6 +50,7 @@
 </header>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
 	$(document).ready(function() {
 	    // 이름 입력값 변경 시
 	    $("#member_name").on("keyup", function() {
@@ -75,10 +76,10 @@
 	        if (birth.length === 6) { // member_birth의 길이가 6일 때만 실행
 	            if (!regex.test(birth)) {
 	                $("#member_birth").css("background-color", "red");
-	                $("#name_span").text("틀렸습니다");
+	                $("#birth_span").text("틀렸습니다");
 	            } else {
 	                $("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-	                $("#name_span").text(""); // 텍스트를 제거합니다
+	                $("#birth_span").text(""); // 텍스트를 제거합니다
 	            }
 	
 	            checkFormValidity(); // 폼 유효성 검사 실행

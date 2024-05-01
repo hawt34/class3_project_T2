@@ -170,11 +170,11 @@ body {
 				</div>
 			</div>
 			<div class="dropdown">
-				<button class="dropdown-btn">극장</button>
+				<button class="dropdown-btn" onclick="location.href='theater'">극장</button>
 				<div class="dropdown-submenu">
-					<a href="theater_detail">해운대점</a> <a href="#none">센텀점</a> <a href="#none">서면점</a>
-					<a href="#none">남포점</a> <a href="#none">부산대점</a> <a href="#none">사직점</a>
-					<a href="#none">영도점</a> <a href="#none">덕천점</a> <a href="#none">정관점</a> <a href="#none">사상점</a>
+					<a href="theater_detail">해운대점</a> <a href="theater_detail">센텀점</a> <a href="theater_detail">서면점</a>
+					<a href="theater_detail">남포점</a> <a href="theater_detail">부산대점</a> <a href="theater_detail">사직점</a>
+					<a href="theater_detail">영도점</a> <a href="theater_detail">덕천점</a> <a href="theater_detail">정관점</a> <a href="theater_detail">사상점</a>
 				</div>
 			</div>
 			<div class="dropdown">

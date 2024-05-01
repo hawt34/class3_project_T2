@@ -2,6 +2,7 @@ package itwillbs.p2c3.boogimovie.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AdminController {
@@ -17,14 +18,19 @@ public class AdminController {
 	public String adminFAQ() {
 		return "admin/admin_csc/admin_FAQ";
 	}
+	@GetMapping("admin_FAQ_delete")
+	public String adminFAQdelete() {
+		return "redirect:/admin_FAQ";
+	}
 	@GetMapping("admin_FAQ_form")
 	public String adminFAQform() {
 		return "admin/admin_csc/admin_FAQ_form";
 	}
-	@GetMapping("admin_FAQ_modify_form")
-	public String adminFAQmodifyForm() {
-		return "admin/admin_csc/admin_FAQ_modify_form";
+	@PostMapping("admin_FAQ_pro")
+	public String adminFAQpro() {
+		return "redirect:/admin_FAQ";
 	}
+	
 	@GetMapping("admin_notice")
 	public String adminNotice() {
 		return "admin/admin_csc/admin_notice";
@@ -33,9 +39,13 @@ public class AdminController {
 	public String adminNoticeForm() {
 		return "admin/admin_csc/admin_notice_form";
 	}
-	@GetMapping("admin_notice_detail")
-	public String adminNoticeDetail() {
-		return "admin/admin_csc/admin_notice_detail";
+	@PostMapping("admin_notice_pro")
+	public String adminNoticePro() {
+		return "redirect:admin_notice";
+	}
+	@GetMapping("admin_notice_delete")
+	public String adminNoticeDelete() {
+		return "redirect:/admin_notice";
 	}
 	@GetMapping("admin_oneOnone")
 	public String adminOnOne() {
@@ -44,6 +54,10 @@ public class AdminController {
 	@GetMapping("admin_oneOneone_detail")
 	public String adminOneOneDetail() {
 		return "admin/admin_csc/admin_oneOneone_detail";
+	}
+	@PostMapping("admin_oneOneone_detail_Pro")
+	public String adminOneOneDetailPro() {
+		return "redirect:/admin_oneOnone";
 	}
 	
 	// 관리자 회원 페이지
@@ -59,9 +73,21 @@ public class AdminController {
 	public String adminReview() {
 		return "admin/admin_member/admin_review";
 	}
+	@GetMapping("admin_review_delete")
+	public String adminReviewDelete() {
+		return "redirect:/admin_review";
+	}
 	@GetMapping("admin_member")
 	public String adminMember() {
 		return "admin/admin_member/admin_member";
+	}
+	@GetMapping("admin_member_editForm")
+	public String adminMemberEditForm() {
+		return "admin/admin_member/admin_member_editForm";
+	}
+	@PostMapping("admin_member_editPro")
+	public String adminMemberEditPro() {
+		return "redirect:/admin_member";
 	}
 	
 	// 관리자 영화 페이지
@@ -69,17 +95,38 @@ public class AdminController {
 	public String adminMoviePlan() {
 		return "admin/admin_movie/admin_moviePlan";
 	}
-	@GetMapping("admin_moviePlan_edit")
-	public String adminMoviePlanEdit() {
-		return "admin/admin_movie/admin_moviePlan_edit";
+	@PostMapping("admin_moviePlan_reg")
+	public String adminMoviePlanReg() {
+		return "redirect:/admin_moviePlan";
+	}
+	@GetMapping("admin_moviePlan_delete")
+	public String adminMoviePlanDelete() {
+		return "redirect:/admin_moviePlan";
+	}
+	@GetMapping("admin_moviePlan_form")
+	public String adminMoviePlanForm() {
+		return "admin/admin_movie/admin_moviePlan_form";
+	}
+	@PostMapping("admin_moviePlan_pro")
+	public String adminMoviePlanPro() {
+		return "redirect:/admin_moviePlan";
 	}
 	@GetMapping("admin_movie")
 	public String adminMovie() {
 		return "admin/admin_movie/admin_movie";
 	}
+	@GetMapping("admin_movie_delete")
+	public String adminMovieDelete() {
+		System.out.println("moviedelete");
+		return "redirect:/admin_movie";
+	}
 	@GetMapping("admin_movie_form")
 	public String adminMovieForm() {
 		return "admin/admin_movie/admin_movie_form";
+	}
+	@PostMapping("admin_movie_pro")
+	public String adminMoviePro() {
+		return "redirect:admin_movie";
 	}
 	
 	// 관리자 이벤트 
@@ -91,15 +138,24 @@ public class AdminController {
 	public String adminEventForm() {
 		return "admin/admin_event/admin_event_form";
 	}
-	@GetMapping("admin_event_detail")
-	public String adminEventDetail() {
-		return "admin/admin_event/admin_event_detail";
+	@PostMapping("admin_event_pro")
+	public String adminEventPro() {
+		return "redirect:/admin_event";
 	}
+	@GetMapping("admin_event_delete")
+	public String adminEventDelete() {
+		return "redirect:/admin_event";
+	}
+
 	
 	// 관리자 결제 페이지
 	@GetMapping("admin_pay")
 	public String adminPay() {
 		return "admin/admin_pay/admin_pay";
+	}
+	@GetMapping("admin_pay_cancel")
+	public String adminPayCancel() {
+		return "redirect:/admin_pay";
 	}
 	
 	// 관리자 스토어 페이지
@@ -111,19 +167,44 @@ public class AdminController {
 	public String adminStoreForm() {
 		return "admin/admin_store/admin_store_form";
 	}
+	@PostMapping("admin_store_pro")
+	public String adminStorePro() {
+		return "redirect:/admin_store";
+	}
+	@GetMapping("admin_store_delete")
+	public String adminStoreDelete() {
+		System.out.println("storedelete");
+		return "redirect:/admin_store";
+	}
 	
 	// 관리자 극장 페이지
 	@GetMapping("admin_theater")
 	public String adminTheater() {
 		return "admin/admin_theater/admin_theater";
 	}
+	@GetMapping("admin_theater_delete")
+	public String adminTheaterDelete() {
+		return "redirect:/admin_theater";
+	}
 	@GetMapping("admin_theater_form")
 	public String adminTheaterForm() {
 		return "admin/admin_theater/admin_theater_form";
 	}
+	@PostMapping("admin_theater_pro")
+	public String adminTheaterPro() {
+		return "redirect:/admin_theater";
+	}
 	@GetMapping("admin_booth_form")
 	public String adminBoothForm() {
 		return "admin/admin_theater/admin_booth_form";
+	}
+	@PostMapping("admin_booth_pro")
+	public String adminBoothPro() {
+		return "redirect:/admin_booth";
+	}
+	@GetMapping("admin_booth_delete")
+	public String adminBoothDelete() {
+		return "redirect:/admin_booth";
 	}
 	@GetMapping("admin_booth")
 	public String adminBooth() {

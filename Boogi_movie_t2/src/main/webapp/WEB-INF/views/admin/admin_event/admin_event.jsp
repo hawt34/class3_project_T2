@@ -50,7 +50,7 @@
 								<th>등록일</th>
 								<th>작성자</th>
 								<th>이벤트상태</th>
-								<th>상세보기/수정</th>
+								<th>상세보기</th>
 								<th>삭제</th>
 							</tr>
 						</thead>
@@ -62,11 +62,10 @@
 								<td>어드민</td>
 								<td>진행전</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세보기</button>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="eventForm()">상세보기</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -76,11 +75,10 @@
 								<td>어드민</td>
 								<td>진행전</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세보기</button>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="eventForm()">상세보기</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -90,11 +88,10 @@
 								<td>어드민</td>
 								<td>진행중</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세보기</button>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="eventForm()">상세보기</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw()">삭제</button>
 								</td>
 							</tr>
 							<tr>
@@ -104,11 +101,10 @@
 								<td>어드민</td>
 								<td>진행중</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">상세보기</button>
-									<button type="button" class="btn btn-outline-primary">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="eventForm()">상세보기</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-outline-primary">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw()">삭제</button>
 								</td>
 							</tr>
 							
@@ -119,7 +115,7 @@
 					<br>
 					<br>
 				<div class="admin_movie_footer" align="center">
-					<button onclick="movieForm()">이벤트 등록</button>
+					<button onclick="eventForm()">이벤트 등록</button>
 				</div>
 				
 				</div>
@@ -134,8 +130,11 @@
 	</footer>
 
 	<script type="text/javascript">
-		function movieForm() {
-			window.open("admin_movie_form.jsp", "movieForm", "width=1000, height=800, top=100, left=400");
+		function eventForm() {
+			window.open("admin_event_form", "_self");
+		}
+		function eventWithdraw() {
+			location.href = "admin_event_delete";
 		}
 	
 	

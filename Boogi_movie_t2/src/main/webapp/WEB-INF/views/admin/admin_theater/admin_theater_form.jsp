@@ -23,27 +23,27 @@
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<h4 class="mb-4">해운대점 상영관등록</h4>
-				<form class="validation-form" novalidate action="#" method="post">
+				<h4 class="mb-4">극장등록</h4>
+				<form class="validation-form" novalidate action="admin_theater_pro" method="post">
 					<div class="mb-3">
-						<label for="movie_code">상영관코드</label> 
+						<label for="movie_code">극장코드</label> 
 						<input type="text" id="movie_code" class="form-control" required />
-						<div class="invalid-feedback">상영관코드를 입력해주세요.</div>
+						<div class="invalid-feedback">극장코드를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_name">상영관명</label> 
+						<label for="movie_name">극장명</label> 
 						<input type="text" id="movie_name" class="form-control" required />
-						<div class="invalid-feedback">상영관명을 입력해주세요.</div>
+						<div class="invalid-feedback">극장명을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_director">상영관위치</label> 
+						<label for="movie_director">극장위치</label> 
 						<input type="text" id="movie_director" class="form-control" required />
-						<div class="invalid-feedback">상영관위치를 입력해주세요.</div>
+						<div class="invalid-feedback">극장위치를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_createDate">상영관크기</label> 
+						<label for="movie_createDate">극장크기</label> 
 						<input type="text" id="movie_createDate" class="form-control" required />
-						<div class="invalid-feedback">상영관크기를 입력해주세요.</div>
+						<div class="invalid-feedback">극장크기를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_genre">운영시간</label> 
@@ -56,7 +56,7 @@
 					<div class="mb-4" align="center">
 						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" >
 						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
-						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="window.close()">
+						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
 				</form>
 			</div>

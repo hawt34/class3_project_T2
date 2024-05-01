@@ -81,7 +81,7 @@ body {
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">상영일정 수정페이지</h4>
 				<hr>
-				<form class="validation-form" novalidate action="#" method="post">
+				<form class="validation-form" novalidate action="admin_moviePlan_pro" method="post">
 					<div class="row mb-3">
 						<div class="col-md-6">
 							<div class="subject">극장</div>
@@ -144,9 +144,9 @@ body {
 					<hr class="mb-4">
 					<div class="mb-4" align="center">
 						<input type="submit" value="수정하기"
-							class="btn btn-primary btn-lg btn-block" onclick="window.close()">
+							class="btn btn-primary btn-lg btn-block">
 						<input type="button" value="돌아가기"
-							class="btn btn-primary btn-lg btn-block" onclick="window.close()">
+							class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
 				</form>
 			</div>

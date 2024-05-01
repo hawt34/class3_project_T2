@@ -76,14 +76,14 @@ public class MypageController {
 		return "mypage/myp_oto_breakdown";
 	}
 		
-	
 	@GetMapping("myp_oto_modifyForm")
 	public String mypOtoModifyForm() {
 		return "mypage/myp_oto_modifyForm";
 	}
-	@GetMapping("myp_oto_detail")
-	public String mypOtoDetail() {
-		return "mypage/myp_oto_detail";
+	
+	@PostMapping("myp_oto_modifyPro")
+	public String myOtoModifyPro() {
+		return "redirect:/myp_oto_breakdown";
 	}
 	
 	

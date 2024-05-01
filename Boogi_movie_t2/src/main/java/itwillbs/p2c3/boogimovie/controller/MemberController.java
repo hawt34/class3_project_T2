@@ -126,6 +126,7 @@ public class MemberController {
 	public String memberLogoutPro(HttpSession session, Model model) {
 		session.invalidate();
 		model.addAttribute("msg", "로그아웃 완료");
+		model.addAttribute("targetURL", "./");
 		return "error/fail";
 	}
 }

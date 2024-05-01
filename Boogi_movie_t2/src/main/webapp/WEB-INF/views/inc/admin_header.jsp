@@ -1,5 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,14 +121,28 @@ body {
 </style>
 </head>
 <body>
+
 	<div class="header">
 		<!--  여기가 헤더 탑 로그인 자리 -->
 		<div align="right" class="header_top">
-			<a href="member_login"> 로그인 | </a> 
-			<a onclick="member_logout()" class="cursor-pointer"> 로그아웃 | </a> 
-			<a href="member_pre_reg_member"> 회원가입 | </a> 
-			<a href="admin_main"> 관리자페이지 </a>
+			<c:choose>
+				<c:when test="${empty sId}">
+					<a href="member_login"> 로그인 | </a> 
+				</c:when>
+				<c:otherwise>
+					<a onclick="member_logout()" class="cursor-pointer"> 로그아웃 | </a> 
+				</c:otherwise>
+			</c:choose>
+			<c:if test="${empty sId}">
+					<a href="member_pre_reg_member"> 회원가입 | </a> 
+			</c:if>
+			
+			<c:if test="${sId eq 'admin'}">
+				<a href="admin_main"> 관리자페이지 </a>
+			</c:if>
 		</div>
+			
+			
 		<!--  부기무비 타이틀 영역 -->
 		<div class="header_middle">
 			<div class="row">

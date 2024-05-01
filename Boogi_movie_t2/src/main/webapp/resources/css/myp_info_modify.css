@@ -2,12 +2,8 @@
 * {box-sizing: border-box}
 
 .container1{
-	height : 1100px;
+	height : 1300px;
 	width: 1400px; /* 해상도 1200*/
-/* 	min-width: 1200px; 페이지 최소 너비를 1200으로 설정 해상도 1200 */
-}
-
-.container2{
 	margin-top: 20px;
 }
 
@@ -18,8 +14,12 @@
 
 .box2{
 	margin-left : 385px;	
+	margin-top : 50px;	
 }
 
+.box3{
+	display: flex; /* 가로로 정렬 */
+}
 /* ============= 버튼 ================= */
 
 .content {

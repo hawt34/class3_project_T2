@@ -13,8 +13,8 @@ public class TheaterController {
 	}
 	
 	@GetMapping("theater_detail")
-	public String theater_detail() {
-		System.out.println("theater_detail");
+	public String theaterDetail() {
+		System.out.println("theaterDetail");
 		return "theater/theater_detail";
 	}
 }

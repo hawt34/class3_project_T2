@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/theater.css" type="text/css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
-
 	<div class="theater-info">
 		<h4>관람료</h4>
 			<div class="row gx-5">
@@ -28,19 +28,19 @@
 					    <tr>
 					      <th scope="row" rowspan="2">월~목</th>
 					      <td>조조(06:00~)</td>
-					      <td>9,000</td>
-					      <td>7,000</td>
+					      <td>10,000</td>
+					      <td>8,000</td>
 					    </tr>
 					    <tr>
 					    	<td>일반(11:01~)</td>
-					    	<td>14,000</td>
-							<td>11,000</td>
+					    	<td>13,000</td>
+							<td>10,000</td>
 					    </tr>
 					    <tr>
 					 		<th scope="row" rowspan="2">금~일<br>공휴일</th>
 					     	<td>조조(06:00~)</td>
 					      	<td>11,000</td>
-					      	<td>7,000</td>
+					      	<td>8,000</td>
 					    </tr>
 					    <tr>
 					    	<td>일반(11:01~)</td>
@@ -70,14 +70,14 @@
 						</tr>
 					    <tr>
 					    	<td>일반(11:01~)</td>
-					    	<td>16,000</td>
-							<td>13,000</td>
+					    	<td>15,000</td>
+							<td>12,000</td>
 					    </tr>
 					    <tr>
 					 		<th scope="row" rowspan="2">금~일<br>공휴일</th>
 					     	<td>조조(06:00~)</td>
 					      	<td>13,000</td>
-					      	<td>10,000</td>
+					      	<td>11,000</td>
 					    </tr>
 					    <tr>
 					    	<td>일반(11:01~)</td>

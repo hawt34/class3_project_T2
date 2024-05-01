@@ -152,8 +152,9 @@ body {
 			<div class="dropdown">
 				<button class="dropdown-btn">극장</button>
 				<div class="dropdown-submenu">
-					<a href="#none">부산진구</a> <a href="#none">해운대구</a> <a href="#none">북구</a>
-					<a href="#none">남구</a> <a href="#none">서구</a>
+					<a href="theater_detail">해운대점</a> <a href="#none">센텀점</a> <a href="#none">서면점</a>
+					<a href="#none">남포점</a> <a href="#none">부산대점</a> <a href="#none">사직점</a>
+					<a href="#none">영도점</a> <a href="#none">덕천점</a> <a href="#none">정관점</a> <a href="#none">사상점</a>
 				</div>
 			</div>
 			<div class="dropdown">

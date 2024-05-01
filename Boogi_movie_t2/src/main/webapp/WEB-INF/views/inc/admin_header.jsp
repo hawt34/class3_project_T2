@@ -112,6 +112,10 @@ body {
 	display: block;
 	transition-duration: 1s;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -119,7 +123,7 @@ body {
 		<!--  여기가 헤더 탑 로그인 자리 -->
 		<div align="right" class="header_top">
 			<a href="member_login"> 로그인 | </a> 
-			<a href="member_logout"> 로그아웃 | </a> 
+			<a onclick="member_logout()" class="cursor-pointer"> 로그아웃 | </a> 
 			<a href="member_pre_reg_member"> 회원가입 | </a> 
 			<a href="admin_main"> 관리자페이지 </a>
 		</div>
@@ -159,7 +163,7 @@ body {
 			<div class="dropdown">
 				<button class="dropdown-btn">예매</button>
 				<div class="dropdown-submenu">
-					<a href="#none">빠른예매</a> <a href="#none">상영스케줄</a>
+					<a href="tic_ticketing">빠른예매</a> <a href="#none">상영스케줄</a>
 				</div>
 			</div>
 			<div class="dropdown">
@@ -185,5 +189,14 @@ body {
 		</div>
 	</div>
 
+
+<script>
+	function member_logout(){
+		if(confirm("로그아웃 하시겠습니까?")){
+			location.href="member_logout_pro";
+		}
+	}
+
+</script>
 </body>
 </html>

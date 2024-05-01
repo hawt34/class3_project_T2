@@ -18,7 +18,7 @@
 	<h3>로그인</h3>
 	<hr>
 	<div class="col input-box">
-		<form action="LoginPro" method="post">
+		<form action="member_login_pro" method="post">
 			<label for="id">아이디</label>
 			<input type="text" id="id" name="member_id" placeholder="아이디를 입력하세요">
 	

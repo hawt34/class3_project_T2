@@ -107,7 +107,7 @@ public class MemberController {
 		return "member/member_pwd_search_result";
 	}
 	
-	@PostMapping("LoginPro")
+	@PostMapping("member_login_pro")
 	public String memberLoginPro(MemberVO inputMember, HttpSession session, Model model) {
 		System.out.println("Controller inputMember : " + inputMember);
 		boolean isCorrectMember = false;
@@ -116,11 +116,16 @@ public class MemberController {
 			model.addAttribute("msg", "로그인 실패!");
 			return "error/fail";
 		}
+		
 		session.setAttribute("sId", inputMember.getMember_id());
 		System.out.println(session.getAttribute("sId"));
-		return "movie/movie";
+		return "redirect:/";
 	}
 	
-	
-	
+	@GetMapping("member_logout_pro")
+	public String memberLogoutPro(HttpSession session, Model model) {
+		session.invalidate();
+		model.addAttribute("msg", "로그아웃 완료");
+		return "error/fail";
+	}
 }

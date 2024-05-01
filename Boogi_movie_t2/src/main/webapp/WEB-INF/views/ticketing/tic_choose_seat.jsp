@@ -37,60 +37,33 @@
 		
 		<div class="custom-select">
 	  	<select>
-		    <option value="0">0명</option>
+		    <option>0명</option>
 		    <option value="1">1명</option>
 		    <option value="2">2명</option>
 		    <option value="3">3명</option>
 		    <option value="4">4명</option>
-		    <option value="5">5명</option>
-		    <option value="6">6명</option>
-		    <option value="7">7명</option>
-		    <option value="8">8명</option>
 	  	</select>
 		</div>     
 		
 		<label class="person_option">청소년</label>
 		<div class="custom-select">
 		  	<select>
-			    <option value="0">0명</option>
+			    <option>0명</option>
 			    <option value="1">1명</option>
 			    <option value="2">2명</option>
 			    <option value="3">3명</option>
 			    <option value="4">4명</option>
-			    <option value="5">5명</option>
-			    <option value="6">6명</option>
-			    <option value="7">7명</option>
-			    <option value="8">8명</option>
 		  	</select>
 		</div>
 		
-		<label class="person_option">경로</label>
+		<label class="person_option">노약자</label>
 		<div class="custom-select">
 		  	<select>
-			    <option value="0">0명</option>
+			    <option>0명</option>
 			    <option value="1">1명</option>
 			    <option value="2">2명</option>
 			    <option value="3">3명</option>
 			    <option value="4">4명</option>
-			    <option value="5">5명</option>
-			    <option value="6">6명</option>
-			    <option value="7">7명</option>
-			    <option value="8">8명</option>
-		  	</select>
-		</div>
-		
-		<label class="person_option">우대</label>
-		<div class="custom-select">
-		  	<select>
-			    <option value="0">0명</option>
-			    <option value="1">1명</option>
-			    <option value="2">2명</option>
-			    <option value="3">3명</option>
-			    <option value="4">4명</option>
-			    <option value="5">5명</option>
-			    <option value="6">6명</option>
-			    <option value="7">7명</option>
-			    <option value="8">8명</option>
 		  	</select>
 		</div>
 	</div>

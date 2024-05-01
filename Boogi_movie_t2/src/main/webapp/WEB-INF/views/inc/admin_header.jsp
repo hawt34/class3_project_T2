@@ -1,5 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,17 +114,35 @@ body {
 	display: block;
 	transition-duration: 1s;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
 </style>
 </head>
 <body>
+
 	<div class="header">
 		<!--  여기가 헤더 탑 로그인 자리 -->
 		<div align="right" class="header_top">
-			<a href="member_login"> 로그인 | </a> 
-			<a href="member_logout"> 로그아웃 | </a> 
-			<a href="member_pre_reg_member"> 회원가입 | </a> 
-			<a href="admin_main"> 관리자페이지 </a>
+			<c:choose>
+				<c:when test="${empty sId}">
+					<a href="member_login"> 로그인 | </a> 
+				</c:when>
+				<c:otherwise>
+					<a onclick="member_logout()" class="cursor-pointer"> 로그아웃 | </a> 
+				</c:otherwise>
+			</c:choose>
+			<c:if test="${empty sId}">
+					<a href="member_pre_reg_member"> 회원가입 | </a> 
+			</c:if>
+			
+			<c:if test="${sId eq 'admin'}">
+				<a href="admin_main"> 관리자페이지 </a>
+			</c:if>
 		</div>
+			
+			
 		<!--  부기무비 타이틀 영역 -->
 		<div class="header_middle">
 			<div class="row">
@@ -152,14 +172,15 @@ body {
 			<div class="dropdown">
 				<button class="dropdown-btn">극장</button>
 				<div class="dropdown-submenu">
-					<a href="#none">부산진구</a> <a href="#none">해운대구</a> <a href="#none">북구</a>
-					<a href="#none">남구</a> <a href="#none">서구</a>
+					<a href="theater_detail">해운대점</a> <a href="#none">센텀점</a> <a href="#none">서면점</a>
+					<a href="#none">남포점</a> <a href="#none">부산대점</a> <a href="#none">사직점</a>
+					<a href="#none">영도점</a> <a href="#none">덕천점</a> <a href="#none">정관점</a> <a href="#none">사상점</a>
 				</div>
 			</div>
 			<div class="dropdown">
 				<button class="dropdown-btn">예매</button>
 				<div class="dropdown-submenu">
-					<a href="#none">빠른예매</a> <a href="#none">상영스케줄</a>
+					<a href="tic_ticketing">빠른예매</a> <a href="#none">상영스케줄</a>
 				</div>
 			</div>
 			<div class="dropdown">
@@ -185,5 +206,14 @@ body {
 		</div>
 	</div>
 
+
+<script>
+	function member_logout(){
+		if(confirm("로그아웃 하시겠습니까?")){
+			location.href="member_logout_pro";
+		}
+	}
+
+</script>
 </body>
 </html>

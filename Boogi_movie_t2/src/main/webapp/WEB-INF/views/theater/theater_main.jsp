@@ -8,7 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/theater.css" type="text/css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -21,8 +23,8 @@
 	<div class="theater_all">
 		<div class="theater_top">
 			<nav class="nav justify-content-center theater_name">
-				 <a class="nav-link" href="#">해운대점</a>
-				 <a class="nav-link" href="#">광안리점</a>
+				 <a class="nav-link" href="theater_detail">해운대점</a>
+				 <a class="nav-link" href="theater_detail">광안리점</a>
 				 <a class="nav-link" href="#">서면점</a>
 				 <a class="nav-link" href="#">남포점</a>
 				 <a class="nav-link" href="#">부산대점</a>
@@ -108,7 +110,7 @@
 		<!-- 극장 관련 이벤트 불러오기 -->
 		<div class="theater_main_cont" id="theater-event">
 			<h3>극장 이벤트</h3>
-			<a href="${pageContext.request.contextPath}/images/theater_event_ex2.jpg"><img src="${pageContext.request.contextPath}/images/theater_event_ex1.jpg"></a>
+			<a href="${pageContext.request.contextPath}/resources/images/theater_event_ex2.jpg"><img src="${pageContext.request.contextPath}/resources/images/theater_event_ex1.jpg"></a>
 		</div>
 		<div class="theater_main_cont" id="theater-notice">
 			<div class="row">
@@ -116,10 +118,10 @@
 	     			<h3>극장 공지사항</h3>	
 	   			</div>
 	    		<div class="col">
-	      			더보기 
+	      			<a href="">더보기 
 	      			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
  						<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-					</svg>
+					</svg></a>
 	   			</div>
 	   		</div>
 			<table class="table table-striped">
@@ -159,9 +161,6 @@
 	<footer>
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
 
 </body>
 </html>

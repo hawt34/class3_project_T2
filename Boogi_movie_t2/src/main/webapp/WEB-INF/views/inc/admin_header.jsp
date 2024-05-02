@@ -33,8 +33,12 @@
 }
 
 .header_top {
-	padding-right: 100px;
+	padding-right: 300px;
 	padding-top: 20px;
+}
+.header_top > a{
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .col-md-2>img {
@@ -127,18 +131,18 @@ body {
 		<div align="right" class="header_top">
 			<c:choose>
 				<c:when test="${empty sId}">
-					<a href="member_login"> 로그인 | </a> 
+					<a href="member_login"> 로그인 </a> 
 				</c:when>
 				<c:otherwise>
-					<a onclick="member_logout()" class="cursor-pointer"> 로그아웃 | </a> 
+					<a onclick="member_logout()" class="cursor-pointer"> | 로그아웃 </a> 
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${empty sId}">
-					<a href="member_pre_reg_member"> 회원가입 | </a> 
+					<a href="member_pre_reg_member"> | 회원가입 </a> 
 			</c:if>
 				
 			<c:if test="${sId eq 'admin'}">
-				<a href="admin_main"> 관리자페이지 </a>
+				<a href="admin_main"> | 관리자페이지 </a>
 			</c:if>
 		</div>
 			

@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 </head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
-" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/member_login.css" rel="stylesheet" type="text/css">
 <body>
 <header>

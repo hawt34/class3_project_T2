@@ -161,4 +161,6 @@ public class MemberController {
 		
 		return "redirect:/member_search_id_result";
 	}
+	
+	
 }

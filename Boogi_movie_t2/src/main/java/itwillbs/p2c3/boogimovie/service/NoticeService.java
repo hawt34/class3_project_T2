@@ -14,9 +14,8 @@ public class NoticeService {
 	@Autowired
 	private NoticeMapper mapper;
 
-	public List<NoticeVO> getNoticeList() {
-		System.out.println(mapper.selectNoticeList());
-		return mapper.selectNoticeList();
+	public List<NoticeVO> getNoticeList(int listLimit, int startRow) {
+		return mapper.selectNoticeList(listLimit, startRow);
 	}
 	
 }

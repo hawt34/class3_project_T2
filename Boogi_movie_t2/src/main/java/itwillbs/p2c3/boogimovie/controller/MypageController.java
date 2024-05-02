@@ -24,7 +24,7 @@ public class MypageController {
 	
 	@GetMapping("myp_point")
 	public String mypPoint() {
-//		System.out.println("myp_point");
+		System.out.println("myp_point");
 		return "mypage/myp_point";
 	}
 	

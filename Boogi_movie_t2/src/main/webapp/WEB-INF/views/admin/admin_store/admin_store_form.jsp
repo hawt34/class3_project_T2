@@ -22,7 +22,7 @@
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">스낵등록</h4>
-				<form class="validation-form" novalidate action="admin_store_pro" method="post">
+				<form class="validation-form" novalidate action="admin_store_pro" method="post" onsubmit="return confirm('스낵정보를 등록하시겠습니까?');">
 					<div class="mb-3">
 						<label for="movie_code">스낵코드</label> 
 						<input type="text" id="movie_code" class="form-control" required />

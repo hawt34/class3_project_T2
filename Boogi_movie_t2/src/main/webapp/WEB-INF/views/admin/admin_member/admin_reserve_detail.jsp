@@ -84,7 +84,6 @@ body {
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">예매내역 - 상세</h4>
 				<hr>
-				<form class="validation-form" novalidate action="#" method="post">
 					<div class="row mb-3">
 						<div class="col-md-6">
 							<div class="subject">결제번호</div>
@@ -138,7 +137,6 @@ body {
 					<div class="mb-4" align="center">
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="window.close()">
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -146,7 +144,6 @@ body {
 		<footer class="my-3 text-center text-small">
 			<p class="mb-1">&copy; Boogi Movie</p>
 		</footer>
-	</div>
 	<script>
 	    window.addEventListener('load', () => {
 	      const forms = document.getElementsByClassName('validation-form');

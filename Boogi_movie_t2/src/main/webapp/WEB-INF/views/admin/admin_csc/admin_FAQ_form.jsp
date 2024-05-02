@@ -17,7 +17,7 @@
 	crossorigin="anonymous">
 </script>
 
-<link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css" onsubmit="return confirm('FAQ를 등록하시겠습니까?');">
 </head>
 <body>
 	<div class="container">

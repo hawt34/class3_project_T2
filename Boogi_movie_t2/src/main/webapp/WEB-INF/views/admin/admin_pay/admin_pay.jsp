@@ -122,7 +122,9 @@
 
 	<script type="text/javascript">
 		function pay_cancel() {
-			location.href = "admin_pay_cancel";
+			if(confirm("정말 취소하시겠습니까?")){
+				location.href = "admin_pay_cancel";
+			}
 		}
 	
 	

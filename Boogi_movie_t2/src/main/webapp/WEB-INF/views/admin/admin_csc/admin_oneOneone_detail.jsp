@@ -98,7 +98,7 @@
 				</tr>
 			</table>
 		</div>
-		<form action="admin_oneOneone_detail_Pro" method="post">
+		<form action="admin_oneOneone_detail_Pro" method="post" onsubmit="return confirm('답변을 등록하시겠습니까?');">
 			<table>
 				<tr>
 					<td>제목</td>

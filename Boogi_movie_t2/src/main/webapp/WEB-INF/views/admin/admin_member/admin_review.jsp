@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지 - 리뷰관리</title>
-<link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -180,16 +179,6 @@ td:nth-child(6) {
 									<button type="button" class="btn btn-outline-primary" onclick="reviewWithdraw()">삭제</button>
 								</td>
 							</tr>
-							<tr>
-								<td>윙카</td>
-								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>2024-04-19</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="reviewWithdraw()">삭제</button>
-								</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -205,7 +194,10 @@ td:nth-child(6) {
 
 	<script type="text/javascript">
 		function reviewWithdraw(){
-			location.href = "admin_review_delete";
+			 
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href = "admin_review_delete";
+			}
 		} 
 	</script>
 </body>

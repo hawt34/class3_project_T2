@@ -57,7 +57,7 @@ public class MemberController {
 		return "member/member_pre_reg_member";
 	}
 	
-	@PostMapping("member_reg_complete")
+	@PostMapping("member_reg_member_pro")
 	public String memberRegComplete(MemberVO member, Model model) {
 		System.out.println("member_reg_complete()");
 		int insertCount = regMemberProService.regMember(member);
@@ -69,7 +69,7 @@ public class MemberController {
 		
 		model.addAttribute("member_name", member.getMember_name());
 		
-		return "member/member_reg_complete";
+		return "redirect:/member_reg_member_complete";
 	}
 	
 	@RequestMapping(value = "member_reg_member")
@@ -128,5 +128,13 @@ public class MemberController {
 		model.addAttribute("msg", "로그아웃 완료");
 		model.addAttribute("targetURL", "./");
 		return "error/fail";
+	}
+	
+	
+	@GetMapping("member_reg_member_complete")
+	public String memberRegMemberComplete() {
+		System.out.println("회원가입처리완료");
+		
+		return "member/member_reg_complete";
 	}
 }

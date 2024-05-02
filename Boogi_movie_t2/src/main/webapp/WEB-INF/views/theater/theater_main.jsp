@@ -24,20 +24,20 @@
 		<div class="theater_top">
 			<nav class="nav justify-content-center theater_name">
 				 <a class="nav-link" href="theater_detail">해운대점</a>
-				 <a class="nav-link" href="theater_detail">광안리점</a>
-				 <a class="nav-link" href="#">서면점</a>
-				 <a class="nav-link" href="#">남포점</a>
-				 <a class="nav-link" href="#">부산대점</a>
-				 <a class="nav-link" href="#">사직점</a>
-				 <a class="nav-link" href="#">수영점</a>
-				 <a class="nav-link" href="#">덕천점</a>
-				 <a class="nav-link" href="#">정관점</a>
-				 <a class="nav-link" href="#">사상점</a>
+				 <a class="nav-link" href="theater_detail">센텀점</a>
+				 <a class="nav-link" href="theater_detail">서면점</a>
+				 <a class="nav-link" href="theater_detail">남포점</a>
+				 <a class="nav-link" href="theater_detail">부산대점</a>
+				 <a class="nav-link" href="theater_detail">사직점</a>
+				 <a class="nav-link" href="theater_detail">영도점</a>
+				 <a class="nav-link" href="theater_detail">덕천점</a>
+				 <a class="nav-link" href="theater_detail">정관점</a>
+				 <a class="nav-link" href="theater_detail">사상점</a>
 				 <div class="dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">MY 극장</a>
 					<ul class="dropdown-menu">
 						 <!-- 비로그인 상태 -->
-						<li><input type="button" class="btn btn-outline-primary btn-sm" value="로그인하기"></li>
+						<li><input type="button" class="btn btn-outline-primary btn-sm" value="로그인하기" onclick="location.href='member_login'"></li>
 						<!-- 로그인 상태 -->
 						<!-- 나의극장 관리 모달 버튼 -->
 						<li><button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">MY 극장 관리</button></li>
@@ -53,7 +53,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="exampleModalLabel">MY 극장 관리</h1>
+							<h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-gear"></i>MY 극장 관리</h1>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
@@ -63,7 +63,7 @@
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="" id="check2">
-								<label class="form-check-label" for="check2">광안리점</label>
+								<label class="form-check-label" for="check2">센텀점</label>
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="" id="check3">
@@ -83,7 +83,7 @@
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="" id="check7">
-								<label class="form-check-label" for="check7">수영점</label>
+								<label class="form-check-label" for="check7">영도점</label>
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="" id="check8">
@@ -164,3 +164,5 @@
 
 </body>
 </html>
+
+

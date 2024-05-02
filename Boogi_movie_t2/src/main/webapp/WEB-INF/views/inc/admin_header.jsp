@@ -33,8 +33,11 @@
 }
 
 .header_top {
-	padding-right: 100px;
-	padding-top: 20px;
+	padding: 20px 200px;
+}
+.header_top > a{
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .col-md-2>img {
@@ -131,6 +134,20 @@ body {
 .header_middle_title > .col-md-5{
 	width: 800px;
 }
+.header_middle_title > .col-md-1 {
+	width: 230px;
+}
+.header_middle_title > .col-md-2 {
+	width: 300px;
+}
+.header_middle_title > .col-md-5 {
+	width: 800px;
+}
+.header_middle_title {
+	display: flex;
+	flex-direction: row;
+	margin: 0 auto;
+}
 </style>
 </head>
 <body>
@@ -149,7 +166,7 @@ body {
 			<c:if test="${empty sId}">
 					<a href="member_pre_reg_member"> &nbsp; 회원가입 &nbsp; | </a> 
 			</c:if>
-			
+				
 			<c:if test="${sId eq 'admin'}">
 				<a href="admin_main"> &nbsp; 관리자페이지 &nbsp; | </a>
 			</c:if>
@@ -159,10 +176,9 @@ body {
 		<!--  부기무비 타이틀 영역 -->
 		<div class="header_middle">
 			<div class="header_middle_title">
-				      
 				<div class="col-md-1"></div>
 				<div class="col-md-2" align="center">
-					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png">
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png" width="200px">
 				</div>
 				<div class="col-md-5" align="center">
 					<img src="${pageContext.request.contextPath}/resources/images/boogi_title.png" onclick="location.href='./'">
@@ -183,11 +199,11 @@ body {
 				</div>
 			</div>
 			<div class="dropdown">
-				<button class="dropdown-btn">극장</button>
+				<button class="dropdown-btn" onclick="location.href='theater'">극장</button>
 				<div class="dropdown-submenu">
-					<a href="theater_detail">해운대점</a> <a href="#none">센텀점</a> <a href="#none">서면점</a>
-					<a href="#none">남포점</a> <a href="#none">부산대점</a> <a href="#none">사직점</a>
-					<a href="#none">영도점</a> <a href="#none">덕천점</a> <a href="#none">정관점</a> <a href="#none">사상점</a>
+					<a href="theater_detail">해운대점</a> <a href="theater_detail">센텀점</a> <a href="theater_detail">서면점</a>
+					<a href="theater_detail">남포점</a> <a href="theater_detail">부산대점</a> <a href="theater_detail">사직점</a>
+					<a href="theater_detail">영도점</a> <a href="theater_detail">덕천점</a> <a href="theater_detail">정관점</a> <a href="theater_detail">사상점</a>
 				</div>
 			</div>
 			<div class="dropdown">
@@ -197,9 +213,9 @@ body {
 				</div>
 			</div>
 			<div class="dropdown">
-				<button class="dropdown-btn">마이페이지</button>
+				<button class="dropdown-btn" onclick="location.href='myp_main'">마이페이지</button>
 				<div class="dropdown-submenu">
-					<a href="myp_reservation">예매내역</a> <a href="myp_cancel">취소내역</a> <a href="myp_point">포인트내역</a>
+					<a href="myp_reservation">예매내역</a> <a href="myp_cancel">취소내역</a> <a href="myp_point">포인트 내역</a>
 					<a href="myp_coupon">쿠폰</a> <a href="myp_oto_breakdown">문의내역</a> <a href="myp_info_modify">회원정보수정</a> <a href="myp_witdraw_info">회원탈퇴</a>
 				</div>
 			</div>

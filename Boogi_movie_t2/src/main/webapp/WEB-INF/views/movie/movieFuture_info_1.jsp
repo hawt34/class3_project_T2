@@ -34,9 +34,9 @@
 					</div>
 					<div class="movieInfo">
 						<ul>
-							<li><span>기본 정보 : </span> </li>
+							<li><span>제목 : </span> </li>
 							<li><span>개봉 : 	</span>  </li>
-							<li><span>감독 : </span></li>
+							<li><span>감독 :  </span></li>
 							<li><span>배우 : </span> </li>
 							<li><span>등급 : </span> </li>
 							<li><span>총관객수 : </span></li>

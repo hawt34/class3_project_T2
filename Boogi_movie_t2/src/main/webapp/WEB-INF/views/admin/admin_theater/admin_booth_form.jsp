@@ -57,7 +57,7 @@
 					<hr class="mb-4">
 					
 					<div class="mb-4" align="center">
-						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" >
+						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" onclick="submitAlert()">
 						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
@@ -83,6 +83,10 @@
 	        }, false);
 	      });
 	    }, false);
+	    
+	    function submitAlert() {
+			confirm("상영관정보를 등록하시겠습니까?");	
+		}
  	</script>
 </body>
 </html>

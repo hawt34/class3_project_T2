@@ -38,27 +38,27 @@ body {
 				<div class="box1">
 	    			<label for="name">이름</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" name="name" id="name" placeholder="이름을 입력" required>
+				    	<input type="text" name="member_name" id="member_name" placeholder="이름을 입력" required>
 				    </div><!-- form item -->
 				
 	    			<label for="id">아이디</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="아이디 입력" name="id" id="id" autocapitalize="off" required>
+				    	<input type="text" placeholder="아이디 입력" name="member_id" id="member_id" autocapitalize="off" required>
 				    </div><!-- form item -->
 				
 	    			<label for="pwd">비밀번호</label>
 				  	<div class="form_item w-75">
-				    	<input type="password" placeholder="비밀번호 입력" name="pwd" id="pwd" required>
+				    	<input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd" required>
 				    </div><!-- form item -->
 				
 	    			<label for="pwd2">비밀번호 확인</label>
 				  	<div class="form_item w-75 ">
-				    	<input type="password" placeholder="비밀번호 확인" name="pwd2" id="pwd2" required>
+				    	<input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2" required>
 				    </div><!-- form item -->
 				
 	    			<label for="birth">생년월일</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="생년월일" name="birth" id="birth" required value="${member.birth}" required>
+				    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.birth}" required>
 				    </div><!-- form item -->
 	
 	    			<label for="postCode">주소</label>
@@ -70,20 +70,20 @@ body {
 				
 	    			<label for="email">Email</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="이메일 입력" name="email" id="email" required>
+				    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required>
 				    </div><!-- form item -->
 				
 	    			<label for="phoneNum">전화번호</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="tel" id="tel" required>
+				    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" id="member_tel" required>
 				    </div><!-- form item -->
 				    
 		    		<div class="row">
 						<label for="movie_genre"><b>영화취향</b></label>
 							<div class="col-md-8 box3">
-					  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="공포" name="movie_genre">공포</div>
-					  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="코믹" name="movie_genre">코믹</div>
-					  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="시사" name="movie_genre">시사</div>
+					  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="공포" name="member_movie_genre">공포</div>
+					  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="코믹" name="member_movie_genre">코믹</div>
+					  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="시사" name="member_movie_genre">시사</div>
   								<div class="col-md-2"><input type="checkbox" id="cb_all">전체선택</div>
 							</div>
 				    </div>
@@ -98,6 +98,18 @@ body {
 	<footer>
 		<jsp:include page="inc/myp_footer.jsp"></jsp:include>
 	</footer>
+	<script>
+		$(document).ready(function(){
+			
+			
+			
+			
+			
+			
+			
+			
+		});
+	</script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	    function search_address() {

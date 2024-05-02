@@ -94,7 +94,7 @@ body {
 					    <tr  class="table-secondary">
 					      <th scope="row">3</th>
 				            <td>토이스토리</td>
-				            <td>2024 / 01 / 18</td>
+				            <td>2024 / 01 / 19</td>
 				            <td>21:10 ~ 23:10</td>
 				            <td>서면</td>
 				            <td>12,000원</td>

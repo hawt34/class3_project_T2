@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 </head>
-<script src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/member_default.css" rel="stylesheet" type="text/css">
 <body>
 
@@ -23,52 +23,46 @@
 	    <h3>회원가입</h3>
 	    <hr>
     </div>
-<form action="member_reg_complete" method="post">
+<form action="member_reg_member_pro" method="post" name="fr">
 	<div class="member_row">
 		
 	    <div class="form_item">
 	    	<label for="name"><b>이름</b></label>
-	    	<input type="text"  name="name" id="name" required  value="${member.member_name }" readonly="readonly">
+	    	<input type="text"  name="member_name" id="member_name" required  value="${member.member_name }" readonly="readonly">
 	    	<span></span>
 	    </div>
 	
 	
 	<label for="id"><b>아이디</b></label>
-    <input type="text" placeholder="아이디 입력" name="id" id="id" required autocapitalize="off">
-	
+    <input type="text" placeholder="아이디 입력" name="member_id" id="member_id" required autocapitalize="off">
     <label for="pwd"><b>비밀번호</b></label>
-    <input type="password" placeholder="비밀번호 입력" name="pwd" id="pwd" required>
-
+    <input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd" required>
     <label for="pwd2"><b>비밀번호 확인</b></label>
-    <input type="password" placeholder="비밀번호 확인" name="pwd2" id="pwd2" required>
-    
+    <input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2" required>
     <label for="birth"><b>생년월일</b></label>
-    <input type="text" placeholder="생년월일" name="birth" id="birth" required value="${member.member_birth }" readonly="readonly">	
-    
+    <input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.member_birth }" readonly="readonly">	
     <label for="postCode"><b>주소</b></label>
     <input type="text" id="postCode" name="postCode" size="6" readonly onclick="search_address()" placeholder="클릭 시 주소검색">
 	<input type="text" id="address1" name="address1" placeholder="기본주소" size="25" readonly onclick="search_address()"><br>
 	<input type="text" id="address2" name="address2" placeholder="상세주소" size="25" pattern="^.{2,20}$" maxlength="20">
-    
-    <label for="email"><b>Email</b></label>
+    <label for="member_email"><b>Email</b></label>
     <input type="text" placeholder="이메일 입력" name="email" id="email" required>
-    
-    <label for="phoneNum"><b>전화번호</b></label>
-
-    <input type="text" placeholder="전화번호 입력" name="tel" id="tel" placeholder="-제외한 전화번호를 입력해주세요" required >
+    <label for="member_tel"><b>전화번호</b></label>
+	
+    <input type="text" placeholder="전화번호 입력" name="member_tel" id="member_tel" placeholder="-제외한 전화번호를 입력해주세요" required >
     
 		<div class="form_item">
-			<label for="movie_genre"><b>영화취향</b></label>
-				<div class="movie_genre">
-					<label><input type="checkbox" name="movie_genre" value="공포">공포</label>
-					<label><input type="checkbox" name="movie_genre" value="코믹">코믹</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="movie_genre" value="시사">시사</label>
+			<label for="member_movie_genre"><b>영화취향</b></label>
+				<div class="member_movie_genre">
+					<label><input type="checkbox" name="member_movie_genre" value="공포">공포</label>
+					<label><input type="checkbox" name="member_movie_genre" value="코믹">코믹</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
 				</div>
 			</div>
 		<div class="regist_fianl">
@@ -84,9 +78,119 @@
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+	
+	$(document).ready(function() {
+		
+	    // 아이디 입력값 변경 시
+	    $("#member_id").on("keyup", function() {
+	        let id = $("#member_id").val();
+	        let regex = /^[a-zA-Z가-힣]{2,10}$/g;
+	        
+	        if (!regex.test(id)) {
+	            $("#member_id").css("background-color", "red");
+	        } else {
+	            $("#member_id").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+	
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    // 비밀번호 입력값 변경 시
+	    $("#member_pwd").on("keyup", function() {
+	        let pwd = $("#member_pwd").val();
+	        let regex = /^.{8,16}$/g;
+	        
+	        if (!regex.test(pwd)) {
+	            $("#member_pwd").css("background-color", "red");
+	        } else {
+	            $("#member_pwd").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+	
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    
+	    // 비밀번호2 입력값 변경 시
+	    $("#member_pwd2").on("keyup", function() {
+	    	let pwd = $("#member_pwd").val();
+	        let pwd2 = $("#member_pwd2").val();
+	        let regex = /^.{8,16}$/g;
+	        
+	        if (pwd2 != pwd) {
+	            $("#member_pwd2").css("background-color", "red");
+	        } else {
+	            $("#member_pwd2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+	
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    
+	    // 상세주소 입력값 변경 시
+	    $("#member_address2").on("keyup", function() {
+	        let address2 = $("#member_address2").val();
+	        let regex = /^.{2,20}$/g;
+	        
+	        if (!regex.test(address2)) {
+	            $("#member_address2").css("background-color", "red");
+	        } else {
+	            $("#member_address2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+		
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    // 이메일 입력값 변경 시
+	    $("#member_email").on("keyup", function() {
+	        let email = $("#member_email").val();
+	        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
+	        
+	        if (!regex.test(email)) {
+	            $("#member_email").css("background-color", "red");
+	        } else {
+	            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+		
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    
+	    // 전화번호 입력값 변경 시
+	    $("#member_tel").on("keyup", function() {
+	        let tel = $("#member_tel").val();
+	        let regex = /^010\d{8}$/g;
+	        
+	        if (!regex.test(tel)) {
+	            $("#member_tel").css("background-color", "red");
+	        } else {
+	            $("#member_tel").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+		
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
 
-
-
+	    
+		    // 폼 유효성 검사 함수
+		    function checkFormValidity() {
+	        let idIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_id").val());
+	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
+	        let pwd2IsValid = /^.{8,16}$/.test($("#member_pwd2").val());
+	        let address2IsValid = /^.{2,20}$/.test($("#member_address2").val());
+	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
+	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
+	
+	        if (idIsValid && pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid) {
+	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
+	        } else {
+	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
+	        }
+	    }
+	});
+	</script>
+	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	    function search_address() {
@@ -101,7 +205,7 @@
 	                // 1) 우편번호(= 국가기초구역번호 = zonecode 속성값) 가져와서 
 	                //    우편번호 입력란(postCode)에 출력
 	                document.fr.postCode.value = data.zonecode;
-	        
+	        		
 	        		// 2) 기본주소(address 속성값) 가져와서 기본주소 항목(address1)에 출력
 // 	        		document.fr.address1.value = data.address; // 기본주소
 // 	        		document.fr.address1.value = data.roadAddress; // 도로명주소

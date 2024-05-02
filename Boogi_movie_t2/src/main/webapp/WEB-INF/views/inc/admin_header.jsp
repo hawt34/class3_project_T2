@@ -203,7 +203,7 @@ body {
 				<button class="dropdown-btn" onclick="location.href='myp_main'">마이페이지</button>
 				<div class="dropdown-submenu">
 					<a href="myp_reservation">예매내역</a> <a href="myp_cancel">취소내역</a> <a href="myp_point">포인트 내역</a>
-					<a href="myp_coupon">쿠폰</a> <a href="myp_oto_breakdown">문의내역</a> <a href="myp_info_modify">회원정보수정</a> <a href="myp_witdraw_info">회원탈퇴</a>
+					<a href="myp_coupon">쿠폰</a> <a href="myp_oto_breakdown">문의내역</a> <a href="myp_info_modify">회원정보수정</a> <a href="myp_withdraw_info">회원탈퇴</a>
 				</div>
 			</div>
 			<div class="dropdown">

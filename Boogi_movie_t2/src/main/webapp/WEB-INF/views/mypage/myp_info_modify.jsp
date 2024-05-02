@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_info_modify.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
@@ -38,12 +40,12 @@ body {
 				<div class="box1">
 	    			<label for="name">이름</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" name="member_name" id="member_name" placeholder="이름을 입력" required>
+				    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" required>
 				    </div><!-- form item -->
 				
 	    			<label for="id">아이디</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="아이디 입력" name="member_id" id="member_id" autocapitalize="off" required>
+				    	<input type="text" placeholder="아이디 입력" name="member_id" id="member_id" value="${member.member_id}" autocapitalize="off" required>
 				    </div><!-- form item -->
 				
 	    			<label for="pwd">비밀번호</label>
@@ -58,24 +60,25 @@ body {
 				
 	    			<label for="birth">생년월일</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.birth}" required>
+				    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" value="${member.member_birth}" required>
 				    </div><!-- form item -->
 	
 	    			<label for="postCode">주소</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" id="postCode" name="postCode" size="6" onclick="search_address()" placeholder="클릭 시 주소검색" required>
-				    	<input type="text" id="address1" name="address1" placeholder="기본주소" onclick="search_address()" size="25" required>
-				    	<input type="text" id="address2" name="address2" placeholder="상세주소" size="25" pattern="^.{2,20}$" maxlength="20" required>
+<%-- 						<c:set var="arrAddress" value="${fn:split(member.member_addr, '/')}" /> --%>
+				    	<input type="text" id="postCode" name="postCode" size="6" onclick="search_address()" value="${arrAddress[0]}" placeholder="클릭 시 주소검색" required>
+				    	<input type="text" id="address1" name="address1" placeholder="기본주소" onclick="search_address()" value="${arrAddress[1]}" size="25" required>
+				    	<input type="text" id="address2" name="address2" placeholder="상세주소" value="${arrAddress[2]}" size="25" pattern="^.{2,20}$" maxlength="20" required>
 				    </div><!-- form item -->
 				
 	    			<label for="email">Email</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required>
+				    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" value="${member.member_email}" required>
 				    </div><!-- form item -->
 				
 	    			<label for="phoneNum">전화번호</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" id="member_tel" required>
+				    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" id="member_tel" value="${member.member_tel}" required>
 				    </div><!-- form item -->
 				    
 		    		<div class="row">
@@ -98,17 +101,150 @@ body {
 	<footer>
 		<jsp:include page="inc/myp_footer.jsp"></jsp:include>
 	</footer>
+	
 	<script>
-		$(document).ready(function(){
+
+	$(document).ready(function() {
+
+		// 이름 입력값 변경 시 
+		$("#member_name").on("keyup", function(){
+			let name = $("member_name").val();
+			// 특수문자 불가, 영어불가, 숫자불가, 최대글자 10글자
+			let regex = /^[^A-Za-z0-9\p{P}\p{S}]{1,10}$;
 			
+			if(!(regex.test(name))){
+				$("member_name").css("background-color", "red");
+			} else {
+	            $("#member_name").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+			}
 			
-			
-			
-			
-			
-			
+			checkFormValidity(); // 폼 유효성 검사 실행
 			
 		});
+		
+		
+		
+	    // 아이디 입력값 변경 시
+	    $("#member_id").on("keyup", function() {
+	        let id = $("#member_id").val();
+	        let regex = /^[a-zA-Z가-힣]{2,10}$/g;
+	        
+	        if (!regex.test(id)) {
+	            $("#member_id").css("background-color", "red");
+	        } else {
+	            $("#member_id").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+	
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    // 비밀번호 입력값 변경 시
+	    $("#member_pwd").on("keyup", function() {
+	        let pwd = $("#member_pwd").val();
+	        let regex = /^.{8,16}$/g;
+	        
+	        if (!regex.test(pwd)) {
+	            $("#member_pwd").css("background-color", "red");
+	        } else {
+	            $("#member_pwd").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+	
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    
+	    // 비밀번호2 입력값 변경 시
+	    $("#member_pwd2").on("keyup", function() {
+	    	let pwd = $("#member_pwd").val();
+	        let pwd2 = $("#member_pwd2").val();
+	        let regex = /^.{8,16}$/g;
+	        
+	        if (pwd2 != pwd) {
+	            $("#member_pwd2").css("background-color", "red");
+	        } else {
+	            $("#member_pwd2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+	
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    // 생년월일 입력값 변경 시 
+	    $("#member_birth").on("keyup", function() {
+	        let birth = $("#member_birth").val();
+	        let regex = /^[0-9]{8}$;
+	        
+	        if (!regex.test(birth)) {
+	            $("#member_birth").css("background-color", "red");
+	        } else {
+	            $("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+		
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    
+	    // 상세주소 입력값 변경 시
+	    $("#member_address2").on("keyup", function() {
+	        let address2 = $("#member_address2").val();
+	        let regex = /^{2,20}$/g;
+	        
+	        if (!regex.test(address2)) {
+	            $("#member_address2").css("background-color", "red");
+	        } else {
+	            $("#member_address2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+		
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    // 이메일 입력값 변경 시
+	    $("#member_email").on("keyup", function() {
+	        let email = $("#member_email").val();
+	        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
+	        
+	        if (!regex.test(email)) {
+	            $("#member_email").css("background-color", "red");
+	        } else {
+	            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+		
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    
+	    // 전화번호 입력값 변경 시
+	    $("#member_tel").on("keyup", function() {
+	        let tel = $("#member_tel").val();
+	        let regex = /^010\d{8}$/g;
+	        
+	        if (!regex.test(tel)) {
+	            $("#member_tel").css("background-color", "red");
+	        } else {
+	            $("#member_tel").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
+		
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+
+	    
+		    // 폼 유효성 검사 함수
+		    function checkFormValidity() {
+		    let nameIsValid = /^[^A-Za-z0-9\p{P}\p{S}]{1,10}$/.test($("member_name").val());
+	        let idIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_id").val());
+	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
+	        let pwd2IsValid = /^.{8,16}$/.test($("#member_pwd2").val());
+	        let birthIsValid = /^[0-9]{8}$/.test($("#member_birth").val());
+	        let address2IsValid = /^.{2,20}$/.test($("#member_address2").val());
+	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
+	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
+	
+	        if (nameIsValid && idIsValid && pwdIsValid && pwd2IsValid && birthIsValid && address2IsValid && emailIsValid && telIsValid) {
+	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
+	        } else {
+	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
+	        }
+	    }
+	});
 	</script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
@@ -153,6 +289,7 @@ body {
 	    }
 	    
 	</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
 </body>
 </html>

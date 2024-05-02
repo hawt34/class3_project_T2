@@ -224,7 +224,9 @@ th:nth-child(7), td:nth-child(7) {
 		}
 		
 		function movieWithdraw(){
-			location.href = "admin_movie_delete";
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href = "admin_movie_delete";
+			}
 		}
 	</script>
 </body>

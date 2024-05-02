@@ -152,7 +152,9 @@
 			window.open("admin_booth_form", "_self");
 		}
 		function boothWithdraw() {
-			location.href="admin_booth_delete";
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href="admin_booth_delete";
+			}
 		}
 	
 	

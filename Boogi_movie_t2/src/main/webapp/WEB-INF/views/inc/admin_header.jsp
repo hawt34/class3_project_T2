@@ -121,6 +121,19 @@ body {
 .cursor-pointer {
     cursor: pointer;
 }
+.header_middle_title{
+	display: flex;
+	flex-direction: row;
+}
+.header_middle_title > .col-md-1{
+	width: 200px;
+}
+.header_middle_title > .col-md-2{
+	width: 300px;
+}
+.header_middle_title > .col-md-5{
+	width: 800px;
+}
 .header_middle_title > .col-md-1 {
 	width: 230px;
 }
@@ -144,18 +157,18 @@ body {
 		<div align="right" class="header_top">
 			<c:choose>
 				<c:when test="${empty sId}">
-					<a href="member_login"> | &nbsp; 로그인 &nbsp;</a> 
+					<a href="member_login"> | &nbsp; 로그인 &nbsp; | </a> 
 				</c:when>
 				<c:otherwise>
-					<a onclick="member_logout()" class="cursor-pointer"> | &nbsp; 로그아웃 &nbsp; </a> 
+					<a onclick="member_logout()" class="cursor-pointer"> | &nbsp; 로그아웃 &nbsp; | </a> 
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${empty sId}">
-					<a href="member_pre_reg_member"> | &nbsp; 회원가입 &nbsp; | </a> 
+					<a href="member_pre_reg_member"> &nbsp; 회원가입 &nbsp; | </a> 
 			</c:if>
 				
 			<c:if test="${sId eq 'admin'}">
-				<a href="admin_main"> | &nbsp; 관리자페이지 &nbsp; | </a>
+				<a href="admin_main"> &nbsp; 관리자페이지 &nbsp; | </a>
 			</c:if>
 		</div>
 			

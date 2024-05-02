@@ -191,7 +191,9 @@
 			window.open("admin_store_form", "_self");
 		}
 		function store_delete() {
-			location.href="admin_store_delete";
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href="admin_store_delete";
+			}
 		}
 		
 	

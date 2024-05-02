@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>영화 등록폼</title>
+<title>상영 등록폼</title>
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -81,7 +81,7 @@ body {
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">상영일정 수정페이지</h4>
 				<hr>
-				<form class="validation-form" novalidate action="admin_moviePlan_pro" method="post">
+				<form class="validation-form" novalidate action="admin_moviePlan_pro" method="post" onsubmit="return confirm('상영일정을 등록하시겠습니까?');">
 					<div class="row mb-3">
 						<div class="col-md-6">
 							<div class="subject">극장</div>

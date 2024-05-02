@@ -60,7 +60,7 @@ body {
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">영화등록</h4>
-				<form class="validation-form" novalidate action="admin_member_editPro" method="post">
+				<form class="validation-form" novalidate action="admin_member_editPro" method="post" onsubmit="return confirm('영화정보를 등록하시겠습니까?');">
 					<div class="mb-3">
 						<label for="movie_code">영화코드</label> 
 						<input type="text" id="movie_code" class="form-control" required />

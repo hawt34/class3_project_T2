@@ -103,7 +103,7 @@
 				</div>
 				
 				<div class="admin_movie_footer" align="center">
-					<button onclick="admin_notice()">등록하기</button>
+					<button onclick="admin_notice()">공지 등록</button>
 				</div>
 
 			</div>

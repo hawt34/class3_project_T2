@@ -152,7 +152,9 @@
 			window.open("admin_theater_form", "_self");
 		}
 		function theaterWithdraw() {
-			location.href="admin_theater_delete";
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href="admin_theater_delete";
+			}
 		}
 	
 	

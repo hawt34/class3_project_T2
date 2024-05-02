@@ -22,7 +22,7 @@
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">상영관등록</h4>
-				<form class="validation-form" novalidate action="admin_booth_pro" method="post">
+				<form class="validation-form" novalidate action="admin_booth_pro" method="post" onsubmit="return confirm('상영관을 등록하시겠습니까?');">
 					<div class="mb-3">
 						<label for="movie_code">극장명</label> 
 						<input type="text" id="movie_code" class="form-control" required />

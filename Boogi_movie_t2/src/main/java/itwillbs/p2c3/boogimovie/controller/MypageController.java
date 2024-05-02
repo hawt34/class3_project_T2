@@ -66,7 +66,7 @@ public class MypageController {
 	
 	@GetMapping("myp_withdraw_finish")
 	public String mypWithdrawFinish() {
-//		System.out.println("myp_withdraw_finish()");
+		System.out.println("myp_withdraw_finish()");
 		return "mypage/myp_withdraw_finish";
 	}
 	

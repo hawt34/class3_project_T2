@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -161,53 +162,31 @@ th:nth-child(8), td:nth-child(8) {
 					<table>
 						<thead>
 							<tr>
-								<th>이름</th>
-								<th>나이</th>
 								<th>회원ID</th>
+								<th>이름</th>
 								<th>이메일</th>
 								<th>가입일</th>
 								<th>탈퇴일</th>
 								<th>회원상태</th>
+								<th>포인트</th>
 								<th>회원정보수정</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>박종민</td>
-								<td>28살</td>
-								<td>admin</td>
-								<td>admin@gmail.com</td>
-								<td>2024-04-19</td>
-								<td></td>
-								<td>회원</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_member_edit()">수정</button>
-								</td>
-							</tr>
-							<tr>
-								<td>전준혁</td>
-								<td>29살</td>
-								<td>junhyuk</td>
-								<td>junhyuk@gmail.com</td>
-								<td>2024-04-19</td>
-								<td></td>
-								<td>회원</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_member_edit()">수정</button>
-								</td>
-							</tr>
-							<tr>
-								<td>전준혁</td>
-								<td>29살</td>
-								<td>junhyuk</td>
-								<td>junhyuk@gmail.com</td>
-								<td>2024-04-19</td>
-								<td></td>
-								<td>회원</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_member_edit()">수정</button>
-								</td>
-							</tr>
+							<c:forEach var="member" items="${memberList}">
+								<tr>
+									<td>${member.member_id}</td>
+									<td>${member.member_name}</td>
+									<td>${member.member_email}</td>
+									<td>${member.member_reg_date}</td>
+									<td>${member.member_withdraw_date}</td>
+									<td>${member.member_status}</td>
+									<td>${member.member_point}</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_member_editForm?member_id=${member.member_id}'">수정</button>
+									</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -220,11 +199,6 @@ th:nth-child(8), td:nth-child(8) {
 	<footer>
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
-	<script type="text/javascript">
-		function admin_member_edit() {
-			window.open("admin_member_editForm", "_self");
-		}
-	</script>
 
 </body>
 </html>

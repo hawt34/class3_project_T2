@@ -28,7 +28,7 @@ body {
 }
 
 .input-form {
-	max-width: 680px;
+	max-width: 500px;
 	margin-top: 80px;
 	padding: 32px;
 	background: #fff;
@@ -39,7 +39,7 @@ body {
 	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
-.col-md-6>select {
+.col-md-6>input {
 	width: 250px;
 	padding: 5px;
 	border: 1px solid #999;
@@ -59,107 +59,51 @@ body {
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<h4 class="mb-4">영화등록</h4>
-				<form class="validation-form" novalidate action="admin_member_editPro" method="post" onsubmit="return confirm('영화정보를 등록하시겠습니까?');">
+				<h4 class="mb-4">회원정보상세</h4>
 					<div class="mb-3">
-						<label for="movie_code">영화코드</label> 
-						<input type="text" id="movie_code" class="form-control" required />
-						<div class="invalid-feedback">영화코드를 입력해주세요.</div>
+						<label for="movie_code">이름</label> 
+						<input type="text" id="movie_code" class="form-control" readonly value="${member.member_name}" />
 					</div>
 					<div class="mb-3">
-						<label for="movie_name">영화명</label> 
-						<input type="text" id="movie_name" class="form-control" required />
-						<div class="invalid-feedback">영화명을 입력해주세요.</div>
+						<label for="movie_name">아이디</label> 
+						<input type="text" id="movie_name" class="form-control" readonly value="${member.member_id}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_director">감독</label> 
-						<input type="text" id="movie_director" class="form-control" required />
-						<div class="invalid-feedback">감독을 입력해주세요.</div>
+						<label for="movie_director">생년월일</label> 
+						<input type="text" id="movie_director" class="form-control" readonly value="${member.member_birth}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_createDate">제작년도</label> 
-						<input type="text" id="movie_createDate" class="form-control" required />
-						<div class="invalid-feedback">제작년도를 입력해주세요.</div>
+						<label for="movie_createDate">주소</label> 
+						<input type="text" id="movie_createDate" class="form-control" readonly value="${member.member_addr}"/>
+						<div class="invalid-feedback">주소를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_genre">장르</label> 
-						<input type="text" id="movie_genre" class="form-control" required />
-						<div class="invalid-feedback">장르를 입력해주세요.</div>
+						<label for="movie_genre">Email</label> 
+						<input type="text" id="movie_genre" class="form-control" readonly value="${member.member_email}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_runtime">상영시간</label> 
-						<input type="text" id="movie_runtime" class="form-control" required />
-						<div class="invalid-feedback">상영시간을 입력해주세요.</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-md-6">
-							<label for="movie_rate">관람등급</label> 
-							<select class="custom-select d-block w-100" id="movie_rate">
-							<option value="관람등급">관람등급을 선택하세요</option>
-							<option value="전체이용가">전체이용가</option>
-							<option value="15세관람가">15세관람가</option>
-							<option value="19세관람가">19세관람가</option>
-							</select>
-							<div class="invalid-feedback">관람등급을 입력해주세요.</div>
-						</div>
-						<div class="col-md-6">
-							<label for="root">상영상태</label> <select
-							class="custom-select d-block w-100" id="root">
-							<option value="상영상태">상영상태를 선택하세요</option>
-							<option value="개봉예정작">개봉예정작</option>
-							<option value="현재상영작">현재상영작</option>
-							<option value="상영종료">상영종료</option>
-							</select>
-							<div class="invalid-feedback">상영상태를 선택해주세요.</div>
-						</div>
+						<label for="movie_runtime">전화번호</label> 
+						<input type="text" id="movie_runtime" class="form-control" readonly value="${member.member_tel}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_startDate">개봉일</label> 
-						<input type="date" id="movie_startDate" class="form-control" required />
-						<div class="invalid-feedback">개봉일을 선택해주세요.</div>
+						<label for="movie_stillCut1">가입일</label> 
+						<input type="text" id="movie_stillCut1" class="form-control" readonly value="${member.member_reg_date}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_endDate">종영일</label> 
-						<input type="date" id="movie_endDate" class="form-control" required />
-						<div class="invalid-feedback">종영일을 선택해주세요.</div>
+						<label for="movie_stillCut2">탈퇴일</label>  
+						<input type="text" id="movie_stillCut2" class="form-control" readonly value="${member.member_withdraw_date}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_poster">포스터</label> 
-						<input type="text" id="movie_poster" class="form-control" required />
-						<div class="invalid-feedback">포스터를 선택해주세요.</div>
-					</div>
-					<div class="mb-3">
-						<label for="movie_stillCut1">스틸컷1</label> 
-						<input type="text" id="movie_stillCut1" class="form-control" required />
-						<div class="invalid-feedback">스틸컷을 선택해주세요.</div>
-					</div>
-					<div class="mb-3">
-						<label for="movie_stillCut2">스틸컷2</label>  &nbsp; (필수 아님) 
-						<input type="text" id="movie_stillCut2" class="form-control" />
-					</div>
-					<div class="mb-3">
-						<label for="movie_stillCut3">스틸컷3</label>  &nbsp; (필수 아님)
-						<input type="text" id="movie_stillCut3" class="form-control" />
-					</div>
-					<div class="mb-3">
-						<label for="movie_trailer">트레일러</label> 
-						<input type="text" id="movie_trailer" class="form-control" required />
-						<div class="invalid-feedback">트레일러를 입력해주세요.</div>
-					</div>
-					<div class="mb-3">
-						<label for="movie_story">줄거리</label> 
-						<textArea id="movie_story" class="form-control" rows="10px" required></textArea>
-						<div class="invalid-feedback">줄거리를 입력해주세요.</div>
+						<label for="movie_stillCut3">회원상태</label> 
+						<input type="text" id="movie_stillCut3" class="form-control" readonly value="${member.member_status}"/>
 					</div>
 					
 					<hr class="mb-4">
 					
 					<div class="mb-4" align="center">
-						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" >
-						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
+						<input type="button" value="회원삭제" class="btn btn-primary btn-lg btn-block" onclick="if (confirm('정말로 삭제하시겠습니까?')) location.href='admin_member_withdraw?member_id=${member.member_id}';">
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
-				</form>
 			</div>
 		</div>
 		<footer class="my-3 text-center text-small">
@@ -181,6 +125,7 @@ body {
 	        }, false);
 	      });
 	    }, false);
+	    
  	</script>
 </body>
 </html>

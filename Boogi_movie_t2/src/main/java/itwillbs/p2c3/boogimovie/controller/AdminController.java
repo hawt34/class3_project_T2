@@ -1,12 +1,22 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import itwillbs.p2c3.boogimovie.service.AdminService;
+import itwillbs.p2c3.boogimovie.vo.MemberVO;
+
 @Controller
 public class AdminController {
-
+	
+	@Autowired
+	AdminService service;
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")
@@ -78,16 +88,34 @@ public class AdminController {
 		return "redirect:/admin_review";
 	}
 	@GetMapping("admin_member")
-	public String adminMember() {
+	public String adminMember(Model model) {
+		List<Map<String, String>> memberList = service.getmemberList();
+		model.addAttribute("memberList", memberList);
+		
 		return "admin/admin_member/admin_member";
 	}
+	
 	@GetMapping("admin_member_editForm")
-	public String adminMemberEditForm() {
+	public String adminMemberEditForm(MemberVO member , Model model) {
+		System.out.println(member.getMember_id());
+		member = service.SelectMember(member.getMember_id());
+		model.addAttribute("member", member);
+		
 		return "admin/admin_member/admin_member_editForm";
 	}
-	@PostMapping("admin_member_editPro")
-	public String adminMemberEditPro() {
-		return "redirect:/admin_member";
+	
+	@GetMapping("admin_member_withdraw")
+	public String adminMemberWithdraw(MemberVO member, Model model) {
+		int updateCount = service.deleteMember(member.getMember_id());
+		
+		if(updateCount > 0) {
+			return "redirect:/admin_member";
+		} else {
+			model.addAttribute("msg", "회원삭제에 실패하였습니다");
+			return "error/fail";
+			
+		}
+		
 	}
 	
 	// 관리자 영화 페이지

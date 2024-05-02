@@ -33,8 +33,7 @@
 }
 
 .header_top {
-	padding-right: 300px;
-	padding-top: 20px;
+	padding: 20px 200px;
 }
 .header_top > a{
 	font-size: 20px;
@@ -122,6 +121,20 @@ body {
 .cursor-pointer {
     cursor: pointer;
 }
+.header_middle_title > .col-md-1 {
+	width: 230px;
+}
+.header_middle_title > .col-md-2 {
+	width: 300px;
+}
+.header_middle_title > .col-md-5 {
+	width: 800px;
+}
+.header_middle_title {
+	display: flex;
+	flex-direction: row;
+	margin: 0 auto;
+}
 </style>
 </head>
 <body>
@@ -131,29 +144,28 @@ body {
 		<div align="right" class="header_top">
 			<c:choose>
 				<c:when test="${empty sId}">
-					<a href="member_login"> 로그인 </a> 
+					<a href="member_login"> | &nbsp; 로그인 &nbsp;</a> 
 				</c:when>
 				<c:otherwise>
-					<a onclick="member_logout()" class="cursor-pointer"> | 로그아웃 </a> 
+					<a onclick="member_logout()" class="cursor-pointer"> | &nbsp; 로그아웃 &nbsp; </a> 
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${empty sId}">
-					<a href="member_pre_reg_member"> | 회원가입 </a> 
+					<a href="member_pre_reg_member"> | &nbsp; 회원가입 &nbsp; | </a> 
 			</c:if>
 				
 			<c:if test="${sId eq 'admin'}">
-				<a href="admin_main"> | 관리자페이지 </a>
+				<a href="admin_main"> | &nbsp; 관리자페이지 &nbsp; | </a>
 			</c:if>
 		</div>
 			
 			
 		<!--  부기무비 타이틀 영역 -->
 		<div class="header_middle">
-			<div class="row">
-				      
+			<div class="header_middle_title">
 				<div class="col-md-1"></div>
 				<div class="col-md-2" align="center">
-					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png">
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png" width="200px">
 				</div>
 				<div class="col-md-5" align="center">
 					<img src="${pageContext.request.contextPath}/resources/images/boogi_title.png" onclick="location.href='./'">

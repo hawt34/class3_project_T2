@@ -10,6 +10,7 @@
 	font-family: "Gowun Dodum", sans-serif;
 	font-weight: 400;
 	font-style: normal;
+	margin-top: 50px;
 }
 
 .footer_image {

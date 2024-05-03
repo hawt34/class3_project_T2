@@ -15,27 +15,27 @@
 
 <section class="member_section">
 <div class="member_title">
-	<h3>아이디 찾기</h3>
+	<h3>새로운 비밀번호 입력</h3>
     <hr>
 </div>
-<form action="member_login" method="get">
+<form action="member_pwd_update" method="post">
 <div class="member_row">
 
     <div class="form_item">
-    	<label for="pwd1"><b>비밀번호</b></label>
-    	<input type="text"  name="pwd1" id="pwd1" required>
+    	<label for="member_pwd"><b>비밀번호</b></label>
+    	<input type="password"  name="member_pwd" id="member_pwd" required>
     	<span></span>
     </div>
     
     <div class="form_item">
-    	<label for="pwd2"><b>비밀번호 확인</b></label>
-    	<input type="text"  name="pwd2" id="pwd2" required>
+    	<label for="member_pwd2"><b>비밀번호 확인</b></label>
+    	<input type="password"  name="member_pwd2" id="member_pwd2" required>
     	<span></span>
     </div>
-
+	<input type="hidden" value="${member_id }">
 	<div class="regist_final">
 		<hr>
-    	<button type="submit" class="btn btn-outline-primary" onclick="location.href='member_search_id'">아이디 찾기</button>
+    	<button type="submit" class="btn btn-outline-primary">비밀번호 바꾸기</button>
 	</div>
 	</div>
 </form>

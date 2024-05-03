@@ -13,4 +13,8 @@ public interface MemberMapper {
 	
 	MemberVO isCorrectMember(MemberVO member);
 	
+	MemberVO memberPwdSearch(MemberVO member);
+	
+//	MemberVO getMemberInfo(MemberVO member);
+	
 }

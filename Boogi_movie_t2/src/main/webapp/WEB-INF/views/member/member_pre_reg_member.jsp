@@ -53,7 +53,7 @@
 
 	$(document).ready(function() {
 	    // 이름 입력값 변경 시
-	    $("#member_name").on("keyup", function() {
+	    $("#member_name").on("input", function() {
 	        let name = $("#member_name").val();
 	        let regex = /^[a-zA-Z가-힣]{2,10}$/g;
 	        
@@ -69,7 +69,7 @@
 	    });
 	    
 	    // 생일 입력값 변경 시
-	    $("#member_birth").on("keyup", function() {
+	    $("#member_birth").on("input", function() {
 	        let birth = $("#member_birth").val();
 	        let regex = /^\d{6}$/g;
 	

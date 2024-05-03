@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -177,36 +178,26 @@ th:nth-child(7), td:nth-child(7) {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1231221</td>
-								<td>윙카</td>
-								<td>126분</td>
-								<td>2024-04-12</td>
-								<td>2024-06-19</td>
-								<td>현재상영작</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="movieForm()">수정</button>
-									<button type="button" class="btn btn-outline-primary" onclick="movieWithdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>1231221</td>
-								<td>윙카</td>
-								<td>126분</td>
-								<td>2024-04-12</td>
-								<td>2024-06-19</td>
-								<td>현재상영작</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="movieForm()">수정</button>
-									<button type="button" class="btn btn-outline-primary" onclick="movieWithdraw()">삭제</button>
-								</td>
-							</tr>
+							<c:forEach var="movie" items="${movieList}">
+								<tr>
+									<td>${movie.movie_num}</td>
+									<td>${movie.movie_name}</td>
+									<td>상영시간</td>
+									<td>${movie.movie_open_date}</td>
+									<td>종영일</td>
+									<td>${movie.movie_status}</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_movie_edit_form?movie_num=${movie.movie_num}'">수정</button>
+										<button type="button" class="btn btn-outline-primary" onclick="movieWithdraw()">삭제</button>
+									</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 				
 				<div class="admin_movie_footer" align="center">
-					<button onclick="movieForm()">영화등록</button>
+					<button onclick="location.href = 'admin_movie_reg_form'">영화등록</button>
 				</div>
 
 			</div>
@@ -219,10 +210,6 @@ th:nth-child(7), td:nth-child(7) {
 	</footer>
 
 	<script type="text/javascript">
-		function movieForm() {
-			window.open("admin_movie_form", "_self");
-		}
-		
 		function movieWithdraw(){
 			if(confirm("정말 삭제하시겠습니까?")){
 				location.href = "admin_movie_delete";

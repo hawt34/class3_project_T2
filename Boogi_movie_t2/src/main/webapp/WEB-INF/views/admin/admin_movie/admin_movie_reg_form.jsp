@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,20 +61,20 @@ body {
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">영화등록</h4>
-				<form class="validation-form" novalidate action="admin_movie_pro" method="post" onsubmit="return confirm('영화를 등록하시겠습니까?');">
+				<form class="validation-form" novalidate action="admin_movie_reg_pro" method="post" onsubmit="return confirm('영화를 등록하시겠습니까?');">
 					<div class="mb-3">
-						<label for="movie_code">영화코드</label> 
-						<input type="text" id="movie_code" class="form-control" required />
+						<label for="movie_num">영화코드</label> 
+						<input type="text" name="movie_num" id="movie_num" class="form-control" required"/>
 						<div class="invalid-feedback">영화코드를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_name">영화명</label> 
-						<input type="text" id="movie_name" class="form-control" required />
+						<input type="text" name="movie_name" id="movie_name" class="form-control" required" />
 						<div class="invalid-feedback">영화명을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_director">감독</label> 
-						<input type="text" id="movie_director" class="form-control" required />
+						<input type="text" name="movie_director" id="movie_director" class="form-control" required"/>
 						<div class="invalid-feedback">감독을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
@@ -83,7 +84,7 @@ body {
 					</div>
 					<div class="mb-3">
 						<label for="movie_genre">장르</label> 
-						<input type="text" id="movie_genre" class="form-control" required />
+						<input type="text" name="genre_num" id="movie_genre" class="form-control" required />
 						<div class="invalid-feedback">장르를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
@@ -94,28 +95,29 @@ body {
 					<div class="row mb-3">
 						<div class="col-md-6">
 							<label for="movie_rate">관람등급</label> 
-							<select class="custom-select d-block w-100" id="movie_rate">
-							<option value="관람등급">관람등급을 선택하세요</option>
-							<option value="전체이용가">전체이용가</option>
-							<option value="15세관람가">15세관람가</option>
-							<option value="19세관람가">19세관람가</option>
+							<select class="custom-select d-block w-100" id="movie_rate" name="movie_grade">
+								<option value="관람등급">관람등급을 선택하세요</option>
+								<option value="전체이용가">전체이용가</option>
+								<option value="12세관람가">12세관람가</option>
+								<option value="15세관람가">15세관람가</option>
+								<option value="19세관람가">19세관람가</option>
 							</select>
 							<div class="invalid-feedback">관람등급을 입력해주세요.</div>
 						</div>
 						<div class="col-md-6">
-							<label for="root">상영상태</label> <select
-							class="custom-select d-block w-100" id="root">
-							<option value="상영상태">상영상태를 선택하세요</option>
-							<option value="개봉예정작">개봉예정작</option>
-							<option value="현재상영작">현재상영작</option>
-							<option value="상영종료">상영종료</option>
+							<label for="root">상영상태</label> 
+							<select class="custom-select d-block w-100" id="root" name="movie_status">
+								<option >상영상태를 선택하세요</option>
+								<option value="개봉예정작">개봉예정작</option>
+								<option value="현재상영작">현재상영작</option>
+								<option value="상영종료">상영종료</option>
 							</select>
 							<div class="invalid-feedback">상영상태를 선택해주세요.</div>
 						</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_startDate">개봉일</label> 
-						<input type="date" id="movie_startDate" class="form-control" required />
+						<input type="date" name="movie_open_date" id="movie_startDate" class="form-control" required />
 						<div class="invalid-feedback">개봉일을 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
@@ -125,12 +127,12 @@ body {
 					</div>
 					<div class="mb-3">
 						<label for="movie_poster">포스터</label> 
-						<input type="text" id="movie_poster" class="form-control" required />
+						<input type="text" name="movie_poster" id="movie_poster" class="form-control" required />
 						<div class="invalid-feedback">포스터를 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_stillCut1">스틸컷1</label> 
-						<input type="text" id="movie_stillCut1" class="form-control" required />
+						<input type="text" name="stillcut_num" id="movie_stillCut1" class="form-control" required />
 						<div class="invalid-feedback">스틸컷을 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
@@ -143,12 +145,12 @@ body {
 					</div>
 					<div class="mb-3">
 						<label for="movie_trailer">트레일러</label> 
-						<input type="text" id="movie_trailer" class="form-control" required />
+						<input type="text" name="movie_trailler" id="movie_trailer" class="form-control" required />
 						<div class="invalid-feedback">트레일러를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_story">줄거리</label> 
-						<textArea id="movie_story" class="form-control" rows="10px" required></textArea>
+						<textArea  name="movie_summary" id="movie_story" class="form-control" rows="10px" required></textArea>
 						<div class="invalid-feedback">줄거리를 입력해주세요.</div>
 					</div>
 					

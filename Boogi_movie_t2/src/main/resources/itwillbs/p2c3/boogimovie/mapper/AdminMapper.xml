@@ -20,6 +20,35 @@
 		WHERE member_id = #{id}
 	</delete>
 	
+	<select id="selectMovieList" resultType="hashmap">
+		SELECT * 
+		FROM movie
+	</select>
 
+	<select id="selectMovie" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
+		SELECT * 
+		FROM movie
+		WHERE movie_num = #{movie_num}
+	</select>
+	
+	<update id="updateMovie">
+		<selectKey keyProperty="board_num" resultType="int" order="BEFORE">
+			SELECT board_num  
+			FROM board -- update를 위한 동일한 board_num 조회
+		</selectKey>
+		
+		UPDATE movie
+		SET movie_name = #{movie_name},
+			movie_director = #{movie_director},
+			movie_poster = #{movie_poster},
+			stillcut_num = #{stillcut_num},
+			movie_trailler = #{movie_trailler},
+			movie_open_date = #{movie_open_date},
+			movie_status = #{movie_status},
+			genre_name = #{genre_name},
+			movie_grade = #{movie_grade},
+			movie_summary = #{movie_summary}
+		WHERE movie_num = #{movie_num}
+	</update>
 	
 </mapper>

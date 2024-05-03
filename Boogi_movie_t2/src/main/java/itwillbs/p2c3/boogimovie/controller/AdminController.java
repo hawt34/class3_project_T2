@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
+import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 
 @Controller
@@ -90,6 +93,7 @@ public class AdminController {
 	public String adminReviewDelete() {
 		return "redirect:/admin_review";
 	}
+	
 	@GetMapping("admin_member")
 	public String adminMember(Model model) {
 		List<Map<String, String>> memberList = service.getmemberList();
@@ -142,21 +146,48 @@ public class AdminController {
 	public String adminMoviePlanPro() {
 		return "redirect:/admin_moviePlan";
 	}
+	
 	@GetMapping("admin_movie")
-	public String adminMovie() {
+	public String adminMovie(Model model) {
+		List<Map<String, String>> movieList = service.getmovieList();
+		model.addAttribute("movieList", movieList);
+		
 		return "admin/admin_movie/admin_movie";
 	}
+	
 	@GetMapping("admin_movie_delete")
 	public String adminMovieDelete() {
 		System.out.println("moviedelete");
 		return "redirect:/admin_movie";
 	}
-	@GetMapping("admin_movie_form")
-	public String adminMovieForm() {
-		return "admin/admin_movie/admin_movie_form";
+	@GetMapping("admin_movie_reg_form")
+	public String adminMovieRegForm(MovieVO movie, Model model) {
+		model.addAttribute("movie", movie);
+		return "admin/admin_movie/admin_movie_reg_form";
 	}
-	@PostMapping("admin_movie_pro")
-	public String adminMoviePro() {
+	
+	@GetMapping("admin_movie_edit_form")
+	public String adminMovieEditForm(MovieVO movie, Model model) {
+		System.out.println("movie_num: " + movie.getMovie_num());
+		movie = service.SelectMovie(movie.getMovie_num());
+		model.addAttribute("movie", movie);
+		
+		return "admin/admin_movie/admin_movie_edit_form";
+	}
+	
+	@PostMapping("admin_movie_edit_pro")
+	public String adminMovieEditPro(@ModelAttribute MovieVO movie) {
+//		System.out.println(movie);
+		service.UpdateMovie(movie);
+		
+		return "redirect:admin_movie";
+	}
+	
+	@PostMapping("admin_movie_reg_pro")
+	public String adminMovieGetPro(@ModelAttribute MovieVO movie) {
+//		System.out.println(movie);
+		service.InsertMovie(movie);
+		
 		return "redirect:admin_movie";
 	}
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>		
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,46 +37,71 @@
 			</div>
 			<div class="list">
 				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_1.jpg">
-					<p>범죄도시</p>
+					<c:forEach var= "movie" items="${movieInfo}"> 
+					<c:if test="${movie.movie_num eq 1}">					
+					<img src="${pageContext.request.contextPath}/resources/images/${movie.movie_poster}">
+					<p>${movie.movie_name}</p>
+					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
 					<button type="button" class="btn btn-outline-primary">예매하기
 					</button>
-					<button type="button" class="btn btn-outline-primary"  onclick="window.location.href='movieInfo1'">상세보기
+					<button type="button" class="btn btn-outline-primary detail_button" >상세보기
 					</button>
+					</c:if>
+					</c:forEach>	
 				</div>
 				<div class="movie">
-					<img
-						src="${pageContext.request.contextPath}/resources/images/movie_2.jpg">
-					<p>쿵푸팬더</p>
+					<c:forEach var= "movie" items="${movieInfo}">
+					<c:if test="${movie.movie_num eq 2}">
+					<img  src="${pageContext.request.contextPath}/resources/images/${movie.movie_poster}">
+					<p>${movie.movie_name}</p>
+					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
 					<button type="button" class="btn btn-outline-primary">예매하기
 					</button>
-					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieInfo2'">상세보기
+					<button type="button" class="btn btn-outline-primary detail_button" >상세보기
 					</button>
+					</c:if>
+					</c:forEach>
 				</div>
 				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_3.jpg">
-					<p>bts</p>
+					<c:forEach var= "movie" items="${movieInfo}">
+					<c:if test="${movie.movie_num eq 3}">
+					<img src="${pageContext.request.contextPath}/resources/images/${movie.movie_poster}">
+					<p>${movie.movie_name}</p>
+					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
 					<button type="button" class="btn btn-outline-primary">예매하기
 					</button>
-					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieInfo3'">상세보기
+					<button type="button" class="btn btn-outline-primary detail_button" >상세보기
 					</button>
+					</c:if>
+					</c:forEach>
 				</div>
 				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_4.jpg">
-					<p>페이커는 신이고 무적이다</p>
+					<c:forEach var= "movie" items="${movieInfo}">
+					<c:if test="${movie.movie_num eq 4}">
+					<img src="${pageContext.request.contextPath}/resources/images/${movie.movie_poster}">
+					<p>${movie.movie_name}</p>
+					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
 					<button type="button" class="btn btn-outline-primary">예매하기
 					</button>
-					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieInfo4'">상세보기
+					<button type="button" class="btn btn-outline-primary detail_button" >상세보기
 					</button>
+					</c:if>
+					</c:forEach>
 				</div>
 				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_5.jpg">
-					<p>파묘</p>
+					<c:forEach var= "movie" items="${movieInfo}">
+					<c:if test="${movie.movie_num eq 5}">
+					<img src="${pageContext.request.contextPath}/resources/images/${movie.movie_poster}">
+					<p>${movie.movie_name}</p>
+					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
 					<button type="button" class="btn btn-outline-primary">예매하기
 					</button>
-					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieInfo5'">상세보기
+					<button type="button" class="btn btn-outline-primary detail_button" >상세보기
 					</button>
+					</c:if>
+					</c:forEach>
 				</div>
+				
 			</div>
 			<div id="carouselExample" class="carousel slide">
 				<h1>박스오피스 순위</h1>
@@ -118,5 +144,15 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
 		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    // 상세보기 버튼 클릭 이벤트 처리
+	    $(".detail_button").click(function() {
+	        // 클릭된 버튼의 부모 요소에서 movie_num 값을 가져와서 상세보기 페이지의 URL에 파라미터로 추가하여 전달
+	        var movieNum = $(this).closest(".movie").find("#movie_num").val();
+	        window.location.href = "movieInfo?movie_num=" + movieNum;
+	    });
+	});
+	</script>
 </body>
 </html>

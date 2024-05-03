@@ -1,7 +1,5 @@
 package itwillbs.p2c3.boogimovie.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,42 +15,18 @@ public class MovieInfoController {
 	private MovieInfoService service;
 	
 	
-	@GetMapping("movieInfo1")
-	public String movieInfo1(Model model) {
-		
-		
-		List<MovieVO> movieInfo = service.getMovieList();
-		model.addAttribute("movieInfo", movieInfo);
-		System.out.println(movieInfo);
-		
-		
-		
-		
-		return "movie/movie_info_1";
-	}
+	@GetMapping("movieInfo")
+    public String movieInfo(int movie_num,MovieVO movie, Model model) {
+        System.out.println(movie_num);
+        
+        MovieVO movie2 = service.getMovieInfo(movie);
+        
+		model.addAttribute("movie", movie2);
+		System.out.println(movie2);
+        
+        
+        return "movie/movie_info"; // 뷰 이름은 적절하게 변경해야 합니다.
+    }
 	
-	@GetMapping("movieInfo2")
-	public String movieInfo2() {
-		
-		return "movie/movie_info_2";
-	}
-	
-	@GetMapping("movieInfo3")
-	public String movieInfo3() {
-		
-		return "movie/movie_info_3";
-	}
-
-	@GetMapping("movieInfo4")
-	public String movieInfo4() {
-		
-		return "movie/movie_info_4";
-	}
-	
-	@GetMapping("movieInfo5")
-	public String movieInfo5() {
-		
-		return "movie/movie_info_5";
-	}
 
 }

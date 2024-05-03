@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,28 +24,26 @@
 		<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 	</header>
 	<div id="wrap">
+        		
 		<article>
-			<iframe width="1400px" height="600px"  src="https://www.youtube.com/embed/ft70sAYrFyY?si=mh2AS2Sw3V2Lfhh2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+			<iframe width="1400px" height="600px"  src="${movie.movie_trailler}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 		</article>
 		<section>
 			<div class="content">
 				<h1>영화 상세페이지</h1>
 				<div class="list">
 					<div class="movie">
-						<img src="${pageContext.request.contextPath}/resources/images/movie_4.jpg">
+						<img src="${pageContext.request.contextPath}/resources/images/${movie.movie_poster}">
 						<button type="button" class="btn btn-outline-primary">예매하기</button>
 					</div>
 					<div class="movieInfo">
 						<ul>
-							<li><span>기본 정보 : </span> </li>
-							<li><span>개봉 : 	</span>  </li>
-							<li><span>감독 : </span></li>
-							<li><span>배우 : </span> </li>
-							<li><span>등급 : </span> </li>
-							<li><span>총관객수 : </span></li>
+							<li><span>제목 : ${movie.movie_name}  </span> </li>
+							<li><span>개봉 : ${movie.movie_open_date} 	</span>  </li>
+							<li><span>감독 : ${movie.movie_director} </span></li>
+							<li><span>등급 : ${movie.movie_grade}  </span> </li>
+							<li><span>줄거리 : ${movie.movie_summary}</span> </li>
 						</ul>
-						
-						<h2>줄거리: 페이커는 신이고 무적이다!</h2>
 						<button type="button" class="btn btn-outline-primary">뒤로가기</button>
 					</div>	
 				</div>

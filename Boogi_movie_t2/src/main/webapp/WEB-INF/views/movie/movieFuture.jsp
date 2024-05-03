@@ -30,7 +30,7 @@
 		</article>
 		<section>
 			<div class="nowMovie">
-				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movie'">현재
+				<button id="currMovie" type="button" class="btn btn-outline-primary">현재
 					상영작</button>
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFuture'">상영예정작</button>
 			</div>
@@ -97,4 +97,17 @@
 		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#currMovie').on('click', function(){
+		$.ajax({
+			type: 'get',
+			url: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20240501",
+			success: function(data){
+				debugger;
+			}
+		});
+	});
+});
+</script>
 </html>

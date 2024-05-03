@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+
 
 import itwillbs.p2c3.boogimovie.mapper.MovieInfoMapper;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
@@ -18,4 +18,12 @@ public class MovieInfoService {
 		
 		return mapper.selectMovieInfo();
 	}
+	
+	
+	
+	public MovieVO getMovieInfo(MovieVO movie) {
+		
+		return mapper.selectMovie(movie);
+	}
+	
 }

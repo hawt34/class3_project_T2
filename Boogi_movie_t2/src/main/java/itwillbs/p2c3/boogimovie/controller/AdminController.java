@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
+import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 
 @Controller
 public class AdminController {
@@ -50,7 +51,9 @@ public class AdminController {
 		return "admin/admin_csc/admin_notice_form";
 	}
 	@PostMapping("admin_notice_pro")
-	public String adminNoticePro() {
+	public String adminNoticePro(NoticeVO notice) {
+		 
+		
 		return "redirect:admin_notice";
 	}
 	@GetMapping("admin_notice_delete")

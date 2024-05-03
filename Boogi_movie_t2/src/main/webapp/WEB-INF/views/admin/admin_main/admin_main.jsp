@@ -11,7 +11,6 @@
 <link href="admin_header.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Kaushan+Script&display=swap');
 
 a {
    text-decoration: none;
@@ -21,11 +20,6 @@ body {
     color : #151619;
     line-height: 1.5em;
     margin: 0px;
-}
-main {
-  font-family: "Gowun Dodum", sans-serif;
-  font-weight: 400;
-  font-style: normal;
 }
 
 .admin_main_center{

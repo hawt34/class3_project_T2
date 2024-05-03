@@ -17,6 +17,7 @@
 
 .btn-group {
 	padding: 4px 0px;
+	text-align: center;
 }
 
 .btn-group:hover .dropdown-menu {
@@ -36,14 +37,16 @@
 	background: white;
 	border-top: 3px solid black;
 	border-bottom: 3px solid black;
+	width: 170px;
 }
 
 .sideVar_title {
 	padding-top: 15px;
+	margin: 0 auto;
 }
 
 .sideVar {
-	margin: 60px auto;
+	margin-top: 60px;
 }
 .admin_aside_name{
 	font-weight: bold;
@@ -54,7 +57,7 @@
 	<div class="admin_middle_left" align="right">
 		<div class="btn-group-vertical">
 			<!-- 사이드바 타이틀 -->
-			<div class="sideVar_title">
+			<div class="sideVar_title" align="center">
 				<h4 class="admin_aside_name" onclick="location.href='admin_main'">관리자페이지</h4>
 			</div>
 			<div class="btn-group dropright">

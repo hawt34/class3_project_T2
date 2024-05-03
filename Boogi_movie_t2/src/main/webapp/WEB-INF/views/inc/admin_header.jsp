@@ -28,12 +28,13 @@
 
 .header {
 	background: white;
-	margin: 0px;
 	border-bottom: 3px solid #151619;
 }
 
 .header_top {
+	margin: 0px auto;
 	padding: 20px 200px;
+	width: 1600px;
 }
 .header_top > a{
 	font-size: 20px;
@@ -50,6 +51,8 @@
 
 .header_middle {
 	padding: 20px 0px;
+	width: 1900px;
+	margin: 0px auto;
 }
 
 body {
@@ -63,9 +66,13 @@ body {
 	color: black;
 	text-decoration: none;
 }
+.header_low{
+	display: flex;
+	width: 1250px;
+	margin: 0px auto;
 
+}
 .dropdown {
-	display: inline-block;
 	position: relatvie;
 	margin: 0px;
 	padding: 0px;
@@ -120,19 +127,6 @@ body {
 
 .cursor-pointer {
     cursor: pointer;
-}
-.header_middle_title{
-	display: flex;
-	flex-direction: row;
-}
-.header_middle_title > .col-md-1{
-	width: 200px;
-}
-.header_middle_title > .col-md-2{
-	width: 300px;
-}
-.header_middle_title > .col-md-5{
-	width: 800px;
 }
 .header_middle_title > .col-md-1 {
 	width: 230px;

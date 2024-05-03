@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -72,30 +73,23 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>살라</td>
-							<td>23살</td>
-							<td>23살</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>김백수</td>
-							<td>21살</td>
-							<td>21살</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>홍길동</td>
-							<td>25살</td>
-							<td>25살</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>아무개</td>
-							<td>20살</td>
-							<td>20살</td>
-						</tr>
+						<c:choose>
+							<c:when test="${empty noticeList }">
+								<tr>
+									<th colspan="4">게시물이 없습니다</th>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="notice" items="${noticeList }">
+									<tr>
+										<td>${notice.notice_num }</td>
+										<td>${notice.theater_num }</td>
+										<td>${notice.notice_subject }</td>
+										<td>${notice.notice_date }</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 			</div>

@@ -8,6 +8,7 @@ public class NoticeVO {
 	private String notice_content;
 	private int theater_num;
 	private LocalTime notice_date;
+	
 	public int getNotice_num() {
 		return notice_num;
 	}

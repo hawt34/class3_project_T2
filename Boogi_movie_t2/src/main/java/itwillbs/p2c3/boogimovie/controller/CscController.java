@@ -31,17 +31,25 @@ public class CscController {
 		@GetMapping("csc_notice")
 		public String cscNotice(Model model, @RequestParam(defaultValue = "1")int pageNum) {
 			//----------------------------------------------------
-			int listLimit = 10; // 페이지당 보여줄 게시물 갯수
-			
-			int startRow = (pageNum - 1) * listLimit; // 게시물의 시작점
-			
-			List<NoticeVO> noticeList = service.getNoticeList(listLimit, startRow);
-			
-			
-			
-			model.addAttribute("noticeList", noticeList);
+//			int listLimit = 10; // 페이지당 보여줄 게시물 갯수
+//			
+//			int startRow = (pageNum - 1) * listLimit; // 게시물의 시작점
+//			
+//			List<NoticeVO> noticeList = service.getNoticeList(listLimit, startRow);
+//			
+//			
+//			
+//			model.addAttribute("noticeList", noticeList);
 			return "csc/csc_notice";
 		}
+		
+		@GetMapping("csc_notice_detail")
+		public String cscNoiceDetail(int notice_num) {
+			
+			
+			return "csc/csc_notice_detail";
+		}
+		
 		@GetMapping("csc_oto")
 		public String cscOto() {
 			return "csc/csc_oto";

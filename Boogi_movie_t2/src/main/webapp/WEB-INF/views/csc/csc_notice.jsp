@@ -12,7 +12,14 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+</script>
+<style>
+	th[colspan="4"] {
+		text-align: center;
+		font-size: 1.2em;
+	}
+</style>
 </head>
 <body>
 <header>
@@ -84,7 +91,7 @@
 									<tr>
 										<td>${notice.notice_num }</td>
 										<td>${notice.theater_num }</td>
-										<td>${notice.notice_subject }</td>
+										<td onclick="location.href='csc_notice_detail?notice_num=${notice.notice_num}'">${notice.notice_subject }</td>
 										<td>${notice.notice_date }</td>
 									</tr>
 								</c:forEach>

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>극장 정보</title>
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources//js/bootstrap.bundle.min.js"></script>
@@ -21,7 +22,9 @@
 	</header>
 	<article>
 		<div class="theater_detail_all">
+		
 			<jsp:include page="thaeter_top.jsp"></jsp:include>
+			
 			<div class="container text-center">
 		    	<div class="col col2">
 		    		<!-- 상단에서 클릭된 극장명 -->

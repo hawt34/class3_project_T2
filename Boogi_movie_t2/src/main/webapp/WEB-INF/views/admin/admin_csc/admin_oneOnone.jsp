@@ -115,25 +115,25 @@
 			<!-- content 영역 -->
 			<div class="col-9">
 				<div class="admin_ono_head">
-					<div class="admin_ono_title">고객센터관리</div>
+					<div class="admin_ono_title">1대1 문의 관리</div>
 						<div class="admin_ono_search">
 							<table>
 								<tr>
 									<td>
 							<!-- 문의 유형 카테고리 -->
-										<select class="form-select form-select-sm"
-											aria-label="Default select example">
-											<option selected>문의 유형 선택</option>
-											<option value="영화">영화</option>
-											<option value="극장">극장</option>
-											<option value="예매/결제">예매/결제</option>
-											<option value="쿠폰">쿠폰</option>
-											<option value="회원정보">회원정보</option>
+										<select class="form-select form-select-sm w-50"
+											aria-label="Default select example" name="csc_category">
+											<option selected value="">문의 유형 선택</option>
+											<option value="movie">영화</option>
+											<option value="theater">극장</option>
+											<option value="payment">예매/결제</option>
+											<option value="coupon">쿠폰</option>
+											<option value="memberInfo">회원정보</option>
 										</select> 
 									</td>
 									<td>
-										<select class="form-select form-select-sm"
-											aria-label="Default select example">
+										<select class="form-select form-select-sm w-50"
+											aria-label="Default select example" name="csc_theater">
 											<option selected>문의 지점 선택</option>
 											<option value="부산진구">부산진구</option>
 											<option value="해운대구">해운대구</option>

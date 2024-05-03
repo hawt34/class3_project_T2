@@ -34,8 +34,11 @@
 			<h3>귀하의 아이디는 ${replaceMemberId } 입니다!</h3>
 			<br>
 			<br>
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='member_login'">로그인</button>
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='member_search_pwd'">패스워드 찾기</button>
+			<form action="member_search_pwd" method="post">
+				<input type="hidden" name="member_id" id="member_id" value="${memberId}">
+				<button type="button" class="btn btn-outline-primary" onclick="location.href='member_login'">로그인</button>
+				<button type="submit" class="btn btn-outline-primary">패스워드 찾기</button>
+			</form>
 		</div>
 		
 	</div>

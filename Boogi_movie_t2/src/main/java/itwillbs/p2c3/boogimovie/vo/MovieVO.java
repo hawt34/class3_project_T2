@@ -14,6 +14,7 @@ public class MovieVO {
 	private String movie_trailler;
 	private String movie_status;
 	private Date movie_open_date;
+	
 	public int getMovie_num() {
 		return movie_num;
 	}

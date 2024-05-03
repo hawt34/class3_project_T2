@@ -1,3 +1,5 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -47,7 +49,7 @@
 					        <select class="form-select form-select-lg mb-3" style="width: 100px; height: 35px; font-size: 13px;">
 					          <option value="예매순">예매순</option>
 					          <option value="가나다순">가나다순</option>
-					          <option value="2">Option 2</option>
+					          <option value="">나의 취향</option>
 					        </select>
 							<span class="focus"></span>
 					<!-- 영화정보 -->
@@ -74,23 +76,27 @@
 							<!-- theater 리스트1 -->
 							<div class="col-sm-6" style="border-right: solid 3px black; text-align: left;">
 								<ul>
-									<li>MY영화관</li>
+									<li><a>MY영화관</a></li>
 								</ul>
-								<c:forEach var = "i" begin="1" end = "10">
 								<ul>
-									<li>지역정보${i } </li>
+									<li><a>전체극장</a></li>
 								</ul>	
-								</c:forEach>
 							</div>
-							
+								
+								
+								
 							<!-- theater 리스트2 -->
+							<!--  -->
 							<div class="col-sm-6 theaterlist scroll">
-								<c:forEach var = "i" begin="1" end = "40">
+								<c:forEach var = "i" begin="1" end = "10">
 									<ul>
 										<li>영화관정보${i } </li>
 									</ul>	
 								</c:forEach>
 							</div>		
+								
+								
+							
 						</div>
 					</div>
 				</div>	
@@ -105,9 +111,18 @@
 						</div>
 							<div class="finallist">
 							
+<!-- 현재날짜와 이번달 최대일수를 계산하여 출력 -->
+<%
+	LocalDate currentDate = LocalDate.now();
+	int maxDay = currentDate.lengthOfMonth();
+	int nowDay = currentDate.getDayOfMonth();
+	pageContext.setAttribute("maxDay", maxDay);
+	pageContext.setAttribute("nowDay", nowDay);
+%>
+										
 								<div class="daylist scroll">
 									<div>
-										<c:forEach begin="2" end="30" var="i">
+										<c:forEach begin="${nowDay }" end="${maxDay }" var="i">
 											<button>${i }일</button>&nbsp;
 										</c:forEach>
 									</div>

@@ -27,13 +27,13 @@
 	<div class="member_row">
 		
 	    <div class="form_item">
-	    	<label for="name"><b>이름</b></label>
+	    	<label for="member_name"><b>이름</b></label>
 	    	<input type="text"  name="member_name" id="member_name" required  value="${member.member_name }" readonly="readonly">
 	    	<span></span>
 	    </div>
 	
 	
-	<label for="id"><b>아이디</b></label>
+	<label for="member_id"><b>아이디</b></label>
     <input type="text" placeholder="아이디 입력" name="member_id" id="member_id" required autocapitalize="off">
     <label for="pwd"><b>비밀번호</b></label>
     <input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd" required>
@@ -44,9 +44,9 @@
     <label for="postCode"><b>주소</b></label>
     <input type="text" id="postCode" name="postCode" size="6" readonly onclick="search_address()" placeholder="클릭 시 주소검색">
 	<input type="text" id="address1" name="address1" placeholder="기본주소" size="25" readonly onclick="search_address()"><br>
-	<input type="text" id="address2" name="address2" placeholder="상세주소" size="25" pattern="^.{2,20}$" maxlength="20">
+	<input type="text" id="member_address2" name="member_address2" placeholder="상세주소" size="25" pattern="^.{2,20}$" maxlength="20">
     <label for="member_email"><b>Email</b></label>
-    <input type="text" placeholder="이메일 입력" name="email" id="email" required>
+    <input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required>
     <label for="member_tel"><b>전화번호</b></label>
 	
     <input type="text" placeholder="전화번호 입력" name="member_tel" id="member_tel" placeholder="-제외한 전화번호를 입력해주세요" required >
@@ -82,11 +82,11 @@
 	<script>
 	
 	$(document).ready(function() {
-		
+		debugger;
 	    // 아이디 입력값 변경 시
-	    $("#member_id").on("keyup", function() {
+	    $("#member_id").on("input", function() {
 	        let id = $("#member_id").val();
-	        let regex = /^[a-zA-Z가-힣]{2,10}$/g;
+	        let regex = /^[a-zA-Z가-힣0-9]{2,10}$/g;
 	        
 	        if (!regex.test(id)) {
 	            $("#member_id").css("background-color", "red");
@@ -98,7 +98,7 @@
 	    });
 	    
 	    // 비밀번호 입력값 변경 시
-	    $("#member_pwd").on("keyup", function() {
+	    $("#member_pwd").on("input", function() {
 	        let pwd = $("#member_pwd").val();
 	        let regex = /^.{8,16}$/g;
 	        
@@ -113,7 +113,7 @@
 	    
 	    
 	    // 비밀번호2 입력값 변경 시
-	    $("#member_pwd2").on("keyup", function() {
+	    $("#member_pwd2").on("input", function() {
 	    	let pwd = $("#member_pwd").val();
 	        let pwd2 = $("#member_pwd2").val();
 	        let regex = /^.{8,16}$/g;
@@ -129,7 +129,7 @@
 	    
 	    
 	    // 상세주소 입력값 변경 시
-	    $("#member_address2").on("keyup", function() {
+	    $("#member_address2").on("input", function() {
 	        let address2 = $("#member_address2").val();
 	        let regex = /^.{2,20}$/g;
 	        
@@ -143,7 +143,7 @@
 	    });
 	    
 	    // 이메일 입력값 변경 시
-	    $("#member_email").on("keyup", function() {
+	    $("#member_email").on("input", function() {
 	        let email = $("#member_email").val();
 	        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
 	        
@@ -158,7 +158,7 @@
 	    
 	    
 	    // 전화번호 입력값 변경 시
-	    $("#member_tel").on("keyup", function() {
+	    $("#member_tel").on("input", function() {
 	        let tel = $("#member_tel").val();
 	        let regex = /^010\d{8}$/g;
 	        
@@ -172,27 +172,28 @@
 	    });
 	    
 
-	    
 		    // 폼 유효성 검사 함수
 		    function checkFormValidity() {
-	        let idIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_id").val());
-	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
-	        let pwd2IsValid = /^.{8,16}$/.test($("#member_pwd2").val());
-	        let address2IsValid = /^.{2,20}$/.test($("#member_address2").val());
-	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
-	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
-	
-	        if (idIsValid && pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid) {
-	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
-	        } else {
-	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
-	        }
-	    }
+		        let idIsValid = /^[a-zA-Z가-힣0-9]{2,10}$/.test($("#member_id").val());
+		        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
+		        let pwd2IsValid = /^.{8,16}$/.test($("#member_pwd2").val());
+		        let address2IsValid = /^.{2,20}$/.test($("#member_address2").val());
+		        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
+		        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
+			
+		        if (idIsValid && pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid) {
+		            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
+		        } else {
+		        	$("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
+		        }
+			}
 	});
-	</script>
+	
+</script>
 	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+	
 	    function search_address() {
 	        new daum.Postcode({ // daum.Postcode 객체 생성
 	        	// 주소검색 창에서 주소 검색 후 검색된 주소를 사용자가 클릭하면

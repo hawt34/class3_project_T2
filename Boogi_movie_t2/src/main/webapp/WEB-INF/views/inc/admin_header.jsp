@@ -68,7 +68,7 @@ body {
 }
 .header_low{
 	display: flex;
-	width: 1250px;
+	width: 1200px;
 	margin: 0px auto;
 
 }
@@ -178,7 +178,7 @@ body {
 					<img src="${pageContext.request.contextPath}/resources/images/boogi_title.png" onclick="location.href='./'">
 				</div>
 				<div class="col-md-2" align="center">
-					<img src="${pageContext.request.contextPath}/resources/images/boogi_walk.png">
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png">
 				</div>
 				<div class="col-md-1"></div>
 			</div>

@@ -53,6 +53,12 @@ h1 {
 table {
 	text-align: center;
 }
+
+.theater_map {
+	align-content: center;
+	
+}
+
 /* ========================================= */
 /* theater_detail */
 

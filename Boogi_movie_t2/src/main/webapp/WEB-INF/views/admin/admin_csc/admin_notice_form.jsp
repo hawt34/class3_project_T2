@@ -26,24 +26,29 @@
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">공지사항등록</h4>
 				<form class="validation-form" novalidate action="admin_notice_pro" method="post" onsubmit="return confirm('공지를 등록하시겠습니까?');">
-					<div class="mb-3">
-						<label for="movie_director">작성자</label> 
-						<input type="text" id="movie_director" class="form-control" required />
-						<div class="invalid-feedback">작성자를 입력해주세요.</div>
-					</div>
+<!-- 					<div class="mb-3"> -->
+<!-- 						<label for="movie_director">작성자</label>  -->
+<!-- 						<input type="text" id="movie_director" class="form-control" required /> -->
+<!-- 						<div class="invalid-feedback">작성자를 입력해주세요.</div> -->
+<!-- 					</div> -->
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 
-						<input type="text" id="movie_name" class="form-control" required />
+						<input type="text" id="movie_name" class="form-control" required name="notice_subject" />
 						<div class="invalid-feedback">글제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_name">이미지</label> 
-						<input type="text" id="movie_name" class="form-control" required />
-						<div class="invalid-feedback">이미지를 입력해주세요.</div>
+						<select name="theater_name">
+							<option value="해운대점">해운대점</option>
+							<option value="서면점">서면점</option>
+							<option value="정관점">정관점</option>
+							<option value="남포점">남포점</option>
+							<option value="센텀점">센텀점</option>
+							<option value="덕천점">덕천점</option>
+						</select>
 					</div>
 					<div class="mb-3">
 						<label for="movie_story">내용</label> 
-						<textArea id="summernote" class="form-control" rows="10px" required></textArea>
+						<textArea id="summernote" class="form-control" rows="10px" required name="notice_content"></textArea>
 						<div class="invalid-feedback">내용을 입력해주세요.</div>
 					</div>
 					

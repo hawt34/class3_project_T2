@@ -3,12 +3,14 @@ package itwillbs.p2c3.boogimovie.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import itwillbs.p2c3.boogimovie.mapper.AdminMapper;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
+import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 
 @Service
 public class AdminService {
@@ -42,6 +44,10 @@ public class AdminService {
 
 	public int InsertMovie(MovieVO movie) {
 		return mapper.insertMovie(movie);
+	}
+	
+	public int InsertNotice(NoticeVO notice, String theater_name) {
+		return mapper.insertNotice(notice, theater_name);
 	}
 	
 }

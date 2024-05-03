@@ -6,20 +6,19 @@
 	<select id="selectMovieInfo" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
 		SELECT *
 		FROM movie
+		<if test="movie_num != null and movie_num != ''">
+		    WHERE movie_num = #{movie_num}
+		</if>
 	</select>
 	
-<!-- 		<if test="movie_num != null and movie_num != ''"> -->
-<!-- 		    WHERE movie_num = #{movie_num} -->
-<!-- 		</if> -->
 	<select id="selectMovie" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
 		SELECT *
 		FROM movie
-		WHERE movie_num = #{movie_num} 
+ 		<if test="movie_num != null and movie_num != ''"> 
+ 		    WHERE movie_num = #{movie_num} 
+ 		</if> 
+		
 	</select>
 	
-		
-<!-- 		<if test="movie_num != null and movie_num != ''"> -->
-<!-- 		    WHERE movie_num = #{movie_num} -->
-<!-- 		</if> -->
 		
 </mapper>

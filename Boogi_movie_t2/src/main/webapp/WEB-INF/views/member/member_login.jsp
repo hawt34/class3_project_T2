@@ -37,7 +37,7 @@ input[type=password]{
 	
 			<label for="member_pwd">비밀번호</label>
 			<input type="password" id="member_pwd" name="member_pwd" placeholder="비밀번호를 입력하세요">
-		
+			
 	  		<div class="loginBtns">
 				<button type="submit" class="btn btn-outline-primary">로그인</button>
 				<button type="button" class="btn btn-outline-primary" onclick="location.href='member_search_id'">아이디 찾기</button>

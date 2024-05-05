@@ -149,7 +149,7 @@
 	    // 상세보기 버튼 클릭 이벤트 처리
 	    $(".detail_button").click(function() {
 	        // 클릭된 버튼의 부모 요소에서 movie_num 값을 가져와서 상세보기 페이지의 URL에 파라미터로 추가하여 전달
-	        var movieNum = $(this).closest(".movie").find("#movie_num").val();
+	        let movieNum = $(this).closest(".movie").find("#movie_num").val();
 	        window.location.href = "movieInfo?movie_num=" + movieNum;
 	    });
 	});

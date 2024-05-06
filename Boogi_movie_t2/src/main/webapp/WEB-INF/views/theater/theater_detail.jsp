@@ -27,7 +27,7 @@
 			
 			<div class="container text-center">
 		    	<div class="col col2">
-		    		<!-- 상단에서 클릭된 극장명 -->
+		    		<!-- 상단에서 클릭된 극장명 / theater_name -->
 		    		<h3>해운대점</h3>
 		    	</div>
 			</div>

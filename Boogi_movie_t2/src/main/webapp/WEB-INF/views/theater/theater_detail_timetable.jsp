@@ -11,8 +11,29 @@
 <link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="theater-info" align="center">
-		<h1>상영 시간표~</h1>
+	<div class="theater_timetable_all" >
+		<h4>상영시간표</h4>
+		<div class="time_schedule">
+			<img src="${pageContext.request.contextPath}/resources/images/chevron-left.svg" width="15px;" class="time_schedule_day"> 
+			<div class=time_schedule_day>오늘</div>
+			<div class="time_schedule_day">내일</div>
+			<div class="time_schedule_day">모레</div>
+			<div class="time_schedule_day">글피</div>
+			<div class="time_schedule_day">월</div>
+			<div class="time_schedule_day">화</div>
+			<div class="time_schedule_day">수</div>
+			<div class="time_schedule_day">목</div>
+			<div class="time_schedule_day">금</div>
+			<div class="time_schedule_day">토</div>
+			<div class="time_schedule_day">일</div>
+			<img src="${pageContext.request.contextPath}/resources/images/chevron-right.svg" width="15px;" class="time_schedule_day"> 
+			<img src="${pageContext.request.contextPath}/resources/images/calendar3.svg" width="15px;" class="time_schedule_day"> 
+		</div>
+		<div class="timetable">
+			<div class= ></div>
+			
+		</div>
+		
 	</div>
 
 </body>

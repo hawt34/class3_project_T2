@@ -14,16 +14,16 @@
 <body>
 	<div class="theater_top">
 		<nav class="nav justify-content-center theater_name">
-			 <a class="nav-link" href="theater_detail">해운대점</a>
-			 <a class="nav-link" href="theater_detail">센텀점</a>
-			 <a class="nav-link" href="theater_detail">서면점</a>
-			 <a class="nav-link" href="theater_detail">남포점</a>
-			 <a class="nav-link" href="theater_detail">부산대점</a>
-			 <a class="nav-link" href="theater_detail">사직점</a>
-			 <a class="nav-link" href="theater_detail">영도점</a>
-			 <a class="nav-link" href="theater_detail">덕천점</a>
-			 <a class="nav-link" href="theater_detail">정관점</a>
-			 <a class="nav-link" href="theater_detail">사상점</a>
+			 <a class="nav-link" href="theater_detail" name="haeundae">해운대점</a>
+			 <a class="nav-link" href="theater_detail" name="centum">센텀점</a>
+			 <a class="nav-link" href="theater_detail" name="seomyeon" >서면점</a>
+			 <a class="nav-link" href="theater_detail" name="nampo">남포점</a>
+			 <a class="nav-link" href="theater_detail" name="busanuniv">부산대점</a>
+			 <a class="nav-link" href="theater_detail" name="sajik">사직점</a>
+			 <a class="nav-link" href="theater_detail" name="yeongdo">영도점</a>
+			 <a class="nav-link" href="theater_detail" name="deokcheon">덕천점</a>
+			 <a class="nav-link" href="theater_detail" name="jeonggwan">정관점</a>
+			 <a class="nav-link" href="theater_detail" name="sasang" >사상점</a>
 			 <div class="dropdown">
 				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">MY 극장</a>
 				<ul class="dropdown-menu">
@@ -39,7 +39,7 @@
 								<path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
 								</svg> MY 극장 관리</button>
 							</li>
-							<!-- 체크된 MY극장 리스트 -->
+							<!-- 체크된 MY극장 리스트 / my -->
 							<li><a class="dropdown-item" href="#">정관점</a></li>
 							<li><a class="dropdown-item" href="#">서면점</a></li>
 					 	</c:otherwise>
@@ -58,43 +58,43 @@
 					</div>
 					<div class="modal-body">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="check1">
+							<input class="form-check-input" type="checkbox" value="haeundae" id="check1">
 							<label class="form-check-label" for="check1">해운대점</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="check2">
+							<input class="form-check-input" type="checkbox" value="centum" id="check2">
 							<label class="form-check-label" for="check2">센텀점</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="check3">
+							<input class="form-check-input" type="checkbox" value="seomyeon" id="check3">
 							<label class="form-check-label" for="check3">서면점</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="check4">
+							<input class="form-check-input" type="checkbox" value="nampo" id="check4">
 							<label class="form-check-label" for="check4">남포점</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="check5">
+							<input class="form-check-input" type="checkbox" value="busanuniv" id="check5">
 							<label class="form-check-label" for="check5">부산대점</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="check6">
+							<input class="form-check-input" type="checkbox" value="sajik" id="check6">
 							<label class="form-check-label" for="check6">사직점</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="check7">
+							<input class="form-check-input" type="checkbox" value="yeongdo" id="check7">
 							<label class="form-check-label" for="check7">영도점</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="check8">
+							<input class="form-check-input" type="checkbox" value="deokcheon" id="check8">
 							<label class="form-check-label" for="check8">덕천점</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="check9">
+							<input class="form-check-input" type="checkbox" value="jeonggwan" id="check9">
 							<label class="form-check-label" for="check9">정관점</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="check10">
+							<input class="form-check-input" type="checkbox" value="sasang" id="check10">
 							<label class="form-check-label" for="check10">사상점</label>
 						</div>
 					</div>

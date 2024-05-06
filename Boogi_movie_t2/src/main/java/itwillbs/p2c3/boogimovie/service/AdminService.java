@@ -46,6 +46,7 @@ public class AdminService {
 		return mapper.insertMovie(movie);
 	}
 	
+	//공지사항 등록
 	public int InsertNotice(NoticeVO notice, String theater_name) {
 		return mapper.insertNotice(notice, theater_name);
 	}

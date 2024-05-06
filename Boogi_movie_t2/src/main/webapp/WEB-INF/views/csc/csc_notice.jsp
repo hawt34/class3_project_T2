@@ -46,17 +46,20 @@
 				
 				<div class="col-11">
 					<div class="csc_local">전체</div>
-					<div class="csc_local">서면</div>
-					<div class="csc_local">서면삼정타운</div>
-					<div class="csc_local">아시아드</div>
-					<div class="csc_local">센텀시티</div>
-					<div class="csc_local">동래</div>
-					<div class="csc_local">해운대</div>
-					<div class="csc_local">서면 상상마당</div>
+					<div class="csc_local">해운대점</div>
+					<div class="csc_local">센텀점</div>
+					<div class="csc_local">서면점</div>
+					<div class="csc_local">남포점</div>
+					<div class="csc_local">부산대점</div>
+					<div class="csc_local">사직점</div>
+					<div class="csc_local">영도점</div>
+					<div class="csc_local">덕천점</div>
+					<div class="csc_local">정관점</div>
+					<div class="csc_local">사상점</div>
 					
 					<div class="csc_search">
 						<!--공지 찾는 검색창  -->
-						<form method="post">
+						<form method="post" action="">
 							<input type="text" placeholder="검색어를 입력해주세요"> 
 								<i class="bi bi-search searchIcon"></i>
 							<div class="csc_searcher">

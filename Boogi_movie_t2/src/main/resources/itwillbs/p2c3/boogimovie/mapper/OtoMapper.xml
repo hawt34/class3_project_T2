@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="itwillbs.p2c3.boogimovie.mapper.OtoMapper">
+	<insert id="insertOto">
+		<selectKey keyProperty="theater_num" resultType="int" order="BEFORE">
+			SELECT theater_num
+			FROM theater
+			WHERE theater_name = #{theater_name}
+		</selectKey>
+<!-- 		<selectKey keyProperty="member_id" resultType="String" order="BEFORE"> -->
+<!-- 			SELECT member_id -->
+<!-- 			FROM member -->
+<!-- 			WHERE member_id = #{member_id} -->
+<!-- 		</selectKey> -->
+		INSERT INTO OTO(OTO_num,
+						OTO_subject,
+						OTO_content,
+						theater_num,
+						member_id,
+						OTO_date,
+						OTO_category,
+						OTO_reply_status)
+		VALUES (null,
+				#{oto.OTO_subject},
+				#{oto.OTO_content},
+				#{theater_num},
+				null,
+				now(),
+				#{oto.OTO_category},
+				'미답')
+	
+	</insert>
+</mapper>

@@ -150,7 +150,7 @@ public class MemberController {
 		
 		session.setAttribute("sId", inputMember.getMember_id());
 		System.out.println(session.getAttribute("sId"));
-		return "redirect:/";
+		return "redirect:/movie";
 	}
 	
 	@GetMapping("member_logout_pro")

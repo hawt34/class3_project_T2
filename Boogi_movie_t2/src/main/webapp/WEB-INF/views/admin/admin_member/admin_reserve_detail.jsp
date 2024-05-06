@@ -107,7 +107,7 @@ body {
 					<div class="row mb-3">
 						<div class="col-md-6">
 							<div class="subject">상영일</div>
-							<input type="text" id="movie_date" class="form-control" placeholder='홍길동전' readonly />
+							<input type="date" id="movie_date" class="form-control" placeholder='홍길동전' readonly />
 						</div>
 						<div class="col-md-6">
 							<div class="subject">극장정보</div>
@@ -116,20 +116,23 @@ body {
 					</div>
 					<div class="row mb-3">
 						<div class="col-md-6">
-							<div class="subject">예매좌석</div>
+							<div class="subject">상영관</div>
 							<input type="text" id="res_seat" class="form-control" placeholder='홍길동전' readonly />
 						</div>
 						<div class="col-md-6">
-							<div class="subject">결제금액</div>
-							<input type="text" id="pay_amount" class="form-control" placeholder='홍길동전' readonly />
+							<div class="subject">예매좌석</div>
+							<input type="text" id="res_seat" class="form-control" placeholder='홍길동전' readonly />
 						</div>
 					</div>
 					<div class="row mb-3">
+					
 						<div class="col-md-6">
 							<div class="subject">결제상태</div>
 							<input type="text" id="pay_status" class="form-control" placeholder='홍길동전' readonly />
 						</div>
 						<div class="col-md-6">
+							<div class="subject">결제금액</div>
+							<input type="text" id="pay_amount" class="form-control" placeholder='홍길동전' readonly />
 						</div>
 					</div>
 					<div class="space"></div>

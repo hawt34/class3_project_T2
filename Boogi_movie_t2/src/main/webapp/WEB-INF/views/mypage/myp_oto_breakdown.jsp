@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -43,12 +44,12 @@ tbody tr:hover {
 /* 테이블 비율 */
 th:nth-child(1),
 td:nth-child(1) {
-  width: 10%;
+  width: 5%;
 }
 
 th:nth-child(2),
 td:nth-child(2) {
-  width: 40%;
+  width: 35%;
 }
 
 th:nth-child(3),
@@ -66,6 +67,10 @@ td:nth-child(5) {
 th:nth-child(6),
 td:nth-child(6) { 
    width: 15%;  
+} 
+th:nth-child(7),
+td:nth-child(7) { 
+   width: 10%;  
 } 
 .myp_inquiry > img {
 	width:27px;
@@ -125,39 +130,36 @@ td:nth-child(6) {
 								<th>문의유형</th>
 								<th>문의지점</th>
 								<th>수정</th>
+								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>3</td>
-								<td>예매가 안되요</td>
-								<td>admin</td>
-								<td>예매/결제</td>
-								<td>어디점</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="location.href='myp_oto_modifyForm'">수정</button>
-								</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>영화 언제 개봉하나요?</td>
-								<td>hong123</td>
-								<td>영화</td>
-								<td>누구점</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-								</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>미확인</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary">수정</button>
-								</td>
-							</tr>
+							<c:choose>
+								<c:when test="${empty otoList} ">
+									<tr>
+										<td colspan="7">게시판이 비어있습니다</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="oto" items="${otoList}">
+										<tr>
+											<td>${oto.OTO_num}</td>
+											<td onclick="location.href='myp_oto_detail?OTO_num=${oto.OTO_num}'">${oto.OTO_subject} </td>
+											<td>${oto.member_id} </td>
+											<td>${oto.OTO_category} </td>
+											<td>${oto.theater_num }</td>
+											<td>
+												<button type="button" class="btn btn-outline-primary" 
+													onclick="location.href='myp_oto_modifyForm?OTO_num=${oto.OTO_num}'">수정</button>
+											</td>
+											<td>
+												<button type="button" class="btn btn-outline-primary" onclick="otoConfirm()">삭제</button>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+							
 						</tbody>
 					</table>
 					</div>
@@ -181,36 +183,27 @@ td:nth-child(6) {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>3</td>
-								<td>예매가 안되요</td>
-								<td>admin</td>
-								<td>예매/결제</td>
-								<td>센텀점</td>
-								<td>
-									답변
-								</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>영화 언제 개봉하나요?</td>
-								<td>hong123</td>
-								<td>영화</td>
-								<td>부산점</td>
-								<td>
-									답변
-								</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>junhyuk</td>
-								<td>RHekfl115</td>
-								<td>맴버십</td>
-								<td>광안리점</td>
-								<td>
-									미답변
-								</td>
-							</tr>
+							<c:forEach var="oto" items=" ">
+								<c:choose>
+									<c:when test="${empty otoList} ">
+										<tr>
+											<td colspan="7">게시판이 비어있습니다</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<tr>
+											<td>3</td>
+											<td>예매가 안되요</td>
+											<td>admin</td>
+											<td>예매/결제</td>
+											<td>센텀점</td>
+											<td>
+												답변
+											</td>
+										</tr>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
 						</tbody>
 					</table>
 					</div>
@@ -226,5 +219,12 @@ td:nth-child(6) {
 <footer>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </footer>
+<script type="text/javascript">
+	function otoConfirm() {
+		if(confirm("삭제하시겠습니까?")) {
+			location.href="myp_oto_delete"
+		}
+	};
+</script>
 </body>
 </html>

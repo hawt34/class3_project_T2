@@ -143,7 +143,23 @@ table {
 }
 
 	
+/* ========================================= */
+/* theater_detail_timetable.jsp */
+.theater_timetable_all{
 	
+}
+	
+.time_schedule{
+	margin: auto;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	display: flex;
+	
+}
 
-
+.time_schedule_day{
+	margin: 12px auto;
+	
+	
+}
 

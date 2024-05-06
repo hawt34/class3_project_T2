@@ -1,5 +1,7 @@
 package itwillbs.p2c3.boogimovie.vo;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class OTOVO {
@@ -10,7 +12,8 @@ public class OTOVO {
 	private String member_id;
 	private String OTO_category;
 	private String OTO_reply_status;
-	private LocalTime OTO_date;
+	private LocalDateTime OTO_date;
+	
 	public int getOTO_num() {
 		return OTO_num;
 	}
@@ -53,18 +56,20 @@ public class OTOVO {
 	public void setOTO_reply_status(String oTO_reply_status) {
 		OTO_reply_status = oTO_reply_status;
 	}
-	public LocalTime getOTO_date() {
+	public LocalDateTime getOTO_date() {
 		return OTO_date;
 	}
-	public void setOTO_date(LocalTime oTO_date) {
+	public void setOTO_date(LocalDateTime oTO_date) {
 		OTO_date = oTO_date;
 	}
+	
 	@Override
 	public String toString() {
 		return "OTOVO [OTO_num=" + OTO_num + ", theater_num=" + theater_num + ", OTO_subject=" + OTO_subject
 				+ ", OTO_content=" + OTO_content + ", member_id=" + member_id + ", OTO_category=" + OTO_category
 				+ ", OTO_reply_status=" + OTO_reply_status + ", OTO_date=" + OTO_date + "]";
 	}
+	
 	
 	
 	

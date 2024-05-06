@@ -6,16 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.NoticeService;
+import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
+import itwillbs.p2c3.boogimovie.vo.OTOVO;
 
 @Controller
 public class CscController {
 	
 	@Autowired
 	private NoticeService service;
+	
+	@Autowired
+	private OtoService otoService;
 	
 	// csc 연결
 		@GetMapping("csc_main")
@@ -56,7 +62,27 @@ public class CscController {
 		public String cscOto() {
 			return "csc/csc_oto";
 		}
-	
+		
+		@PostMapping("csc_oto")
+		public String cscOtoPro(OTOVO oto, String theater_name, String member_id, Model model) {
+			System.out.println(oto);
+			System.out.println(theater_name);
+			System.out.println(member_id);
+			
+			if(member_id == null) {
+				model.addAttribute("msg", "로그인 후 이용");
+				model.addAttribute("targetURL", "./");
+			}
+			
+			int insertCount = otoService.insertOto(oto, theater_name, member_id);
+			
+			if(insertCount == 0) {
+				model.addAttribute("msg", "1대1 문의 실패");
+				return "error/fail";
+			}
+			
+			return "redirect:/myp_oto_breakdown";
+		}
 	
 	
 }

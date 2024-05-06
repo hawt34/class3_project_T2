@@ -10,8 +10,8 @@
 		width:850px;
 		height:auto;
 		margin: 0 auto;
-		border:1px solid #6699FF;
-		border-width: 5px;
+/* 		border:1px solid #6699FF; */
+/* 		border-width: 5px; */
 		padding: 10px;
 		
 	}
@@ -31,13 +31,12 @@
 	td:nth-child(odd) {
 	  font-weight: bold;
 	  text-align: left;
-	  background-color: #6699FF;
+	  background-color: skyblue;
 	}
 	
 	td:nth-child(even) {
 	  font-weight: bold;
 	  text-align: left;
-	  background-color: #CCCCCC;
 	}
 	
 	 tr:nth-child(4) td {
@@ -54,10 +53,11 @@
 	}
 	 
 	
-	input[value="수정완료"] {
+	input[value="목록"] {
 		padding:10px;
-		background-color: #6699FF;	
+		background-color: skyblue;	
 		font-weight: bold;
+		border-radius: 5px;
 	}
 	.detail_button {
 		text-align: center;
@@ -65,47 +65,50 @@
 	}
 	
 	span {
-		color:#FFFF00;
+		color:#6699FF;
 	}
 	
 </style>
 </head>
 <body>
 <header>
-	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 </header>
 	<div class="container">
-		<form action="" method="post">
+		<form action="myp_oto_modifyPro" method="post">
 			<table>
 				<tr>
 					<td>제목</td>
-					<td>이거 어떻게 해요?</td>
+					<td>${oto.OTO_subject }</td>
 					<td>작성자</td>
-					<td>admin</td>
+					<td>${oto.member_id }</td>
 				</tr>
 				<tr>
 					<td>문의 유형</td>
-					<td><span>[영화]</span></td>
+					<td><span>[${oto.OTO_category }]</span></td>
 					<td>문의 지점</td>
-					<td>[부산센텀]</td>
+					<td><span>[${otoTheater }]</span></td>
 				</tr>
 				<tr>
 					<td>작성일</td>
-					<td>~~~~</td>
+					<td>${otoDate}</td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
 					<td colspan="4">
-						<textarea rows="20" cols="100" style="resize: none"></textarea>
+						<textarea rows="20" cols="100" style="resize: none" disabled>${oto.OTO_content }</textarea>
 					</td>
 				</tr>
 				
 			</table>
 			<!-- 답변 버튼 -->
 			<div class="detail_button">
-				<input type="submit" value="수정완료">
+				<input type="button" value="목록">
 			</div>
 		</form>
 	</div>
+<footer>
+	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
+</footer>
 </body>
 </html>

@@ -30,6 +30,25 @@
 				now(),
 				#{oto.OTO_category},
 				'미답')
-	
 	</insert>
+	
+	<!-- otoList 가져오기 -->
+	<select id="selectOtoList" resultType="itwillbs.p2c3.boogimovie.vo.OTOVO">
+		SELECT * FROM OTO
+		ORDER BY OTO_num DESC
+		LIMIT #{startRow}, #{listLimit}
+	</select>
+	<select id="selectOto" resultType="itwillbs.p2c3.boogimovie.vo.OTOVO">
+		SELECT * FROM OTO WHERE OTO_num = #{OTO_num}
+	</select>
+	<select id="selectTheaterName">
+		SELECT theater_name 
+		FROM theater
+		WHERE theater_num = #{theater_num}
+	</select>
+	<update id="updateOto">
+		UPDATE OTO
+		SET OTO_content = #{OTO_content}
+		WHERE OTO_num = #{OTO_num}
+	</update>
 </mapper>

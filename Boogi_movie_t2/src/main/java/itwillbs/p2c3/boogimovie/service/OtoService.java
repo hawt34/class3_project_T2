@@ -22,19 +22,19 @@ public class OtoService {
 		return mapper.selectOtoList(startRow, listLimit);
 	}
 
-	public OTOVO getOto(int OTO_num) {
-		return mapper.selectOto(OTO_num);
+	public OTOVO getOto(int oto_num) {
+		return mapper.selectOto(oto_num);
 	}
 
 	public String getTheaterName(int theater_num) {
 		return mapper.selectTheaterName(theater_num);
 	}
 
-	public int updateOto(int OTO_num, String OTO_content) {
-		return mapper.updateOto(OTO_num, OTO_content);
+	public int updateOto(int oto_num, String oto_content) {
+		return mapper.updateOto(oto_num, oto_content);
 	}
 
-	public int deleteOto(int OTO_num) {
-		return mapper.deleteOto(OTO_num);
+	public int deleteOto(int oto_num) {
+		return mapper.deleteOto(oto_num);
 	}
 }

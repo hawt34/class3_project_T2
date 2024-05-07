@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -153,47 +154,39 @@
 							<tr>
 								<th>번호</th>
 								<th>작성자</th>
-								<th>문의내용</th>
+								<th>문의제목</th>
 								<th>문의유형</th>
 								<th>문의지점</th>
 								<th>작성일</th>
+								<th>답변상태</th>
 								<th>답변</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>윙카</td>
-								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>2024-04-19</td>
-								<td>2024.04.26~</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_oneOnone_reply()">답변하기</button>
-								</td>
-							</tr>
-							<tr>
-								<td>윙카</td>
-								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>2024-04-19</td>
-								<td>2024.04.26~</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_oneOnone_reply()">답변하기</button>
-								</td>
-							</tr>
-							<tr>
-								<td>윙카</td>
-								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>2024-04-19</td>
-								<td>2024.04.26~</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_oneOnone_reply()">답변하기</button>
-								</td>
-							</tr>
+							<c:choose>
+								<c:when test="${empty otoList }">
+									<tr>
+										<td colspan="7">게시물이 없습니다</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="oto" items="${otoList }">
+										<tr>
+											<td>${oto.oto_num }</td>
+											<td>${oto.member_id }</td>
+											<td>${oto.oto_subject }</td>
+											<td>${oto.oto_category }</td>
+											<td>${oto.theater_name }</td>
+											<td>${oto.oto_date }</td>
+											<td>${oto.oto_reply_status }</td> <!-- 답변 상태 -->
+											<td>
+												<button type="button" class="btn btn-outline-primary" onclick="admin_oto_reply(${oto.oto_num})">답변하기</button>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+							
 						</tbody>
 					</table>
 				</div>
@@ -205,8 +198,8 @@
 	</footer>
 	
 	<script type="text/javascript">
-		function admin_oneOnone_reply() {
-			window.open("admin_oneOneone_detail", "_self");
+		function admin_oto_reply(num) {
+			window.open("admin_oto_detail?oto_num=" + num, "_self");
 		}
 		function admin_notice_withdraw() {
 			location.href="admin_notice_delete";

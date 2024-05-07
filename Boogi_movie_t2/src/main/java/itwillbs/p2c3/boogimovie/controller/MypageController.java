@@ -150,11 +150,11 @@ public class MypageController {
 	// CSC 관련 List
 	@RequestMapping(value = "myp_oto_breakdown", method = {RequestMethod.POST, RequestMethod.GET})
 	public String mypOtoBreakdown(Model model, @RequestParam(defaultValue = "1")int pageNum) {
-//		System.out.println("myp_withdraw_finish()");
+//			System.out.println("myp_withdraw_finish()");
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
 		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit);
-
+		
 
 
 		model.addAttribute("otoList", otoList);
@@ -163,10 +163,11 @@ public class MypageController {
 	
 
 	@GetMapping("myp_oto_detail")
-	public String mypOtoDetail(int OTO_num, Model model) {
-		OTOVO oto = otoService.getOto(OTO_num);
-		String otoDate = oto.getOTO_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+	public String mypOtoDetail(int oto_num, Model model) {
+		OTOVO oto = otoService.getOto(oto_num);
+		String otoDate = oto.getOto_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		String otoTheater = otoService.getTheaterName(oto.getTheater_num());
+		
 
 		model.addAttribute("otoTheater", otoTheater);
 		model.addAttribute("otoDate", otoDate);
@@ -175,9 +176,9 @@ public class MypageController {
 	}
 	
 	@GetMapping("myp_oto_modifyForm")
-	public String mypOtoModifyForm(int OTO_num, Model model) {
-		OTOVO oto = otoService.getOto(OTO_num);
-		String otoDate = oto.getOTO_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+	public String mypOtoModifyForm(int oto_num, Model model) {
+		OTOVO oto = otoService.getOto(oto_num);
+		String otoDate = oto.getOto_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		String otoTheater = otoService.getTheaterName(oto.getTheater_num());
 
 		model.addAttribute("otoTheater", otoTheater);
@@ -187,8 +188,8 @@ public class MypageController {
 	}
 	
 	@PostMapping("myp_oto_modifyPro")
-	public String myOtoModifyPro(int OTO_num, String OTO_content, Model model) {
-		int updateCount = otoService.updateOto(OTO_num, OTO_content);
+	public String myOtoModifyPro(int oto_num, String OTO_content, Model model) {
+		int updateCount = otoService.updateOto(oto_num, OTO_content);
 		if(updateCount == 0) {
 			model.addAttribute("msg", "수정에 실패하였습니다");
 			return "error/fail";
@@ -197,13 +198,14 @@ public class MypageController {
 	}
 	
 	@GetMapping("myp_oto_delete")
-	public String myOtoDelete(int OTO_num, Model model) {
-		int deleteOtoCount = otoService.deleteOto(OTO_num);
+	public String myOtoDelete(int oto_num, Model model) {
+		int deleteOtoCount = otoService.deleteOto(oto_num);
 		if(deleteOtoCount == 0) {
 			model.addAttribute("msg", "삭제 실패");
 		}
 		
 		return "redirect:/myp_oto_breakdown";
 	}
+
 	
 }

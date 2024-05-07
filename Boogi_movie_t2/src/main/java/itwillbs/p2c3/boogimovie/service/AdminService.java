@@ -3,7 +3,6 @@ package itwillbs.p2c3.boogimovie.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +10,7 @@ import itwillbs.p2c3.boogimovie.mapper.AdminMapper;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
+import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 
 @Service
 public class AdminService {
@@ -49,6 +49,14 @@ public class AdminService {
 	//공지사항 등록
 	public int InsertNotice(NoticeVO notice, String theater_name) {
 		return mapper.insertNotice(notice, theater_name);
+	}
+	//공지사항 list 가져오기
+	public List<NoticeVO> getNoticeList(int startRow, int listLimit) {
+		return mapper.selectNoticeList(startRow, listLimit);
+	}
+
+	public int replyRegist(OTOReplyVO reply, int oto_num) {
+		return mapper.insertReply(reply, oto_num);
 	}
 	
 }

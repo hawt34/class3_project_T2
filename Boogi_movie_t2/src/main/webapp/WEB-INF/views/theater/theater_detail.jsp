@@ -25,10 +25,10 @@
 		
 			<jsp:include page="thaeter_top.jsp"></jsp:include>
 			
-			<div class="container text-center">
-		    	<div class="col col2">
+			<div class="theater_name_aera" style="position: relative; width: 100%; height: 200px; background-image: url('${pageContext.request.contextPath}/resources/images/theater_CINEMA4.jpg'); background-size: cover;">
+		    	<div class="theater_name container text-centers" style="position: absolute; ">
 		    		<!-- 상단에서 클릭된 극장명 / theater_name -->
-		    		<h3>해운대점</h3>
+		    		<h1>${theater.theater_name}</h1>
 		    	</div>
 			</div>
 

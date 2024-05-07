@@ -51,4 +51,8 @@
 		SET OTO_content = #{OTO_content}
 		WHERE OTO_num = #{OTO_num}
 	</update>
+	<delete id="deleteOto">
+		DELETE FROM OTO
+		WHERE OTO_num = #{OTO_num}
+	</delete>
 </mapper>

@@ -182,5 +182,14 @@ public class MypageController {
 		return "redirect:/myp_oto_breakdown";
 	}
 	
+	@GetMapping("myp_oto_delete")
+	public String myOtoDelete(int OTO_num, Model model) {
+		int deleteOtoCount = otoService.deleteOto(OTO_num);
+		if(deleteOtoCount == 0) {
+			model.addAttribute("msg", "삭제 실패");
+		}
+		
+		return "redirect:/myp_oto_breakdown";
+	}
 	
 }

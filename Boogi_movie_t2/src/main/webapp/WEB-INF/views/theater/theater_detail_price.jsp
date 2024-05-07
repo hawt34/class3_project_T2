@@ -11,7 +11,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="theater-info">
+	<div class="theater_info">
 		<h4>관람료</h4>
 			<div class="row gx-5">
 		    	<div class="col">

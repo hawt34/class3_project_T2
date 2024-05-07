@@ -29,7 +29,7 @@ body {
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 <div class="container1">
-	<form action="myp_info_modify" method="post">
+	<form action="myp_info_modify" method="post" name="fr">
 		<div class="row">
 			<div class="col-md-2">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
@@ -40,7 +40,7 @@ body {
 				<div class="box1">
 	    			<label for="name">이름</label>
 				  	<div class="form_item w-75">
-				    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" required>
+				    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" required readonly>
 				    </div><!-- form item -->
 				
 	    			<label for="id">아이디</label>
@@ -92,7 +92,7 @@ body {
 				    </div>
 				</div><!-- box1 -->
 				<div class="d-grid gap-2 col-3 box2">
-					  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='myp_main'">수정완료</button>
+					  <button class="btn btn-outline-primary btn-lg" type="submit" onclick="location.href='myp_main'">수정완료</button>
 				</div>
 			</div><!-- col-md-10 -->
 		</div><!-- row  -->	
@@ -102,18 +102,21 @@ body {
 		<jsp:include page="inc/myp_footer.jsp"></jsp:include>
 	</footer>
 	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
 	<script>
 
 	$(document).ready(function() {
 
 		// 이름 입력값 변경 시 
 		$("#member_name").on("keyup", function(){
-			let name = $("member_name").val();
+			let name = $("#member_name").val();
 			// 특수문자 불가, 영어불가, 숫자불가, 최대글자 10글자
-			let regex = /^[^A-Za-z0-9\p{P}\p{S}]{1,10}$;
-			
+// 			let regex = /^[^A-Za-z0-9\p{P}\p{S}]{1,10}$;
+	        let regex = /^[a-zA-Z가-힣]{2,10}$/g;
+
 			if(!(regex.test(name))){
-				$("member_name").css("background-color", "red");
+				$("#member_name").css("background-color", "red");
 			} else {
 	            $("#member_name").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 			}
@@ -171,16 +174,29 @@ body {
 	    // 생년월일 입력값 변경 시 
 	    $("#member_birth").on("keyup", function() {
 	        let birth = $("#member_birth").val();
-	        let regex = /^[0-9]{8}$;
+//         	let regex = /^[0-9]{8}$/;
+	        let regex = /^\d{6}$/g;
 	        
-	        if (!regex.test(birth)) {
-	            $("#member_birth").css("background-color", "red");
-	        } else {
-	            $("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-	        }
+			if (birth.length == 6) { // member_birth의 길이가 6일 때만 실행
+				if (!regex.test(birth)) {
+					$("#member_birth").css("background-color", "red");
+				} else {
+					$("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+				}
+	
+	            checkFormValidity(); // 폼 유효성 검사 실행
+			}
+			
+			});
+	    
+// 	        if (!regex.test(birth)) {
+// 	            $("#member_birth").css("background-color", "red");
+// 	        } else {
+// 	            $("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+// 	        }
 		
-	        checkFormValidity(); // 폼 유효성 검사 실행
-	    });
+// 	        checkFormValidity(); // 폼 유효성 검사 실행
+// 	    });
 	    
 	    
 	    // 상세주소 입력값 변경 시
@@ -229,11 +245,11 @@ body {
 	    
 		    // 폼 유효성 검사 함수
 		    function checkFormValidity() {
-		    let nameIsValid = /^[^A-Za-z0-9\p{P}\p{S}]{1,10}$/.test($("member_name").val());
+	        let nameIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_name").val());
 	        let idIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_id").val());
 	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
 	        let pwd2IsValid = /^.{8,16}$/.test($("#member_pwd2").val());
-	        let birthIsValid = /^[0-9]{8}$/.test($("#member_birth").val());
+	        let birthIsValid = /^\d{6}$/.test($("#member_birth").val());
 	        let address2IsValid = /^.{2,20}$/.test($("#member_address2").val());
 	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
 	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());

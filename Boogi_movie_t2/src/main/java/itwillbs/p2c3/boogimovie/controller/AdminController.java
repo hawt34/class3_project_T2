@@ -1,5 +1,6 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -12,16 +13,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
-import itwillbs.p2c3.boogimovie.service.NoticeService;
+import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
+import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
+import itwillbs.p2c3.boogimovie.vo.OTOVO;
 
 @Controller
 public class AdminController {
 	
 	@Autowired
 	AdminService service;
+	
+	@Autowired
+	OtoService otoService;
+	
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")
@@ -47,9 +54,16 @@ public class AdminController {
 	public String adminFAQpro() {
 		return "redirect:/admin_FAQ";
 	}
-	
+	//-------------------------------------
+	//공지사항 관리 controller
+	//listLimit으로 목록 10개 가져오기
 	@GetMapping("admin_notice")
-	public String adminNotice() {
+	public String adminNotice(@RequestParam(defaultValue = "1")int pageNum, Model model) {
+		int listLimit = 10;
+		int startRow = (pageNum  - 1) * listLimit;
+		
+		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
+		
 		return "admin/admin_csc/admin_notice";
 	}
 	@GetMapping("admin_notice_form")
@@ -76,18 +90,45 @@ public class AdminController {
 	public String adminNoticeDelete() {
 		return "redirect:/admin_notice";
 	}
-	@GetMapping("admin_oneOnone")
-	public String adminOnOne() {
-		return "admin/admin_csc/admin_oneOnone";
+	
+	//---------------------------
+	//일대일 문의 controller
+	@GetMapping("admin_oto")
+	public String adminOto(@RequestParam(defaultValue = "1")int pageNum, Model model) {
+		int listLimit = 10;
+		int startRow = (pageNum  - 1) * listLimit;
+		
+		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit);
+		
+		
+		
+		model.addAttribute("otoList", otoList);
+		return "admin/admin_csc/admin_oto";
 	}
-	@GetMapping("admin_oneOneone_detail")
-	public String adminOneOneDetail() {
-		return "admin/admin_csc/admin_oneOneone_detail";
+	@GetMapping("admin_oto_detail")
+	public String adminOtoDetail(Model model, int oto_num) {
+		OTOVO oto = otoService.getOto(oto_num);
+		String otoDate = oto.getOto_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		String otoTheater = otoService.getTheaterName(oto.getTheater_num());
+		
+		model.addAttribute("otoDate", otoDate);
+		model.addAttribute("otoTheater", otoTheater);
+		model.addAttribute("oto", oto);
+		return "admin/admin_csc/admin_oto_detail";
 	}
-	@PostMapping("admin_oneOneone_detail_Pro")
-	public String adminOneOneDetailPro() {
-		return "redirect:/admin_oneOnone";
+	@PostMapping("admin_oto_detail")
+	public String adminOtoDetailPro(OTOReplyVO reply, Model model) {
+		System.out.println(reply);
+		int insertCount = service.replyRegist(reply, reply.getOto_num());
+		if(insertCount == 0) {
+			model.addAttribute("msg", "일대일문의 답변 실패");
+		
+			return "error/fail";
+		}
+		
+		return "redirect:/admin_oto";
 	}
+	
 	//-----------------------------------------------
 	// 관리자 회원 페이지
 	@GetMapping("admin_reserve")

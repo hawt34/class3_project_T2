@@ -3,20 +3,27 @@ package itwillbs.p2c3.boogimovie.vo;
 import java.time.LocalDateTime;
 
 public class OTOVO {
-	private int OTO_num;
+	private int oto_num;
 	private int theater_num;
-	private String OTO_subject;
-	private String OTO_content;
+	private String oto_subject;
+	private String oto_content;
 	private String member_id;
-	private String OTO_category;
-	private String OTO_reply_status;
-	private LocalDateTime OTO_date;
+	private String oto_category;
+	private String oto_reply_status;
+	private LocalDateTime oto_date;
+	private String theater_name;
 	
-	public int getOTO_num() {
-		return OTO_num;
+	public String getTheater_name() {
+		return theater_name;
 	}
-	public void setOTO_num(int oTO_num) {
-		OTO_num = oTO_num;
+	public void setTheater_name(String theater_name) {
+		this.theater_name = theater_name;
+	}
+	public int getOto_num() {
+		return oto_num;
+	}
+	public void setOto_num(int oto_num) {
+		this.oto_num = oto_num;
 	}
 	public int getTheater_num() {
 		return theater_num;
@@ -24,17 +31,17 @@ public class OTOVO {
 	public void setTheater_num(int theater_num) {
 		this.theater_num = theater_num;
 	}
-	public String getOTO_subject() {
-		return OTO_subject;
+	public String getOto_subject() {
+		return oto_subject;
 	}
-	public void setOTO_subject(String oTO_subject) {
-		OTO_subject = oTO_subject;
+	public void setOto_subject(String oto_subject) {
+		this.oto_subject = oto_subject;
 	}
-	public String getOTO_content() {
-		return OTO_content;
+	public String getOto_content() {
+		return oto_content;
 	}
-	public void setOTO_content(String oTO_content) {
-		OTO_content = oTO_content;
+	public void setOto_content(String oto_content) {
+		this.oto_content = oto_content;
 	}
 	public String getMember_id() {
 		return member_id;
@@ -42,31 +49,34 @@ public class OTOVO {
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
-	public String getOTO_category() {
-		return OTO_category;
+	public String getOto_category() {
+		return oto_category;
 	}
-	public void setOTO_category(String oTO_category) {
-		OTO_category = oTO_category;
+	public void setOto_category(String oto_category) {
+		this.oto_category = oto_category;
 	}
-	public String getOTO_reply_status() {
-		return OTO_reply_status;
+	public String getOto_reply_status() {
+		return oto_reply_status;
 	}
-	public void setOTO_reply_status(String oTO_reply_status) {
-		OTO_reply_status = oTO_reply_status;
+	public void setOto_reply_status(String oto_reply_status) {
+		this.oto_reply_status = oto_reply_status;
 	}
-	public LocalDateTime getOTO_date() {
-		return OTO_date;
+	public LocalDateTime getOto_date() {
+		return oto_date;
 	}
-	public void setOTO_date(LocalDateTime oTO_date) {
-		OTO_date = oTO_date;
+	public void setOto_date(LocalDateTime oto_date) {
+		this.oto_date = oto_date;
 	}
-	
 	@Override
 	public String toString() {
-		return "OTOVO [OTO_num=" + OTO_num + ", theater_num=" + theater_num + ", OTO_subject=" + OTO_subject
-				+ ", OTO_content=" + OTO_content + ", member_id=" + member_id + ", OTO_category=" + OTO_category
-				+ ", OTO_reply_status=" + OTO_reply_status + ", OTO_date=" + OTO_date + "]";
+		return "OTOVO [oto_num=" + oto_num + ", theater_num=" + theater_num + ", oto_subject=" + oto_subject
+				+ ", oto_content=" + oto_content + ", member_id=" + member_id + ", oto_category=" + oto_category
+				+ ", oto_reply_status=" + oto_reply_status + ", oto_date=" + oto_date + ", theater_name=" + theater_name
+				+ "]";
 	}
+	
+	
+	
 	
 	
 	

@@ -5,6 +5,7 @@ public class ReservationVO {
 	private String member_id;
 	private int movie_num;
 	private int booth_num;
+	
 	public int getReservation_num() {
 		return reservation_num;
 	}

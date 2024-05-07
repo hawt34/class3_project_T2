@@ -61,4 +61,18 @@
 		
 	</insert>
 	
+	<select id="selectNoticeList" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
+		SELECT *
+		FROM notice
+		ORDER BY notice_num DESC
+		LIMIT #{startRow}, #{listLimit}
+	</select>
+	<insert id="insertReply">
+		INSERT INTO OTO_reply
+		VALUES (null,
+				#{oto_num}, -- oto_num을 참조하는 데이터
+				#{reply.oto_reply_content},
+				now())
+	</insert>
+	
 </mapper>

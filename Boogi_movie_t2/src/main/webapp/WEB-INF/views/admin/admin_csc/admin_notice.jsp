@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,53 +52,38 @@
 					<table>
 						<thead>
 							<tr>
-								<th>공지사항코드?</th>
+								<th>공지사항번호</th>
 								<th>공지사항제목</th>
 								<th>공지사항등록일</th>
-								<th>작성자</th>
+								<th>극장 구분</th>
 								<th>상세보기/수정</th>
 								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1259933</td>
-								<td>개인정보 서약 변경 안내</td>
-								<td>2024-03-12</td>
-								<td>홍길동</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>9919198</td>
-								<td>서면점 폐쇄 안내</td>
-								<td>2024-05-22</td>
-								<td>박종민</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>4981923</td>
-								<td>신제품 출시 안내</td>
-								<td>2024-01-44</td>
-								<td>이연태</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw()">삭제</button>
-								</td>
-							</tr>
-							
-						
+<%-- 							<c:choose> --%>
+<%-- 								<c:when test="${empty noticeList }"> --%>
+<!-- 									<tr> -->
+<!-- 										<td colspan="6"></td> -->
+<!-- 									</tr> -->
+<%-- 								</c:when> --%>
+<%-- 								<c:otherwise> --%>
+<%-- 										<c:forEach var="notice" items="${noticeList }"> --%>
+<!-- 											<tr> -->
+<%-- 												<td>${notice.notice_num }</td> --%>
+<%-- 												<td>${notice.notice_subject }</td> --%>
+<%-- 												<td>${noticec.notice_date }</td> --%>
+<%-- 												<td>${noticec.theater_num }</td> --%>
+<!-- 												<td> -->
+<!-- 													<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기/수정</button> -->
+<!-- 												</td> -->
+<!-- 												<td> -->
+<!-- 													<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw()">삭제</button> -->
+<!-- 												</td> -->
+<!-- 											</tr> -->
+<%-- 										</c:forEach> --%>
+<%-- 								</c:otherwise> --%>
+<%-- 							</c:choose> --%>
 						</tbody>
 					</table>
 				</div>
@@ -117,7 +103,7 @@
 
 	<script type="text/javascript">
 		function admin_notice() {
-			window.open("admin_notice_form", "_self");
+			window.open("admin_notice_modify", "_self");
 		}
 		function admin_notice_withdraw() {
 			location.href="admin_notice_delete";

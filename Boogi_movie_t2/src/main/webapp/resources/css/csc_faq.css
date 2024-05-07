@@ -43,7 +43,7 @@ input[id*="answer"]{
 input[id*="answer"] + label {
 	display:block;
 	padding:20px;
-	border: solid 3px #232188;
+	border: solid 1px #232188;
 	border-bottom: 0;
 	border-radius:4px;
 	color:#fff;
@@ -68,7 +68,7 @@ input[id*="answer"] + label + div {
 	max-height: 0;
 	transition:all .35s;
 	overflow:hidden;
-	background: #ebf8ff;
+	background: white;
 	font-size:14px;
 }
 

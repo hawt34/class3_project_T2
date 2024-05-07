@@ -5,13 +5,17 @@
   
   <mapper namespace="itwillbs.p2c3.boogimovie.mapper.MypageMapper">
     <select id="selectMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
-        <!-- SQL 쿼리 작성 -->
         SELECT * FROM member WHERE member_id = #{member_id}
     </select>
     
-    <select id="selectMainMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
-    	SELECT member_name
-    	FROM member
+    <select id="selectMovieResv" resultType="itwillbs.p2c3.boogimovie.vo.ReservationVO">
+    	SELECT *
+    	FROM reservation
     	WHERE member_id = #{member_id}
     </select>
+    <select id="selectTheater" resultType="itwillbs.p2c3.boogimovie.vo.TheaterVO">
+    	SELECT theater_num, theater_name
+    	FROM theater
+    </select>
+    
 </mapper>

@@ -7,6 +7,7 @@ public class TheaterVO {
 	private String theater_map_x;
 	private String theater_map_y;
 	private String theater_map_code;
+	private String theater_name;
 	private String theater_parking;
 	private String theater_floor_info;
 	private String theater_facility_info;
@@ -42,6 +43,12 @@ public class TheaterVO {
 	public void setTheater_map_code(String theater_map_code) {
 		this.theater_map_code = theater_map_code;
 	}
+	public String getTheater_name() {
+		return theater_name;
+	}
+	public void setTheater_name(String theater_name) {
+		this.theater_name = theater_name;
+	}
 	public String getTheater_parking() {
 		return theater_parking;
 	}
@@ -60,15 +67,14 @@ public class TheaterVO {
 	public void setTheater_facility_info(String theater_facility_info) {
 		this.theater_facility_info = theater_facility_info;
 	}
-
 	@Override
 	public String toString() {
 		return "TheaterVO [theater_num=" + theater_num + ", theater_address=" + theater_address + ", theater_map_x="
 				+ theater_map_x + ", theater_map_y=" + theater_map_y + ", theater_map_code=" + theater_map_code
-				+ ", theater_parking=" + theater_parking + ", theater_floor_info=" + theater_floor_info
-				+ ", theater_facility_info=" + theater_facility_info + "]";
+				+ ", theater_name=" + theater_name + ", theater_parking=" + theater_parking + ", theater_floor_info="
+				+ theater_floor_info + ", theater_facility_info=" + theater_facility_info + "]";
 	}
-	
+
 	
 	
 }

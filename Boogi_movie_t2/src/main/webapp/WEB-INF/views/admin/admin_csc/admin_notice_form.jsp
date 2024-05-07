@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 등록폼</title>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -23,24 +26,29 @@
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">공지사항등록</h4>
 				<form class="validation-form" novalidate action="admin_notice_pro" method="post" onsubmit="return confirm('공지를 등록하시겠습니까?');">
-					<div class="mb-3">
-						<label for="movie_director">작성자</label> 
-						<input type="text" id="movie_director" class="form-control" required />
-						<div class="invalid-feedback">작성자를 입력해주세요.</div>
-					</div>
+<!-- 					<div class="mb-3"> -->
+<!-- 						<label for="movie_director">작성자</label>  -->
+<!-- 						<input type="text" id="movie_director" class="form-control" required /> -->
+<!-- 						<div class="invalid-feedback">작성자를 입력해주세요.</div> -->
+<!-- 					</div> -->
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 
-						<input type="text" id="movie_name" class="form-control" required />
+						<input type="text" id="movie_name" class="form-control" required name="notice_subject" />
 						<div class="invalid-feedback">글제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_name">이미지</label> 
-						<input type="text" id="movie_name" class="form-control" required />
-						<div class="invalid-feedback">이미지를 입력해주세요.</div>
+						<select name="theater_name">
+							<option value="해운대점">해운대점</option>
+							<option value="서면점">서면점</option>
+							<option value="정관점">정관점</option>
+							<option value="남포점">남포점</option>
+							<option value="센텀점">센텀점</option>
+							<option value="덕천점">덕천점</option>
+						</select>
 					</div>
 					<div class="mb-3">
 						<label for="movie_story">내용</label> 
-						<textArea id="movie_story" class="form-control" rows="10px" required></textArea>
+						<textArea id="summernote" class="form-control" rows="10px" required name="notice_content"></textArea>
 						<div class="invalid-feedback">내용을 입력해주세요.</div>
 					</div>
 					
@@ -74,5 +82,21 @@
 	      });
 	    }, false);
  	</script>
+ 	<script>
+      $('#summernote').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 1,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    </script>
 </body>
 </html>

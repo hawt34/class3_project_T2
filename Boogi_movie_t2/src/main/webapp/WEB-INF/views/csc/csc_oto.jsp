@@ -25,7 +25,7 @@
 		</div>
 		<!-- content 영역 -->
 		<div class="col-9">
-			<form method="post" action="myp_oto_breakdown">
+			<form method="post" action="csc_oto">
 				<div id="csc_mainTitle">
 					<h1 class="csc-title">1 대 1 문의</h1>
 				</div>
@@ -41,7 +41,7 @@
 				<hr>
 				<div id="csc_agree">
 					<div class="csc_check_scope">
-						<input type="checkbox" id="csc_checkbox" required>
+						<input type="checkbox" id="csc_checkbox" required name="check_box">
 						<label for="csc_checkbox">개인정보 수집에 대한 동의</label>
 					</div>
 					<hr>
@@ -64,15 +64,15 @@
 				<div class="row">
 					<div class="inquiry_warning">* 필수!</div>
 					<div class="row mb-3">
-					<label for="client_name" class="col-2 col-form-label" >고객 ID</label>
+					<label for="client_name" class="col-2 col-form-label">고객 ID</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control form-control-sm w-25" id="client_name" readonly>
+						<input type="text" class="form-control form-control-sm w-25" id="client_name" readonly name="member_id" value="${sId }">
 					</div>
 					</div>
 					<div class="row mb-2">
 						<label for="inquiry_type" class="col-sm-2 col-form-label inquiry_warning_star">문의유형</label>
 						<div class="col-sm-10">
-							<select class="form-select form-select-sm w-25" aria-label="Default select example" required>
+							<select name="OTO_category" class="form-select form-select-sm w-25" aria-label="Default select example" required>
 								<option selected disabled>문의 유형 선택</option>
 								<option value="영화">영화</option>
 								<option value="극장">극장</option>
@@ -85,13 +85,18 @@
 					<div class="row mb-2">
 						<label for="inquiry_type" class="col-sm-2 col-form-label inquiry_warning_star">문의지점</label>
 						<div class="col-sm-10">
-							<select class="form-select form-select-sm w-25" aria-label="Default select example" required>
+							<select name="theater_name" class="form-select form-select-sm w-25" aria-label="Default select example" required>
 								<option selected disabled>문의 지점 선택</option>
-								<option value="부산진구">부산진구</option>
-								<option value="해운대구">해운대구</option>
-								<option value="북구">북구</option>
-								<option value="남구">남구</option>
-								<option value="서구">서구</option>
+								<option value="해운대점">해운대점</option>
+								<option value="센텀점">센텀점</option>
+								<option value="서면점">서면점</option>
+								<option value="남포점">남포점</option>
+								<option value="부산대점">부산대점</option>
+								<option value="사직점">사직점</option>
+								<option value="영도점">영도점</option>
+								<option value="덕천점">덕천점</option>
+								<option value="정관점">정관점</option>
+								<option value="사상점">사상점</option>
 							</select>
 						</div>
 					</div>
@@ -99,14 +104,14 @@
 					<div class="row mb-2">
 						<label for="client_subject" class="col-2 col-form-label inquiry_warning_star" >제목</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control form-control-sm" id="client_subject" required >
+							<input type="text" name="OTO_subject" class="form-control form-control-sm" id="client_subject" required >
 						</div>
 					</div>
 					<!-- 내용 -->
 					<div class="row mb-2">
 						<label for="client_content" class="col-2 col-form-label inquiry_warning_star" >내용</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" rows="10" id="client_content" required ></textarea>
+							<textarea class="form-control" name="OTO_content" rows="13" id="client_content" required style="resize: none"></textarea>
 						</div>
 					</div>
 					<hr>

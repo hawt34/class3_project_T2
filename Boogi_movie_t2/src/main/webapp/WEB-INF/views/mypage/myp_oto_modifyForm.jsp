@@ -31,13 +31,12 @@
 	td:nth-child(odd) {
 	  font-weight: bold;
 	  text-align: left;
-	  background-color: #6699FF;
+	  background-color: skyblue;
 	}
 	
 	td:nth-child(even) {
 	  font-weight: bold;
 	  text-align: left;
-	  background-color: #CCCCCC;
 	}
 	
 	 tr:nth-child(4) td {
@@ -56,8 +55,9 @@
 	
 	input[value="수정완료"] {
 		padding:10px;
-		background-color: #6699FF;	
+		background-color: skyblue;	
 		font-weight: bold;
+		border-radius: 5px;
 	}
 	.detail_button {
 		text-align: center;
@@ -65,7 +65,7 @@
 	}
 	
 	span {
-		color:#FFFF00;
+		color:#6699FF;
 	}
 	
 </style>
@@ -76,30 +76,28 @@
 </header>
 	<div class="container">
 		<form action="myp_oto_modifyPro" method="post">
-			<input type="hidden" value="${param.board_num}">
+			<input type="hidden" name="OTO_num" value="${oto.OTO_num} ">
 			<table>
 				<tr>
 					<td>제목</td>
-					<td>이거 어떻게 해요?</td>
+					<td>${oto.OTO_subject }</td>
 					<td>작성자</td>
-					<td>admin</td>
+					<td>${oto.member_id }</td>
 				</tr>
 				<tr>
 					<td>문의 유형</td>
-					<td><span>[영화]</span></td>
+					<td><span>[${oto.OTO_category }]</span></td>
 					<td>문의 지점</td>
-					<td>[부산센텀]</td>
+					<td><span>[${otoTheater }]</span></td>
 				</tr>
 				<tr>
 					<td>작성일</td>
-					<td>~~~~</td>
+					<td>${otoDate}</td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
 					<td colspan="4">
-						<textarea rows="20" cols="100" style="resize: none">
-							
-						</textarea>
+						<textarea rows="20" cols="100" style="resize: none" name="OTO_content">${oto.OTO_content }</textarea>
 					</td>
 				</tr>
 				

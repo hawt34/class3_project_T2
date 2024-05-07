@@ -12,7 +12,14 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+</script>
+<style>
+	th[colspan="4"] {
+		text-align: center;
+		font-size: 1.2em;
+	}
+</style>
 </head>
 <body>
 <header>
@@ -39,17 +46,20 @@
 				
 				<div class="col-11">
 					<div class="csc_local">전체</div>
-					<div class="csc_local">서면</div>
-					<div class="csc_local">서면삼정타운</div>
-					<div class="csc_local">아시아드</div>
-					<div class="csc_local">센텀시티</div>
-					<div class="csc_local">동래</div>
-					<div class="csc_local">해운대</div>
-					<div class="csc_local">서면 상상마당</div>
+					<div class="csc_local">해운대점</div>
+					<div class="csc_local">센텀점</div>
+					<div class="csc_local">서면점</div>
+					<div class="csc_local">남포점</div>
+					<div class="csc_local">부산대점</div>
+					<div class="csc_local">사직점</div>
+					<div class="csc_local">영도점</div>
+					<div class="csc_local">덕천점</div>
+					<div class="csc_local">정관점</div>
+					<div class="csc_local">사상점</div>
 					
 					<div class="csc_search">
 						<!--공지 찾는 검색창  -->
-						<form method="post">
+						<form method="post" action="">
 							<input type="text" placeholder="검색어를 입력해주세요"> 
 								<i class="bi bi-search searchIcon"></i>
 							<div class="csc_searcher">
@@ -84,7 +94,7 @@
 									<tr>
 										<td>${notice.notice_num }</td>
 										<td>${notice.theater_num }</td>
-										<td>${notice.notice_subject }</td>
+										<td onclick="location.href='csc_notice_detail?notice_num=${notice.notice_num}'">${notice.notice_subject }</td>
 										<td>${notice.notice_date }</td>
 									</tr>
 								</c:forEach>

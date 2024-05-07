@@ -1,5 +1,8 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,35 +12,46 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import itwillbs.p2c3.boogimovie.service.MypageMainService;
-import itwillbs.p2c3.boogimovie.service.MypageService;
+import itwillbs.p2c3.boogimovie.service.MypageInfoService;
+import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
+import itwillbs.p2c3.boogimovie.vo.OTOVO;
+import itwillbs.p2c3.boogimovie.vo.ReservationVO;
+import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
 public class MypageController {
 	
 	@Autowired
-	private MypageService mypageService;
+	private MypageInfoService mypageInfoService;
 	
 	@Autowired
-	private MypageMainService mypageMainService;
-	
-	
+	private OtoService otoService;
+
 	@GetMapping("myp_main")
-	public String mypMain(HttpSession session, Model model, MemberVO member) {
+	public String mypMain(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("sId");
 		System.out.println(id);
 		
 		if(id == null) { // 실패
 			model.addAttribute("msg", "로그인이 필요한 페이지입니다.");
 			model.addAttribute("targetURL", "member_login");
-			System.out.println("myp_main controller");
+//			System.out.println("myp_main 실패");
 			return "error/fail";
 		} else { // 성공
-			System.out.println("myp_main controller");
-			MemberVO infoMainMember = mypageService.getMainMember(id);
-			model.addAttribute("member", infoMainMember);
+//			System.out.println("myp_main 성공");
+//			MemberVO infoModifyMember = mypageInfoService.getMember(id);
+//			model.addAttribute("member", infoModifyMember);
+			
+			ReservationVO infoMovieResv = mypageInfoService.getMovieResv(id);
+			model.addAttribute("reservation", infoMovieResv);
+			
+			List<TheaterVO> infoTheater = mypageInfoService.getTheater();
+			model.addAttribute("theater", infoTheater);
+
+			
 			
 			return"mypage/myp_main";
 		}
@@ -45,28 +59,41 @@ public class MypageController {
 		
 	}
 	
+	@GetMapping("MyTheaterList")
+	public String myTheaterList(TheaterVO theater, Model model) {
+		System.out.println("MyTheaterList");
+		
+		
+		return"";
+	}
+	
+	
+	
+	
+	
 	@GetMapping("myp_point")
 	public String mypPoint() {
 		System.out.println("myp_point");
 		return "mypage/myp_point";
 	}
 	
+	
 	@RequestMapping(value = "myp_info_modify", method = {RequestMethod.GET, RequestMethod.POST})
 	public String mypInfoModify(HttpSession session, Model model, MemberVO member) {
-//	    String id = (String) session.getAttribute("sId");
-//	    System.out.println(id);
-//	    if (id == null) { // 세션 아이디 존재 안할경우
-//	        model.addAttribute("msg", "잘못된 접근입니다!");
-//	        model.addAttribute("targetURL", "member_login");
-//	        return "error/fail";
-//	    } else { // 아이디 존재할 경우
+	    String id = (String) session.getAttribute("sId");
+	    System.out.println(id);
+	    if (id == null) { // 세션 아이디 존재 안할경우
+	        model.addAttribute("msg", "잘못된 접근입니다!");
+	        model.addAttribute("targetURL", "member_login");
+	        return "error/fail";
+	    } else { // 아이디 존재할 경우
 //	         회원정보 수정 폼으로 이동
-//	    	MemberVO infoModifyMember = infoModifyService.getMember(id);
-//	    	MemberVO infoModifyMember = mypageService.getMember(id);
-//	    	model.addAttribute("member", infoModifyMember);
+	    	MemberVO infoModifyMember = mypageInfoService.getMember(id);
+	    	model.addAttribute("member", infoModifyMember);
 	        return "mypage/myp_info_modify";
-//	    }
+	    }
 	}
+	
 	
 	
 	
@@ -106,19 +133,52 @@ public class MypageController {
 		return "mypage/myp_withdraw_finish";
 	}
 	
+	// CSC 관련 List
 	@RequestMapping(value = "myp_oto_breakdown", method = {RequestMethod.POST, RequestMethod.GET})
-	public String mypOtoBreakdown() {
+	public String mypOtoBreakdown(Model model, @RequestParam(defaultValue = "1")int pageNum) {
 //		System.out.println("myp_withdraw_finish()");
+		int listLimit = 10;
+		int startRow = (pageNum - 1) * listLimit;
+		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit);
+
+
+
+		model.addAttribute("otoList", otoList);
 		return "mypage/myp_oto_breakdown";
 	}
-		
+	
+
+	@GetMapping("myp_oto_detail")
+	public String mypOtoDetail(int OTO_num, Model model) {
+		OTOVO oto = otoService.getOto(OTO_num);
+		String otoDate = oto.getOTO_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		String otoTheater = otoService.getTheaterName(oto.getTheater_num());
+
+		model.addAttribute("otoTheater", otoTheater);
+		model.addAttribute("otoDate", otoDate);
+		model.addAttribute("oto", oto);
+		return "mypage/myp_oto_detail";
+	}
+	
 	@GetMapping("myp_oto_modifyForm")
-	public String mypOtoModifyForm() {
+	public String mypOtoModifyForm(int OTO_num, Model model) {
+		OTOVO oto = otoService.getOto(OTO_num);
+		String otoDate = oto.getOTO_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		String otoTheater = otoService.getTheaterName(oto.getTheater_num());
+
+		model.addAttribute("otoTheater", otoTheater);
+		model.addAttribute("otoDate", otoDate);
+		model.addAttribute("oto", oto);
 		return "mypage/myp_oto_modifyForm";
 	}
 	
 	@PostMapping("myp_oto_modifyPro")
-	public String myOtoModifyPro() {
+	public String myOtoModifyPro(int OTO_num, String OTO_content, Model model) {
+		int updateCount = otoService.updateOto(OTO_num, OTO_content);
+		if(updateCount == 0) {
+			model.addAttribute("msg", "수정에 실패하였습니다");
+			return "error/fail";
+		}
 		return "redirect:/myp_oto_breakdown";
 	}
 	

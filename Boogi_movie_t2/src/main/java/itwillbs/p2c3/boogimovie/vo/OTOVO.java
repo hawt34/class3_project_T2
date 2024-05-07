@@ -1,8 +1,6 @@
 package itwillbs.p2c3.boogimovie.vo;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class OTOVO {
 	private int OTO_num;

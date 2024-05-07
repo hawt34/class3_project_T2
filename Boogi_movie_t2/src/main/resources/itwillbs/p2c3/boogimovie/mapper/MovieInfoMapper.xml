@@ -20,5 +20,17 @@
 		
 	</select>
 	
+	<select id="selectMovieInfoLike" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
+		SELECT *
+		FROM movie
+		ORDER BY movie_like;
+	</select>
+	
+	<select id="selectMovieInfoAbc" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
+		SELECT *
+		FROM movie
+		ORDER BY movie_name;
+	</select>
+	
 		
 </mapper>

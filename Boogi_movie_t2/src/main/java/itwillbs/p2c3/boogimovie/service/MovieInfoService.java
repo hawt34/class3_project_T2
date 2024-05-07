@@ -26,4 +26,14 @@ public class MovieInfoService {
 		return mapper.selectMovie(movie);
 	}
 	
+	public List<MovieVO> getMovieListLike(){
+		
+		return mapper.selectMovieInfoLike();
+	} 
+	
+	public List<MovieVO> getMovieListAbc(){
+		
+		return mapper.selectMovieInfoAbc();
+	}
+	
 }

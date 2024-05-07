@@ -153,7 +153,7 @@ td:nth-child(7) {
 													onclick="location.href='myp_oto_modifyForm?OTO_num=${oto.OTO_num}'">수정</button>
 											</td>
 											<td>
-												<button type="button" class="btn btn-outline-primary" onclick="otoConfirm()">삭제</button>
+												<button type="button" class="btn btn-outline-primary" onclick="otoConfirm(${oto.OTO_num})">삭제</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -220,9 +220,10 @@ td:nth-child(7) {
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </footer>
 <script type="text/javascript">
-	function otoConfirm() {
+	function otoConfirm(num) {
+		debugger;
 		if(confirm("삭제하시겠습니까?")) {
-			location.href="myp_oto_delete"
+			location.href="myp_oto_delete?OTO_num=" + num;
 		}
 	};
 </script>

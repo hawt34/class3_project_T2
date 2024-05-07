@@ -33,4 +33,8 @@ public class OtoService {
 	public int updateOto(int OTO_num, String OTO_content) {
 		return mapper.updateOto(OTO_num, OTO_content);
 	}
+
+	public int deleteOto(int OTO_num) {
+		return mapper.deleteOto(OTO_num);
+	}
 }

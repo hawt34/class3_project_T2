@@ -40,6 +40,7 @@ public class MovieInfoController {
         return "movie/movie_info"; // 뷰 이름은 적절하게 변경해야 합니다.
     }
 	
+<<<<<<< HEAD
 //	@GetMapping("movieInfo")
 //	public String movieInfo1(Model model) {
 		
@@ -53,6 +54,8 @@ public class MovieInfoController {
 		
 //		return "movie/movie_info";
 //	}
+=======
+>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	
 
 }

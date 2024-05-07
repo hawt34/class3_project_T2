@@ -183,13 +183,13 @@ body {
 					</div><!-- modal fade 모달 div 끝 -->
 					<table class="table3 table table-bordered">
 						<tr>
-							<td><a href="#">서면</a></td>
+							<td><a href="theater_detail">서면</a></td>
 						</tr>
 						<tr>
-							<td><a href="#">아시아드</a></td>
+							<td><a href="theater_detail">아시아드</a></td>
 						</tr>
 						<tr>
-							<td><a href="#">삼정타워</a></td>
+							<td><a href="theater_detail">삼정타워</a></td>
 						</tr>
 					</table>
 				</div><!-- col-md-3-->

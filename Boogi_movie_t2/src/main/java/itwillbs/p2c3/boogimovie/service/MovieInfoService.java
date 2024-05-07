@@ -14,8 +14,8 @@ public class MovieInfoService {
 	@Autowired
 	private MovieInfoMapper mapper;
 	
-	public List<MovieVO> getMovieList(){
+//	public List<MovieVO> getMovieList(){
 		
-		return mapper.selectMovieInfo();
-	}
+//		return mapper.selectMovieInfo();
+//	}
 }

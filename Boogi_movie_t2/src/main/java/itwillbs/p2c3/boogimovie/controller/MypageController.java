@@ -1,25 +1,48 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import itwillbs.p2c3.boogimovie.service.InfoModifyService;
+import itwillbs.p2c3.boogimovie.service.MypageMainService;
+import itwillbs.p2c3.boogimovie.service.MypageService;
+import itwillbs.p2c3.boogimovie.vo.MemberVO;
 
 @Controller
 public class MypageController {
 	
 	@Autowired
-	private InfoModifyService infoModifyService;
+	private MypageService mypageService;
+	
+	@Autowired
+	private MypageMainService mypageMainService;
 	
 	
 	@GetMapping("myp_main")
-	public String mypMain() {
-//		System.out.println("myp_main");
-		return "mypage/myp_main";
+	public String mypMain(HttpSession session, Model model, MemberVO member) {
+		String id = (String)session.getAttribute("sId");
+		System.out.println(id);
+		
+		if(id == null) { // 실패
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다.");
+			model.addAttribute("targetURL", "member_login");
+			System.out.println("myp_main controller");
+			return "error/fail";
+		} else { // 성공
+			System.out.println("myp_main controller");
+			MemberVO infoMainMember = mypageService.getMainMember(id);
+			model.addAttribute("member", infoMainMember);
+			
+			return"mypage/myp_main";
+		}
+		
+		
 	}
 	
 	@GetMapping("myp_point")
@@ -29,10 +52,23 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "myp_info_modify", method = {RequestMethod.GET, RequestMethod.POST})
-	public String mypInfoModify() {
-//		System.out.println("myp_info_modify()");
-		return "mypage/myp_info_modify";
+	public String mypInfoModify(HttpSession session, Model model, MemberVO member) {
+//	    String id = (String) session.getAttribute("sId");
+//	    System.out.println(id);
+//	    if (id == null) { // 세션 아이디 존재 안할경우
+//	        model.addAttribute("msg", "잘못된 접근입니다!");
+//	        model.addAttribute("targetURL", "member_login");
+//	        return "error/fail";
+//	    } else { // 아이디 존재할 경우
+//	         회원정보 수정 폼으로 이동
+//	    	MemberVO infoModifyMember = infoModifyService.getMember(id);
+//	    	MemberVO infoModifyMember = mypageService.getMember(id);
+//	    	model.addAttribute("member", infoModifyMember);
+	        return "mypage/myp_info_modify";
+//	    }
 	}
+	
+	
 	
 	@GetMapping("myp_coupon")
 	public String mypCoupon() {

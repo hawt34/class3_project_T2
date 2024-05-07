@@ -21,9 +21,9 @@ public class MovieInfoController {
 	public String movieInfo1(Model model) {
 		
 		
-		List<MovieVO> movieInfo = service.getMovieList();
-		model.addAttribute("movieInfo", movieInfo);
-		System.out.println(movieInfo);
+//		List<MovieVO> movieInfo = service.getMovieList();
+//		model.addAttribute("movieInfo", movieInfo);
+//		System.out.println(movieInfo);
 		
 		
 		

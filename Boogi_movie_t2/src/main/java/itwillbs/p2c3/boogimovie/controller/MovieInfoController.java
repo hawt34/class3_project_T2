@@ -40,8 +40,8 @@ public class MovieInfoController {
         return "movie/movie_info"; // 뷰 이름은 적절하게 변경해야 합니다.
     }
 	
-	@GetMapping("movieInfo")
-	public String movieInfo1(Model model) {
+//	@GetMapping("movieInfo")
+//	public String movieInfo1(Model model) {
 		
 		
 //		List<MovieVO> movieInfo = service.getMovieList();
@@ -51,8 +51,8 @@ public class MovieInfoController {
 		
 		
 		
-		return "movie/movie_info";
-	}
+//		return "movie/movie_info";
+//	}
 	
 
 }

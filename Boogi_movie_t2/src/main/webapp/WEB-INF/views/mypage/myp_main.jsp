@@ -171,7 +171,7 @@ body {
 							
 								<div>
 									<c:forEach begin="0" var="theater" items="${theater}">
-										  <input onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_num}" type="checkbox" id="flexCheckDefault">
+										  <input onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_name}" type="checkbox" id="flexCheckDefault" name="theaterId">
 										  ${theater.theater_name}<br>
 										  <br>
 									</c:forEach>
@@ -180,7 +180,8 @@ body {
 							
 					      </div><!-- modal-body -->
 					      <div class="modal-footer">
-								<button type="button" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+					      		<form id="theaterForm" method="post" action="MyTheaterList">
+								<button type="submit" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
 					      
 					      		<script type="text/javascript">
 								    function sendCheckedValues() {
@@ -197,7 +198,8 @@ body {
 								        location.href="MyTheaterList";
 								    }
 								</script>
-					      
+								</form>
+								
 					      </div><!--modal-footer  -->
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->

@@ -20,6 +20,7 @@ import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.ReservationVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
+import lombok.var;
 
 @Controller
 public class MypageController {
@@ -31,42 +32,44 @@ public class MypageController {
 	private OtoService otoService;
 
 	@GetMapping("myp_main")
-	public String mypMain(HttpSession session, Model model) {
+	public String mypMain(HttpSession session, Model model, MemberVO member) {
 		String id = (String)session.getAttribute("sId");
 		System.out.println(id);
 		
-		if(id == null) { // 실패
-			model.addAttribute("msg", "로그인이 필요한 페이지입니다.");
-			model.addAttribute("targetURL", "member_login");
+//		if(id == null) { // 실패
+//			model.addAttribute("msg", "로그인이 필요한 페이지입니다.");
+//			model.addAttribute("targetURL", "member_login");
 //			System.out.println("myp_main 실패");
-			return "error/fail";
-		} else { // 성공
+//			return "error/fail";
+//		} else { // 성공
 //			System.out.println("myp_main 성공");
-//			MemberVO infoModifyMember = mypageInfoService.getMember(id);
-//			model.addAttribute("member", infoModifyMember);
+			MemberVO infoModifyMember = mypageInfoService.getMember(member);
+			model.addAttribute("member", infoModifyMember);
 			
-			ReservationVO infoMovieResv = mypageInfoService.getMovieResv(id);
+			ReservationVO infoMovieResv = mypageInfoService.getMovieResv(member);
 			model.addAttribute("reservation", infoMovieResv);
 			
 			List<TheaterVO> infoTheater = mypageInfoService.getTheater();
 			model.addAttribute("theater", infoTheater);
-
-			
 			
 			return"mypage/myp_main";
-		}
-		
+//		}
 		
 	}
 	
-	@GetMapping("MyTheaterList")
-	public String myTheaterList(TheaterVO theater, Model model) {
-		System.out.println("MyTheaterList");
-		
-		
-		return"";
-	}
-	
+//	@GetMapping("MyTheaterList")
+//	public String myTheaterList(TheaterVO theater, Model model, HttpSession session) {
+//		System.out.println("MyTheaterList");
+//		String myTheater = session.getAttribute("theater_num");
+//		return"redirect:/";
+//	}
+	@PostMapping("MyTheaterList")
+//	public String handleFormSubmit(@RequestParam List<String> theaterIds, HttpSession session) {
+	public String handleFormSubmit(@RequestParam(name = "theaterIds", required = false, defaultValue = "") List<String> theaterIds, HttpSession session, TheaterVO theater) {
+
+	    System.out.println(" 나의 극장 : " + theaterIds);
+	        return "redirect:/myp_main";
+    }
 	
 	
 	
@@ -88,7 +91,7 @@ public class MypageController {
 	        return "error/fail";
 	    } else { // 아이디 존재할 경우
 //	         회원정보 수정 폼으로 이동
-	    	MemberVO infoModifyMember = mypageInfoService.getMember(id);
+	    	MemberVO infoModifyMember = mypageInfoService.getMember(member);
 	    	model.addAttribute("member", infoModifyMember);
 	        return "mypage/myp_info_modify";
 	    }
@@ -116,8 +119,19 @@ public class MypageController {
 	}
 	
 	@GetMapping("myp_withdraw_info")
-	public String mypWithdrawInfo() {
-//		System.out.println("myp_withdraw_info()");
+	public String mypWithdrawInfo(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("sId");
+		System.out.println(id);
+		
+		if(id == null) { // 실패
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다.");
+			model.addAttribute("targetURL", "member_login");
+			System.out.println("myp_withdraw_info 실패");
+			return "error/fail";
+		} else { // 성공
+			System.out.println("myp_withdraw_info 성공");
+			
+		}
 		return "mypage/myp_withdraw_info";
 	}
 	

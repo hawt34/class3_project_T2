@@ -29,6 +29,7 @@ public interface AdminMapper {
 	
 	int insertMovie(MovieVO movie);
 	
+	//-------------csc관련 메서드----------------------------------------
 	//공지사항 등록
 	int insertNotice(@Param("notice") NoticeVO notice,
 					 @Param("theater_num")int theater_name);
@@ -39,4 +40,8 @@ public interface AdminMapper {
 	//1대1 문의 답변 insert
 	int insertReply(@Param("reply")OTOReplyVO reply,
 					@Param("oto_num")int oto_num);
+
+	int deleteNotice(int notice_num);
+
+	int getNoticeListCount();
 }

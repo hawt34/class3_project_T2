@@ -102,7 +102,7 @@ body {
 							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
 							        <th scope="row">${status.index + 1}</th>
 							        <td>${movie.movie_name}</td>
-							        <td>${ticket.screen_date}</td>
+<%-- 							        <td>${ticket.screen_date}</td> --%>
 <%-- 							        <td>${reservation.discsount_num}</td> --%>
 <%-- 							        <td>${reservation.discsount_num}</td> --%>
 <%-- 							        <td>${reservation.discsount_num}</td> --%>

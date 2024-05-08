@@ -128,7 +128,7 @@ section h1 {
 	height: 200px;
 }
 
-.rating {
+.reviewCover {
 	width: 200px;
 	height: 80px;
 	float: left;
@@ -142,10 +142,10 @@ section h1 {
 /* 	border: 1px solid red;   */
 	float: right; 
 }
-.rating span:before {
+.reviewCover span:before {
 	content: '★';
 }
-.rating span.empty::before {
+.reviewCover span.empty::before {
     content: '☆'; /* 빈 별의 모양 */
 }
 .reviewTexts{

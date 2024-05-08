@@ -6,7 +6,6 @@
 <html>
 <head>
 
-
 <meta charset="UTF-8">
 
 <title>Insert title here</title>
@@ -56,7 +55,7 @@
 							<li><span>줄거리 : ${movie.movie_summary}</span> </li>
 							
 						</ul>
-						<button type="button" class="btn btn-outline-primary">뒤로가기</button>
+						<button type="button" class="btn btn-outline-primary" onclick="window.history.back()">뒤로가기</button>
 					</div>	
 				</div>
 			</div>
@@ -65,7 +64,7 @@
 				<div class="star-rating">
 
 					<p>별점 </p>
-				<select id="rating" class="form-select" >
+				<select id="rating" name= "rating" class="form-select" >
     				<option value="0" selected>별점 선택(미선택시 0점 ☆)</option>
     				<option value="1">★ 1점</option>
     				<option value="2">★★ 2점</option>
@@ -96,7 +95,7 @@
 			</div>
 			<div class="showReview">
 				<c:forEach var="review" items="${reviews}">
-    			<div class="rating">
+    			<div class="reviewCover">
         			<c:choose>
             		<c:when test="${review.rating eq 0}">
                 	<span class="empty"></span>

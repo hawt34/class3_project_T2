@@ -103,7 +103,7 @@
 
 	<script type="text/javascript">
 		function admin_notice() {
-			window.open("admin_notice_modify", "_self");
+			window.open("admin_noticeForm", "_self");
 		}
 		function admin_notice_withdraw() {
 			location.href="admin_notice_delete";

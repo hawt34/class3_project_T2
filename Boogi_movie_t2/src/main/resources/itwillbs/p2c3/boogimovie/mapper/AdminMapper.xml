@@ -52,12 +52,12 @@
 	</update>
 	
 	<insert id="insertNotice" >
-		<selectKey keyProperty="theater_num" resultType="int" order="BEFORE">
-			SELECT theater_num FROM theater WHERE theater_name = #{theater_name}
+		<selectKey keyProperty="notice_num" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(notice_num), 0) FROM notice
 		</selectKey>
 		
 	INSERT INTO notice (notice_num, notice_subject, notice_content, theater_num, notice_date )
-	VALUES (null, #{notice.notice_subject}, #{notice.notice_content}, #{theater_num}, now())
+	VALUES (#{notice_num} + 1, #{notice.notice_subject}, #{notice.notice_content}, #{theater_num}, now())
 		
 	</insert>
 	

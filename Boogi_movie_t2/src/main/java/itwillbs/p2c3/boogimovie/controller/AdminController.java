@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
+import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -28,6 +29,9 @@ public class AdminController {
 	
 	@Autowired
 	OtoService otoService;
+	
+	@Autowired
+	TheaterService theaterService;
 	
 	
 	// admin 메인 연결
@@ -66,7 +70,7 @@ public class AdminController {
 		
 		return "admin/admin_csc/admin_notice";
 	}
-	@GetMapping("admin_notice_form")
+	@GetMapping("admin_noticeForm")
 	public String adminNoticeForm() {
 		
 		return "admin/admin_csc/admin_notice_form";
@@ -74,14 +78,15 @@ public class AdminController {
 	
 	@PostMapping("admin_notice_pro")
 	public String adminNoticePro(NoticeVO notice, Model model, String theater_name) {
-		int noticeCount = service.InsertNotice(notice,theater_name);
-		System.out.println(theater_name);
+		int theater_num = theaterService.getTheaterName(theater_name);
+		
+		
+		int noticeCount = service.InsertNotice(notice,theater_num);
 		if(noticeCount == 0) {
 			model.addAttribute("msg", "입력 실패!");
 		
-		return "error/fail";
+			return "error/fail";
 		}
-		
 		
 		return "redirect:admin_notice";
 	}

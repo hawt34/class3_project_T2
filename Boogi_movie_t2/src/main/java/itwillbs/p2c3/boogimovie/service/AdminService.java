@@ -47,8 +47,8 @@ public class AdminService {
 	}
 	
 	//공지사항 등록
-	public int InsertNotice(NoticeVO notice, String theater_name) {
-		return mapper.insertNotice(notice, theater_name);
+	public int InsertNotice(NoticeVO notice, int theater_num) {
+		return mapper.insertNotice(notice, theater_num);
 	}
 	//공지사항 list 가져오기
 	public List<NoticeVO> getNoticeList(int startRow, int listLimit) {

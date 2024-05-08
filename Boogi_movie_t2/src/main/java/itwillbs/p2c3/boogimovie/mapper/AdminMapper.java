@@ -28,9 +28,10 @@ public interface AdminMapper {
 	int updateMovie(MovieVO movie);
 	
 	int insertMovie(MovieVO movie);
-
+	
+	//공지사항 등록
 	int insertNotice(@Param("notice") NoticeVO notice,
-					 @Param("theater_name")String theater_name);
+					 @Param("theater_num")int theater_name);
 
 	List<NoticeVO> selectNoticeList(@Param("startRow") int startRow,
 									@Param("listLimit") int listLimit);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import itwillbs.p2c3.boogimovie.mapper.TheaterMapper;
+import itwillbs.p2c3.boogimovie.vo.TheaterFacilityVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 	
@@ -31,6 +32,12 @@ public class TheaterService {
 	
 	public List<TheaterVO> getTheatersOrderbyName() {
 		return mapper.selectTheatersOrderbyName();
+	}
+
+
+
+	public List<TheaterFacilityVO> getFacility(TheaterFacilityVO facility) {
+		return mapper.selectFacility(facility);
 	}
 	
 	

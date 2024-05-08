@@ -29,6 +29,12 @@ public interface AdminMapper {
 
 	// 리뷰 삭제
 	int deleteReview(String review_id);
+
+	// 예매리스트
+	List<Map<String, String>> selectReserveList();
+	
+	// 예매 상세
+	Map<String, String> selectReserve(int reservation_num);
 	
 	// 영화 리스트 조회
 	List<Map<String, String>> selectMovieList();

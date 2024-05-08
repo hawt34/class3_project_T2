@@ -34,6 +34,16 @@ public class AdminService {
 		return mapper.deleteMember(id);
 	}
 	
+	// 예매리스트
+	public List<Map<String, String>> getReserveList() {
+		return mapper.selectReserveList();
+	}
+	
+	// 예매 상세보기
+	public Map<String, String> selectReserveDetail(int reservation_num) {
+		return mapper.selectReserve(reservation_num);
+	}
+	
 	// 리뷰 리스트 조회
 	public List<ReviewVO> getReviewList() {
 		return mapper.selectReviewList();

@@ -212,7 +212,8 @@ th:nth-child(7), td:nth-child(7) {
 	<script type="text/javascript">
 		function movieWithdraw(){
 			if(confirm("정말 삭제하시겠습니까?")){
-				location.href = "admin_movie_delete";
+				let url = "admin_movie_delete?movie_num=" + ${movie.movie_num};
+				location.href = url;
 			}
 		}
 	</script>

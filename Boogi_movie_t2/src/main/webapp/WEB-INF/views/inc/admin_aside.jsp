@@ -69,7 +69,6 @@
 					<!-- 마우스 오버 후 서브메뉴 -->
 					<a class="dropdown-item" href="admin_member">회원정보관리</a> 
 					<a class="dropdown-item" href="admin_review">리뷰관리</a> 
-					<a class="dropdown-item" href="admin_reserve">예매관리</a>
 				</div>
 			</div>
 			<div class="btn-group dropright">
@@ -104,7 +103,8 @@
 					<h5>결제관리</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="admin_pay">결제관리</a>
+					<a class="dropdown-item" href="admin_pay">스토어결제관리</a>
+					<a class="dropdown-item" href="admin_reserve">영화예매관리</a>
 				</div>
 			</div>
 			<div class="btn-group">

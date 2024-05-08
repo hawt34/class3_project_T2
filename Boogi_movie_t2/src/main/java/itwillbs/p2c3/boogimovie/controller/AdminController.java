@@ -92,15 +92,7 @@ public class AdminController {
 	
 	//--------------------------------------------------------------------
 	// 관리자 회원 페이지
-	//	1) 예매 페이지
-	@GetMapping("admin_reserve")
-	public String adminReserve() {
-		return "admin/admin_member/admin_reserve";
-	}
-	@GetMapping("admin_reserve_detail")
-	public String adminReserveDetail() {
-		return "admin/admin_member/admin_reserve_detail";
-	}
+
 	// 2) 리뷰 페이지
 	@GetMapping("admin_review")
 	public String adminReview(Model model) {
@@ -176,6 +168,7 @@ public class AdminController {
 		return "redirect:/admin_moviePlan";
 	}
 	
+	// 영화 리스트 조회 
 	@GetMapping("admin_movie")
 	public String adminMovie(Model model) {
 		List<Map<String, String>> movieList = service.getmovieList();
@@ -184,17 +177,37 @@ public class AdminController {
 		return "admin/admin_movie/admin_movie";
 	}
 	
+	// 영화 삭제
 	@GetMapping("admin_movie_delete")
-	public String adminMovieDelete() {
+	public String adminMovieDelete(@RequestParam String movie_num) {
 		System.out.println("moviedelete");
+//		service.deleteMovie();
+		
 		return "redirect:/admin_movie";
 	}
+	
+	// 영화 등록 폼
 	@GetMapping("admin_movie_reg_form")
 	public String adminMovieRegForm(MovieVO movie, Model model) {
 		model.addAttribute("movie", movie);
 		return "admin/admin_movie/admin_movie_reg_form";
 	}
 	
+	// 영화 등록 프로
+	@PostMapping("admin_movie_reg_pro")
+	public String adminMovieGetPro(@ModelAttribute MovieVO movie, Model model) {
+		int insertCount = service.InsertMovie(movie);
+		
+		if(insertCount > 0) {
+			return "redirect:admin_movie";
+		} else {
+			model.addAttribute("msg", "영화등록 실패");
+			return "redirect:/error/fail";
+		}
+		
+	}
+	
+	// 영화 수정 폼
 	@GetMapping("admin_movie_edit_form")
 	public String adminMovieEditForm(MovieVO movie, Model model) {
 		System.out.println("movie_num: " + movie.getMovie_num());
@@ -204,21 +217,14 @@ public class AdminController {
 		return "admin/admin_movie/admin_movie_edit_form";
 	}
 	
+	// 영화 수정 프로
 	@PostMapping("admin_movie_edit_pro")
 	public String adminMovieEditPro(@ModelAttribute MovieVO movie) {
-//		System.out.println(movie);
 		service.UpdateMovie(movie);
 		
 		return "redirect:admin_movie";
 	}
 	
-	@PostMapping("admin_movie_reg_pro")
-	public String adminMovieGetPro(@ModelAttribute MovieVO movie) {
-//		System.out.println(movie);
-		service.InsertMovie(movie);
-		
-		return "redirect:admin_movie";
-	}
 	
 	//--------------------------------------------------------------------
 	// 관리자 이벤트 
@@ -248,6 +254,23 @@ public class AdminController {
 	@GetMapping("admin_pay_cancel")
 	public String adminPayCancel() {
 		return "redirect:/admin_pay";
+	}
+	
+	//	예매관리 페이지
+	@GetMapping("admin_reserve")
+	public String adminReserve(Model model) {
+		List<Map<String, String>> reserveList = service.getReserveList();
+		System.out.println(reserveList);
+		model.addAttribute("reserveList", reserveList);
+		return "admin/admin_member/admin_reserve";
+	}
+	
+	// 예매 상세 페이지
+	@GetMapping("admin_reserve_detail")
+	public String adminReserveDetail(@RequestParam int reservation_num, Model model) {
+		Map<String, String> reserveDetail = service.selectReserveDetail(reservation_num);
+		model.addAttribute("reserveDetail", reserveDetail);
+		return "admin/admin_member/admin_reserve_detail";
 	}
 	
 	//--------------------------------------------------------------------

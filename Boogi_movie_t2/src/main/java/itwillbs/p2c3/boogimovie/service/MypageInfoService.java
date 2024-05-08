@@ -16,22 +16,23 @@ public class MypageInfoService {
 	@Autowired
 	private MypageMapper mapper;
 	
-	public MemberVO getMember(MemberVO member) {
-		System.out.println("MypageInfoService - getMember");
-//		MemberVO infoModifyMember = mapper.selectMember(id);
-		return mapper.selectMember(member);
+	public MemberVO getMember(String id) {
+//		System.out.println("MypageInfoService - getMember");
+		MemberVO infoMember = mapper.selectMember(id);
+		return infoMember;
 	}
 	
 	
-	public ReservationVO getMovieResv(MemberVO member) {
+	public ReservationVO getMovieResv(String id) {
 		System.out.println("MypageInfoService - getMovieResv");
-//		ReservationVO infoMovieResv = mapper.selectMovieResv(id);
-		return mapper.selectMovieResv(member);
+		ReservationVO infoMovieResv = mapper.selectMovieResv(id);
+		return mapper.selectMovieResv(id);
 	}
 	
 	public List<TheaterVO> getTheater() {
 		System.out.println("MypageInfoService - getTheater");
-		return mapper.selectTheater();
+		List<TheaterVO> infoTheater = mapper.selectTheater();
+		return infoTheater;
 	}
 	
 	

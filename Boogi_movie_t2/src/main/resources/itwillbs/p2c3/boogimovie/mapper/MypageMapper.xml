@@ -5,14 +5,14 @@
   
   <mapper namespace="itwillbs.p2c3.boogimovie.mapper.MypageMapper">
     <select id="selectMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
-        SELECT * FROM member WHERE member_id = #{member_id}
+        SELECT * FROM member WHERE member_id = #{id}
     </select>
     
-    <select id="selectMovieResv" resultType="itwillbs.p2c3.boogimovie.vo.ReservationVO">
-    	SELECT *
-    	FROM reservation
-    	WHERE member_id = #{member_id}
-    </select>
+<!--     <select id="selectMovieResv" resultType="itwillbs.p2c3.boogimovie.vo.ReservationVO"> -->
+<!--     	SELECT * -->
+<!--     	FROM reservation -->
+<!--     	WHERE member_id = #{id} -->
+<!--     </select> -->
     <select id="selectTheater" resultType="itwillbs.p2c3.boogimovie.vo.TheaterVO">
     	SELECT theater_num, theater_name
     	FROM theater

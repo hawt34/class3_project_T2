@@ -114,7 +114,7 @@
         			<span class="review-date">${fn:substring(review.review_date, 0, 10)}</span>
     				<c:if test="${review.member_id eq sessionScope.sId}">
                 	<button onclick="openReviewModify(${review.review_id})" class="btn btn-outline-primary" >수정</button> 
-                	<button onclick="confirmDelete(${review.review_id})" class="btn btn-outline-primary">삭제</button>
+                 	<button onclick="confirmDelete(${review.review_id})" class="btn btn-outline-primary">삭제</button>
             		</c:if>
     			</div>
     			</c:forEach>

@@ -43,7 +43,7 @@ public class ReviewController {
 	
 	@GetMapping("deleteReview")
 	public String deleteReview(int review_id, Model model) {
-		System.out.println("삭제리뷰"+review_id);
+		System.out.println("삭제리뷰"+ review_id);
 		int deleteCount = service.deleteReview(review_id);
 		if(deleteCount > 0) {
 			model.addAttribute("msg", "성공적으로 삭제했습니다!");

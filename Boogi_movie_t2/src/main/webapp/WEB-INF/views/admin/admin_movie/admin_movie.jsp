@@ -188,7 +188,7 @@ th:nth-child(7), td:nth-child(7) {
 									<td>${movie.movie_status}</td>
 									<td>
 										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_movie_edit_form?movie_num=${movie.movie_num}'">수정</button>
-										<button type="button" class="btn btn-outline-primary" onclick="movieWithdraw()">삭제</button>
+										<button type="button" class="btn btn-outline-primary" onclick="movieWithdraw(${movie.movie_num})">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -210,10 +210,9 @@ th:nth-child(7), td:nth-child(7) {
 	</footer>
 
 	<script type="text/javascript">
-		function movieWithdraw(){
+		function movieWithdraw(movie_num){
 			if(confirm("정말 삭제하시겠습니까?")){
-				let url = "admin_movie_delete?movie_num=" + ${movie.movie_num};
-				location.href = url;
+				location.href = "admin_movie_delete?movie_num=" + movie_num;
 			}
 		}
 	</script>

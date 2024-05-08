@@ -30,6 +30,7 @@ public interface AdminMapper {
 	// 리뷰 삭제
 	int deleteReview(String review_id);
 
+
 	// 예매리스트
 	List<Map<String, String>> selectReserveList();
 	
@@ -43,10 +44,13 @@ public interface AdminMapper {
 	MovieVO selectMovie(int movie_num);
 
 	// 영화 수정 업데이트
-	int updateMovie(MovieVO movie);
+	int updateMovie(MovieVO moviem);
 	
 	// 영화 등록
 	int insertMovie(MovieVO movie);
+
+	// 영화 삭제
+	int deleteMovie(String movie_num);
 
 	//공지사항 등록
 	int insertNotice(@Param("notice") NoticeVO notice,

@@ -122,6 +122,7 @@ public class AdminController {
 		return "admin/admin_member/admin_member";
 	}
 	
+	// 회원정보 상세
 	@GetMapping("admin_member_editForm")
 	public String adminMemberEditForm(MemberVO member , Model model) {
 		System.out.println(member.getMember_id());
@@ -131,6 +132,7 @@ public class AdminController {
 		return "admin/admin_member/admin_member_editForm";
 	}
 	
+	// 회원 삭제
 	@GetMapping("admin_member_withdraw")
 	public String adminMemberWithdraw(MemberVO member, Model model) {
 		int updateCount = service.deleteMember(member.getMember_id());
@@ -179,11 +181,17 @@ public class AdminController {
 	
 	// 영화 삭제
 	@GetMapping("admin_movie_delete")
-	public String adminMovieDelete(@RequestParam String movie_num) {
+	public String adminMovieDelete(@RequestParam String movie_num, Model model) {
 		System.out.println("moviedelete");
-//		service.deleteMovie();
+		int deleteCount = service.deleteMovie(movie_num);
 		
-		return "redirect:/admin_movie";
+		if(deleteCount > 0) {
+			return "redirect:admin_movie";
+		} else {
+			model.addAttribute("msg", "영화등록 실패");
+			return "redirect:/error/fail";
+		}
+		
 	}
 	
 	// 영화 등록 폼
@@ -219,10 +227,17 @@ public class AdminController {
 	
 	// 영화 수정 프로
 	@PostMapping("admin_movie_edit_pro")
-	public String adminMovieEditPro(@ModelAttribute MovieVO movie) {
-		service.UpdateMovie(movie);
+	public String adminMovieEditPro(@ModelAttribute MovieVO movie, Model model) {
+		int updateCount = service.UpdateMovie(movie);
 		
-		return "redirect:admin_movie";
+		if(updateCount > 0) {
+			return "redirect:admin_movie";			
+		} else {
+			model.addAttribute("msg", "영화수정 실패");
+			return "redirect:/error/fail";
+		}
+		
+		
 	}
 	
 	

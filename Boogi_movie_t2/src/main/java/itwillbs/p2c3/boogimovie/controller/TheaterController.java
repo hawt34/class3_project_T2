@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.TheaterService;
+import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterFacilityVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
@@ -27,24 +28,32 @@ public class TheaterController {
 	}       
 	
 	@GetMapping("theater_detail")
-	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, Model model, @RequestParam(defaultValue = "1") int theater_num) {
+	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, Model model, 
+								@RequestParam(defaultValue = "1") int theater_num) {
 		System.out.println("theaterDetail");
 		
 		System.out.println("theater_num : " + theater_num);
 		
 		theater.setTheater_num(theater_num);
 		facility.setTheater_num(theater_num);
+		notice.setTheater_num(theater_num);
 		
 		theater = service.getTheater(theater);
 		List<TheaterFacilityVO> facilityList = service.getFacility(facility);
+		List<NoticeVO> noticeList = service.getNoticeList(notice);
+		
 		
 		model.addAttribute("x", Double.parseDouble(theater.getTheater_map_x()));
 		model.addAttribute("y", Double.parseDouble(theater.getTheater_map_y()));
 		
 		model.addAttribute("theater", theater);
 		model.addAttribute("facilityList", facilityList);
+		model.addAttribute("noticeList", noticeList);
 		
+		System.out.println(noticeList);
 		
 		return "theater/theater_detail";
 	}
 }
+
+

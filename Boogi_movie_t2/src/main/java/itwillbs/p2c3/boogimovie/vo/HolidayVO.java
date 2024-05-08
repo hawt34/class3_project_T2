@@ -5,6 +5,8 @@ import java.sql.Date;
 public class HolidayVO {
 	private String holiday_name;
 	private Date holiday_date;
+	
+	
 	public String getHoliday_name() {
 		return holiday_name;
 	}

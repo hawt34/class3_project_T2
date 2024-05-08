@@ -25,27 +25,28 @@
 <body>
 	<div class="theater_info">
 		<div class="theater_info_content"> <!-- 시설안내 -->
-			<h4>시설 안내</h4>
+			<h4 class="text-primary">시설 안내</h4>
 			<div class="theater_facility"> <!-- 보유시설 -->
 				<h5>보유 시설</h5>
-				<div class="theater_facility_area">
-					<c:forEach var="facility" items="${facilityList}" >
-						<img src="${pageContext.request.contextPath}/resources/images/${facility.facility_img}" class="theater_facility_info_img">
-						${facility.facility_info}
+				<div class="theater_facility_area" style="display: flex;">
+					<c:forEach var="facility" items="${facilityList}">
+						<div style="width:120px; text-align: center;">
+							<img src="${pageContext.request.contextPath}/resources/images/${facility.facility_img}" class="theater_facility_info_img"><br>
+							${facility.facility_info}
+						</div>
 					</c:forEach>
-					
 				</div>
 				
 			</div> <!-- theater_facility_info 끝 -->
-			 
+			 <br>
 			 <div class="theater_floor_info"> <!-- 층별안내 -->
 				<h5>층별 안내</h5>
 				${theater.theater_floor_info}
 			 </div> <!-- theater_floor_info 끝 -->
 		</div> <!-- theater_info_content 끝 -->
-		
+		<br>
 		<div class="theater_info_content"> <!-- 교통안내 -->
-			<h4>교통 안내</h4>
+			<h4 class="text-primary">교통 안내</h4>
 			<div class="theater_detail_map"> <!-- 약도 -->
 				<h5>약도</h5>
 				<p>도로명 주소: ${theater.theater_address}</p>
@@ -57,8 +58,7 @@
 					
 					var theater_map_x = ${x};
 					var theater_map_y = ${y};
-					console.log(theater_map_x);
-					console.log(theater_map_y);
+					
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 					  mapOption = { 
 					        center: new kakao.maps.LatLng(theater_map_x, theater_map_y), // 지도의 중심좌표
@@ -101,7 +101,7 @@
 					});
 				</script>
 			 </div> <!-- theater_detail_map 끝 -->
-			 
+			 <br>
 			 <div class="theater_parking"> <!-- 주차 안내 -->
 				<h5>주차</h5>	
 				<div class="theater_parking_info">
@@ -113,6 +113,7 @@
 					${theater.theater_parking_fee}
 				</div>		
 			 </div> <!-- theater_parking 끝 -->
+			 <br>
 			 <div class="theater_public">  <!-- 교통안내 -->
 			 	<h5>대중교통</h5>	
 			 	<div class="theater_public_bus">
@@ -127,12 +128,12 @@
 				</div>		
 			 </div> <!-- theater_public 끝 -->
 		</div> <!-- theater_info_content 끝 -->
-		
+		<br>
 		<!-- 각 지점 공지사항 -->
 		<div class="theater_info_content"> <!-- 공지사항 -->
 			<div class="row">
 	    		<div class="col-11">
-					<h4>공지사항</h4>
+					<h4 class="text-primary">공지사항</h4>
 	   			</div>
 	    		<div class="col">
 	      			<a href="">더보기 
@@ -141,40 +142,22 @@
 					</svg></a>
 	   			</div>
 	   		</div>
-			<table class="table table-striped">
+			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th scope="col" width="">극장</th>
-						<th scope="col">제목</th>
-						<th scope="col">등록일</th>
+						<th scope="col" width="400px">극장</th>
+						<th scope="col" width="800px">제목</th>
+						<th scope="col" >등록일</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td scope="row">해운대점</td>
-						<td>Mark</td>
-						<td>Otto</td>
-					</tr>
-					<tr>
-						<td scope="row">서면점</td>
-						<td>Jacob</td>
-						<td>Thornton</td>
-					</tr>
-					<tr>
-						<td scope="row">정관점</td>
-						<td>Larry the Bird</td>
-						<td>@twitter</td>
-					</tr>
-					<tr>
-						<td scope="row">남포점</td>
-						<td>Larry the Bird</td>
-						<td>@twitter</td>
-					</tr>
-					<tr>
-						<td scope="row">센텀점</td>
-						<td>Larry the Bird</td>
-						<td>@twitter</td>
-					</tr>
+					<c:forEach var="notice" items="${noticeList}">
+						<tr>
+							<td scope="row">${notice.theater_name}</td>
+							<td>${notice.notice_subject}</td>
+							<td>${notice.notice_date}</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div> <!-- theater_info_content 끝 -->

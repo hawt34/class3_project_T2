@@ -81,26 +81,24 @@ table {
 	padding:30px 5px;
 }
 
-
+.theater_info {
+	margin: 20px;
+	
+}
 
   
 /* ========================================= */
 /* theater_detail_info.jsp */
 
+ 
 .theater_facility_info_img {
 	width: 100px; 
 	margin: 12px;
 }
-
-	
- .theater_info_content {
-  	margin-top: 20px;
- }
  
- .theater_facility_area {
- 	
+ h4 {
+ 	margin-bottom: 20px;
  }
-  
 /* ========================================= */
 /* theater_detail_timetable */
 .theater-info{

@@ -26,17 +26,16 @@
 	<div class="theater_info">
 		<div class="theater_info_content"> <!-- 시설안내 -->
 			<h4>시설 안내</h4>
-			<div class="theater_facility_info"> <!-- 보유시설 -->
+			<div class="theater_facility"> <!-- 보유시설 -->
 				<h5>보유 시설</h5>
-				<div>
-					<c:forEach var="facility" items="facilityList" >
+				<div class="theater_facility_area">
+					<c:forEach var="facility" items="${facilityList}" >
+						<img src="${pageContext.request.contextPath}/resources/images/${facility.facility_img}" class="theater_facility_info_img">
 						${facility.facility_info}
 					</c:forEach>
 					
 				</div>
-				<img src="${pageContext.request.contextPath}/resources/images/theater_disabled.png" class="theater_facility_info_img">
-				<img src="${pageContext.request.contextPath}/resources/images/theater_special_seat.png" class="theater_facility_info_img">
-				<img src="${pageContext.request.contextPath}/resources/images/theater_recliner.png" class="theater_facility_info_img">
+				
 			</div> <!-- theater_facility_info 끝 -->
 			 
 			 <div class="theater_floor_info"> <!-- 층별안내 -->

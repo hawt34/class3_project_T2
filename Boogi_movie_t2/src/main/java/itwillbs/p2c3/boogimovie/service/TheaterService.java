@@ -26,22 +26,14 @@ public class TheaterService {
 		return mapper.selectTheatersOrderbyName();
 	}
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	public List<TheaterFacilityVO> getFacility(TheaterFacilityVO facility) {
-<<<<<<< HEAD
 		return mapper.selectFacility(facility);
 	}
 
-=======
 		
-		return mapper.selectFacility(facility);	
-	}
 	
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	public int getTheaterName(String theater_name) {
 		return mapper.selectTheaterName(theater_name);
 	}

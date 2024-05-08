@@ -12,6 +12,21 @@
         SELECT * FROM review WHERE movie_num = #{movie_num}
     </select>
  	
+ 	<select id="selectReviewId" resultType="itwillbs.p2c3.boogimovie.vo.ReviewVO">
+ 		SELECT * FROM review WHERE review_id = #{review_id}
+ 	</select>
+ 	
+ 	<update id="updateReview" >
+ 		UPDATE review
+ 		SET rating = #{rating},
+ 			review_text = #{review_text}
+ 		WHERE review_id = #{review_id}	 
+ 	</update>
+ 	<delete id="deleteReview">
+ 		DELETE FROM review
+ 		WHERE review_id = #{review_id}	 
+ 	
+ 	</delete>
  	
  	
  </mapper>

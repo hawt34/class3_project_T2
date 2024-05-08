@@ -25,4 +25,6 @@ public interface OtoMapper {
 				  @Param("oto_content")String oto_content);
 
 	int deleteOto(int oto_num);
+
+	int updateResponse(int oto_num);
 }

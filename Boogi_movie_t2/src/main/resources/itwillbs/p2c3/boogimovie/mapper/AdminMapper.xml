@@ -68,9 +68,12 @@
 		LIMIT #{startRow}, #{listLimit}
 	</select>
 	<insert id="insertReply">
+		<selectKey keyProperty="oto_reply_num" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(oto_reply_num), 0) FROM OTO_reply
+		</selectKey>
 		INSERT INTO OTO_reply
-		VALUES (null,
-				#{oto_num}, -- oto_num을 참조하는 데이터
+		VALUES (#{oto_reply_num} + 1,
+				#{oto_num}, 
 				#{reply.oto_reply_content},
 				now())
 	</insert>

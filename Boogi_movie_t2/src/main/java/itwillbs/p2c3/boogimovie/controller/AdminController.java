@@ -122,8 +122,11 @@ public class AdminController {
 		int insertCount = service.replyRegist(reply, reply.getOto_num());
 		if(insertCount == 0) {
 			model.addAttribute("msg", "일대일문의 답변 실패");
-		
 			return "error/fail";
+		}
+		int updateCount = otoService.updateOtoResponse(reply.getOto_num());
+		if(updateCount == 0) {
+			model.addAttribute("msg", "답변 변경 실패");
 		}
 		
 		return "redirect:/admin_oto";

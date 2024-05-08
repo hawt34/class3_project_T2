@@ -37,4 +37,8 @@ public class OtoService {
 	public int deleteOto(int oto_num) {
 		return mapper.deleteOto(oto_num);
 	}
+	//'미답' 상태 변경
+	public int updateOtoResponse(int oto_num) {
+		return mapper.updateResponse(oto_num);
+	}
 }

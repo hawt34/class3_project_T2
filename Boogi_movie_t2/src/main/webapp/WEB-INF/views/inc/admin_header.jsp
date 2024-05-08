@@ -140,7 +140,6 @@ body {
 .header_middle_title {
 	display: flex;
 	flex-direction: row;
-	margin: 0 auto;
 }
 </style>
 </head>

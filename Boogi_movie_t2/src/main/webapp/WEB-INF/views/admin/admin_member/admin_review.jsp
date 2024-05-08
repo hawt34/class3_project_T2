@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,7 @@ tbody tr:hover {
 /* 테이블 비율 */
 th:nth-child(1),
 td:nth-child(1) {
-  width: 15%;
+  width: 10%;
 }
 
 th:nth-child(2),
@@ -56,19 +57,23 @@ td:nth-child(2) {
 
 th:nth-child(3),
 td:nth-child(3) {
-  width: 20%;
+  width: 15%;
 }
 th:nth-child(4),
 td:nth-child(4) {
-  width: 10%;
+  width: 5%;
 }
 th:nth-child(5),
 td:nth-child(5) {
-  width: 20%;
+  width: 30%;
 }
 th:nth-child(6),
 td:nth-child(6) {
-  width: 20%;
+  width: 10%;
+}
+th:nth-child(7),
+td:nth-child(7) {
+  width: 10%;
 }
 .admin_review_head{
 	margin: 50px 0;
@@ -150,35 +155,32 @@ td:nth-child(6) {
 					<table>
 						<thead>
 							<tr>
-								<th>영화제목</th>
-								<th>아이디</th>
-								<th>제목</th>
+								<th>리뷰번호</th>
+								<th>영화번호</th>
+								<th>회원ID</th>
 								<th>별점</th>
+								<th>내용</th>
 								<th>등록날짜</th>
-								<th>수정/삭제</th>
+								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>윙카</td>
-								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>2024-04-19</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="reviewWithdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>윙카</td>
-								<td>junhyuk</td>
-								<td>이거 리뷰 써지는거냐?</td>
-								<td>4.8점</td>
-								<td>2024-04-19</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="reviewWithdraw()">삭제</button>
-								</td>
-							</tr>
+							<c:forEach var="review" items="${reviewList}">
+								<tr>
+									<td>${review.review_id}</td>
+									<td>${review.movie_num}</td>
+									<td>${review.member_id}</td>
+									<td>${review.rating}</td>
+									<td>${review.review_text}</td>
+									<td>${review.review_date}</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" 
+											onclick="reviewWithdraw('${review.review_id}')">
+											삭제
+										</button>
+									</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -193,10 +195,10 @@ td:nth-child(6) {
 	</footer>
 
 	<script type="text/javascript">
-		function reviewWithdraw(){
+		function reviewWithdraw(reviewId){
 			 
 			if(confirm("정말 삭제하시겠습니까?")){
-				location.href = "admin_review_delete";
+				location.href = "admin_review_delete?review_id=" + reviewId;
 			}
 		} 
 	</script>

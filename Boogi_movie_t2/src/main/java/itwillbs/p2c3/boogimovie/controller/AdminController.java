@@ -16,6 +16,7 @@ import itwillbs.p2c3.boogimovie.service.NoticeService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
+import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 
 @Controller
 public class AdminController {
@@ -29,7 +30,7 @@ public class AdminController {
 		return "admin/admin_main/admin_main";
 	}
 	
-	
+	//--------------------------------------------------------------------
 	// 관리자 고객센터
 	@GetMapping("admin_FAQ")
 	public String adminFAQ() {
@@ -88,8 +89,10 @@ public class AdminController {
 	public String adminOneOneDetailPro() {
 		return "redirect:/admin_oneOnone";
 	}
-	//-----------------------------------------------
+	
+	//--------------------------------------------------------------------
 	// 관리자 회원 페이지
+	//	1) 예매 페이지
 	@GetMapping("admin_reserve")
 	public String adminReserve() {
 		return "admin/admin_member/admin_reserve";
@@ -98,15 +101,27 @@ public class AdminController {
 	public String adminReserveDetail() {
 		return "admin/admin_member/admin_reserve_detail";
 	}
+	// 2) 리뷰 페이지
 	@GetMapping("admin_review")
-	public String adminReview() {
+	public String adminReview(Model model) {
+		List<ReviewVO> reviewList = service.getReviewList();
+		model.addAttribute("reviewList", reviewList);
+//		System.out.println(reviewList);
 		return "admin/admin_member/admin_review";
 	}
 	@GetMapping("admin_review_delete")
-	public String adminReviewDelete() {
-		return "redirect:/admin_review";
+	public String adminReviewDelete(String review_id, Model model) {
+		int deleteCount = service.deleteReview(review_id);
+		if(deleteCount > 0) {
+			return "redirect:/admin_review";
+		} else {
+			model.addAttribute("msg", "삭제에 실패하였습니다");
+			return "error/fail";
+			
+		}
+		
 	}
-	
+	// 3) 회원페이지
 	@GetMapping("admin_member")
 	public String adminMember(Model model) {
 		List<Map<String, String>> memberList = service.getmemberList();
@@ -138,6 +153,7 @@ public class AdminController {
 		
 	}
 	
+	//--------------------------------------------------------------------
 	// 관리자 영화 페이지
 	@GetMapping("admin_moviePlan")
 	public String adminMoviePlan() {
@@ -204,6 +220,7 @@ public class AdminController {
 		return "redirect:admin_movie";
 	}
 	
+	//--------------------------------------------------------------------
 	// 관리자 이벤트 
 	@GetMapping("admin_event")
 	public String adminEvent() {
@@ -222,7 +239,7 @@ public class AdminController {
 		return "redirect:/admin_event";
 	}
 
-	
+	//--------------------------------------------------------------------
 	// 관리자 결제 페이지
 	@GetMapping("admin_pay")
 	public String adminPay() {
@@ -233,6 +250,7 @@ public class AdminController {
 		return "redirect:/admin_pay";
 	}
 	
+	//--------------------------------------------------------------------
 	// 관리자 스토어 페이지
 	@GetMapping("admin_store")
 	public String adminStore() {
@@ -252,6 +270,7 @@ public class AdminController {
 		return "redirect:/admin_store";
 	}
 	
+	//--------------------------------------------------------------------
 	// 관리자 극장 페이지
 	@GetMapping("admin_theater")
 	public String adminTheater() {

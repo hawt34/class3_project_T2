@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="itwillbs.p2c3.boogimovie.mapper.MemberMapper">
+	<insert id="insertMember">
+		INSERT INTO member
+		VALUES (
+			#{member_id}
+			,#{member_name}
+			,#{member_pwd}
+			,#{member_email}
+			,#{member_tel}
+			,#{member_addr}
+			,#{member_movie_genre}
+			,"활동"
+			,null
+			,"0"
+			,now()
+			,null
+			,#{member_birth}
+		);
+
+	</insert>
+
+	<select id="preRegMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
+		SELECT *
+		FROM member
+		WHERE member_name = #{member_name} and member_birth = #{member_birth}
+
+	</select>
+
+	<select id="isCorrectMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
+		SELECT * 
+		FROM member
+		WHERE member_id = #{member_id} and member_pwd = #{member_pwd}
+	</select>
+
+	<select id="memberPwdSearch" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
+		SELECT *
+		FROM member
+		WHERE member_id = #{member_id} and member_birth = #{member_birth}
+	</select>	
+
+</mapper>

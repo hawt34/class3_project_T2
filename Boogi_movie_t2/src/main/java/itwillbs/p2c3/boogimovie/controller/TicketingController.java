@@ -40,7 +40,7 @@ public class TicketingController {
 		}
 		
 		List<MovieVO> movieList = movieService.getMovieList();
-		List<TheaterVO> theaterList = theaterService.searchTheaters();
+		List<TheaterVO> theaterList = theaterService.getTheatersOrderbyName();
 		
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("theaterList", theaterList);

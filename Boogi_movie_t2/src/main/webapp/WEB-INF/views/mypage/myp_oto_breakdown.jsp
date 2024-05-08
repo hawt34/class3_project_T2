@@ -183,22 +183,22 @@ td:nth-child(7) {
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="oto" items=" ">
+							<c:forEach var="oto" items="${otoReplyList } ">
 								<c:choose>
-									<c:when test="${empty otoList} ">
+									<c:when test="${empty otoReplyList} ">
 										<tr>
 											<td colspan="7">게시판이 비어있습니다</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
 										<tr>
-											<td>3</td>
-											<td>예매가 안되요</td>
-											<td>admin</td>
-											<td>예매/결제</td>
-											<td>센텀점</td>
+											<td>${oto.oto_num }</td>
+											<td>${oto.oto_subject }</td>
+											<td>${oto.member_id }</td>
+											<td>${oto.oto_category }</td>
+											<td>${otoTheater }</td>
 											<td>
-												답변
+												${oto.oto_reply_status }
 											</td>
 										</tr>
 									</c:otherwise>

@@ -45,7 +45,7 @@ public class AdminService {
 	public int InsertMovie(MovieVO movie) {
 		return mapper.insertMovie(movie);
 	}
-	
+	//----------------------------------------------
 	//공지사항 등록
 	public int InsertNotice(NoticeVO notice, int theater_num) {
 		return mapper.insertNotice(notice, theater_num);
@@ -57,6 +57,14 @@ public class AdminService {
 
 	public int replyRegist(OTOReplyVO reply, int oto_num) {
 		return mapper.insertReply(reply, oto_num);
+	}
+
+	public int deleteNotice(int notice_num) {
+		return mapper.deleteNotice(notice_num);
+	}
+
+	public int getNoticeListCount() {
+		return mapper.getNoticeListCount();
 	}
 	
 }

@@ -51,6 +51,7 @@
 		WHERE movie_num = #{movie_num}
 	</update>
 	
+	<!-- 여기서부터 csc 관련 sql=========================================== -->
 	<insert id="insertNotice" >
 		<selectKey keyProperty="notice_num" resultType="int" order="BEFORE">
 			SELECT IFNULL(MAX(notice_num), 0) FROM notice
@@ -62,8 +63,13 @@
 	</insert>
 	
 	<select id="selectNoticeList" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
-		SELECT *
-		FROM notice
+		SELECT n.notice_num
+			  ,n.notice_subject
+			  ,n.notice_content
+			  ,t.theater_name
+			  ,n.notice_date
+		FROM notice n JOIN theater t 
+		ON n.theater_num = t.theater_num
 		ORDER BY notice_num DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
@@ -77,5 +83,12 @@
 				#{reply.oto_reply_content},
 				now())
 	</insert>
+	<delete id="deleteNotice">
+		DELETE FROM notice
+		WHERE notice_num = #{notice_num}
+	</delete>
+	<select id="getNoticeListCount" resultType="int">
+		SELECT COUNT(notice_num) FROM notice
+	</select>
 	
 </mapper>

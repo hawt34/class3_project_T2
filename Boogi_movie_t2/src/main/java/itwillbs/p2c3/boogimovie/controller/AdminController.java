@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
+import itwillbs.p2c3.boogimovie.service.NoticeService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
@@ -20,6 +21,7 @@ import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
+import itwillbs.p2c3.boogimovie.vo.PageInfo;
 
 @Controller
 public class AdminController {
@@ -66,7 +68,20 @@ public class AdminController {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
 		
+		int NoticeCount = service.getNoticeListCount(); //총 공지사항 갯수
+		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+		int maxPage = NoticeCount / listLimit + (NoticeCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+		
+		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+			endPage = maxPage;
+		}
+		PageInfo pageList = new PageInfo(NoticeCount, pageListLimit, maxPage, startPage, endPage);
+		
 		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("pageList", pageList);
 		
 		return "admin/admin_csc/admin_notice";
 	}
@@ -92,7 +107,12 @@ public class AdminController {
 	}
 	
 	@GetMapping("admin_notice_delete")
-	public String adminNoticeDelete() {
+	public String adminNoticeDelete(int notice_num, Model model) {
+		int deleteCount = service.deleteNotice(notice_num);
+		if(deleteCount == 0) {
+			model.addAttribute("msg", "공지사항 삭제 실패");
+			return "error/fail";
+		}
 		return "redirect:/admin_notice";
 	}
 	

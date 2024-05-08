@@ -5,16 +5,20 @@
 <mapper namespace="itwillbs.p2c3.boogimovie.mapper.OtoMapper">
 	<!-- 1대1 문의 DB 저장 -->
 	<insert id="insertOto">
-		<selectKey keyProperty="theater_num" resultType="int" order="BEFORE">
-			SELECT theater_num
-			FROM theater
-			WHERE theater_name = #{theater_name}
-		</selectKey>
+<!-- 		<selectKey keyProperty="theater_num" resultType="int" order="BEFORE"> -->
+<!-- 			SELECT theater_num -->
+<!-- 			FROM theater -->
+<!-- 			WHERE theater_name = #{theater_name} -->
+<!-- 		</selectKey> -->
 <!-- 		<selectKey keyProperty="member_id" resultType="String" order="BEFORE"> -->
 <!-- 			SELECT member_id -->
 <!-- 			FROM member -->
 <!-- 			WHERE member_id = #{member_id} -->
 <!-- 		</selectKey> -->
+		<selectKey keyProperty="oto_num" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(#{oto.oto_num}), 0) FROM OTO 
+			
+		</selectKey>
 		INSERT INTO OTO(oto_num,
 						oto_subject,
 						oto_content,
@@ -23,11 +27,11 @@
 						oto_date,
 						oto_category,
 						oto_reply_status)
-		VALUES (null,
+		VALUES (#{oto_num} + 1,
 				#{oto.oto_subject},
 				#{oto.oto_content},
 				#{theater_num},
-				null,
+				#{id},
 				now(),
 				#{oto.oto_category},
 				'미답')

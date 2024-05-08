@@ -21,4 +21,10 @@
 		FROM theater
 		WHERE theater_id = #{theater_id}
 	</select>
+	
+	<select id="selectTheaterName" resultType="int">
+		SELECT theater_num
+		FROM theater
+		WHERE theater_name = #{theater_name}
+	</select>
 </mapper>

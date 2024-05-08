@@ -11,8 +11,8 @@ import itwillbs.p2c3.boogimovie.vo.OTOVO;
 public interface OtoMapper {
 	
 	int insertOto(@Param("oto")OTOVO oto,
-				  @Param("theater_name")String theater_name,
-				  @Param("member_id")String member_id);
+				  @Param("theater_num")int theater_num,
+				  @Param("id")String id);
 
 	List<OTOVO> selectOtoList(@Param("startRow")int startRow, 
 							  @Param("listLimit")int listLimit);

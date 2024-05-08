@@ -23,6 +23,7 @@
 		WHERE theater_num = #{theater_num}
 	</select>
 	
+<<<<<<< HEAD
 	<select id="selectFacility">
 		SELECT * 
 		FROM theater_facility 
@@ -30,4 +31,11 @@
 	</select>
 	
 	
+=======
+	<select id="selectTheaterName" resultType="int">
+		SELECT theater_num
+		FROM theater
+		WHERE theater_name = #{theater_name}
+	</select>
+>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 </mapper>

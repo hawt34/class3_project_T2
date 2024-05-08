@@ -13,6 +13,10 @@ public interface TheaterMapper {
 	TheaterVO selectTheater(TheaterVO theater);
 	
 	List<TheaterVO> selectTheatersOrderbyName();
+	
+	
+	//theater_num 가져오기
+	int selectTheaterName(String theater_name);
 
 	List<TheaterFacilityVO> selectFacility(TheaterFacilityVO facility);
 

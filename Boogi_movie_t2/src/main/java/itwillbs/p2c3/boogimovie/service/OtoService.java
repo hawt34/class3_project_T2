@@ -14,8 +14,8 @@ public class OtoService {
 	@Autowired
 	private OtoMapper mapper;
 	
-	public int insertOto(OTOVO oto, String theater_name, String member_id ) {
-		return mapper.insertOto(oto, theater_name, member_id);
+	public int insertOto(OTOVO oto, int theater_name, String id ) {
+		return mapper.insertOto(oto, theater_name, id);
 	}
 
 	public List<OTOVO> getOtoList(int startRow, int listLimit) {

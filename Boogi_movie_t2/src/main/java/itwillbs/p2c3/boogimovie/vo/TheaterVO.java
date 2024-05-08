@@ -13,7 +13,6 @@ public class TheaterVO {
 	private String theater_parking_fee;
 	private String theater_public_bus;
 	private String theater_public_subway;
-	private String theater_id;
 	
 	
 	public TheaterVO() {}
@@ -119,23 +118,13 @@ public class TheaterVO {
 	}
 
 
-	public String getTheater_id() {
-		return theater_id;
-	}
-
-
-	public void setTheater_id(String theater_id) {
-		this.theater_id = theater_id;
-	}
-
-
 	@Override
 	public String toString() {
 		return "TheaterVO [theater_num=" + theater_num + ", theater_address=" + theater_address + ", theater_map_x="
 				+ theater_map_x + ", theater_map_y=" + theater_map_y + ", theater_floor_info=" + theater_floor_info
 				+ ", theater_name=" + theater_name + ", theater_parking_info=" + theater_parking_info
 				+ ", theater_parking_fee=" + theater_parking_fee + ", theater_public_bus=" + theater_public_bus
-				+ ", theater_public_subway=" + theater_public_subway + ", theater_id=" + theater_id + "]";
+				+ ", theater_public_subway=" + theater_public_subway + "]";
 	}
 	
 	

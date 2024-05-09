@@ -41,9 +41,6 @@ public class TheaterController {
 		List<NoticeVO> theaterNoticeList = service.getTheaterNoticeList(notice);
 		
 		
-		model.addAttribute("x", Double.parseDouble(theater.getTheater_map_x()));
-		model.addAttribute("y", Double.parseDouble(theater.getTheater_map_y()));
-		
 		model.addAttribute("theater", theater);
 		model.addAttribute("facilityList", facilityList);
 		model.addAttribute("theaterNoticeList", theaterNoticeList);

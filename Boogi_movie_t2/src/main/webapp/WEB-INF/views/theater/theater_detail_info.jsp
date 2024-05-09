@@ -28,8 +28,9 @@
 			<h4 class="text-primary">시설 안내</h4>
 			<div> <!-- 지점별 운영 시간 -->
 				<h5>■ 운영 시간</h5>
-				
+				${theater.theater_hours}
 			</div>
+			<br>
 			<div class="theater_facility"> <!-- 보유시설 -->
 				<h5>■ 보유 시설</h5>
 				<div class="theater_facility_area" style="display: flex;">
@@ -60,8 +61,8 @@
 				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622&libraries=services"></script>
 				<script>
 					
-					var theater_map_x = ${x};
-					var theater_map_y = ${y};
+					var theater_map_x = ${theater.theater_map_x};
+					var theater_map_y = ${theater.theater_map_y};
 					
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 					  mapOption = { 
@@ -145,7 +146,7 @@
 					<h4 class="text-primary">공지사항</h4>
 	   			</div>
 	    		<div class="col">
-	      			<a href="csc_notice">더보기
+	      			<a href="csc_notice"  style="text-decoration: none;">더보기
 	      				<img src="${pageContext.request.contextPath}/resources/images/chevron-right.svg" width="15"> 
 	      			</a>
 	   			</div>

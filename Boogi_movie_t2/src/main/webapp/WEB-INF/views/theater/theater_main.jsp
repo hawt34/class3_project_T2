@@ -118,10 +118,9 @@
 					<h3>극장 이벤트</h3>
 				</div>
 				<div class="col">
-					<a href="">더보기 
-	      			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
- 						<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-					</svg></a>
+					<a href="event" style="text-decoration: none;">더보기 
+	      				<img src="${pageContext.request.contextPath}/resources/images/chevron-right.svg" width="15" > 
+	      			</a>
 				</div>
 			</div>
 			<div class="row">
@@ -144,46 +143,27 @@
 	     			<h3>극장 공지사항</h3>	
 	   			</div>
 	    		<div class="col">
-	      			<a href="">더보기 
-	      			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
- 						<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-					</svg></a>
+	      			<a href="csc_notice" style="text-decoration: none;">더보기 
+	      				<img src="${pageContext.request.contextPath}/resources/images/chevron-right.svg" width="15"> 
+	      			</a>
 	   			</div>
 	   		</div>
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th scope="col" width="">극장</th>
-						<th scope="col">제목</th>
-						<th scope="col">등록일</th>
+						<th scope="col" width="400px">극장</th>
+						<th scope="col" width="800px">제목</th>
+						<th scope="col" >등록일</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td scope="row">해운대점</td>
-						<td>Mark</td>
-						<td>Otto</td>
-					</tr>
-					<tr>
-						<td scope="row">서면점</td>
-						<td>Jacob</td>
-						<td>Thornton</td>
-					</tr>
-					<tr>
-						<td scope="row">정관점</td>
-						<td>Larry the Bird</td>
-						<td>@twitter</td>
-					</tr>
-					<tr>
-						<td scope="row">남포점</td>
-						<td>Larry the Bird</td>
-						<td>@twitter</td>
-					</tr>
-					<tr>
-						<td scope="row">센텀점</td>
-						<td>Larry the Bird</td>
-						<td>@twitter</td>
-					</tr>
+					<c:forEach var="notice" items="${noticeList}" begin="0" end="6">
+						<tr>
+							<td scope="row">${notice.theater_name}</td>
+							<td>${notice.notice_subject}</td>
+							<td>${notice.notice_date}</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			</div>

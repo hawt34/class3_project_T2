@@ -11,8 +11,13 @@ import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 @Mapper
 public interface MypageMapper {
 	
-	MemberVO selectMember (MemberVO member);
-	ReservationVO selectMovieResv(MemberVO member);
+	MemberVO selectMember (String id);
+	ReservationVO selectMovieResv(String id);
 	List<TheaterVO> selectTheater();
+	MemberVO selectDbMember(MemberVO member);
 	
+	// 탈퇴
+	int updateMemberForWithdraw(MemberVO member);
+	
+	int updateMember(MemberVO member);
 }

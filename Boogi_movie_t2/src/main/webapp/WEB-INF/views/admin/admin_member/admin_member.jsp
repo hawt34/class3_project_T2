@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -169,7 +169,7 @@ th:nth-child(8), td:nth-child(8) {
 								<th>탈퇴일</th>
 								<th>회원상태</th>
 								<th>포인트</th>
-								<th>회원정보수정</th>
+								<th>회원정보상세</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -183,7 +183,7 @@ th:nth-child(8), td:nth-child(8) {
 									<td>${member.member_status}</td>
 									<td>${member.member_point}</td>
 									<td>
-										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_member_editForm?member_id=${member.member_id}'">수정</button>
+										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_member_editForm?member_id=${member.member_id}'">상세보기</button>
 									</td>
 								</tr>
 							</c:forEach>

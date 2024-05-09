@@ -5,10 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지 홈</title>
-<link href="admin_main.css" rel="stylesheet">
-<link href="admin_aside.css" rel="stylesheet">
-<link href="admin_footer.css" rel="stylesheet">
-<link href="admin_header.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <style>
 

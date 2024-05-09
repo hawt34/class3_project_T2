@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import itwillbs.p2c3.boogimovie.service.MovieInfoService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
+import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 
 
 @Controller
@@ -32,6 +33,7 @@ public class MovieController {
 		//System.out.println(movieInfo);
 		return "movie/movie";
 	}
-
+	
+	
 
 }

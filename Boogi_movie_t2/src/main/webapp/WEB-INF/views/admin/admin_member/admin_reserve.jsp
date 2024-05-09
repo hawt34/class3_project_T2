@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -160,29 +161,31 @@ td:nth-child(8) {
 					<table>
 						<thead>
 							<tr>
-								<th>결제번호</th>
+								<th>예매번호</th>
 								<th>회원ID</th>
 								<th>영화명</th>
 								<th>상영일</th>
+								<th>회차</th>
 								<th>극장정보</th>
-								<th>좌석</th>
 								<th>결제상태</th>
 								<th>상세보기</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>121</td>
-								<td>junhyuk</td>
-								<td>파묘</td>
-								<td>2024-04-19</td>
-								<td>해운대점</td>
-								<td>G13,G14</td>
-								<td>결제완료</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="reserveDetail()">상세</button>
-								</td>
-							</tr>
+							<c:forEach var="reserve" items="${reserveList}">
+								<tr>
+									<td>${reserve.reservation_num}</td>
+									<td>${reserve.member_id}</td>
+									<td>${reserve.movie_name}</td>
+									<td>${reserve.screen_date}</td>
+									<td>${reserve.round_num}</td>
+									<td>${reserve.theater_name} / ${reserve.booth_num}관</td>
+									<td>${reserve.ticket_pay_status}</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_reserve_detail?reservation_num=${reserve.reservation_num}'">상세</button>
+									</td>
+								</tr>
+							</c:forEach>
 							
 						</tbody>
 					</table>
@@ -196,11 +199,5 @@ td:nth-child(8) {
 	<footer>
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
-
-	<script type="text/javascript">
-		function reserveDetail() {
-			window.open("admin_reserve_detail", "movieForm", "width=1000, height=800, top=100, left=400");
-		}
-	</script>
 </body>
 </html>

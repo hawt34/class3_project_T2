@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
+import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
+import itwillbs.p2c3.boogimovie.vo.PageInfo;
+import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 
 @Controller
 public class AdminController {
@@ -29,6 +32,9 @@ public class AdminController {
 	@Autowired
 	OtoService otoService;
 	
+	@Autowired
+	TheaterService theaterService;
+	
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")
@@ -36,7 +42,7 @@ public class AdminController {
 		return "admin/admin_main/admin_main";
 	}
 	
-	
+	//--------------------------------------------------------------------
 	// 관리자 고객센터
 	@GetMapping("admin_FAQ")
 	public String adminFAQ() {
@@ -62,11 +68,24 @@ public class AdminController {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
 		
+		int NoticeCount = service.getNoticeListCount(); //총 공지사항 갯수
+		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+		int maxPage = NoticeCount / listLimit + (NoticeCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+		
+		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+			endPage = maxPage;
+		}
+		PageInfo pageList = new PageInfo(NoticeCount, pageListLimit, maxPage, startPage, endPage);
+		
 		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("pageList", pageList);
 		
 		return "admin/admin_csc/admin_notice";
 	}
-	@GetMapping("admin_notice_form")
+	@GetMapping("admin_noticeForm")
 	public String adminNoticeForm() {
 		
 		return "admin/admin_csc/admin_notice_form";
@@ -74,20 +93,26 @@ public class AdminController {
 	
 	@PostMapping("admin_notice_pro")
 	public String adminNoticePro(NoticeVO notice, Model model, String theater_name) {
-		int noticeCount = service.InsertNotice(notice,theater_name);
-		System.out.println(theater_name);
+		int theater_num = theaterService.getTheaterName(theater_name);
+		
+		
+		int noticeCount = service.InsertNotice(notice,theater_num);
 		if(noticeCount == 0) {
 			model.addAttribute("msg", "입력 실패!");
 		
-		return "error/fail";
+			return "error/fail";
 		}
-		
 		
 		return "redirect:admin_notice";
 	}
 	
 	@GetMapping("admin_notice_delete")
-	public String adminNoticeDelete() {
+	public String adminNoticeDelete(int notice_num, Model model) {
+		int deleteCount = service.deleteNotice(notice_num);
+		if(deleteCount == 0) {
+			model.addAttribute("msg", "공지사항 삭제 실패");
+			return "error/fail";
+		}
 		return "redirect:/admin_notice";
 	}
 	
@@ -122,32 +147,39 @@ public class AdminController {
 		int insertCount = service.replyRegist(reply, reply.getOto_num());
 		if(insertCount == 0) {
 			model.addAttribute("msg", "일대일문의 답변 실패");
-		
 			return "error/fail";
+		}
+		int updateCount = otoService.updateOtoResponse(reply.getOto_num());
+		if(updateCount == 0) {
+			model.addAttribute("msg", "답변 변경 실패");
 		}
 		
 		return "redirect:/admin_oto";
 	}
 	
-	//-----------------------------------------------
 	// 관리자 회원 페이지
-	@GetMapping("admin_reserve")
-	public String adminReserve() {
-		return "admin/admin_member/admin_reserve";
-	}
-	@GetMapping("admin_reserve_detail")
-	public String adminReserveDetail() {
-		return "admin/admin_member/admin_reserve_detail";
-	}
+
+	// 2) 리뷰 페이지
 	@GetMapping("admin_review")
-	public String adminReview() {
+	public String adminReview(Model model) {
+		List<ReviewVO> reviewList = service.getReviewList();
+		model.addAttribute("reviewList", reviewList);
+//		System.out.println(reviewList);
 		return "admin/admin_member/admin_review";
 	}
 	@GetMapping("admin_review_delete")
-	public String adminReviewDelete() {
-		return "redirect:/admin_review";
+	public String adminReviewDelete(String review_id, Model model) {
+		int deleteCount = service.deleteReview(review_id);
+		if(deleteCount > 0) {
+			return "redirect:/admin_review";
+		} else {
+			model.addAttribute("msg", "삭제에 실패하였습니다");
+			return "error/fail";
+			
+		}
+		
 	}
-	
+	// 3) 회원페이지
 	@GetMapping("admin_member")
 	public String adminMember(Model model) {
 		List<Map<String, String>> memberList = service.getmemberList();
@@ -156,6 +188,7 @@ public class AdminController {
 		return "admin/admin_member/admin_member";
 	}
 	
+	// 회원정보 상세
 	@GetMapping("admin_member_editForm")
 	public String adminMemberEditForm(MemberVO member , Model model) {
 		System.out.println(member.getMember_id());
@@ -165,6 +198,7 @@ public class AdminController {
 		return "admin/admin_member/admin_member_editForm";
 	}
 	
+	// 회원 삭제
 	@GetMapping("admin_member_withdraw")
 	public String adminMemberWithdraw(MemberVO member, Model model) {
 		int updateCount = service.deleteMember(member.getMember_id());
@@ -179,6 +213,7 @@ public class AdminController {
 		
 	}
 	
+	//--------------------------------------------------------------------
 	// 관리자 영화 페이지
 	@GetMapping("admin_moviePlan")
 	public String adminMoviePlan() {
@@ -201,6 +236,7 @@ public class AdminController {
 		return "redirect:/admin_moviePlan";
 	}
 	
+	// 영화 리스트 조회 
 	@GetMapping("admin_movie")
 	public String adminMovie(Model model) {
 		List<Map<String, String>> movieList = service.getmovieList();
@@ -209,17 +245,43 @@ public class AdminController {
 		return "admin/admin_movie/admin_movie";
 	}
 	
+	// 영화 삭제
 	@GetMapping("admin_movie_delete")
-	public String adminMovieDelete() {
+	public String adminMovieDelete(@RequestParam String movie_num, Model model) {
 		System.out.println("moviedelete");
-		return "redirect:/admin_movie";
+		int deleteCount = service.deleteMovie(movie_num);
+		
+		if(deleteCount > 0) {
+			return "redirect:admin_movie";
+		} else {
+			model.addAttribute("msg", "영화등록 실패");
+			return "redirect:/error/fail";
+		}
+		
 	}
+	
+	// 영화 등록 폼
 	@GetMapping("admin_movie_reg_form")
 	public String adminMovieRegForm(MovieVO movie, Model model) {
 		model.addAttribute("movie", movie);
 		return "admin/admin_movie/admin_movie_reg_form";
 	}
 	
+	// 영화 등록 프로
+	@PostMapping("admin_movie_reg_pro")
+	public String adminMovieGetPro(@ModelAttribute MovieVO movie, Model model) {
+		int insertCount = service.InsertMovie(movie);
+		
+		if(insertCount > 0) {
+			return "redirect:admin_movie";
+		} else {
+			model.addAttribute("msg", "영화등록 실패");
+			return "redirect:/error/fail";
+		}
+		
+	}
+	
+	// 영화 수정 폼
 	@GetMapping("admin_movie_edit_form")
 	public String adminMovieEditForm(MovieVO movie, Model model) {
 		System.out.println("movie_num: " + movie.getMovie_num());
@@ -229,22 +291,23 @@ public class AdminController {
 		return "admin/admin_movie/admin_movie_edit_form";
 	}
 	
+	// 영화 수정 프로
 	@PostMapping("admin_movie_edit_pro")
-	public String adminMovieEditPro(@ModelAttribute MovieVO movie) {
-//		System.out.println(movie);
-		service.UpdateMovie(movie);
+	public String adminMovieEditPro(@ModelAttribute MovieVO movie, Model model) {
+		int updateCount = service.UpdateMovie(movie);
 		
-		return "redirect:admin_movie";
+		if(updateCount > 0) {
+			return "redirect:admin_movie";			
+		} else {
+			model.addAttribute("msg", "영화수정 실패");
+			return "redirect:/error/fail";
+		}
+		
+		
 	}
 	
-	@PostMapping("admin_movie_reg_pro")
-	public String adminMovieGetPro(@ModelAttribute MovieVO movie) {
-//		System.out.println(movie);
-		service.InsertMovie(movie);
-		
-		return "redirect:admin_movie";
-	}
 	
+	//--------------------------------------------------------------------
 	// 관리자 이벤트 
 	@GetMapping("admin_event")
 	public String adminEvent() {
@@ -263,7 +326,7 @@ public class AdminController {
 		return "redirect:/admin_event";
 	}
 
-	
+	//--------------------------------------------------------------------
 	// 관리자 결제 페이지
 	@GetMapping("admin_pay")
 	public String adminPay() {
@@ -274,6 +337,24 @@ public class AdminController {
 		return "redirect:/admin_pay";
 	}
 	
+	//	예매관리 페이지
+	@GetMapping("admin_reserve")
+	public String adminReserve(Model model) {
+		List<Map<String, String>> reserveList = service.getReserveList();
+		System.out.println(reserveList);
+		model.addAttribute("reserveList", reserveList);
+		return "admin/admin_member/admin_reserve";
+	}
+	
+	// 예매 상세 페이지
+	@GetMapping("admin_reserve_detail")
+	public String adminReserveDetail(@RequestParam int reservation_num, Model model) {
+		Map<String, String> reserveDetail = service.selectReserveDetail(reservation_num);
+		model.addAttribute("reserveDetail", reserveDetail);
+		return "admin/admin_member/admin_reserve_detail";
+	}
+	
+	//--------------------------------------------------------------------
 	// 관리자 스토어 페이지
 	@GetMapping("admin_store")
 	public String adminStore() {
@@ -293,6 +374,7 @@ public class AdminController {
 		return "redirect:/admin_store";
 	}
 	
+	//--------------------------------------------------------------------
 	// 관리자 극장 페이지
 	@GetMapping("admin_theater")
 	public String adminTheater() {

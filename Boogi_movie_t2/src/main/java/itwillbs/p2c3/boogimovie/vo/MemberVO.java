@@ -3,6 +3,7 @@ package itwillbs.p2c3.boogimovie.vo;
 import java.sql.Date;
 
 import lombok.Data;
+
 @Data
 public class MemberVO {
 	private String member_id;

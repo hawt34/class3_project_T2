@@ -87,58 +87,67 @@ body {
 					<div class="row mb-3">
 						<div class="col-md-6">
 							<div class="subject">결제번호</div>
-							<input type="text" id="pay_num" class="form-control" placeholder='결제번호' readonly />
+							<input type="text" id="pay_num" class="form-control" value="${reserveDetail.ticket_pay_num}" readonly />
 						</div>
 						<div class="col-md-6">
-							<div class="subject">예매코드</div>
-							<input type="text" id="res_code" class="form-control" placeholder='12341234' readonly />
+							<div class="subject">예매번호</div>
+							<input type="text" id="res_code" class="form-control" value="${reserveDetail.reservation_num}" readonly />
 						</div>
 					</div>
 					<div class="row mb-3">
 						<div class="col-md-6">
 							<div class="subject">회원ID</div>
-							<input type="text" id="member_id" class="form-control" placeholder='admin' readonly />
+							<input type="text" id="member_id" class="form-control" value="${reserveDetail.member_id}" readonly />
 						</div>
 						<div class="col-md-6">
 							<div class="subject">영화명</div>
-							<input type="text" id="movie_name" class="form-control" placeholder='홍길동전' readonly />
+							<input type="text" id="movie_name" class="form-control" value="${reserveDetail.movie_name}" readonly />
 						</div>
 					</div>
 					<div class="row mb-3">
 						<div class="col-md-6">
-							<div class="subject">상영일</div>
-							<input type="date" id="movie_date" class="form-control" placeholder='홍길동전' readonly />
+							<div class="subject">극장</div>
+							<input type="text" id="theaterInfo" class="form-control" value="${reserveDetail.theater_name}" readonly />
 						</div>
-						<div class="col-md-6">
-							<div class="subject">극장정보</div>
-							<input type="text" id="theaterInfo" class="form-control" placeholder='홍길동전' readonly />
-						</div>
-					</div>
-					<div class="row mb-3">
 						<div class="col-md-6">
 							<div class="subject">상영관</div>
-							<input type="text" id="res_seat" class="form-control" placeholder='홍길동전' readonly />
-						</div>
-						<div class="col-md-6">
-							<div class="subject">예매좌석</div>
-							<input type="text" id="res_seat" class="form-control" placeholder='홍길동전' readonly />
+							<input type="text" id="booth_num" class="form-control" value="${reserveDetail.booth_num}관" readonly />
 						</div>
 					</div>
 					<div class="row mb-3">
-					
+						<div class="col-md-6">
+							<div class="subject">예매좌석</div>
+							<input type="text" id="res_seat" class="form-control" value="${reserveDetail.ticket_seat_info}" readonly />
+						</div>
+						<div class="col-md-6">
+							<div class="subject">상영일</div>
+							<input type="date" id="movie_date" class="form-control" value="${reserveDetail.screen_date}" readonly />
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<div class="subject">회차정보</div>
+							<input type="text" id="screen_round" class="form-control" value="${reserveDetail.round_num}" readonly />
+						</div>
+						<div class="col-md-6">
+							<div class="subject">결제날짜</div>
+							<input type="date" id="pay_date" class="form-control" value="${reserveDetail.ticket_pay_date}" readonly />
+						</div>
+					</div>
+					<div class="row mb-3">
 						<div class="col-md-6">
 							<div class="subject">결제상태</div>
-							<input type="text" id="pay_status" class="form-control" placeholder='홍길동전' readonly />
+							<input type="text" id="pay_status" class="form-control" value="${reserveDetail.ticket_pay_status}" readonly />
 						</div>
 						<div class="col-md-6">
 							<div class="subject">결제금액</div>
-							<input type="text" id="pay_amount" class="form-control" placeholder='홍길동전' readonly />
+							<input type="text" id="pay_amount" class="form-control" value="${reserveDetail.ticket_pay_price}" readonly />
 						</div>
 					</div>
 					<div class="space"></div>
 					<hr class="mb-4">
 					<div class="mb-4" align="center">
-						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="window.close()">
+						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
 			</div>
 		</div>

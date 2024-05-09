@@ -5,10 +5,27 @@
 <mapper namespace="itwillbs.p2c3.boogimovie.mapper.NoticeMapper">
 
 	<select id="selectNoticeList" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
-		SELECT * 
-		FROM notice
+		SELECT n.notice_num,
+			   n.notice_subject,
+			   n.notice_content,
+			   t.theater_name,
+			   n.notice_date
+		FROM notice n
+		JOIN theater t
+		ON n.theater_num = t.theater_num
 		ORDER BY notice_num DESC
 		limit #{startRow}, #{listLimit};
+	</select>
+	
+	<select id="selectNotice" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
+		SELECT n.notice_num,
+			   n.notice_subject,
+			   n.notice_content,
+			   t.theater_name,
+			   n.notice_date
+		FROM notice n
+		JOIN theater t
+		ON n.theater_num = t.theater_num
 	</select>
 
 </mapper>

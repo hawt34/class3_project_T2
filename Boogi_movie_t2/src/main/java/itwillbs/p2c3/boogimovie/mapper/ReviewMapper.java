@@ -11,4 +11,7 @@ public interface ReviewMapper {
 
 	int insertReview(ReviewVO review);
 	List<ReviewVO> selectReviewList(int movie_num);
+	List<ReviewVO> selectReviewId(int review_id);
+	int updateReview(ReviewVO review2);
+	int deleteReview(int review_id);
 }

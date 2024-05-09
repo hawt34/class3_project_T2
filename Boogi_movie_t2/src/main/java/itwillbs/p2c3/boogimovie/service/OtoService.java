@@ -14,8 +14,8 @@ public class OtoService {
 	@Autowired
 	private OtoMapper mapper;
 	
-	public int insertOto(OTOVO oto, String theater_name, String member_id ) {
-		return mapper.insertOto(oto, theater_name, member_id);
+	public int insertOto(OTOVO oto, int theater_name, String id ) {
+		return mapper.insertOto(oto, theater_name, id);
 	}
 
 	public List<OTOVO> getOtoList(int startRow, int listLimit) {
@@ -36,5 +36,9 @@ public class OtoService {
 
 	public int deleteOto(int oto_num) {
 		return mapper.deleteOto(oto_num);
+	}
+	//'미답' 상태 변경
+	public int updateOtoResponse(int oto_num) {
+		return mapper.updateResponse(oto_num);
 	}
 }

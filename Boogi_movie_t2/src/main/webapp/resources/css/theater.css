@@ -67,12 +67,7 @@ table {
 	margin: auto;
 }
 
-.theater_name{
-	background-image: url(${pageContext.request.contextPath}/resources/images/theater_CINEMA4.jpg);
-	position: inherit;
-}
-
-,theater_name_aera{
+.theater_name_aera{
 	
 	
 }
@@ -82,30 +77,40 @@ table {
 }
 
 
-.theater_info {
-	margin: 25px 5px;  
-	padding:30px 5px;
-}
-
-
 .theater_detail_subtab {
 	padding:30px 5px;
 }
 
-
+.theater_info {
+	margin: 20px;
+	
+}
 
   
 /* ========================================= */
 /* theater_detail_info.jsp */
 
+ 
 .theater_facility_info_img {
 	width: 100px; 
 	margin: 12px;
 }
-
-	
-  
-  
+ 
+ h4 {
+ 	margin-bottom: 20px;
+ }
+ 
+ .theater_public_info {
+ 	display: flex; 
+ 	margin: 20px 0;
+ }
+ 
+ .theater_public_img {
+ 	width: 100px;
+ 	margin: 20px;
+ }
+ 
+ 
 /* ========================================= */
 /* theater_detail_timetable */
 .theater-info{

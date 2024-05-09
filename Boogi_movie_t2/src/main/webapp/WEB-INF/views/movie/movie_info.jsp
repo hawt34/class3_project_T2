@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 
 <title>Insert title here</title>
@@ -21,6 +22,13 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+<script>
+	function refreshParent() {
+		location.reload(); // 원래 페이지 새로고침	
+	}
+    
+</script>
+
 <body>
 	<header>
 		<jsp:include page="../inc/admin_header.jsp"></jsp:include>
@@ -47,55 +55,67 @@
 							<li><span>줄거리 : ${movie.movie_summary}</span> </li>
 							
 						</ul>
-						<button type="button" class="btn btn-outline-primary">뒤로가기</button>
+						<button type="button" class="btn btn-outline-primary" onclick="window.history.back()">뒤로가기</button>
 					</div>	
 				</div>
 			</div>
 			<div class="reviewContents">
 			<form action="reviewPro" method="post">	
 				<div class="star-rating">
-				    <input type="radio" class="star" value="1">
-    				<input type="radio" class="star" value="2">
-				    <input type="radio" class="star" value="3">
-				    <input type="radio" class="star" value="4">
-				    <input type="radio" class="star" value="5">
+
+					<p>별점 </p>
+				<select id="rating" name= "rating" class="form-select" >
+    				<option value="0" selected>별점 선택(미선택시 0점 ☆)</option>
+    				<option value="1">★ 1점</option>
+    				<option value="2">★★ 2점</option>
+    				<option value="3">★★★ 3점</option>
+    				<option value="4">★★★★ 4점</option>
+    				<option value="5">★★★★★ 5점</option>
+				</select>
 				</div>
 				<div class="review">
-  				<h2>관람평</h2>
+  				<p>관람평</p>
   				<c:choose>
     				<c:when test="${not empty sessionScope.sId}">
-        				<textarea id="reviewText" class="form-control" rows="3" cols="2" maxlength="50" placeholder="50자 이내로 부탁드리겠습니다."></textarea>
+        				<textarea id="reviewText" name="review_text" class="form-control" rows="3" cols="5" maxlength="50" placeholder="50자 이내로 부탁드리겠습니다."></textarea>
     				</c:when>
     				<c:otherwise>
-        				<textarea id="reviewText" class="form-control" rows="3" cols="2" maxlength="50" placeholder="사랑하는 고객님 로그인먼저 부탁드리겠습니다."></textarea>
+        				<textarea id="reviewText" class="form-control" rows="3" cols="5" maxlength="50" placeholder="사랑하는 고객님 로그인먼저 부탁드리겠습니다."></textarea>
     				</c:otherwise>
 				</c:choose>
-  				</div>	
+  				</div>
+  				<div class="submitButton">	
 				<button type="submit" class="btn btn-outline-primary"  id="submitReviewBtn">별점주기 & 관람평 남기기</button>
+				 </div>
 				 <!-- hidden input으로 값을 추가 -->
-    			<input type="hidden" id="ratingInput" name="rating" value="">
-   				<input type="hidden" id="reviewTextInput" name="review_text" value="">
    				<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
    				<input type="hidden" id="member_id" name="member_id" value="${sessionScope.sId}">
    				
 			</form>
 			</div>
 			<div class="showReview">
-				 
 				<c:forEach var="review" items="${reviews}">
-        		<div class="rating">
-            	<c:forEach begin="1" end="${review.rating}">
-                <span class="filled"></span>
-           		 </c:forEach>
-        		</div>
+    			<div class="reviewCover">
+        			<c:choose>
+            		<c:when test="${review.rating eq 0}">
+                	<span class="empty"></span>
+            		</c:when>
+            		<c:otherwise>
+                		<c:forEach begin="1" end="${review.rating}">
+                    	<span class="filled"></span>
+                		</c:forEach>
+            		</c:otherwise>
+        			</c:choose>
+    			</div>
+				        		
         		<div class="reviewTexts">
-        		<span class="review-text">${review.review_text}</span>
-        		<span class="member-id">${review.member_id}</span>
-        		<span class="review-date">${fn:substring(review.review_date, 0, 10)}</span>
-    			<c:if test="${review.member_id eq sessionScope.sId}">
-                <button onclick="editReview('${review.review_id}')">수정</button>
-                <button onclick="deleteReview('${review.review_id}')">삭제</button>
-            	</c:if>
+        			<span class="review-text">${review.review_text}</span>
+        			<span class="member-id">${review.member_id}</span>
+        			<span class="review-date">${fn:substring(review.review_date, 0, 10)}</span>
+    				<c:if test="${review.member_id eq sessionScope.sId}">
+                	<button onclick="openReviewModify(${review.review_id})" class="btn btn-outline-primary" >수정</button> 
+                 	<button onclick="confirmDelete(${review.review_id})" class="btn btn-outline-primary">삭제</button>
+            		</c:if>
     			</div>
     			</c:forEach>
 			</div>
@@ -106,11 +126,13 @@
 	</div>
 </body>
 <script type="text/javascript">
+    
+    
 $("#submitReviewBtn").click(function(event) {
     // 세션 아이디 가져오기
     let sessionId = "${sessionScope.sId}";
 
-    // 관람평 가져오기
+    
     let reviewText = $("#reviewText").val().trim();
     // 로그인 여부 확인
     if (!sessionId) {
@@ -131,17 +153,22 @@ $("#submitReviewBtn").click(function(event) {
         return;
     }
 
-    // 별점 가져오기
-    let rating = $('.star-rating input:checked').val();
-    if (!rating) {
-        // 별점을 선택하지 않았을 때 기본값으로 0점 설정
-        rating = 0;
-    }
+   
 
-    // 별점과 관람평을 hidden input에 설정
-    $("#ratingInput").val(rating);
-    $("#reviewTextInput").val(reviewText);
 });
+
+function openReviewModify(review_id) {
+	var url = "reviewModify?review_id=" + review_id;
+	
+	window.open(url,"","width=700,height=500");
+}
+
+function confirmDelete(review_id) {
+	var url = "deleteReview?review_id=" + review_id;
+	
+	window.open(url,"","width=700,height=300");	
+}
+
 
 </script>
 

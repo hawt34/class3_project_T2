@@ -180,7 +180,14 @@
 											<td>${oto.oto_date }</td>
 											<td>${oto.oto_reply_status }</td> <!-- 답변 상태 -->
 											<td>
-												<button type="button" class="btn btn-outline-primary" onclick="admin_oto_reply(${oto.oto_num})">답변하기</button>
+												<c:choose>
+													<c:when test="${oto.oto_reply_status eq '답변'}">
+														<button type="button" class="btn btn-outline-primary" onclick="admin_oto_reply(${oto.oto_num})" style="display: none;">답변하기</button>
+													</c:when>
+													<c:otherwise>
+														<button type="button" class="btn btn-outline-primary" onclick="admin_oto_reply(${oto.oto_num})">답변하기</button>
+													</c:otherwise>
+												</c:choose>
 											</td>
 										</tr>
 									</c:forEach>

@@ -140,7 +140,6 @@ body {
 .header_middle_title {
 	display: flex;
 	flex-direction: row;
-	margin: 0 auto;
 }
 </style>
 </head>
@@ -195,16 +194,16 @@ body {
 			<div class="dropdown">
 				<button class="dropdown-btn" onclick="location.href='theater'">극장</button>
 				<div class="dropdown-submenu">
-					<a href="theater_detail?name=haeundae" name="haeundae">해운대점</a> 
-					<a href="theater_detail?name=centum" name="centum">센텀점</a> 
-					<a href="theater_detail?name=seomyeon" name="seomyeon">서면점</a>
-					<a href="theater_detail?name=nampo" name="nampo">남포점</a> 
-					<a href="theater_detail?name=busanuniv" name="busanuniv">부산대점</a> 
-					<a href="theater_detail?name=sajik" name="sajik">사직점</a>
-					<a href="theater_detail?name=yeongdo" name="yeongdo">영도점</a> 
-					<a href="theater_detail?name=deokcheon" name="deokcheon">덕천점</a> 
-					<a href="theater_detail?name=jeonggwan" name="jeonggwan">정관점</a> 
-					<a href="theater_detail?name=sasang" name="sasang">사상점</a>
+					<a href="theater_detail?theater_num=1">해운대점</a> 
+					<a href="theater_detail?theater_num=2">센텀점</a> 
+					<a href="theater_detail?theater_num=3">서면점</a>
+					<a href="theater_detail?theater_num=4">남포점</a> 
+					<a href="theater_detail?theater_num=5">부산대점</a> 
+					<a href="theater_detail?theater_num=6">사직점</a>
+					<a href="theater_detail?theater_num=7">영도점</a> 
+					<a href="theater_detail?theater_num=8">덕천점</a> 
+					<a href="theater_detail?theater_num=9">정관점</a> 
+					<a href="theater_detail?theater_num=10">사상점</a>
 				</div>
 			</div>
 			<div class="dropdown">

@@ -90,62 +90,80 @@ body {
 					      <th scope="col">#</th>
 					      <th scope="col">영화</th>
 					      <th scope="col">날짜</th>
-					      <th scope="col">시간</th>
+					      <th scope="col">상영시간</th>
 					      <th scope="col">극장</th>
+					      <th scope="col">좌석</th>
 					      <th scope="col">가격</th>
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr  class="table-secondary">
-					      <th scope="row">1</th>
-						      <td>듄2
-<%-- 						          <input type="text" value="${}" name="title" id="title" readonly> --%>
-						      </td>
-						      <td>2024 / 04 / 16</td>
-						      <td>17:00 ~ 19:20</td>
-						      <td>서면</td>
-						      <td>15,000원</td>
-					    </tr>      
-					    <tr>
-					      <th scope="row">2</th>
-					        <td>아바타3</td>
-					        <td>2024 / 03 / 29</td>
-					        <td>18:20 ~ 20:15</td>
-					        <td>서면</td>
-					        <td>15,000원</td>
-					    </tr>
-					    <tr  class="table-secondary">
-					      <th scope="row">3</th>
-				            <td>토이스토리</td>
-				            <td>2024 / 01 / 19</td>
-				            <td>21:10 ~ 23:10</td>
-				            <td>서면</td>
-				            <td>12,000원</td>
-				         </tr>
-						<tr>
-					      <th scope="row">4</th>
-							<td>파묘</td>
-		          			<td>2024 / 03 / 18</td>
-		            		<td>12:10 ~ 14:30</td>
-		           			<td>아시아드</td>
-		            		<td>12,000원</td>
-		          		</tr>
-		          		<tr  class="table-secondary">
-					      <th scope="row">5</th>
-					      	<td>폴라익스프레스</td>
-			              	<td>2013 / 12 / 25</td>
-							<td>21:00 ~ 23:10</td>
-			            	<td>아시아드</td>
-			            	<td>9,000원</td>
-		         		</tr>
-		          		<tr>
-					      <th scope="row">6</th>
-		          			<td>엘리멘탈</td>
-		            		<td>2023 / 10 / 29</td>
-				            <td>19:35 ~ 22:10</td>
-				            <td>삼정타워</td>
-				            <td>12,000원</td>
-				          </tr>
+					  
+						  <c:forEach var="movie" items="${movieReservation}" varStatus="status">
+							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+							        <th scope="row">${status.index + 1}</th>
+							        <td>${movie.movie_name}</td>
+<%-- 							        <td>${ticket.screen_date}</td> --%>
+<%-- 							        <td>${reservation.discsount_num}</td> --%>
+<%-- 							        <td>${reservation.discsount_num}</td> --%>
+<%-- 							        <td>${reservation.discsount_num}</td> --%>
+<%-- 							        <td>${reservation.discsount_num}</td> --%>
+							    </tr>
+							</c:forEach>
+					  
+<!-- 					    <tr  class="table-secondary"> -->
+<!-- 					      <th scope="row">1</th> -->
+<%-- 						      <td>${movie.movie_name}</td> --%>
+<!-- 						      <td>2024 / 04 / 16</td> -->
+<!-- 						      <td>17:00 ~ 19:20</td> -->
+<!-- 						      <td>서면</td> -->
+<!-- 						      <td>K9</td> -->
+<!-- 						      <td>15,000원</td> -->
+<!-- 					    </tr>       -->
+<!-- 					    <tr> -->
+<!-- 					      <th scope="row">2</th> -->
+<!-- 					        <td>아바타3</td> -->
+<!-- 					        <td>2024 / 03 / 29</td> -->
+<!-- 					        <td>18:20 ~ 20:15</td> -->
+<!-- 					        <td>서면</td> -->
+<!-- 					        <td>H8</td> -->
+<!-- 					        <td>15,000원</td> -->
+<!-- 					    </tr> -->
+<!-- 					    <tr  class="table-secondary"> -->
+<!-- 					      <th scope="row">3</th> -->
+<!-- 				            <td>토이스토리</td> -->
+<!-- 				            <td>2024 / 01 / 19</td> -->
+<!-- 				            <td>21:10 ~ 23:10</td> -->
+<!-- 				            <td>서면</td> -->
+<!-- 				            <td>D13</td> -->
+<!-- 				            <td>12,000원</td> -->
+<!-- 				         </tr> -->
+<!-- 						<tr> -->
+<!-- 					      <th scope="row">4</th> -->
+<!-- 							<td>파묘</td> -->
+<!-- 		          			<td>2024 / 03 / 18</td> -->
+<!-- 		            		<td>12:10 ~ 14:30</td> -->
+<!-- 		           			<td>아시아드</td> -->
+<!-- 		           			<td>H11 H12</td> -->
+<!-- 		            		<td>12,000원</td> -->
+<!-- 		          		</tr> -->
+<!-- 		          		<tr  class="table-secondary"> -->
+<!-- 					      <th scope="row">5</th> -->
+<!-- 					      	<td>폴라익스프레스</td> -->
+<!-- 			              	<td>2013 / 12 / 25</td> -->
+<!-- 							<td>21:00 ~ 23:10</td> -->
+<!-- 			            	<td>아시아드</td> -->
+<!-- 			            	<td>K8 K9 K10</td> -->
+<!-- 			            	<td>9,000원</td> -->
+<!-- 		         		</tr> -->
+<!-- 		          		<tr> -->
+<!-- 					      <th scope="row">6</th> -->
+<!-- 		          			<td>엘리멘탈</td> -->
+<!-- 		            		<td>2023 / 10 / 29</td> -->
+<!-- 				            <td>19:35 ~ 22:10</td> -->
+<!-- 				            <td>삼정타워</td> -->
+<!-- 				            <td>H15 H16</td> -->
+<!-- 				            <td>12,000원</td> -->
+<!-- 				          </tr> -->
 					  </tbody>
 					</table>
 				</div><!-- col-md-7 -->
@@ -179,28 +197,26 @@ body {
 							</div>
 							
 					      </div><!-- modal-body -->
-					      <div class="modal-footer">
+					      <div class="modal-footer"> <!-- 모달 폼 극장 전체 리스트 -->
 					      		<form id="theaterForm" method="post" action="MyTheaterList">
 								<button type="submit" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
-					      
-					      		<script type="text/javascript">
-								    function sendCheckedValues() {
-								        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
-								        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
-								
-								        checkboxes.forEach(function(checkbox) {
-								            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
-								        });
-								
-								        // 서버로 선택된 값들을 전송
-								        // 여기서는 간단하게 alert 창에 선택된 값들을 표시하도록 했지만, 실제로는 서버로 값을 전송하는 방식을 사용해야 함
-								        alert('선택된 값들: ' + checkedValues.join(', '));
-								        location.href="MyTheaterList";
-								    }
-								</script>
+						      		<script type="text/javascript">
+									    function sendCheckedValues() {
+									        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
+									        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
+									
+									        checkboxes.forEach(function(checkbox) {
+									            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
+									        });
+									
+									        // 서버로 선택된 값들을 전송
+									        // 여기서는 간단하게 alert 창에 선택된 값들을 표시하도록 했지만, 실제로는 서버로 값을 전송하는 방식을 사용해야 함
+									        alert('선택된 값들: ' + checkedValues.join(', '));
+	// 								        location.href="MyTheaterList";
+									    }
+									</script>
 								</form>
-								
-					      </div><!--modal-footer  -->
+					      </div><!--modal-footer  --> <!-- 모달 폼 극장 전체 리스트 -->
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->
 					</div><!-- modal fade 모달 div 끝 -->

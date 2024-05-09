@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,12 +67,12 @@ body {
 					</div>	
 					<div class="paybox1 col-md-6" >
 						<div class="col-md-4 d-grid gap-5">
-							<input class="form-control box3 w-75" type="text" value="영화제목" aria-label="Disabled input example " disabled readonly >
+							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly >
 							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly>
 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly>
 						</div>
 						<div class="col-md-4 d-grid gap-5">
-							<input type="text" readonly class="form-control-plaintext" value="범죄도시">
+							<input type="text" readonly class="form-control-plaintext" value="${reservation.movie_name }">
 							<input type="text" readonly class="form-control-plaintext" value="2024 / 04 / 24">
 							<input type="text" readonly class="form-control-plaintext" value="서면 8관">
 						</div>
@@ -94,7 +95,7 @@ body {
 					</div>	
 					<div class="paybox1 col-md-6">
 						<div class="col-md-4 d-grid gap-5">
-							<input class="form-control box3 w-75" type="text" value="영화제목" aria-label="Disabled input example " disabled readonly >
+							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly >
 							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly>
 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly>
 						</div>
@@ -122,7 +123,7 @@ body {
 					</div>	
 					<div class="paybox1 col-md-6">
 						<div class="col-md-4 d-grid gap-5">
-							<input class="form-control box3 w-75" type="text" value="영화제목" aria-label="Disabled input example " disabled readonly >
+							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly >
 							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly>
 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly>
 						</div>
@@ -151,7 +152,7 @@ body {
 						</div>	
 						<div class="paybox1 col-md-6">
 							<div class="col-md-4 d-grid gap-5">
-								<input class="form-control box3 w-75" type="text" value="영화제목" aria-label="Disabled input example " disabled readonly >
+								<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly >
 								<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly>
 								<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly>
 							</div>

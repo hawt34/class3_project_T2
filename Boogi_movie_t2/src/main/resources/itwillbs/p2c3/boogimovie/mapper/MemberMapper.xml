@@ -48,7 +48,7 @@
 	</select>	
 	
 	<select id="selectTheatersMyTheater" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
-		SELECT member_my_theater1 member_my_theater2 member_my_theater3
+		SELECT member_my_theater1, member_my_theater2, member_my_theater3
 		FROM member
 		WHERE member_id = #{sId} 
 	</select>

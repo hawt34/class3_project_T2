@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
+import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -22,6 +23,8 @@ import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
+import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
 public class AdminController {
@@ -35,6 +38,8 @@ public class AdminController {
 	@Autowired
 	TheaterService theaterService;
 	
+	@Autowired
+	TicketingService ticService;
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")
@@ -377,7 +382,13 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 극장 페이지
 	@GetMapping("admin_theater")
-	public String adminTheater() {
+	public String adminTheater(TheaterVO theater, Model model, ScreenInfoVO screen_info) {
+		
+//		List<ScreenInfoVO> screenInfoList = ticService.getScreenInfo();
+		List<TheaterVO> theaterList = theaterService.getTheater();
+		
+		model.addAttribute("theaterList", theaterList);
+		
 		return "admin/admin_theater/admin_theater";
 	}
 	@GetMapping("admin_theater_delete")
@@ -388,6 +399,15 @@ public class AdminController {
 	public String adminTheaterForm() {
 		return "admin/admin_theater/admin_theater_form";
 	}
+	@GetMapping("admin_theater_modify_form")
+	public String adminTheaterModifyForm(TheaterVO theater, Model model) {
+		
+		theater = theaterService.getTheater(theater);
+		model.addAttribute("theater", theater);
+		
+		return "admin/admin_theater/admin_theater_modify_form";
+	}
+	
 	@PostMapping("admin_theater_pro")
 	public String adminTheaterPro() {
 		return "redirect:/admin_theater";
@@ -405,7 +425,10 @@ public class AdminController {
 		return "redirect:/admin_booth";
 	}
 	@GetMapping("admin_booth")
-	public String adminBooth() {
+	public String adminBooth(TheaterVO theater, Model model) {
+		List<TheaterVO> theaterList = theaterService.getTheater();
+		model.addAttribute("theaterList", theaterList);
+		
 		return "admin/admin_theater/admin_booth";
 	}
 	

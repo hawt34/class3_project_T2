@@ -32,5 +32,10 @@ public interface TheaterMapper {
 	
 	
 	List<TheaterVO> selectTheatersOrderbyName();
+
+
+	List<TheaterVO> selectTheater2();
+
+
 	
 }

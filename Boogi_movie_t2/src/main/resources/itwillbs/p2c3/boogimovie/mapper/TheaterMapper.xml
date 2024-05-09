@@ -50,9 +50,12 @@
 		FROM notice 
 		JOIN theater 
 		ON notice.theater_num = theater.theater_num 
-		WHERE notice_category = 'theater';
+		WHERE notice_category = '극장';
 	</select>
 	
-	
+	<select id="selectTheater2" resultType="itwillbs.p2c3.boogimovie.vo.TheaterVO">
+		SELECT *
+		FROM theater
+	</select>
 	
 </mapper>

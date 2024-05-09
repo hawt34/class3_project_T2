@@ -21,23 +21,21 @@ public class TheaterController {
 	
 	
 	@GetMapping("theater")
-	public String theater(Model model, NoticeVO notice) {
+	public String theater(Model model) {
 		
-		List<NoticeVO> noticeList = service.getNoticeList(notice);
+		List<NoticeVO> noticeList = service.getNoticeList();
 		model.addAttribute("noticeList", noticeList);
-		
+		System.out.println(noticeList);
 		
 		
 		return "theater/theater_main";
 	}       
 	 
-//	@RequestParam(defaultValue = "1") int theater_num
 	@GetMapping("theater_detail")
 	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, Model model) {
 		
 		System.out.println("theater_num : " + theater.getTheater_num());
 			
-		
 		theater = service.getTheater(theater);
 		List<TheaterFacilityVO> facilityList = service.getFacility(facility);
 		List<NoticeVO> theaterNoticeList = service.getTheaterNoticeList(notice);

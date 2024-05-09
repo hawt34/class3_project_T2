@@ -50,7 +50,7 @@
 		FROM notice 
 		JOIN theater 
 		ON notice.theater_num = theater.theater_num 
-		WHERE notice_category = thaeter;
+		WHERE notice_category = 'theater';
 	</select>
 	
 	

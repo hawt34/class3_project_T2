@@ -26,9 +26,10 @@ public interface TheaterMapper {
 	int selectTheaterName(String theater_name);
 
 	
-
 	// 극장 메인 > theater_main.jsp 에서 극장 전체 공지사항 조회
-	List<NoticeVO> selectNoticeList(NoticeVO notice);
+	List<NoticeVO> selectNoticeList();
+	
+	
 	
 	List<TheaterVO> selectTheatersOrderbyName();
 	

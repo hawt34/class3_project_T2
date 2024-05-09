@@ -5,13 +5,182 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+/*   	border: 1px solid skyblue;   */
+}
+
+body {
+	/* 	background-color: #fffde7; */
+	
+}
+
+#wrap {
+	width: 1400px;
+	margin: 0 auto;
+}
+
+article {
+	margin-top: 40px;
+	width: 1400px;
+	height: 600px;
+	/* 	background-color: #ffd54f; */
+}
+
+section {
+	overflow: hidden;
+	width: 1400px;
+	height: 1500px;
+	/* 	background-color: #ffca28; */
+	display: flex;
+	flex-wrap: wrap;
+}
+
+section h1 {
+	position: relative;
+	text-align: center; /* 가운데 정렬 */
+	font-size: 32px; /* 폰트 크기 수정 */
+	width: 100%; /* 너비 조정 */
+	white-space: nowrap;
+}
+
+.content {
+	width: 1400px;
+}
+
+.movie {
+	padding-top: 30px;
+	width: 350px;
+	height: 600px;
+	float: left;
+	text-align: center;
+}
+
+.movie img {
+	width: 300px;
+	height: 500px;
+}
+
+.movie input[type="button"] {
+	display: inline-block;
+}
+
+.movieInfo {
+	padding-top: 30px;
+	float: right;
+	width: 1000px;
+	height: 600px;
+}
+
+.movieInfo ul li {
+	font-size: 24px; /* 텍스트 크기 조정 */
+}
+
+.movieInfo input[type="button"] {
+	position: absolute;
+	margin-left: 20px;
+	bottom: 30px;
+}
+
+.reviewContents {
+	width: 1400px;
+	margin-top: 10px;
+	height: 200px;
+/* 	border: 1px solid black;   */
+	font-size: 30px;
+}
+
+.submitButton{
+	width: 400px;
+	margin-left: 10px;
+	
+}
+
+
+#starSelect {
+	float: left;
+	width: 300px;
+	height: 100px;
+	font-size: 24px;
+	color: gold;
+}
+#starSelect option {
+    font-size: 24px; /* 옵션들의 글자 크기를 설정 */
+ 	color: gold;   
+}
+.star-rating{
+	padding-left: 10px;
+	padding-top: 10px;
+	float: left;
+	width: 320px;
+	height: 150px;
+	
+}
+
+
+.review textarea.form-control {
+	margin-left: 20px;
+	width: 500px;
+	height: 100px; /* 높이를 원하는 크기로 조절하세요 */
+/* 	border: 2px solid black; */
+	resize: none;
+}
+
+.showReview {
+	margin-bottom: 250px;
+	font-size: 24px;
+	margin-left:20px;
+	width: 1300px;
+	height: 200px;
+}
+
+.reviewCover {
+	width: 200px;
+	height: 80px;
+	float: left;
+	color: gold; /* 별의 색상을 골드로 지정 */
+}
+
+.review {
+	padding-top: 10px;
+	width: 900px;
+	margin-bottom:200px;
+/* 	border: 1px solid red;   */
+	float: right; 
+}
+.reviewCover span:before {
+	content: '★';
+}
+.reviewCover span.empty::before {
+    content: '☆'; /* 빈 별의 모양 */
+}
+.reviewTexts{
+	float: right;
+	width: 1000px;
+	height: 80px;
+}
+.reviewTexts span {
+        margin-right: 10px; /* 원하는 만큼의 간격을 조절하세요 */
+ }
+
+
+
+footer {
+	width: 100%;
+	height: 100px;
+	/* 	background-color: #ffb300; */
+}
+
+</style>
 
 <meta charset="UTF-8">
 
 <title>Insert title here</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/movie_info1.css" rel="stylesheet" type="text/css">
+<%-- <link href="${pageContext.request.contextPath}/resources/css/movie_info1.css" rel="stylesheet" type="text/css"> --%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link
@@ -113,8 +282,8 @@
         			<span class="member-id">${review.member_id}</span>
         			<span class="review-date">${fn:substring(review.review_date, 0, 10)}</span>
     				<c:if test="${review.member_id eq sessionScope.sId}">
-                	<button onclick="openReviewModify(${review.review_id})" class="btn btn-outline-primary" >수정</button> 
-                 	<button onclick="confirmDelete(${review.review_id})" class="btn btn-outline-primary">삭제</button>
+                	<button onclick="openReviewModify(${review.review_num})" class="btn btn-outline-primary" >수정</button> 
+                 	<button onclick="confirmDelete(${review.review_num})" class="btn btn-outline-primary">삭제</button>
             		</c:if>
     			</div>
     			</c:forEach>
@@ -157,14 +326,14 @@ $("#submitReviewBtn").click(function(event) {
 
 });
 
-function openReviewModify(review_id) {
-	var url = "reviewModify?review_id=" + review_id;
+function openReviewModify(review_num) {
+	var url = "reviewModify?review_num=" + review_num;
 	
 	window.open(url,"","width=700,height=500");
 }
 
-function confirmDelete(review_id) {
-	var url = "deleteReview?review_id=" + review_id;
+function confirmDelete(review_num) {
+	var url = "deleteReview?review_num=" + review_num;
 	
 	window.open(url,"","width=700,height=300");	
 }

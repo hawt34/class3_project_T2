@@ -21,26 +21,26 @@ public class TheaterController {
 	
 	
 	@GetMapping("theater")
-	public String theater() {
-		System.out.println("theater");
+	public String theater(Model model, NoticeVO notice) {
+		
+		List<NoticeVO> noticeList = service.getNoticeList(notice);
+		model.addAttribute("noticeList", noticeList);
+		
+		
 		
 		return "theater/theater_main";
 	}       
-	
+	 
+//	@RequestParam(defaultValue = "1") int theater_num
 	@GetMapping("theater_detail")
-	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, Model model, 
-								@RequestParam(defaultValue = "1") int theater_num) {
-		System.out.println("theaterDetail");
+	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, Model model) {
 		
-		System.out.println("theater_num : " + theater_num);
-		
-		theater.setTheater_num(theater_num);
-		facility.setTheater_num(theater_num);
-		notice.setTheater_num(theater_num);
+		System.out.println("theater_num : " + theater.getTheater_num());
+			
 		
 		theater = service.getTheater(theater);
 		List<TheaterFacilityVO> facilityList = service.getFacility(facility);
-		List<NoticeVO> noticeList = service.getNoticeList(notice);
+		List<NoticeVO> theaterNoticeList = service.getTheaterNoticeList(notice);
 		
 		
 		model.addAttribute("x", Double.parseDouble(theater.getTheater_map_x()));
@@ -48,9 +48,8 @@ public class TheaterController {
 		
 		model.addAttribute("theater", theater);
 		model.addAttribute("facilityList", facilityList);
-		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("theaterNoticeList", theaterNoticeList);
 		
-		System.out.println(noticeList);
 		
 		return "theater/theater_detail";
 	}

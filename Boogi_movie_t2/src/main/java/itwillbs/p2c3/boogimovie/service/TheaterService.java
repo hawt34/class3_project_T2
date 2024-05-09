@@ -41,6 +41,12 @@ public class TheaterService {
 
 
 
+	public List<NoticeVO> getTheaterNoticeList(NoticeVO notice) {
+		return mapper.selectTheaterNoticeList(notice);
+	}
+
+
+
 	public List<NoticeVO> getNoticeList(NoticeVO notice) {
 		return mapper.selectNoticeList(notice);
 	}

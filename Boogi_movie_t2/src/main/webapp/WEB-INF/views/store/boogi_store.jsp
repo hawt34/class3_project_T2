@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,18 +105,68 @@ footer {
 				<div class= snack1>
 					<div class= snack1_name> 여기는 스낵이름 영역</div>
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_popCol.jpg">
+						<select name="category">
+  					  	<c:forEach items="${itemInfoSnack}" var="item">
+        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+    					</c:forEach>
+						</select>
+						<select name="snackNum" onchange="">
+            			<option value="1">1개</option>
+            			<option value="2">2개</option>
+            			<option value="3">3개</option>
+            			<option value="4">4개</option>
+            			<option value="5">5개</option>
+				        </select>
 				</div>		
 				<div class="snack2">
 					<div class= snack2_name> 여기는 스낵이름 영역</div> 
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_pop.jpg">
+						<select name="category">
+  					  	<c:forEach items="${itemInfoPop}" var="item">
+        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+    					</c:forEach>
+						</select>
+						<select name="snackPop" onchange="">
+            			<option value="1">1개</option>
+            			<option value="2">2개</option>
+            			<option value="3">3개</option>
+            			<option value="4">4개</option>
+            			<option value="5">5개</option>
+				        </select>
+												
 				</div>
 				<div class="snack3">
 					<div class= snack3_name> 여기는 스낵이름 영역</div> 
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_col.jpg">
+						<select name="category">
+  					  	<c:forEach items="${itemInfoJuice}" var="item">
+        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+    					</c:forEach>
+						</select>
+						<select name="snackJuice" onchange="">
+            			<option value="1">1개</option>
+            			<option value="2">2개</option>
+            			<option value="3">3개</option>
+            			<option value="4">4개</option>
+            			<option value="5">5개</option>
+				        </select>
 				</div>
 				<div class="snack4">
 					<div class= snack4_name> 여기는 스낵이름 영역</div> 
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_snack.jpg">
+						<select name="category">
+  					  	<c:forEach items="${itemInfoCombo}" var="item">
+        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+    					</c:forEach>
+						</select>
+						<select name="snackCombo" onchange="">
+            			<option value="1">1개</option>
+            			<option value="2">2개</option>
+            			<option value="3">3개</option>
+            			<option value="4">4개</option>
+            			<option value="5">5개</option>
+				        </select>
+						
 				</div>
 			</div>
 			<div class="bottomButton">

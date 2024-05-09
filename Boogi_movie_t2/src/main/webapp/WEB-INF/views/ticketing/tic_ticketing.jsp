@@ -122,7 +122,7 @@
 								
 							<!-- theater 리스트2 -->
 							<!--  -->
-							<div class="col-sm-6 theaterlist scroll">
+							<div class="col-sm-6 theaterlist scroll" id="theaterlist">
 								<c:forEach items="${theaterList }" var="theater">
 									<ul>
 										<li><a onclick="javascript:theaterClick('${theater.theater_name}')">${theater.theater_name }</a> </li>
@@ -197,6 +197,19 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
 "></script>
 <script>
+	let selectedMovie = "";
+	let selectedTheater = "";
+	
+	function finalList() {
+	    if (selectedMovie && selectedTheater) {
+	        // 두 가지가 모두 선택된 경우에만 `finalList` 함수가 실행됩니다.
+	        alert("선택된 영화: " + selectedMovie + "\n선택된 상영관: " + selectedTheater);
+	        // 실제 구현에서는 AJAX로 해당 영화관 및 영화 정보 조회 로직을 추가하세요.
+	        // 이 부분에 최종 영화관 및 상영 정보 조회 로직을 구현
+	    }
+	}
+
+
 	function theaterType(type, sId) {
 	    $.ajax({
 	        url: "api/theater" + type,
@@ -208,16 +221,17 @@
 	        success: function (response) {
 	            var result = $("#theaterlist");
 	            result.empty();
-	
+				
 	            response.forEach(function (theater) {
-	                var theaterListItem = `
-	                    <ul>
-	                        <li>
-	                            <a onclick="theaterClick('${theater.theater_name}')">${theater.theater_name}</a>
-	                        </li>
-	                    </ul>
-	                `;
-	                result.append(theaterListItem);
+	                var theaterDiv = "<div class='theater_atrbt'>"
+	                    + "<span>"
+	                    + "<a onclick='theaterClick(\"" + theater.member_my_theater + "\")'>" + theater.member_my_theater + "</a>"
+	                    + "</span>"
+	                    + "</div>";
+
+	                result.append(theaterDiv); 
+	                	
+
 	            });
 	        },
 	        error: function () {
@@ -232,6 +246,8 @@
 		result1.empty();
 		result1.append(movie_name);
 		result2.css("background-color", "blue");
+		
+		finalList();
 	} 
 	
 	function theaterClick(theater_name){
@@ -239,6 +255,8 @@
 		$(this).css("background-color", "yellow");
 		result.empty();
 		result.append(theater_name);
+		
+		finalList();
 	} 
 	
 	function getGradeIcon(grade) {

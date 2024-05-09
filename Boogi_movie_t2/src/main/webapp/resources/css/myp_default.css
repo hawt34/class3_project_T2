@@ -46,6 +46,9 @@
 	margin-left: 750px;
 	margin-top: 70px;
 }
+.align_center{
+	text-align : center;
+}
 /* --------------------  ¹öÆ°  ----------------------*/
 .content {
 	z-index: 1;

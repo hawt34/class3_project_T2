@@ -1,5 +1,6 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -74,8 +75,9 @@ public class CscController {
 		@GetMapping("csc_notice_detail")
 		public String cscNoiceDetail(int notice_num, Model model) {
 			NoticeVO notice = noticeService.getNotice(notice_num);
-			notice.setNotice_date(notice.getNotice_date().);
+			String noticeDate = notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 			
+			model.addAttribute("noticeDate", noticeDate);
 			model.addAttribute("notice", notice);
 			
 			return "csc/csc_notice_detail";

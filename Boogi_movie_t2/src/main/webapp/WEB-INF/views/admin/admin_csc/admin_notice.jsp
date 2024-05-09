@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,14 +68,15 @@
 									</tr>
 								</c:when>
 								<c:otherwise>
+								
 									<c:forEach var="notice" items="${noticeList }">
 										<tr>
 											<td>${notice.notice_num }</td>
-											<td>${notice.notice_subject }</td>
+											<td onclick="location.href='admin_notice_detail?notice_num=${notice.notice_num}'">${notice.notice_subject }</td>
 											<td>${notice.notice_date }</td>
 											<td>${notice.theater_name }</td>
 											<td>
-												<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기/수정</button>
+												<button type="button" class="btn btn-outline-primary" onclick="loaction.href='admin_notice_modify?notice_num=${notice.notice_num}'">수정</button>
 											</td>
 											<td>
 												<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw(${notice.notice_num})">삭제</button>
@@ -127,9 +130,6 @@
 	</footer>
 
 	<script type="text/javascript">
-		function admin_notice() {
-			window.open("admin_noticeForm", "_self");
-		}
 		function admin_notice_withdraw(num) {
 			if(confirm("정말 삭제하시겠습니까?")){
 				location.href="admin_notice_delete?notice_num=" + num;

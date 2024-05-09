@@ -19,6 +19,7 @@ import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieGenreVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
+import itwillbs.p2c3.boogimovie.vo.MyTheaterVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
@@ -89,14 +90,15 @@ public class TicketingController {
 		
 	@ResponseBody
 	@GetMapping(value = "api/theaterMyTheater", produces = "application/json")
-	public List<String> theaterMyTheater(@RequestParam String sId){
+	public List<MyTheaterVO> theaterMyTheater(@RequestParam String sId){
 		MemberVO member = memberService.selectTheatersMyTheater(sId);
-		List<String> Theaters = new ArrayList<String>();
-		Theaters.add(member.getMember_my_theater1());
-		Theaters.add(member.getMember_my_theater2());
-		Theaters.add(member.getMember_my_theater3());
+		List<MyTheaterVO> myTheaters = new ArrayList<MyTheaterVO>();
+		myTheaters.add(new MyTheaterVO(member.getMember_my_theater1()));
+		myTheaters.add(new MyTheaterVO(member.getMember_my_theater2()));
+		myTheaters.add(new MyTheaterVO(member.getMember_my_theater3()));
 		
-		return Theaters;
+		
+		return myTheaters;
 	}
 	
 		

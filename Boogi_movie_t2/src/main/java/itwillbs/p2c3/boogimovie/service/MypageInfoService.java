@@ -22,6 +22,7 @@ public class MypageInfoService {
 		return infoMember;
 	}
 	
+	// 회원정보
 	public MemberVO getDbMember(MemberVO member) {
 		return mapper.selectDbMember(member);
 	}
@@ -38,12 +39,12 @@ public class MypageInfoService {
 		return infoTheater;
 	}
 	
-	// 수정
+	// 정보수정
 	public int modifyMember(MemberVO member) {
 		return mapper.updateMember(member);
 	}
 	
-	// 탈퇴
+	// 탈퇴처리
 	public int withdrawMember(MemberVO member) {
 		return mapper.updateMemberForWithdraw(member);
 	}

@@ -143,17 +143,17 @@ td:nth-child(7) {
 								<c:otherwise>
 									<c:forEach var="oto" items="${otoList}">
 										<tr>
-											<td>${oto.OTO_num}</td>
-											<td onclick="location.href='myp_oto_detail?OTO_num=${oto.OTO_num}'">${oto.OTO_subject} </td>
+											<td>${oto.oto_num}</td>
+											<td onclick="location.href='myp_oto_detail?oto_num=${oto.oto_num}'">${oto.oto_subject} </td>
 											<td>${oto.member_id} </td>
-											<td>${oto.OTO_category} </td>
-											<td>${oto.theater_num }</td>
+											<td>${oto.oto_category} </td>
+											<td>${oto.theater_name }</td>
 											<td>
 												<button type="button" class="btn btn-outline-primary" 
-													onclick="location.href='myp_oto_modifyForm?OTO_num=${oto.OTO_num}'">수정</button>
+													onclick="location.href='myp_oto_modifyForm?oto_num=${oto.oto_num}'">수정</button>
 											</td>
 											<td>
-												<button type="button" class="btn btn-outline-primary" onclick="otoConfirm()">삭제</button>
+												<button type="button" class="btn btn-outline-primary" onclick="otoConfirm(${oto.oto_num})">삭제</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -183,22 +183,22 @@ td:nth-child(7) {
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="oto" items=" ">
+							<c:forEach var="oto" items="${otoReplyList } ">
 								<c:choose>
-									<c:when test="${empty otoList} ">
+									<c:when test="${empty otoReplyList} ">
 										<tr>
 											<td colspan="7">게시판이 비어있습니다</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
 										<tr>
-											<td>3</td>
-											<td>예매가 안되요</td>
-											<td>admin</td>
-											<td>예매/결제</td>
-											<td>센텀점</td>
+											<td>${oto.oto_num }</td>
+											<td>${oto.oto_subject }</td>
+											<td>${oto.member_id }</td>
+											<td>${oto.oto_category }</td>
+											<td>${otoTheater }</td>
 											<td>
-												답변
+												${oto.oto_reply_status }
 											</td>
 										</tr>
 									</c:otherwise>
@@ -220,9 +220,9 @@ td:nth-child(7) {
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </footer>
 <script type="text/javascript">
-	function otoConfirm() {
+	function otoConfirm(num) {
 		if(confirm("삭제하시겠습니까?")) {
-			location.href="myp_oto_delete"
+			location.href="myp_oto_delete?oto_num=" + num;
 		}
 	};
 </script>

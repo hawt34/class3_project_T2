@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지 - 공지사항관리</title>
-<link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -19,15 +20,13 @@
 <link href="${pageContext.request.contextPath}/resources/css/admin_list.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
 	<header>
 		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 	</header>
 
 	<main>
-
+	<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
 		<div class="row">
-
 			<div class="col-md-2">
 				<!-- 사이드바 영역 -->
 				<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
@@ -51,55 +50,67 @@
 					<table>
 						<thead>
 							<tr>
-								<th>공지사항코드?</th>
+								<th>공지사항번호</th>
 								<th>공지사항제목</th>
 								<th>공지사항등록일</th>
-								<th>작성자</th>
+								<th>극장 구분</th>
 								<th>상세보기/수정</th>
 								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1259933</td>
-								<td>개인정보 서약 변경 안내</td>
-								<td>2024-03-12</td>
-								<td>홍길동</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>9919198</td>
-								<td>서면점 폐쇄 안내</td>
-								<td>2024-05-22</td>
-								<td>박종민</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>4981923</td>
-								<td>신제품 출시 안내</td>
-								<td>2024-01-44</td>
-								<td>이연태</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw()">삭제</button>
-								</td>
-							</tr>
-							
-						
+							<c:choose>
+								<c:when test="${empty noticeList }">
+									<tr>
+										<td colspan="6"></td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="notice" items="${noticeList }">
+										<tr>
+											<td>${notice.notice_num }</td>
+											<td>${notice.notice_subject }</td>
+											<td>${notice.notice_date }</td>
+											<td>${notice.theater_name }</td>
+											<td>
+												<button type="button" class="btn btn-outline-primary" onclick="admin_notice()">상세보기/수정</button>
+											</td>
+											<td>
+												<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw(${notice.notice_num})">삭제</button>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
+				</div>
+				<!-- 페이징 -->
+				<div class="notice_pageArea">
+					<nav aria-label="Page navigation example" >
+						<ul class="pagination">
+							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
+								<a class="page-link" href="admin_notice?pageNum=${pageNum - 1}" aria-label="Previous" >
+								<span aria-hidden="true" >&laquo;</span>
+								</a>
+							</li>
+							<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
+								<c:choose>
+									<c:when test="${pageNum eq i }">
+										<li class="page-item active"><a class="page-link">${i}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="admin_notice?pageNum=${i}">${i}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
+								<a class="page-link" href="admin_notice?pageNum=${pageNum + 1}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
 				</div>
 				
 				<div class="admin_movie_footer" align="center">
@@ -117,10 +128,10 @@
 
 	<script type="text/javascript">
 		function admin_notice() {
-			window.open("admin_notice_form", "_self");
+			window.open("admin_noticeForm", "_self");
 		}
-		function admin_notice_withdraw() {
-			location.href="admin_notice_delete";
+		function admin_notice_withdraw(num) {
+			location.href="admin_notice_delete?notice_num=" + num;
 		}
 	
 	

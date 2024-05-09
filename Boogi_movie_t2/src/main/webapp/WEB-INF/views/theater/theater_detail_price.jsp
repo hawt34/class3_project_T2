@@ -11,8 +11,8 @@
 <link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="theater-info">
-		<h4>관람료</h4>
+	<div class="theater_info">
+		<h4 class="text-primary">관람료</h4>
 			<div class="row gx-5">
 		    	<div class="col">
 		    		<ul><li>2D</li></ul>
@@ -90,14 +90,14 @@
 			</div>
 		</div>
 		<p>
-		<h4>요금제</h4>
+		<h4 class="text-primary">요금제</h4>
 		<ul>
 			<li>경로 만65세 이상 본인에 한함(신분증 확인)</li>
 			<li>청소년 요금 만4세~ 만18세 : 미취학 아동~고등학생(학생증, 교복, 청소년증, 의료보험증, 주민등록 등/초본, 그 외 청소년 확인 가능 서류)</li>
 			<li>48개월 미만의 경우 증빙원(예 : 의료보험증, 주민등록 초/등본 등) 지참 시에만 무료 관람 가능</li>
 		</ul>
-		<p>
-		<h4>우대적용</h4>
+		<br>
+		<h4 class="text-primary">우대적용</h4>
 		<ul>
 			<li>부산 지역 주민 본인만 가능(신분증 확인)</li>
 			<li>국가유공자 현장에서 국가유공자증을 소지한 본인만 가능</li>

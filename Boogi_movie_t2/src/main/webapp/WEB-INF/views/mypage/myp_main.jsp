@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +28,27 @@ body {
 <body>
 <header>
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
+	
+	<script type="text/javascript">
+		var maxCount = 3;								// 카운트 최대값은 3
+		var count = 0;   								// 카운트, 0으로 초기화 설정
+		
+		function CountChecked(field){ 					// field객체를 인자로 하는 CountChecked 함수 정의
+			if (field.checked) {						// 만약 field의 속성이 checked 라면(사용자가 클릭해서 체크상태가 된다면)
+				count += 1;								// count 1 증가
+			}
+			else {										// 아니라면 (field의 속성이 checked가 아니라면)
+				count -= 1;								// count 1 감소
+			}
+			
+			if (count > maxCount) {						// 만약 count 값이 maxCount 값보다 큰 경우라면
+				alert("최대 3개까지만 선택가능합니다!");	// alert 창을 띄움
+			field.checked = false;						// (마지막 onclick한)field 객체의 checked를 false(checked가 아닌 상태)로 만든다.
+			count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
+			}
+		}
+	</script>
+					
 </header>
 <div class="container1">
 	<div class="container2">
@@ -39,8 +62,7 @@ body {
 				<blockquote class="bluejeans">
 					<br>
 					<div class="main">
-						<h3>김현경님</h3>
-						<h4>2024년 고객님의 회원등급은 VIP입니다.</h4>
+						<h3>${member.member_name}님 안녕하세요!</h3>
 					</div>
 <!-- 					<section class="content"> -->
 						<div class="col-6 box3">
@@ -68,62 +90,80 @@ body {
 					      <th scope="col">#</th>
 					      <th scope="col">영화</th>
 					      <th scope="col">날짜</th>
-					      <th scope="col">시간</th>
+					      <th scope="col">상영시간</th>
 					      <th scope="col">극장</th>
+					      <th scope="col">좌석</th>
 					      <th scope="col">가격</th>
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr  class="table-secondary">
-					      <th scope="row">1</th>
-						      <td>듄2
-<%-- 						          <input type="text" value="${}" name="title" id="title" readonly> --%>
-						      </td>
-						      <td>2024 / 04 / 16</td>
-						      <td>17:00 ~ 19:20</td>
-						      <td>서면</td>
-						      <td>15,000원</td>
-					    </tr>      
-					    <tr>
-					      <th scope="row">2</th>
-					        <td>아바타3</td>
-					        <td>2024 / 03 / 29</td>
-					        <td>18:20 ~ 20:15</td>
-					        <td>서면</td>
-					        <td>15,000원</td>
-					    </tr>
-					    <tr  class="table-secondary">
-					      <th scope="row">3</th>
-				            <td>토이스토리</td>
-				            <td>2024 / 01 / 19</td>
-				            <td>21:10 ~ 23:10</td>
-				            <td>서면</td>
-				            <td>12,000원</td>
-				         </tr>
-						<tr>
-					      <th scope="row">4</th>
-							<td>파묘</td>
-		          			<td>2024 / 03 / 18</td>
-		            		<td>12:10 ~ 14:30</td>
-		           			<td>아시아드</td>
-		            		<td>12,000원</td>
-		          		</tr>
-		          		<tr  class="table-secondary">
-					      <th scope="row">5</th>
-					      	<td>폴라익스프레스</td>
-			              	<td>2013 / 12 / 25</td>
-							<td>21:00 ~ 23:10</td>
-			            	<td>아시아드</td>
-			            	<td>9,000원</td>
-		         		</tr>
-		          		<tr>
-					      <th scope="row">6</th>
-		          			<td>엘리멘탈</td>
-		            		<td>2023 / 10 / 29</td>
-				            <td>19:35 ~ 22:10</td>
-				            <td>삼정타워</td>
-				            <td>12,000원</td>
-				          </tr>
+					  
+						  <c:forEach var="movie" items="${movieReservation}" varStatus="status">
+							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+							        <th scope="row">${status.index + 1}</th>
+							        <td>${movie.movie_name}</td>
+<%-- 							        <td>${ticket.screen_date}</td> --%>
+<%-- 							        <td>${reservation.discsount_num}</td> --%>
+<%-- 							        <td>${reservation.discsount_num}</td> --%>
+<%-- 							        <td>${reservation.discsount_num}</td> --%>
+<%-- 							        <td>${reservation.discsount_num}</td> --%>
+							    </tr>
+							</c:forEach>
+					  
+<!-- 					    <tr  class="table-secondary"> -->
+<!-- 					      <th scope="row">1</th> -->
+<%-- 						      <td>${movie.movie_name}</td> --%>
+<!-- 						      <td>2024 / 04 / 16</td> -->
+<!-- 						      <td>17:00 ~ 19:20</td> -->
+<!-- 						      <td>서면</td> -->
+<!-- 						      <td>K9</td> -->
+<!-- 						      <td>15,000원</td> -->
+<!-- 					    </tr>       -->
+<!-- 					    <tr> -->
+<!-- 					      <th scope="row">2</th> -->
+<!-- 					        <td>아바타3</td> -->
+<!-- 					        <td>2024 / 03 / 29</td> -->
+<!-- 					        <td>18:20 ~ 20:15</td> -->
+<!-- 					        <td>서면</td> -->
+<!-- 					        <td>H8</td> -->
+<!-- 					        <td>15,000원</td> -->
+<!-- 					    </tr> -->
+<!-- 					    <tr  class="table-secondary"> -->
+<!-- 					      <th scope="row">3</th> -->
+<!-- 				            <td>토이스토리</td> -->
+<!-- 				            <td>2024 / 01 / 19</td> -->
+<!-- 				            <td>21:10 ~ 23:10</td> -->
+<!-- 				            <td>서면</td> -->
+<!-- 				            <td>D13</td> -->
+<!-- 				            <td>12,000원</td> -->
+<!-- 				         </tr> -->
+<!-- 						<tr> -->
+<!-- 					      <th scope="row">4</th> -->
+<!-- 							<td>파묘</td> -->
+<!-- 		          			<td>2024 / 03 / 18</td> -->
+<!-- 		            		<td>12:10 ~ 14:30</td> -->
+<!-- 		           			<td>아시아드</td> -->
+<!-- 		           			<td>H11 H12</td> -->
+<!-- 		            		<td>12,000원</td> -->
+<!-- 		          		</tr> -->
+<!-- 		          		<tr  class="table-secondary"> -->
+<!-- 					      <th scope="row">5</th> -->
+<!-- 					      	<td>폴라익스프레스</td> -->
+<!-- 			              	<td>2013 / 12 / 25</td> -->
+<!-- 							<td>21:00 ~ 23:10</td> -->
+<!-- 			            	<td>아시아드</td> -->
+<!-- 			            	<td>K8 K9 K10</td> -->
+<!-- 			            	<td>9,000원</td> -->
+<!-- 		         		</tr> -->
+<!-- 		          		<tr> -->
+<!-- 					      <th scope="row">6</th> -->
+<!-- 		          			<td>엘리멘탈</td> -->
+<!-- 		            		<td>2023 / 10 / 29</td> -->
+<!-- 				            <td>19:35 ~ 22:10</td> -->
+<!-- 				            <td>삼정타워</td> -->
+<!-- 				            <td>H15 H16</td> -->
+<!-- 				            <td>12,000원</td> -->
+<!-- 				          </tr> -->
 					  </tbody>
 					</table>
 				</div><!-- col-md-7 -->
@@ -146,58 +186,108 @@ body {
 					      </div><!-- modal-header -->
 					      <div class="modal-body">
 							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							  	서면
+							
+								<div>
+									<c:forEach begin="0" var="theater" items="${theater}">
+										  <input onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_name}" type="checkbox" id="flexCheckDefault" name="theaterId">
+										  ${theater.theater_name}<br>
+										  <br>
+									</c:forEach>
+								</div>
 							</div>
-							<br>
-							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							  	아시아드
-							</div>
-							<br>
-							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							  	삼정타워
-							</div>
-							<br>
-							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							  	롯데백화점서면
-							</div>
-							<br>
-							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							  	센텀시티
-							</div>
-							<br>
-							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-							  	해운대
-							</div>
+							
 					      </div><!-- modal-body -->
 					      <div class="modal-footer">
-								<button type="button" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					      		<form id="theaterForm" method="post" action="MyTheaterList">
+								<button type="submit" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
+					      
+					      		<script type="text/javascript">
+								    function sendCheckedValues() {
+								        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
+								        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
+								
+								        checkboxes.forEach(function(checkbox) {
+								            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
+								        });
+								
+								        // 서버로 선택된 값들을 전송
+								        // 여기서는 간단하게 alert 창에 선택된 값들을 표시하도록 했지만, 실제로는 서버로 값을 전송하는 방식을 사용해야 함
+								        alert('선택된 값들: ' + checkedValues.join(', '));
+								        location.href="MyTheaterList";
+								    }
+								</script>
+								</form>
+								
 					      </div><!--modal-footer  -->
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->
 					</div><!-- modal fade 모달 div 끝 -->
+					
 					<table class="table3 table table-bordered">
 						<tr>
-							<td><a href="#">서면</a></td>
+							<td>
+								<c:choose>
+									<c:when test="${empty mytheater.theater_num}"><%-- 자주가는 영화관 미설정시 --%>
+										<a href="#">+</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#">${mytheater.theater_num}</a>
+									</c:otherwise>
+								</c:choose>
+							</td>
 						</tr>
 						<tr>
-							<td><a href="#">아시아드</a></td>
+							<td>
+								<c:choose>
+									<c:when test="${empty mytheater.theater_name}">
+										<a href="#">+</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#">${mytheater.theater_name}</a>
+									</c:otherwise>
+								</c:choose>
+							</td>
 						</tr>
 						<tr>
-							<td><a href="#">삼정타워</a></td>
+							<td>
+								<c:choose>
+									<c:when test="${empty mytheater.theater_num}">
+										<a href="#">+</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#">${mytheater.theater_num}</a>
+									</c:otherwise>
+								</c:choose>
+							</td>
 						</tr>
+
+
+
+<%-- 							<c:forEach var="index" begin="1" end="3"> --%>
+<!-- 							    <tr> -->
+<!-- 							        <td> -->
+<%-- 							            <c:choose> --%>
+<%-- 											<c:if test="${index le fn:length(mytheaterList)}"> --%>
+<%-- 							                    <c:set var="mytheater" value="${mytheaterList[index - 1]}" /> --%>
+<%-- 							                    <c:choose> --%>
+<%-- 							                        <c:when test="${empty mytheater.theater_num}"> --%>
+<!-- 							                            <a href="#">+</a> -->
+<%-- 							                        </c:when> --%>
+<%-- 							                        <c:otherwise> --%>
+<%-- 							                            <a href="#">${mytheater.theater_num}</a> --%>
+<%-- 							                        </c:otherwise> --%>
+<%-- 							                    </c:choose> --%>
+<%-- 							                </c:if> --%>
+<%-- 							             	<c:otherwise><!-- 최대 3번까지만 반복하도록 추가 동작을 구현할 수 있습니다. --></c:otherwise> --%>
+<%-- 							            </c:choose> --%>
+<!-- 							        </td> -->
+<!-- 							    </tr> -->
+<%-- 							</c:forEach>								 --%>
 					</table>
 				</div><!-- col-md-3-->
 		</div> <!-- row -->
 	</div><!-- container2 -->
 </div><!-- container -->
-
-
 
 <footer>
 	<jsp:include page="inc/myp_footer.jsp"></jsp:include>

@@ -14,16 +14,16 @@
 <body>
 	<div class="theater_top">
 		<nav class="nav justify-content-center theater_name">
-			 <a class="nav-link" href="theater_detail" name="haeundae">해운대점</a>
-			 <a class="nav-link" href="theater_detail" name="centum">센텀점</a>
-			 <a class="nav-link" href="theater_detail" name="seomyeon" >서면점</a>
-			 <a class="nav-link" href="theater_detail" name="nampo">남포점</a>
-			 <a class="nav-link" href="theater_detail" name="busanuniv">부산대점</a>
-			 <a class="nav-link" href="theater_detail" name="sajik">사직점</a>
-			 <a class="nav-link" href="theater_detail" name="yeongdo">영도점</a>
-			 <a class="nav-link" href="theater_detail" name="deokcheon">덕천점</a>
-			 <a class="nav-link" href="theater_detail" name="jeonggwan">정관점</a>
-			 <a class="nav-link" href="theater_detail" name="sasang" >사상점</a>
+			 <a class="nav-link" href="theater_detail?theater_num=1">해운대점</a>
+			 <a class="nav-link" href="theater_detail?theater_num=2">센텀점</a>
+			 <a class="nav-link" href="theater_detail?theater_num=3">서면점</a>
+			 <a class="nav-link" href="theater_detail?theater_num=4">남포점</a>
+			 <a class="nav-link" href="theater_detail?theater_num=5" >부산대점</a>
+			 <a class="nav-link" href="theater_detail?theater_num=6">사직점</a>
+			 <a class="nav-link" href="theater_detail?theater_num=7">영도점</a>
+			 <a class="nav-link" href="theater_detail?theater_num=8" >덕천점</a>
+			 <a class="nav-link" href="theater_detail?theater_num=9" >정관점</a>
+			 <a class="nav-link" href="theater_detail?theater_num=10" >사상점</a>
 			 <div class="dropdown">
 				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">MY 극장</a>
 				<ul class="dropdown-menu">

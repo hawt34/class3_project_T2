@@ -22,4 +22,20 @@ public class ReviewService {
 		
 		return mapper.selectReviewList(movie_num);
 	}
+
+	public List<ReviewVO> getReviewId(int review_id) {
+
+		return mapper.selectReviewId(review_id);
+	}
+
+	public int updateReview(ReviewVO review2) {
+		
+		return mapper.updateReview(review2);
+	}
+	
+	public int deleteReview(int review_id) {
+		
+		return mapper.deleteReview(review_id);
+	}
+	
 }

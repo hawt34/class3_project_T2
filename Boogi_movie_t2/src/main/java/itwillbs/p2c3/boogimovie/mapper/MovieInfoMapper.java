@@ -9,4 +9,6 @@ import itwillbs.p2c3.boogimovie.vo.MovieVO;
 public interface MovieInfoMapper {
 	List<MovieVO> selectMovieInfo();
 	MovieVO selectMovie(MovieVO movie);
+	List<MovieVO> selectMovieInfoLike();
+	List<MovieVO> selectMovieInfoAbc();
 }

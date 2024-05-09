@@ -67,14 +67,13 @@ table {
 	margin: auto;
 }
 
-.theater_top{
-	margin: auto;
+.theater_name_aera{
+	
+	
 }
 
-
-.theater-info {
-	margin: 25px 5px;  
-	padding:30px 5px;
+.theater_top{
+	margin: auto;
 }
 
 
@@ -82,34 +81,24 @@ table {
 	padding:30px 5px;
 }
 
-.col2 {
-	margin-top: 25px;  
-	padding:30px 5px;
-	background-image: url("../images/CINEMA4.jpg");
+.theater_info {
+	margin: 20px;
+	
 }
 
- table {
-      border-collapse: collapse;
-      width: 100%;
-  }
+  
+/* ========================================= */
+/* theater_detail_info.jsp */
 
-  th, td {
-      border: 1px solid lightgray;
-      padding: 8px;
-  }
-
-  #id1 {
-      background-color: lightgray;
-  }
-  
-  .row {
-	padding: 10px;    
-  }
-  
-  table{
-  	text-align: center;
-  }
-  
+ 
+.theater_facility_info_img {
+	width: 100px; 
+	margin: 12px;
+}
+ 
+ h4 {
+ 	margin-bottom: 20px;
+ }
 /* ========================================= */
 /* theater_detail_timetable */
 .theater-info{
@@ -117,37 +106,6 @@ table {
 	width: 1400px;
 }
 
-.theater_info_timetable_subject {
-	height: 30px;
-	background-color: lightgray;
-	margin-top: 20px;
-}
-
-.sct_btn {
-	border: 1px solid gray;
-	height: 50px;
-	
-	
-}
-
-.sct_booth_num {
-	border: 1px solid gray;	
-	height: 50px;
-	width: 70px; 
-}
-/* ========================================= */
-/* theater_detail_info.jsp */
-
-.theater_facility_info_img {
-	width: 100px; 
-}
-
-	
-/* ========================================= */
-/* theater_detail_timetable.jsp */
-.theater_timetable_all{
-	
-}
 	
 .time_schedule{
 	margin: auto;
@@ -162,4 +120,12 @@ table {
 	
 	
 }
+
+
+/* ========================================= */
+/* theater_detail_price */
+
+
+
+
 

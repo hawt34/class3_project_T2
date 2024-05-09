@@ -20,26 +20,26 @@
 			,null
 			,#{member_birth}
 		);
-		
+
 	</insert>
-	
+
 	<select id="preRegMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
 		SELECT *
 		FROM member
 		WHERE member_name = #{member_name} and member_birth = #{member_birth}
-		
+
 	</select>
-		
+
 	<select id="isCorrectMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
 		SELECT * 
 		FROM member
 		WHERE member_id = #{member_id} and member_pwd = #{member_pwd}
 	</select>
-		
+
 	<select id="memberPwdSearch" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
 		SELECT *
 		FROM member
 		WHERE member_id = #{member_id} and member_birth = #{member_birth}
 	</select>	
-	
+
 </mapper>

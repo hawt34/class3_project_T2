@@ -2,6 +2,8 @@ package itwillbs.p2c3.boogimovie.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.NoticeService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
+import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 
@@ -22,6 +25,9 @@ public class CscController {
 	
 	@Autowired
 	private OtoService otoService;
+	
+	@Autowired
+	private TheaterService theaterService;
 	
 	// csc 연결
 		@GetMapping("csc_main")
@@ -64,17 +70,20 @@ public class CscController {
 		}
 		
 		@PostMapping("csc_oto")
-		public String cscOtoPro(OTOVO oto, String theater_name, String member_id, Model model) {
-			System.out.println(oto);
-			System.out.println(theater_name);
-			System.out.println(member_id);
+		public String cscOtoPro(OTOVO oto, String theater_name, HttpSession session, Model model) {
+			String id = (String)session.getAttribute("sId");
+			System.out.println("아이디" + id);
 			
-			if(member_id == null) {
+			int theater_num = theaterService.getTheaterName(theater_name);
+			System.out.println("극장번호: " + theater_num);
+			
+			
+			if(id == null) {
 				model.addAttribute("msg", "로그인 후 이용");
 				model.addAttribute("targetURL", "./");
 			}
 			
-			int insertCount = otoService.insertOto(oto, theater_name, member_id);
+			int insertCount = otoService.insertOto(oto, theater_num, id);
 			
 			if(insertCount == 0) {
 				model.addAttribute("msg", "1대1 문의 실패");

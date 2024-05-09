@@ -3,7 +3,6 @@ package itwillbs.p2c3.boogimovie.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,11 @@ import itwillbs.p2c3.boogimovie.mapper.AdminMapper;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
+<<<<<<< HEAD
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
+=======
+import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
+>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 
 @Service
 public class AdminService {
@@ -78,10 +81,26 @@ public class AdminService {
 	public int InsertMovie(MovieVO movie) {
 		return mapper.insertMovie(movie);
 	}
-	
+	//----------------------------------------------
 	//공지사항 등록
-	public int InsertNotice(NoticeVO notice, String theater_name) {
-		return mapper.insertNotice(notice, theater_name);
+	public int InsertNotice(NoticeVO notice, int theater_num) {
+		return mapper.insertNotice(notice, theater_num);
+	}
+	//공지사항 list 가져오기
+	public List<NoticeVO> getNoticeList(int startRow, int listLimit) {
+		return mapper.selectNoticeList(startRow, listLimit);
+	}
+
+	public int replyRegist(OTOReplyVO reply, int oto_num) {
+		return mapper.insertReply(reply, oto_num);
+	}
+
+	public int deleteNotice(int notice_num) {
+		return mapper.deleteNotice(notice_num);
+	}
+
+	public int getNoticeListCount() {
+		return mapper.getNoticeListCount();
 	}
 	
 }

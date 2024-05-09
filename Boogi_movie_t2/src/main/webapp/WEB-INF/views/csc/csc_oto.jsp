@@ -72,7 +72,7 @@
 					<div class="row mb-2">
 						<label for="inquiry_type" class="col-sm-2 col-form-label inquiry_warning_star">문의유형</label>
 						<div class="col-sm-10">
-							<select name="OTO_category" class="form-select form-select-sm w-25" aria-label="Default select example" required>
+							<select name="oto_category" class="form-select form-select-sm w-25" aria-label="Default select example" required>
 								<option selected disabled>문의 유형 선택</option>
 								<option value="영화">영화</option>
 								<option value="극장">극장</option>
@@ -104,14 +104,14 @@
 					<div class="row mb-2">
 						<label for="client_subject" class="col-2 col-form-label inquiry_warning_star" >제목</label>
 						<div class="col-sm-10">
-							<input type="text" name="OTO_subject" class="form-control form-control-sm" id="client_subject" required >
+							<input type="text" name="oto_subject" class="form-control form-control-sm" id="client_subject" required >
 						</div>
 					</div>
 					<!-- 내용 -->
 					<div class="row mb-2">
 						<label for="client_content" class="col-2 col-form-label inquiry_warning_star" >내용</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" name="OTO_content" rows="13" id="client_content" required style="resize: none"></textarea>
+							<textarea class="form-control" name="oto_content" rows="13" id="client_content" required style="resize: none"></textarea>
 						</div>
 					</div>
 					<hr>

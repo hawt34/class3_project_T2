@@ -3,43 +3,48 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="itwillbs.p2c3.boogimovie.mapper.OtoMapper">
+	<!-- 1대1 문의 DB 저장 -->
 	<insert id="insertOto">
-		<selectKey keyProperty="theater_num" resultType="int" order="BEFORE">
-			SELECT theater_num
-			FROM theater
-			WHERE theater_name = #{theater_name}
+		<selectKey keyProperty="oto_num" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(oto_num), 0) FROM OTO 
 		</selectKey>
-<!-- 		<selectKey keyProperty="member_id" resultType="String" order="BEFORE"> -->
-<!-- 			SELECT member_id -->
-<!-- 			FROM member -->
-<!-- 			WHERE member_id = #{member_id} -->
-<!-- 		</selectKey> -->
-		INSERT INTO OTO(OTO_num,
-						OTO_subject,
-						OTO_content,
+		INSERT INTO OTO(oto_num,
+						oto_subject,
+						oto_content,
 						theater_num,
 						member_id,
-						OTO_date,
-						OTO_category,
-						OTO_reply_status)
-		VALUES (null,
-				#{oto.OTO_subject},
-				#{oto.OTO_content},
+						oto_date,
+						oto_category,
+						oto_reply_status)
+		VALUES (#{oto_num} + 1,
+				#{oto.oto_subject},
+				#{oto.oto_content},
 				#{theater_num},
-				null,
+				#{id},
 				now(),
-				#{oto.OTO_category},
+				#{oto.oto_category},
 				'미답')
 	</insert>
 	
 	<!-- otoList 가져오기 -->
 	<select id="selectOtoList" resultType="itwillbs.p2c3.boogimovie.vo.OTOVO">
-		SELECT * FROM OTO
-		ORDER BY OTO_num DESC
+		SELECT o.oto_num
+		  -- , o.theater_num
+			 , t.theater_name
+		  	 , o.oto_content
+		     , o.member_id
+		     , o.oto_date
+		     , o.oto_category
+		     , o.oto_reply_status
+		     , o.oto_subject
+		 FROM OTO o
+		 JOIN theater t
+   		on o.theater_num = t.theater_num
+		ORDER BY oto_num DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
 	<select id="selectOto" resultType="itwillbs.p2c3.boogimovie.vo.OTOVO">
-		SELECT * FROM OTO WHERE OTO_num = #{OTO_num}
+		SELECT * FROM OTO WHERE oto_num = #{oto_num}
 	</select>
 	<select id="selectTheaterName">
 		SELECT theater_name 
@@ -48,7 +53,17 @@
 	</select>
 	<update id="updateOto">
 		UPDATE OTO
-		SET OTO_content = #{OTO_content}
-		WHERE OTO_num = #{OTO_num}
+		SET oto_content = #{oto_content}
+		WHERE oto_num = #{oto_num}
+	</update>
+	<delete id="deleteOto">
+		DELETE FROM OTO
+		WHERE oto_num = #{oto_num}
+	</delete>
+	<!-- 답변후 '미답' -> '답변' 변경-->
+	<update id="updateResponse">
+		UPDATE OTO
+		SET oto_reply_status = '답변'
+		WHERE oto_num = #{oto_num}
 	</update>
 </mapper>

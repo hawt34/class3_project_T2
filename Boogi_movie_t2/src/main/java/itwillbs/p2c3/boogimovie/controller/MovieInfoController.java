@@ -28,7 +28,8 @@ public class MovieInfoController {
     public String movieInfo(HttpSession session,int movie_num,MovieVO movie, Model model) {
         //System.out.println(movie_num); 확인완료 주석처리
         String member_id = (String) session.getAttribute("sId");
-		System.out.println("여기는 무비인포 현재로그인한 " +member_id); 
+		//System.out.println("여기는 무비인포 현재로그인한 " +member_id); 확인완료 주석처리.
+        
         MovieVO movie2 = service.getMovieInfo(movie);
 		model.addAttribute("movie", movie2);
 		//System.out.println(movie2); 확인완료 주석처리
@@ -37,8 +38,20 @@ public class MovieInfoController {
 		
         //System.out.println(reviews); 확인완료 주석처리
         model.addAttribute("reviews", reviews);
-        return "movie/movie_info"; // 뷰 이름은 적절하게 변경해야 합니다.
+        return "movie/movie_info"; 
     }
 	
+	@GetMapping("reviewModify")
+	public String reviewModify(int review_id, Model model) {
+		//System.out.println("여기는 리뷰모디파이"+ review_id); 확인완료주석처리
+		
+		List<ReviewVO> reviews = serviceReview.getReviewId(review_id);
+		model.addAttribute("reviews", reviews);
+		//System.out.println(reviews); 확인완료 주석처리
+		
+		
+		return "movie/review_modify";
+	}
+
 
 }

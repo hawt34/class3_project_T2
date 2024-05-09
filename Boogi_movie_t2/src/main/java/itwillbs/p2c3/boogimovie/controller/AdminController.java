@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
+import itwillbs.p2c3.boogimovie.service.EventService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
+import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -34,6 +36,9 @@ public class AdminController {
 	
 	@Autowired
 	TheaterService theaterService;
+	
+	@Autowired
+	EventService eventService;
 	
 	
 	// admin 메인 연결
@@ -310,12 +315,20 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 이벤트 
 	@GetMapping("admin_event")
-	public String adminEvent() {
+	public String adminEvent(Model model) {
+		List<EventVO> eventList = eventService.getEventList();
+		model.addAttribute(eventList);
 		return "admin/admin_event/admin_event";
 	}
 	@GetMapping("admin_event_form")
 	public String adminEventForm() {
+		
 		return "admin/admin_event/admin_event_form";
+	}
+	@GetMapping("admin_event_modify")
+	public String adminEventModify() {
+		
+		return "admin/admin_event/admin_event_modify";
 	}
 	@PostMapping("admin_event_pro")
 	public String adminEventPro() {

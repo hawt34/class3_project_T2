@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,11 +46,11 @@
 					<table>
 						<thead>
 							<tr>
-								<th>이벤트 코드</th>
+								<th>이벤트코드</th>
 								<th>제목</th>
+								<th>이벤트타입</th>
 								<th>등록일</th>
-								<th>작성자</th>
-								<th>이벤트상태</th>
+								<th>이벤트기간</th>
 								<th>상세보기</th>
 								<th>삭제</th>
 							</tr>
@@ -68,47 +69,21 @@
 									<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw()">삭제</button>
 								</td>
 							</tr>
-							<tr>
-								<td>7322</td>
-								<td>어버이날 이벤트</td>
-								<td>2024-04-22</td>
-								<td>어드민</td>
-								<td>진행전</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="eventForm()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>1112</td>
-								<td>1000번째회원 이벤트</td>
-								<td>2024-03-22</td>
-								<td>어드민</td>
-								<td>진행중</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="eventForm()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>3333232</td>
-								<td>플레티넘회원 이벤트</td>
-								<td>2024-04-12</td>
-								<td>어드민</td>
-								<td>진행중</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="eventForm()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw()">삭제</button>
-								</td>
-							</tr>
-							
-						
+							<c:forEach var="event" items="${eventList}">
+								<tr>
+									<td>${event.event_num}</td>
+									<td>${event.event_subject}</td>
+									<td>${event.event_type_name}</td>
+									<td>${event.event_reg_date}</td>
+									<td>${event.event_start_date} ~ ${event.event_end_date}</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" onclick="eventEdit()">상세보기</button>
+									</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw()">삭제</button>
+									</td>
+								</tr>
+							</c:forEach>
 							
 						</tbody>
 					</table>
@@ -133,8 +108,13 @@
 		function eventForm() {
 			window.open("admin_event_form", "_self");
 		}
+		function eventEdit() {
+			window.open("admin_event_modify", "_self");
+		}
 		function eventWithdraw() {
-			location.href = "admin_event_delete";
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href = "admin_event_delete";
+			}		 
 		}
 	
 	

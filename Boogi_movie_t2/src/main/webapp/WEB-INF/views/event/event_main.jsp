@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,14 +95,14 @@ main {
 	margin: 5px 0 0;
 }
 
-.textBox__name {
+.textBox_name {
 	font-size: 22px;
 	font-weight: 500;
 	opacity: 0;
 	transform: translateY(50px);
 }
 
-.textBox__price {
+.textBox_price {
 	font-size: 16px;
 	font-weight: 400;
 	opacity: 0;
@@ -121,19 +122,19 @@ main {
 }
 
 /* 기능 2 : 상품 정보 보이면서 위로 올라가기. */
-.item:hover .textBox .textBox__name {
+.item:hover .textBox .textBox_name {
 	opacity: 1;
 	transform: translateY(0px);
 }
 
 /* 기능 2 : 상품 정보 보이면서 위로 올라가기. */
-.item:hover .textBox .textBox__price {
+.item:hover .textBox .textBox_price {
 	opacity: 1;
 	transform: translateY(0px);
 }
 
 /* 자연스럽게 트랜지션 적용하기. */
-.item:after, .item .imgBox img, .item .textBox__name, .item .textBox__price
+.item:after, .item .imgBox img, .item .textBox_name, .item .textBox_price
 	{
 	transition: all 0.4s ease-in-out;
 }
@@ -151,82 +152,28 @@ main {
 		</div>
 		<hr>
 		<div class="container">
-			<div class="item">
+			<div class="item" onclick="location.href='eventDetail'">
 				<div class="imgBox">
 					<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" />
 				</div>
 				<div class="textBox">
-					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
-					<p class="textBox__price">극장이벤트</p>
+					<p class="textBox_name">팝콘할인해줘! 이벤트</p>
+					<p class="textBox_price">극장이벤트</p>
 				</div>
 			</div>
-			<div class="item">
-				<div class="imgBox">
-					<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" />
+			<c:forEach var="event" items="${eventList}">
+				<div class="item">
+					<div class="imgBox">
+						<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" onclick="location.href='eventDetail?event_num?=${event.event_num}'"/>
+					</div>
+					<div class="textBox">
+						<p class="textBox_name">${event.event_subject}</p>
+						<p class="textBox_price">${event.event_type_name}</p>
+					</div>
 				</div>
-				<div class="textBox">
-					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
-					<p class="textBox__price">극장이벤트</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="imgBox">
-					<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" />
-				</div>
-				<div class="textBox">
-					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
-					<p class="textBox__price">극장이벤트</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="imgBox">
-					<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" />
-				</div>
-				<div class="textBox">
-					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
-					<p class="textBox__price">극장이벤트</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="imgBox">
-					<img src="${pageContext.request.contextPath}/resources/images/event_sum.jpg" alt="썸네일" />
-				</div>
-				<div class="textBox">
-					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
-					<p class="textBox__price">극장이벤트</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="imgBox">
-					<img src="${pageContext.request.contextPath}/resources/images/event_sum.jpg" alt="썸네일" />
-				</div>
-				<div class="textBox">
-					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
-					<p class="textBox__price">극장이벤트</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="imgBox">
-					<img src="${pageContext.request.contextPath}/resources/images/event_sum.jpg" alt="썸네일" />
-				</div>
-				<div class="textBox">
-					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
-					<p class="textBox__price">극장이벤트</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="imgBox">
-					<img src="${pageContext.request.contextPath}/resources/images/event_sum.jpg" alt="썸네일" />
-				</div>
-				<div class="textBox">
-					<p class="textBox__name">팝콘할인해줘! 이벤트</p>
-					<p class="textBox__price">극장이벤트</p>
-				</div>
-			</div>
+			</c:forEach>
+
 		</div>
-
-
-
 	</main>
 
 	<footer>

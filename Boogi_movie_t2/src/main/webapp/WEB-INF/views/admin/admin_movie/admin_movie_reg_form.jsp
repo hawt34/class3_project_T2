@@ -16,6 +16,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js" ></script>
 <style>
 
 body {
@@ -69,50 +70,33 @@ body {
 <!-- 					</div> -->
 					<div class="mb-3">
 						<label for="movie_name">영화명</label> 
-						<input type="text" name="movie_name" id="movie_name" class="form-control" required" />
+						<input type="text" name="movie_name" id="movie_name" class="form-control" required />
 						<div class="invalid-feedback">영화명을 입력해주세요.</div>
+						<div><button id="getMovie">영화불러오기</button></div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_director">감독</label> 
-						<input type="text" name="movie_director" id="movie_director" class="form-control" required"/>
-						<div class="invalid-feedback">감독을 입력해주세요.</div>
+						<input type="text" name="movie_director" id="movie_director" class="form-control" readonly/>
 					</div>
-<!-- 					<div class="mb-3"> -->
-<!-- 						<label for="movie_createDate">제작년도</label>  -->
-<!-- 						<input type="text" id="movie_createDate" class="form-control" required /> -->
-<!-- 						<div class="invalid-feedback">제작년도를 입력해주세요.</div> -->
-<!-- 					</div> -->
 					<div class="mb-3">
 						<label for="genre_num">장르</label> 
-						<input type="text" name="genre_num" id="genre_num" class="form-control" required />
-						<div class="invalid-feedback">장르를 입력해주세요.</div>
+						<input type="text" name="genre_num" id="genre_num" class="form-control" readonly/>
 					</div>
-					<div class="row mb-3">
-						<div class="col-md-6">
-							<label for="movie_grade">관람등급</label> 
-							<select class="custom-select d-block w-100" id="movie_grade" name="movie_grade">
-								<option value="관람등급">관람등급을 선택하세요</option>
-								<option value="전체이용가">전체이용가</option>
-								<option value="12세관람가">12세관람가</option>
-								<option value="15세관람가">15세관람가</option>
-								<option value="19세관람가">19세관람가</option>
-							</select>
-							<div class="invalid-feedback">관람등급을 입력해주세요.</div>
-						</div>
-						<div class="col-md-6">
-							<label for="movie_status">상영상태</label> 
-							<select class="custom-select d-block w-100" id="movie_status" name="movie_status">
-								<option >상영상태를 선택하세요</option>
-								<option value="개봉예정작">개봉예정작</option>
-								<option value="현재상영작">현재상영작</option>
-								<option value="상영종료">상영종료</option>
-							</select>
-							<div class="invalid-feedback">상영상태를 선택해주세요.</div>
-						</div>
+					<div class="mb-3">
+						<label for="movie_grade">관람등급</label> 
+						<input type="text" class="form-control" id="movie_grade" name="movie_grade" readonly >
+					</div>
+					<div class="mb-3">
+						<label for="movie_runtime">상영시간</label> 
+						<input type="text" class="form-control" id="movie_runtime" name="movie_runtime" readonly >
+					</div>
+					<div class="mb-3">
+						<label for="movie_status">상영시간</label> 
+						<input type="text" class="form-control" id="movie_status" name="movie_status" readonly >
 					</div>
 					<div class="mb-3">
 						<label for="movie_open_date">개봉일</label> 
-						<input type="date" name="movie_open_date" id="movie_open_date" class="form-control" required />
+						<input type="date" name="movie_open_date" id="movie_open_date" class="form-control"  />
 						<div class="invalid-feedback">개봉일을 선택해주세요.</div>
 					</div>
 <!-- 					<div class="mb-3"> -->
@@ -178,6 +162,73 @@ body {
 	        }, false);
 	      });
 	    }, false);
+	    
+	    window.onload = function(){
+	    	var btnGetMovie = document.getElementById('getMovie');
+	    	
+	    	btnGetMovie.onclick = function(){
+	    		
+	    		var movieNm = $('#movie_name').val();
+	    		
+	    		$.ajax({    
+	    			type : 'get',           // 타입 (get, post, put 등등)    
+	    			url : 'https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f5eef3421c602c6cb7ea224104795888&movieNm=' + movieNm,           // 요청할 서버url    
+	    			  
+	    			// dataType : 'text',       // 데이터 타입 (html, xml, json, text 등등)    
+	    			//data : JSON.stringify({  // 보낼 데이터 (Object , String, Array)      
+	    			//	"no" : no,      
+	    			//	"name" : name,      
+	    			//	"nick" : nick    
+	    			//}),    
+	    			success : function(result) { // 결과 성공 콜백함수
+	    			console.log(result);
+	    				
+	    			// 영화코드
+    				var movieCode = result.movieListResult.movieList[0].movieCd;
+    				//장르
+    				$('#genre_num').val(result.movieListResult.movieList[0].repGenreNm);
+					// 감독	    				
+    				$('#movie_director').val(result.movieListResult.movieList[0].directors[0].peopleNm);
+					// 개봉상태
+    				$('#movie_status').val(result.movieListResult.movieList[0].prdtStatNm);
+
+					//개봉일
+    				let dateString = result.movieListResult.movieList[0].openDt;
+    				let year = dateString.substring(0, 4);
+    				let month = dateString.substring(4, 6);
+    				let day = dateString.substring(6, 8);
+    				let formattedDate = year + '-' + month + '-' + day;
+    				
+    				$('#movie_open_date').val(formattedDate);
+    				
+					$.ajax({
+						type : 'get',
+						url: 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=' + movieCode,           // 요청할 서버url
+						
+						success : function(result2) { // 결과 성공 콜백함수
+						console.log(result2);
+						// 영화등급
+	    				$('#movie_grade').val(result2.movieInfoResult.movieInfo.audits[0].watchGradeNm);
+						// 상영시간
+	    				$('#movie_runtime').val(result2.movieInfoResult.movieInfo.showTm + "분");
+						
+						
+						},
+						error : function(request, status, error) { // 결과 에러 콜백함수        
+		    				console.log(error)    
+		    				
+		    			}
+						
+					}) // inner ajax
+	    				
+	    			},    
+	    			error : function(request, status, error) { // 결과 에러 콜백함수        
+	    				console.log(error)    
+	    			}
+	    		}) // outter ajax
+	    	}
+	    } // window.onload
+	    
  	</script>
 </body>
 </html>

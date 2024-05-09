@@ -71,7 +71,7 @@ body {
 							        <th scope="row">${status.index + 1}</th>
 							        <td>${coupon.coupon_num}</td>
 							        <td>${coupon.coupon_name}</td>
-							        <td>${coupon.discount_num}</td>
+							        <td>${coupon.discount_value}</td>
 							    </tr>
 							</c:forEach>
 						  </tbody>

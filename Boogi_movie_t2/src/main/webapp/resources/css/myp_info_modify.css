@@ -20,6 +20,9 @@
 .box3{
 	display: flex; /* 가로로 정렬 */
 }
+.align_center{
+	text-align: center;
+}
 /* ============= 버튼 ================= */
 
 .content {

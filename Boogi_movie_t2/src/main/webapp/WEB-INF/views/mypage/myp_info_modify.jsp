@@ -24,6 +24,29 @@ body {
 
 
 </style>
+
+<script type="text/javascript">
+
+$(function() {
+	// --------------------------------------------------------------------
+	// 1. ID 중복확인 버튼 클릭 시 새 창(check_id.jsp) 띄우기
+	// ID중복확인 버튼 클릭 시 이벤트 핸들링 
+	$("#btnCheckId").click(function() {
+		window.open("check_id.jsp", "check_id", "width=500, height=400");
+	});
+}
+
+</script>
+
+<script type="text/javascript">
+function checkId() {
+	window.open("CheckDupId", "check_id", "width=500, height=400");
+}
+
+</script>
+
+
+
 </head>
 <body>
 <header>
@@ -41,13 +64,20 @@ body {
 			<div class="box1">
 	   			<label for="name">이름</label>
 			  	<div class="form_item w-75">
-			    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" required readonly>
+			    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" readonly>
 			    </div><!-- form item -->
-			
-	   			<label for="id">아이디</label>
-			  	<div class="form_item w-75">
-			    	<input type="text" placeholder="아이디 입력" name="member_id" id="member_id" value="${member.member_id}" autocapitalize="off" required>
-			    </div><!-- form item -->
+				
+				
+<!-- 				<form action="CheckDupId" class="align_center"> -->
+				<!-- pattern 속성으로 입력값 검증 수행 -->
+				<!-- 주의! submit 버튼 클릭 시 동작하며, 패턴 작성 시 / 와 / 사이의 내용만 작성 -->
+		   			<label for="id">아이디</label>
+				  	<div class="form_item w-75">
+<%-- 					<input type="text" name="id" value="${param.id}" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" placeholder="검색할 아이디 입력" required> --%>
+				
+			    	<input type="text"  placeholder="아이디 입력" onclick="checkId()" name="id" id="member_id" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" value="${member.member_id}" required readonly>
+				    </div><!-- form item -->
+<!-- 				</form> -->
 			
 	   			<label for="pwd">새 비밀번호</label>
 			  	<div class="form_item w-75">
@@ -63,24 +93,22 @@ body {
 			
 	   			<label for="birth">생년월일</label>
 			  	<div class="form_item w-75">
-			    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" value="${member.member_birth}">
+			    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.member_birth}">
 			    </div><!-- form item -->
 	
 	   			<label for="postCode">주소</label>
 			  	<div class="form_item w-75">
-			    	<input type="text" id="postCode" name="postCode" size="6" onclick="search_address()" value="${arrAddress[0]}" placeholder="클릭 시 주소검색">
-			    	<input type="text" id="address1" name="address1" placeholder="기본주소" onclick="search_address()" value="${arrAddress[1]}" size="25">
-			    	<input type="text" id="address2" name="address2" placeholder="상세주소" value="${arrAddress[2]}" size="25" pattern="^.{2,20}$" maxlength="20">
+			    	<input type="text" id="member_addr" name="member_addr" size="6" onclick="search_address()" required value="${member.member_addr}" placeholder="클릭 시 주소검색">
 			    </div><!-- form item -->
 			
 	   			<label for="email">Email</label>
 			  	<div class="form_item w-75">
-			    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" value="${member.member_email}">
+			    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required value="${member.member_email}">
 			    </div><!-- form item -->
 			
 	   			<label for="phoneNum">전화번호</label>
 			  	<div class="form_item w-75">
-			    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" id="member_tel" value="${member.member_tel}">
+			    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" required id="member_tel" value="${member.member_tel}">
 			    </div><!-- form item -->
 			    
 	    		<div class="row">

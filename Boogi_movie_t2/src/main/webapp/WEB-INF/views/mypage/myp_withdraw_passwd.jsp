@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +78,7 @@ input[type=text]:focus, input[type=password]:focus {
 		<div class="row">
 			<div class="col-md-2">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
-			</div><!-- row box1  -->
+			</div><!-- col-md-2  -->
 			
 			<div class="col-md-9">
 				<h2>회원탈퇴</h2>
@@ -89,12 +90,22 @@ input[type=text]:focus, input[type=password]:focus {
 				    	<input type="text" required>
 				    </div><!-- form item -->
 				    <form action="myp_withdraw_finish_pro" method="post">
-						<section class="content">
-							<button type="submit" class="btn btn-outline-primary btn-lg">회원탈퇴하기</button>
-						</section>
+						<c:choose>
+							<c:when test="${member_passwd }">
+								<section class="content">
+									<button type="submit" class="btn btn-outline-primary btn-lg" disabled>회원탈퇴하기</button>
+								</section>
+							
+							</c:when>
+							<c:otherwise>
+								<section class="content">
+									<button type="submit" class="btn btn-outline-primary btn-lg">회원탈퇴하기</button>
+								</section>
+							</c:otherwise>
+						</c:choose>
 					</form>
 				</div><!-- text1 -->
-			</div><!-- col-md-10 box1 -->
+			</div><!-- col-md-9 -->
 		</div><!-- row -->
 	</div><!-- container2 -->
 </div><!-- container1 -->

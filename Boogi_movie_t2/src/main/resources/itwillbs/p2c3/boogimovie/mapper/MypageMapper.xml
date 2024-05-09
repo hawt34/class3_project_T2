@@ -18,4 +18,40 @@
     	FROM theater
     </select>
     
+    <select id="selectDbMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
+    	SELECT * FROM member WHERE member_id = #{member_id}
+    </select>
+    
+    <update id="updateMember">
+ 		UPDATE member
+		SET
+			member_name = #{name}
+			<!-- 새 패스워드(passwd) 입력 여부에 따라 패스워드 변경 여부 결정 -->
+			<!-- 마이바티스 동적 SQL 기능 중 <if></if> 활용하여 패스워드 변경 작업을 동적으로 처리 -->
+			<!-- 주의! 비교에 사용될 파라미터는 #{} 또는 ${} 제외하고 표현 -->
+			<!-- passwd 파라미터가 null 이 아니고 널스트링('')도 아닐 경우 패스워드 변경 -->
+			<!-- (실제로는 패스워드 미입력 시 널스트링이 전달되므로 null 값 판별 생략 가능) -->
+			<if test="member_pwd != null and !member_pwd.equals('')">
+				, member_id = #{member_id}
+				, member_pwd = #{member_pwd}  -- 새 패스워드 존재할 경우에만 기존 패스워드 변경
+				, member_birth = #{member_birth}
+				, member_addr = #{member_addr}
+				, member_email = #{member_email}
+				, member_tel = #{member_tel}
+			</if>
+<!-- 			, post_code = #{post_code} -->
+<!-- 			, address1 = #{address1} -->
+<!-- 			, address2 = #{address2} -->
+<!-- 			, member_email = CONCAT(#{email1}, '@', #{email2}) -->
+		WHERE
+			member_id = #{member_id}
+    
+    </update>
+    
+    
+    <update id="updateMemberForWithdraw">
+<!--    		UPDATE member -->
+<!-- 		SET member_status = 3, -->
+<!-- 			withdraw_date = now() -->
+    </update>
 </mapper>

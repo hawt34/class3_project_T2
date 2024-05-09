@@ -88,9 +88,11 @@ input[type=text]:focus, input[type=password]:focus {
 				    <div class="form_item w-75 box1">
 				    	<input type="text" required>
 				    </div><!-- form item -->
-					<section class="content">
-						<button type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='myp_withdraw_finish'">회원탈퇴하기</button>
-					</section>
+				    <form action="myp_withdraw_finish_pro" method="post">
+						<section class="content">
+							<button type="submit" class="btn btn-outline-primary btn-lg">회원탈퇴하기</button>
+						</section>
+					</form>
 				</div><!-- text1 -->
 			</div><!-- col-md-10 box1 -->
 		</div><!-- row -->

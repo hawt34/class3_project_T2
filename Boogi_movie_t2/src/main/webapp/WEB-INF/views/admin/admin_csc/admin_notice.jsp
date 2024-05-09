@@ -131,8 +131,11 @@
 			window.open("admin_noticeForm", "_self");
 		}
 		function admin_notice_withdraw(num) {
-			location.href="admin_notice_delete?notice_num=" + num;
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href="admin_notice_delete?notice_num=" + num;
+			}
 		}
+		
 	
 	
 	</script>

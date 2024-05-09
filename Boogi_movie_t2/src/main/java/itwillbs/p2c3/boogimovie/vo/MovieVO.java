@@ -17,6 +17,6 @@ public class MovieVO {
 	private String movie_runtime;
 	private Date movie_open_date;
 	private Date movie_end_date;
-	
-	
 }
+	
+	

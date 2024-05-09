@@ -59,10 +59,10 @@
 						</div>
 					<!-- select박스 -->
 					<div class="row">
-					        <select id ="movieOrderby" class="form-select form-select-lg mb-3 col-md-2" style="width: 100px; height: 35px; font-size: 13px; margin-right : 100px;">
-					          <option value="Like">예매순</option>
-					          <option value="Abc">가나다순</option>
-					        </select>
+<!-- 					        <select id ="movieOrderby" class="form-select form-select-lg mb-3 col-md-2" style="width: 100px; height: 35px; font-size: 13px; margin-right : 100px;"> -->
+<!-- 					          <option value="Like">예매순</option> -->
+<!-- 					          <option value="Abc">가나다순</option> -->
+<!-- 					        </select> -->
 					        
 					        <div class="col-md-4">
 								<input type="checkbox" id ="like_movie" name="like_movie" value="나의취향" class="col-md-3">내취향
@@ -241,6 +241,7 @@
 	}
 	
 	function movieClick(movie_name, movie_num){
+		selectedMovie = movie_name;
 		var result1 = $("#movieSelected");
 		var result2 = $("#movie_"+movie_num);
 		result1.empty();
@@ -251,6 +252,7 @@
 	} 
 	
 	function theaterClick(theater_name){
+		selectedTheater = theater_name;
 		var result = $("#theaterSelected");
 		$(this).css("background-color", "yellow");
 		result.empty();
@@ -276,60 +278,60 @@
     }
 	
 	
-	function loadMovies(orderBy, sId) {	
-		$.ajax({
-            url: "api/movie" + orderBy,
-            method: "GET",
-            data: {
-                sId: sId
-            },
-            dataType: "json",
-            success: function (response) {
-            	var result = $("#movielist");
-                result.empty();
-                response.forEach(function (movie) {
-                    var movieDiv = "<div class='movie_atrbt'>"
-                        + getGradeIcon(movie.movie_grade)
-                        + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                        + "<span>"
-                        + "<a onclick='movieClick(\"" + movie.movie_name + "\")'>" + movie.movie_name + "</a>"
-                        + "</span>"
-                        + "</div>";
+// 	function loadMovies(orderBy, sId) {	
+// 		$.ajax({
+//             url: "api/movie" + orderBy,
+//             method: "GET",
+//             data: {
+//                 sId: sId
+//             },
+//             dataType: "json",
+//             success: function (response) {
+//             	var result = $("#movielist");
+//                 result.empty();
+//                 response.forEach(function (movie) {
+//                     var movieDiv = "<div class='movie_atrbt'>"
+//                         + getGradeIcon(movie.movie_grade)
+//                         + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+//                         + "<span>"
+//                         + "<a onclick='movieClick(\"" + movie.movie_name + "\")'>" + movie.movie_name + "</a>"
+//                         + "</span>"
+//                         + "</div>";
 
-                    result.append(movieDiv);
-                });
-            },
-            error: function () {
-                alert("영화 정보를 가져오는 데 실패했습니다.");
-            }
-        });
-	}
+//                     result.append(movieDiv);
+//                 });
+//             },
+//             error: function () {
+//                 alert("영화 정보를 가져오는 데 실패했습니다.");
+//             }
+//         });
+// 	}
 	
 	
 	
-	$(document).ready(function () {
-		var sId = '<%= session.getAttribute("sId") %>';
-		$("#movieOrderby").change(function () {
-			var orderBy = $(this).val();
-			loadMovies(orderBy);
-		});
+// 	$(document).ready(function () {
+<%-- 		var sId = '<%= session.getAttribute("sId") %>'; --%>
+// 		$("#movieOrderby").change(function () {
+// 			var orderBy = $(this).val();
+// 			loadMovies(orderBy);
+// 		});
 		 
 		
 
-	    $("#like_movie").change(function () {
-	        var likeMovie = $(this).is(":checked");
-	        var orderBy = "LikeMovie";
+// 	    $("#like_movie").change(function () {
+// 	        var likeMovie = $(this).is(":checked");
+// 	        var orderBy = "LikeMovie";
 	        
-	        if(likeMovie){
-	        	loadMovies(orderBy,sId);	
-	        }else{
-	        	orderBy = "Like";
-	        	loadMovies(orderBy);
-	        }
+// 	        if(likeMovie){
+// 	        	loadMovies(orderBy,sId);	
+// 	        }else{
+// 	        	orderBy = "Like";
+// 	        	loadMovies(orderBy);
+// 	        }
 		        
 		    
-		});	
-	});
+// 		});	
+// 	});
 </script>
 </body>
 </html>

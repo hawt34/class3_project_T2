@@ -75,9 +75,7 @@ public class CscController {
 		@GetMapping("csc_notice_detail")
 		public String cscNoiceDetail(int notice_num, Model model) {
 			NoticeVO notice = noticeService.getNotice(notice_num);
-			String noticeDate = notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 			
-			model.addAttribute("noticeDate", noticeDate);
 			model.addAttribute("notice", notice);
 			
 			return "csc/csc_notice_detail";

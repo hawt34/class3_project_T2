@@ -37,6 +37,10 @@
 						<div class="invalid-feedback">글제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
+						<select name="notice_category">
+							<option value="전체">전체</option>
+							<option value="극장">극장</option>
+						</select>
 						<select name="theater_name">
 							<option value="해운대점">해운대점</option>
 							<option value="센텀점">센텀점</option>

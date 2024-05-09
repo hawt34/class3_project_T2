@@ -40,10 +40,15 @@ public class TheaterService {
 	}
 
 
-
-	public List<NoticeVO> getNoticeList(NoticeVO notice) {
-		return mapper.selectNoticeList(notice);
+	//  극장 상세 > 지점별 공지사항 
+	public List<NoticeVO> getTheaterNoticeList(NoticeVO notice) {
+		return mapper.selectTheaterNoticeList(notice);
 	}
-	
+
+
+	// 극장 메인 > 극장 카테고리 공지사항 
+	public List<NoticeVO> getNoticeList() {
+		return mapper.selectNoticeList();
+	}
 	
 }

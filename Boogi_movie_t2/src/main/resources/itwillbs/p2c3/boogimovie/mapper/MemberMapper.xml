@@ -16,18 +16,17 @@
 			,"활동"
 			,null
 			,"0"
-			,now()
+			,now()	
 			,null
 			,#{member_birth}
 		);
-
 	</insert>
+	
 
 	<select id="preRegMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
 		SELECT *
 		FROM member
 		WHERE member_name = #{member_name} and member_birth = #{member_birth}
-
 	</select>
 
 	<select id="isCorrectMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
@@ -40,6 +39,18 @@
 		SELECT *
 		FROM member
 		WHERE member_id = #{member_id} and member_birth = #{member_birth}
+	</select>
+	
+	<select id="memberMovieGenreSearch" resultType="String">
+		SELECT member_movie_genre
+		FROM member
+		WHERE member_id = #{sId}
 	</select>	
+	
+	<select id="selectTheatersMyTheater" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
+		SELECT member_my_theater1 member_my_theater2 member_my_theater3
+		FROM member
+		WHERE member_id = #{sId} 
+	</select>
 
 </mapper>

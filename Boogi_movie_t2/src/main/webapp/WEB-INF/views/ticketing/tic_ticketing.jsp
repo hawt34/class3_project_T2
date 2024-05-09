@@ -32,6 +32,7 @@
 	
 %>
 
+
 <header>
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
@@ -64,7 +65,7 @@
 					        </select>
 					        
 					        <div class="col-md-4">
-								<input type="checkbox" name="like_movie" value="나의취향" class="col-md-3">내취향
+								<input type="checkbox" id ="like_movie" name="like_movie" value="나의취향" class="col-md-3">내취향
 							</div>
 					</div>
 					<!-- 영화정보 -->
@@ -86,11 +87,11 @@
 									</c:when>
 								</c:choose>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<span>
-										<a onclick="javascript:movieClick('${movie.movie_name}')">
+									<div id="movie_${movie_num }">
+										<a onclick="javascript:movieClick('${movie.movie_name}','${movie.movie_num }')">
 											${movie.movie_name}
 										</a>
-									</span>
+									</div>
 							</div>
 						</c:forEach>
 					</div>
@@ -109,11 +110,11 @@
 							<!-- theater 리스트1 -->
 							<div class="col-sm-6" style="border-right: solid 3px black; text-align: left;">
 								<ul>
-									<li><a>전체극장</a></li>
+									<li><a onclick="javascript:theaterType('EntireTheater')">전체극장</a></li>
 								</ul>	
 								
 								<ul>
-									<li><a>MY영화관</a></li>
+									<li><a onclick="javascript:theaterType('MyTheater','${sessionScope.sId}')">MY영화관</a></li>
 								</ul>
 							</div>
 								
@@ -180,7 +181,7 @@
 	<div class="tic_button">
 		<button type="submit" class="btn btn-outline-primary">좌석 선택</button>
 	</div>
-	
+
 </section>
 </form>				
 			
@@ -196,16 +197,46 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
 "></script>
 <script>
-	function movieClick(movie_name){
-		var result = $("#movieSelected");
-		
-		result.empty();
-		result.append(movie_name);
+	function theaterType(type, sId) {
+	    $.ajax({
+	        url: "api/theater" + type,
+	        method: "GET",
+	        data: {
+	            sId: sId
+	        },
+	        dataType: "json",
+	        success: function (response) {
+	            var result = $("#theaterlist");
+	            result.empty();
+	
+	            response.forEach(function (theater) {
+	                var theaterListItem = `
+	                    <ul>
+	                        <li>
+	                            <a onclick="theaterClick('${theater.theater_name}')">${theater.theater_name}</a>
+	                        </li>
+	                    </ul>
+	                `;
+	                result.append(theaterListItem);
+	            });
+	        },
+	        error: function () {
+	            alert("영화 정보를 가져오는 데 실패했습니다.");
+	        }
+	    });
+	}
+	
+	function movieClick(movie_name, movie_num){
+		var result1 = $("#movieSelected");
+		var result2 = $("#movie_"+movie_num);
+		result1.empty();
+		result1.append(movie_name);
+		result2.css("background-color", "blue");
 	} 
 	
 	function theaterClick(theater_name){
 		var result = $("#theaterSelected");
-		
+		$(this).css("background-color", "yellow");
 		result.empty();
 		result.append(theater_name);
 	} 
@@ -227,10 +258,13 @@
     }
 	
 	
-	function loadMovies(orderBy) {	
+	function loadMovies(orderBy, sId) {	
 		$.ajax({
             url: "api/movie" + orderBy,
             method: "GET",
+            data: {
+                sId: sId
+            },
             dataType: "json",
             success: function (response) {
             	var result = $("#movielist");
@@ -254,13 +288,30 @@
 	}
 	
 	
-	$(document).ready(function () {	
-		 $("#movieOrderby").change(function () {
-             var orderBy = $(this).val();
-             loadMovies(orderBy);
+	
+	$(document).ready(function () {
+		var sId = '<%= session.getAttribute("sId") %>';
+		$("#movieOrderby").change(function () {
+			var orderBy = $(this).val();
+			loadMovies(orderBy);
 		});
-	});	
+		 
 		
+
+	    $("#like_movie").change(function () {
+	        var likeMovie = $(this).is(":checked");
+	        var orderBy = "LikeMovie";
+	        
+	        if(likeMovie){
+	        	loadMovies(orderBy,sId);	
+	        }else{
+	        	orderBy = "Like";
+	        	loadMovies(orderBy);
+	        }
+		        
+		    
+		});	
+	});
 </script>
 </body>
 </html>

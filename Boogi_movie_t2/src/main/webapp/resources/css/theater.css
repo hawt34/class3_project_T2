@@ -99,6 +99,18 @@ table {
  h4 {
  	margin-bottom: 20px;
  }
+ 
+ .theater_public_info {
+ 	display: flex; 
+ 	margin: 20px 0;
+ }
+ 
+ .theater_public_img {
+ 	width: 100px;
+ 	margin: 20px;
+ }
+ 
+ 
 /* ========================================= */
 /* theater_detail_timetable */
 .theater-info{

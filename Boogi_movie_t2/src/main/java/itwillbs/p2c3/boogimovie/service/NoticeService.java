@@ -17,5 +17,9 @@ public class NoticeService {
 	public List<NoticeVO> getNoticeList(int listLimit, int startRow) {
 		return mapper.selectNoticeList(listLimit, startRow);
 	}
+
+	public NoticeVO getNotice(int notice_num) {
+		return mapper.selectNotice(notice_num);
+	}
 	
 }

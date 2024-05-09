@@ -72,4 +72,14 @@ public class MemberService {
 //	}
 	
 	
+	public String movieGenreSearch(String sId) {
+		
+		return mapper.memberMovieGenreSearch(sId);
+	}
+	
+	
+	public MemberVO selectTheatersMyTheater(String sId) {
+		
+		return mapper.selectTheatersMyTheater(sId);
+	}
 }

@@ -32,5 +32,16 @@
 		ORDER BY movie_name;
 	</select>
 	
+	<select id="selectMovieGenreNum" resultType="int">
+		SELECT genre_num
+		FROM movie_genre
+		WHERE genre_name = #{genre_name}
+	</select>
+	
+	<select id="selectMovieInfoGenre" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
+		SELECT *
+		from movie
+		WHERE genre_num = #{genre_num}
+	</select>
 		
 </mapper>

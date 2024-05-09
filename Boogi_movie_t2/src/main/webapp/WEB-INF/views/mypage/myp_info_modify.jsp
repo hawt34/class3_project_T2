@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_info_modify.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,75 +30,76 @@ body {
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 <div class="container1">
-	<form action="myp_info_modify" method="post" name="fr">
-		<div class="row">
-			<div class="col-md-2">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
-			</div>	<!-- col-md-2 사이드바  -->
-				<div class="col-md-9">
-					<h2>회원정보수정</h2>
-					<hr>
-				<div class="box1">
-	    			<label for="name">이름</label>
-				  	<div class="form_item w-75">
-				    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" required readonly>
-				    </div><!-- form item -->
-				
-	    			<label for="id">아이디</label>
-				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="아이디 입력" name="member_id" id="member_id" value="${member.member_id}" autocapitalize="off" required>
-				    </div><!-- form item -->
-				
-	    			<label for="pwd">비밀번호</label>
-				  	<div class="form_item w-75">
-				    	<input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd" required>
-				    </div><!-- form item -->
-				
-	    			<label for="pwd2">비밀번호 확인</label>
-				  	<div class="form_item w-75 ">
-				    	<input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2" required>
-				    </div><!-- form item -->
-				
-	    			<label for="birth">생년월일</label>
-				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" value="${member.member_birth}" required>
-				    </div><!-- form item -->
+	<div class="row">
+		<div class="col-md-2">
+			<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+		</div>	<!-- col-md-2 사이드바  -->
+		<div class="col-md-9">
+			<h2>회원정보수정</h2>
+			<hr>
+		<form action="myp_info_modify_pro" method="post" name="fr">
+			<div class="box1">
+	   			<label for="name">이름</label>
+			  	<div class="form_item w-75">
+			    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" required readonly>
+			    </div><!-- form item -->
+			
+	   			<label for="id">아이디</label>
+			  	<div class="form_item w-75">
+			    	<input type="text" placeholder="아이디 입력" name="member_id" id="member_id" value="${member.member_id}" autocapitalize="off" required>
+			    </div><!-- form item -->
+			
+	   			<label for="pwd">새 비밀번호</label>
+			  	<div class="form_item w-75">
+			    	<input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd">
+					<div id="checkPasswdResult"></div>
+			    </div><!-- form item -->
+			
+	   			<label for="pwd2">새 비밀번호확인</label>
+			  	<div class="form_item w-75 ">
+			    	<input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2">
+	 						<div id="checkPasswd2Result"></div>
+			    </div><!-- form item -->
+			
+	   			<label for="birth">생년월일</label>
+			  	<div class="form_item w-75">
+			    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" value="${member.member_birth}">
+			    </div><!-- form item -->
 	
-	    			<label for="postCode">주소</label>
-				  	<div class="form_item w-75">
-<%-- 						<c:set var="arrAddress" value="${fn:split(member.member_addr, '/')}" /> --%>
-				    	<input type="text" id="postCode" name="postCode" size="6" onclick="search_address()" value="${arrAddress[0]}" placeholder="클릭 시 주소검색" required>
-				    	<input type="text" id="address1" name="address1" placeholder="기본주소" onclick="search_address()" value="${arrAddress[1]}" size="25" required>
-				    	<input type="text" id="address2" name="address2" placeholder="상세주소" value="${arrAddress[2]}" size="25" pattern="^.{2,20}$" maxlength="20" required>
-				    </div><!-- form item -->
-				
-	    			<label for="email">Email</label>
-				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" value="${member.member_email}" required>
-				    </div><!-- form item -->
-				
-	    			<label for="phoneNum">전화번호</label>
-				  	<div class="form_item w-75">
-				    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" id="member_tel" value="${member.member_tel}" required>
-				    </div><!-- form item -->
-				    
-		    		<div class="row">
-						<label for="movie_genre"><b>영화취향</b></label>
-							<div class="col-md-8 box3">
-					  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="공포" name="member_movie_genre">공포</div>
-					  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="코믹" name="member_movie_genre">코믹</div>
-					  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="시사" name="member_movie_genre">시사</div>
-  								<div class="col-md-2"><input type="checkbox" id="cb_all">전체선택</div>
-							</div>
-				    </div>
-				</div><!-- box1 -->
-				<div class="d-grid gap-2 col-3 box2">
-					  <button class="btn btn-outline-primary btn-lg" type="submit" onclick="location.href='myp_main'">수정완료</button>
-				</div>
-			</div><!-- col-md-10 -->
-		</div><!-- row  -->	
-	</form>
-</div> <!--  container1  -->
+	   			<label for="postCode">주소</label>
+			  	<div class="form_item w-75">
+			    	<input type="text" id="postCode" name="postCode" size="6" onclick="search_address()" value="${arrAddress[0]}" placeholder="클릭 시 주소검색">
+			    	<input type="text" id="address1" name="address1" placeholder="기본주소" onclick="search_address()" value="${arrAddress[1]}" size="25">
+			    	<input type="text" id="address2" name="address2" placeholder="상세주소" value="${arrAddress[2]}" size="25" pattern="^.{2,20}$" maxlength="20">
+			    </div><!-- form item -->
+			
+	   			<label for="email">Email</label>
+			  	<div class="form_item w-75">
+			    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" value="${member.member_email}">
+			    </div><!-- form item -->
+			
+	   			<label for="phoneNum">전화번호</label>
+			  	<div class="form_item w-75">
+			    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" id="member_tel" value="${member.member_tel}">
+			    </div><!-- form item -->
+			    
+	    		<div class="row">
+					<label for="movie_genre"><b>영화취향</b></label>
+						<div class="col-md-8 box3">
+				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="공포" name="member_movie_genre">공포</div>
+				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="코믹" name="member_movie_genre">코믹</div>
+				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="시사" name="member_movie_genre">시사</div>
+									<div class="col-md-2"><input type="checkbox" id="cb_all">전체선택</div>
+						</div>
+			    </div>
+			</div><!-- box1 -->
+			<div class="d-grid gap-2 col-3 box2">
+				  <button class="btn btn-outline-primary btn-lg" type="submit" >수정완료</button>
+			</div> <!-- d-grid gap-2 col-3 box2 -->
+		</form>
+		</div><!-- col-md-9 -->
+	</div><!-- row -->
+</div><!-- container1  -->	
 	<footer>
 		<jsp:include page="inc/myp_footer.jsp"></jsp:include>
 	</footer>
@@ -108,29 +110,11 @@ body {
 
 	$(document).ready(function() {
 
-		// 이름 입력값 변경 시 
-		$("#member_name").on("keyup", function(){
-			let name = $("#member_name").val();
-			// 특수문자 불가, 영어불가, 숫자불가, 최대글자 10글자
-// 			let regex = /^[^A-Za-z0-9\p{P}\p{S}]{1,10}$;
-	        let regex = /^[a-zA-Z가-힣]{2,10}$/g;
-
-			if(!(regex.test(name))){
-				$("#member_name").css("background-color", "red");
-			} else {
-	            $("#member_name").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-			}
-			
-			checkFormValidity(); // 폼 유효성 검사 실행
-			
-		});
-		
-		
 		
 	    // 아이디 입력값 변경 시
-	    $("#member_id").on("keyup", function() {
+	    $("#member_id").on("input", function() {
 	        let id = $("#member_id").val();
-	        let regex = /^[a-zA-Z가-힣]{2,10}$/g;
+	        let regex = /^[a-zA-Z가-힣0-9]{2,10}$/g;
 	        
 	        if (!regex.test(id)) {
 	            $("#member_id").css("background-color", "red");
@@ -142,7 +126,7 @@ body {
 	    });
 	    
 	    // 비밀번호 입력값 변경 시
-	    $("#member_pwd").on("keyup", function() {
+	    $("#member_pwd").on("input", function()
 	        let pwd = $("#member_pwd").val();
 	        let regex = /^.{8,16}$/g;
 	        
@@ -157,7 +141,7 @@ body {
 	    
 	    
 	    // 비밀번호2 입력값 변경 시
-	    $("#member_pwd2").on("keyup", function() {
+	    $("#member_pwd2").on("input", function() {
 	    	let pwd = $("#member_pwd").val();
 	        let pwd2 = $("#member_pwd2").val();
 	        let regex = /^.{8,16}$/g;
@@ -172,7 +156,7 @@ body {
 	    });
 	    
 	    // 생년월일 입력값 변경 시 
-	    $("#member_birth").on("keyup", function() {
+	    $("#member_birth").on("input", function() {
 	        let birth = $("#member_birth").val();
 //         	let regex = /^[0-9]{8}$/;
 	        let regex = /^\d{6}$/g;
@@ -189,18 +173,8 @@ body {
 			
 			});
 	    
-// 	        if (!regex.test(birth)) {
-// 	            $("#member_birth").css("background-color", "red");
-// 	        } else {
-// 	            $("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-// 	        }
-		
-// 	        checkFormValidity(); // 폼 유효성 검사 실행
-// 	    });
-	    
-	    
 	    // 상세주소 입력값 변경 시
-	    $("#member_address2").on("keyup", function() {
+	    $("#member_address2").on("input", function() {
 	        let address2 = $("#member_address2").val();
 	        let regex = /^{2,20}$/g;
 	        
@@ -214,7 +188,7 @@ body {
 	    });
 	    
 	    // 이메일 입력값 변경 시
-	    $("#member_email").on("keyup", function() {
+	    $("#member_email").on("input", function() {
 	        let email = $("#member_email").val();
 	        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
 	        
@@ -229,7 +203,7 @@ body {
 	    
 	    
 	    // 전화번호 입력값 변경 시
-	    $("#member_tel").on("keyup", function() {
+	    $("#member_tel").on("input", function() {
 	        let tel = $("#member_tel").val();
 	        let regex = /^010\d{8}$/g;
 	        
@@ -244,8 +218,7 @@ body {
 
 	    
 		    // 폼 유효성 검사 함수
-		    function checkFormValidity() {
-	        let nameIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_name").val());
+	    function checkFormValidity() {
 	        let idIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_id").val());
 	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
 	        let pwd2IsValid = /^.{8,16}$/.test($("#member_pwd2").val());
@@ -254,7 +227,7 @@ body {
 	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
 	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
 	
-	        if (nameIsValid && idIsValid && pwdIsValid && pwd2IsValid && birthIsValid && address2IsValid && emailIsValid && telIsValid) {
+	        if (idIsValid && pwdIsValid && pwd2IsValid && birthIsValid && address2IsValid && emailIsValid && telIsValid) {
 	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
 	        } else {
 	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화

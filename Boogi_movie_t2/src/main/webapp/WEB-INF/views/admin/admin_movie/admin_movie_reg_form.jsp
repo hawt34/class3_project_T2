@@ -172,54 +172,58 @@ body {
 	    		
 	    		$.ajax({    
 	    			type : 'get',           // 타입 (get, post, put 등등)    
-	    			url : 'https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f5eef3421c602c6cb7ea224104795888&movieNm=' + movieNm,           // 요청할 서버url    
+	    			url : 'https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=YM1N07PIQD3S9ZQD2Y5W&title=' + movieNm,           // 요청할 서버url    
+// 	    			url : 'https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f5eef3421c602c6cb7ea224104795888&movieNm=' + movieNm,           // 요청할 서버url    
 	    			  
-	    			// dataType : 'text',       // 데이터 타입 (html, xml, json, text 등등)    
-	    			//data : JSON.stringify({  // 보낼 데이터 (Object , String, Array)      
-	    			//	"no" : no,      
-	    			//	"name" : name,      
-	    			//	"nick" : nick    
-	    			//}),    
+	    			dataType : 'json',       // 데이터 타입 (html, xml, json, text 등등)    
+// 	    			data : JSON.stringify({  // 보낼 데이터 (Object , String, Array)      
+// 	    				"no" : no,      
+// 	    				"name" : name      
+// 	    				"nick" : nick    
+// 	    			}),    
 	    			success : function(result) { // 결과 성공 콜백함수
 	    			console.log(result);
 	    				
 	    			// 영화코드
-    				var movieCode = result.movieListResult.movieList[0].movieCd;
+//     				var movieCode = result.movieListResult.movieList[0].movieCd;
+// 	    			var movie = Data[0].Result[0]
     				//장르
-    				$('#genre_num').val(result.movieListResult.movieList[0].repGenreNm);
+//     				$('#genre_num').val(result.movieListResult.movieList[0].repGenreNm);
+    				$('#genre_num').val(result.Data[0].Result[0].rating);
 					// 감독	    				
-    				$('#movie_director').val(result.movieListResult.movieList[0].directors[0].peopleNm);
+//     				$('#movie_director').val(result.movieListResult.movieList[0].directors[0].peopleNm);
+    				$('#movie_director').val(result.Data[0].Result[0].directors.director[0]);
 					// 개봉상태
-    				$('#movie_status').val(result.movieListResult.movieList[0].prdtStatNm);
+//     				$('#movie_status').val(result.movieListResult.movieList[0].prdtStatNm);
 
 					//개봉일
-    				let dateString = result.movieListResult.movieList[0].openDt;
-    				let year = dateString.substring(0, 4);
-    				let month = dateString.substring(4, 6);
-    				let day = dateString.substring(6, 8);
-    				let formattedDate = year + '-' + month + '-' + day;
+//     				let dateString = result.movieListResult.movieList[0].openDt;
+//     				let year = dateString.substring(0, 4);
+//     				let month = dateString.substring(4, 6);
+//     				let day = dateString.substring(6, 8);
+//     				let formattedDate = year + '-' + month + '-' + day;
     				
-    				$('#movie_open_date').val(formattedDate);
+//     				$('#movie_open_date').val(formattedDate);
     				
-					$.ajax({
-						type : 'get',
-						url: 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=' + movieCode,           // 요청할 서버url
+// 					$.ajax({
+// 						type : 'get',
+// 						url: 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=' + movieCode,           // 요청할 서버url
 						
-						success : function(result2) { // 결과 성공 콜백함수
-						console.log(result2);
-						// 영화등급
-	    				$('#movie_grade').val(result2.movieInfoResult.movieInfo.audits[0].watchGradeNm);
-						// 상영시간
-	    				$('#movie_runtime').val(result2.movieInfoResult.movieInfo.showTm + "분");
+// 						success : function(result2) { // 결과 성공 콜백함수
+// 						console.log(result2);
+// 						// 영화등급
+// // 	    				$('#movie_grade').val(result2.movieInfoResult.movieInfo.audits[0].watchGradeNm);
+// 						// 상영시간
+// // 	    				$('#movie_runtime').val(result2.movieInfoResult.movieInfo.showTm + "분");
 						
 						
-						},
-						error : function(request, status, error) { // 결과 에러 콜백함수        
-		    				console.log(error)    
+// 						},
+// 						error : function(request, status, error) { // 결과 에러 콜백함수        
+// 		    				console.log(error)    
 		    				
-		    			}
+// 		    			}
 						
-					}) // inner ajax
+// 					}) // inner ajax
 	    				
 	    			},    
 	    			error : function(request, status, error) { // 결과 에러 콜백함수        

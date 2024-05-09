@@ -10,11 +10,8 @@ import itwillbs.p2c3.boogimovie.mapper.AdminMapper;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
-<<<<<<< HEAD
-import itwillbs.p2c3.boogimovie.vo.ReviewVO;
-=======
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
+import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 
 @Service
 public class AdminService {

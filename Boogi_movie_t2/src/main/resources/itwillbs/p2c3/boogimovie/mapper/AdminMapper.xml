@@ -94,16 +94,14 @@
 		WHERE movie_num = #{movie_num}
 	</update>
 	
-<<<<<<< HEAD
 	<delete id="deleteMovie">
 		DELETE FROM movie
 		WHERE movie_num = #{movie_num}
 	</delete>
 	
 <!-- 공지사항 입력 -->
-=======
+
 	<!-- 여기서부터 csc 관련 sql=========================================== -->
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	<insert id="insertNotice" >
 		<selectKey keyProperty="notice_num" resultType="int" order="BEFORE">
 			SELECT IFNULL(MAX(notice_num), 0) FROM notice

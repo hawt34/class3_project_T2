@@ -13,19 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
-import itwillbs.p2c3.boogimovie.service.NoticeService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
-<<<<<<< HEAD
-import itwillbs.p2c3.boogimovie.vo.ReviewVO;
-=======
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
+import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 
 @Controller
 public class AdminController {
@@ -161,11 +157,6 @@ public class AdminController {
 		return "redirect:/admin_oto";
 	}
 	
-<<<<<<< HEAD
-	//--------------------------------------------------------------------
-=======
-	//-----------------------------------------------
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	// 관리자 회원 페이지
 
 	// 2) 리뷰 페이지

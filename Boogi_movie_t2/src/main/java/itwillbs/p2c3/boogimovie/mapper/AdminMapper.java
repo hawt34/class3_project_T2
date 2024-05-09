@@ -9,12 +9,8 @@ import org.apache.ibatis.annotations.Param;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
-<<<<<<< HEAD
-import itwillbs.p2c3.boogimovie.vo.ReviewVO;
-=======
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
-
+import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 
 @Mapper
 public interface AdminMapper {
@@ -52,22 +48,12 @@ public interface AdminMapper {
 	
 	// 영화 등록
 	int insertMovie(MovieVO movie);
-<<<<<<< HEAD
 
 	// 영화 삭제
 	int deleteMovie(String movie_num);
 
-=======
-	
-	//-------------csc관련 메서드----------------------------------------
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	//공지사항 등록
-	int insertNotice(@Param("notice") NoticeVO notice,
-<<<<<<< HEAD
-			@Param("theater_name")String theater_name);
-	
-=======
-					 @Param("theater_num")int theater_name);
+	int insertNotice(@Param("notice") NoticeVO notice, @Param("theater_num")int theater_num);
 
 	List<NoticeVO> selectNoticeList(@Param("startRow") int startRow,
 									@Param("listLimit") int listLimit);
@@ -79,5 +65,4 @@ public interface AdminMapper {
 	int deleteNotice(int notice_num);
 
 	int getNoticeListCount();
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 }

@@ -87,7 +87,7 @@
 				</div>
 				<!-- 페이징 -->
 				<div class="notice_pageArea">
-					<nav aria-label="Page navigation example" >
+					<nav aria-label="Page navigation example">
 						<ul class="pagination">
 							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
 								<a class="page-link" href="admin_notice?pageNum=${pageNum - 1}" aria-label="Previous" >

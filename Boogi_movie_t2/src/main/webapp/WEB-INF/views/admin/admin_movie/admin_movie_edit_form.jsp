@@ -78,11 +78,6 @@ body {
 						<div class="invalid-feedback">감독을 입력해주세요.</div>
 					</div>
 <!-- 					<div class="mb-3"> -->
-<!-- 						<label for="movie_createDate">제작년도</label>  -->
-<!-- 						<input type="text" id="movie_createDate" class="form-control" required /> -->
-<!-- 						<div class="invalid-feedback">제작년도를 입력해주세요.</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="mb-3"> -->
 <!-- 						<label for="movie_genre">장르</label>  -->
 <%-- 						<input type="text" name="genre_num"  id="movie_genre" class="form-control" required value="${movie.genre_num'}" /> --%>
 <!-- 						<div class="invalid-feedback">장르를 입력해주세요.</div> -->
@@ -111,7 +106,7 @@ body {
 							<select class="custom-select d-block w-100" id="root" name="movie_status" required>
 								<option >상영상태를 선택하세요</option>
 								<option <c:if test='${movie_status eq "개봉예정작"}'> selected </c:if> value="개봉예정작">개봉예정작</option>
-								<option <c:if test='${movie_status eq "절찬상영중"'> selected </c:if> value="절찬상영중">절찬상영중</option>
+								<option <c:if test='${movie_status eq "절찬상영중"}'> selected </c:if> value="절찬상영중">절찬상영중</option>
 								<option <c:if test='${movie_status eq "상영종료"}'> selected </c:if> value="상영종료">상영종료</option>
 							</select>
 							<div class="invalid-feedback">상영상태를 선택해주세요.</div>

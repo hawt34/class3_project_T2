@@ -26,6 +26,7 @@
 		FROM notice n
 		JOIN theater t
 		ON n.theater_num = t.theater_num
+		WHERE notice_num = #{notice_num}
 	</select>
 
 </mapper>

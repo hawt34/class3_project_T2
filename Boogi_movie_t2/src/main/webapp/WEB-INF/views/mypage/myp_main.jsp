@@ -76,14 +76,14 @@ body {
 		<div class="row ">
 			<div class="col-md-2"> </div>
 				<div class="col-md-6">
-				<div class="row">
-					<div class="col-10">
-						<h2>예매내역</h2>
-					</div>
-					<div class="col-2 box2">
-						<button type="button" class="btn btn-outline-primary" onclick="location.href='myp_reservation'">+ 더보기</button>
-					</div>
-				</div><!-- row -->
+					<div class="row">
+						<div class="col-10">
+							<h2>예매내역</h2>
+						</div>
+						<div class="col-2 box2">
+							<button type="button" class="btn btn-outline-primary" onclick="location.href='myp_reservation'">+ 더보기</button>
+						</div>
+					</div><!-- row -->
 					<table class="table2 table table-hover " >
 					  <thead>
 					    <tr>
@@ -128,45 +128,10 @@ body {
 <!-- 					        <td>H8</td> -->
 <!-- 					        <td>15,000원</td> -->
 <!-- 					    </tr> -->
-<!-- 					    <tr  class="table-secondary"> -->
-<!-- 					      <th scope="row">3</th> -->
-<!-- 				            <td>토이스토리</td> -->
-<!-- 				            <td>2024 / 01 / 19</td> -->
-<!-- 				            <td>21:10 ~ 23:10</td> -->
-<!-- 				            <td>서면</td> -->
-<!-- 				            <td>D13</td> -->
-<!-- 				            <td>12,000원</td> -->
-<!-- 				         </tr> -->
-<!-- 						<tr> -->
-<!-- 					      <th scope="row">4</th> -->
-<!-- 							<td>파묘</td> -->
-<!-- 		          			<td>2024 / 03 / 18</td> -->
-<!-- 		            		<td>12:10 ~ 14:30</td> -->
-<!-- 		           			<td>아시아드</td> -->
-<!-- 		           			<td>H11 H12</td> -->
-<!-- 		            		<td>12,000원</td> -->
-<!-- 		          		</tr> -->
-<!-- 		          		<tr  class="table-secondary"> -->
-<!-- 					      <th scope="row">5</th> -->
-<!-- 					      	<td>폴라익스프레스</td> -->
-<!-- 			              	<td>2013 / 12 / 25</td> -->
-<!-- 							<td>21:00 ~ 23:10</td> -->
-<!-- 			            	<td>아시아드</td> -->
-<!-- 			            	<td>K8 K9 K10</td> -->
-<!-- 			            	<td>9,000원</td> -->
-<!-- 		         		</tr> -->
-<!-- 		          		<tr> -->
-<!-- 					      <th scope="row">6</th> -->
-<!-- 		          			<td>엘리멘탈</td> -->
-<!-- 		            		<td>2023 / 10 / 29</td> -->
-<!-- 				            <td>19:35 ~ 22:10</td> -->
-<!-- 				            <td>삼정타워</td> -->
-<!-- 				            <td>H15 H16</td> -->
-<!-- 				            <td>12,000원</td> -->
-<!-- 				          </tr> -->
 					  </tbody>
 					</table>
-				</div><!-- col-md-7 -->
+				</div><!-- col-md-6 -->
+				
 				<div class="col-md-3">
 					<div class="row">
 						<div class="col-10">
@@ -175,18 +140,20 @@ body {
 						<div class="col-2">
 							<img src="${pageContext.request.contextPath}/resources/images/myp_mytheater.png" data-bs-toggle="modal" data-bs-target="#exampleModal" width="25px" height="25px">
 						</div><!-- col-7 -->
-					</div>	<!-- row -->				
+					</div>	<!-- row -->	
+								
 					<!-- Modal -->
 					<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered">
 					    <div class="modal-content">
+					    
 					      <div class="modal-header">
 					        <h5 class="modal-title" id="exampleModalLabel">자주가는 극장</h5>
 					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					      </div><!-- modal-header -->
+					      
 					      <div class="modal-body">
 							<div class="form-check">
-							
 								<div>
 									<c:forEach begin="0" var="theater" items="${theater}">
 										  <input onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_name}" type="checkbox" id="flexCheckDefault" name="theaterId">
@@ -195,11 +162,11 @@ body {
 									</c:forEach>
 								</div>
 							</div>
-							
 					      </div><!-- modal-body -->
+					      
 					      <div class="modal-footer"> <!-- 모달 폼 극장 전체 리스트 -->
 					      		<form id="theaterForm" method="post" action="MyTheaterList">
-								<button type="submit" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
+									<button type="submit" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
 						      		<script type="text/javascript">
 									    function sendCheckedValues() {
 									        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
@@ -217,11 +184,33 @@ body {
 									</script>
 								</form>
 					      </div><!--modal-footer  --> <!-- 모달 폼 극장 전체 리스트 -->
+					      
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->
 					</div><!-- modal fade 모달 div 끝 -->
 					
 					<table class="table3 table table-bordered">
+					
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${empty member_my_theater1}"> --%>
+<!-- 							<tr> -->
+<!-- 								<th>+</th> -->
+<!-- 							</tr> -->
+<%-- 						</c:when> --%>
+<%-- 						<c:when test="${empty member_my_theater2}"> --%>
+<!-- 							<tr> -->
+<!-- 								<th>+</th> -->
+<!-- 							</tr> -->
+<%-- 						</c:when> --%>
+<%-- 						<c:when test="${empty member_my_theater3}"> --%>
+<!-- 							<tr> -->
+<!-- 								<th>+</th> -->
+<!-- 							</tr> -->
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+					
 						<tr>
 							<td>
 								<c:choose>
@@ -234,6 +223,7 @@ body {
 								</c:choose>
 							</td>
 						</tr>
+						
 						<tr>
 							<td>
 								<c:choose>
@@ -246,6 +236,7 @@ body {
 								</c:choose>
 							</td>
 						</tr>
+						
 						<tr>
 							<td>
 								<c:choose>
@@ -258,8 +249,6 @@ body {
 								</c:choose>
 							</td>
 						</tr>
-
-
 
 <%-- 							<c:forEach var="index" begin="1" end="3"> --%>
 <!-- 							    <tr> -->

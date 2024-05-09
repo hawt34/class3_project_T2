@@ -1,5 +1,6 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
+import itwillbs.p2c3.boogimovie.service.NoticeService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
@@ -85,6 +87,12 @@ public class AdminController {
 		PageInfo pageList = new PageInfo(NoticeCount, pageListLimit, maxPage, startPage, endPage);
 		
 		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
+		
+		for(NoticeVO notice : noticeList) {
+			LocalDateTime ldt = LocalDateTime.parse(notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+			notice.setNotice_date(ldt);
+//			notice.setNotice_date();
+		}
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pageList", pageList);
 		
@@ -119,6 +127,18 @@ public class AdminController {
 			return "error/fail";
 		}
 		return "redirect:/admin_notice";
+	}
+	
+	@GetMapping("admin_notice_detail")
+	public String adminNoticeDetail(NoticeVO notice, Model model) {
+		notice = service.getNotice(notice);
+		String noticeDate = notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		int maxNotice = service.getMaxNotice(notice);
+		
+		model.addAttribute("maxNotice", maxNotice);
+		model.addAttribute("noticeDate", noticeDate);
+		model.addAttribute("notice", notice);
+		return "admin/admin_csc/admin_notice_detail";
 	}
 	
 	//---------------------------

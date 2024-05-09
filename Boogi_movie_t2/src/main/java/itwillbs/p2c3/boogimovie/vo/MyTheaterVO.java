@@ -4,7 +4,12 @@ import lombok.Data;
 
 @Data
 public class MyTheaterVO {
-	private int theater_num;
-	private String member_id;
+	private String member_my_theater;
+
+	public MyTheaterVO(String member_my_theater) {
+		super();
+		this.member_my_theater = member_my_theater;
+	}
+
 	
 }

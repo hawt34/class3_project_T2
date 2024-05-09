@@ -26,14 +26,12 @@
 <header>
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
-
-
 	<div class="container1">
 		<div class="container2">
-		<div class="row">
-			<div class="col-md-2">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
-			</div><!-- col-md-2 사이드바임 -->
+			<div class="row">
+				<div class="col-md-2">
+					<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				</div><!-- col-md-2 사이드바임 -->
 				<div class="col-md-9">
 					<h2>회원탈퇴</h2>
 					<hr>
@@ -47,17 +45,16 @@
 									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='myp_main'">메인페이지</button>
 									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='member_reg_member'">회원가입</button>
 									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='member_login'">로그인</button>
-									</div>
+									</div> <!-- d-grid gap-2 d-md-block box2 -->
 								</section>
-						    </div><!-- col-md-4 -->
+						    </div><!-- col-md-5 -->
 							<div class="col-md-3"> </div>
 					    </div><!-- row -->
-					</div>  
-			    </div><!-- "col-md-10" -->
+					</div> <!--  box1 --> 
+			    </div><!-- "col-md-9" -->
 		    </div><!-- row -->
     	</div> <!-- container2 -->
     </div> <!-- container1 -->
-    
 <footer>
 	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
 </footer>

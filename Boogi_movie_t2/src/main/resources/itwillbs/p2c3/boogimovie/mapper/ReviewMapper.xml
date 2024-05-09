@@ -5,7 +5,7 @@
  <mapper namespace="itwillbs.p2c3.boogimovie.mapper.ReviewMapper">
  	<insert id="insertReview" >
  	INSERT INTO review (movie_num, member_id, rating, review_text, review_id)
-    SELECT #{movie_num}, #{member_id}, #{rating}, #{review_text}, COALESCE(MAX(review_id), 0) + 1
+    SELECT #{movie_num}, #{member_id}, #{rating}, #{review_text}, COALESCE(MAX(review_num), 0) + 1
     FROM review
  	
  	</insert>
@@ -15,18 +15,18 @@
     </select>
  	
  	<select id="selectReviewId" resultType="itwillbs.p2c3.boogimovie.vo.ReviewVO">
- 		SELECT * FROM review WHERE review_id = #{review_id}
+ 		SELECT * FROM review WHERE review_num = #{review_num}
  	</select>
  	
  	<update id="updateReview" >
  		UPDATE review
  		SET rating = #{rating},
  			review_text = #{review_text}
- 		WHERE review_id = #{review_id}	 
+ 		WHERE review_num = #{review_num}	 
  	</update>
  	<delete id="deleteReview">
  		DELETE FROM review
- 		WHERE review_id = #{review_id}	 
+ 		WHERE review_num = #{review_num}	 
  	
  	</delete>
  	

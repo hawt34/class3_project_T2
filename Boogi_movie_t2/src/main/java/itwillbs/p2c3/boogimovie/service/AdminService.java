@@ -99,5 +99,13 @@ public class AdminService {
 	public int getNoticeListCount() {
 		return mapper.getNoticeListCount();
 	}
+
+	public NoticeVO getNotice(NoticeVO notice) {
+		return mapper.selectNotice(notice);
+	}
+
+	public int getMaxNotice(NoticeVO notice) {
+		return mapper.selectMaxNotice(notice);
+	}
 	
 }

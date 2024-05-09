@@ -21,4 +21,5 @@
 		FROM theater
 		WHERE theater_id = #{theater_id}
 	</select>
+	
 </mapper>

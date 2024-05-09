@@ -8,14 +8,6 @@ import org.springframework.stereotype.Service;
 import itwillbs.p2c3.boogimovie.mapper.TheaterMapper;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
-	
-	
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import itwillbs.p2c3.boogimovie.mapper.TheaterMapper;
-import itwillbs.p2c3.boogimovie.vo.TheaterVO;
-
 @Service
 public class TheaterService {
 

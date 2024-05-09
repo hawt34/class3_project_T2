@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,33 +44,53 @@ section {
 	margin: 10px 10px 10px 10px;
 	
 }
-
+.snack1_box, .snack2_box, .snack3_box, .snack4_box{
+	font-size:24px;
+	height:200px;
+	width:300px;
+	float: right;
+	
+}
+.snack1_box select,
+.snack2_box select,
+.snack3_box select,
+.snack4_box select {
+    margin-top: 10px;
+}
+#totalSnack,#totalPop,#totalJuice,#totalCombo {
+	width:300px;
+	height:80px;
+    font-size: 24px; /* 원하는 글자 크기 값으로 변경하세요 */
+	margin-left: 150px;
+}  
 .snack1 {
-	width: 600px;
+	width: 650px;
 	height: 300px;
 	float: left;
 }
-
+.snack1_name,.snack2_name,.snack3_name,.snack4_name{
+	text-align: center;
+	font-size: 24px;
+}
 .snack2 {
-	width: 600px;
+	width: 650px;
 	height: 300px;
 	float: right;
 }
 .snack3 {
-	width: 600px;
+	width: 650px;
 	height: 300px;
 	float: left;
-	margin-top: 100px; 
+	margin-top: 30px;
 }
 .snack4 {
-	width: 600px;
+	width: 650px;
 	height: 300px;
 	float: right;
-	margin-top: 100px;
+	margin-top: 30px;
 }
-
 .bottomButton {
-    margin-top: 800px; /* 페이지의 하단에 배치 */
+    margin-top: 700px; /* 페이지의 하단에 배치 */
 	text-align: center;
 	margin-bottom: 10px;
 	font-size: 24px;
@@ -102,79 +122,105 @@ footer {
 				<h1>부기 스토어</h1>
 			</article>
 			<div class="content">
-				<div class= snack1>
-					<div class= snack1_name> 여기는 스낵이름 영역</div>
+				<form action="storePay" method="post">
+				<div class="snack1">
+					<div class= "snack1_name"> 부기스낵</div>
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_popCol.jpg">
-						<select name="category">
-  					  	<c:forEach items="${itemInfoSnack}" var="item">
-        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+						<div class = "snack1_box">
+						<h4>종류 및 가격</h4>
+						<select name="category1" id="category1" >
+  					  	<c:forEach items="${itemInfoSnack}" var="item_snack">
+        				<option value="${item_snack.item_info_price}">${item_snack.item_info_name} - ${item_snack.item_info_price}원</option>
     					</c:forEach>
 						</select>
-						<select name="snackNum" onchange="">
+						<h4>수량</h4>
+						<select name="snackNum" id="snackNum">
+            			<option value="0" selected>스낵 미선택</option>
             			<option value="1">1개</option>
             			<option value="2">2개</option>
             			<option value="3">3개</option>
             			<option value="4">4개</option>
             			<option value="5">5개</option>
 				        </select>
+				        </div>
+						<div id="totalSnack"></div>
+        				
+						 
 				</div>		
 				<div class="snack2">
-					<div class= snack2_name> 여기는 스낵이름 영역</div> 
+					<div class= "snack2_name"> 부기팝콘</div> 
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_pop.jpg">
-						<select name="category">
-  					  	<c:forEach items="${itemInfoPop}" var="item">
-        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+						<div class = "snack2_box">
+						<h4>종류 및 가격</h4>
+						<select name="category2" id="category2">
+  					  	<c:forEach items="${itemInfoPop}" var="item_pop">
+        				<option value="${item_pop.item_info_price}">${item_pop.item_info_name} ${item_pop.item_info_price}원</option>
     					</c:forEach>
 						</select>
-						<select name="snackPop" onchange="">
+						<h4>수량</h4>
+						<select name="snackPop" id="snackPop">
+						<option value="0" selected>팝콘 미선택</option>
             			<option value="1">1개</option>
             			<option value="2">2개</option>
             			<option value="3">3개</option>
             			<option value="4">4개</option>
             			<option value="5">5개</option>
 				        </select>
-												
+				        </div>
+						<div id="totalPop"></div> 						
+					
 				</div>
 				<div class="snack3">
-					<div class= snack3_name> 여기는 스낵이름 영역</div> 
+					<div class= "snack3_name"> 부기음료</div> 
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_col.jpg">
-						<select name="category">
-  					  	<c:forEach items="${itemInfoJuice}" var="item">
-        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+						<div class = "snack3_box">
+						<h4>종류 및 가격</h4>
+						<select name="category3" id="category3">
+  					  	<c:forEach items="${itemInfoJuice}" var="item_Juice">
+        				<option value="${item_Juice.item_info_price}">${item_Juice.item_info_name} ${item_Juice.item_info_price}원</option>
     					</c:forEach>
 						</select>
-						<select name="snackJuice" onchange="">
+						<h4>수량</h4>
+						<select name="snackJuice" id="snackJuice" >
+						<option value="0" selected>음료 미선택</option>
             			<option value="1">1개</option>
             			<option value="2">2개</option>
             			<option value="3">3개</option>
             			<option value="4">4개</option>
             			<option value="5">5개</option>
 				        </select>
+				        </div>
+				        <div id="totalJuice"></div>
 				</div>
 				<div class="snack4">
-					<div class= snack4_name> 여기는 스낵이름 영역</div> 
+					<div class= "snack4_name">부기콤보</div> 
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_snack.jpg">
-						<select name="category">
-  					  	<c:forEach items="${itemInfoCombo}" var="item">
-        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+						<div class = "snack4_box">
+						<h4>종류 및 가격</h4>
+						<select name="category4" id ="category4">
+  					  	<c:forEach items="${itemInfoCombo}" var="item_combo">
+        				<option value="${item_combo.item_info_price}">${item_combo.item_info_name}  ${item_combo.item_info_price}원</option>
     					</c:forEach>
 						</select>
-						<select name="snackCombo" onchange="">
+						<h4>수량</h4>
+						<select name="snackCombo" id = "snackCombo">
+						<option value="0" selected>콤보 미선택</option>
             			<option value="1">1개</option>
             			<option value="2">2개</option>
             			<option value="3">3개</option>
             			<option value="4">4개</option>
             			<option value="5">5개</option>
 				        </select>
-						
+						</div>
+						<div id="totalCombo"></div>	
 				</div>
-			</div>
 			<div class="bottomButton">
-				<button type="submit" class="btn btn-outline-primary" >장바구니 </button>
+				<button type="submit" id="cartButton" class="btn btn-outline-primary" >장바구니 </button>
 				<input type="button" class="btn btn-outline-primary" value="뒤로가기"> 
 			</div>
+		</form>	
 			
-			
+		</div>
 						
 		</section>
 		<footer> 
@@ -184,6 +230,53 @@ footer {
 
 </body>
 	<script>
-	
+	 $(document).ready(function() {
+	        // 아이템이나 수량이 변경될 때마다 총 가격을 다시 계산하여 업데이트
+	        $("#category1, #snackNum").change(function() {
+	            // 선택한 아이템의 가격
+	            let snackPrice = $("#category1").val();
+	            // 선택한 수량
+	            let snackYang = $("#snackNum").val();
+	            // 총 가격 계산
+	            let totalSnack = snackPrice * snackYang;
+	            // 결과를 표시하는 요소에 총 가격을 업데이트
+	            $("#totalSnack").text("스낵 총 합계  " + totalSnack + "원");
+	        });
+
+	        
+	        $("#category2, #snackPop").change(function() {
+	            let popPrice = $("#category2").val();
+	            let popYang = $("#snackPop").val();
+	            let totalPop = popPrice * popYang;
+	            $("#totalPop").text("팝콘 총 합계  " + totalPop + "원");
+	        });
+			
+	        $("#category3, #snackJuice").change(function() {
+	            let juicePrice = $("#category3").val();
+	            let juiceYang = $("#snackJuice").val();
+	            let totalJuice = juicePrice * juiceYang;
+	            $("#totalJuice").text("음료 총 합계  " +totalJuice + "원");
+	        });
+	        
+	        $("#category4, #snackCombo").change(function() {
+	            let comboPrice = $("#category4").val();
+	            let comboYang = $("#snackCombo").val();
+	            let totalCombo = comboPrice * comboYang;
+	            $("#totalCombo").text("콤보 총 합계  " + totalCombo + "원");
+	        });
+	        
+	                
+	        // 페이지 로드 시 총 가격을 초기화
+	        $("#category1, #snackNum").change();
+	        $("#category2, #snackJuice").change();       
+	        $("#category3, #snackPop").change();
+	        $("#category4, #snackCombo").change();
+	             
+	    });
+// 	 	$("#cartButton").click(function() {
+// 	        // 팝업 창 띄우기
+// 	        window.open("storePay", "장바구니", "width=400, height=300, top=100, left=100");
+// 	    }); //get방식으로만 가능..
+	 
 	</script>
 </html>

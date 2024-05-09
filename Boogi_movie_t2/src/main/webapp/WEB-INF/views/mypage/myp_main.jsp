@@ -197,28 +197,26 @@ body {
 							</div>
 							
 					      </div><!-- modal-body -->
-					      <div class="modal-footer">
+					      <div class="modal-footer"> <!-- 모달 폼 극장 전체 리스트 -->
 					      		<form id="theaterForm" method="post" action="MyTheaterList">
 								<button type="submit" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
-					      
-					      		<script type="text/javascript">
-								    function sendCheckedValues() {
-								        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
-								        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
-								
-								        checkboxes.forEach(function(checkbox) {
-								            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
-								        });
-								
-								        // 서버로 선택된 값들을 전송
-								        // 여기서는 간단하게 alert 창에 선택된 값들을 표시하도록 했지만, 실제로는 서버로 값을 전송하는 방식을 사용해야 함
-								        alert('선택된 값들: ' + checkedValues.join(', '));
-								        location.href="MyTheaterList";
-								    }
-								</script>
+						      		<script type="text/javascript">
+									    function sendCheckedValues() {
+									        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
+									        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
+									
+									        checkboxes.forEach(function(checkbox) {
+									            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
+									        });
+									
+									        // 서버로 선택된 값들을 전송
+									        // 여기서는 간단하게 alert 창에 선택된 값들을 표시하도록 했지만, 실제로는 서버로 값을 전송하는 방식을 사용해야 함
+									        alert('선택된 값들: ' + checkedValues.join(', '));
+	// 								        location.href="MyTheaterList";
+									    }
+									</script>
 								</form>
-								
-					      </div><!--modal-footer  -->
+					      </div><!--modal-footer  --> <!-- 모달 폼 극장 전체 리스트 -->
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->
 					</div><!-- modal fade 모달 div 끝 -->

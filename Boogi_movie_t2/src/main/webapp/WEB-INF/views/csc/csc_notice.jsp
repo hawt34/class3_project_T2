@@ -95,7 +95,7 @@
 								<c:forEach var="notice" items="${noticeList }">
 									<tr>
 										<td>${notice.notice_num }</td>
-										<td>카테고리</td>
+										<td>${notice.notice_category}</td>
 										<td>${notice.theater_name }</td>
 										<td onclick="location.href='csc_notice_detail?notice_num=${notice.notice_num}'">${notice.notice_subject }</td>
 										<td>${notice.notice_date }</td>

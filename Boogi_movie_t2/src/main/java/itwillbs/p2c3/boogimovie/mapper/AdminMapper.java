@@ -65,4 +65,9 @@ public interface AdminMapper {
 	int deleteNotice(int notice_num);
 
 	int getNoticeListCount();
+
+	NoticeVO selectNotice(NoticeVO notice);
+	
+	//notice 마지막 번호
+	int selectMaxNotice(NoticeVO notice);
 }

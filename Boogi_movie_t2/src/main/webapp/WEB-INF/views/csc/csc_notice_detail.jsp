@@ -23,7 +23,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-2">
-			<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/csc/csc_sidebar.jsp"></jsp:include>
 		</div>
 		<div class="col-10">
 			<h3>공지사항</h3>

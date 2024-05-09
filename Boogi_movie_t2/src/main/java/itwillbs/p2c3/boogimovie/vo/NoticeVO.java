@@ -13,6 +13,7 @@ public class NoticeVO {
 	private int theater_num;
 	private Timestamp notice_date;
 	private String theater_name;
+	private String notice_category;
 	
 	
 	

@@ -25,5 +25,4 @@ public class TheaterService {
 		return mapper.selectTheatersOrderbyName();
 	}
 	
-	
 }

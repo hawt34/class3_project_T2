@@ -1,12 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+ 	border: 1px solid skyblue; 
+}
+
+body {
+	/* 	background-color: #fffde7; */
+	
+}
+
+#wrap {
+	width: 1400px;
+	margin: 0 auto;
+}
+
+article {
+	margin-top: 50px;
+	width : 1400px;
+	height: 100px;
+	text-align: center;
+}
+
+.content img {
+    width: 200px;
+    height: 200px;
+}
+
+section {
+	width: 1400px;
+	height: 1000px;
+/* 	background-color: #ffca28; */
+	
+}
+.content {
+	margin: 10px 10px 10px 10px;
+	
+}
+
+.snack1 {
+	width: 600px;
+	height: 300px;
+	float: left;
+}
+
+.snack2 {
+	width: 600px;
+	height: 300px;
+	float: right;
+}
+.snack3 {
+	width: 600px;
+	height: 300px;
+	float: left;
+	margin-top: 100px; 
+}
+.snack4 {
+	width: 600px;
+	height: 300px;
+	float: right;
+	margin-top: 100px;
+}
+
+.bottomButton {
+    margin-top: 800px; /* 페이지의 하단에 배치 */
+	text-align: center;
+	margin-bottom: 10px;
+	font-size: 24px;
+}
+
+
+footer {
+	width: 100%;
+	height: 100px;
+	/* 	background-color: #ffb300; */
+}
+
+</style>
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/resources/css/boogi_store.css"
-	rel="stylesheet" type="text/css">
+<%-- <link href="${pageContext.request.contextPath}/resources/css/boogi_store.css" rel="stylesheet" type="text/css"> --%>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
 " rel="stylesheet" type="text/css" />
@@ -19,153 +98,84 @@
 	</header>
 	<div id="wrap">
 		<section>
+			<article> 
+				<h1>부기 스토어</h1>
+			</article>
 			<div class="content">
-				<h1>부기 스낵</h1>
-				<div class="snackList">
-					<div class="snack1">
-						<div class= "snack_name">부기 팝콘</div>
-						<div class= "snack_info"><p>고소한 부기팝콘</p> 가격 개당 5000원</div>
-						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_pop.jpg">
-						<select id="popcorn" class="form-select" >
-			 				<option selected>수량을 선택해주세요</option>
-			  				<option value="1">1개</option>
-			  				<option value="2">2개</option>
-			  				<option value="3">3개</option>
-			  				<option value="4">4개</option>
-			  				<option value="5">5개</option>
-			  				<option value="6">6개</option>
-			  				<option value="4">7개</option>
-			  				<option value="5">8개</option>
-			  				<option value="6">9개</option>
-			  			</select>	
-						<div class="buttons">
-							<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
-							<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-			  					<div class="offcanvas-header">
-			    				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">장바구니</h5>
-			    				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-			  					</div>
-			  					<div class="offcanvas-body">
-									<div class="payBox" >
-				 	 					<ul class="list-group list-group-flush">
-				 	 						<li class="list-group-item">종목 및 합계</li>
-  											<li class="list-group-item">부기 팝콘 <span id="boogiPopQty">0</span> 개</li>
-  											<li class="list-group-item">부기 콜라 <span id="boogiColaQty">0</span> 개</li>
-										    <li class="list-group-item">부기 세트 <span id="boogiSetQty">0</span> 개</li>
-										    <li class="list-group-item">합계</li>
-										</ul>
-				 	 				</div>
-				 	 			</div>
-			  					<button type="button" class="btn btn-outline-primary" onclick="">취소</button>
-			    				<button type="button" class="btn btn-outline-primary">결제하기</button>	
-							</div>
-						</div>
-					</div>
-					<div class="snack2">
-						<div class= "snack_name">부기 콜라</div>
-						<div class= "snack_info"><p>시원한 부기콜라</p>  가격 개당 2000원</div>
-						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_col.jpg">
-						<select id = "cola" class="form-select" >
-			 				<option selected>수량을 선택해주세요</option>
-			  				<option value="1">1개</option>
-			  				<option value="2">2개</option>
-			  				<option value="3">3개</option>
-			  				<option value="4">4개</option>
-			  				<option value="5">5개</option>
-			  				<option value="6">6개</option>
-			  				<option value="4">7개</option>
-			  				<option value="5">8개</option>
-			  				<option value="6">9개</option>
-			  			</select>		
-						<div class="buttons">
-							<div class="buttons">
-							<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
-							<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-			  					<div class="offcanvas-header">
-			    				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">장바구니</h5>
-			    				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-			  				</div>
-			  				<div class="offcanvas-body">
-			  					<div class="payBox" >
-				 	 					<ul class="list-group list-group-flush">
-				 	 						<li class="list-group-item">종목 및 합계</li>
-  											<li class="list-group-item">부기 팝콘 <span id="boogiPopQty">0</span> 개 </li>
-  											<li class="list-group-item">부기 콜라 <span id="boogiColaQty">0</span> 개 </li>
-										    <li class="list-group-item">부기 세트 <span id="boogiSetQty">0</span> 개 </li>
-										    <li class="list-group-item">합계</li>
-										</ul>
-				 	 			</div>
-			  					<button type="button" class="btn btn-outline-primary" onclick="">취소</button>
-			    				<button type="button" class="btn btn-outline-primary">결제하기</button>	
-			 	 			</div>
-							</div>
-							</div>
-						</div>
-					</div>
-					<div class="snack3">
-						<div class= "snack_name">부기 세트</div>
-						<div class= "snack_info"><p>고소한 부기팝콘 +</p> <p>부기 콜라2잔</p> 세트 가격 8000원</div>
+				<div class= snack1>
+					<div class= snack1_name> 여기는 스낵이름 영역</div>
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_popCol.jpg">
-						<select  id = "set" class="form-select" >
-			 				<option selected>수량을 선택해주세요</option>
-			  				<option value="1">1개</option>
-			  				<option value="2">2개</option>
-			  				<option value="3">3개</option>
-			  				<option value="4">4개</option>
-			  				<option value="5">5개</option>
-			  				<option value="6">6개</option>
-			  				<option value="4">7개</option>
-			  				<option value="5">8개</option>
-			  				<option value="6">9개</option>
-			  			</select>	
-						<div class="buttons">
-							<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니담기</button>
-							<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-			  					<div class="offcanvas-header">
-			    				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">장바구니</h5>
-			    				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-			  				</div>
-			  				<div class="offcanvas-body">
-			  					<div class="payBox" >
-				 	 					<ul class="list-group list-group-flush">
-				 	 						<li class="list-group-item">종목 및 합계</li>
-  											<li class="list-group-item">부기 팝콘 <span id="boogiPopQty">0</span> 개 </li>
-  											<li class="list-group-item">부기 콜라 <span id="boogiColaQty">0</span> 개 </li>
-										    <li class="list-group-item">부기 세트 <span id="boogiSetQty">0</span> 개 </li>
-										    <li class="list-group-item">합계</li>
-										</ul>
-				 	 				</div>
-			  					<button type="button" class="btn btn-outline-primary" onclick="">취소</button>
-			    				<button type="button" class="btn btn-outline-primary">결제하기</button>	
-			 	 			</div>
-							</div>
-						</div>
-					</div>
+						<select name="category">
+  					  	<c:forEach items="${itemInfoSnack}" var="item">
+        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+    					</c:forEach>
+						</select>
+						<select name="snackNum" onchange="">
+            			<option value="1">1개</option>
+            			<option value="2">2개</option>
+            			<option value="3">3개</option>
+            			<option value="4">4개</option>
+            			<option value="5">5개</option>
+				        </select>
+				</div>		
+				<div class="snack2">
+					<div class= snack2_name> 여기는 스낵이름 영역</div> 
+						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_pop.jpg">
+						<select name="category">
+  					  	<c:forEach items="${itemInfoPop}" var="item">
+        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+    					</c:forEach>
+						</select>
+						<select name="snackPop" onchange="">
+            			<option value="1">1개</option>
+            			<option value="2">2개</option>
+            			<option value="3">3개</option>
+            			<option value="4">4개</option>
+            			<option value="5">5개</option>
+				        </select>
+												
 				</div>
-				<div class="basket_buttons">
-					<div class="buttons">
-							<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">장바구니 확인하기</button>
-							<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-			  					<div class="offcanvas-header">
-			    				<h5 class="offcanvas-title" id="offcanvasScrollingLabel"></h5>
-			    				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-			  				</div>
-			  				<div class="offcanvas-body">
-			  					<div class="payBox" >
-				 	 					<ul class="list-group list-group-flush">
-				 	 						<li class="list-group-item">종목 및 합계</li>
-  											<li class="list-group-item">부기 팝콘 <span id="boogiPopQty">0</span> 개 </li>
-  											<li class="list-group-item">부기 콜라 <span id="boogiColaQty">0</span> 개 </li>
-										    <li class="list-group-item">부기 세트 <span id="boogiSetQty">0</span> 개 </li>
-										    <li class="list-group-item">합계</li>
-										</ul>
-				 	 				</div>
-							 </div>
-				</div>			 	 				
-					<button type="button" class="btn btn-outline-primary">결제하기</button>
+				<div class="snack3">
+					<div class= snack3_name> 여기는 스낵이름 영역</div> 
+						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_col.jpg">
+						<select name="category">
+  					  	<c:forEach items="${itemInfoJuice}" var="item">
+        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+    					</c:forEach>
+						</select>
+						<select name="snackJuice" onchange="">
+            			<option value="1">1개</option>
+            			<option value="2">2개</option>
+            			<option value="3">3개</option>
+            			<option value="4">4개</option>
+            			<option value="5">5개</option>
+				        </select>
+				</div>
+				<div class="snack4">
+					<div class= snack4_name> 여기는 스낵이름 영역</div> 
+						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_snack.jpg">
+						<select name="category">
+  					  	<c:forEach items="${itemInfoCombo}" var="item">
+        				<option value="${item.item_info_name}">${item.item_info_name} - ${item.item_info_price}원</option>
+    					</c:forEach>
+						</select>
+						<select name="snackCombo" onchange="">
+            			<option value="1">1개</option>
+            			<option value="2">2개</option>
+            			<option value="3">3개</option>
+            			<option value="4">4개</option>
+            			<option value="5">5개</option>
+				        </select>
+						
 				</div>
 			</div>
-		</div>	
+			<div class="bottomButton">
+				<button type="submit" class="btn btn-outline-primary" >장바구니 </button>
+				<input type="button" class="btn btn-outline-primary" value="뒤로가기"> 
+			</div>
+			
+			
+						
 		</section>
 		<footer> 
 			<jsp:include page="../inc/admin_footer.jsp"></jsp:include> 
@@ -174,28 +184,6 @@
 
 </body>
 	<script>
-	$(document).ready(function() {
-        $('#popcorn').change(function() {
-            const selectedQuantity = $(this).val();
-            console.log('선택된 팝콘 수량:', selectedQuantity);
-            $('#boogiPopQty').text(selectedQuantity); 
-        });
-    });
-	
-	$(document).ready(function() {
-        $('#cola').change(function() {
-            const selectedQuantity = $(this).val();
-            console.log('선택된 콜라 수량:', selectedQuantity);
-            $('#boogiColaQty').text(selectedQuantity); 
-        });
-    });
-	$(document).ready(function() {
-        $('#set').change(function() {
-            const selectedQuantity = $(this).val();
-            $('#boogiSetQty').text(selectedQuantity); 
-        });
-    });
-	
 	
 	</script>
 </html>

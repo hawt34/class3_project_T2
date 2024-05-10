@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.NoticeService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
+import itwillbs.p2c3.boogimovie.service.ScreenService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
@@ -41,7 +42,7 @@ public class AdminController {
 	TheaterService theaterService;
 	
 	@Autowired
-	TicketingService ticService;
+	ScreenService screenService;
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")
@@ -404,6 +405,7 @@ public class AdminController {
 	@GetMapping("admin_theater")
 	public String adminTheater(TheaterVO theater, Model model, ScreenInfoVO screen_info) {
 		
+		// 극장 리스트 조회
 		List<TheaterVO> theaterList = theaterService.getTheater();
 		
 		model.addAttribute("theaterList", theaterList);
@@ -414,6 +416,7 @@ public class AdminController {
 	// 극장 관리 > 극장 수정 폼으로
 	@GetMapping("admin_theater_modify")
 	public String adminTheaterModifyForm(TheaterVO theater, Model model) {
+		// 수정할 극장 조회
 		theater = theaterService.getTheater(theater);
 		model.addAttribute("theater", theater);
 		
@@ -475,9 +478,17 @@ public class AdminController {
 		return "redirect:/admin_booth";
 	}
 	@GetMapping("admin_booth")
-	public String adminBooth(TheaterVO theater, Model model) {
-//		List<TheaterVO> theaterList = theaterService.getTheater();
-//		model.addAttribute("theaterList", theaterList);
+	public String adminBooth(TheaterVO theater, Model model, ScreenInfoVO screenInfo) {
+		
+		// 극장 리스트 조회
+		List<TheaterVO> theaterList = theaterService.getTheater();
+		// 상영관 리스트 조회
+		List<ScreenInfoVO> screenInfoList = screenService.getScreenInfo();
+		
+		model.addAttribute("theaterList", theaterList);
+		model.addAttribute("screenInfoList", screenInfoList);
+		
+		
 		
 		return "admin/admin_theater/admin_booth";
 	}

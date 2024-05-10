@@ -86,6 +86,14 @@ td:nth-child(7) {
 	margin-top: 20px;
 }
 
+.breakdown_pageArea {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.breakdown_pageArea > nav {
+	display: inline-block;
+}
 </style>
 </head>
 <body>
@@ -93,6 +101,7 @@ td:nth-child(7) {
 	<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 </header>
 <div class="container">
+	<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
 	<div class="row">
 		<!--사이드 바  -->
 		<div class="col-2">
@@ -163,7 +172,34 @@ td:nth-child(7) {
 						</tbody>
 					</table>
 					</div>
-					
+					<!-- 페이징 시작 -->
+					<div class="breakdown_pageArea">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
+								<a class="page-link" href="myp_oto_breakdown?pageNum=${pageNum - 1}" aria-label="Previous" >
+								<span aria-hidden="true" >&laquo;</span>
+								</a>
+							</li>
+							<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
+								<c:choose>
+									<c:when test="${pageNum eq i }">
+										<li class="page-item active"><a class="page-link">${i}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="myp_oto_breakdown?pageNum=${i}">${i}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
+								<a class="page-link" href="myp_oto_breakdown?pageNum=${pageNum + 1}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+					</div>
+					<!-- 페이징 끝 -->
 				</div>
 				<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 					<div class="myp_inquiry">
@@ -183,27 +219,27 @@ td:nth-child(7) {
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="oto" items="${otoReplyList } ">
-								<c:choose>
-									<c:when test="${empty otoReplyList} ">
-										<tr>
-											<td colspan="7">게시판이 비어있습니다</td>
-										</tr>
-									</c:when>
-									<c:otherwise>
-										<tr>
-											<td>${oto.oto_num }</td>
-											<td>${oto.oto_subject }</td>
-											<td>${oto.member_id }</td>
-											<td>${oto.oto_category }</td>
-											<td>${otoTheater }</td>
-											<td>
-												${oto.oto_reply_status }
-											</td>
-										</tr>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
+<%-- 							<c:forEach var="oto" items="${otoReplyList } "> --%>
+<%-- 								<c:choose> --%>
+<%-- 									<c:when test="${empty otoReplyList} "> --%>
+<!-- 										<tr> -->
+<!-- 											<td colspan="7">게시판이 비어있습니다</td> -->
+<!-- 										</tr> -->
+<%-- 									</c:when> --%>
+<%-- 									<c:otherwise> --%>
+<!-- 										<tr> -->
+<%-- 											<td>${oto.oto_num }</td> --%>
+<%-- 											<td>${oto.oto_subject }</td> --%>
+<%-- 											<td>${oto.member_id }</td> --%>
+<%-- 											<td>${oto.oto_category }</td> --%>
+<%-- 											<td>${otoTheater }</td> --%>
+<!-- 											<td> -->
+<%-- 												${oto.oto_reply_status } --%>
+<!-- 											</td> -->
+<!-- 										</tr> -->
+<%-- 									</c:otherwise> --%>
+<%-- 								</c:choose> --%>
+<%-- 							</c:forEach> --%>
 						</tbody>
 					</table>
 					</div>

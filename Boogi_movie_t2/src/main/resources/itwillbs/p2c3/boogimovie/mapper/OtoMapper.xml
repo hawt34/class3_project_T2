@@ -5,52 +5,66 @@
 <mapper namespace="itwillbs.p2c3.boogimovie.mapper.OtoMapper">
 	<!-- 1대1 문의 DB 저장 -->
 	<insert id="insertOto">
-		<selectKey keyProperty="oto_num" resultType="int" order="BEFORE">
-			SELECT IFNULL(MAX(oto_num), 0) FROM oto 
-		</selectKey>
 		INSERT INTO oto(oto_num,
 						oto_subject,
 						oto_content,
-						theater_num,
-						member_id,
 						oto_date,
 						oto_category,
-						oto_reply_status)
-		VALUES (#{oto_num} + 1,
+						oto_reply_status,
+						theater_num,
+						member_id
+						)
+		VALUES (null,
 				#{oto.oto_subject},
 				#{oto.oto_content},
-				#{theater_num},
-				#{id},
 				now(),
 				#{oto.oto_category},
-				'미답')
+				'미답',
+				#{theater_num},
+				#{id}
+				)
 	</insert>
 	
 	<!-- otoList 가져오기 -->
 	<select id="selectOtoList" resultType="itwillbs.p2c3.boogimovie.vo.OTOVO">
-		SELECT o.oto_num
-		  -- , o.theater_num
-			 , t.theater_name
-		  	 , o.oto_content
-		     , o.member_id
-		     , o.oto_date
-		     , o.oto_category
-		     , o.oto_reply_status
-		     , o.oto_subject
+		SELECT o.oto_num,
+			   o.oto_subject,
+			   o.oto_content,
+			   o.oto_date,
+			   o.oto_category,
+			   o.oto_reply_status,
+			   o.theater_num,
+			   o.member_id,
+			   t.theater_name
 		 FROM oto o
 		 JOIN theater t
    		on o.theater_num = t.theater_num
 		ORDER BY oto_num DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
+	<!-- 1대1 문의 데이터 하나 갖고 오기 -->
 	<select id="selectOto" resultType="itwillbs.p2c3.boogimovie.vo.OTOVO">
-		SELECT * FROM oto WHERE oto_num = #{oto_num}
+		SELECT o.oto_num,
+			   o.oto_subject,
+			   o.oto_content,
+			   o.oto_date,
+			   o.oto_category,
+			   o.oto_reply_status,
+			   o.theater_num,
+			   o.member_id,
+			   t.theater_name
+		 FROM oto o
+		 JOIN theater t
+   		on o.theater_num = t.theater_num
+   		WHERE oto_num = #{oto_num}
 	</select>
-	<select id="selectTheaterName">
-		SELECT theater_name 
+	<!-- 극장 번호 갖고 오기 -->
+	<select id="selectTheaterNum" resultType="int">
+		SELECT theater_num 
 		FROM theater
-		WHERE theater_num = #{theater_num}
+		WHERE theater_name = #{theater_name}
 	</select>
+	<!-- 1대1 문의 content 수정 -->
 	<update id="updateOto">
 		UPDATE oto
 		SET oto_content = #{oto_content}
@@ -66,4 +80,9 @@
 		SET oto_reply_status = '답변'
 		WHERE oto_num = #{oto_num}
 	</update>
+	<!-- 1대1 문의 게시물 갯수 -->
+	<select id="getOtoListCount" resultType="int">
+		SELECT COUNT(oto_num)
+		FROM oto
+	</select>
 </mapper>

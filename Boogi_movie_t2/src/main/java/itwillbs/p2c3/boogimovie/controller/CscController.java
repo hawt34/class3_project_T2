@@ -94,10 +94,9 @@ public class CscController {
 		@PostMapping("csc_oto")
 		public String cscOtoPro(OTOVO oto, String theater_name, HttpSession session, Model model) {
 			String id = (String)session.getAttribute("sId");
-			System.out.println("아이디" + id);
 			
-			int theater_num = theaterService.getTheaterName(theater_name);
-			System.out.println("극장번호: " + theater_num);
+			// 극장 번호 가져오기
+			int theater_num = otoService.getTheaterNum(theater_name);
 			
 			
 			if(id == null) {
@@ -105,6 +104,7 @@ public class CscController {
 				model.addAttribute("targetURL", "./");
 			}
 			
+			//1대1 문의 db 등록
 			int insertCount = otoService.insertOto(oto, theater_num, id);
 			
 			if(insertCount == 0) {

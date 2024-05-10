@@ -35,13 +35,13 @@
 		WHERE review_id = #{review_id}
 	</delete>
 	
-<!-- 	예매 리스트 조회 -->
+<!-- 예매 리스트 조회 -->
 	<select id="selectReserveList" resultType="hashmap">
 		SELECT * 
 		FROM admin_movieList
 	</select>
 
-<!-- 	예매 리스트 조회 -->
+<!-- 예매 리스트 조회 -->
 	<select id="selectReserve" resultType="hashmap">
 		SELECT * 
 		FROM admin_movieList
@@ -63,18 +63,38 @@
 	
 <!-- 	영화 등록하기 -->
 	<insert id="insertMovie" >
-		INSERT INTO movie(movie_name, movie_director, movie_poster, movie_trailler, movie_open_date, movie_status, genre_num, movie_grade, movie_summary, movie_like)
-		VALUES(
-			#{movie_name}
+		INSERT INTO movie
+		(	  movie_name
+			, movie_director
+			, movie_poster
+			, movie_trailler
+			, movie_open_date
+			, movie_end_date
+			, movie_status
+			, movie_grade
+			, movie_summary
+			, movie_runtime
+			, movie_stillCut
+			, movie_stillCut2
+			, movie_stillCut3
+			, movie_genre
+		)
+		VALUES
+		(	  #{movie_name}
 			, #{movie_director}
 			, #{movie_poster}
 			, #{movie_trailler}
 			, #{movie_open_date}
+			, #{movie_end_date}
 			, #{movie_status}
-			, #{genre_num}
 			, #{movie_grade}
 			, #{movie_summary}
-			, 0
+			, #{movie_runtime}
+			, #{movie_stillCut}
+			, #{movie_stillCut2}
+			, #{movie_stillCut3}
+			, #{movie_genre}
+			
 		)
 	</insert>
 	

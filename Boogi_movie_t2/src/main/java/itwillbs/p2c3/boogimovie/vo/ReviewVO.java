@@ -10,7 +10,7 @@ public class ReviewVO {
 	private int review_num;
     private int movie_num;
     private String member_id;
-    private int rating;
+    private int review_rating;
     private String review_text;
     private Date review_date;
     

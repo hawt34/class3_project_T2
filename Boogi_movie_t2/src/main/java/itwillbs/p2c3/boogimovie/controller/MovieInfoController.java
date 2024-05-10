@@ -42,10 +42,10 @@ public class MovieInfoController {
     }
 	
 	@GetMapping("reviewModify")
-	public String reviewModify(int review_id, Model model) {
+	public String reviewModify(int review_num, Model model) {
 		//System.out.println("여기는 리뷰모디파이"+ review_id); 확인완료주석처리
 		
-		List<ReviewVO> reviews = serviceReview.getReviewId(review_id);
+		List<ReviewVO> reviews = serviceReview.getReviewId(review_num);
 		model.addAttribute("reviews", reviews);
 		//System.out.println(reviews); 확인완료 주석처리
 		

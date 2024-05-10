@@ -4,8 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="itwillbs.p2c3.boogimovie.mapper.ReviewMapper">
  	<insert id="insertReview" >
- 	INSERT INTO review (movie_num, member_id, rating, review_text, review_id)
-    SELECT #{movie_num}, #{member_id}, #{rating}, #{review_text}, COALESCE(MAX(review_num), 0) + 1
+ 	INSERT INTO review (movie_num, member_id, review_rating, review_text, review_num)
+    SELECT #{movie_num}, #{member_id}, #{review_rating}, #{review_text}, COALESCE(MAX(review_num), 0) + 1
     FROM review
  	
  	</insert>
@@ -20,7 +20,7 @@
  	
  	<update id="updateReview" >
  		UPDATE review
- 		SET rating = #{rating},
+ 		SET review_rating = #{review_rating},
  			review_text = #{review_text}
  		WHERE review_num = #{review_num}	 
  	</update>

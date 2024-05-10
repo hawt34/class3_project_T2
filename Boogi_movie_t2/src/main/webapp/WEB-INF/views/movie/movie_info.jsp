@@ -9,13 +9,9 @@
 * {
 	margin: 0;
 	padding: 0;
-/*   	border: 1px solid skyblue;   */
+   	border: 1px solid skyblue;   
 }
 
-body {
-	/* 	background-color: #fffde7; */
-	
-}
 
 #wrap {
 	width: 1400px;
@@ -99,23 +95,14 @@ section h1 {
 }
 
 
-#starSelect {
-	float: left;
-	width: 300px;
-	height: 100px;
-	font-size: 24px;
-	color: gold;
-}
-#starSelect option {
-    font-size: 24px; /* 옵션들의 글자 크기를 설정 */
- 	color: gold;   
-}
+
 .star-rating{
 	padding-left: 10px;
 	padding-top: 10px;
 	float: left;
 	width: 320px;
 	height: 150px;
+	
 	
 }
 
@@ -152,9 +139,15 @@ section h1 {
 }
 .reviewCover span:before {
 	content: '★';
+	color: gold;
 }
 .reviewCover span.empty::before {
     content: '☆'; /* 빈 별의 모양 */
+    color: gold;
+}
+.reviewCover span.filled::before {
+    content: '★'; /* 별이 채워진 상태 */
+	color: gold;
 }
 .reviewTexts{
 	float: right;
@@ -164,7 +157,6 @@ section h1 {
 .reviewTexts span {
         margin-right: 10px; /* 원하는 만큼의 간격을 조절하세요 */
  }
-
 
 
 footer {
@@ -233,7 +225,7 @@ footer {
 				<div class="star-rating">
 
 					<p>별점 </p>
-				<select id="rating" name= "rating" class="form-select" >
+				<select id="review_rating" name= "review_rating" class="form-select" >
     				<option value="0" selected>별점 선택(미선택시 0점 ☆)</option>
     				<option value="1">★ 1점</option>
     				<option value="2">★★ 2점</option>
@@ -266,11 +258,11 @@ footer {
 				<c:forEach var="review" items="${reviews}">
     			<div class="reviewCover">
         			<c:choose>
-            		<c:when test="${review.rating eq 0}">
+            		<c:when test="${review.review_rating eq 0}">
                 	<span class="empty"></span>
             		</c:when>
             		<c:otherwise>
-                		<c:forEach begin="1" end="${review.rating}">
+                		<c:forEach begin="1" end="${review.review_rating}">
                     	<span class="filled"></span>
                 		</c:forEach>
             		</c:otherwise>
@@ -300,7 +292,7 @@ footer {
 $("#submitReviewBtn").click(function(event) {
     // 세션 아이디 가져오기
     let sessionId = "${sessionScope.sId}";
-
+	
     
     let reviewText = $("#reviewText").val().trim();
     // 로그인 여부 확인

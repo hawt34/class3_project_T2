@@ -33,7 +33,7 @@
 				<div class="admin_movie_head">
 					<div class="admin_movie_title">상영관관리</div>
 					<div class="admin_movie_search">
-						<select class="form-select">
+						<select class="form-select" style="width: 300px;">
 							<c:forEach var="theater" items="${theaterList}">
 								<option>${theater.theater_name}</option>
 							</c:forEach>
@@ -46,13 +46,11 @@
 				<div class="admin_movie_body">
 					<table>
 						<thead>
-			
 							<tr>
-								<th>상영관 코드</th>
+								<th>상영관 번호</th>
+								<th>극장명</th>
 								<th>상영관 이름</th>
-								<th>상영관 위치</th>
 								<th>상영관 크기</th>
-								<th>운영 시간</th>
 								<th>운영 상태</th>
 								<th>수정/삭제</th>
 							</tr>
@@ -60,68 +58,19 @@
 				<!--  이 부분을 반복문을 통해서 상영관 정보를 담은 리스트를 
 			      전달받아 출력하면 좋을듯-->
 						<tbody>
-							<c:forEach var="" items="">
+							<c:forEach var="screenInfo" items="${screenInfoList}">
 								<tr>
-									<td>4984981</td>
-									<td>xxx관</td>
-									<td>9층</td>
-									<td>10 x 12</td>
-									<td>09 : 00 ~ 22 : 00</td>
-									<td>운영 중</td>
+									<td>${screenInfo.screen_num}</td>
+									<td>${screenInfo.theater_name}</td>
+									<td>${screenInfo.screen_cinema_num}관</td>
+									<td>row : ${screenInfo.screen_seat_row} / col : ${screenInfo.screen_seat_col}</td>
+									<td>${screenInfo.screen_status}</td>
 									<td>
 										<button type="button" class="btn btn-outline-primary" onclick="boothForm()">수정</button>
 										<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw()">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
-							<tr>
-								<td>4984981</td>
-								<td>xxx관</td>
-								<td>9층</td>
-								<td>10 x 12</td>
-								<td>09 : 00 ~ 22 : 00</td>
-								<td>운영 중</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="boothForm()">수정</button>
-									<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>4984981</td>
-								<td>xxx관</td>
-								<td>8층</td>
-								<td>10 x 12</td>
-								<td>09 : 00 ~ 22 : 00</td>
-								<td>운영 중</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="boothForm()">수정</button>
-									<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>4912381</td>
-								<td>xxx관</td>
-								<td>11층</td>
-								<td>10 x 12</td>
-								<td>09 : 00 ~ 22 : 00</td>
-								<td>미운영</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="boothForm()">수정</button>
-									<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>4984981</td>
-								<td>xxx관</td>
-								<td>9층</td>
-								<td>10 x 12</td>
-								<td>09 : 00 ~ 22 : 00</td>
-								<td>운영 중</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="boothForm()">수정</button>
-									<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw()">삭제</button>
-								</td>
-							</tr>
 							
 						</tbody>
 					</table>

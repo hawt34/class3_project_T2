@@ -56,7 +56,7 @@
 					</div>
 					<div class="mb-3">
 						<label for="movie_story">내용</label> 
-						<textArea id="summernote" class="form-control" rows="10px" required name="notice_content"></textArea>
+						<textarea id="summernote" class="form-control" rows="10" required name="notice_content"></textarea>
 						<div class="invalid-feedback">내용을 입력해주세요.</div>
 					</div>
 					

@@ -6,9 +6,9 @@
 	<!-- 1대1 문의 DB 저장 -->
 	<insert id="insertOto">
 		<selectKey keyProperty="oto_num" resultType="int" order="BEFORE">
-			SELECT IFNULL(MAX(oto_num), 0) FROM OTO 
+			SELECT IFNULL(MAX(oto_num), 0) FROM oto 
 		</selectKey>
-		INSERT INTO OTO(oto_num,
+		INSERT INTO oto(oto_num,
 						oto_subject,
 						oto_content,
 						theater_num,
@@ -37,14 +37,14 @@
 		     , o.oto_category
 		     , o.oto_reply_status
 		     , o.oto_subject
-		 FROM OTO o
+		 FROM oto o
 		 JOIN theater t
    		on o.theater_num = t.theater_num
 		ORDER BY oto_num DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
 	<select id="selectOto" resultType="itwillbs.p2c3.boogimovie.vo.OTOVO">
-		SELECT * FROM OTO WHERE oto_num = #{oto_num}
+		SELECT * FROM oto WHERE oto_num = #{oto_num}
 	</select>
 	<select id="selectTheaterName">
 		SELECT theater_name 
@@ -52,17 +52,17 @@
 		WHERE theater_num = #{theater_num}
 	</select>
 	<update id="updateOto">
-		UPDATE OTO
+		UPDATE oto
 		SET oto_content = #{oto_content}
 		WHERE oto_num = #{oto_num}
 	</update>
 	<delete id="deleteOto">
-		DELETE FROM OTO
+		DELETE FROM oto
 		WHERE oto_num = #{oto_num}
 	</delete>
 	<!-- 답변후 '미답' -> '답변' 변경-->
 	<update id="updateResponse">
-		UPDATE OTO
+		UPDATE oto
 		SET oto_reply_status = '답변'
 		WHERE oto_num = #{oto_num}
 	</update>

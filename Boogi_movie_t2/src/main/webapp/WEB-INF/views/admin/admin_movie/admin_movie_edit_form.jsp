@@ -64,82 +64,65 @@ body {
 				<form class="validation-form" novalidate action="admin_movie_edit_pro" method="post" onsubmit="return confirm('영화를 등록하시겠습니까?');">
 					<div class="mb-3">
 						<label for="movie_num">영화코드</label> 
-						<input type="text" id="movie_num" name="movie_num" class="form-control" required value="${movie.movie_num}"/>
-						<div class="invalid-feedback">영화코드를 입력해주세요.</div>
+						<input type="text" name="movie_num" id="movie_num" class="form-control" value="${movie.movie_num}" />
 					</div>
 					<div class="mb-3">
 						<label for="movie_name">영화명</label> 
-						<input type="text" name="movie_name" id="movie_name" class="form-control" required value="${movie.movie_name}" />
+						<input type="text" name="movie_name" id="movie_name" class="form-control" value="${movie.movie_name}" />
 						<div class="invalid-feedback">영화명을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_director">감독</label> 
-						<input type="text" name="movie_director" id="movie_director" class="form-control" required value="${movie.movie_director}"/>
+						<input type="text" name="movie_director" id="movie_director" class="form-control" value="${movie.movie_director}"/>
 						<div class="invalid-feedback">감독을 입력해주세요.</div>
 					</div>
-<!-- 					<div class="mb-3"> -->
-<!-- 						<label for="movie_genre">장르</label>  -->
-<%-- 						<input type="text" name="genre_num"  id="movie_genre" class="form-control" required value="${movie.genre_num'}" /> --%>
-<!-- 						<div class="invalid-feedback">장르를 입력해주세요.</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="mb-3"> -->
-<!-- 						<label for="movie_runtime">상영시간</label>  -->
-<!-- 						<input type="text" id="movie_runtime" class="form-control" required /> -->
-<!-- 						<div class="invalid-feedback">상영시간을 입력해주세요.</div> -->
-<!-- 					</div> -->
-					<div class="row mb-3">
-						<div class="col-md-6">
-							<label for="movie_rate">관람등급</label> 
-							<c:set var="movie_grade" value="${movie.movie_grade}" />
-							<select class="custom-select d-block w-100" id="movie_rate" name="movie_grade" required>
-								<option value="관람등급">관람등급을 선택하세요</option>
-								<option <c:if test='${movie_grade eq "전체이용가"}'> selected </c:if> value="전체이용가">전체이용가</option>
-								<option <c:if test='${movie_grade eq "12세"}'> selected </c:if> value="12세관람가">12세관람가</option>
-								<option <c:if test='${movie_grade eq "15세"}'> selected </c:if> value="15세관람가">15세관람가</option>
-								<option <c:if test='${movie_grade eq "19세"}'> selected </c:if> value="19세관람가">19세관람가</option>
-							</select>
-							<div class="invalid-feedback">관람등급을 입력해주세요.</div>
-						</div>
-						<div class="col-md-6">
-							<label for="root">상영상태</label> 
-							<c:set var="movie_status" value="${movie.movie_status}" />
-							<select class="custom-select d-block w-100" id="root" name="movie_status" required>
-								<option >상영상태를 선택하세요</option>
-								<option <c:if test='${movie_status eq "개봉예정작"}'> selected </c:if> value="개봉예정작">개봉예정작</option>
-								<option <c:if test='${movie_status eq "절찬상영중"}'> selected </c:if> value="절찬상영중">절찬상영중</option>
-								<option <c:if test='${movie_status eq "상영종료"}'> selected </c:if> value="상영종료">상영종료</option>
-							</select>
-							<div class="invalid-feedback">상영상태를 선택해주세요.</div>
-						</div>
+					<div class="mb-3">
+						<label for="movie_genre">장르</label> 
+						<input type="text" name="movie_genre" id="movie_genre" class="form-control" value="${movie.movie_genre}">
 					</div>
 					<div class="mb-3">
-						<label for="movie_startDate">개봉일</label> 
-						<input type="date" name="movie_open_date" id="movie_startDate" class="form-control" required value="${movie.movie_open_date}"/>
+						<label for="movie_grade">관람등급</label> 
+						<input type="text" class="form-control" id="movie_grade" name="movie_grade" value="${movie.movie_grade}">
+					</div>
+					<div class="mb-3">
+						<label for="movie_runtime">상영시간</label> 
+						<input type="text" class="form-control" id="movie_runtime" name="movie_runtime" value="${movie.movie_runtime}">
+					</div>
+					<div class="mb-3">
+						<label for="movie_open_date">개봉일</label> 
+						<input type="date" name="movie_open_date" id="movie_open_date" class="form-control" value="${movie.movie_open_date}"/>
 						<div class="invalid-feedback">개봉일을 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_endDate">종영일</label> 
-						<input type="date" id="movie_endDate" class="form-control" value="movie_date"/>
+						<label for="movie_end_date">종영일</label> 
+						<input type="date" id="movie_end_date" class="form-control" name="movie_end_date"  value="${movie.movie_end_date}"/>
 						<div class="invalid-feedback">종영일을 선택해주세요.</div>
+					</div>
+					<div class="mb-3">
+						<label for="movie_status">개봉현황</label> 
+						<input type="text" class="form-control" id="movie_status" name="movie_status" value="${movie.movie_status}" />
 					</div>
 					<div class="mb-3">
 						<label for="movie_poster">포스터</label> 
 						<input type="text" name="movie_poster" id="movie_poster" class="form-control" required value="${movie.movie_poster}" />
 						<div class="invalid-feedback">포스터를 선택해주세요.</div>
 					</div>
-<!-- 					<div class="mb-3"> -->
-<!-- 						<label for="movie_stillCut1">스틸컷1</label>  -->
-<%-- 						<input type="text" name="stillcut_num" id="movie_stillCut1" class="form-control" value="${movie.stillcut_num'}" /> --%>
-<!-- 						<div class="invalid-feedback">스틸컷을 선택해주세요.</div> -->
-<!-- 					</div> -->
 					<div class="mb-3">
-						<label for="movie_stillCut2">스틸컷2</label>  &nbsp; (필수 아님) 
-						<input type="text" id="movie_stillCut2" class="form-control" />
+						<label for="movie_stillCut">스틸컷1</label> 
+						<input type="text" name="movie_stillCut" id="movie_stillCut" class="form-control" value="${movie.movie_stillCut}" />
+						<div class="invalid-feedback">스틸컷을 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_stillCut3">스틸컷3</label>  &nbsp; (필수 아님)
-						<input type="text" id="movie_stillCut3" class="form-control" />
+						<label for="movie_stillCut2">스틸컷2</label> 
+						<input type="text" name="movie_stillCut2" id="movie_stillCut2" class="form-control" value="${movie.movie_stillCut2}" />
+						<div class="invalid-feedback">스틸컷을 선택해주세요.</div>
 					</div>
+					<div class="mb-3">
+						<label for="movie_stillCut3">스틸컷3</label> 
+						<input type="text" name="movie_stillCut3" id="movie_stillCut3" class="form-control" value="${movie.movie_stillCut3}" />
+						<div class="invalid-feedback">스틸컷을 선택해주세요.</div>
+					</div>
+			
 					<div class="mb-3">
 						<label for="movie_trailer">트레일러</label> 
 						<input type="text" name="movie_trailler" id="movie_trailer" class="form-control" required value="${movie.movie_trailler}" />
@@ -181,11 +164,6 @@ body {
 	      });
 	    }, false);
 	    
-        // JavaScript Date 객체로 변환
-        var movie_date = new Date("${movie.movie_open_date}");
-
-        // 3개월을 더함
-        movie_date.setMonth(date.getMonth() + 3);
  	</script>
 </body>
 </html>

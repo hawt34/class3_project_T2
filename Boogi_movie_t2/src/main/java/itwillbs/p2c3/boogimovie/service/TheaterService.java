@@ -16,34 +16,46 @@ public class TheaterService {
 	
 	@Autowired
 	private TheaterMapper mapper;
-
+	
+	// 탑 메인 메뉴 + 극장 상단 메뉴에서 극장 상세페이지 이동시 
 	public TheaterVO getTheater(TheaterVO theater) {
 		return mapper.selectTheater(theater);
 	}
 	
+	public List<TheaterVO> getTheater() {
+		return mapper.selectTheater2();
+	}
 	
 	
+	// 예매 페이지에서 극장 이름별 정렬 시 사용
 	public List<TheaterVO> getTheatersOrderbyName() {
 		return mapper.selectTheatersOrderbyName();
 	}
-
-
-
-	public List<TheaterFacilityVO> getFacility(TheaterFacilityVO facility) {
-		return mapper.selectFacility(facility);
-	}
-
-		
 	
+	// ???
 	public int getTheaterName(String theater_name) {
 		return mapper.selectTheaterName(theater_name);
 	}
 
-
-
-	public List<NoticeVO> getNoticeList(NoticeVO notice) {
-		return mapper.selectNoticeList(notice);
+	// 극장 상세 > 극장별 보유시설 가져오기
+	public List<TheaterFacilityVO> getFacility(TheaterFacilityVO facility) {
+		return mapper.selectFacility(facility);
 	}
+		
+	
+
+	//  극장 상세 > 지점별 공지사항 
+	public List<NoticeVO> getTheaterNoticeList(NoticeVO notice) {
+		return mapper.selectTheaterNoticeList(notice);
+	}
+
+
+	// 극장 메인 > 극장 카테고리 공지사항 
+	public List<NoticeVO> getNoticeList() {
+		return mapper.selectNoticeList();
+	}
+
+	
 	
 	
 }

@@ -26,8 +26,13 @@
 	<div class="theater_info">
 		<div class="theater_info_content"> <!-- 시설안내 -->
 			<h4 class="text-primary">시설 안내</h4>
+			<div> <!-- 지점별 운영 시간 -->
+				<h5>■ 운영 시간</h5>
+				${theater.theater_hours}
+			</div>
+			<br>
 			<div class="theater_facility"> <!-- 보유시설 -->
-				<h5>보유 시설</h5>
+				<h5>■ 보유 시설</h5>
 				<div class="theater_facility_area" style="display: flex;">
 					<c:forEach var="facility" items="${facilityList}">
 						<div style="width:120px; text-align: center;">
@@ -40,7 +45,7 @@
 			</div> <!-- theater_facility_info 끝 -->
 			 <br>
 			 <div class="theater_floor_info"> <!-- 층별안내 -->
-				<h5>층별 안내</h5>
+				<h5>■ 층별 안내</h5>
 				${theater.theater_floor_info}
 			 </div> <!-- theater_floor_info 끝 -->
 		</div> <!-- theater_info_content 끝 -->
@@ -48,7 +53,7 @@
 		<div class="theater_info_content"> <!-- 교통안내 -->
 			<h4 class="text-primary">교통 안내</h4>
 			<div class="theater_detail_map"> <!-- 약도 -->
-				<h5>약도</h5>
+				<h5>■ 약도</h5>
 				<p>도로명 주소: ${theater.theater_address}</p>
 				
 				<div id="map" style="width:350px; height:350px;"></div>
@@ -56,8 +61,8 @@
 				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622&libraries=services"></script>
 				<script>
 					
-					var theater_map_x = ${x};
-					var theater_map_y = ${y};
+					var theater_map_x = ${theater.theater_map_x};
+					var theater_map_y = ${theater.theater_map_y};
 					
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 					  mapOption = { 
@@ -86,7 +91,7 @@
 		
 					// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 					var content = '<div class="customoverlay">' +
-					    '    <span class="title">부기무비 해운대점</span>' +
+					    '    <span class="title">부기무비 ' + '${theater.theater_name}' + '</span>' +
 					    '</div>';
 		
 					// 커스텀 오버레이가 표시될 위치입니다 
@@ -103,29 +108,35 @@
 			 </div> <!-- theater_detail_map 끝 -->
 			 <br>
 			 <div class="theater_parking"> <!-- 주차 안내 -->
-				<h5>주차</h5>	
+				<h5>■ 주차</h5>	
 				<div class="theater_parking_info">
 					<p>주차안내</p>
 					${theater.theater_parking_info}
 				</div>
+				<br>
 				<div class="theater_parking_fee">
 					<p>주차요금</p>
 					${theater.theater_parking_fee}
 				</div>		
 			 </div> <!-- theater_parking 끝 -->
 			 <br>
-			 <div class="theater_public">  <!-- 교통안내 -->
-			 	<h5>대중교통</h5>	
-			 	<div class="theater_public_bus">
-					<p>버스</p>
-					${theater.theater_public_bus}
-				</div>		
-			 	<div class="theater_public_subway">
-			 		<c:if test="${not empty theater.theater_public_subway}">
-						<p>지하철</p>
-						${theater.theater_public_subway}
-					</c:if>
-				</div>		
+			 <div class="theater_public" >  <!-- 교통안내 -->
+			 	<h5>■ 대중교통</h5>	
+			 	<div class="theater_public_area">
+				 	<div class="theater_public_info">
+				 		<img src="${pageContext.request.contextPath}/resources/images/theater_info_bus.png" class="theater_public_img">
+						<b>버스</b><br>
+						${theater.theater_public_bus}
+						
+					</div>		
+				 	<div class="theater_public_info" >
+				 		<c:if test="${not empty theater.theater_public_subway}">
+				 			<img src="${pageContext.request.contextPath}/resources/images/theater_info_subway.png" class="theater_public_img"> 
+							<b>지하철</b><br>
+							${theater.theater_public_subway}
+						</c:if>
+					</div>		
+				</div>
 			 </div> <!-- theater_public 끝 -->
 		</div> <!-- theater_info_content 끝 -->
 		<br>
@@ -136,10 +147,9 @@
 					<h4 class="text-primary">공지사항</h4>
 	   			</div>
 	    		<div class="col">
-	      			<a href="">더보기 
-	      			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
- 						<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-					</svg></a>
+	      			<a href="csc_notice"  style="text-decoration: none;">더보기
+	      				<img src="${pageContext.request.contextPath}/resources/images/chevron-right.svg" width="15"> 
+	      			</a>
 	   			</div>
 	   		</div>
 			<table class="table table-bordered table-striped">
@@ -151,7 +161,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="notice" items="${noticeList}">
+					<c:forEach var="notice" items="${theaterNoticeList}" begin="0" end="6">
 						<tr>
 							<td scope="row">${notice.theater_name}</td>
 							<td>${notice.notice_subject}</td>

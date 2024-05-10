@@ -22,6 +22,10 @@ public class MypageInfoService {
 		return infoMember;
 	}
 	
+	// 회원정보
+	public MemberVO getDbMember(MemberVO member) {
+		return mapper.selectDbMember(member);
+	}
 	
 	public ReservationVO getMovieResv(String id) {
 		System.out.println("MypageInfoService - getMovieResv");
@@ -33,6 +37,16 @@ public class MypageInfoService {
 		System.out.println("MypageInfoService - getTheater");
 		List<TheaterVO> infoTheater = mapper.selectTheater();
 		return infoTheater;
+	}
+	
+	// 정보수정
+	public int modifyMember(MemberVO member) {
+		return mapper.updateMember(member);
+	}
+	
+	// 탈퇴처리
+	public int withdrawMember(MemberVO member) {
+		return mapper.updateMemberForWithdraw(member);
 	}
 	
 	

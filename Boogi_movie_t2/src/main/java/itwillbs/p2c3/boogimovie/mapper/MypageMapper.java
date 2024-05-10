@@ -15,4 +15,13 @@ public interface MypageMapper {
 	ReservationVO selectMovieResv(String id);
 	List<TheaterVO> selectTheater();
 	
+	// 회원정보
+	MemberVO selectDbMember(MemberVO member);
+	
+	// 정보수정
+	int updateMember(MemberVO member);
+	
+	// 탈퇴처리
+	int updateMemberForWithdraw(MemberVO member);
+	
 }

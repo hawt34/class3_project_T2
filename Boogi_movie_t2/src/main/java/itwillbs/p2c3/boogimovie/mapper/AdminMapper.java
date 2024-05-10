@@ -43,8 +43,11 @@ public interface AdminMapper {
 	// 영화 상세보기
 	MovieVO selectMovie(int movie_num);
 
+	// 영화 확인
+	MovieVO getMovie(String movie_name);
+
 	// 영화 수정 업데이트
-	int updateMovie(MovieVO moviem);
+	int updateMovie(MovieVO movie);
 	
 	// 영화 등록
 	int insertMovie(MovieVO movie);
@@ -65,4 +68,9 @@ public interface AdminMapper {
 	int deleteNotice(int notice_num);
 
 	int getNoticeListCount();
+
+	NoticeVO selectNotice(NoticeVO notice);
+	
+	//notice 마지막 번호
+	int selectMaxNotice(NoticeVO notice);
 }

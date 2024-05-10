@@ -1,5 +1,6 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import itwillbs.p2c3.boogimovie.service.EventService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
+import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -24,6 +26,8 @@ import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
+import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
 public class AdminController {
@@ -40,6 +44,8 @@ public class AdminController {
 	@Autowired
 	EventService eventService;
 	
+	@Autowired
+	TicketingService ticService;
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")
@@ -85,6 +91,12 @@ public class AdminController {
 		PageInfo pageList = new PageInfo(NoticeCount, pageListLimit, maxPage, startPage, endPage);
 		
 		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
+		
+		for(NoticeVO notice : noticeList) {
+			LocalDateTime ldt = LocalDateTime.parse(notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+			notice.setNotice_date(ldt);
+//			notice.setNotice_date();
+		}
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pageList", pageList);
 		
@@ -119,6 +131,18 @@ public class AdminController {
 			return "error/fail";
 		}
 		return "redirect:/admin_notice";
+	}
+	
+	@GetMapping("admin_notice_detail")
+	public String adminNoticeDetail(NoticeVO notice, Model model) {
+		notice = service.getNotice(notice);
+		String noticeDate = notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		int maxNotice = service.getMaxNotice(notice);
+		
+		model.addAttribute("maxNotice", maxNotice);
+		model.addAttribute("noticeDate", noticeDate);
+		model.addAttribute("notice", notice);
+		return "admin/admin_csc/admin_notice_detail";
 	}
 	
 	//---------------------------
@@ -259,7 +283,7 @@ public class AdminController {
 		if(deleteCount > 0) {
 			return "redirect:admin_movie";
 		} else {
-			model.addAttribute("msg", "영화등록 실패");
+			model.addAttribute("msg", "영화삭제 실패");
 			return "redirect:/error/fail";
 		}
 		
@@ -267,21 +291,26 @@ public class AdminController {
 	
 	// 영화 등록 폼
 	@GetMapping("admin_movie_reg_form")
-	public String adminMovieRegForm(MovieVO movie, Model model) {
-		model.addAttribute("movie", movie);
+	public String adminMovieRegForm() {
 		return "admin/admin_movie/admin_movie_reg_form";
 	}
 	
 	// 영화 등록 프로
 	@PostMapping("admin_movie_reg_pro")
 	public String adminMovieGetPro(@ModelAttribute MovieVO movie, Model model) {
+		// db에 영화가 있는지 판별
+		MovieVO dbMovie = service.getMovie(movie.getMovie_name()); 
+		if(dbMovie != null) {
+			model.addAttribute("msg", "이미 등록된 영화입니다!");
+			return "error/fail";
+		}
+		// db에 영화 삽입		
 		int insertCount = service.InsertMovie(movie);
-		
 		if(insertCount > 0) {
 			return "redirect:admin_movie";
 		} else {
 			model.addAttribute("msg", "영화등록 실패");
-			return "redirect:/error/fail";
+			return "error/fail";
 		}
 		
 	}
@@ -289,7 +318,7 @@ public class AdminController {
 	// 영화 수정 폼
 	@GetMapping("admin_movie_edit_form")
 	public String adminMovieEditForm(MovieVO movie, Model model) {
-		System.out.println("movie_num: " + movie.getMovie_num());
+//		System.out.println("movie_num: " + movie.getMovie_num());
 		movie = service.SelectMovie(movie.getMovie_num());
 		model.addAttribute("movie", movie);
 		
@@ -300,12 +329,13 @@ public class AdminController {
 	@PostMapping("admin_movie_edit_pro")
 	public String adminMovieEditPro(@ModelAttribute MovieVO movie, Model model) {
 		int updateCount = service.UpdateMovie(movie);
+		System.out.println(movie);
 		
 		if(updateCount > 0) {
 			return "redirect:admin_movie";			
 		} else {
 			model.addAttribute("msg", "영화수정 실패");
-			return "redirect:/error/fail";
+			return "error/fail";
 		}
 		
 		
@@ -390,7 +420,13 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 극장 페이지
 	@GetMapping("admin_theater")
-	public String adminTheater() {
+	public String adminTheater(TheaterVO theater, Model model, ScreenInfoVO screen_info) {
+		
+//		List<ScreenInfoVO> screenInfoList = ticService.getScreenInfo();
+		List<TheaterVO> theaterList = theaterService.getTheater();
+		
+		model.addAttribute("theaterList", theaterList);
+		
 		return "admin/admin_theater/admin_theater";
 	}
 	@GetMapping("admin_theater_delete")
@@ -401,6 +437,15 @@ public class AdminController {
 	public String adminTheaterForm() {
 		return "admin/admin_theater/admin_theater_form";
 	}
+	@GetMapping("admin_theater_modify_form")
+	public String adminTheaterModifyForm(TheaterVO theater, Model model) {
+		
+		theater = theaterService.getTheater(theater);
+		model.addAttribute("theater", theater);
+		
+		return "admin/admin_theater/admin_theater_modify_form";
+	}
+	
 	@PostMapping("admin_theater_pro")
 	public String adminTheaterPro() {
 		return "redirect:/admin_theater";
@@ -418,7 +463,10 @@ public class AdminController {
 		return "redirect:/admin_booth";
 	}
 	@GetMapping("admin_booth")
-	public String adminBooth() {
+	public String adminBooth(TheaterVO theater, Model model) {
+		List<TheaterVO> theaterList = theaterService.getTheater();
+		model.addAttribute("theaterList", theaterList);
+		
 		return "admin/admin_theater/admin_booth";
 	}
 	

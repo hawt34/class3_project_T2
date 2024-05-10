@@ -64,7 +64,7 @@
 				<div class="star-rating">
 
 					<p>별점 </p>
-				<select id="rating" name= "rating" class="form-select" >
+				<select id="review_rating" name= "review_rating" class="form-select" >
     				<option value="0" selected>별점 선택(미선택시 0점 ☆)</option>
     				<option value="1">★ 1점</option>
     				<option value="2">★★ 2점</option>
@@ -97,11 +97,11 @@
 				<c:forEach var="review" items="${reviews}">
     			<div class="reviewCover">
         			<c:choose>
-            		<c:when test="${review.rating eq 0}">
+            		<c:when test="${review.review_rating eq 0}">
                 	<span class="empty"></span>
             		</c:when>
             		<c:otherwise>
-                		<c:forEach begin="1" end="${review.rating}">
+                		<c:forEach begin="1" end="${review.review_rating}">
                     	<span class="filled"></span>
                 		</c:forEach>
             		</c:otherwise>
@@ -113,8 +113,8 @@
         			<span class="member-id">${review.member_id}</span>
         			<span class="review-date">${fn:substring(review.review_date, 0, 10)}</span>
     				<c:if test="${review.member_id eq sessionScope.sId}">
-                	<button onclick="openReviewModify(${review.review_id})" class="btn btn-outline-primary" >수정</button> 
-                 	<button onclick="confirmDelete(${review.review_id})" class="btn btn-outline-primary">삭제</button>
+                	<button onclick="openReviewModify(${review.review_num})" class="btn btn-outline-primary" >수정</button> 
+                 	<button onclick="confirmDelete(${review.review_num})" class="btn btn-outline-primary">삭제</button>
             		</c:if>
     			</div>
     			</c:forEach>
@@ -131,7 +131,7 @@
 $("#submitReviewBtn").click(function(event) {
     // 세션 아이디 가져오기
     let sessionId = "${sessionScope.sId}";
-
+	
     
     let reviewText = $("#reviewText").val().trim();
     // 로그인 여부 확인
@@ -157,14 +157,14 @@ $("#submitReviewBtn").click(function(event) {
 
 });
 
-function openReviewModify(review_id) {
-	var url = "reviewModify?review_id=" + review_id;
+function openReviewModify(review_num) {
+	var url = "reviewModify?review_num=" + review_num;
 	
 	window.open(url,"","width=700,height=500");
 }
 
-function confirmDelete(review_id) {
-	var url = "deleteReview?review_id=" + review_id;
+function confirmDelete(review_num) {
+	var url = "deleteReview?review_num=" + review_num;
 	
 	window.open(url,"","width=700,height=300");	
 }

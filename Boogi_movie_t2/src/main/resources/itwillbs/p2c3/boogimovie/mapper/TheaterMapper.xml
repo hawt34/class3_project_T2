@@ -37,7 +37,7 @@
 		WHERE theater_name = #{theater_name}
 	</select>
 	
-	<select id="selectNoticeList">
+	<select id="selectTheaterNoticeList" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
 		SELECT notice_subject, notice_content, notice_date, theater_name
 		FROM notice 
 		JOIN theater 
@@ -45,8 +45,17 @@
 		WHERE notice.theater_num = #{theater_num};
 	</select>
 	
+	<select id="selectNoticeList" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
+		SELECT notice_subject, notice_content, notice_date, theater_name
+		FROM notice 
+		JOIN theater 
+		ON notice.theater_num = theater.theater_num 
+		WHERE notice_category = '극장';
+	</select>
 	
-	
-	
+	<select id="selectTheater2" resultType="itwillbs.p2c3.boogimovie.vo.TheaterVO">
+		SELECT *
+		FROM theater
+	</select>
 	
 </mapper>

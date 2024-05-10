@@ -33,10 +33,14 @@
 <!-- 					</div> -->
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 
-						<input type="text" id="movie_name" class="form-control" required name="notice_subject" />
+						<input type="text" id="movie_name" class="form-control" required name="notice_subject" required />
 						<div class="invalid-feedback">글제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
+						<select name="notice_category">
+							<option value="전체">전체</option>
+							<option value="극장">극장</option>
+						</select>
 						<select name="theater_name">
 							<option value="해운대점">해운대점</option>
 							<option value="센텀점">센텀점</option>
@@ -52,7 +56,7 @@
 					</div>
 					<div class="mb-3">
 						<label for="movie_story">내용</label> 
-						<textArea id="summernote" class="form-control" rows="10px" required name="notice_content"></textArea>
+						<textarea id="summernote" class="form-control" rows="10" required name="notice_content"></textarea>
 						<div class="invalid-feedback">내용을 입력해주세요.</div>
 					</div>
 					
@@ -102,5 +106,27 @@
         ]
       });
     </script>
+    <script>
+    // 첫 번째 선택란의 변경을 감지하여 두 번째 선택란의 옵션을 변경하는 함수
+    document.getElemenByName('notice_category').addEventListener('change', function() {
+        var firstValue = this.value; // 첫 번째 선택란의 값을 가져옴
+        var secondSelect = document.getElementByName('theater_name');
+
+        // 첫 번째 선택란의 값에 따라 두 번째 선택란의 옵션을 변경
+        switch (notice_category) {
+            case '1':
+                secondSelect.value = 'A';
+                break;
+            case '2':
+                secondSelect.value = 'B';
+                break;
+            case '3':
+                secondSelect.value = 'C';
+                break;
+            default:
+                secondSelect.value = ''; // 디폴트 값 설정
+        }
+    });
+</script>
 </body>
 </html>

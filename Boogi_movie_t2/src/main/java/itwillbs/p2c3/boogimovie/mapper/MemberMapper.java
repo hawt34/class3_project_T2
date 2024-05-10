@@ -15,6 +15,10 @@ public interface MemberMapper {
 	
 	MemberVO memberPwdSearch(MemberVO member);
 	
+	String memberMovieGenreSearch(String sId);
+	
+	MemberVO selectTheatersMyTheater(String sId);
+	
 //	MemberVO getMemberInfo(MemberVO member);
 	
 }

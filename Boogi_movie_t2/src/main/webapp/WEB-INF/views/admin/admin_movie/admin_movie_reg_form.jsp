@@ -41,19 +41,15 @@ body {
 	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
-.col-md-6>select {
-	width: 250px;
-	padding: 5px;
-	border: 1px solid #999;
-	font-family: url('http://i.ibb.co/98Vbb8L/gnb-bg.gif') no-repeat 95% 50%;
-	border-radius: 2px;
-	-webkit-appearance: none;
-	-mox-appearance: none;
-	appearance: none;
-	text-align: center;
-}
+
 .form-control{
 	border: 1px solid #bbb;
+}
+#getMovie {
+	height: 40px;
+	font-size: 18px;
+	flex: right;
+	margin-top: 22px;
 }
 </style>
 </head>
@@ -63,45 +59,46 @@ body {
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">영화등록</h4>
 				<form class="validation-form" novalidate action="admin_movie_reg_pro" method="post" onsubmit="return confirm('영화를 등록하시겠습니까?');">
-<!-- 					<div class="mb-3"> -->
-<!-- 						<label for="movie_num">영화코드</label>  -->
-<!-- 						<input type="text" name="movie_num" id="movie_num" class="form-control" required"/> -->
-<!-- 						<div class="invalid-feedback">영화코드를 입력해주세요.</div> -->
-<!-- 					</div> -->
-					<div class="mb-3">
-						<label for="movie_name">영화명</label> 
-						<input type="text" name="movie_name" id="movie_name" class="form-control" required />
-						<div class="invalid-feedback">영화명을 입력해주세요.</div>
-						<div><button id="getMovie">영화검색하기</button></div>
+					<div class="row"> 
+						<div class="col-md-6 mb-3">
+							<label for="movie_name">영화명</label> 
+							<input type="text" name="movie_name" id="movie_name" class="form-control" required />
+							<div class="invalid-feedback">영화명을 입력해주세요.</div>
+						</div>
+						<div class="col-md-6">
+							<div>
+								<input type="submit" id="getMovie" value="영화검색하기" class="btn btn-primary btn-lg btn-block" >
+							</div>
+						</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_director">감독</label> 
-						<input type="text" name="movie_director" id="movie_director" class="form-control"/>
+						<input type="text" name="movie_director" id="movie_director" class="form-control" required/>
 					</div>
 					<div class="mb-3">
 						<label for="genre_num">장르</label> 
-						<input type="text" name="movie_genre" id="genre_num" class="form-control"/>
+						<input type="text" name="movie_genre" id="genre_num" class="form-control" required/>
 					</div>
 					<div class="mb-3">
 						<label for="movie_grade">관람등급</label> 
-						<input type="text" class="form-control" id="movie_grade" name="movie_grade" >
+						<input type="text" class="form-control" id="movie_grade" name="movie_grade" required/>
 					</div>
 					<div class="mb-3">
 						<label for="movie_runtime">상영시간</label> 
-						<input type="text" class="form-control" id="movie_runtime" name="movie_runtime" >
+						<input type="text" class="form-control" id="movie_runtime" name="movie_runtime" required/>
 					</div>
 					<div class="mb-3">
 						<label for="movie_status">개봉현황</label> 
-						<input type="text" class="form-control" id="movie_status" name="movie_status" >
+						<input type="text" class="form-control" id="movie_status" name="movie_status" required/>
 					</div>
 					<div class="mb-3">
 						<label for="movie_open_date">개봉일</label> 
-						<input type="date" name="movie_open_date" id="movie_open_date" class="form-control" />
+						<input type="date" name="movie_open_date" id="movie_open_date" class="form-control" required/>
 						<div class="invalid-feedback">개봉일을 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_end_date">종영일</label> 
-						<input type="date" id="movie_end_date" class="form-control" />
+						<input type="date" id="movie_end_date" name="movie_end_date" class="form-control" required/>
 						<div class="invalid-feedback">종영일을 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
@@ -111,17 +108,17 @@ body {
 					</div>
 					<div class="mb-3">
 						<label for="movie_stillCut">스틸컷</label> 
-						<input type="text" name="movie_stillCut" id="movie_stillCut" class="form-control" />
+						<input type="text" name="movie_stillCut" id="movie_stillCut" class="form-control" required/>
 						<div class="invalid-feedback">스틸컷을 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_stillCut2">스틸컷2</label> 
-						<input type="text" name="movie_stillCut2" id="movie_stillCut2" class="form-control" />
+						<input type="text" name="movie_stillCut2" id="movie_stillCut2" class="form-control" required/>
 						<div class="invalid-feedback">스틸컷을 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_stillCut3">스틸컷3</label> 
-						<input type="text" name="movie_stillCut3" id="movie_stillCut3" class="form-control" />
+						<input type="text" name="movie_stillCut3" id="movie_stillCut3" class="form-control" required/>
 						<div class="invalid-feedback">스틸컷을 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
@@ -131,7 +128,7 @@ body {
 					</div>
 					<div class="mb-3">
 						<label for="movie_story">줄거리</label> 
-						<textArea  name="movie_summary" id="movie_story" class="form-control" rows="10px" ></textArea>
+						<textArea  name="movie_summary" id="movie_story" class="form-control" rows="10px" required></textArea>
 						<div class="invalid-feedback">줄거리를 입력해주세요.</div>
 					</div>
 					
@@ -202,7 +199,7 @@ body {
 	                    // 년, 월, 일을 문자열로 변환하여 YYYY-MM-DD 형식으로 조합
 	                    let endYear = endDate.getFullYear();
 	                    let endMonth = endDate.getMonth() < 10 ? '0' + endDate.getMonth() : endDate.getMonth(); // 한자리수일 경우 앞에 0 추가
-	                    let endDay = endDate.getDate();
+	                    let endDay = endDate.getDate() < 10 ? '0' + endDate.getDate() : endDate.getDate();
 	                    let formattedEndDate = endYear + '-' + endMonth + '-' + endDay;
 	                    // movie_end_date에 3개월을 더한 날짜 설정
 	                    $('#movie_end_date').val(formattedEndDate);
@@ -232,7 +229,7 @@ body {
 	                    // 영화등급
 	                    $('#movie_grade').val(result.Data[0].Result[0].rating);
 	                    // 상영시간
-	                    $('#movie_runtime').val(result.Data[0].Result[0].runtime + "분");
+	                    $('#movie_runtime').val(result.Data[0].Result[0].runtime + '분');
 	                    // 스틸컷  
 	                    $('#movie_stillCut').val(result.Data[0].Result[0].stlls.split("|")[0]);
 	                    // 스틸컷2  

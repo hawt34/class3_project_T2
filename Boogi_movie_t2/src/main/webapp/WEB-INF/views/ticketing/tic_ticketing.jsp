@@ -32,6 +32,7 @@
 	
 %>
 
+
 <header>
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
@@ -64,7 +65,7 @@
 					        </select>
 					        
 					        <div class="col-md-4">
-								<input type="checkbox" name="like_movie" value="나의취향" class="col-md-3">내취향
+								<input type="checkbox" id ="like_movie" name="like_movie" value="나의취향" class="col-md-3">내취향
 							</div>
 					</div>
 					<!-- 영화정보 -->
@@ -86,11 +87,11 @@
 									</c:when>
 								</c:choose>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<span>
-										<a onclick="javascript:movieClick('${movie.movie_name}')">
+									<div id="movie_${movie_num }">
+										<a onclick="javascript:movieClick('${movie.movie_name}','${movie.movie_num }')">
 											${movie.movie_name}
 										</a>
-									</span>
+									</div>
 							</div>
 						</c:forEach>
 					</div>
@@ -109,11 +110,11 @@
 							<!-- theater 리스트1 -->
 							<div class="col-sm-6" style="border-right: solid 3px black; text-align: left;">
 								<ul>
-									<li><a>전체극장</a></li>
+									<li><a onclick="javascript:theaterType('EntireTheater')">전체극장</a></li>
 								</ul>	
 								
 								<ul>
-									<li><a>MY영화관</a></li>
+									<li><a onclick="javascript:theaterType('MyTheater','${sessionScope.sId}')">MY영화관</a></li>
 								</ul>
 							</div>
 								
@@ -121,7 +122,7 @@
 								
 							<!-- theater 리스트2 -->
 							<!--  -->
-							<div class="col-sm-6 theaterlist scroll">
+							<div class="col-sm-6 theaterlist scroll" id="theaterlist">
 								<c:forEach items="${theaterList }" var="theater">
 									<ul>
 										<li><a onclick="javascript:theaterClick('${theater.theater_name}')">${theater.theater_name }</a> </li>
@@ -180,7 +181,7 @@
 	<div class="tic_button">
 		<button type="submit" class="btn btn-outline-primary">좌석 선택</button>
 	</div>
-	
+
 </section>
 </form>				
 			
@@ -196,18 +197,66 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
 "></script>
 <script>
-	function movieClick(movie_name){
-		var result = $("#movieSelected");
+	let selectedMovie = "";
+	let selectedTheater = "";
+	
+	function finalList() {
+	    if (selectedMovie && selectedTheater) {
+	        // 두 가지가 모두 선택된 경우에만 `finalList` 함수가 실행됩니다.
+	        alert("선택된 영화: " + selectedMovie + "\n선택된 상영관: " + selectedTheater);
+	        // 실제 구현에서는 AJAX로 해당 영화관 및 영화 정보 조회 로직을 추가하세요.
+	        // 이 부분에 최종 영화관 및 상영 정보 조회 로직을 구현
+	    }
+	}
+
+
+	function theaterType(type, sId) {
+	    $.ajax({
+	        url: "api/theater" + type,
+	        method: "GET",
+	        data: {
+	            sId: sId
+	        },
+	        dataType: "json",
+	        success: function (response) {
+	            var result = $("#theaterlist");
+	            result.empty();
+				
+	            response.forEach(function (theater) {
+	                var theaterDiv = "<div class='theater_atrbt'>"
+	                    + "<span>"
+	                    + "<a onclick='theaterClick(\"" + theater.member_my_theater + "\")'>" + theater.member_my_theater + "</a>"
+	                    + "</span>"
+	                    + "</div>";
+
+	                result.append(theaterDiv); 
+	                	
+
+	            });
+	        },
+	        error: function () {
+	            alert("영화 정보를 가져오는 데 실패했습니다.");
+	        }
+	    });
+	}
+	
+	function movieClick(movie_name, movie_num){
+		var result1 = $("#movieSelected");
+		var result2 = $("#movie_"+movie_num);
+		result1.empty();
+		result1.append(movie_name);
+		result2.css("background-color", "blue");
 		
-		result.empty();
-		result.append(movie_name);
+		finalList();
 	} 
 	
 	function theaterClick(theater_name){
 		var result = $("#theaterSelected");
-		
+		$(this).css("background-color", "yellow");
 		result.empty();
 		result.append(theater_name);
+		
+		finalList();
 	} 
 	
 	function getGradeIcon(grade) {
@@ -227,10 +276,13 @@
     }
 	
 	
-	function loadMovies(orderBy) {	
+	function loadMovies(orderBy, sId) {	
 		$.ajax({
             url: "api/movie" + orderBy,
             method: "GET",
+            data: {
+                sId: sId
+            },
             dataType: "json",
             success: function (response) {
             	var result = $("#movielist");
@@ -254,13 +306,30 @@
 	}
 	
 	
-	$(document).ready(function () {	
-		 $("#movieOrderby").change(function () {
-             var orderBy = $(this).val();
-             loadMovies(orderBy);
+	
+	$(document).ready(function () {
+		var sId = '<%= session.getAttribute("sId") %>';
+		$("#movieOrderby").change(function () {
+			var orderBy = $(this).val();
+			loadMovies(orderBy);
 		});
-	});	
+		 
 		
+
+	    $("#like_movie").change(function () {
+	        var likeMovie = $(this).is(":checked");
+	        var orderBy = "LikeMovie";
+	        
+	        if(likeMovie){
+	        	loadMovies(orderBy,sId);	
+	        }else{
+	        	orderBy = "Like";
+	        	loadMovies(orderBy);
+	        }
+		        
+		    
+		});	
+	});
 </script>
 </body>
 </html>

@@ -4,58 +4,79 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상영관 등록폼</title>
-<!-- 부트스트랩 링크 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-	crossorigin="anonymous">
-</script>
-
+<title>극장 등록 폼</title>
+<!-- 부트스트랩 CSS, JS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
+<script src="${pageContext.request.contextPath}/resources//js/bootstrap.bundle.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<h4 class="mb-4">극장등록</h4>
+				<h4 class="mb-4">새 극장 등록</h4>
 				<form class="validation-form" novalidate action="admin_theater_pro" method="post" onsubmit="return confirm('극장을 등록하시겠습니까?');">
 					<div class="mb-3">
-						<label for="movie_code">극장코드</label> 
-						<input type="text" id="movie_code" class="form-control" required />
-						<div class="invalid-feedback">극장코드를 입력해주세요.</div>
-					</div>
-					<div class="mb-3">
 						<label for="movie_name">극장명</label> 
-						<input type="text" id="movie_name" class="form-control" required />
+						<input type="text" id="movie_name" class="form-control" required maxlength="30"/>
 						<div class="invalid-feedback">극장명을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_director">극장위치</label> 
-						<input type="text" id="movie_director" class="form-control" required />
-						<div class="invalid-feedback">극장위치를 입력해주세요.</div>
+						<label for="movie_director">극장 주소</label> 
+						<input type="text" id="movie_director" class="form-control" required maxlength="100"/>
+						<div class="invalid-feedback">극장 주소를 입력해주세요.</div>
+					</div>
+					<div class="mb-3"> 
+						<label for="movie_director">극장 좌표</label> 
+						<div style="display: flex;">
+							<input type="text" id="movie_director" class="form-control" required placeholder="X 좌표" 
+								pattern="^[0-9][.]{10,15}$" title="double 타입"  style="width: 300px; margin-right: 30px;" />
+							<input type="text" id="movie_director" class="form-control" required  placeholder="Y 좌표" 
+								pattern="^[0-9][.]{10,15}$" title="double 타입"  style="width: 300px;"/>
+						</div>
+						<div class="invalid-feedback">극장 좌표를 입력하세요</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_createDate">극장크기</label> 
-						<input type="text" id="movie_createDate" class="form-control" required />
-						<div class="invalid-feedback">극장크기를 입력해주세요.</div>
+						<label for="movie_director">층 정보</label> 
+						<input type="text" id="movie_director" class="form-control" required maxlength="200"/>
+						<div class="invalid-feedback">층 정보를 입력하세요</div>
+					</div>
+					<div class="mb-3">
+						<label for="movie_director">주차 정보</label> 
+						<input type="text" id="movie_director" class="form-control" required maxlength="800"/>
+						<div class="invalid-feedback">주차 정보를 입력하세요</div>
+					</div>
+					<div class="mb-3">
+						<label for="movie_director">주차 요금</label> 
+						<input type="text" id="movie_director" class="form-control" required maxlength="500"/>
+						<div class="invalid-feedback">주차 요금을 입력하세요</div>
+					</div>
+					<div class="mb-3">
+						<label for="movie_director">버스 교통 정보</label> 
+						<input type="text" id="movie_director" class="form-control" maxlength="300"/>
+						<div class="invalid-feedback">버스 교통 정보를 입력하세요</div>
+					</div>
+					<div class="mb-3">
+						<label for="movie_director">지하철 교통 정보</label> 
+						<input type="text" id="movie_director" class="form-control" maxlength="200"/>
+						<div class="invalid-feedback">지하철 교통 정보를 입력하세요</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_genre">운영시간</label> 
-						<input type="text" id="movie_genre" class="form-control" required />
+						<input type="text" id="movie_genre" class="form-control" required maxlength="200" />
 						<div class="invalid-feedback">운영시간을 입력해주세요.</div>
+					</div>
+					<div class="mb-3">
+						<label for="movie_genre">운영상태</label> 
+						<input type="text" id="movie_genre" class="form-control" required maxlength="200" pattern="^[0-9]$" title="int 타입"/>
+						<div class="invalid-feedback">운영상태를 입력해주세요. (1 = 정상운영, 2 = 미운영 상태)</div>
 					</div>
 					
 					<hr class="mb-4">
 					
 					<div class="mb-4" align="center">
-						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" onclick="submitAlert()">
-						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
+						<input type="submit" value="수정하기" class="btn btn-primary btn-lg btn-block" onclick="submitAlert()">
+						<input type="reset" value="다시 작성" class="btn btn-primary btn-lg btn-block" >
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
 				</form>

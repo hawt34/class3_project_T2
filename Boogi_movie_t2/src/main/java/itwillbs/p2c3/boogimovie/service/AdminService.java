@@ -69,9 +69,14 @@ public class AdminService {
 		return mapper.selectMovie(movie_num);
 	}
 	
+	// 영화 확인
+	public MovieVO getMovie(String movie_name) {
+		return mapper.getMovie(movie_name);
+	}
+	
 	// 영화 수정 업데이트
-	public int UpdateMovie(MovieVO moviem) {
-		return mapper.updateMovie(moviem);
+	public int UpdateMovie(MovieVO movie) {
+		return mapper.updateMovie(movie);
 	}
 	
 	// 영화 등록
@@ -98,6 +103,14 @@ public class AdminService {
 
 	public int getNoticeListCount() {
 		return mapper.getNoticeListCount();
+	}
+
+	public NoticeVO getNotice(NoticeVO notice) {
+		return mapper.selectNotice(notice);
+	}
+
+	public int getMaxNotice(NoticeVO notice) {
+		return mapper.selectMaxNotice(notice);
 	}
 	
 }

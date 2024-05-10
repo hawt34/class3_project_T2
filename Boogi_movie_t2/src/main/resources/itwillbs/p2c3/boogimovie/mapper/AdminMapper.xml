@@ -60,6 +60,13 @@
 		FROM movie
 		WHERE movie_num = #{movie_num}
 	</select>
+
+<!-- 영화 확인 -->
+	<select id="getMovie" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
+		SELECT * 
+		FROM movie
+		WHERE movie_name = #{movie_name}
+	</select>
 	
 <!-- 	영화 등록하기 -->
 	<insert id="insertMovie" >
@@ -101,16 +108,20 @@
 <!-- 영화 수정 업데이트 -->
 	<update id="updateMovie">
 		UPDATE movie
-		SET movie_name = #{movie_name},
-			movie_director = #{movie_director},
-			movie_poster = #{movie_poster},
-<!-- 			stillcut_num = #{stillcut_num}, -->
-			movie_trailler = #{movie_trailler},
-			movie_open_date = #{movie_open_date},
-			movie_status = #{movie_status},
-<!-- 			genre_name = #{genre_name}, -->
-			movie_grade = #{movie_grade},
-			movie_summary = #{movie_summary}
+		SET movie_name = #{movie_name}
+		  , movie_director = #{movie_director}
+		  , movie_poster = #{movie_poster}
+		  , movie_trailler = #{movie_trailler}
+		  , movie_open_date = #{movie_open_date}
+		  , movie_end_date = #{movie_end_date}
+		  , movie_status = #{movie_status}
+		  , movie_grade = #{movie_grade}
+		  , movie_summary = #{movie_summary}
+		  , movie_runtime = #{movie_runtime}
+		  , movie_stillCut = #{movie_stillCut}
+		  , movie_stillCut2 = #{movie_stillCut2}
+		  , movie_stillCut3 = #{movie_stillCut3}
+		  , movie_genre = #{movie_genre}
 		WHERE movie_num = #{movie_num}
 	</update>
 	
@@ -123,12 +134,12 @@
 
 	<!-- 여기서부터 csc 관련 sql=========================================== -->
 	<insert id="insertNotice" >
-		<selectKey keyProperty="notice_num" resultType="int" order="BEFORE">
-			SELECT IFNULL(MAX(notice_num), 0) FROM notice
-		</selectKey>
+<!-- 		<selectKey keyProperty="notice_num" resultType="int" order="BEFORE"> -->
+<!-- 			SELECT IFNULL(MAX(notice_num), 0) FROM notice -->
+<!-- 		</selectKey> -->
 		
-	INSERT INTO notice (notice_num, notice_subject, notice_content, theater_num, notice_date )
-	VALUES (#{notice_num} + 1, #{notice.notice_subject}, #{notice.notice_content}, #{theater_num}, now())
+	INSERT INTO notice (notice_num, notice_subject, notice_content, notice_date, notice_category, theater_num )
+	VALUES (null, #{notice.notice_subject}, #{notice.notice_content}, now(), #{notice.notice_category}, #{theater_num})
 		
 	</insert>
 	
@@ -159,6 +170,30 @@
 	</delete>
 	<select id="getNoticeListCount" resultType="int">
 		SELECT COUNT(notice_num) FROM notice
+	</select>
+	<select id="selectNotice">
+		WITH TMP AS (
+			SELECT MIN(notice_num) as min
+			    , MAX(notice_num) as max
+		     FROM notice
+		)
+		SELECT n.notice_num
+			 , n.notice_subject
+			 , n.notice_content
+			 , n.notice_date
+			 , n.notice_category
+			 , t.theater_name
+		     , CASE WHEN notice_num = (SELECT min FROM TMP) || notice_num = (SELECT max FROM TMP) THEN 'return false' 
+																								  ELSE '' END AS disable
+		  FROM notice n
+		  JOIN theater t
+		  ON n.theater_num = t.theater_num
+		  WHERE notice_num = #{notice_num}
+
+	</select>
+	<select id="selectMaxNotice" resultType="int">
+		SELECT MAX(notice_num)
+		FROM notice
 	</select>
 	
 </mapper>

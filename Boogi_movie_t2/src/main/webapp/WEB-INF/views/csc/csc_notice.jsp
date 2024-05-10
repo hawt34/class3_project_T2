@@ -27,6 +27,7 @@
 </header>
 <!-- main -->
 <div class="container">
+<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
 	<div class="row">
 		<!--사이드바 영역  -->
 		<div class="col-2">
@@ -41,7 +42,7 @@
 			<div class="row">
 			
 				<div class="col-1 mt-3">
-					<span>전체 00건</span>
+					<span>전체 ${pageList.noticeCount }건</span>
 				</div>
 				
 				<div class="col-11">
@@ -77,7 +78,8 @@
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>구분</th>
+							<th>공지구분</th>
+							<th>극장</th>
 							<th>제목</th>
 							<th>작성일</th>
 						</tr>
@@ -93,7 +95,8 @@
 								<c:forEach var="notice" items="${noticeList }">
 									<tr>
 										<td>${notice.notice_num }</td>
-										<td>${notice.theater_num }</td>
+										<td>${notice.notice_category}</td>
+										<td>${notice.theater_name }</td>
 										<td onclick="location.href='csc_notice_detail?notice_num=${notice.notice_num}'">${notice.notice_subject }</td>
 										<td>${notice.notice_date }</td>
 									</tr>
@@ -105,10 +108,34 @@
 			</div>
 			<!-- 페이지네이션-페이징 -->
 			<hr>
-			<div class="row">
-				
+			
+			<div class="notice_pageArea">
+				<nav aria-label="Page navigation example" >
+					<ul class="pagination">
+						<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
+							<a class="page-link" href="csc_notice?pageNum=${pageNum - 1}" aria-label="Previous" >
+							<span aria-hidden="true" >&laquo;</span>
+							</a>
+						</li>
+						<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
+							<c:choose>
+								<c:when test="${pageNum eq i }">
+									<li class="page-item active"><a class="page-link">${i}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="csc_notice?pageNum=${i}">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
+							<a class="page-link" href="csc_notice?pageNum=${pageNum + 1}" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
 			</div>
-			<!-- 페이지네이션 끝 -->
+			
 
 
 		</div>

@@ -10,6 +10,8 @@ import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 @Mapper
 public interface NoticeMapper {
 	
-	List<NoticeVO> selectNoticeList(@Param("listLimit")int listLimit, @Param("startRow")int startRow); 
+	List<NoticeVO> selectNoticeList(@Param("listLimit")int listLimit, @Param("startRow")int startRow);
+
+	NoticeVO selectNotice(int notice_num); 
 	
 }

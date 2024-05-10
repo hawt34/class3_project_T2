@@ -67,7 +67,7 @@ public class AdminController {
 	public String adminFAQ() {
 		return "admin/admin_csc/admin_faq";
 	}
-	@GetMapping("admin_FAQ_delete")
+	@GetMapping("admin_faq_delete")
 	public String adminFAQdelete() {
 		return "redirect:/admin_faq";
 	}

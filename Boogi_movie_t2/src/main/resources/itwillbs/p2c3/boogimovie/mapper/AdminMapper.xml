@@ -149,11 +149,13 @@
 			  ,n.notice_content
 			  ,t.theater_name
 			  ,n.notice_date
+			  ,n.notice_category
 		FROM notice n JOIN theater t 
 		ON n.theater_num = t.theater_num
 		ORDER BY notice_num DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
+
 	<insert id="insertReply">
 		<selectKey keyProperty="oto_reply_num" resultType="int" order="BEFORE">
 			SELECT IFNULL(MAX(oto_reply_num), 0) FROM OTO_reply

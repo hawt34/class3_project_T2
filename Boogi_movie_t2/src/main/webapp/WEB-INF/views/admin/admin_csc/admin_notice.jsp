@@ -55,6 +55,7 @@
 								<th>공지사항번호</th>
 								<th>공지사항제목</th>
 								<th>공지사항등록일</th>
+								<th>공지 구분</th>
 								<th>극장 구분</th>
 								<th>상세보기/수정</th>
 								<th>삭제</th>
@@ -73,10 +74,11 @@
 										<tr>
 											<td>${notice.notice_num }</td>
 											<td onclick="location.href='admin_notice_detail?notice_num=${notice.notice_num}'">${notice.notice_subject }</td>
-											<td>${notice.notice_date }</td>
+											<td>${notice.notice_fdt }</td>
+											<td>${notice.notice_category }</td>
 											<td>${notice.theater_name }</td>
 											<td>
-												<button type="button" class="btn btn-outline-primary" onclick="loaction.href='admin_notice_modify?notice_num'">수정</button>
+												<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_notice_modify?notice_num=${notice.notice_num}'">수정</button>
 											</td>
 											<td>
 												<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw(${notice.notice_num})">삭제</button>

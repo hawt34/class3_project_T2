@@ -96,17 +96,16 @@ public class AdminController {
 		
 		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
 		
+		//LocalDateTIme format
 		for(NoticeVO notice : noticeList) {
-			LocalDateTime ldt = LocalDateTime.parse(notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-			notice.setNotice_date(ldt);
-//			notice.setNotice_date();
+			notice.setNotice_fdt(notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 		}
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pageList", pageList);
 		
 		return "admin/admin_csc/admin_notice";
 	}
-	@GetMapping("admin_noticeForm")
+	@GetMapping("admin_notice_form")
 	public String adminNoticeForm() {
 		
 		return "admin/admin_csc/admin_notice_form";
@@ -125,6 +124,16 @@ public class AdminController {
 		}
 		
 		return "redirect:admin_notice";
+	}
+	
+	//notice_modify 연결
+	@GetMapping("admin_notice_modify")
+	public String adminNoticeModify(NoticeVO notice, Model model) {
+		notice = service.getNotice(notice);
+		System.out.println(notice);
+		
+		model.addAttribute("notice", notice);
+		return "admin/admin_csc/admin_notice_modify";
 	}
 	
 	@GetMapping("admin_notice_delete")

@@ -41,4 +41,13 @@ public class OtoService {
 	public int updateOtoResponse(int oto_num) {
 		return mapper.updateResponse(oto_num);
 	}
+
+	public int getTheaterNum(String theater_name) {
+		return mapper.selectTheaterNum(theater_name);
+	}
+	
+	// 1대1 문의 게시물 갯수
+	public int getOtoListCount() {
+		return mapper.getOtoListCount();
+	}
 }

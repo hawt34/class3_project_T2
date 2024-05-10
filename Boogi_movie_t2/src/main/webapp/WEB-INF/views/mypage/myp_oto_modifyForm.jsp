@@ -88,7 +88,7 @@
 					<td>문의 유형</td>
 					<td><span>[${oto.oto_category }]</span></td>
 					<td>문의 지점</td>
-					<td><span>[${otoTheater }]</span></td>
+					<td><span>[${oto.theater_name }]</span></td>
 				</tr>
 				<tr>
 					<td>작성일</td>
@@ -97,7 +97,7 @@
 				</tr>
 				<tr>
 					<td colspan="4">
-						<textarea rows="20" cols="100" style="resize: none" name="OTO_content">${oto.oto_content }</textarea>
+						<textarea rows="20" cols="100" style="resize: none" name="oto_content">${oto.oto_content }</textarea>
 					</td>
 				</tr>
 				

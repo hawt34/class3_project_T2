@@ -65,7 +65,7 @@
 				<div class="movie">
 					<c:forEach var= "movie" items="${movieInfo}">
 					<c:if test="${movie.movie_num eq 3}">
-					<img src="${pageContext.request.contextPath}/resources/images/${movie.movie_poster}">
+					<img src="${movie.movie_poster}">
 					<p>${movie.movie_name}</p>
 					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
 					<button type="button" class="btn btn-outline-primary">예매하기
@@ -78,7 +78,7 @@
 				<div class="movie">
 					<c:forEach var= "movie" items="${movieInfo}">
 					<c:if test="${movie.movie_num eq 4}">
-					<img src="${pageContext.request.contextPath}/resources/images/${movie.movie_poster}">
+					<img src="${movie.movie_poster}">
 					<p>${movie.movie_name}</p>
 					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
 					<button type="button" class="btn btn-outline-primary">예매하기
@@ -91,7 +91,7 @@
 				<div class="movie">
 					<c:forEach var= "movie" items="${movieInfo}">
 					<c:if test="${movie.movie_num eq 5}">
-					<img src="${pageContext.request.contextPath}/resources/images/${movie.movie_poster}">
+					<img src="${movie.movie_poster}">
 					<p>${movie.movie_name}</p>
 					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
 					<button type="button" class="btn btn-outline-primary">예매하기

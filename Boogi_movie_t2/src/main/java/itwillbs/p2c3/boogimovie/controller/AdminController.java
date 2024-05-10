@@ -63,12 +63,39 @@ public class AdminController {
 	
 	//--------------------------------------------------------------------
 	// 관리자 고객센터
+	// faq List view에 포워딩
 	@GetMapping("admin_faq")
-	public String adminFAQ() {
+	public String adminFAQ(@RequestParam(defaultValue = "1")int pageNum, Model model) {
+		int listLimit = 10;
+		int startRow = (pageNum  - 1) * listLimit;
+		
+		int listCount = faqService.getFaqListCount(); //총 공지사항 갯수
+		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+		System.out.println("maxPage: " + maxPage);
+		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+			endPage = maxPage;
+		}
+		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow);
+		
+		model.addAttribute("pageList", pageList);
+		model.addAttribute("faqList", faqList);
 		return "admin/admin_csc/admin_faq";
 	}
+	
+	//faq 삭제
 	@GetMapping("admin_faq_delete")
-	public String adminFAQdelete() {
+	public String adminFAQdelete(FAQVO faq, Model model) {
+		int deleteCount = faqService.deleteFaq(faq);
+		
+		if(deleteCount == 0) {
+			model.addAttribute("msg", "삭제 실패!");
+			return "error/fail";
+		}
 		return "redirect:/admin_faq";
 	}
 	
@@ -81,6 +108,11 @@ public class AdminController {
 	//faq 등록(pro) 
 	@PostMapping("admin_faq_pro")
 	public String adminFAQpro(FAQVO faq, Model model) {
+		if(faq.getFaq_category().equals("")) {
+			model.addAttribute("msg", "유형을 선택해 주세요");
+			return "error/fail";
+		}
+		
 		int insertCount = faqService.insertFaq(faq);
 		
 		if(insertCount == 0) {
@@ -90,6 +122,27 @@ public class AdminController {
 		
 		return "redirect:/admin_faq";
 	}
+	
+	//faq modify form 이동
+	@GetMapping("admin_faq_modify")
+	public String adminFAQModify(FAQVO faq, Model model) {
+		faq = faqService.getFaq(faq);
+		
+		model.addAttribute("faq", faq);
+		return "admin/admin_csc/admin_faq_modify";
+	}
+	
+	//faq update
+	@PostMapping("admin_faq_modify")
+	public String adminFAQModifyPro(FAQVO faq, Model model) {
+		int updateCount = faqService.updateFaq(faq);
+		
+		if(updateCount == 0) {
+			model.addAttribute("msg", "수정을 실패하였습니다");
+		}
+		return "redirect:/admin_faq";
+	}
+	
 	//-------------------------------------
 	//공지사항 관리 controller
 	//listLimit으로 목록 10개 가져오기

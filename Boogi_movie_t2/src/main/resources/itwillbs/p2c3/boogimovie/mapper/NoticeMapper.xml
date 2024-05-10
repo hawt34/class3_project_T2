@@ -9,7 +9,7 @@
 			   n.notice_subject,
 			   n.notice_content,
 			   t.theater_name,
-			   t.notice_category,
+			   n.notice_category,
 			   n.notice_date
 		FROM notice n
 		JOIN theater t

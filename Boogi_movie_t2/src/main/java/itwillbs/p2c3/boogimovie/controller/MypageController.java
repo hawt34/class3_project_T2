@@ -354,16 +354,16 @@ public class MypageController {
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
 		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit);
-		int otoCount = otoService.getOtoListCount(); //총 공지사항 갯수
+		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-		int maxPage = otoCount / listLimit + (otoCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
 		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
 		
 		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
 			endPage = maxPage;
 		}
-		PageInfo pageList = new PageInfo(otoCount, pageListLimit, maxPage, startPage, endPage);
+		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
 
 		model.addAttribute("pageList", pageList);

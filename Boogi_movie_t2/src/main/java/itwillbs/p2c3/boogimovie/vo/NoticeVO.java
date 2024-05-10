@@ -15,6 +15,7 @@ public class NoticeVO {
 	private int theater_num;
 	private String theater_name;
 	private String disable;
+	private String notice_fdt;
 	
 	
 }

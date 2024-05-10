@@ -42,7 +42,7 @@
 			<div class="row">
 			
 				<div class="col-1 mt-3">
-					<span>전체 ${pageList.noticeCount }건</span>
+					<span>전체 ${pageList.listCount }건</span>
 				</div>
 				
 				<div class="col-11">
@@ -98,7 +98,7 @@
 										<td>${notice.notice_category}</td>
 										<td>${notice.theater_name }</td>
 										<td onclick="location.href='csc_notice_detail?notice_num=${notice.notice_num}'">${notice.notice_subject }</td>
-										<td>${notice.notice_date }</td>
+										<td>${notice.notice_fdt }</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>

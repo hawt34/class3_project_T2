@@ -76,19 +76,19 @@
 	<div class="container">
 		<div>
 			<form action="admin_oto_detail" method="post" onsubmit="return confirm('답변을 등록하시겠습니까?');">
-			<input type="hidden" value="${oto.oto_num } " name="oto_num">
+			<input type="hidden" value="${oto.oto_num }" name="oto_num">
 				<table>
 					<tr>
 						<td>제목</td>
 						<td>${oto.oto_subject }</td>
 						<td>작성자</td>
-						<td>${member_id }</td>
+						<td>${oto.member_id }</td>
 					</tr>
 					<tr>
 						<td>문의 유형</td>
 						<td><span>[${oto.oto_category }]</span></td>
 						<td>문의 지점</td>
-						<td><span>[${otoTheater }]</span></td>
+						<td><span>[${oto.theater_name}]</span></td>
 					</tr>
 					<tr>
 						<td>작성일</td>

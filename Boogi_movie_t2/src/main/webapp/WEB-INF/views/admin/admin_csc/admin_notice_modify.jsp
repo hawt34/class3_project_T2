@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +25,7 @@
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">공지사항등록</h4>
-				<form class="validation-form" novalidate action="admin_notice_pro" method="post" onsubmit="return confirm('공지를 등록하시겠습니까?');">
+				<form class="validation-form" novalidate action="admin_notice_modify" method="post" onsubmit="return confirm('공지를 등록하시겠습니까?');">
 <!-- 					<div class="mb-3"> -->
 <!-- 						<label for="movie_director">작성자</label>  -->
 <!-- 						<input type="text" id="movie_director" class="form-control" required /> -->
@@ -34,37 +33,37 @@
 <!-- 					</div> -->
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 
-						<input type="text"  id="movie_name" class="form-control" required name="notice_subject" required />
+						<input type="text" value="${notice.notice_subject }" id="movie_name" class="form-control" required name="notice_subject" required />
 						<div class="invalid-feedback">글제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<select name="notice_category" >
-							<option value="전체" >전체</option>
-							<option value="극장" >극장</option>
+						<select name="notice_category">
+							<option value="전체" ${notice.notice_category == '전체' ? 'selected' : ''}>전체</option>
+							<option value="극장" ${notice.notice_category == '극장' ? 'selected' : ''}>극장</option>
 						</select>
 						<select name="theater_name">
-							<option value="해운대점">해운대점</option>
-							<option value="센텀점">센텀점</option>
-							<option value="서면점">서면점</option>
-							<option value="남포점">남포점</option>
-							<option value="부산대점">부산대점</option>
-							<option value="사직점">사직점</option>
-							<option value="영도점">영도점</option>
-							<option value="덕천점">덕천점</option>
-							<option value="정관점">정관점</option>
-							<option value="사상점">사상점</option>
+							<option value="해운대점" ${notice.theater_name eq '해운대점' ? 'selected' : '' }>해운대점</option>
+							<option value="센텀점" ${notice.theater_name eq '센텀점' ? 'selected' : '' }>센텀점</option>
+							<option value="서면점" ${notice.theater_name eq '서면점' ? 'selected' : '' }>서면점</option>
+							<option value="남포점" ${notice.theater_name eq '남포점' ? 'selected' : '' }>남포점</option>
+							<option value="부산대점" ${notice.theater_name eq '부산대점' ? 'selected' : '' }>부산대점</option>
+							<option value="사직점" ${notice.theater_name eq '사직점' ? 'selected' : '' }>사직점</option>
+							<option value="영도점" ${notice.theater_name eq '영도점' ? 'selected' : '' }>영도점</option>
+							<option value="덕천점" ${notice.theater_name eq '덕천점' ? 'selected' : '' }>덕천점</option>
+							<option value="정관점" ${notice.theater_name eq '정관점' ? 'selected' : '' }>정관점</option>
+							<option value="사상점" ${notice.theater_name eq '사상점' ? 'selected' : '' }>사상점</option>
 						</select>
 					</div>
 					<div class="mb-3">
 						<label for="movie_story">내용</label> 
-						<textarea id="summernote" class="form-control" rows="10" required name="notice_content"></textarea>
+						<textarea id="summernote" class="form-control" rows="10" required name="notice_content">${notice.notice_content }</textarea>
 						<div class="invalid-feedback">내용을 입력해주세요.</div>
 					</div>
 					
 					<hr class="mb-4">
 					
 					<div class="mb-4" align="center">
-						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" >
+						<input type="submit" value="수정완료" class="btn btn-primary btn-lg btn-block" >
 						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>

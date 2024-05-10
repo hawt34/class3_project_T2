@@ -5,11 +5,31 @@
 <mapper namespace="itwillbs.p2c3.boogimovie.mapper.ScreenMapper">
 
 	
-	<select id="selectScreenInfo" resultType="itwillbs.p2c3.boogimovie.vo.ScreenInfoVO">
+	<select id="selectScreenInfoList" resultType="itwillbs.p2c3.boogimovie.vo.ScreenInfoVO">
 		SELECT *, theater_name
 		FROM   screen_info
 		JOIN   theater
 		ON     screen_info.theater_num = theater.theater_num
 	 </select>
-
+	 
+	 <select id="selectScreeninfo" resultType="itwillbs.p2c3.boogimovie.vo.ScreenInfoVO">
+	 	SELECT *, theater_name
+		FROM   screen_info
+		JOIN   theater
+		ON     screen_info.theater_num = theater.theater_num 
+	 	WHERE  screen_num = #{screen_num}
+	 </select>
+	
+	
+	<update id="updateScreeninfo">
+	
+		UPDATE screen_info
+		SET    theater_num = #{theater_num}
+		     , screen_cinema_num = #{screen_cinema_num}
+		     , screen_seat_row = #{screen_seat_row}
+		     , screen_seat_col = #{screen_seat_col}
+		     , screen_status = #{screen_status}
+		WHERE  screen_num = #{screen_num}
+	
+	</update>
 </mapper>

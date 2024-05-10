@@ -10,7 +10,12 @@ import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
 public interface ScreenMapper {
 	
 	// 전체 상영관 리스트 조회 
-	List<ScreenInfoVO> selectScreenInfo();
+	List<ScreenInfoVO> selectScreenInfoList();
+	
+	// 상영관 정보 조회 
+	ScreenInfoVO selectScreeninfo(ScreenInfoVO screenInfo);
+
+	int updateScreeninfo(ScreenInfoVO screenInfo);
 	
 	
 	

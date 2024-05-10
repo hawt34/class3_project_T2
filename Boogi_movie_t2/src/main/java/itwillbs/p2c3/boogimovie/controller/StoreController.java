@@ -39,15 +39,10 @@ public class StoreController {
 	}
 	//스토어 돈계산
 	@PostMapping("storePay")
-	 public String storePay(@RequestParam("category1") int category1,
-             @RequestParam("snackNum") int snackNum,
-             @RequestParam("category2") int category2,
-             @RequestParam("snackPop") int snackPop,
-             @RequestParam("category3") int category3,
-             @RequestParam("snackJuice") int snackJuice,
-             @RequestParam("category4") int category4,
-             @RequestParam("snackCombo") int snackCombo,
-             Model model) {
+	 public String storePay(@RequestParam("category1") int category1,  @RequestParam("snackNum") int snackNum,
+             				@RequestParam("category2") int category2,  @RequestParam("snackPop") int snackPop,
+             				@RequestParam("category3") int category3,  @RequestParam("snackJuice") int snackJuice,
+             				@RequestParam("category4") int category4,  @RequestParam("snackCombo") int snackCombo,   Model model) {
 		model.addAttribute("category1", category1);
 		model.addAttribute("snackNum", snackNum);
 		model.addAttribute("category2", category2);

@@ -9,7 +9,7 @@
 * {
 	margin: 0;
 	padding: 0;
- 	border: 1px solid skyblue; 
+  	border: 1px solid white;  
 }
 
 body {
@@ -56,6 +56,7 @@ section {
 .snack3_box select,
 .snack4_box select {
     margin-top: 10px;
+    border: 1px solid black;  
 }
 #totalSnack,#totalPop,#totalJuice,#totalCombo {
 	width:300px;

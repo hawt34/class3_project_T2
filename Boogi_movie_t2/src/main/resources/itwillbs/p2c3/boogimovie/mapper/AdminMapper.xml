@@ -32,7 +32,7 @@
 <!-- 리뷰 삭제 -->
 	<delete id="deleteReview">
 		DELETE FROM review
-		WHERE review_id = #{review_id}
+		WHERE review_num = #{review_num}
 	</delete>
 	
 <!-- 예매 리스트 조회 -->

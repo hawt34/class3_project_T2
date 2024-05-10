@@ -188,7 +188,7 @@ th:nth-child(8), td:nth-child(8) {
 											<c:when test="${member.member_status eq 2}">
 												휴면회원
 											</c:when>
-											<c:when test="${member.member_status eq 2}">
+											<c:when test="${member.member_status eq 3}">
 												탈퇴회원
 											</c:when>
 										</c:choose>

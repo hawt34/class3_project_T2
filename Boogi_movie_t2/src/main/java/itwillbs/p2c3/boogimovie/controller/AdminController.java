@@ -197,12 +197,11 @@ public class AdminController {
 	public String adminReview(Model model) {
 		List<ReviewVO> reviewList = service.getReviewList();
 		model.addAttribute("reviewList", reviewList);
-//		System.out.println(reviewList);
 		return "admin/admin_member/admin_review";
 	}
 	@GetMapping("admin_review_delete")
-	public String adminReviewDelete(String review_id, Model model) {
-		int deleteCount = service.deleteReview(review_id);
+	public String adminReviewDelete(String review_num, Model model) {
+		int deleteCount = service.deleteReview(review_num);
 		if(deleteCount > 0) {
 			return "redirect:/admin_review";
 		} else {

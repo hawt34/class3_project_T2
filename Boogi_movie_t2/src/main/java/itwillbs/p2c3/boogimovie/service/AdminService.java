@@ -50,8 +50,8 @@ public class AdminService {
 	}
 	
 	// 리뷰 삭제
-	public int deleteReview(String reviewId) {
-		return mapper.deleteReview(reviewId);
+	public int deleteReview(String review_num) {
+		return mapper.deleteReview(review_num);
 	}
 	
 	// 영화 삭제

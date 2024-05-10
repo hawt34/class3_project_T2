@@ -28,8 +28,7 @@ public interface AdminMapper {
 	List<ReviewVO> selectReviewList();
 
 	// 리뷰 삭제
-	int deleteReview(String review_id);
-
+	int deleteReview(String review_num);
 
 	// 예매리스트
 	List<Map<String, String>> selectReserveList();

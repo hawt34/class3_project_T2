@@ -78,7 +78,6 @@
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="admin_movie">영화정보관리</a> 
 					<a class="dropdown-item" href="admin_moviePlan">상영일정관리</a> 
-					<a class="dropdown-item" href="#">박스오피스조회</a>
 				</div>
 			</div>
 			<div class="btn-group">

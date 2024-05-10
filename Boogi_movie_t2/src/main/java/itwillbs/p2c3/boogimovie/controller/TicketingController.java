@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.service.MovieInfoService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
+import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieGenreVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.MyTheaterVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
@@ -31,6 +33,11 @@ public class TicketingController {
 	private TheaterService theaterService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private TicketingService ticketingService;
+	
+	
+	
 	
 	@GetMapping("tic_ticketing")
 	public String ticketing(HttpSession session, Model model) {
@@ -99,6 +106,38 @@ public class TicketingController {
 		
 		
 		return myTheaters;
+	}
+	
+	
+	@ResponseBody
+	@GetMapping(value = "api/finalList", produces = "application/json")
+	public void finalList(@RequestParam String selectedMovie,@RequestParam String selectedTheater,@RequestParam String selectedDay){
+		//가져온 영화이름정보로 무비번호 가져오기
+		MovieVO movie = new MovieVO();
+		movie.setMovie_name(selectedMovie);
+		MovieVO dbMovie = movieService.getMovieInfo(movie);
+		int movie_num = dbMovie.getMovie_num();
+		
+		//가져온 극장 정보로 극장번호 가져오기
+		TheaterVO theater = new TheaterVO();
+		theater.setTheater_name(selectedDay);
+		int theater_num = theaterService.getTheaterName(selectedTheater);
+		
+		//종합한 정보를 vo에 담아 db접근
+		ScreenSessionVO scs = new ScreenSessionVO();
+		scs.setMovie_num(movie_num);
+		scs.setTheater_num(theater_num);
+		scs.setSelect_date(selectedDay);
+		ScreenSessionVO dbScs = ticketingService.finalListSelect(scs);
+		System.out.println(dbScs);
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 		

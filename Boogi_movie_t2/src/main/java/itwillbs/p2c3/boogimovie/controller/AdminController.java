@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.EventService;
+import itwillbs.p2c3.boogimovie.service.FaqService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.ScreenService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
+import itwillbs.p2c3.boogimovie.vo.FAQVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -36,7 +38,7 @@ public class AdminController {
 	AdminService service;
 	
 	@Autowired
-	OtoService otoService;
+	private OtoService otoService;
 	
 	@Autowired
 	TheaterService theaterService;
@@ -50,6 +52,9 @@ public class AdminController {
 	@Autowired
 	ScreenService screenService;
 	
+	@Autowired
+	private FaqService faqService;
+	
 	// admin 메인 연결
 	@GetMapping("admin_main")
 	public String adminMain() {
@@ -58,21 +63,32 @@ public class AdminController {
 	
 	//--------------------------------------------------------------------
 	// 관리자 고객센터
-	@GetMapping("admin_FAQ")
+	@GetMapping("admin_faq")
 	public String adminFAQ() {
-		return "admin/admin_csc/admin_FAQ";
+		return "admin/admin_csc/admin_faq";
 	}
-	@GetMapping("admin_FAQ_delete")
+	@GetMapping("admin_faq_delete")
 	public String adminFAQdelete() {
-		return "redirect:/admin_FAQ";
+		return "redirect:/admin_faq";
 	}
-	@GetMapping("admin_FAQ_form")
+	
+	//faq form 이동
+	@GetMapping("admin_faq_form")
 	public String adminFAQform() {
-		return "admin/admin_csc/admin_FAQ_form";
+		return "admin/admin_csc/admin_faq_form";
 	}
-	@PostMapping("admin_FAQ_pro")
-	public String adminFAQpro() {
-		return "redirect:/admin_FAQ";
+	
+	//faq 등록(pro) 
+	@PostMapping("admin_faq_pro")
+	public String adminFAQpro(FAQVO faq, Model model) {
+		int insertCount = faqService.insertFaq(faq);
+		
+		if(insertCount == 0) {
+			model.addAttribute("msg", "faq 등록 실패");
+			return "error/fail";
+		}
+		
+		return "redirect:/admin_faq";
 	}
 	//-------------------------------------
 	//공지사항 관리 controller
@@ -82,16 +98,16 @@ public class AdminController {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
 		
-		int NoticeCount = service.getNoticeListCount(); //총 공지사항 갯수
+		int listCount = service.getNoticeListCount(); //총 공지사항 갯수
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-		int maxPage = NoticeCount / listLimit + (NoticeCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
 		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-		
+		System.out.println("maxPage: " + maxPage);
 		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
 			endPage = maxPage;
 		}
-		PageInfo pageList = new PageInfo(NoticeCount, pageListLimit, maxPage, startPage, endPage);
+		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
 		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
 		
@@ -166,8 +182,18 @@ public class AdminController {
 		
 		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit);
 		
+		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
+		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
 		
+		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+			endPage = maxPage;
+		}
+		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
+		model.addAttribute("pageList", pageList);
 		model.addAttribute("otoList", otoList);
 		return "admin/admin_csc/admin_oto";
 	}

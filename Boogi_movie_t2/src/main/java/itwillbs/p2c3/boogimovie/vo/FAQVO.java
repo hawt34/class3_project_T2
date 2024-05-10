@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class FAQVO {
-	private int FAQ_num;
-	private String FAQ_subject;
-	private String FAQ_content;
-	private String FAQ_category;
-	private int FAQ_read_count;
+	private int faq_num;
+	private String faq_subject;
+	private String faq_content;
+	private String faq_category;
+	private int faq_read_count;
 }

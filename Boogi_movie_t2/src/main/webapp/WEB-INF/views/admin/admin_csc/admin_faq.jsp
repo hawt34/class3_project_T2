@@ -45,10 +45,9 @@
 					<table>
 						<thead>
 							<tr>
-								<th>FAQ 코드</th>
+								<th>FAQ번호</th>
 								<th>제목</th>
 								<th>등록일</th>
-								<th>작성자</th>
 								<th>상세보기</th>
 								<th>삭제</th>
 							</tr>
@@ -58,7 +57,6 @@
 								<td>1259933</td>
 								<td>결제 취소는 어디서 하나요?</td>
 								<td>2023-11-12</td>
-								<td>어드민</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary" onclick="FAQform()">상세보기</button>
 								</td>
@@ -66,48 +64,10 @@
 									<button type="button" class="btn btn-outline-primary" onclick="FAQwithdraw()">삭제</button>
 								</td>
 							</tr>
-							<tr>
-								<td>7323232</td>
-								<td>분신물 신고는 어디서 하나요?</td>
-								<td>2023-12-22</td>
-								<td>어드민</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="FAQform()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="FAQwithdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>12312341</td>
-								<td>하나둘하나둘</td>
-								<td>2023-11-12</td>
-								<td>어드민</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="FAQform()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="FAQwithdraw()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>848293</td>
-								<td>마이크쳌마이크쳌</td>
-								<td>2023-11-12</td>
-								<td>어드민</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="FAQform()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="FAQwithdraw()">삭제</button>
-								</td>
-							</tr>
-						
-							
 						</tbody>
 					</table>
 				<div class="admin_movie_footer" align="center">
-					<button onclick="FAQform()">FAQ 등록</button>
+					<button onclick="location.href='admin_faq_form'">FAQ 등록</button>
 				</div>
 				
 				</div>
@@ -122,11 +82,11 @@
 	</footer>
 
 	<script type="text/javascript">
-		function FAQform() {
-			window.open("admin_FAQ_form", "_self");
-		}
+// 		function FAQform() {
+// 			window.open("admin_FAQ", "_self");
+// 		}
 		function FAQwithdraw() {
-			location.href="admin_FAQ_delete";
+			location.href="admin_faq_delete";
 		}
 	
 	

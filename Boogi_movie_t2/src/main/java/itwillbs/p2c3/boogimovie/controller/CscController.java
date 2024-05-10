@@ -53,18 +53,22 @@ public class CscController {
 			int listLimit = 10; // 페이지당 보여줄 게시물 갯수
 			
 			int startRow = (pageNum - 1) * listLimit; // 게시물의 시작점
-			int noticeCount = adminService.getNoticeListCount(); //총 공지사항 갯수
+			int listCount = adminService.getNoticeListCount(); //총 공지사항 갯수
 			int pageListLimit = 5; //뷰에 표시할 페이지갯수
-			int maxPage = noticeCount / listLimit + (noticeCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+			int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
 			int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
 			
 			if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
 				endPage = maxPage;
 			}
-			PageInfo pageList = new PageInfo(noticeCount, pageListLimit, maxPage, startPage, endPage);	
+			PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);	
 			
 			List<NoticeVO> noticeList = noticeService.getNoticeList(listLimit, startRow);
+			//LocalDateTIme format
+			for(NoticeVO notice : noticeList) {
+				notice.setNotice_fdt(notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			}
 			
 			
 			model.addAttribute("pageList", pageList);

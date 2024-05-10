@@ -10,6 +10,8 @@ import itwillbs.p2c3.boogimovie.vo.OTOVO;
 @Mapper
 public interface OtoMapper {
 	
+	int selectTheaterNum(String theater_name);
+
 	int insertOto(@Param("oto")OTOVO oto,
 				  @Param("theater_num")int theater_num,
 				  @Param("id")String id);
@@ -27,4 +29,6 @@ public interface OtoMapper {
 	int deleteOto(int oto_num);
 
 	int updateResponse(int oto_num);
+
+	int getOtoListCount();
 }

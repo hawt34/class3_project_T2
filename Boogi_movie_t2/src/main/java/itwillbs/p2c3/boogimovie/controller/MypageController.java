@@ -24,6 +24,7 @@ import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
+import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
@@ -353,22 +354,30 @@ public class MypageController {
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
 		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit);
+		int otoCount = otoService.getOtoListCount(); //총 공지사항 갯수
+		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+		int maxPage = otoCount / listLimit + (otoCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+		
+		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+			endPage = maxPage;
+		}
+		PageInfo pageList = new PageInfo(otoCount, pageListLimit, maxPage, startPage, endPage);
 		
 
-
+		model.addAttribute("pageList", pageList);
 		model.addAttribute("otoList", otoList);
 		return "mypage/myp_oto_breakdown";
 	}
 	
-
+	//1대1 문의 삭제
 	@GetMapping("myp_oto_detail")
 	public String mypOtoDetail(int oto_num, Model model) {
 		OTOVO oto = otoService.getOto(oto_num);
 		String otoDate = oto.getOto_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-		String otoTheater = otoService.getTheaterName(oto.getTheater_num());
 		
 
-		model.addAttribute("otoTheater", otoTheater);
 		model.addAttribute("otoDate", otoDate);
 		model.addAttribute("oto", oto);
 		return "mypage/myp_oto_detail";
@@ -378,17 +387,17 @@ public class MypageController {
 	public String mypOtoModifyForm(int oto_num, Model model) {
 		OTOVO oto = otoService.getOto(oto_num);
 		String otoDate = oto.getOto_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-		String otoTheater = otoService.getTheaterName(oto.getTheater_num());
+//		String otoTheater = otoService.getTheaterName(oto.getTheater_num());
 
-		model.addAttribute("otoTheater", otoTheater);
+//		model.addAttribute("otoTheater", otoTheater);
 		model.addAttribute("otoDate", otoDate);
 		model.addAttribute("oto", oto);
 		return "mypage/myp_oto_modifyForm";
 	}
 	
 	@PostMapping("myp_oto_modifyPro")
-	public String myOtoModifyPro(int oto_num, String OTO_content, Model model) {
-		int updateCount = otoService.updateOto(oto_num, OTO_content);
+	public String myOtoModifyPro(int oto_num, String oto_content, Model model) {
+		int updateCount = otoService.updateOto(oto_num, oto_content);
 		if(updateCount == 0) {
 			model.addAttribute("msg", "수정에 실패하였습니다");
 			return "error/fail";

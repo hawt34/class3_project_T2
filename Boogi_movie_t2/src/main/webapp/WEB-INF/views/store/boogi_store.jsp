@@ -106,8 +106,6 @@ footer {
 
 </style>
 <title>Insert title here</title>
-<%-- <link href="${pageContext.request.contextPath}/resources/css/boogi_store.css" rel="stylesheet" type="text/css"> --%>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
 " rel="stylesheet" type="text/css" />
 <script
@@ -217,7 +215,7 @@ footer {
 				</div>
 			<div class="bottomButton">
 				<button type="submit" id="cartButton" class="btn btn-outline-primary" >장바구니 </button>
-				<input type="button" class="btn btn-outline-primary" value="뒤로가기"> 
+				<input type="button" class="btn btn-outline-primary" value="뒤로가기" onclick="history.back()"> 
 			</div>
 		</form>	
 			
@@ -274,6 +272,24 @@ footer {
 	        $("#category4, #snackCombo").change();
 	             
 	    });
+	 
+	 $("#cartButton").click(function(event) {
+		    // 세션 아이디 가져오기
+		    let sessionId = "${sessionScope.sId}";
+			
+		    
+		    // 로그인 여부 확인
+		    if (!sessionId) {
+		        if (confirm("로그인이 필요합니다. 상단의 로그인영역으로 이동하시겠습니까?")) {
+		            // 로그인 페이지로 이동
+		        	$('a[href="member_login"]').focus();
+		        }
+		        event.preventDefault(); // 폼 제출 중단
+		        return;
+		    }
+			   
+
+		});
 // 	 	$("#cartButton").click(function() {
 // 	        // 팝업 창 띄우기
 // 	        window.open("storePay", "장바구니", "width=400, height=300, top=100, left=100");

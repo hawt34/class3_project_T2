@@ -18,6 +18,11 @@
 				<h4 class="mb-4">극장 정보 수정</h4>
 				<form class="validation-form" novalidate action="admin_theater_modify" method="post"  name="fr"> <!-- onsubmit="return confirm('극장 정보를 등록하시겠습니까?');" -->
 					<div class="mb-3">
+						<label for="movie_name">극장 번호</label> 
+						<input type="text" id="movie_name" class="form-control" name="theater_num" readonly value="${theater.theater_num}"/>
+						<div class="invalid-feedback">자동 입력 값</div>
+					</div>
+					<div class="mb-3">	
 						<label for="movie_name">극장명</label> 
 						<input type="text" id="movie_name" class="form-control" name="theater_name" required maxlength="30" value="${theater.theater_name}"/>
 						<div class="invalid-feedback">극장명을 입력해주세요.</div>

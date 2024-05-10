@@ -66,11 +66,6 @@
 						<input type="text" id="movie_genre" class="form-control" name="theater_hours"  required maxlength="200" />
 						<div class="invalid-feedback">운영시간을 입력해주세요.</div>
 					</div>
-					<div class="mb-3">
-						<label for="movie_genre">운영상태</label> 
-						<input type="text" id="movie_genre" class="form-control"  name="theater_status" required maxlength="200" pattern="^[0-9]$" title="int 타입"/>
-						<div class="invalid-feedback">운영상태를 입력해주세요. (1 = 정상운영, 2 = 미운영 상태)</div>
-					</div>
 					
 					<hr class="mb-4">
 					

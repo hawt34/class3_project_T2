@@ -422,9 +422,8 @@ public class AdminController {
 	
 	// 극장 관리 > 극장 수정 등록 비즈니스
 	@PostMapping("admin_theater_modify")
-	public String adminTheaterModifyPro(TheaterVO theater, Model model, @RequestParam(name = "theater_num", defaultValue = "0")int theater_num) {
-		System.out.println("◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆"+theater_num);
-		theater.setTheater_num(theater_num);
+	public String adminTheaterModifyPro(TheaterVO theater, Model model) {
+		
 		int updateCount = theaterService.modifyTheater(theater);
 		
 		if(updateCount < 1) {
@@ -456,7 +455,10 @@ public class AdminController {
 	}
 	
 	@GetMapping("admin_theater_delete")
-	public String adminTheaterDelete() {
+	public String adminTheaterDelete(TheaterVO theater) {
+		
+//		int deleteCount 
+		
 		return "redirect:/admin_theater";
 	}
 		
@@ -474,8 +476,8 @@ public class AdminController {
 	}
 	@GetMapping("admin_booth")
 	public String adminBooth(TheaterVO theater, Model model) {
-		List<TheaterVO> theaterList = theaterService.getTheater();
-		model.addAttribute("theaterList", theaterList);
+//		List<TheaterVO> theaterList = theaterService.getTheater();
+//		model.addAttribute("theaterList", theaterList);
 		
 		return "admin/admin_theater/admin_booth";
 	}

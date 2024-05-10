@@ -89,7 +89,7 @@
 				, #{theater_public_bus}
 				, #{theater_public_subway}
 				, #{theater_hours}
-				, #{theater_status}
+				, 1						
 		)
 	</insert>
 	

@@ -33,8 +33,16 @@ public interface TheaterMapper {
 	
 	List<TheaterVO> selectTheatersOrderbyName();
 
-
+	
+	// 관리자 > 극장 관리 페이지
 	List<TheaterVO> selectTheater2();
+
+	
+	// 관리자 > 극장 수정 등록 업데이트
+	int updateTheater(TheaterVO theater);
+
+	// 관리자 > 새 극장 정보 등록
+	int insertTheater(TheaterVO theater);
 
 
 	

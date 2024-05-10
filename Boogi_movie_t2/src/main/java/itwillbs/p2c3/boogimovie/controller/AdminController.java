@@ -400,38 +400,66 @@ public class AdminController {
 	}
 	
 	//--------------------------------------------------------------------
-	// 관리자 극장 페이지
+	// 관리자 극장 페이지 메인
 	@GetMapping("admin_theater")
 	public String adminTheater(TheaterVO theater, Model model, ScreenInfoVO screen_info) {
 		
-//		List<ScreenInfoVO> screenInfoList = ticService.getScreenInfo();
 		List<TheaterVO> theaterList = theaterService.getTheater();
 		
 		model.addAttribute("theaterList", theaterList);
 		
 		return "admin/admin_theater/admin_theater";
 	}
-	@GetMapping("admin_theater_delete")
-	public String adminTheaterDelete() {
-		return "redirect:/admin_theater";
-	}
-	@GetMapping("admin_theater_form")
-	public String adminTheaterForm() {
-		return "admin/admin_theater/admin_theater_form";
-	}
-	@GetMapping("admin_theater_modify_form")
+	
+	// 극장 관리 > 극장 수정 폼으로
+	@GetMapping("admin_theater_modify")
 	public String adminTheaterModifyForm(TheaterVO theater, Model model) {
-		
 		theater = theaterService.getTheater(theater);
 		model.addAttribute("theater", theater);
 		
 		return "admin/admin_theater/admin_theater_modify_form";
 	}
 	
-	@PostMapping("admin_theater_pro")
-	public String adminTheaterPro() {
+	// 극장 관리 > 극장 수정 등록 비즈니스
+	@PostMapping("admin_theater_modify")
+	public String adminTheaterModifyPro(TheaterVO theater, Model model, @RequestParam(name = "theater_num", defaultValue = "0")int theater_num) {
+		System.out.println("◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆"+theater_num);
+		theater.setTheater_num(theater_num);
+		int updateCount = theaterService.modifyTheater(theater);
+		
+		if(updateCount < 1) {
+			model.addAttribute("msg", "극장 정보 수정 실패!");
+			return "error/fail";
+		}
+		
 		return "redirect:/admin_theater";
 	}
+	
+	// 극장 관리 > 새 극장 등록 폼
+	@GetMapping("admin_theater_form")
+	public String adminTheaterForm() {
+		return "admin/admin_theater/admin_theater_form";
+	}
+	
+	// 극장 관리 > 새 극장 등록 비즈니스
+	@PostMapping("admin_theater_pro")
+	public String adminTheaterPro(TheaterVO theater, Model model) {
+		
+		int insertCount = theaterService.registTheater(theater);
+		
+		if(insertCount < 1) {
+			model.addAttribute("msg", "극장 정보 등록 실패!");
+			return "error/fail";
+		}
+		
+		return "redirect:/admin_theater";
+	}
+	
+	@GetMapping("admin_theater_delete")
+	public String adminTheaterDelete() {
+		return "redirect:/admin_theater";
+	}
+		
 	@GetMapping("admin_booth_form")
 	public String adminBoothForm() {
 		return "admin/admin_theater/admin_booth_form";

@@ -55,6 +55,14 @@ public class TheaterService {
 		return mapper.selectNoticeList();
 	}
 
+	public int modifyTheater(TheaterVO theater) {
+		return mapper.updateTheater(theater);
+	}
+
+	public int registTheater(TheaterVO theater) {
+		return mapper.insertTheater(theater);
+	}
+
 	
 	
 	

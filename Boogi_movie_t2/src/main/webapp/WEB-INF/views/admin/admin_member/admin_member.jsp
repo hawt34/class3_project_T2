@@ -53,7 +53,7 @@ th:nth-child(1), td:nth-child(1) {
 }
 
 th:nth-child(2), td:nth-child(2) {
-	width: 5%;
+	width: 10%;
 }
 
 th:nth-child(3), td:nth-child(3) {
@@ -180,7 +180,19 @@ th:nth-child(8), td:nth-child(8) {
 									<td>${member.member_email}</td>
 									<td>${member.member_reg_date}</td>
 									<td>${member.member_withdraw_date}</td>
-									<td>${member.member_status}</td>
+									<td>
+										<c:choose>
+											<c:when test="${member.member_status eq 1}">
+												활동회원
+											</c:when>
+											<c:when test="${member.member_status eq 2}">
+												휴면회원
+											</c:when>
+											<c:when test="${member.member_status eq 3}">
+												탈퇴회원
+											</c:when>
+										</c:choose>
+									</td>
 									<td>${member.member_point}</td>
 									<td>
 										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_member_editForm?member_id=${member.member_id}'">상세보기</button>

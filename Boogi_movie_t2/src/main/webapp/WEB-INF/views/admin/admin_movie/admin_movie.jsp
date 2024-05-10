@@ -182,9 +182,9 @@ th:nth-child(7), td:nth-child(7) {
 								<tr>
 									<td>${movie.movie_num}</td>
 									<td>${movie.movie_name}</td>
-									<td>상영시간</td>
+									<td>${movie.movie_runtime}</td>
 									<td>${movie.movie_open_date}</td>
-									<td>종영일</td>
+									<td>${movie.movie_end_date}</td>
 									<td>${movie.movie_status}</td>
 									<td>
 										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_movie_edit_form?movie_num=${movie.movie_num}'">수정</button>

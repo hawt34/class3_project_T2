@@ -50,9 +50,47 @@
 		FROM notice 
 		JOIN theater 
 		ON notice.theater_num = theater.theater_num 
-		WHERE notice_category = 'theater';
+		WHERE notice_category = '극장';
+	</select>
+	
+	<select id="selectTheater2" resultType="itwillbs.p2c3.boogimovie.vo.TheaterVO">
+		SELECT *
+		FROM theater
 	</select>
 	
 	
+	<update id="updateTheater">
+		UPDATE theater
+		SET    theater_name = #{theater_name}
+		     , theater_address = #{theater_address}
+		     , theater_map_x = #{theater_map_x}
+		     , theater_map_y = #{theater_map_y}
+		     , theater_floor_info = #{theater_floor_info}
+		     , theater_parking_info = #{theater_parking_info}
+		     , theater_parking_fee = #{theater_parking_fee}
+		     , theater_public_bus = #{theater_public_bus}
+		     , theater_public_subway = #{theater_public_subway}
+		     , theater_hours = #{theater_hours}
+		     , theater_status = #{theater_status}
+		WHERE  theater_num = #{theater_num}
+	</update>
+	
+	<insert id="insertTheater">
+		INSERT INTO theater
+		VALUES (
+				null             			 -- 번호(idx) 자동 증가
+				, #{theater_name}
+				, #{theater_address}
+				, #{theater_map_x}     
+				, #{theater_map_y}
+				, #{theater_floor_info}
+				, #{theater_parking_info}
+				, #{theater_parking_fee}
+				, #{theater_public_bus}
+				, #{theater_public_subway}
+				, #{theater_hours}
+				, 1						
+		)
+	</insert>
 	
 </mapper>

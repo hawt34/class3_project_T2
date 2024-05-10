@@ -167,15 +167,15 @@ td:nth-child(7) {
 						<tbody>
 							<c:forEach var="review" items="${reviewList}">
 								<tr>
-									<td>${review.review_id}</td>
+									<td>${review.review_num}</td>
 									<td>${review.movie_num}</td>
 									<td>${review.member_id}</td>
-									<td>${review.rating}</td>
+									<td>${review.review_rating}</td>
 									<td>${review.review_text}</td>
 									<td>${review.review_date}</td>
 									<td>
 										<button type="button" class="btn btn-outline-primary" 
-											onclick="reviewWithdraw('${review.review_id}')">
+											onclick="reviewWithdraw('${review.review_num}')">
 											삭제
 										</button>
 									</td>
@@ -195,10 +195,10 @@ td:nth-child(7) {
 	</footer>
 
 	<script type="text/javascript">
-		function reviewWithdraw(reviewId){
+		function reviewWithdraw(review_num){
 			 
 			if(confirm("정말 삭제하시겠습니까?")){
-				location.href = "admin_review_delete?review_id=" + reviewId;
+				location.href = "admin_review_delete?review_num=" + review_num;
 			}
 		} 
 	</script>

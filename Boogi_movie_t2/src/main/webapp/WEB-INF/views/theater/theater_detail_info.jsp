@@ -91,7 +91,7 @@
 		
 					// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 					var content = '<div class="customoverlay">' +
-					    '    <span class="title">부기무비 해운대점</span>' +
+					    '    <span class="title">부기무비 ' + '${theater.theater_name}' + '</span>' +
 					    '</div>';
 		
 					// 커스텀 오버레이가 표시될 위치입니다 
@@ -113,6 +113,7 @@
 					<p>주차안내</p>
 					${theater.theater_parking_info}
 				</div>
+				<br>
 				<div class="theater_parking_fee">
 					<p>주차요금</p>
 					${theater.theater_parking_fee}
@@ -160,7 +161,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="notice" items="${theaterNoticeList}">
+					<c:forEach var="notice" items="${theaterNoticeList}" begin="0" end="6">
 						<tr>
 							<td scope="row">${notice.theater_name}</td>
 							<td>${notice.notice_subject}</td>

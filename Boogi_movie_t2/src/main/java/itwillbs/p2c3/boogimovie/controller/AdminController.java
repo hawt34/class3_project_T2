@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
-import itwillbs.p2c3.boogimovie.service.NoticeService;
+import itwillbs.p2c3.boogimovie.service.EventService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
+import itwillbs.p2c3.boogimovie.service.ScreenService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
+import itwillbs.p2c3.boogimovie.vo.EventVO;
+import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -24,6 +27,8 @@ import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
+import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
 public class AdminController {
@@ -37,6 +42,14 @@ public class AdminController {
 	@Autowired
 	TheaterService theaterService;
 	
+	@Autowired
+	EventService eventService;
+	
+	@Autowired
+	TicketingService ticService;
+	
+	@Autowired
+	ScreenService screenService;
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")
@@ -184,12 +197,11 @@ public class AdminController {
 	public String adminReview(Model model) {
 		List<ReviewVO> reviewList = service.getReviewList();
 		model.addAttribute("reviewList", reviewList);
-//		System.out.println(reviewList);
 		return "admin/admin_member/admin_review";
 	}
 	@GetMapping("admin_review_delete")
-	public String adminReviewDelete(String review_id, Model model) {
-		int deleteCount = service.deleteReview(review_id);
+	public String adminReviewDelete(String review_num, Model model) {
+		int deleteCount = service.deleteReview(review_num);
 		if(deleteCount > 0) {
 			return "redirect:/admin_review";
 		} else {
@@ -274,7 +286,7 @@ public class AdminController {
 		if(deleteCount > 0) {
 			return "redirect:admin_movie";
 		} else {
-			model.addAttribute("msg", "영화등록 실패");
+			model.addAttribute("msg", "영화삭제 실패");
 			return "redirect:/error/fail";
 		}
 		
@@ -282,21 +294,26 @@ public class AdminController {
 	
 	// 영화 등록 폼
 	@GetMapping("admin_movie_reg_form")
-	public String adminMovieRegForm(MovieVO movie, Model model) {
-		model.addAttribute("movie", movie);
+	public String adminMovieRegForm() {
 		return "admin/admin_movie/admin_movie_reg_form";
 	}
 	
 	// 영화 등록 프로
 	@PostMapping("admin_movie_reg_pro")
 	public String adminMovieGetPro(@ModelAttribute MovieVO movie, Model model) {
+		// db에 영화가 있는지 판별
+		MovieVO dbMovie = service.getMovie(movie.getMovie_name()); 
+		if(dbMovie != null) {
+			model.addAttribute("msg", "이미 등록된 영화입니다!");
+			return "error/fail";
+		}
+		// db에 영화 삽입		
 		int insertCount = service.InsertMovie(movie);
-		
 		if(insertCount > 0) {
 			return "redirect:admin_movie";
 		} else {
 			model.addAttribute("msg", "영화등록 실패");
-			return "redirect:/error/fail";
+			return "error/fail";
 		}
 		
 	}
@@ -304,7 +321,7 @@ public class AdminController {
 	// 영화 수정 폼
 	@GetMapping("admin_movie_edit_form")
 	public String adminMovieEditForm(MovieVO movie, Model model) {
-		System.out.println("movie_num: " + movie.getMovie_num());
+//		System.out.println("movie_num: " + movie.getMovie_num());
 		movie = service.SelectMovie(movie.getMovie_num());
 		model.addAttribute("movie", movie);
 		
@@ -315,12 +332,13 @@ public class AdminController {
 	@PostMapping("admin_movie_edit_pro")
 	public String adminMovieEditPro(@ModelAttribute MovieVO movie, Model model) {
 		int updateCount = service.UpdateMovie(movie);
+		System.out.println(movie);
 		
 		if(updateCount > 0) {
 			return "redirect:admin_movie";			
 		} else {
 			model.addAttribute("msg", "영화수정 실패");
-			return "redirect:/error/fail";
+			return "error/fail";
 		}
 		
 		
@@ -330,12 +348,20 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 이벤트 
 	@GetMapping("admin_event")
-	public String adminEvent() {
+	public String adminEvent(Model model) {
+		List<EventVO> eventList = eventService.getEventList();
+		model.addAttribute(eventList);
 		return "admin/admin_event/admin_event";
 	}
 	@GetMapping("admin_event_form")
 	public String adminEventForm() {
+		
 		return "admin/admin_event/admin_event_form";
+	}
+	@GetMapping("admin_event_modify")
+	public String adminEventModify() {
+		
+		return "admin/admin_event/admin_event_modify";
 	}
 	@PostMapping("admin_event_pro")
 	public String adminEventPro() {
@@ -395,23 +421,70 @@ public class AdminController {
 	}
 	
 	//--------------------------------------------------------------------
-	// 관리자 극장 페이지
+	// 관리자 극장 페이지 메인
 	@GetMapping("admin_theater")
-	public String adminTheater() {
+	public String adminTheater(TheaterVO theater, Model model, ScreenInfoVO screen_info) {
+		
+		// 극장 리스트 조회
+		List<TheaterVO> theaterList = theaterService.getTheater();
+		
+		model.addAttribute("theaterList", theaterList);
+		
 		return "admin/admin_theater/admin_theater";
 	}
-	@GetMapping("admin_theater_delete")
-	public String adminTheaterDelete() {
+	
+	// 극장 관리 > 극장 수정 폼으로
+	@GetMapping("admin_theater_modify")
+	public String adminTheaterModifyForm(TheaterVO theater, Model model) {
+		// 수정할 극장 조회
+		theater = theaterService.getTheater(theater);
+		model.addAttribute("theater", theater);
+		
+		return "admin/admin_theater/admin_theater_modify_form";
+	}
+	
+	// 극장 관리 > 극장 수정 등록 비즈니스
+	@PostMapping("admin_theater_modify")
+	public String adminTheaterModifyPro(TheaterVO theater, Model model) {
+		
+		int updateCount = theaterService.modifyTheater(theater);
+		
+		if(updateCount < 1) {
+			model.addAttribute("msg", "극장 정보 수정 실패!");
+			return "error/fail";
+		}
+		
 		return "redirect:/admin_theater";
 	}
+	
+	// 극장 관리 > 새 극장 등록 폼
 	@GetMapping("admin_theater_form")
 	public String adminTheaterForm() {
 		return "admin/admin_theater/admin_theater_form";
 	}
+	
+	// 극장 관리 > 새 극장 등록 비즈니스
 	@PostMapping("admin_theater_pro")
-	public String adminTheaterPro() {
+	public String adminTheaterPro(TheaterVO theater, Model model) {
+		
+		int insertCount = theaterService.registTheater(theater);
+		
+		if(insertCount < 1) {
+			model.addAttribute("msg", "극장 정보 등록 실패!");
+			return "error/fail";
+		}
+		
 		return "redirect:/admin_theater";
 	}
+	
+	@GetMapping("admin_theater_delete")
+	public String adminTheaterDelete(TheaterVO theater) {
+		
+//		int deleteCount 
+		
+		return "redirect:/admin_theater";
+	}
+		
 	@GetMapping("admin_booth_form")
 	public String adminBoothForm() {
 		return "admin/admin_theater/admin_booth_form";
@@ -425,7 +498,18 @@ public class AdminController {
 		return "redirect:/admin_booth";
 	}
 	@GetMapping("admin_booth")
-	public String adminBooth() {
+	public String adminBooth(TheaterVO theater, Model model, ScreenInfoVO screenInfo) {
+		
+		// 극장 리스트 조회
+		List<TheaterVO> theaterList = theaterService.getTheater();
+		// 상영관 리스트 조회
+		List<ScreenInfoVO> screenInfoList = screenService.getScreenInfo();
+		
+		model.addAttribute("theaterList", theaterList);
+		model.addAttribute("screenInfoList", screenInfoList);
+		
+		
+		
 		return "admin/admin_theater/admin_booth";
 	}
 	

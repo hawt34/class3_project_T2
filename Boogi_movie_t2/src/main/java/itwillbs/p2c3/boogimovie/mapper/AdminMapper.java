@@ -28,8 +28,7 @@ public interface AdminMapper {
 	List<ReviewVO> selectReviewList();
 
 	// 리뷰 삭제
-	int deleteReview(String review_id);
-
+	int deleteReview(String review_num);
 
 	// 예매리스트
 	List<Map<String, String>> selectReserveList();
@@ -43,8 +42,11 @@ public interface AdminMapper {
 	// 영화 상세보기
 	MovieVO selectMovie(int movie_num);
 
+	// 영화 확인
+	MovieVO getMovie(String movie_name);
+
 	// 영화 수정 업데이트
-	int updateMovie(MovieVO moviem);
+	int updateMovie(MovieVO movie);
 	
 	// 영화 등록
 	int insertMovie(MovieVO movie);

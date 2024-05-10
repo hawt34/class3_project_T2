@@ -16,6 +16,7 @@ public class TheaterVO {
 	private String theater_public_bus;
 	private String theater_public_subway;
 	private String theater_hours;
+	private int theater_status;
 	
 	
 

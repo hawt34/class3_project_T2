@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="itwillbs.p2c3.boogimovie.mapper.TicketMapper">
+	<select id="fianlListSelect" resultType="itwillbs.p2c3.boogimovie.vo.ScreenSessionVO">
+		SELECT 	a.scs_start_date, a.scs_end_date, a.movie_num, a.theater_num, b.screen_cinema_num, b.screen_seat_row,
+				b.screen_seat_col,b.screen_dimension, a.scs_empty_seat
+		FROM 	screen_session as a 
+		JOIN 	screen_info as b
+		ON  	a.screen_num = b.screen_num
+		WHERE 	a.movie_num = #{movie_num}
+		AND 	a.theater_num = #{theater_num}
+		AND 	DATE(a.scs_start_date) = STR_TO_DATE(#{select_date}, '%Y-%m-%d')
+		
+	</select>
+	
+
+		
+
+</mapper>

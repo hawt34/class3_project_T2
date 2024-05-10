@@ -95,8 +95,6 @@
 								<option value="사직점">사직점</option>
 								<option value="영도점">영도점</option>
 								<option value="덕천점">덕천점</option>
-								<option value="정관점">정관점</option>
-								<option value="사상점">사상점</option>
 							</select>
 						</div>
 					</div>

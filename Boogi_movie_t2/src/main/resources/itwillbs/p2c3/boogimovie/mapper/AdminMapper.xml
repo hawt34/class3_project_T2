@@ -32,16 +32,16 @@
 <!-- 리뷰 삭제 -->
 	<delete id="deleteReview">
 		DELETE FROM review
-		WHERE review_id = #{review_id}
+		WHERE review_num = #{review_num}
 	</delete>
 	
-<!-- 	예매 리스트 조회 -->
+<!-- 예매 리스트 조회 -->
 	<select id="selectReserveList" resultType="hashmap">
 		SELECT * 
 		FROM admin_movieList
 	</select>
 
-<!-- 	예매 리스트 조회 -->
+<!-- 예매 리스트 조회 -->
 	<select id="selectReserve" resultType="hashmap">
 		SELECT * 
 		FROM admin_movieList
@@ -60,37 +60,68 @@
 		FROM movie
 		WHERE movie_num = #{movie_num}
 	</select>
+
+<!-- 영화 확인 -->
+	<select id="getMovie" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
+		SELECT * 
+		FROM movie
+		WHERE movie_name = #{movie_name}
+	</select>
 	
 <!-- 	영화 등록하기 -->
 	<insert id="insertMovie" >
-		INSERT INTO movie(movie_name, movie_director, movie_poster, movie_trailler, movie_open_date, movie_status, genre_num, movie_grade, movie_summary, movie_like)
-		VALUES(
-			#{movie_name}
+		INSERT INTO movie
+		(	  movie_name
+			, movie_director
+			, movie_poster
+			, movie_trailler
+			, movie_open_date
+			, movie_end_date
+			, movie_status
+			, movie_grade
+			, movie_summary
+			, movie_runtime
+			, movie_stillCut
+			, movie_stillCut2
+			, movie_stillCut3
+			, movie_genre
+		)
+		VALUES
+		(	  #{movie_name}
 			, #{movie_director}
 			, #{movie_poster}
 			, #{movie_trailler}
 			, #{movie_open_date}
+			, #{movie_end_date}
 			, #{movie_status}
-			, #{genre_num}
 			, #{movie_grade}
 			, #{movie_summary}
-			, 0
+			, #{movie_runtime}
+			, #{movie_stillCut}
+			, #{movie_stillCut2}
+			, #{movie_stillCut3}
+			, #{movie_genre}
+			
 		)
 	</insert>
 	
 <!-- 영화 수정 업데이트 -->
 	<update id="updateMovie">
 		UPDATE movie
-		SET movie_name = #{movie_name},
-			movie_director = #{movie_director},
-			movie_poster = #{movie_poster},
-<!-- 			stillcut_num = #{stillcut_num}, -->
-			movie_trailler = #{movie_trailler},
-			movie_open_date = #{movie_open_date},
-			movie_status = #{movie_status},
-<!-- 			genre_name = #{genre_name}, -->
-			movie_grade = #{movie_grade},
-			movie_summary = #{movie_summary}
+		SET movie_name = #{movie_name}
+		  , movie_director = #{movie_director}
+		  , movie_poster = #{movie_poster}
+		  , movie_trailler = #{movie_trailler}
+		  , movie_open_date = #{movie_open_date}
+		  , movie_end_date = #{movie_end_date}
+		  , movie_status = #{movie_status}
+		  , movie_grade = #{movie_grade}
+		  , movie_summary = #{movie_summary}
+		  , movie_runtime = #{movie_runtime}
+		  , movie_stillCut = #{movie_stillCut}
+		  , movie_stillCut2 = #{movie_stillCut2}
+		  , movie_stillCut3 = #{movie_stillCut3}
+		  , movie_genre = #{movie_genre}
 		WHERE movie_num = #{movie_num}
 	</update>
 	

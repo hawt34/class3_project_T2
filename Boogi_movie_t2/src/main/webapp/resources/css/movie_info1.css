@@ -1,13 +1,9 @@
 * {
 	margin: 0;
 	padding: 0;
-/*   	border: 1px solid skyblue;   */
+/*    	border: 1px solid skyblue;    */
 }
 
-body {
-	/* 	background-color: #fffde7; */
-	
-}
 
 #wrap {
 	width: 1400px;
@@ -91,26 +87,19 @@ section h1 {
 }
 
 
-#starSelect {
-	float: left;
-	width: 300px;
-	height: 100px;
-	font-size: 24px;
-	color: gold;
-}
-#starSelect option {
-    font-size: 24px; /* 옵션들의 글자 크기를 설정 */
- 	color: gold;   
-}
+
 .star-rating{
 	padding-left: 10px;
 	padding-top: 10px;
 	float: left;
 	width: 320px;
 	height: 150px;
-	
 }
-
+#review_rating,
+#review_rating option:checked {
+    color: gold; /* 셀렉트 박스와 선택된 옵션의 텍스트 색상을 골드로 설정 */
+	font-size: 20px;
+}
 
 .review textarea.form-control {
 	margin-left: 20px;
@@ -144,9 +133,15 @@ section h1 {
 }
 .reviewCover span:before {
 	content: '★';
+	color: gold;
 }
 .reviewCover span.empty::before {
     content: '☆'; /* 빈 별의 모양 */
+    color: gold;
+}
+.reviewCover span.filled::before {
+    content: '★'; /* 별이 채워진 상태 */
+	color: gold;
 }
 .reviewTexts{
 	float: right;
@@ -156,7 +151,6 @@ section h1 {
 .reviewTexts span {
         margin-right: 10px; /* 원하는 만큼의 간격을 조절하세요 */
  }
-
 
 
 footer {

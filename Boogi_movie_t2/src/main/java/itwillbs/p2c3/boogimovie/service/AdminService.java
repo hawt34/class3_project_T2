@@ -50,8 +50,8 @@ public class AdminService {
 	}
 	
 	// 리뷰 삭제
-	public int deleteReview(String reviewId) {
-		return mapper.deleteReview(reviewId);
+	public int deleteReview(String review_num) {
+		return mapper.deleteReview(review_num);
 	}
 	
 	// 영화 삭제
@@ -69,9 +69,14 @@ public class AdminService {
 		return mapper.selectMovie(movie_num);
 	}
 	
+	// 영화 확인
+	public MovieVO getMovie(String movie_name) {
+		return mapper.getMovie(movie_name);
+	}
+	
 	// 영화 수정 업데이트
-	public int UpdateMovie(MovieVO moviem) {
-		return mapper.updateMovie(moviem);
+	public int UpdateMovie(MovieVO movie) {
+		return mapper.updateMovie(movie);
 	}
 	
 	// 영화 등록

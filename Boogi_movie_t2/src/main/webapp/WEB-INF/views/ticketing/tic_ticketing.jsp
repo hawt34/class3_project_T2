@@ -1,3 +1,4 @@
+<%@page import="itwillbs.p2c3.boogimovie.handler.DateUtils"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,6 +24,7 @@
 <!-- 현재날짜와 이번달 최대일수를 계산하여 출력 -->
 <%
 	LocalDate currentDate = LocalDate.now();
+	String startDate = currentDate.toString();
 	int maxDay = currentDate.lengthOfMonth();
 	int nowDay = currentDate.getDayOfMonth();
 	int inputDay = nowDay + 10;
@@ -73,17 +75,17 @@
 						<c:forEach items="${movieList }" var="movie">
 							<div class="movie_atrbt">
 								<c:choose>
-									<c:when test="${movie.movie_grade eq 'ALL' }">
+									<c:when test="${movie.movie_grade eq '전체관람가' }">
 										<img src="${pageContext.request.contextPath}/resources/images/tic_icon_all.gif" style="width : 48px; height : 48px;">
 									</c:when>
-									<c:when test="${movie.movie_grade eq '12세' }">
+									<c:when test="${movie.movie_grade eq '12세관람가' }">
 										<img src="${pageContext.request.contextPath}/resources/images/tic_icon_over12.gif" style="width : 48px; height : 48px;">
 									</c:when>
-									<c:when test="${movie.movie_grade eq '15세' }">
+									<c:when test="${movie.movie_grade eq '15세관람가' }">
 										<img src="${pageContext.request.contextPath}/resources/images/tic_icon_over15.gif" style="width : 48px; height : 48px;">
 									</c:when>
-									<c:when test="${movie.movie_grade eq '19세' }">
-										<img src="${pageContext.request.contextPath}/resources/images/tic_icon_over19.gif" style="width : 48px; height : 48px;">
+									<c:when test="${movie.movie_grade eq '18세관람가(청소년관람불가)' }">
+										<img src="${pageContext.request.contextPath}/resources/images/tic_icon_over18.gif" style="width : 48px; height : 48px;">
 									</c:when>
 								</c:choose>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -139,7 +141,7 @@
 				<div class="col-md-6 tic" style="padding-left: 20px; padding-right: 20px;">
 					<div class="tic_final">
 						<!-- 설명영역 -->
-						<div class="explain">
+						<div class="explain" id="daySelected">
 							${currentDate }
 						</div>
 							<div class="finallist">
@@ -151,13 +153,13 @@
 					
 								<div class="daylist scroll">
 									<div>
-										<c:forEach begin="${nowDay }" var="i" end="${day}"> 
-										
-											<button>${i }일</button>&nbsp;
+										<c:forEach begin="${nowDay }" end="${day}" var="i">
+											
+											<input type="button" onclick="javascript:dayClick('${currentDate }', ${i })" value="${i }일">&nbsp;
 										</c:forEach>
 									</div>
 								</div>
-								<div class="finalmovielist scroll">
+								<div class="finalmovielist scroll" id="finalmovielist">
 									<div style="height : 300px">
 
 										영화관 과 상영관 을 선택해주세요
@@ -183,7 +185,7 @@
 	</div>
 
 </section>
-</form>				
+</form>
 			
 		
 		
@@ -199,14 +201,39 @@
 <script>
 	let selectedMovie = "";
 	let selectedTheater = "";
+	let selectedDay = "";
 	
 	function finalList() {
-	    if (selectedMovie && selectedTheater) {
-	        // 두 가지가 모두 선택된 경우에만 `finalList` 함수가 실행됩니다.
-	        alert("선택된 영화: " + selectedMovie + "\n선택된 상영관: " + selectedTheater);
-	        // 실제 구현에서는 AJAX로 해당 영화관 및 영화 정보 조회 로직을 추가하세요.
-	        // 이 부분에 최종 영화관 및 상영 정보 조회 로직을 구현
-	    }
+
+		$.ajax({
+	        url: "api/finalList",
+	        method: "GET",
+	        data: {
+	    		selectedMovie : selectedMovie,
+	    		selectedTheater : selectedTheater,
+	    		selectedDay : selectedDay
+	        },
+	        dataType: "json",
+	        success: function (response) {
+	            var result = $("#finalmovielist");
+	            result.empty();
+				
+	            response.forEach(function (finalList) {
+	                var finalDiv = "<div class='theater_atrbt'>"
+	                    + "<span>"
+	                    + "<a onclick='theaterClick(\"" + theater.member_my_theater + "\")'>" + theater.member_my_theater + "</a>"
+	                    + "</span>"
+	                    + "</div>";
+
+	                result.append(finalDiv); 
+	                	
+
+	            });
+	        },
+	        error: function () {
+	            alert("영화 정보를 가져오는 데 실패했습니다.");
+	        }
+	    });
 	}
 
 
@@ -248,8 +275,7 @@
 		result1.append(movie_name);
 		result2.css("background-color", "blue");
 		
-		finalList();
-	} 
+	}
 	
 	function theaterClick(theater_name){
 		selectedTheater = theater_name;
@@ -257,6 +283,19 @@
 		$(this).css("background-color", "yellow");
 		result.empty();
 		result.append(theater_name);
+		
+	}
+	
+	function dayClick(date, nowDay){
+		var baseDate = new Date(date);
+        baseDate.setDate(nowDay);
+        var formattedDate = baseDate.toISOString().split('T')[0];
+		selectedDay = formattedDate;
+		var result = $("#daySelected");
+		
+		$(this).css("background-color", "yellow");
+		result.empty();
+		result.append(formattedDate);
 		
 		finalList();
 	} 

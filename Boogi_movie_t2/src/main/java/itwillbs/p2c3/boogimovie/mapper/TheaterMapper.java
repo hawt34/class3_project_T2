@@ -14,9 +14,6 @@ public interface TheaterMapper {
 	// 탑메뉴 또는 극장 페이지 내 탑에서 지점 선택
 	TheaterVO selectTheater(TheaterVO theater);
 	
-	List<TheaterVO> selectTheatersOrderbyName();
-	
-	List<TheaterVO> selectTheatersMyTheater();
 	
 	// 극장 상세 > theater_detail_info.jsp 에서 지점별 보유 시설 조회
 	List<TheaterFacilityVO> selectFacility(TheaterFacilityVO facility);
@@ -34,5 +31,19 @@ public interface TheaterMapper {
 	
 	
 	
+	List<TheaterVO> selectTheatersOrderbyName();
+
+	
+	// 관리자 > 극장 관리 페이지
+	List<TheaterVO> selectTheater2();
+
+	
+	// 관리자 > 극장 수정 등록 업데이트
+	int updateTheater(TheaterVO theater);
+
+	// 관리자 > 새 극장 정보 등록
+	int insertTheater(TheaterVO theater);
+
+
 	
 }

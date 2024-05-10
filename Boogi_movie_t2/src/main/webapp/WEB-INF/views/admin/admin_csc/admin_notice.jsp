@@ -76,7 +76,7 @@
 											<td>${notice.notice_date }</td>
 											<td>${notice.theater_name }</td>
 											<td>
-												<button type="button" class="btn btn-outline-primary" onclick="loaction.href='admin_notice_modify?notice_num=${notice.notice_num}'">수정</button>
+												<button type="button" class="btn btn-outline-primary" onclick="loaction.href='admin_notice_modify?notice_num'">수정</button>
 											</td>
 											<td>
 												<button type="button" class="btn btn-outline-primary" onclick="admin_notice_withdraw(${notice.notice_num})">삭제</button>
@@ -135,9 +135,11 @@
 				location.href="admin_notice_delete?notice_num=" + num;
 			}
 		}
-		
-	
-	
+		function admin_notice() {
+			location.href="admin_notice_form";
+		}
 	</script>
+	
+	
 </body>
 </html>

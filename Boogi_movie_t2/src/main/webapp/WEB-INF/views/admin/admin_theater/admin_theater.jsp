@@ -71,8 +71,8 @@
 										</c:choose>
 									</td>
 									<td>
-										<button type="button" class="btn btn-outline-primary" onclick="theaterForm(${theater.theater_num})" >수정</button>
-										<button type="button" class="btn btn-outline-primary" onclick="theaterWithdraw()">삭제</button>
+										<button type="button" class="btn btn-outline-primary" onclick="theaterModifyForm(${theater.theater_num})" >수정</button>
+										<button type="button" class="btn btn-outline-primary" onclick="theaterWithdraw(${theater.theater_num})">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -95,12 +95,17 @@
 	</footer>
 
 	<script type="text/javascript">
-		function theaterForm(num) {
-			window.open("admin_theater_modify_form?theater_num="+num, "_self");
+		function theaterModifyForm(num) {
+			window.open("admin_theater_modify?theater_num=" + num, "_self");
 		}
-		function theaterWithdraw() {
+		
+		function theaterForm() {
+			window.open("admin_theater_form", "_self");
+		}
+		
+		function theaterWithdraw(num) {
 			if(confirm("정말 삭제하시겠습니까?")){
-				location.href="admin_theater_delete";
+				location.href="admin_theater_delete?theater_num=" + num;
 			}
 		}
 	

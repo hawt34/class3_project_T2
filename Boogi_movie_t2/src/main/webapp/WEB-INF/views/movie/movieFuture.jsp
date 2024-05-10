@@ -30,24 +30,23 @@
 		</article>
 		<section>
 			<div class="nowMovie">
-				<button id="showFutureMovies" type="button" class="btn btn-outline-primary">현재
+				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movie'">현재
 					상영작</button>
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFuture'">상영예정작</button>
 			</div>
 			<div class="list">
 				<div class="movie">
 					<img src="${pageContext.request.contextPath}/resources/images/movieF1.jpg">
-					<p>범죄의 재구성</p>
-					<button type="button" class="btn btn-outline-primary">찜하기
+					<p> </p>
+					<button type="button" class="btn btn-outline-primary">뒤로가기
 					</button>
 					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo1'">상세보기
 					</button>
 				</div>
 				<div class="movie">
-					<img
-						src="${pageContext.request.contextPath}/resources/images/movieF2.jpg">
-					<p>다크 나이트</p>
-					<button type="button" class="btn btn-outline-primary">찜하기
+					<img src="${pageContext.request.contextPath}/resources/images/movieF2.jpg">
+					<p></p>
+					<button type="button" class="btn btn-outline-primary">뒤로가기
 					</button>
 					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo2'">상세보기
 					</button>
@@ -55,7 +54,7 @@
 				<div class="movie">
 					<img src="${pageContext.request.contextPath}/resources/images/movieF3.jpg">
 					<p>노팅힐</p>
-					<button type="button" class="btn btn-outline-primary">찜하기
+					<button type="button" class="btn btn-outline-primary">뒤로가기
 					</button>
 					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo3'">상세보기
 					</button>
@@ -63,7 +62,7 @@
 				<div class="movie">
 					<img src="${pageContext.request.contextPath}/resources/images/movieF4.jpg">
 					<p>쇼생크탈출</p>
-					<button type="button" class="btn btn-outline-primary">찜하기
+					<button type="button" class="btn btn-outline-primary">뒤로가기
 					</button>
 					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo4'">상세보기
 					</button>
@@ -71,15 +70,13 @@
 				<div class="movie">
 					<img src="${pageContext.request.contextPath}/resources/images/movieF5.jpg">
 					<p>타짜</p>
-					<button type="button" class="btn btn-outline-primary">찜하기
+					<button type="button" class="btn btn-outline-primary">뒤로가기
 					</button>
 					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo5'">상세보기
 					</button>
 				</div>
 			</div>
-			<div id="movieList">
-    <!-- 여기에 영화 목록이 표시될 것입니다 -->
-</div>
+			
 		</section>
 		<footer>
 			<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
@@ -100,33 +97,6 @@
 		crossorigin="anonymous"></script>
 </body>
 <script type="text/javascript">
-$(document).ready(function(){
-    // 버튼에 클릭 이벤트를 추가합니다.
-    const settings = {
-        async: true,
-        crossDomain: true,
-        url: 'https://api.themoviedb.org/3/movie/upcoming?language=ko&page=1',
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZTAzYWI2NWEyZWVkNGY2NjM2MjUyMWM5Y2NmYzg0YiIsInN1YiI6IjY2MTBkNjAwMTEwOGE4MDE2NDhjMjA4ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BgI_9gW8Nd9HTb07uqQuWAP9-Lahow2QO9WQi_mxXmc'
-        }
-    };
 
-    // Ajax 요청을 수행합니다.
-    $.ajax(settings).done(function (response) {
-        console.log(response);
-        // 원하는 동작을 수행합니다. 예를 들어, 응답 데이터를 화면에 표시할 수 있습니다.
-        
-        let htmlString = '<table><thead><tr><th>제목</th><th>개봉일</th></tr></thead><tbody>';
-        response.results.forEach(function(movie) {
-            htmlString += '<tr><td>' + movie.title + '</td><td>' + movie.release_date + '</td></tr>';
-        });
-        htmlString += '</tbody></table>';
-
-        // 영화 목록을 표시할 영역에 HTML을 삽입합니다.
-        $('#movieList').html(htmlString);
-    });
-});
 </script>
 </html>

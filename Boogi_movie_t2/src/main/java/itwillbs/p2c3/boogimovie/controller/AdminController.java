@@ -1,6 +1,5 @@
 package itwillbs.p2c3.boogimovie.controller;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +17,8 @@ import itwillbs.p2c3.boogimovie.service.EventService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.ScreenService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
-import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
+import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -158,7 +157,7 @@ public class AdminController {
 		return "admin/admin_csc/admin_notice_detail";
 	}
 	
-	//---------------------------
+	//----------------------------------------------------------
 	//일대일 문의 controller
 	@GetMapping("admin_oto")
 	public String adminOto(@RequestParam(defaultValue = "1")int pageNum, Model model) {
@@ -172,14 +171,13 @@ public class AdminController {
 		model.addAttribute("otoList", otoList);
 		return "admin/admin_csc/admin_oto";
 	}
+	//1대1 문의 답변하기
 	@GetMapping("admin_oto_detail")
 	public String adminOtoDetail(Model model, int oto_num) {
 		OTOVO oto = otoService.getOto(oto_num);
 		String otoDate = oto.getOto_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-		String otoTheater = otoService.getTheaterName(oto.getTheater_num());
 		
 		model.addAttribute("otoDate", otoDate);
-		model.addAttribute("otoTheater", otoTheater);
 		model.addAttribute("oto", oto);
 		return "admin/admin_csc/admin_oto_detail";
 	}

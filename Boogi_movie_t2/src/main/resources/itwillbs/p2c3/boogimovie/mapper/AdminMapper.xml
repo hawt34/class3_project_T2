@@ -157,14 +157,12 @@
 	</select>
 
 	<insert id="insertReply">
-		<selectKey keyProperty="oto_reply_num" resultType="int" order="BEFORE">
-			SELECT IFNULL(MAX(oto_reply_num), 0) FROM OTO_reply
-		</selectKey>
-		INSERT INTO OTO_reply
-		VALUES (#{oto_reply_num} + 1,
-				#{oto_num}, 
+		INSERT INTO oto_reply
+		VALUES (null,
 				#{reply.oto_reply_content},
-				now())
+				now(),
+				#{oto_num} 
+		)
 	</insert>
 	<delete id="deleteNotice">
 		DELETE FROM notice

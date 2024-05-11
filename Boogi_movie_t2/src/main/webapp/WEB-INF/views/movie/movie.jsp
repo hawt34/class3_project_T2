@@ -1,13 +1,99 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>		
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/resources/css/movie.css"
-	rel="stylesheet" type="text/css">
+<%-- <link href="${pageContext.request.contextPath}/resources/css/movie.css"	rel="stylesheet" type="text/css"> --%>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+/*  	border: 1px solid skyblue; */
+}
+
+body {
+}
+
+#wrap {
+	width: 1400px;
+	margin: 0 auto;
+}
+
+article {
+	position: relative;
+	width: 1400px;
+	height: 800px;
+/* 	background-color: #ffd54f; */
+}
+
+article video {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	max-width: 100%;
+	max-height: 100%;
+}
+
+section {
+	width: 100%;
+	height:700px; 
+/* 	background-color : #ffca28; */
+	overflow-y: scroll;
+	
+	
+}
+ 
+ section h1 {
+ 	position: relative;
+    text-align: center; /* 가운데 정렬 */
+    font-size: 32px; /* 폰트 크기 수정 */
+    width: 100%; /* 너비 조정 */
+/*     height: 40px; */
+	white-space: nowrap; 
+}
+
+.nowMovie {
+	width: 100%;
+	height: 100px;
+}
+.nowMovie .btn{
+	margin-left: 30px; 
+	font-size: 40px;
+	white-space: nowrap;
+}
+
+.list {
+	width:1350px;
+	margin-left:20px;
+	margin-top: 10px;
+	display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.movie {
+	text-align: center;
+}
+
+.movie img {
+	padding: 30px;
+	width: 280px;
+	height: 400px;
+	display: flex;
+}
+footer {
+	width: 1400px;
+	height: 100px;
+/* 	background-color: #ffb300; */
+}
+
+
+
+</style>
+
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -30,102 +116,25 @@
 			</video>
 		</article>
 		<section>
+			
 			<div class="nowMovie">
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movie'">현재
 					상영작</button>
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFuture'">상영예정작</button>
+				<button type="button" class="btn btn-outline-primary" onclick="window.location.href=''">상영 중인 영화찾기</button>
 			</div>
 			<div class="list">
-				<div class="movie">
-					<c:forEach var= "movie" items="${movieInfo}"> 
-					<c:if test="${movie.movie_num eq 1}">					
-					<img src="${pageContext.request.contextPath}/resources/images/${movie.movie_poster}">
-					<p>${movie.movie_name}</p>
-					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
-					<button type="button" class="btn btn-outline-primary">예매하기
-					</button>
-					<button type="button" class="btn btn-outline-primary detail_button" >상세보기
-					</button>
-					</c:if>
-					</c:forEach>	
-				</div>
-				<div class="movie">
-					<c:forEach var= "movie" items="${movieInfo}">
-					<c:if test="${movie.movie_num eq 2}">
-					<img  src="${pageContext.request.contextPath}/resources/images/${movie.movie_poster}">
-					<p>${movie.movie_name}</p>
-					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
-					<button type="button" class="btn btn-outline-primary">예매하기
-					</button>
-					<button type="button" class="btn btn-outline-primary detail_button" >상세보기
-					</button>
-					</c:if>
-					</c:forEach>
-				</div>
-				<div class="movie">
-					<c:forEach var= "movie" items="${movieInfo}">
-					<c:if test="${movie.movie_num eq 3}">
-					<img src="${movie.movie_poster}">
-					<p>${movie.movie_name}</p>
-					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
-					<button type="button" class="btn btn-outline-primary">예매하기
-					</button>
-					<button type="button" class="btn btn-outline-primary detail_button" >상세보기
-					</button>
-					</c:if>
-					</c:forEach>
-				</div>
-				<div class="movie">
-					<c:forEach var= "movie" items="${movieInfo}">
-					<c:if test="${movie.movie_num eq 4}">
-					<img src="${movie.movie_poster}">
-					<p>${movie.movie_name}</p>
-					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
-					<button type="button" class="btn btn-outline-primary">예매하기
-					</button>
-					<button type="button" class="btn btn-outline-primary detail_button" >상세보기
-					</button>
-					</c:if>
-					</c:forEach>
-				</div>
-				<div class="movie">
-					<c:forEach var= "movie" items="${movieInfo}">
-					<c:if test="${movie.movie_num eq 5}">
-					<img src="${movie.movie_poster}">
-					<p>${movie.movie_name}</p>
-					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
-					<button type="button" class="btn btn-outline-primary">예매하기
-					</button>
-					<button type="button" class="btn btn-outline-primary detail_button" >상세보기
-					</button>
-					</c:if>
-					</c:forEach>
-				</div>
-				
+			<c:forEach var="movie" items="${movieInfo}" varStatus="loop" begin="0">
+    		<div class="movie">
+            <img src="${movie.movie_poster}">
+            <p>${movie.movie_name}</p>
+            <input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
+            <button type="button" class="btn btn-outline-primary">예매하기</button>
+            <button type="button" class="btn btn-outline-primary detail_button">상세보기</button>
+    		</div>
+			</c:forEach>
 			</div>
-			<div id="carouselExample" class="carousel slide">
-				<h1>박스오피스 순위</h1>
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img src="${pageContext.request.contextPath}/resources/images/movie_1.jpg" class="d-block w-100" alt="..." >
-						<div class="carousel-caption">1st</div>
-					</div>
-					<div class="carousel-item">
-						<img src="${pageContext.request.contextPath}/resources/images/movie_2.jpg" class="d-block w-100" alt="...">
-						<div class="carousel-caption">2rd</div>
-					</div>
-					<div class="carousel-item">
-						<img src="${pageContext.request.contextPath}/resources/images/movie_3.jpg" class="d-block w-100" alt="...">
-						<div class="carousel-caption">3rd</div>
-					</div>
-				</div>
-				<button class="carousel-control-prev" type="button"	data-bs-target="#carouselExample" data-bs-slide="prev">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_left.png">
-				</button>
-				<button class="carousel-control-next" type="button"	data-bs-target="#carouselExample" data-bs-slide="next">
-					<img src="${pageContext.request.contextPath}/resources/images/movie_right.png">
-				</button>
-			</div>
+			
 		</section>
 		<footer>
 			<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
@@ -151,6 +160,17 @@
 	        // 클릭된 버튼의 부모 요소에서 movie_num 값을 가져와서 상세보기 페이지의 URL에 파라미터로 추가하여 전달
 	        let movieNum = $(this).closest(".movie").find("#movie_num").val();
 	        window.location.href = "movieInfo?movie_num=" + movieNum;
+	    });
+	});
+	$(document).ready(function() {
+	    // 좌측으로 스크롤하는 함수
+	    $("#prev-button").click(function() {
+	        $(".list").animate({scrollLeft: "-=400"}, "slow");
+	    });
+
+	    // 우측으로 스크롤하는 함수
+	    $("#next-button").click(function() {
+	        $(".list").animate({scrollLeft: "+=400"}, "slow");
 	    });
 	});
 	</script>

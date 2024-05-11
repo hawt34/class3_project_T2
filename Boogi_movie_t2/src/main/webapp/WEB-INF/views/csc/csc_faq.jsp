@@ -48,13 +48,13 @@
 			<!-- 구분 카테고리 시작 -->
 			<div class="row mt-3">
 				<div class="csc_faq_sel">
-					<select class="form-select form-select-sm w-25" aria-label="Small select example">
+					<select name="faq_category" class="form-select form-select-sm w-25" aria-label="Small select example">
 						<option selected>전체</option>
-						<option value="영화예매">영화예매</option>
-						<option value="영화">영화</option>
-						<option value="맴버십">멤버십</option>
-						<option value="극장">극장</option>
-						<option value="회원">회원</option>
+						<option value="예매/결제">예매/결제</option>
+						<option value="영화관이용">영화관이용</option>
+						<option value="쿠폰">쿠폰</option>
+						<option value="스토어">스토어</option>
+						<option value="홈페이지/모바일">홈페이지/모바일</option>
 					</select>
 				</div>
 			</div>
@@ -63,7 +63,9 @@
 			<div class="csc_accordion" >
 				<input type="checkbox" id="answer1">
 				<label for="answer1">제목<em></em></label>
-				<div><p>본문내용을 여기다 넣을 겁니다.
+				<div>
+					<span><em></em>ANSWER</span><br>
+					<p>본문내용을 여기다 넣을 겁니다.
 					꽁꽁얼어 붙은 한강 위로 고양이가 걸어다닙니다.</p> 
 				</div>
 				<input type="checkbox" id="answer2">

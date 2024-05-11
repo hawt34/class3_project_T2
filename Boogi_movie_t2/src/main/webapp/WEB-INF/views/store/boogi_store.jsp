@@ -127,7 +127,7 @@ footer {
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_popCol.jpg">
 						<div class = "snack1_box">
 						<h4>종류 및 가격</h4>
-						<select name="category1" id="category1" >
+						<select name="category1_snack" id="category1_snack" >
   					  	<c:forEach items="${itemInfoSnack}" var="item_snack">
         				<option value="${item_snack.item_info_price}">${item_snack.item_info_name} - ${item_snack.item_info_price}원</option>
     					</c:forEach>
@@ -151,7 +151,7 @@ footer {
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_pop.jpg">
 						<div class = "snack2_box">
 						<h4>종류 및 가격</h4>
-						<select name="category2" id="category2">
+						<select name="category2_pop" id="category2_pop">
   					  	<c:forEach items="${itemInfoPop}" var="item_pop">
         				<option value="${item_pop.item_info_price}">${item_pop.item_info_name} ${item_pop.item_info_price}원</option>
     					</c:forEach>
@@ -174,7 +174,7 @@ footer {
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_col.jpg">
 						<div class = "snack3_box">
 						<h4>종류 및 가격</h4>
-						<select name="category3" id="category3">
+						<select name="category3_juice" id="category3_juice">
   					  	<c:forEach items="${itemInfoJuice}" var="item_Juice">
         				<option value="${item_Juice.item_info_price}">${item_Juice.item_info_name} ${item_Juice.item_info_price}원</option>
     					</c:forEach>
@@ -196,7 +196,7 @@ footer {
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_snack.jpg">
 						<div class = "snack4_box">
 						<h4>종류 및 가격</h4>
-						<select name="category4" id ="category4">
+						<select name="category4_combo" id ="category4_combo">
   					  	<c:forEach items="${itemInfoCombo}" var="item_combo">
         				<option value="${item_combo.item_info_price}">${item_combo.item_info_name}  ${item_combo.item_info_price}원</option>
     					</c:forEach>
@@ -231,9 +231,9 @@ footer {
 	<script>
 	 $(document).ready(function() {
 	        // 아이템이나 수량이 변경될 때마다 총 가격을 다시 계산하여 업데이트
-	        $("#category1, #snackNum").change(function() {
+	        $("#category1_snack, #snackNum").change(function() {
 	            // 선택한 아이템의 가격
-	            let snackPrice = $("#category1").val();
+	            let snackPrice = $("#category1_snack").val();
 	            // 선택한 수량
 	            let snackYang = $("#snackNum").val();
 	            // 총 가격 계산
@@ -243,22 +243,22 @@ footer {
 	        });
 
 	        
-	        $("#category2, #snackPop").change(function() {
-	            let popPrice = $("#category2").val();
+	        $("#category2_pop, #snackPop").change(function() {
+	            let popPrice = $("#category2_pop").val();
 	            let popYang = $("#snackPop").val();
 	            let totalPop = popPrice * popYang;
 	            $("#totalPop").text("팝콘 총 합계  " + totalPop + "원");
 	        });
 			
-	        $("#category3, #snackJuice").change(function() {
-	            let juicePrice = $("#category3").val();
+	        $("#category3_juice, #snackJuice").change(function() {
+	            let juicePrice = $("#category3_juice").val();
 	            let juiceYang = $("#snackJuice").val();
 	            let totalJuice = juicePrice * juiceYang;
 	            $("#totalJuice").text("음료 총 합계  " +totalJuice + "원");
 	        });
 	        
-	        $("#category4, #snackCombo").change(function() {
-	            let comboPrice = $("#category4").val();
+	        $("#category4_combo, #snackCombo").change(function() {
+	            let comboPrice = $("#category4_combo").val();
 	            let comboYang = $("#snackCombo").val();
 	            let totalCombo = comboPrice * comboYang;
 	            $("#totalCombo").text("콤보 총 합계  " + totalCombo + "원");
@@ -266,10 +266,10 @@ footer {
 	        
 	                
 	        // 페이지 로드 시 총 가격을 초기화
-	        $("#category1, #snackNum").change();
-	        $("#category2, #snackJuice").change();       
-	        $("#category3, #snackPop").change();
-	        $("#category4, #snackCombo").change();
+	        $("#category1_snack, #snackNum").change();
+	        $("#category2_pop, #snackJuice").change();       
+	        $("#category3_juice, #snackPop").change();
+	        $("#category4_combo, #snackCombo").change();
 	             
 	    });
 	 

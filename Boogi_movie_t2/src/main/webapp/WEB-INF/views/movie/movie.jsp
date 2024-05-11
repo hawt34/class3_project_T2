@@ -14,9 +14,6 @@
 /*  	border: 1px solid skyblue; */
 }
 
-body {
-}
-
 #wrap {
 	width: 1400px;
 	margin: 0 auto;
@@ -89,8 +86,6 @@ footer {
 /* 	background-color: #ffb300; */
 }
 
-
-
 </style>
 
 
@@ -128,7 +123,7 @@ footer {
     		<div class="movie">
             <img src="${movie.movie_poster}">
             <p>${movie.movie_name}</p>
-            <input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
+            <input type="hidden" class="movie_num" name="movie_num" value="${movie.movie_num}">
             <button type="button" class="btn btn-outline-primary">예매하기</button>
             <button type="button" class="btn btn-outline-primary detail_button">상세보기</button>
     		</div>
@@ -154,25 +149,13 @@ footer {
 		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-	    // 상세보기 버튼 클릭 이벤트 처리
-	    $(".detail_button").click(function() {
-	        // 클릭된 버튼의 부모 요소에서 movie_num 값을 가져와서 상세보기 페이지의 URL에 파라미터로 추가하여 전달
-	        let movieNum = $(this).closest(".movie").find("#movie_num").val();
-	        window.location.href = "movieInfo?movie_num=" + movieNum;
-	    });
-	});
-	$(document).ready(function() {
-	    // 좌측으로 스크롤하는 함수
-	    $("#prev-button").click(function() {
-	        $(".list").animate({scrollLeft: "-=400"}, "slow");
-	    });
-
-	    // 우측으로 스크롤하는 함수
-	    $("#next-button").click(function() {
-	        $(".list").animate({scrollLeft: "+=400"}, "slow");
-	    });
-	});
+		$(document).ready(function() {
+			// 상세보기 버튼 클릭 이벤트 처리
+			$(".list").on("click", ".detail_button", function() {
+				let movie_num = $(this).siblings(".movie_num").val();
+				window.location.href = "movieInfo?movie_num=" + movie_num;
+			});
+		});
 	</script>
 </body>
 </html>

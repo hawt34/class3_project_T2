@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="itwillbs.p2c3.boogimovie.mapper.MovieFutureMapper">
+	<select id="selectMovieFuture" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
+		SELECT *
+		FROM movie
+		WHERE movie_status = '개봉예정'
+	</select>
+</mapper>  

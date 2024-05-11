@@ -39,21 +39,23 @@ public class StoreController {
 	}
 	//스토어 돈계산
 	@PostMapping("storePay")
-	 public String storePay(@RequestParam("category1") int category1,  @RequestParam("snackNum") int snackNum,
-             				@RequestParam("category2") int category2,  @RequestParam("snackPop") int snackPop,
-             				@RequestParam("category3") int category3,  @RequestParam("snackJuice") int snackJuice,
-             				@RequestParam("category4") int category4,  @RequestParam("snackCombo") int snackCombo,   Model model) {
-		model.addAttribute("category1", category1);
+	 public String storePay(@RequestParam("category1_snack") int category1_snack,  @RequestParam("snackNum") int snackNum,
+             				@RequestParam("category2_pop") int category2_pop,  @RequestParam("snackPop") int snackPop,
+             				@RequestParam("category3_juice") int category3_juice,  @RequestParam("snackJuice") int snackJuice,
+             				@RequestParam("category4_combo") int category4_combo,  @RequestParam("snackCombo") int snackCombo,   Model model) {
+		model.addAttribute("snack", category1_snack);
 		model.addAttribute("snackNum", snackNum);
-		model.addAttribute("category2", category2);
+		model.addAttribute("pop", category2_pop);
 		model.addAttribute("snackPop", snackPop);
-		model.addAttribute("category3", category3);
+		model.addAttribute("juice", category3_juice);
 		model.addAttribute("snackJuice", snackJuice);
-		model.addAttribute("category4", category4);
+		model.addAttribute("combo", category4_combo);
 		model.addAttribute("snackCombo", snackCombo);
 
-		System.out.println(category1 +""+ snackNum);
-		return ""; 
+		//System.out.println(category1_snack +""+ snackNum);데이터 확인완료
+		//System.out.println(category2_pop +""+ snackPop);
+		//나중에 결제페이지 연결하면 됨.
+		return "store/storePay"; 
 	}
 	
 }

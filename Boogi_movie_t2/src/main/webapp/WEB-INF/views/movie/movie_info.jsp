@@ -10,7 +10,7 @@
 * {
 	margin: 0;
 	padding: 0;
-   	border: 1px solid skyblue;   
+/*    	border: 1px solid skyblue;    */
 }
 
 
@@ -215,7 +215,14 @@ footer {
 	<div id="wrap">
         <article>
         	<div class="movieTrail">
-			<iframe width="100%" height="600px"  src="${movie.movie_trailler}"> </iframe>
+				<c:choose>
+            		<c:when test="${not empty movie.movie_trailler}">
+                		<iframe width="100%" height="600px" src="${movie.movie_trailler}"></iframe>
+            		</c:when>
+           			<c:otherwise>
+                	<h1>죄송합니다. 이 영화의 트레일러가 준비되지 않았습니다.</h1>
+            		</c:otherwise>
+        		</c:choose>		
 			</div>
 		</article>
 		<section>

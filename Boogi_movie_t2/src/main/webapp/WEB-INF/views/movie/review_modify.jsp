@@ -70,7 +70,6 @@ textarea {
         <textarea class="review-text" name="review_text"  rows="4" cols="35" >${review.review_text}</textarea>
    		<input type="hidden" name="member_id" value="${sessionScope.sId}">    
    		<input type="hidden" name="review_num" value="${review.review_num}">    
-    	
     	</div>
     	</c:forEach>
 		<div class = "buttonBottom">

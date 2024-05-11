@@ -21,7 +21,8 @@
  	<update id="updateReview" >
  		UPDATE review
  		SET review_rating = #{review_rating},
- 			review_text = #{review_text}
+ 			review_text = #{review_text},
+ 			review_date = COALESCE(#{review_date}, NOW())
  		WHERE review_num = #{review_num}	 
  	</update>
  	<delete id="deleteReview">

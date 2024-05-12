@@ -9,7 +9,7 @@
 <link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
-<script src="${pageContext.request.contextPath}/resources//js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_list.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 
@@ -76,8 +76,8 @@
 											</c:choose>
 										</td>
 										<td>
-											<button type="button" class="btn btn-outline-primary" onclick="boothModify(${screenInfo.screen_num})">수정</button>
-											<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw(${screenInfo.screen_num})">삭제</button>
+											<button type="button" class="btn btn-outline-primary" onclick="boothModify(${screenInfo.screen_num})">관리</button>
+										
 										</td>
 									</tr>
 							</c:forEach>
@@ -102,11 +102,12 @@
 		function boothModify(num) {
 			window.open("admin_booth_modify?screen_num=" + num, "_self");
 		}
-		function boothWithdraw(num) {
-			if(confirm("정말 삭제하시겠습니까?")){
-				location.href="admin_booth_delete?screen_num=" + num;
-			}
+		
+		function boothForm() {
+			window.open("admin_booth_form", "_self");
 		}
+		
+		
 	
 	
 	</script>

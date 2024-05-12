@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
-<script src="${pageContext.request.contextPath}/resources//js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <!-- 극장 theater.css  -->
 <link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
 <!-- 카카오맵 API 라이브러리 -->

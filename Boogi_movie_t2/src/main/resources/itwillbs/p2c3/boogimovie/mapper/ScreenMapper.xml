@@ -22,7 +22,6 @@
 	
 	
 	<update id="updateScreeninfo">
-	
 		UPDATE screen_info
 		SET    theater_num = #{theater_num}
 		     , screen_cinema_num = #{screen_cinema_num}
@@ -30,6 +29,24 @@
 		     , screen_seat_col = #{screen_seat_col}
 		     , screen_status = #{screen_status}
 		WHERE  screen_num = #{screen_num}
-	
 	</update>
+	
+	<insert id="insertScreeninfo">
+		INSERT INTO screen_info
+		VALUES (
+				null					 -- 번호(idx) 자동 증가
+			  , #{theater_num}
+			  , #{screen_cinema_num}
+			  , #{screen_seat_row}
+			  , #{screen_seat_col}
+			  , #{screen_status}
+			  , null
+		)
+	</insert>
+	
+	<delete id="deleteScreeninfo">
+		DELETE FROM screen_info
+		WHERE  screen_num = #{screen_num}
+	</delete>
+
 </mapper>

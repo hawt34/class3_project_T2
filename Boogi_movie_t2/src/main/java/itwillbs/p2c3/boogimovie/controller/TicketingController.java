@@ -217,5 +217,13 @@ public class TicketingController {
 		
 		
 	
+	
+	
+	@GetMapping("payment_reservation")
+	public String paymentReserve() {
+		return "payment/payment_reservation";
+	}
+	
+	
 		
 		

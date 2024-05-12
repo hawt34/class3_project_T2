@@ -10,7 +10,7 @@
 <link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
-<script src="${pageContext.request.contextPath}/resources//js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/ㄴjs/bootstrap.bundle.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_list.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -71,8 +71,7 @@
 										</c:choose>
 									</td>
 									<td>
-										<button type="button" class="btn btn-outline-primary" onclick="theaterModifyForm(${theater.theater_num})" >수정</button>
-										<button type="button" class="btn btn-outline-primary" onclick="theaterWithdraw(${theater.theater_num})">삭제</button>
+										<button type="button" class="btn btn-outline-primary" onclick="theaterModifyForm(${theater.theater_num})" >관리</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -103,11 +102,7 @@
 			window.open("admin_theater_form", "_self");
 		}
 		
-		function theaterWithdraw(num) {
-			if(confirm("정말 삭제하시겠습니까?")){
-				location.href="admin_theater_delete?theater_num=" + num;
-			}
-		}
+		
 	
 	
 	</script>

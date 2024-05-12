@@ -44,6 +44,13 @@ public interface TheaterMapper {
 	// 관리자 > 새 극장 정보 등록
 	int insertTheater(TheaterVO theater);
 
+	// 관리자 > 극장 관리 > 극장삭제
+	int deleteTheater(TheaterVO theater);
+
+
+
+
+
 
 	
 }

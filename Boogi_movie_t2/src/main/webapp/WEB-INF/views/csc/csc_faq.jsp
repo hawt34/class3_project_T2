@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,6 +13,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 </head>
 <body>
 <div>
@@ -48,7 +51,7 @@
 			<!-- 구분 카테고리 시작 -->
 			<div class="row mt-3">
 				<div class="csc_faq_sel">
-					<select name="faq_category" class="form-select form-select-sm w-25" aria-label="Small select example">
+					<select id="faq_category" name="faq_category" class="form-select form-select-sm w-25" aria-label="Small select example">
 						<option selected>전체</option>
 						<option value="예매/결제">예매/결제</option>
 						<option value="영화관이용">영화관이용</option>
@@ -61,24 +64,32 @@
 			<hr>
 			<!-- 자주묻는 질문 게시판 -->
 			<div class="csc_accordion" >
-				<input type="checkbox" id="answer1">
-				<label for="answer1">제목<em></em></label>
-				<div>
-					<span><em></em>ANSWER</span><br>
-					<p>본문내용을 여기다 넣을 겁니다.
-					꽁꽁얼어 붙은 한강 위로 고양이가 걸어다닙니다.</p> 
-				</div>
-				<input type="checkbox" id="answer2">
-				<label for="answer2">제목<em></em></label>
-				<div><p>본문내용을 여기다 넣을 겁니다.
-					꽁꽁얼어 붙은 한강 위로 고양이가 걸어다닙니다.</p> 
-				</div>
-				<input type="checkbox" id="answer3">
-				<label for="answer3">제목<em></em></label>
-				<div><p>본문내용을 여기다 넣을 겁니다.
-					꽁꽁얼어 붙은 한강 위로 고양이가 걸어다닙니다.</p> 
-				</div>
+				<c:choose>
+					<c:when test="${empty faqList }">
+						<div align="center">faq 게시물이 없습니다</div>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="faq" items="${faqList }" varStatus="status">
+							<input type="checkbox" id="answer${status.index + 1 }">
+							<label for="answer${status.index + 1}"><span class="faq_category">[${faq.faq_category}]</span> ${faq.faq_subject }<em></em></label>
+							<div>
+								<span><em></em>ANSWER</span><br>
+								<p>${faq.faq_content }</p> 
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
+<!-- 				<input type="checkbox" id="answer2"> -->
+<!-- 				<label for="answer2">제목<em></em></label> -->
+<!-- 				<div><p>본문내용을 여기다 넣을 겁니다. -->
+<!-- 					꽁꽁얼어 붙은 한강 위로 고양이가 걸어다닙니다.</p>  -->
+<!-- 				</div> -->
+<!-- 				<input type="checkbox" id="answer3"> -->
+<!-- 				<label for="answer3">제목<em></em></label> -->
+<!-- 				<div><p>본문내용을 여기다 넣을 겁니다. -->
+<!-- 					꽁꽁얼어 붙은 한강 위로 고양이가 걸어다닙니다.</p>  -->
+<!-- 				</div> -->
 				
 				
 			<!-- 페이지네이션-페이징 -->
@@ -94,6 +105,24 @@
 <div>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	let selectCategory = $("#faq_category").val();
+	//console.log(selectCategory);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+});
+
+</script>
 </body>
 </html>

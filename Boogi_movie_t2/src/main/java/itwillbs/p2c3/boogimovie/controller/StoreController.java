@@ -58,4 +58,12 @@ public class StoreController {
 		return "store/storePay"; 
 	}
 	
+	
+	@GetMapping("payment_store")
+	public String paymentStore() {
+		
+		return "payment/payment_store";
+	}
+	
+	
 }

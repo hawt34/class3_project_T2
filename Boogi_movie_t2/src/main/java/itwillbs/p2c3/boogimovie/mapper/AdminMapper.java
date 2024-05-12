@@ -70,6 +70,9 @@ public interface AdminMapper {
 
 	NoticeVO selectNotice(NoticeVO notice);
 	
-	//notice 마지막 번호
+	//notice 마지막 게시물 번호
 	int selectMaxNotice(NoticeVO notice);
+	
+	// notice 처음 게시물 번호
+	int selectMinNotice(NoticeVO notice);
 }

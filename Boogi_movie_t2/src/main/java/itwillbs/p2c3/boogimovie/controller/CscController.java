@@ -133,9 +133,14 @@ public class CscController {
 	@GetMapping("csc_notice_detail")
 	public String cscNoiceDetail(int notice_num, Model model) {
 		NoticeVO notice = noticeService.getNotice(notice_num);
+		notice.setNotice_fdt(notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+		int maxNotice = adminService.getMaxNotice(notice);
+		int minNotice = adminService.getMinNotice(notice);
 		
+		
+		model.addAttribute("minNotice", minNotice);
+		model.addAttribute("maxNotice", maxNotice);
 		model.addAttribute("notice", notice);
-		
 		return "csc/csc_notice_detail";
 	}
 	

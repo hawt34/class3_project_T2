@@ -31,14 +31,14 @@
 <div class="container">
 	<div class="row">
 		<div class="col-2">
-<%-- 			<jsp:include page="/WEB-INF/views/csc/csc_sidebar.jsp"></jsp:include> --%>
+			<jsp:include page="/WEB-INF/views/csc/csc_sidebar.jsp"></jsp:include>
 		</div>
 		<div class="col-10">
 			<h3>공지사항</h3>
 			<hr>
 			<div>
 				<p><span>[부기무비]</span> ${notice.notice_subject} </p>
-				<p><span>문의 지점</span> | ${notice.theater_name } &nbsp;&nbsp;&nbsp; <span>작성일</span> | ${noticeDate }
+				<p><span>문의 지점</span> | ${notice.theater_name } &nbsp;&nbsp;&nbsp; <span>작성일</span> | ${notice.notice_fdt }
 			</div>
 			<hr>
 			<div>
@@ -61,5 +61,27 @@
 <footer>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </footer>
+<script>
+    let noticeNum = ${notice.notice_num};
+    let maxNoticeNum = ${maxNotice}; // maxNoticeNum은 마지막 notice_num 값
+    let minNoticeNum = ${minNotice}; // maxNoticeNum은 마지막 notice_num 값
+    
+
+    let prevLink = $("#prevLink");
+    let nextLink = $("#nextLink");
+	
+    //처음 게시물 또는 마지막 게시물일 때 a태그 비활성화
+    if (noticeNum === minNoticeNum) {
+        prevLink.removeAttr("href");
+        prevLink.css("pointer-events", "none"); 
+        prevLink.css("color", "gray"); 
+    }
+
+    if (noticeNum === maxNoticeNum) {
+        nextLink.removeAttr("href");
+        nextLink.css("pointer-events", "none");
+        nextLink.css("color", "gray");
+    }
+</script>
 </body>
 </html>

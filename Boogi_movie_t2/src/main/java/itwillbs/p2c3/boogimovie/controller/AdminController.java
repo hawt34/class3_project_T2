@@ -563,7 +563,7 @@ public class AdminController {
 		return "redirect:/admin_theater";
 	}
 	
-	
+	// 극장 관리 > 극장 삭제
 	@GetMapping("admin_theater_delete")
 	public String adminTheaterDelete(TheaterVO theater) {
 		
@@ -572,6 +572,7 @@ public class AdminController {
 		return "redirect:/admin_theater";
 	}
 	
+	// 상영관 관리 > 상영관 리스트
 	@GetMapping("admin_booth")
 	public String adminBooth(TheaterVO theater, Model model, ScreenInfoVO screenInfo) {
 		
@@ -590,9 +591,10 @@ public class AdminController {
 	
 	// 상영관 관리 > 상영관 수정 폼으로
 	@GetMapping("admin_booth_modify")
-	public String adminBoothForm(TheaterVO theater, ScreenInfoVO screenInfo, Model model) {
+	public String adminBoothModify(TheaterVO theater, ScreenInfoVO screenInfo, Model model) {
 		// 극장 리스트 조회
 		List<TheaterVO> theaterList = theaterService.getTheater();
+		
 		// 수정할 상영관 조회
 		screenInfo = screenService.getScreenInfo(screenInfo);
 		
@@ -604,7 +606,7 @@ public class AdminController {
 	
 	// 상영관 관리 > 상영관 수정 비즈니스 
 	@PostMapping("admin_booth_modify")
-	public String adminBoothPro(ScreenInfoVO screenInfo, Model model) {
+	public String adminBoothModify(ScreenInfoVO screenInfo, Model model) {
 		
 		String theater_name = screenInfo.getTheater_name();
 		screenInfo.setTheater_num(theaterService.getTheaterName(theater_name));
@@ -620,6 +622,34 @@ public class AdminController {
 	}
 	
 	
+	// 상영관 관리 > 새 상영관 등록 폼으로
+	@GetMapping("admin_booth_form")
+	public String adminBoothForm(TheaterVO theater, Model model) {
+		// 극장 리스트 조회
+		List<TheaterVO> theaterList = theaterService.getTheater();
+		model.addAttribute("theaterList", theaterList);
+		
+		return "admin/admin_theater/admin_booth_form";
+	}
+	
+	// 상영관 관리 > 새 상영관 등록 비즈니스
+	@PostMapping("admin_booth_pro")
+	public String adminBoothPro(ScreenInfoVO screenInfo, Model model) {
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+screenInfo);
+		String theater_name = screenInfo.getTheater_name();
+		screenInfo.setTheater_num(theaterService.getTheaterName(theater_name));
+		
+		int insertCount = screenService.registTheater(screenInfo);
+		
+		if(insertCount < 1) {
+			model.addAttribute("msg",  "상영관 정보 등록 실패!");
+			return "error/fail";
+		}
+		
+		return "redirect:/admin_booth";
+	}
+	
+	// 상영관 관리 > 상영관 삭제
 	@GetMapping("admin_booth_delete")
 	public String adminBoothDelete() {
 		return "redirect:/admin_booth";

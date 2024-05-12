@@ -27,9 +27,14 @@ public class ScreenService {
 		return mapper.selectScreeninfo(screenInfo);
 	}
 
-
+	// 상영관 정보 수정
 	public int modifyScreenInfo(ScreenInfoVO screenInfo) {
 		return mapper.updateScreeninfo(screenInfo);
+	}
+
+	// 새 상영관 등록
+	public int registTheater(ScreenInfoVO screenInfo) {
+		return mapper.insertScreeninfo(screenInfo);
 	}
 	
 	

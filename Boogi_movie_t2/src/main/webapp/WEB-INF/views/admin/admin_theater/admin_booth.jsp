@@ -102,6 +102,11 @@
 		function boothModify(num) {
 			window.open("admin_booth_modify?screen_num=" + num, "_self");
 		}
+		
+		function boothForm() {
+			window.open("admin_booth_form", "_self");
+		}
+		
 		function boothWithdraw(num) {
 			if(confirm("정말 삭제하시겠습니까?")){
 				location.href="admin_booth_delete?screen_num=" + num;

@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="selectTheaterNoticeList" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
-		SELECT notice_subject, notice_content, notice_date, theater_name
+		SELECT notice_num, notice_subject, notice_content, notice_date, theater_name
 		FROM notice 
 		JOIN theater 
 		ON notice.theater_num = theater.theater_num 
@@ -47,7 +47,7 @@
 	</select>
 	
 	<select id="selectNoticeList" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
-		SELECT notice_subject, notice_content, notice_date, theater_name
+		SELECT notice_num, notice_subject, notice_content, notice_date, theater_name
 		FROM notice 
 		JOIN theater 
 		ON notice.theater_num = theater.theater_num 

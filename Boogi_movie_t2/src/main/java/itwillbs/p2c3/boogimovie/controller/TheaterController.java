@@ -21,11 +21,14 @@ public class TheaterController {
 	
 	
 	@GetMapping("theater")
-	public String theater(Model model) {
-		
+	public String theater(Model model, TheaterVO theater) {
+		// 극장 카테고리 공지사항 리스트 조회
 		List<NoticeVO> noticeList = service.getNoticeList();
+		// 극장 전체 리스트 조회
+		List<TheaterVO> theaterList = service.getTheater();
+		
 		model.addAttribute("noticeList", noticeList);
-		System.out.println(noticeList);
+		model.addAttribute("theaterList", theaterList);
 		
 		
 		return "theater/theater_main";

@@ -64,7 +64,7 @@ public class TheaterService {
 	}
 
 	public int deleteTheater(TheaterVO theater) {
-		return  mapper.deleteTheater(theater);;
+		return  mapper.deleteTheater(theater);
 	}
 
 	

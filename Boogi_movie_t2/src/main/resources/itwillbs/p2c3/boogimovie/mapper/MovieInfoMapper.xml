@@ -18,7 +18,9 @@
  		<if test="movie_num != null and movie_num != ''"> 
  		    WHERE movie_num = #{movie_num} 
  		</if> 
-		
+		<if test="movie_name != null and movie_name != ''">
+			WHERE movie_name = #{movie_name}
+		</if>
 	</select>
 	
 	<select id="selectMovieInfoLike" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">

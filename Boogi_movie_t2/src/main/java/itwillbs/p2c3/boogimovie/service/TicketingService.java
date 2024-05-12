@@ -1,5 +1,7 @@
 package itwillbs.p2c3.boogimovie.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,11 @@ public class TicketingService {
 	@Autowired
 	private TicketingMapper mapper;
 
-	public ScreenSessionVO finalListSelect(ScreenSessionVO scs) {
+	public List<ScreenSessionVO> finalListSelect(ScreenSessionVO scs) {
 		return mapper.fianlListSelect(scs);
+	}
+	
+	public ScreenSessionVO chooseSeatSelect(ScreenSessionVO scs) {
+		return mapper.chooseSeatSelect(scs);
 	}
 }	

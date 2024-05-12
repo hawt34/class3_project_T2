@@ -39,7 +39,7 @@
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 
-<form action="tic_choose_seat" method="post">
+<form action="tic_choose_seat" method="post" id="fr">
 <section class="tic_main">
 	<div class="tic_title">
 		<h3>영화 예매</h3>
@@ -162,14 +162,30 @@
 								<div class="finalmovielist scroll" id="finalmovielist">
 									<div style="height : 300px">
 
-										영화관 과 상영관 을 선택해주세요
-<%-- 										<c:forEach var="i" begin="1" end="20"> --%>
-									
-<%-- 										이용가영역 || 영화제목${i }<br> --%>
-<!-- 										영화관정보 || 영화관정보 || 영화관정보 || -->
-<!-- 										영화관정보 || 영화관정보 || 영화관정보 || -->
-									
-<%-- 										</c:forEach> --%>
+<!-- 										영화관 과 상영관 을 선택해주세요 -->
+										<c:forEach var="i" begin="1" end="20">
+										<div class="final_list">
+											<div>
+												${movie_name }
+											</div>
+											<div class="row">
+												<div class="col-md-3">
+													${scs_start_time}~
+													${scs_end_time }
+												</div>
+												<div class="col-md-7">
+													${movie_name }
+													${screen_dimension}
+													${total_seat }
+													${scs_empty_seat }
+												</div>
+												<div class="col-md-2">
+													${thaeter_name}
+													${screen_cinema_num }
+												</div>
+											</div>
+										</div>
+										</c:forEach>
 								</div>
 								</div>
 							</div>
@@ -203,6 +219,31 @@
 	let selectedTheater = "";
 	let selectedDay = "";
 	
+	function final_list_selected(movie_name, start_time, end_time, theater_name, cinema_num){
+		let final_list_selected_things = "/" + movie_name + "/"
+															+ start_time + "/"
+															+ end_time + "/"
+															+ theater_name + "/"
+															+ cinema_num + "/";
+		// 폼 선택 (ID 또는 다른 선택자를 사용하여 정확한 폼을 지정)
+	    let form = $("#fr");
+
+	    // 폼 내에 이미 동일한 ID를 가진 hidden input이 있는지 확인 후 제거 또는 재사용
+	    let hiddenInput = $('#final_list_input');
+	    if (hiddenInput.length === 0) {
+	        // 숨겨진 입력 필드가 존재하지 않으면 새로 생성
+	        hiddenInput = $('<input>').attr({
+	            type: 'hidden',
+	            id: 'final_list_input',
+	            name: 'final_list_data'  // 폼 데이터로 서버에 전송될 때 사용할 이름
+	        });
+	        form.append(hiddenInput);
+	    }
+
+	    // 입력 필드 값 설정
+	    hiddenInput.val(final_list_selected_things);
+	}
+	
 	function finalList() {
 
 		$.ajax({
@@ -219,15 +260,31 @@
 	            result.empty();
 				
 	            response.forEach(function (finalList) {
-	                var finalDiv = "<div class='theater_atrbt'>"
-	                    + "<span>"
-	                    + "<a onclick='theaterClick(\"" + theater.member_my_theater + "\")'>" + theater.member_my_theater + "</a>"
-	                    + "</span>"
+	            	var finalDiv = "<div class='final_list' onclick='final_list_selected(\"" 
+	            			+ finalList.movie_name 
+	            			+ "\", \"" + finalList.scs_start_time 
+	            			+ "\", \"" + finalList.scs_end_time 
+	            			+ "\", \"" + finalList.theater_name 
+	            			+ "\", \"" + finalList.screen_cinema_num + "\")'>"
+	                    + "<div>" + finalList.movie_name + "</div>"
+	                    + "<div class='row'>"
+	                    + "<div class='col-md-3'>"
+	                    + finalList.scs_start_time + "~" + finalList.scs_end_time
+	                    + "</div>"
+	                    + "<div class='col-md-5'>"
+	                    + finalList.movie_name + " || "
+	                    + finalList.screen_dimension + "D || "
+	                    + "총 " + finalList.total_seat + "석 || "
+	                    + finalList.scs_empty_seat + "석 남음"
+	                    + "</div>"
+	                    + "<div class='col-md-2'>"
+	                    + finalList.theater_name + " || "
+	                    + finalList.screen_cinema_num + " 관"
+	                    + "</div>"
+	                    + "</div>"
 	                    + "</div>";
 
-	                result.append(finalDiv); 
-	                	
-
+	                result.append(finalDiv);
 	            });
 	        },
 	        error: function () {

@@ -22,4 +22,12 @@ public class ScreenSessionVO {
 	private int screen_dimension;
 	private int screen_cinema_num;
 	private String select_date;
+	
+	//뷰페이지용 멤버변수
+	private String scs_start_time;
+	private String scs_end_time;
+	private String movie_name;
+	private int total_seat;
+	private String theater_name;
+	private String movie_poster;
 }

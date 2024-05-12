@@ -1,7 +1,9 @@
 package itwillbs.p2c3.boogimovie.controller;
 
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -92,28 +94,25 @@ public class CscController {
 		for(NoticeVO noticed : noticeList) {
 			noticed.setNotice_fdt(noticed.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 		}
-		
-		
-		
-		
 		model.addAttribute("pageList", pageInfo);
 		model.addAttribute("noticeList", noticeList);
 		return "csc/csc_notice";
 	}
+	//공지사항 List 게시판 - ajax를 이용한 비동기 처리
 	@ResponseBody
 	@GetMapping(value="csc_notice.json")
-	public List<NoticeVO> noticeCategory(Model model,
+	public Map<String, Object> noticeCategory(Model model,
 										 @RequestParam(defaultValue = "1")int pageNum,
 										 @RequestParam(required = false)String theaterName) {
 		//----------------------------------------------------
 		int listLimit = 10; // 페이지당 보여줄 게시물 갯수
 		int startRow = (pageNum - 1) * listLimit; // 게시물의 시작점
 		List<NoticeVO> noticeList = null;
-		if(theaterName.equals("전체")) {
+		//극장명에 따른 ajax 전달 
+		if(theaterName.equals("전체1")) {
 			noticeList = noticeService.getNoticeList(listLimit, startRow);
 		} else {
 			noticeList = noticeService.getNoticeCagList(listLimit, startRow, theaterName);
-			System.out.println("카테고리노티스:" + noticeList);
 		}
 		
 		PageInfo pageInfo = pageInfo(pageNum, listLimit, startRow, theaterName);	
@@ -121,9 +120,14 @@ public class CscController {
 		for(NoticeVO noticed : noticeList) {
 			noticed.setNotice_fdt(noticed.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 		}
-		model.addAttribute("pageList", pageInfo);
+		//두개의 객체전달을 위한 HashMap()
+		Map<String, Object> noticeObj = new HashMap<String, Object>();
+		noticeObj.put("noticeList", noticeList);
+		noticeObj.put("pageList", pageInfo);
+		noticeObj.put("pageNum", pageNum);
+//		model.addAttribute("pageList", pageInfo);
 //		model.addAttribute("noticeList", noticeList);
-		return noticeList;
+		return noticeObj;
 	}
 	//공지사항 확인 - detail.jsp
 	@GetMapping("csc_notice_detail")
@@ -170,7 +174,7 @@ public class CscController {
 	}
 	
 	//paging 처리
-	public PageInfo pageInfo(int listLimit, int startRow, int pageNum, String category) {
+	public PageInfo pageInfo(@RequestParam(defaultValue = "1")int pageNum, int listLimit, int startRow, String category) {
 		//전체1 notice 게시판 번호
 		int listCount = 0;
 		int pageListLimit = 0;

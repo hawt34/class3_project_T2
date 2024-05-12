@@ -86,7 +86,7 @@
 							<th>작성일</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="noticeTheaterList">
 						<c:choose>
 							<c:when test="${empty noticeList }">
 								<tr>
@@ -122,7 +122,7 @@
 						<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
 							<c:choose>
 								<c:when test="${pageNum eq i }">
-									<li class="page-item active"><a class="page-link">${i}</a></li>
+									<li class="page-item active"><a class="page-link" >${i}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link" href="csc_notice?pageNum=${i}">${i}</a></li>
@@ -152,7 +152,76 @@ $(function() {
 	$(".csc_local").click(function() {
 		const theaterName = $(this).data("theater");
 // 		console.log(theaterName);
+		//=====================================================
+		//paging처리를 위한 함수 정의
+		function createPagination(pageList, pageNum) {
+		 // 페이지 이동 함수
+		    function goToPage(pageNum) {
+		        location.href = "csc_notice?pageNum=" + pageNum;
+		    }
+	
+		    let pageLinks = [];
+	
+		    // 이전 페이지 링크
+		    var previousPageLink = $("<li>", { class: "page-item" });
+		    if (pageNum === 1) {
+		        previousPageLink.addClass("disabled");
+		    }
+		    previousPageLink.append(
+		        $("<a>", {
+		            class: "page-link",
+		            href: "csc_notice?pageNum=" + (pageNum - 1)
+		        }).append(
+		            $("<span>").text("«")
+		        )
+		    );
+		    pageLinks.push(previousPageLink);
+	
+		    // 페이지 번호 링크들
+		    for (var i = pageList.startPage; i <= pageList.endPage; i++) {
+		        var pageLink = $("<li>", { class: "page-item" });
+		        if (i === pageNum) {
+		            pageLink.addClass("active");
+		        }
+		        pageLink.append(
+		            $("<a>", {
+		                class: "page-link",
+		                text: i,
+		                click: function() {
+		                    goToPage(i); // 클릭된 페이지 번호로 이동
+		                }
+		            })
+		        );
+		        pageLinks.push(pageLink);
+		    }
+	
+		    // 다음 페이지 링크
+		    var nextPageLink = $("<li>", { class: "page-item" });
+		    if (pageNum === pageList.maxPage) {
+		        nextPageLink.addClass("disabled");
+		    }
+		    nextPageLink.append(
+		        $("<a>", {
+		            class: "page-link",
+		            href: "csc_notice?pageNum=" + (pageNum + 1)
+		        }).append(
+		            $("<span>").text("»")
+		        )
+		    );
+		    pageLinks.push(nextPageLink);
+	
+		    // 페이지 네비게이션 요소에 추가
+		    $(".pagination").empty().append(pageLinks);
+		}
 			
+			
+			
+				
+// 		});
+		
+		
+		
+		//====================================================
 		 $.ajax({
             url: "csc_notice.json",
             method: "GET", // 예시로 POST 메서드를 사용하였습니다. 필요에 따라 변경 가능합니다.
@@ -162,7 +231,30 @@ $(function() {
             },
             dataType: "json",
             success: function(response) {
-                // 서버로부터의 응답을 처리하는 코드
+//          	console.log(response.pageList);
+				let noticeList = response.noticeList;
+				
+				let tbody = $(".noticeTheaterList");
+				tbody.empty();
+				
+				
+				
+				$.each(noticeList, function(index, notice) {
+					let tr = $("<tr>");
+					
+					tr.append("<td>" + notice.notice_num + "</td>");
+		            tr.append("<td>" + notice.notice_category + "</td>");
+		            tr.append("<td>" + notice.theater_name + "</td>");
+		            tr.append("<td onclick='location.href=\"csc_notice_detail?notice_num=" + notice.notice_num + "\"'>" + notice.notice_subject + "</td>");
+            		tr.append("<td>" + notice.notice_fdt + "</td>");
+
+		            tbody.append(tr);
+				});
+				
+				let pageList = response.pageList;
+				let pageNum = response.pageNum; // 현재 페이지 번호를 가져옴
+		        createPagination(pageList, pageNum);
+				
             },
             error: function() {
                 alert("요청을 보내는 중에 오류가 발생하였습니다.");

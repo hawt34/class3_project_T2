@@ -93,6 +93,7 @@
 						<input type="submit" value="수정하기" class="btn btn-primary btn-lg btn-block">
 						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
+						<input type="button" value="상영관삭제" class="btn btn-danger btn-lg btn-block" onclick="boothWithdraw(${screenInfo.screen_num})">
 					</div>
 				</form>
 			</div>
@@ -123,6 +124,12 @@
 			} 
 			
 			return false;
+		}
+	    
+	    function boothWithdraw(num) {
+			if(confirm("정말 상영관을 삭제하시겠습니까?")){
+				location.href="admin_booth_delete?screen_num=" + num;
+			}
 		}
  	</script>
 </body>

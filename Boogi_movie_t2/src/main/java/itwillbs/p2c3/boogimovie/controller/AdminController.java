@@ -29,6 +29,7 @@ import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
+import itwillbs.p2c3.boogimovie.vo.TheaterFacilityVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
@@ -524,6 +525,7 @@ public class AdminController {
 	public String adminTheaterModifyForm(TheaterVO theater, Model model) {
 		// 수정할 극장 조회
 		theater = theaterService.getTheater(theater);
+		
 		model.addAttribute("theater", theater);
 		
 		return "admin/admin_theater/admin_theater_modify_form";
@@ -535,11 +537,11 @@ public class AdminController {
 		
 		int updateCount = theaterService.modifyTheater(theater);
 		
+		
 		if(updateCount < 1) {
 			model.addAttribute("msg", "극장 정보 수정 실패!");
 			return "error/fail";
-		}
-		
+		} 
 		return "redirect:/admin_theater";
 	}
 	
@@ -565,9 +567,14 @@ public class AdminController {
 	
 	// 극장 관리 > 극장 삭제
 	@GetMapping("admin_theater_delete")
-	public String adminTheaterDelete(TheaterVO theater) {
+	public String adminTheaterDelete(TheaterVO theater, Model model) {
 		
-//		int deleteCount 
+		int deleteCount = theaterService.deleteTheater(theater);
+		
+		if(deleteCount < 1) {
+			model.addAttribute("msg", "극장 삭제 실패!");
+			return "error/fail";
+		}
 		
 		return "redirect:/admin_theater";
 	}
@@ -651,7 +658,15 @@ public class AdminController {
 	
 	// 상영관 관리 > 상영관 삭제
 	@GetMapping("admin_booth_delete")
-	public String adminBoothDelete() {
+	public String adminBoothDelete(ScreenInfoVO screenInfo, Model model) {
+		
+		int deleteCount = screenService.deleteScreenInfo(screenInfo);
+		
+		if(deleteCount < 1) {
+			model.addAttribute("msg", "상영관 삭제 실패!");
+			return "error/fail";
+		}
+		
 		return "redirect:/admin_booth";
 	}
 	

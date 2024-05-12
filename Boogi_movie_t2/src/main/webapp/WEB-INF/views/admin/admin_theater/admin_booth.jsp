@@ -76,8 +76,8 @@
 											</c:choose>
 										</td>
 										<td>
-											<button type="button" class="btn btn-outline-primary" onclick="boothModify(${screenInfo.screen_num})">수정</button>
-											<button type="button" class="btn btn-outline-primary" onclick="boothWithdraw(${screenInfo.screen_num})">삭제</button>
+											<button type="button" class="btn btn-outline-primary" onclick="boothModify(${screenInfo.screen_num})">관리</button>
+										
 										</td>
 									</tr>
 							</c:forEach>
@@ -107,11 +107,7 @@
 			window.open("admin_booth_form", "_self");
 		}
 		
-		function boothWithdraw(num) {
-			if(confirm("정말 삭제하시겠습니까?")){
-				location.href="admin_booth_delete?screen_num=" + num;
-			}
-		}
+		
 	
 	
 	</script>

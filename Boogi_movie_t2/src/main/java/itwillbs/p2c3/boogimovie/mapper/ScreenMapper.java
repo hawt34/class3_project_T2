@@ -21,6 +21,9 @@ public interface ScreenMapper {
 	// 새 상영관 등록
 	int insertScreeninfo(ScreenInfoVO screenInfo);
 	
+	// 상영관 정보 삭제
+	int deleteScreeninfo(ScreenInfoVO screenInfo);
+	
 	
 	
 	

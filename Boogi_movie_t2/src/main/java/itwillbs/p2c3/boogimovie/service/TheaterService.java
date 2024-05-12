@@ -63,6 +63,10 @@ public class TheaterService {
 		return mapper.insertTheater(theater);
 	}
 
+	public int deleteTheater(TheaterVO theater) {
+		return  mapper.deleteTheater(theater);;
+	}
+
 	
 	
 	

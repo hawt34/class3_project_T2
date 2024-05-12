@@ -30,6 +30,7 @@
 		WHERE theater_num = #{theater_num};
 	</select>
 	
+
 	
 	<select id="selectTheaterName" resultType="int">
 		SELECT theater_num
@@ -92,5 +93,12 @@
 				, 1						
 		)
 	</insert>
+	
+	<delete id="deleteTheater">
+		DELETE FROM theater
+		WHERE theater_num = #{theater_num}
+	</delete>
+
+	
 	
 </mapper>

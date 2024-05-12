@@ -43,6 +43,10 @@
 			  , null
 		)
 	</insert>
-
+	
+	<delete id="deleteScreeninfo">
+		DELETE FROM screen_info
+		WHERE  screen_num = #{screen_num}
+	</delete>
 
 </mapper>

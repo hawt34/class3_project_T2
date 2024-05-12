@@ -14,6 +14,8 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous">
 </script>
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 <style>
 	th[colspan="4"] {
 		text-align: center;
@@ -46,17 +48,17 @@
 				</div>
 				
 				<div class="col-11">
-					<div class="csc_local">전체</div>
-					<div class="csc_local">해운대점</div>
-					<div class="csc_local">센텀점</div>
-					<div class="csc_local">서면점</div>
-					<div class="csc_local">남포점</div>
-					<div class="csc_local">부산대점</div>
-					<div class="csc_local">사직점</div>
-					<div class="csc_local">영도점</div>
-					<div class="csc_local">덕천점</div>
-					<div class="csc_local">정관점</div>
-					<div class="csc_local">사상점</div>
+					<div class="csc_local" data-theater="전체1">전체</div>
+					<div class="csc_local" data-theater="해운대점">해운대점</div>
+					<div class="csc_local" data-theater="센텀점">센텀점</div>
+					<div class="csc_local" data-theater="서면점">서면점</div>
+					<div class="csc_local" data-theater="남포점">남포점</div>
+					<div class="csc_local" data-theater="부산대점">부산대점</div>
+					<div class="csc_local" data-theater="사직점">사직점</div>
+					<div class="csc_local" data-theater="영도점">영도점</div>
+					<div class="csc_local" data-theater="덕천점">덕천점</div>
+					<div class="csc_local" data-theater="정관점">정관점</div>
+					<div class="csc_local" data-theater="사상점">사상점</div>
 					
 					<div class="csc_search">
 						<!--공지 찾는 검색창  -->
@@ -145,6 +147,31 @@
 <footer>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </footer>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$(".csc_local").click(function() {
+		const theaterName = $(this).data("theater");
+// 		console.log(theaterName);
+			
+		 $.ajax({
+            url: "csc_notice.json",
+            method: "GET", // 예시로 POST 메서드를 사용하였습니다. 필요에 따라 변경 가능합니다.
+            
+            data: {
+                theaterName: theaterName
+            },
+            dataType: "json",
+            success: function(response) {
+                // 서버로부터의 응답을 처리하는 코드
+            },
+            error: function() {
+                alert("요청을 보내는 중에 오류가 발생하였습니다.");
+            }
+        });
+		
+	});
+});
+
+</script>
 </body>
 </html>

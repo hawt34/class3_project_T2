@@ -17,7 +17,15 @@
 	crossorigin="anonymous">
 </script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css">
-
+<style>
+#event_type_num{
+	max-width: 680px;
+	padding: 5px;
+	background: #fff;
+	border-radius: 5px;
+	background: #fff;
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -25,6 +33,27 @@
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">이벤트등록</h4>
 				<form class="validation-form" novalidate action="admin_event_pro" method="post" onsubmit="return confirm('이벤트를 등록하시겠습니까?');">
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="event_type_num">이벤트타입</label> 
+							<select name="event_type_num" id="event_type_num" class="form-control" required>
+								<option value="1">영화이벤트</option>
+								<option value="2">극장이벤트</option>
+								<option value="3">할인이벤트</option>
+							</select>
+							<div class="invalid-feedback">이벤트 제목을 선택해주세요.</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="coupon_num">할인쿠폰</label> 
+							<select name="coupon_num" id="coupon_num" class="form-control" required>
+								<option value="7">미선택</option>
+								<option value="6">1000원 할인쿠폰</option>
+								<option value="5">3000원 할인쿠폰</option>
+								<option value="4">5000원 할인쿠폰</option>
+							</select>
+							<div class="invalid-feedback">이벤트 제목을 선택해주세요.</div>
+						</div>
+					</div>
 					<div class="mb-3">
 						<label for="event_title">이벤트제목</label> 
 						<input type="text" name="event_subject" id="event_title" class="form-control" required />
@@ -40,21 +69,23 @@
 						<input type="file" id="event_img" class="form-control" required />
 						<div class="invalid-feedback">이미지를 선택해주세요.</div>
 					</div>
-					<div class="mb-3">
-						<label for="event_start_date">이벤트 시작일</label> 
-						<input type="date" id="event_start_date" class="form-control" required>
-						<div class="invalid-feedback">이벤트 시작일을 선택해주세요.</div>
-					</div>
-					<div class="mb-3">
-						<label for="event_start_date">이벤트 종료일</label> 
-						<input type="date" id="event_start_date" class="form-control" required>
-						<div class="invalid-feedback">이벤트 종료일을 선택해주세요.</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="event_start_date">이벤트 시작일</label> 
+							<input type="date" id="event_start_date" class="form-control" required>
+							<div class="invalid-feedback">이벤트 시작일을 선택해주세요.</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="event_start_date">이벤트 종료일</label> 
+							<input type="date" id="event_start_date" class="form-control" required>
+							<div class="invalid-feedback">이벤트 종료일을 선택해주세요.</div>
+						</div>
 					</div>
 					
 					<hr class="mb-4">
 					
 					<div class="mb-4" align="center">
-						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" >
+						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block">
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
 				</form>

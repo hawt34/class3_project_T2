@@ -365,6 +365,7 @@ public class AdminController {
 	}
 	@PostMapping("admin_event_pro")
 	public String adminEventPro() {
+		
 		return "redirect:/admin_event";
 	}
 	@GetMapping("admin_event_delete")

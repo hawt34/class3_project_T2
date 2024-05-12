@@ -59,9 +59,9 @@
 							<tr>
 								<td>1259</td>
 								<td>어린이날 이벤트</td>
-								<td>2024-04-26</td>
-								<td>어드민</td>
-								<td>진행전</td>
+								<td>영화이벤트</td>
+								<td>2024-05-11</td>
+								<td>2024-05-11 ~ 2024-07-11</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary" onclick="eventForm()">상세보기</button>
 								</td>

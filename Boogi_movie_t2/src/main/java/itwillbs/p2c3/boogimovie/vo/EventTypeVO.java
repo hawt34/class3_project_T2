@@ -6,6 +6,4 @@ import lombok.Data;
 public class EventTypeVO {
 	private int event_type_num;
 	private String event_type_name;
-	private int coupon_num;
-	
 }

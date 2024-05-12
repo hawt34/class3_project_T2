@@ -43,8 +43,8 @@
 			<hr>
 			<div class="row">
 			
-				<div class="col-1 mt-3">
-					<span>전체 ${pageList.listCount }건</span>
+				<div class="col-1 mt-3" id ="noticeCount">
+					<span id="count">전체 ${pageList.listCount }건</span>
 				</div>
 				
 				<div class="col-11">
@@ -213,15 +213,8 @@ $(function() {
 		    // 페이지 네비게이션 요소에 추가
 		    $(".pagination").empty().append(pageLinks);
 		}
-			
-			
-			
-				
-// 		});
-		
-		
-		
 		//====================================================
+		//ajax 처리 
 		 $.ajax({
             url: "csc_notice.json",
             method: "GET", // 예시로 POST 메서드를 사용하였습니다. 필요에 따라 변경 가능합니다.
@@ -237,8 +230,6 @@ $(function() {
 				let tbody = $(".noticeTheaterList");
 				tbody.empty();
 				
-				
-				
 				$.each(noticeList, function(index, notice) {
 					let tr = $("<tr>");
 					
@@ -249,11 +240,21 @@ $(function() {
             		tr.append("<td>" + notice.notice_fdt + "</td>");
 
 		            tbody.append(tr);
-				});
+				}); // 게시판 비동기 처리
 				
+				// 페이징 비동기 처리
 				let pageList = response.pageList;
 				let pageNum = response.pageNum; // 현재 페이지 번호를 가져옴
 		        createPagination(pageList, pageNum);
+				//----------------------------
+				//count 처리
+				let noticeCount = response.pageList.listCount;
+				
+				let countDiv = $("#noticeCount");
+				countDiv.empty();
+				
+				countDiv.append("<span>전체 " + noticeCount + "건</span>");
+				
 				
             },
             error: function() {

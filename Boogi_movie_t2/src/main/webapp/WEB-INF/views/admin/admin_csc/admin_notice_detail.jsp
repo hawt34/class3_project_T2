@@ -14,16 +14,17 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous">
 </script>
-<style type="text/css">
-span {
-	color:skyblue;
-}
-#prevLink, #nextLink {
-	text-decoration: none;
-	color:black;
-}
-</style>
-
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+	<style type="text/css">
+	span {
+		color:skyblue;
+	}
+	#prevLink, #nextLink {
+		text-decoration: none;
+		color:black;
+	}
+	</style>
 </head>
 <body>
 <header>
@@ -60,8 +61,8 @@ span {
 
 </div>
 <script>
-    let prevLink = document.getElementById("prevLink");
-    let nextLink = document.getElementById("nextLink");
+    let prevLink = $("#prevLink");
+    let nextLink = $("#nextLink");
 
     // 마지막 또는 처음 notice_num일 때 링크를 비활성화
     if (${notice.notice_num eq 1}) {

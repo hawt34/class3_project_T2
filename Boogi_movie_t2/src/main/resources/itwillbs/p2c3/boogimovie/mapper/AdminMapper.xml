@@ -195,5 +195,9 @@
 		SELECT MAX(notice_num)
 		FROM notice
 	</select>
+	<select id="selectMinNotice" resultType="int">
+		SELECT MIN(notice_num)
+		FROM notice
+	</select>
 	
 </mapper>

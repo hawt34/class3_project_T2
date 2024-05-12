@@ -218,11 +218,12 @@ public class AdminController {
 	@GetMapping("admin_notice_detail")
 	public String adminNoticeDetail(NoticeVO notice, Model model) {
 		notice = service.getNotice(notice);
-		String noticeDate = notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		notice.setNotice_fdt(notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))); 
 		int maxNotice = service.getMaxNotice(notice);
+		int minNotice = service.getMinNotice(notice);
 		
+		model.addAttribute("minNotice", minNotice);
 		model.addAttribute("maxNotice", maxNotice);
-		model.addAttribute("noticeDate", noticeDate);
 		model.addAttribute("notice", notice);
 		return "admin/admin_csc/admin_notice_detail";
 	}
@@ -276,7 +277,7 @@ public class AdminController {
 		
 		return "redirect:/admin_oto";
 	}
-	
+	//관리자 고객센터 controller 끝 =========================================================
 	// 관리자 회원 페이지
 
 	// 2) 리뷰 페이지

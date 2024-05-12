@@ -108,9 +108,14 @@ public class AdminService {
 	public NoticeVO getNotice(NoticeVO notice) {
 		return mapper.selectNotice(notice);
 	}
-
+	
+	//notice 마지막 번호 가져오기
 	public int getMaxNotice(NoticeVO notice) {
 		return mapper.selectMaxNotice(notice);
+	}
+	//notice 처음 번호 가져오기
+	public int getMinNotice(NoticeVO notice) {
+		return mapper.selectMinNotice(notice);
 	}
 	
 }

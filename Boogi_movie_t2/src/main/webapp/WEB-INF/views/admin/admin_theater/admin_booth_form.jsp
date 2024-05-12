@@ -8,7 +8,7 @@
 <title>상영관 등록 폼</title>
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
-<script src="${pageContext.request.contextPath}/resources//js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 

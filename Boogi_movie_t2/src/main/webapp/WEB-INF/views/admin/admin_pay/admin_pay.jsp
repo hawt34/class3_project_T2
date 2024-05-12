@@ -8,7 +8,7 @@
 <!-- <link href="../admin_main/admin_main.css" rel="stylesheet"> -->
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
-<script src="${pageContext.request.contextPath}/resources//js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_list.css" rel="stylesheet" type="text/css">
 </head>
 <body>

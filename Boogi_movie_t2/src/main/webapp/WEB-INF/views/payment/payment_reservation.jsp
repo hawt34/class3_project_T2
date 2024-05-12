@@ -7,6 +7,7 @@
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 
 <%-- <link href="${pageContext.request.contextPath}/resources/css/payment.css" rel="stylesheet" type="text/css"> --%>
 <style type="text/css">

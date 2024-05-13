@@ -710,7 +710,7 @@ public class AdminController {
 	
 	// 상영관 관리 > 상영관 수정 폼으로
 	@GetMapping("admin_booth_modify")
-	public String adminBoothModify(TheaterVO theater, ScreenInfoVO screenInfo, Model model) {
+	public String adminBoothModifyForm(TheaterVO theater, ScreenInfoVO screenInfo, Model model) {
 		// 극장 리스트 조회
 		List<TheaterVO> theaterList = theaterService.getTheater();
 		
@@ -725,7 +725,7 @@ public class AdminController {
 	
 	// 상영관 관리 > 상영관 수정 비즈니스 
 	@PostMapping("admin_booth_modify")
-	public String adminBoothModify(ScreenInfoVO screenInfo, Model model) {
+	public String adminBoothModifyPro(ScreenInfoVO screenInfo, Model model) {
 		
 		String theater_name = screenInfo.getTheater_name();
 		screenInfo.setTheater_num(theaterService.getTheaterName(theater_name));

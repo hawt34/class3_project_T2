@@ -2,6 +2,7 @@ package itwillbs.p2c3.boogimovie.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +47,6 @@ public class MypageInfoService {
 		return movieReservation;
 	}
 	
-	
 	// 회원정보
 	public MemberVO getDbMember(MemberVO member) {
 		System.out.println("MypageInfoService - getDbMember");
@@ -61,9 +61,13 @@ public class MypageInfoService {
 	
 	
 	// 정보수정
-	public int modifyMember(MemberVO member) {
-		return mapper.updateMember(member);
+	public int modifyMemberEq(MemberVO member) {
+		return mapper.updateMemberEq(member);
 	}
+	
+//	public int modifyMemberNotEq(MemberVO member) {
+//		return mapper.updateMemberNotEq(member);
+//	}
 	
 	// 탈퇴처리
 	public int withdrawMember(MemberVO member) {

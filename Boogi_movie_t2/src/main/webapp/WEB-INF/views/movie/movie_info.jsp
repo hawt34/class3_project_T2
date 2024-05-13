@@ -5,11 +5,184 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+/*    	border: 1px solid skyblue;    */
+}
+
+
+#wrap {
+	width: 1400px;
+	margin: 0 auto;
+}
+
+article {
+	margin-top: 40px;
+ 	width: 1400px;
+	height: 600px;
+	display: flex;
+    justify-content: center;
+  	align-items: center;
+}
+.movieTrail {
+  /* 내부의 movieTrail을 가운데 정렬합니다. */
+ 	width: 900px;
+ 	max-width: 100%; /* 부모 요소의 너비에 맞게 설정합니다. */
+ 	margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬합니다. */
+}
+section {
+	overflow: hidden;
+	width: 1400px;
+	height: 1500px;
+	/* 	background-color: #ffca28; */
+	display: flex;
+	flex-wrap: wrap;
+}
+
+section h1 {
+	position: relative;
+	text-align: center; /* 가운데 정렬 */
+	font-size: 32px; /* 폰트 크기 수정 */
+	width: 100%; /* 너비 조정 */
+	white-space: nowrap;
+}
+
+.content {
+	width: 1400px;
+}
+
+.movie {
+	padding-top: 30px;
+	width: 350px;
+	height: 600px;
+	float: left;
+	text-align: center;
+}
+
+.movie img {
+	width: 300px;
+	height: 500px;
+}
+
+.movie input[type="button"] {
+	display: inline-block;
+}
+
+.movieInfo {
+	padding-top: 30px;
+	float: right;
+	width: 1000px;
+	height: 600px;
+}
+
+.movieInfo ul li {
+	font-size: 24px; /* 텍스트 크기 조정 */
+}
+
+.movieInfo input[type="button"] {
+	position: absolute;
+	margin-left: 20px;
+	bottom: 30px;
+}
+
+.reviewContents {
+	width: 1400px;
+	margin-top: 10px;
+	height: 200px;
+/* 	border: 1px solid black;   */
+	font-size: 30px;
+}
+
+.submitButton{
+	width: 400px;
+	margin-left: 10px;
+	
+}
+
+.star-rating{
+	padding-left: 10px;
+	padding-top: 10px;
+	float: left;
+	width: 320px;
+	height: 150px;
+}
+#review_rating,
+#review_rating option:checked {
+    color: gold; /* 셀렉트 박스와 선택된 옵션의 텍스트 색상을 골드로 설정 */
+	font-size: 20px;
+}
+
+.review textarea.form-control {
+	margin-left: 20px;
+	width: 500px;
+	height: 100px; /* 높이를 원하는 크기로 조절하세요 */
+/* 	border: 2px solid black; */
+	resize: none;
+}
+
+.showReview {
+	margin-bottom: 250px;
+	font-size: 24px;
+	margin-left:20px;
+	width: 1300px;
+	height: 200px;
+}
+
+.reviewCover {
+	width: 200px;
+	height: 80px;
+	float: left;
+	color: gold; /* 별의 색상을 골드로 지정 */
+}
+
+.review {
+	padding-top: 10px;
+	width: 900px;
+	margin-bottom:200px;
+/* 	border: 1px solid red;   */
+	float: right; 
+}
+.reviewCover span:before {
+	content: '★';
+	color: gold;
+}
+.reviewCover span.empty::before {
+    content: '☆'; /* 빈 별의 모양 */
+    color: gold;
+}
+.reviewCover span.filled::before {
+    content: '★'; /* 별이 채워진 상태 */
+	color: gold;
+}
+.reviewTexts{
+	float: right;
+	width: 1000px;
+	height: 80px;
+}
+.reviewTexts span {
+        margin-right: 10px; /* 원하는 만큼의 간격을 조절하세요 */
+ }
+
+.movieInfo img {
+  width: 200px;
+  height: 100px;
+}
+.backButton {
+	margin-top: 20px;
+}
+
+footer {
+	width: 100%;
+	height: 100px;
+	/* 	background-color: #ffb300; */
+</style>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/movie_info.css" rel="stylesheet" type="text/css">
+<%-- <link href="${pageContext.request.contextPath}/resources/css/movie_info.css" rel="stylesheet" type="text/css"> --%>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"	crossorigin="anonymous">
 <link rel="stylesheet" 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -54,8 +227,12 @@
 							<li><span>상영시간 : ${movie.movie_runtime }</span></li>
 							<li><span>줄거리 : ${movie.movie_summary}</span></li>
 						</ul>
-						
+							<img src="${movie.movie_stillcut}">
+							<img src="${movie.movie_stillcut2}">
+							<img src="${movie.movie_stillcut3}">
+						<div class="backButton">	
 						<button type="button" class="btn btn-outline-primary" onclick="window.history.back()">뒤로가기</button>
+						</div>
 					</div>	
 				</div>
 			</div>

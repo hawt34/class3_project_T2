@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import itwillbs.p2c3.boogimovie.vo.EventVO;
+import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -93,4 +94,12 @@ public interface AdminMapper {
 	
 	// notice 처음 게시물 번호
 	int selectMinNotice(NoticeVO notice);
+	
+	//스토어용
+	//스토어 전체 리스트 
+	List<ItemInfoVO> selectItemListFull();
+	//스토어 추가 시 개별아이템 확인
+	ItemInfoVO selectItem(String item_info_name);
+	int insertItem(ItemInfoVO item);
+	
 }

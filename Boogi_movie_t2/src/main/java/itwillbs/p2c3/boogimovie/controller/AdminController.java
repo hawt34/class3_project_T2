@@ -32,12 +32,14 @@ import org.springframework.web.multipart.MultipartFile;
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.EventService;
 import itwillbs.p2c3.boogimovie.service.FaqService;
+import itwillbs.p2c3.boogimovie.service.ItemInfoService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.ScreenService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.FAQVO;
+import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -550,7 +552,13 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 스토어 페이지
 	@GetMapping("admin_store")
-	public String adminStore() {
+	public String adminStore(Model model) {
+
+		//전체리스트를 담는 걸 하나 만듬.
+		
+		List<ItemInfoVO> itemFull = service.getItmeListFull();
+		model.addAttribute("itemFull", itemFull);
+		//전체리스트 담는 거 확인완료
 		return "admin/admin_store/admin_store";
 	}
 	@GetMapping("admin_store_form")
@@ -558,8 +566,23 @@ public class AdminController {
 		return "admin/admin_store/admin_store_form";
 	}
 	@PostMapping("admin_store_pro")
-	public String adminStorePro() {
-		return "redirect:/admin_store";
+	public String adminStorePro(ItemInfoVO insertItem,Model model) {
+		//System.out.println("여기는 스토어프로 인설트 아이템 확인" + insertItem); 데이터 확인완료
+		ItemInfoVO dbItem =  service.getItem(insertItem.getItem_info_name());
+		
+		if(dbItem != null) {
+			model.addAttribute("msg", "이미 등록된 스토어 아이템입니다!");
+			return "error/fail";
+		}
+		
+		int insertCount = service.insertItem(insertItem);
+		if(insertCount > 0) {
+			return "redirect:/admin_store";
+		} else {
+			model.addAttribute("msg", "스토어아이템 등록 실패");
+			return "error/fail";
+		}
+		
 	}
 	@GetMapping("admin_store_delete")
 	public String adminStoreDelete() {

@@ -12,5 +12,6 @@ public interface ItemMapper {
 	List<ItemInfoVO> selectItemListCombo();
 	List<ItemInfoVO> selectItemListPop();
 	List<ItemInfoVO> selectItemListJuice();
+	List<ItemInfoVO> selectItemListFull();
 	
 }

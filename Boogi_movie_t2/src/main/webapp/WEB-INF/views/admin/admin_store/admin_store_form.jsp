@@ -24,49 +24,30 @@
 				<h4 class="mb-4">스낵등록</h4>
 				<form class="validation-form" novalidate action="admin_store_pro" method="post" onsubmit="return confirm('스낵정보를 등록하시겠습니까?');">
 					<div class="mb-3">
-						<label for="movie_code">스낵코드</label> 
-						<input type="text" id="movie_code" class="form-control" required />
-						<div class="invalid-feedback">스낵코드를 입력해주세요.</div>
-					</div>
-					<div class="mb-3">
 						<label for="movie_createDate">스낵종류</label> 
-						<input type="text" id="movie_createDate" class="form-control" required />
+							<select id="item_info_category" name="item_info_category">
+								<option value="스낵">스낵</option>
+								<option value="음료">음료</option>
+								<option value="팝콘">팝콘</option>
+								<option value="콤보">콤보</option>
+							</select>
 						<div class="invalid-feedback">스낵종류를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_name">스낵명</label> 
-						<input type="text" id="movie_name" class="form-control" required />
+						<input type="text" id="item_info_name" name="item_info_name" class="form-control" required />
 						<div class="invalid-feedback">스낵명을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_director">판매가격</label> 
-						<input type="text" id="movie_director" class="form-control" required />
+						<input type="text" id="item_info_price" name="item_info_price"  class="form-control" required />
 						<div class="invalid-feedback">판매가격을 입력해주세요.</div>
 					</div>
-					<div class="col-md-8 mb-3">
-						<label for="root">운영상태</label> <select
-							class="custom-select d-block w-100" id="root">
-							<option value="상영상태">판매중</option>
-							<option value="개봉예정작">미판매</option>
-						</select>
-						<div class="invalid-feedback">운영상태를 선택해주세요.</div>
-					</div>
 					<div class="mb-3">
-						<label for="movie_stillCut1">스낵이미지1</label> 
-						<input type="text" id="movie_stillCut1" class="form-control" required />
+						<label for="movie_stillCut1">스낵이미지</label> 
+						<input type="text" id="item_info_image" name="item_info_image"  class="form-control" required />
 						<div class="invalid-feedback">스낵이미지를 선택해주세요.</div>
 					</div>
-					<div class="mb-3">
-						<label for="movie_stillCut2">스낵이미지2</label>  &nbsp; (필수 아님) 
-						<input type="text" id="movie_stillCut2" class="form-control" />
-					</div>
-					<div class="mb-3">
-						<label for="movie_stillCut3">스낵이미지3</label>  &nbsp; (필수 아님)
-						<input type="text" id="movie_stillCut3" class="form-control" />
-					</div>
-					
-					<hr class="mb-4">
-					
 					<div class="mb-4" align="center">
 						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" >
 						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >

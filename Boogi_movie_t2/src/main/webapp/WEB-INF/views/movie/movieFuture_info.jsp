@@ -36,7 +36,7 @@ article {
 
 section {
 	width: 1400px;
-	height: 600px;
+	height: 800px;
 	display: flex;
 	overflow: hidden;
 	flex-wrap: wrap;
@@ -81,8 +81,13 @@ section h1 {
 	margin-left: 20px;
 	bottom: 30px;
 }
-
-
+.backButton{
+	margin-top: 20px;
+}
+.movieInfo img {
+  width: 200px;
+  height: 100px;
+}
 footer {
 	width: 100%;
 	height: 100%
@@ -133,8 +138,12 @@ footer {
 							<li><span>상영시간 : ${movieFutureInfo.movie_runtime }</span></li>
 							<li><span>줄거리 : ${movieFutureInfo.movie_summary}</span></li>
 						</ul>
-						
+						<img src="${movieFutureInfo.movie_stillcut}">
+						<img src="${movieFutureInfo.movie_stillcut2}">
+						<img src="${movieFutureInfo.movie_stillcut3}">
+						<div class="backButton">		
 						<button type="button" class="btn btn-outline-primary" onclick="window.history.back()">뒤로가기</button>
+						</div>
 					</div>	
 				</div>
 			</div>

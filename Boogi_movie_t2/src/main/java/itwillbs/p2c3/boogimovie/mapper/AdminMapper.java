@@ -102,4 +102,5 @@ public interface AdminMapper {
 	ItemInfoVO selectItem(String item_info_name);
 	int insertItem(ItemInfoVO item);
 	int deleteItem(String item_info_name);
+	int updateItem(ItemInfoVO item);
 }

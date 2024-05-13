@@ -161,6 +161,9 @@ public class AdminService {
 	public int deleteItem(String item_info_name) {
 		return mapper.deleteItem(item_info_name);
 	}
-	
+	// 스토어 업데이트 아이템
+	public int updateItem(ItemInfoVO item) {
+		return mapper.updateItem(item);
+	}
 	
 }

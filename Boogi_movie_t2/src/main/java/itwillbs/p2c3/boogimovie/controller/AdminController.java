@@ -571,10 +571,15 @@ public class AdminController {
 	// 여기서 아이템 업데이트 폼을 다시 리다이렉트
 	
 	@PostMapping("admin_store_modifyPro")
-	public String adminStoreForm() {
-		System.out.println("진짜 스낵수정폼 수정");
-		
-		return "redirect:/admin_store";
+	public String adminStoreForm(ItemInfoVO updateItem, Model model) {
+		//System.out.println("진짜 스낵수정폼 수정" + updateItem); 데이터 확인완료 주석처리
+		int updateCount = service.updateItem(updateItem);
+		if(updateCount > 0) {
+			return "redirect:/admin_store";
+		} else {
+			model.addAttribute("msg", "스토어 아이템 수정에 실패하였습니다");
+			return "error/fail";
+		}
 	}
 	
 	@PostMapping("admin_store_pro")

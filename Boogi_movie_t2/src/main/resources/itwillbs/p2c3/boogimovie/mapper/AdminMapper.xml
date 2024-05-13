@@ -248,8 +248,7 @@
 		SELECT *
 		FROM item_info
 		WHERE item_info_category IN ('콤보', '스낵', '음료', '팝콘')
-		GROUP BY item_info_name
-		ORDER BY item_info_price ASC;
+		ORDER BY item_info_category, item_info_price ASC
 	</select>	
 	
 	<select id="selectItem" resultType="itwillbs.p2c3.boogimovie.vo.ItemInfoVO">
@@ -278,6 +277,16 @@
 		WHERE item_info_name = #{item_info_name}
 	</delete>
 	
+	<update id="updateItem">
+		UPDATE item_info
+		SET 
+			item_info_category = #{item_info_category}
+			, item_info_price = #{item_info_price}
+			, item_info_image = #{item_info_image}
+		WHERE
+			item_info_name = #{item_info_name}	
+		
+	</update>
 	
 	
 </mapper>

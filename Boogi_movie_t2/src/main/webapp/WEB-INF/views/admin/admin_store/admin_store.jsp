@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,20 +89,19 @@
 				<!-- 사이드바 영역 -->
 				<jsp:include page="../../inc/admin_aside.jsp"></jsp:include>
 			</div>
-
+			
 			<div class="col-md-9">
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_store_head">
 					<div class="admin_store_title">스토어 관리</div>
 					<div class="admin_store_search">
-						<select>
-							<option>음료류</option>
-							<option>치킨류</option>
-							<option>팝콘류</option>
-							<option>감자류</option>
-							<option>그 외</option>
-						</select> 
+						  <select id="categorySelect">
+                            <option value="전체">전체</option> <!-- 전체 카테고리를 선택하는 옵션을 추가할 수 있습니다. -->
+                           	<option value="음료">음료</option> <!-- 귀찮아서 그냥 전체로 끌고옴. -->
+                           	<option value="음료">음료</option>
+                           	<option value="음료">음료</option>
+                          </select> 
 					</div>
 				</div>
 
@@ -112,63 +112,26 @@
 						<thead>
 			
 							<tr>
-								<th>스낵 코드</th>
 								<th>스낵 종류</th>
 								<th>스낵 이름</th>
 								<th>스낵 가격</th>
-								<th>운영 상태</th>
 								<th>수정/삭제</th>
 							</tr>
 						</thead>
 				<!--  이 부분을 반복문을 통해서 상영관 정보를 담은 리스트를 
 			      전달받아 출력하면 좋을듯-->
 						<tbody>
-							<tr>
-								<td>919893</td>
-								<td>음료류</td>
-								<td>제로 펩시 라임향</td>
-								<td>3,000원</td>
-								<td>판매중</td>
-								<td>
+							<c:forEach var="itemFull" items="${itemFull}">
+								 <tr>
+	        					 <td>${itemFull.item_info_category}</td>
+	        					 <td>${itemFull.item_info_name}</td>
+	        					 <td>${itemFull.item_info_price}</td>
+	                             <td>
 									<button type="button" class="btn btn-outline-primary" onclick="store_form()">수정</button>
 									<button type="button" class="btn btn-outline-primary" onclick="store_delete()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>98383</td>
-								<td>팝콘류</td>
-								<td>카라멜 팝콘(중)</td>
-								<td>7,000원</td>
-								<td>판매중</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="store_form()">수정</button>
-									<button type="button" class="btn btn-outline-primary" onclick="store_delete()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>123124</td>
-								<td>팝콘류</td>
-								<td>팝콘(대)</td>
-								<td>8,000원</td>
-								<td>판매 중지</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="store_form()">수정</button>
-									<button type="button" class="btn btn-outline-primary" onclick="store_delete()">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td>34234</td>
-								<td>치킨류</td>
-								<td>지코바 숯불향</td>
-								<td>322,300원</td>
-								<td>판매중</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="store_form()">수정</button>
-									<button type="button" class="btn btn-outline-primary" onclick="store_delete()">삭제</button>
-								</td>
-							</tr>
-						
-							
+								 </td>
+								 </tr>
+						   </c:forEach> 
 						</tbody>
 					</table>
 				</div>
@@ -187,6 +150,8 @@
 	</footer>
 
 	<script type="text/javascript">
+			
+	
 		function store_form() {
 			window.open("admin_store_form", "_self");
 		}
@@ -196,7 +161,7 @@
 			}
 		}
 		
-	
+		
 	
 	</script>
 </body>

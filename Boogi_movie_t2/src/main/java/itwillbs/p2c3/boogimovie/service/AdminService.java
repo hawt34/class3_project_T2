@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import itwillbs.p2c3.boogimovie.mapper.AdminMapper;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
+import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -130,6 +131,25 @@ public class AdminService {
 	//notice 처음 번호 가져오기
 	public int getMinNotice(NoticeVO notice) {
 		return mapper.selectMinNotice(notice);
+	}
+	
+	//스토어 모든 리스트 가져오기
+	public List<ItemInfoVO> getItmeListFull(){
+		
+		return mapper.selectItemListFull();
+	}
+
+	
+	//스토어 아이템 추가전 확인
+		
+	public ItemInfoVO getItem(String item_info_name) {
+		
+		return mapper.selectItem(item_info_name);
+	}
+	
+	//스토어 아이템 추가 
+	public int insertItem(ItemInfoVO insertItem) {
+		return mapper.insertItem(insertItem);
 	}
 	
 }

@@ -229,4 +229,38 @@
 		FROM notice
 	</select>
 	
+	
+	<!-- 스토어 사항 입력 -->
+	<select id="selectItemListFull" resultType="itwillbs.p2c3.boogimovie.vo.ItemInfoVO">
+		SELECT *
+		FROM item_info
+		WHERE item_info_category IN ('콤보', '스낵', '음료', '팝콘')
+		GROUP BY item_info_name
+		ORDER BY item_info_price ASC;
+	</select>	
+	
+	<select id="selectItem" resultType="itwillbs.p2c3.boogimovie.vo.ItemInfoVO">
+		SELECT * 
+		FROM item_info
+		WHERE item_info_name = #{item_info_name}
+	</select>	
+	
+	<insert id="insertItem">
+		INSERT INTO item_info(
+		item_info_name,
+		item_info_category,
+		item_info_image,
+		item_info_price		
+		)
+		VALUES (
+			#{item_info_name},
+			#{item_info_category},
+			#{item_info_image},
+			#{item_info_price}
+		)
+	</insert>
+	
+	
+	
+	
 </mapper>

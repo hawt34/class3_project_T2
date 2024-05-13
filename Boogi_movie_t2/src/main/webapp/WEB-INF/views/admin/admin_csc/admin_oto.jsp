@@ -100,6 +100,14 @@
 		font-size: 30px;
 		margin-left: 100px;
 	}
+	.notice_pageArea {
+	margin-top: 20px;
+    text-align: center;
+	}
+
+	.notice_pageArea nav {
+	    display: inline-block;
+	}
 </style>
 </head>
 <body>
@@ -109,6 +117,7 @@
 	
 <!-- 	<div class="container"> -->
 		<div class="row">
+		
 			<!-- side 영역 -->
 			<div class="col-2">
 				<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
@@ -196,6 +205,33 @@
 							
 						</tbody>
 					</table>
+				</div>
+				<div class="notice_pageArea">
+				<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
+								<a class="page-link" href="admin_oto?pageNum=${pageNum - 1}" aria-label="Previous" >
+								<span aria-hidden="true" >&laquo;</span>
+								</a>
+							</li>
+							<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
+								<c:choose>
+									<c:when test="${pageNum eq i }">
+										<li class="page-item active"><a class="page-link">${i}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="admin_oto?pageNum=${i}">${i}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<li class="page-item <c:if test="${pageNum eq pageList.maxPage}">disabled</c:if>">
+								<a class="page-link" href="admin_oto?pageNum=${pageNum + 1}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</div>

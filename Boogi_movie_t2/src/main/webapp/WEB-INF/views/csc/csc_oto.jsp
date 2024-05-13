@@ -74,11 +74,11 @@
 						<div class="col-sm-10">
 							<select name="oto_category" class="form-select form-select-sm w-25" aria-label="Default select example" required>
 								<option selected disabled>문의 유형 선택</option>
-								<option value="영화">영화</option>
-								<option value="극장">극장</option>
 								<option value="예매/결제">예매/결제</option>
+								<option value="영화관이용">영화관이용</option>
 								<option value="쿠폰">쿠폰</option>
-								<option value="회원정보">회원정보</option>
+								<option value="스토어">스토어</option>
+								<option value="홈페이지/모바일">홈페이지/모바일</option>
 							</select>					
 						</div>
 					</div>

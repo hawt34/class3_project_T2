@@ -6,7 +6,7 @@
 	vertical-align: middle;
 	text-align: center;
 	font-weight: bold;
-	background: #99CCFF;
+	background: #CCCCCC;
 	border-radius: 5px;
 	width: 300px;
 	height: 100px;
@@ -24,7 +24,8 @@
 }
 
 .csc_faq_search input[value="검색"] {
-	background: #3333FF;
+	background: skyblue;
+	border:0;
 	color: white;
 }
 
@@ -35,6 +36,11 @@
 
 /* faq 게시판 형식 */
 
+.csc_accordion {
+        max-width: 900px; /* 원하는 너비 설정 */
+        margin: 0 auto; /* 가운데 정렬 */
+    }
+
 
 input[id*="answer"]{
 	display: none;
@@ -43,24 +49,25 @@ input[id*="answer"]{
 input[id*="answer"] + label {
 	display:block;
 	padding:20px;
-	border: solid 1px #232188;
+	border: solid 1px skyblue;
 	border-bottom: 0;
 	border-radius:4px;
-	color:#fff;
+	color:black;
 	font-weight:900;
-	background: #99CCFF;
+	background: #CCCCCC;
 	cursor: pointer;
 	position: relative;
 }
 input[id*="answer"] + label em{
 	position: absolute;
-	top:50%;
-	right: 18px;
+	top:60%;
+	right: 30px;
 	display: inline-block;
-	width:50px;
-	height:30px;
+	width:25px;
+	height:25px;
 	margin-top: -15px;
 	background: url("../images/arrowDown.png") 0 0 no-repeat;
+	background-size: contain;
 	
 }
 
@@ -77,12 +84,12 @@ input[id*="answer"] + label + div  p {
 	padding:20px;
 }
 input[id*="answer"]:checked + label + div {
-	max-height: 100px;
+	max-height: 500px;
 }
 input[id*="answer"]:checked + label em{
 	position: absolute;
 	top:50%;
-	right: 18px;
+	right: 30px;
 	display: inline-block;
 	width:50px;
 	height:30px;
@@ -95,4 +102,19 @@ input[value="검색"] {
 	margin-top: 10px;
 	padding: 2px 5px;
 	border-radius: 3px;		
+}
+
+.csc_accordion div span em {
+    display: inline-block;
+    width: 25px; /* 이미지의 가로 크기에 맞게 조절 */
+    height: 25px; /* 이미지의 세로 크기에 맞게 조절 */
+    background: url("../images/cscBulb.png") center center no-repeat; /* 이미지 경로 설정 */
+    background-size: contain; /* 이미지가 잘리지 않고 비율 유지 */
+    margin-right: 10px; /* 이미지와 텍스트 사이의 간격 조절 */
+    vertical-align: bottom; /* 이미지를 텍스트와 수직으로 가운데 정렬 */
+	margin-top:6px;    
+}
+
+.faq_category {
+	color: #339999;	
 }

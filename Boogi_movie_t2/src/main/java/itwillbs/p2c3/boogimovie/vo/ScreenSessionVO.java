@@ -1,0 +1,25 @@
+package itwillbs.p2c3.boogimovie.vo;
+
+import java.sql.Timestamp;
+
+import lombok.Data;
+
+@Data
+public class ScreenSessionVO {
+	private int scs_num;
+	private int movie_num;
+	private int theater_num;
+	private int screen_num;
+	private int scs_empty_seat;
+	private Timestamp scs_start_date;
+	private Timestamp scs_end_date;
+	
+	
+	
+	//SELECT 용 멤버변수
+	private String screen_seat_row;
+	private String screen_seat_col;
+	private int screen_dimension;
+	private int screen_cinema_num;
+	private String select_date;
+}

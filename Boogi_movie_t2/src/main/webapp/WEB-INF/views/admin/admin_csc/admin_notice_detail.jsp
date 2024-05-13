@@ -14,16 +14,17 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous">
 </script>
-<style type="text/css">
-span {
-	color:skyblue;
-}
-#prevLink, #nextLink {
-	text-decoration: none;
-	color:black;
-}
-</style>
-
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+	<style type="text/css">
+	span {
+		color:skyblue;
+	}
+	#prevLink, #nextLink {
+		text-decoration: none;
+		color:black;
+	}
+	</style>
 </head>
 <body>
 <header>
@@ -39,7 +40,7 @@ span {
 			<hr>
 			<div>
 				<p><span>[부기무비]</span> ${notice.notice_subject} </p>
-				<p><span>문의 지점</span> | ${notice.theater_name } &nbsp;&nbsp;&nbsp; <span>작성일</span> | ${noticeDate }
+				<p><span>문의 지점</span> | ${notice.theater_name } &nbsp;&nbsp;&nbsp; <span>작성일</span> | ${notice.notice_fdt }
 			</div>
 			<hr>
 			<div>
@@ -59,25 +60,31 @@ span {
 	</div>
 
 </div>
-<script>
-    let prevLink = document.getElementById("prevLink");
-    let nextLink = document.getElementById("nextLink");
-
-    // 마지막 또는 처음 notice_num일 때 링크를 비활성화
-    if (${notice.notice_num eq 1}) {
-        prevLink.removeAttribute("href");
-        prevLink.style.pointerEvents = "none"; 
-        prevLink.style.color = "gray"; 
-    }
-
-    if (${notice.notice_num eq maxNotice}) { // maxNoticeNum은 마지막 notice_num 값
-        nextLink.removeAttribute("href");
-        nextLink.style.pointerEvents = "none";
-        nextLink.style.color = "gray";
-    }
-</script>
 <footer>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </footer>
+<script>
+    let noticeNum = ${notice.notice_num};
+    let maxNoticeNum = ${maxNotice}; // maxNoticeNum은 마지막 notice_num 값
+    let minNoticeNum = ${minNotice}; // maxNoticeNum은 마지막 notice_num 값
+    
+
+    let prevLink = $("#prevLink");
+    let nextLink = $("#nextLink");
+	
+    //처음 게시물 또는 마지막 게시물일 때 a태그 비활성화
+    if (noticeNum === minNoticeNum) {
+        prevLink.removeAttr("href");
+        prevLink.css("pointer-events", "none"); 
+        prevLink.css("color", "gray"); 
+    }
+
+    if (noticeNum === maxNoticeNum) {
+        nextLink.removeAttr("href");
+        nextLink.css("pointer-events", "none");
+        nextLink.css("color", "gray");
+    }
+</script>
+</script>
 </body>
 </html>

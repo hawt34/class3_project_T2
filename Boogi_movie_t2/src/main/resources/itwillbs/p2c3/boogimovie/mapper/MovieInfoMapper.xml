@@ -9,6 +9,7 @@
 		<if test="movie_num != null and movie_num != ''">
 		    WHERE movie_num = #{movie_num}
 		</if>
+		WHERE movie_status = '개봉'
 	</select>
 	
 	<select id="selectMovie" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">

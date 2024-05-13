@@ -16,7 +16,6 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous">
 </script>
-
 <link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css" onsubmit="return confirm('FAQ를 등록하시겠습니까?');">
 </head>
 <body>
@@ -24,28 +23,31 @@
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">FAQ등록</h4>
-				<form class="validation-form" novalidate action="admin_FAQ_pro" method="post">
-					<div class="mb-3">
-						<label for="movie_director">작성자</label> 
-						<input type="text" id="movie_director" class="form-control" required />
-						<div class="invalid-feedback">작성자를 입력해주세요.</div>
-					</div>
+				<form class="validation-form" novalidate action="admin_faq_pro" method="post">
+<!-- 					<div class="mb-3"> -->
+<!-- 						<label for="movie_director">작성자</label>  -->
+<!-- 						<input type="text" id="movie_director" class="form-control" required /> -->
+<!-- 						<div class="invalid-feedback">작성자를 입력해주세요.</div> -->
+<!-- 					</div> -->
+					<select name="faq_category">
+						<option value="">유형선택</option>
+						<option value="영화">영화</option>
+						<option value="극장">극장</option>
+						<option value="예매/결제">예매/결제</option>
+						<option value="쿠폰">쿠폰</option>
+						<option value="회원정보">회원정보</option>
+					</select>
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 
-						<input type="text" id="movie_name" class="form-control" required />
+						<input type="text" id="movie_name" name="faq_subject" class="form-control" required />
 						<div class="invalid-feedback">글제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_name">이미지</label> 
-						<input type="text" id="movie_name" class="form-control" required />
-						<div class="invalid-feedback">이미지를 입력해주세요.</div>
-					</div>
-					<div class="mb-3">
 						<label for="movie_story">내용</label> 
-						<textArea id="movie_story" class="form-control" rows="10px" required></textArea>
+						<textArea id="movie_story" name="faq_content" class="form-control" rows="30" required></textArea>
 						<div class="invalid-feedback">내용을 입력해주세요.</div>
 					</div>
-					
+
 					<hr class="mb-4">
 					
 					<div class="mb-4" align="center">

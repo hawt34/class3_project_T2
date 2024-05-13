@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,13 +34,13 @@
 <!-- 					</div> -->
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 
-						<input type="text" id="movie_name" class="form-control" required name="notice_subject" required />
+						<input type="text"  id="movie_name" class="form-control" required name="notice_subject" required />
 						<div class="invalid-feedback">글제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<select name="notice_category">
-							<option value="전체">전체</option>
-							<option value="극장">극장</option>
+						<select name="notice_category" >
+							<option value="전체" >전체</option>
+							<option value="극장" >극장</option>
 						</select>
 						<select name="theater_name">
 							<option value="해운대점">해운대점</option>
@@ -92,9 +93,9 @@
  	</script>
  	<script>
       $('#summernote').summernote({
-        placeholder: 'Hello stand alone ui',
+        placeholder: '공지를 입력하세요.',
         tabsize: 1,
-        height: 120,
+        height: 800,
         toolbar: [
           ['style', ['style']],
           ['font', ['bold', 'underline', 'clear']],
@@ -102,7 +103,8 @@
           ['para', ['ul', 'ol', 'paragraph']],
           ['table', ['table']],
           ['insert', ['link', 'picture', 'video']],
-          ['view', ['fullscreen', 'codeview', 'help']]
+          ['view', ['fullscreen', 'codeview', 'help']],
+          ['height', ['height']]
         ]
       });
     </script>

@@ -16,5 +16,6 @@ public interface ReservationMapper {
 	List<MovieVO> selectMovieReservation(String id);
 	
 	// 예매내역 관람날짜
-	List<TicketVO> selectDateReservation(String id);
+//	List<TicketVO> selectDateReservation(String id);
 }
+

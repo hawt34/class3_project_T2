@@ -23,11 +23,12 @@ public class ReservationService {
 		return movieReservation;
 	}
 	
+	
 	// 예매내역 관람날짜
-	public List<TicketVO> getDateReservation(String id){
-		List<TicketVO> dateReservation = mapper.selectDateReservation(id);
-		return dateReservation;
-	}
+//	public List<TicketVO> getDateReservation(String id){
+//		List<TicketVO> dateReservation = mapper.selectDateReservation(id);
+//		return dateReservation;
+//	}
 	
 	
 }

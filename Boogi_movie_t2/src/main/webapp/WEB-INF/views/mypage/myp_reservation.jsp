@@ -22,6 +22,7 @@ body {
 }
 
 
+
 </style>
 </head>
 <body>
@@ -72,7 +73,7 @@ body {
 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly>
 						</div>
 						<div class="col-md-4 d-grid gap-5">
-							<input type="text" readonly class="form-control-plaintext" value="${reservation.movie_name }">
+							<input type="text" readonly class="form-control-plaintext" value="${moive.movie_name }">
 							<input type="text" readonly class="form-control-plaintext" value="2024 / 04 / 24">
 							<input type="text" readonly class="form-control-plaintext" value="서면 8관">
 						</div>

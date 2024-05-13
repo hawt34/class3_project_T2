@@ -1,12 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>	
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+/*  	border: 1px solid skyblue;   */
+}
+#wrap {
+	width: 1400px;
+	margin: 0 auto;
+}
+
+article {
+	position: relative;
+	width: 1400px;
+	height: 800px;
+/* 	background-color: #ffd54f; */
+}
+
+article video {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	max-width: 100%;
+	max-height: 100%;
+}
+
+section {
+	width: 100%;
+	height:700px; 
+/* 	background-color : #ffca28; */
+	overflow-y: scroll;
+	
+	
+}
+.nowMovie {
+	width: 100%;
+	height: 100px;
+}
+.nowMovie .btn{
+	margin-left: 30px; 
+	font-size: 40px;
+	white-space: nowrap;
+}
+
+.list {
+	width:1350px;
+	margin-left:20px;
+	margin-top: 10px;
+	display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.movie {
+	text-align: center;
+}
+
+.movie img {
+	padding: 30px;
+	width: 280px;
+	height: 400px;
+	display: flex;
+}
+
+footer {
+	width: 100%;
+	height: 100%;
+	/* 	background-color: #ffb300; */
+}
+
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/resources/css/movieFuture.css"
-	rel="stylesheet" type="text/css">
+<%-- <link href="${pageContext.request.contextPath}/resources/css/movieFuture.css"	rel="stylesheet" type="text/css"> --%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -35,48 +107,16 @@
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFuture'">상영예정작</button>
 			</div>
 			<div class="list">
-				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movieF1.jpg">
-					<p> </p>
-					<button type="button" class="btn btn-outline-primary">뒤로가기
-					</button>
-					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo1'">상세보기
-					</button>
-				</div>
-				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movieF2.jpg">
-					<p></p>
-					<button type="button" class="btn btn-outline-primary">뒤로가기
-					</button>
-					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo2'">상세보기
-					</button>
-				</div>
-				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movieF3.jpg">
-					<p>노팅힐</p>
-					<button type="button" class="btn btn-outline-primary">뒤로가기
-					</button>
-					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo3'">상세보기
-					</button>
-				</div>
-				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movieF4.jpg">
-					<p>쇼생크탈출</p>
-					<button type="button" class="btn btn-outline-primary">뒤로가기
-					</button>
-					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo4'">상세보기
-					</button>
-				</div>
-				<div class="movie">
-					<img src="${pageContext.request.contextPath}/resources/images/movieF5.jpg">
-					<p>타짜</p>
-					<button type="button" class="btn btn-outline-primary">뒤로가기
-					</button>
-					<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFutureInfo5'">상세보기
-					</button>
-				</div>
+				<c:forEach var="movieFuture" items="${movieFuture}" varStatus="loop" begin="0">
+    		<div class="movie">
+            <img src="${movieFuture.movie_poster}">
+            <p>${movieFuture.movie_name}</p>
+            <input type="hidden" class="movie_num" name="movie_num" value="${movieFuture.movie_num}">
+            <button type="button" class="btn btn-outline-primary future_detail_button">상세보기</button>
+    		</div>
+			</c:forEach>
 			</div>
-			
+				
 		</section>
 		<footer>
 			<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
@@ -96,7 +136,13 @@
 		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
 </body>
-<script type="text/javascript">
-
+	<script type="text/javascript">
+	$(document).ready(function() {
+        // 상세보기 버튼 클릭 이벤트 처리
+        $(".list").on("click", ".future_detail_button", function() {
+            let movie_num = $(this).siblings(".movie_num").val();
+            window.location.href = "movieFutureInfo?movie_num=" + movie_num;
+        });
+    });
 </script>
 </html>

@@ -17,9 +17,9 @@ public class MovieVO {
 	private String movie_grade;
 	private String movie_summary;
 	private String movie_runtime;
-	private String movie_stillCut;
-	private String movie_stillCut2;
-	private String movie_stillCut3;
+	private String movie_stillcut;
+	private String movie_stillcut2;
+	private String movie_stillcut3;
 	private String movie_genre;
 	
 	

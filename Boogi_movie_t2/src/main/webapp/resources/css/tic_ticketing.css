@@ -4,7 +4,12 @@
 
 	
 	
-	
+	.final_list{
+		width:60%;
+		margin-left : 50px;
+		margin-top : 50px;
+		padding-top: 30px;
+	}
 	
 	body {
 		font-family: "Nanum Gothic Coding", monospace;

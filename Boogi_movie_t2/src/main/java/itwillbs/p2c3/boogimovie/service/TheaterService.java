@@ -32,7 +32,7 @@ public class TheaterService {
 		return mapper.selectTheatersOrderbyName();
 	}
 	
-	// ???
+	// name으로 num가지고오기
 	public int getTheaterName(String theater_name) {
 		return mapper.selectTheaterName(theater_name);
 	}

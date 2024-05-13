@@ -1,11 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
- 	border: 1px solid skyblue;  
-}
-
-body {
-/* 	background-color: #fffde7; */
+/*   	border: 1px solid skyblue;  */
 }
 
 #wrap {
@@ -13,14 +9,11 @@ body {
 	margin: 0 auto;
 }
 
-
-
 article {
 	position: relative;
 	width: 1400px;
 	height: 800px;
 /* 	background-color: #ffd54f; */
-	overflow: hidden;
 }
 
 article video {
@@ -33,12 +26,12 @@ article video {
 }
 
 section {
-	overflow: hidden;
 	width: 100%;
-	height: 1200px; 
+	height:700px; 
 /* 	background-color : #ffca28; */
-	display: flex;
-	flex-wrap: wrap;
+	overflow-y: scroll;
+	
+	
 }
  
  section h1 {
@@ -48,16 +41,8 @@ section {
     width: 100%; /* 너비 조정 */
 /*     height: 40px; */
 	white-space: nowrap; 
-	
 }
-section>div {
-/* 	width: 20%; */
-	margin: 1%;
-	margin: 1% 1% 0;  
-	height : 170px;
-/* 	background-color: #ff980; */
-	
-}
+
 .nowMovie {
 	width: 100%;
 	height: 100px;
@@ -69,26 +54,23 @@ section>div {
 }
 
 .list {
-	width:1400px;
-	margin-right:10px;
+	width:1350px;
+	margin-left:20px;
 	margin-top: 10px;
-	display: flex;
-	margin-bottom: 300px;
+	display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 .movie {
 	text-align: center;
+	
 }
 
 .movie img {
 	padding: 30px;
-	width: 280px;
+	width: 340px;
 	height: 400px;
 	display: flex;
 }
-
-
-
-
 footer {
 	width: 1400px;
 	height: 100px;

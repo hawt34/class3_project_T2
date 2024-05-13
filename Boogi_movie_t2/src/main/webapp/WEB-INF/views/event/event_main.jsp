@@ -16,9 +16,8 @@ main {
 }
 
 .event_title {
-	text-align: center;
-	margin: 30px auto;
-	margin-top: 50px;
+	text-align: left;
+	margin: 30px 60px 0px;
 }
 
 * {
@@ -156,13 +155,25 @@ main {
 				</div>
 			</div>
 			<c:forEach var="event" items="${eventList}">
-				<div class="item">
+				<div class="item" onclick="event_detail(${event.event_num})">
 					<div class="imgBox">
-						<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" onclick="location.href='eventDetail?event_num?=${event.event_num}'"/>
+						<img src="${pageContext.request.contextPath}/resources/images/${event.event_thumbnail}" alt="썸네일" onclick="location.href='eventDetail?event_num?=${event.event_num}'"/>
 					</div>
 					<div class="textBox">
 						<p class="textBox_name">${event.event_subject}</p>
-						<p class="textBox_price">${event.event_type_name}</p>
+						<p class="textBox_price">
+							<c:choose>
+								<c:when test="${event.event_type_num eq 1}">
+									영화이벤트
+								</c:when>
+								<c:when test="${event.event_type_num eq 2}">
+									극장이벤트
+								</c:when>
+								<c:when test="${event.event_type_num eq 3}">
+									할인이벤트
+								</c:when>
+							</c:choose>
+						</p>
 					</div>
 				</div>
 			</c:forEach>
@@ -173,6 +184,12 @@ main {
 	<footer>
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
+	<script type="text/javascript">
+		function event_detail(event_num) {
+			location.href='eventDetail?event_num=' + event_num;
+		} 
+	
+	</script>
 
 
 </body>

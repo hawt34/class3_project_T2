@@ -2,6 +2,8 @@ package itwillbs.p2c3.boogimovie.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -12,7 +14,7 @@ public class EventVO {
 	private String event_thumbnail;
 	private String event_image;
 	private int coupon_num;
-	private Date event_reg_date; 
+	private Date event_reg_date;
 	private Date event_start_date; 
 	private Date event_end_date; 
 	

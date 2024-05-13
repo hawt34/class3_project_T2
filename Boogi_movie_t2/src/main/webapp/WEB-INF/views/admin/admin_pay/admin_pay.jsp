@@ -30,10 +30,9 @@
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_movie_head">
-					<div class="admin_movie_title">결제관리</div>
+					<div class="admin_movie_title">스토어 결제관리</div>
 					<div class="admin_movie_search">
 						<select>
-							<option>예매</option>
 							<option>스토어</option>
 						</select> 
 					</div>

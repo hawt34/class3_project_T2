@@ -66,18 +66,18 @@
 					</div>
 					<div class="mb-3">
 						<label for="event_img">본문이미지</label> 
-						<input type="file" id="event_img" class="form-control" required />
+						<input type="file" id="event_img" name="event_image" class="form-control" required />
 						<div class="invalid-feedback">이미지를 선택해주세요.</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="event_start_date">이벤트 시작일</label> 
-							<input type="date" id="event_start_date" class="form-control" required>
+							<input type="date" id="event_start_date" name="event_start_date" class="form-control" required>
 							<div class="invalid-feedback">이벤트 시작일을 선택해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="event_start_date">이벤트 종료일</label> 
-							<input type="date" id="event_start_date" class="form-control" required>
+							<input type="date" id="event_start_date" name="event_end_date" class="form-control" required>
 							<div class="invalid-feedback">이벤트 종료일을 선택해주세요.</div>
 						</div>
 					</div>

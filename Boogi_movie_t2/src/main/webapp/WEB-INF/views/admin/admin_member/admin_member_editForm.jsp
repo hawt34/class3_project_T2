@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,41 +62,51 @@ body {
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">회원정보상세</h4>
 					<div class="mb-3">
-						<label for="movie_code">이름</label> 
-						<input type="text" id="movie_code" class="form-control" readonly value="${member.member_name}" />
+						<label for="member_name">이름</label> 
+						<input type="text" id="member_name" class="form-control" readonly value="${member.member_name}" />
 					</div>
 					<div class="mb-3">
-						<label for="movie_name">아이디</label> 
-						<input type="text" id="movie_name" class="form-control" readonly value="${member.member_id}"/>
+						<label for="member_id">아이디</label> 
+						<input type="text" id="member_id" class="form-control" readonly value="${member.member_id}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_director">생년월일</label> 
-						<input type="text" id="movie_director" class="form-control" readonly value="${member.member_birth}"/>
+						<label for="member_birth">생년월일</label> 
+						<input type="text" id="member_birth" class="form-control" readonly value="${member.member_birth}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_createDate">주소</label> 
-						<input type="text" id="movie_createDate" class="form-control" readonly value="${member.member_addr}"/>
+						<label for="member_addr">주소</label> 
+						<input type="text" id="member_addr" class="form-control" readonly value="${member.member_addr}"/>
 						<div class="invalid-feedback">주소를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_genre">Email</label> 
-						<input type="text" id="movie_genre" class="form-control" readonly value="${member.member_email}"/>
+						<label for="member_email">Email</label> 
+						<input type="text" id="member_email" class="form-control" readonly value="${member.member_email}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_runtime">전화번호</label> 
-						<input type="text" id="movie_runtime" class="form-control" readonly value="${member.member_tel}"/>
+						<label for="member_tel">전화번호</label> 
+						<input type="text" id="member_tel" class="form-control" readonly value="${member.member_tel}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_stillCut1">가입일</label> 
-						<input type="text" id="movie_stillCut1" class="form-control" readonly value="${member.member_reg_date}"/>
+						<label for="member_reg_date">가입일</label> 
+						<input type="text" id="member_reg_date" class="form-control" readonly value="${member.member_reg_date}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_stillCut2">탈퇴일</label>  
-						<input type="text" id="movie_stillCut2" class="form-control" readonly value="${member.member_withdraw_date}"/>
+						<label for="member_withdraw_date">탈퇴일</label>  
+						<input type="text" id="member_withdraw_date" class="form-control" readonly value="${member.member_withdraw_date}"/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_stillCut3">회원상태</label> 
-						<input type="text" id="movie_stillCut3" class="form-control" readonly value="${member.member_status}"/>
+						<label for="member_status">회원상태</label> 
+						<c:choose>
+							<c:when test="${member.member_status eq 1}">
+							<input type="text" id="member_status" class="form-control" readonly value="활동회원">
+							</c:when>
+							<c:when test="${member.member_status eq 2}">
+								<input type="text" id="member_status" class="form-control" readonly value="휴면">
+							</c:when>
+							<c:when test="${member.member_status eq 3}">
+								<input type="text" id="member_status" class="form-control" readonly value="탈퇴">
+							</c:when>
+						</c:choose>
 					</div>
 					
 					<hr class="mb-4">

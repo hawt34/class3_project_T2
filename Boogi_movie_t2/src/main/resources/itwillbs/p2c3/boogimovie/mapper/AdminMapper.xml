@@ -69,7 +69,7 @@
 	</select>
 	
 <!-- 	영화 등록하기 -->
-	<insert id="insertMovie" >
+	<insert id="insertMovie">
 		INSERT INTO movie
 		(	  movie_name
 			, movie_director
@@ -101,7 +101,6 @@
 			, #{movie_stillCut2}
 			, #{movie_stillCut3}
 			, #{movie_genre}
-			
 		)
 	</insert>
 	
@@ -128,6 +127,36 @@
 	<delete id="deleteMovie">
 		DELETE FROM movie
 		WHERE movie_num = #{movie_num}
+	</delete>
+	
+<!-- 이벤트 등록 -->
+	<insert id="insertEvent">
+		INSERT INTO event(
+			event_subject
+			, event_type_num
+			, event_reg_date
+			, event_start_date
+			, event_end_date
+			, event_thumbnail
+			, event_image
+			, coupon_num
+		)
+		VALUES(
+			#{event_subject}
+			, #{event_type_num}
+			, now()
+			, #{event_start_date}
+			, #{event_end_date}
+			, #{event_thumbnail}
+			, #{event_image}
+			, #{coupon_num}
+		)
+	</insert>
+	
+<!-- 이벤트 삭제 -->
+	<delete id="deleteEvent">
+		DELETE FROM event
+		WHERE event_num = #{event_num}
 	</delete>
 	
 <!-- 공지사항 입력 -->

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import itwillbs.p2c3.boogimovie.mapper.AdminMapper;
+import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -34,6 +35,7 @@ public class AdminService {
 		return mapper.deleteMember(id);
 	}
 	
+	//--------------------------------------------------------------
 	// 예매리스트
 	public List<Map<String, String>> getReserveList() {
 		return mapper.selectReserveList();
@@ -44,6 +46,7 @@ public class AdminService {
 		return mapper.selectReserve(reservation_num);
 	}
 	
+	//--------------------------------------------------------------
 	// 리뷰 리스트 조회
 	public List<ReviewVO> getReviewList() {
 		return mapper.selectReviewList();
@@ -54,6 +57,7 @@ public class AdminService {
 		return mapper.deleteReview(review_num);
 	}
 	
+	//--------------------------------------------------------------
 	// 영화 삭제
 	public int deleteMovie(String movie_num) {
 		return mapper.deleteMovie(movie_num);
@@ -83,7 +87,17 @@ public class AdminService {
 	public int InsertMovie(MovieVO movie) {
 		return mapper.insertMovie(movie);
 	}
-	//----------------------------------------------
+	//--------------------------------------------------------------
+	// 이벤트 등록
+	public int InsertEvent(EventVO event) {
+		return mapper.insertEvent(event);
+	}
+	
+	// 이벤트 삭제
+	public int deleteEvent(EventVO event) {
+		return mapper.deleteEvent(event);
+	}
+	//---------------------------------------------------------------
 	//공지사항 등록
 	public int InsertNotice(NoticeVO notice, int theater_num) {
 		return mapper.insertNotice(notice, theater_num);

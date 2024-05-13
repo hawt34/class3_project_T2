@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,31 +57,36 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1259</td>
-								<td>어린이날 이벤트</td>
-								<td>영화이벤트</td>
-								<td>2024-05-11</td>
-								<td>2024-05-11 ~ 2024-07-11</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="eventForm()">상세보기</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw()">삭제</button>
-								</td>
-							</tr>
 							<c:forEach var="event" items="${eventList}">
 								<tr>
 									<td>${event.event_num}</td>
 									<td>${event.event_subject}</td>
-									<td>${event.event_type_name}</td>
-									<td>${event.event_reg_date}</td>
-									<td>${event.event_start_date} ~ ${event.event_end_date}</td>
 									<td>
-										<button type="button" class="btn btn-outline-primary" onclick="eventEdit()">상세보기</button>
+										<c:choose>
+											<c:when test="${event.event_type_num eq 1}">
+												영화이벤트
+											</c:when>
+											<c:when test="${event.event_type_num eq 2}">
+												극장이벤트
+											</c:when>
+											<c:when test="${event.event_type_num eq 3}">
+												할인이벤트
+											</c:when>
+										</c:choose>
+									</td>
+									
+									<td>
+										<fmt:formatDate value="${event.event_reg_date}" pattern="yyyy-MM-dd" />
 									</td>
 									<td>
-										<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw()">삭제</button>
+										<fmt:formatDate value="${event.event_start_date}" pattern="yyyy-MM-dd" /> ~
+										<fmt:formatDate value="${event.event_end_date}" pattern="yyyy-MM-dd" />
+									</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" onclick="eventEdit(${event.event_num})">상세보기</button>
+									</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" onclick="eventWithdraw(${event.event_num})">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -106,14 +112,14 @@
 
 	<script type="text/javascript">
 		function eventForm() {
-			window.open("admin_event_form", "_self");
+			location.href = "admin_event_form";
 		}
-		function eventEdit() {
-			window.open("admin_event_modify", "_self");
+		function eventEdit(event_num) {
+			location.href = "admin_event_modify?event_num=" + event_num;
 		}
-		function eventWithdraw() {
+		function eventWithdraw(event_num) {
 			if(confirm("정말 삭제하시겠습니까?")){
-				location.href = "admin_event_delete";
+				location.href = "admin_event_delete?event_num=" + event_num;
 			}		 
 		}
 	

@@ -1,13 +1,19 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -287,6 +293,8 @@ public class AdminController {
 		model.addAttribute("reviewList", reviewList);
 		return "admin/admin_member/admin_review";
 	}
+	
+	// 리뷰 삭제
 	@GetMapping("admin_review_delete")
 	public String adminReviewDelete(String review_num, Model model) {
 		int deleteCount = service.deleteReview(review_num);
@@ -295,10 +303,9 @@ public class AdminController {
 		} else {
 			model.addAttribute("msg", "삭제에 실패하였습니다");
 			return "error/fail";
-			
 		}
-		
 	}
+	
 	// 3) 회원페이지
 	@GetMapping("admin_member")
 	public String adminMember(Model model) {
@@ -328,13 +335,11 @@ public class AdminController {
 		} else {
 			model.addAttribute("msg", "회원삭제에 실패하였습니다");
 			return "error/fail";
-			
 		}
-		
 	}
 	
 	//--------------------------------------------------------------------
-	// 관리자 영화 페이지
+	// 관리자 상영관리 페이지
 	@GetMapping("admin_moviePlan")
 	public String adminMoviePlan() {
 		return "admin/admin_movie/admin_moviePlan";
@@ -377,7 +382,6 @@ public class AdminController {
 			model.addAttribute("msg", "영화삭제 실패");
 			return "redirect:/error/fail";
 		}
-		
 	}
 	
 	// 영화 등록 폼
@@ -428,37 +432,71 @@ public class AdminController {
 			model.addAttribute("msg", "영화수정 실패");
 			return "error/fail";
 		}
-		
-		
 	}
 	
 	
 	//--------------------------------------------------------------------
+	// 날짜 변환기
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+    }
 	// 관리자 이벤트 
 	@GetMapping("admin_event")
 	public String adminEvent(Model model) {
 		List<EventVO> eventList = eventService.getEventList();
-		model.addAttribute(eventList);
+		model.addAttribute("eventList",eventList);
 		return "admin/admin_event/admin_event";
 	}
+	// 이벤트 등록 폼
 	@GetMapping("admin_event_form")
 	public String adminEventForm() {
-		
 		return "admin/admin_event/admin_event_form";
 	}
-	@GetMapping("admin_event_modify")
-	public String adminEventModify() {
-		
-		return "admin/admin_event/admin_event_modify";
-	}
+	
+	// 이벤트 등록 프로
 	@PostMapping("admin_event_pro")
-	public String adminEventPro() {
+	public String adminEventPro(EventVO event, Model model) {
+		int insertCount = service.InsertEvent(event);
+//		System.out.println(event);
+		if(insertCount > 0) {
+			return "redirect:/admin_event";
+		} else {
+			model.addAttribute("msg", "이벤트 등록에 실패했습니다");
+			return "error/fail";
+		}
+	}
+	// 이벤트 등록 수정 폼
+	@GetMapping("admin_event_modify")
+	public String adminEventModify(EventVO event, Model model) {
+		event = eventService.getEvent(event.getEvent_num());
+		if(event == null) {
+			model.addAttribute("msg", "이벤트를 불러오는데 실패하였습니다");
+			return "error/fail";
+		} else {
+			model.addAttribute("event", event);
+			return "admin/admin_event/admin_event_modify";
+		}
+	}
+	// 이벤트 등록 수정 프로
+	@PostMapping("admin_event_modify_pro")
+	public String adminEventModifyPro() {
 		
 		return "redirect:/admin_event";
 	}
+	// 이벤트 삭제
 	@GetMapping("admin_event_delete")
-	public String adminEventDelete() {
-		return "redirect:/admin_event";
+	public String adminEventDelete(EventVO event, Model model) {
+		System.out.println(event);
+		int deleteCount = service.deleteEvent(event);
+		if(deleteCount > 0) {
+			return "redirect:/admin_event";
+		} else {
+			model.addAttribute("msg", "이벤트 수정에 실패했습니다");
+			return "error/fail";
+		}
 	}
 
 	//--------------------------------------------------------------------

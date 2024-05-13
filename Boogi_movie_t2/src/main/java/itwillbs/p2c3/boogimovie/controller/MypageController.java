@@ -49,6 +49,7 @@ public class MypageController {
 	@Autowired
 	private HttpSession session;
 	
+	
 	@GetMapping("myp_main")
 	public String mypMain(Model model, MemberVO member) {
 		String id = (String)session.getAttribute("sId");
@@ -60,32 +61,27 @@ public class MypageController {
 //			System.out.println("myp_main 실패");
 			return "error/fail";
 		} else { // 성공
-//			System.out.println("myp_main 성공");
 			
 			// 메인페이지 아이디 
-//			member.setMember_id(id);
-			
 			member = mypageInfoService.getMember(id);
 			model.addAttribute("member", member);
-//			System.out.println("member222 : " + member);
 			
-			
-//			ReservationVO member2 = mypageInfoService.getMovieResv(member.getMember_id());
-//			model.addAttribute("reservation", member2);
-			
-			// 극장 리스트
+			// My극장 극장 전체리스트
 			List<TheaterVO> infoTheater = mypageInfoService.getTheater();
 			model.addAttribute("theater", infoTheater);
 			
+			// My극장 자주가는 영화관
+			MemberVO infoMyTheater = mypageInfoService.getMyTheater();
+			model.addAttribute("infoMyTheater", infoMyTheater);
+			
 			// 예매내역 영화제목
-			List<MovieVO> movieReservation = reservationService.getMovieReservation(id);
+			List<MovieVO> movieReservation = mypageInfoService.getMovieReservation(id);
 			model.addAttribute("movieReservation", movieReservation);
-//			System.out.println("movieReservation" + movieReservation);
 			
 			// 예매내역 관람날짜
-			List<TicketVO> dateReservation = reservationService.getDateReservation(id);
-			model.addAttribute("dateReservation", dateReservation);
-			System.out.println("dateReservation" + dateReservation);
+//			List<TicketVO> dateReservation = reservationService.getDateReservation(id);
+//			model.addAttribute("dateReservation", dateReservation);
+//			System.out.println("dateReservation" + dateReservation);
 			
 //			List<Object> combinedList = new ArrayList<>();
 //			combinedList.addAll(movieReservation);
@@ -96,14 +92,8 @@ public class MypageController {
 		}
 		
 	}
-	
-//	@GetMapping("MyTheaterList")
-//	public String myTheaterList(TheaterVO theater, Model model, HttpSession session) {
-//		System.out.println("MyTheaterList");
-//		String myTheater = session.getAttribute("theater_num");
-//		return"redirect:/";
-//	}
-	// ============================= 극장 전체 리스트 =============================
+
+	// ============================= My극장 체크박스 =============================
 	@PostMapping("MyTheaterList") // 마이페이지 My극장 모달폼 극장 전체 리스트
 	public String handleFormSubmit(@RequestParam(name = "theaterIds", required = false, defaultValue = "") List<String> theaterIds, HttpSession session, TheaterVO theater) {
 
@@ -221,10 +211,6 @@ public class MypageController {
 	}
 	
 	
-	
-	
-	
-	
 	// ============================= 쿠폰 =============================
 
 	@GetMapping("myp_coupon")
@@ -266,7 +252,6 @@ public class MypageController {
 //		MovieVO sadfsdf = service.sadfsadfs();
 //		ReservationVO asdfasdf = service.asdfasdf();
 		
-		
 		return "mypage/myp_reservation";
 	}
 	
@@ -276,19 +261,18 @@ public class MypageController {
 //		System.out.println("myp_cancel()");
 		return "mypage/myp_cancel";
 	}
+	
 	// ============================= 탈퇴 =============================
 	
 	
 	// 탈퇴 안내 페이지 (탈퇴1)
 	@GetMapping("myp_withdraw_info")
-	public String mypWithdrawInfo(HttpSession session, Model model) {
+	public String mypWithdrawInfo(Model model) {
 		String id = (String)session.getAttribute("sId");
-//		System.out.println(id);
 		
 		if(id == null) { // 실패
-			model.addAttribute("msg", "로그인이 필요한 페이지입니다.");
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
 			model.addAttribute("targetURL", "member_login");
-			System.out.println("myp_withdraw_info 실패");
 			return "error/fail";
 		} 
 		return "mypage/myp_withdraw_info";
@@ -296,52 +280,68 @@ public class MypageController {
 	
 	// 탈퇴 비밀번호 재입력 페이지 (탈퇴2)
 	@GetMapping("myp_withdraw_passwd")
-	public String mypWithdrawPasswd() {
-		System.out.println("myp_withdraw_passwd()");
+	public String mypWithdrawPasswd(Model model) {
+//		System.out.println("myp_withdraw_passwd()");
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "./");
+			return"error/fail";
+		}
 		return "mypage/myp_withdraw_passwd";
 	}
 	
 	// 탈퇴처리
 	@PostMapping("myp_withdraw_finish_pro")
-	public String mypWithdrawFinishPro(MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
+	public String mypWithdrawFinishPro(@RequestParam("password")String password, MemberVO member, Model model) {
 		// 세션 아이디 존재 여부 판별
 		// 회원 정보 조회 후 아이디 일치 여부와 패스워드 일치 여부 확인
 		String id = (String)session.getAttribute("sId");
+//		System.out.println("password : " + password);
+//		System.out.println("myp_withdraw_finish_pro");
 		if(id == null) {
-			model.addAttribute("msg", "존재하지 않는 아이디 입니다!");
+			model.addAttribute("msg", "잘못된 접근입니다");
 			model.addAttribute("targetURL", "./");
 			return"error/fail";
 		}
-		
 		
 		// 로그인 비즈니스 로직 처리 과정에서 사용한 MemberService - getMember() 메서드 재사용
 		// => MemberVO 객체를 파라미터로 전달하지만 객체 내에는 데이터가 없으므로
 		//    세션 아이디를 MemberVO 객체의 id 멤버변수 값으로 저장
 		member.setMember_id(id);
 		MemberVO dbMember = mypageInfoService.getDbMember(member);
+//		System.out.println("dbMember pwd : " + dbMember.getMember_pwd());
+//		System.out.println("member pwd : " + password);
+//		System.out.println("dbMember : " + dbMember);
 		
-		
-//		session.getAttribute("passwd");
-		if(dbMember != null && passwordEncoder.matches(member.getMember_pwd(), dbMember.getMember_pwd())) {
-			// memberService - withdrawMember() 메서드 호출하여 회원 탈퇴 처리 요청
+		if(dbMember != null && password.equals(dbMember.getMember_pwd())) { // 비번이 같을 때 
 			int updateCount = mypageInfoService.withdrawMember(member);
-			
+			System.out.println(dbMember.getMember_pwd());
 		// 로그인 정보 제거하기 위해 세션 초기화 후 메인페이지로 리다이렉트
-			session.invalidate();
-			return "redirect:/myp_withdraw_finish";
-		} else { // 아이디가 존재하지 않거나 패스워드가 일치하지 않을 경우
-			model.addAttribute("msg", "탈퇴 권한이 없습니다!");
+			if(updateCount > 0) { // 탈퇴 성공 시
+//				System.out.println("탈퇴성공");
+				
+				// 로그인 정보 제거하기 위해 세션 초기화 후 myp_withdraw_finish 리다이렉트
+				session.invalidate();
+				return "redirect:/myp_withdraw_finish";
+			} else { // 실패시
+//				System.out.println("탈퇴실패");
+				model.addAttribute("msg", "탈퇴에 실패했습니다!");
+				model.addAttribute("targetURL", "./");
+				return"error/fail";
+			}
+		} else { // 비번이 일치하지 않을 경우
+//			System.out.println("비번 틀림");
+			model.addAttribute("msg", "비밀번호가 일치하지 않습니다");
+			model.addAttribute("targetURL", "myp_withdraw_passwd");
 			return"error/fail";
-			
 		}
-		
-		
 	}
 	
+	// 탈퇴 후 보여지는 페이지
 	@GetMapping("myp_withdraw_finish")
-	public String mypWithdrawFinish() {
-		System.out.println("myp_withdraw_finish()");
-		
+	public String mypWithdrawFinish(MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
+//		System.out.println("myp_withdraw_finish()");
 		return "mypage/myp_withdraw_finish";
 	}
 	

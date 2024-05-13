@@ -23,6 +23,7 @@ body {
 }
 
 
+
 </style>
 </head>
 <body>
@@ -184,41 +185,20 @@ body {
 									</script>
 								</form>
 					      </div><!--modal-footer  --> <!-- 모달 폼 극장 전체 리스트 -->
-					      
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->
 					</div><!-- modal fade 모달 div 끝 -->
 					
 					<table class="table3 table table-bordered">
 					
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${empty member_my_theater1}"> --%>
-<!-- 							<tr> -->
-<!-- 								<th>+</th> -->
-<!-- 							</tr> -->
-<%-- 						</c:when> --%>
-<%-- 						<c:when test="${empty member_my_theater2}"> --%>
-<!-- 							<tr> -->
-<!-- 								<th>+</th> -->
-<!-- 							</tr> -->
-<%-- 						</c:when> --%>
-<%-- 						<c:when test="${empty member_my_theater3}"> --%>
-<!-- 							<tr> -->
-<!-- 								<th>+</th> -->
-<!-- 							</tr> -->
-<%-- 						</c:when> --%>
-<%-- 						<c:otherwise> --%>
-<%-- 						</c:otherwise> --%>
-<%-- 					</c:choose> --%>
-					
 						<tr>
 							<td>
 								<c:choose>
-									<c:when test="${empty mytheater.theater_num}"><%-- 자주가는 영화관 미설정시 --%>
+									<c:when test="${empty member.member_my_theater1}"><%-- 자주가는 영화관 미설정시 --%>
 										<a href="#">+</a>
 									</c:when>
 									<c:otherwise>
-										<a href="#">${mytheater.theater_num}</a>
+										<a href="#">${member.member_my_theater1}</a>
 									</c:otherwise>
 								</c:choose>
 							</td>
@@ -227,11 +207,11 @@ body {
 						<tr>
 							<td>
 								<c:choose>
-									<c:when test="${empty mytheater.theater_name}">
+									<c:when test="${empty member.member_my_theater2}">
 										<a href="#">+</a>
 									</c:when>
 									<c:otherwise>
-										<a href="#">${mytheater.theater_name}</a>
+										<a href="#">${member.member_my_theater2}</a>
 									</c:otherwise>
 								</c:choose>
 							</td>
@@ -240,36 +220,15 @@ body {
 						<tr>
 							<td>
 								<c:choose>
-									<c:when test="${empty mytheater.theater_num}">
+									<c:when test="${empty member.member_my_theater3}">
 										<a href="#">+</a>
 									</c:when>
 									<c:otherwise>
-										<a href="#">${mytheater.theater_num}</a>
+										<a href="#">${member.member_my_theater3}</a>
 									</c:otherwise>
 								</c:choose>
 							</td>
 						</tr>
-
-<%-- 							<c:forEach var="index" begin="1" end="3"> --%>
-<!-- 							    <tr> -->
-<!-- 							        <td> -->
-<%-- 							            <c:choose> --%>
-<%-- 											<c:if test="${index le fn:length(mytheaterList)}"> --%>
-<%-- 							                    <c:set var="mytheater" value="${mytheaterList[index - 1]}" /> --%>
-<%-- 							                    <c:choose> --%>
-<%-- 							                        <c:when test="${empty mytheater.theater_num}"> --%>
-<!-- 							                            <a href="#">+</a> -->
-<%-- 							                        </c:when> --%>
-<%-- 							                        <c:otherwise> --%>
-<%-- 							                            <a href="#">${mytheater.theater_num}</a> --%>
-<%-- 							                        </c:otherwise> --%>
-<%-- 							                    </c:choose> --%>
-<%-- 							                </c:if> --%>
-<%-- 							             	<c:otherwise><!-- 최대 3번까지만 반복하도록 추가 동작을 구현할 수 있습니다. --></c:otherwise> --%>
-<%-- 							            </c:choose> --%>
-<!-- 							        </td> -->
-<!-- 							    </tr> -->
-<%-- 							</c:forEach>								 --%>
 					</table>
 				</div><!-- col-md-3-->
 		</div> <!-- row -->

@@ -4,19 +4,36 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="itwillbs.p2c3.boogimovie.mapper.MypageMapper">
+  	<!-- 메인페이지 id -->
     <select id="selectMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
         SELECT * FROM member WHERE member_id = #{id}
     </select>
     
-<!--     <select id="selectMovieResv" resultType="itwillbs.p2c3.boogimovie.vo.ReservationVO"> -->
-<!--     	SELECT * -->
-<!--     	FROM reservation -->
-<!--     	WHERE member_id = #{id} -->
-<!--     </select> -->
+	<!-- My극장 극장 전체리스트 -->
     <select id="selectTheater" resultType="itwillbs.p2c3.boogimovie.vo.TheaterVO">
     	SELECT theater_num, theater_name
     	FROM theater
     </select>
+    
+    
+    <!-- My극장 자주가는 영화관 -->
+    <select id="selectMyTheater" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
+    	SELECT member_my_theater1, member_my_theater2, member_my_theater3
+    	FROM member
+		WHERE member_id = #{id};
+    </select>
+    
+    <!-- 예매내역 영화제목 -->
+	<select id="selectMovieReservation" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO" parameterType="String">
+		SELECT movie_name 
+		FROM movie JOIN review
+		ON movie.movie_num = review.movie_num
+		JOIN member 
+		ON member.member_id = review.member_id
+	  	WHERE member.member_id = #{id}
+	</select>
+    
+    
     
     <!-- 회원정보 -->
     <select id="selectDbMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">

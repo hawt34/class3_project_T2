@@ -8,6 +8,4 @@ public class CouponVO {
 	private String coupon_name;
 	private int discount_num;
 	
-	
-	
 }

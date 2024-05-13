@@ -23,20 +23,15 @@ main {
 	margin: 0 auto;
 }
 
-.event_title {
-	text-align: center;
-	margin: 30px auto;
-	margin-top: 50px;
-}
-.eventTable tr td{
-	border: 3px solid #eee;
-	
+tr td{
+ 	border: 1px solid lightgray; 
 }
 .eventTable{
 	margin: 0 auto;
 	width: 1200px;
 	text-align: center;
 	font-size: 20px;
+	margin-top: 40px;
 }
 tr{
 	height: 60px;
@@ -44,6 +39,7 @@ tr{
 td > img{
 	width: 1200px;
 }
+
 </style>
 </head>
 <body>
@@ -53,32 +49,21 @@ td > img{
 	</header>
 
 	<main>
-		<div class="event_title">
-			<h2>이벤트페이지</h2>
-		</div>
-		<hr>
 		<table class="eventTable">
-		<colgroup>
-		<col style="background: #eee;">
-		<col>
-		<col style="background: #eee;">
-		<col>
-		</colgroup>
 			<tr>
-				<td>이벤트</td>
+				<td style="background:black; color: white;">이벤트</td>
 				<td colspan="3">${event.event_subject}</td>
 			</tr>
 			<tr>
-				<td>등록날짜</td>
+				<td style="background:black; color: white;">등록날짜</td>
 				<td><fmt:formatDate value="${event.event_reg_date}" pattern="yyyy-MM-dd"/></td>
-				<td>이벤트기간</td>
+				<td style="background:black; color: white;">이벤트기간</td>
 				<td><fmt:formatDate value="${event.event_start_date}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${event.event_end_date}" pattern="yyyy-MM-dd"/></td>
 			</tr>
 			<tr>
 				<td colspan="4">
-					<c:set var="original_event_image" value="${fn:substringAfter(event.event_image, '_')}"/>
 					<c:if test="${not empty event.event_image}">
-						<img alt="본문이미지" src="${pageContext.request.contextPath}/resources/images/${original_event_image}">
+						<img alt="본문이미지" src="${pageContext.request.contextPath}/resources/images/${event.event_image}">
 					</c:if>
 				</td>
 			</tr>

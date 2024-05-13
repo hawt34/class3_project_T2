@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -172,7 +173,7 @@ td:nth-child(7) {
 									<td>${review.member_id}</td>
 									<td>${review.review_rating}</td>
 									<td>${review.review_text}</td>
-									<td>${review.review_date}</td>
+									<td><fmt:formatDate value="${review.review_date}" pattern="yyyy-MM-dd" /></td>
 									<td>
 										<button type="button" class="btn btn-outline-primary" 
 											onclick="reviewWithdraw('${review.review_num}')">

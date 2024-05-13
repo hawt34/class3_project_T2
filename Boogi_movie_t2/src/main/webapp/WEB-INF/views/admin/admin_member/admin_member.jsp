@@ -186,10 +186,10 @@ th:nth-child(8), td:nth-child(8) {
 												활동회원
 											</c:when>
 											<c:when test="${member.member_status eq 2}">
-												휴면회원
+												휴면
 											</c:when>
 											<c:when test="${member.member_status eq 3}">
-												탈퇴회원
+												탈퇴
 											</c:when>
 										</c:choose>
 									</td>

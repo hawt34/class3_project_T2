@@ -3,6 +3,7 @@ package itwillbs.p2c3.boogimovie.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
@@ -24,16 +25,18 @@ public interface MypageMapper {
 	// 예매내역 영화제목
 	List<MovieVO> selectMovieReservation(String id);
 	
-	
-	
-	ReservationVO selectMovieResv(String id);
-	
 	// 회원정보
 	MemberVO selectDbMember(MemberVO member);
 	
 	
+	ReservationVO selectMovieResv(String id);
+	
+	
+	
 	// 정보수정
-	int updateMember(MemberVO member);
+	int updateMemberEq(MemberVO member);
+	
+//	int updateMemberNotEq(MemberVO member);
 	
 	// 탈퇴처리
 	int updateMemberForWithdraw(MemberVO member);

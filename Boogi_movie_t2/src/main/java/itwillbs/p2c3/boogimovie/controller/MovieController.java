@@ -28,7 +28,7 @@ public class MovieController {
 		List<MovieVO> movieInfo = service.getMovieList();
 		model.addAttribute("movieInfo", movieInfo);
 		String member_id = (String) session.getAttribute("sId");
-		System.out.println("현재로그인한 " +member_id);
+		//System.out.println("현재로그인한 " +member_id);
 		model.addAttribute("member_id", member_id);
 		//System.out.println(movieInfo);
 		return "movie/movie";

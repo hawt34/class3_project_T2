@@ -16,32 +16,30 @@ main {
 }
 
 .event_title {
-	text-align: center;
-	margin: 30px auto;
-	margin-top: 50px;
+	text-align: left;
+	margin: 30px 60px 0px;
+	border-bottom: 3px solid lightgray;
 }
 
 * {
 	box-sizing: border-box;
 	padding: 0;
-	margin: 0;
 }
 
 .container {
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: space-between;
 	align-content: flex-start;
 }
 
 /* item에 hidden 처리하기. */
 .item {
-	width: 300px;
+	width: 350px;
 	aspect-ratio: 10/6;
 	position: relative;
  	overflow: hidden; 
 	border-radius: 10px;
-	margin: 30px 0px;
+	margin: 10px 40px;
 }
 
 .item:after {
@@ -90,7 +88,7 @@ main {
 }
 
 .textBox_name {
-	font-size: 22px;
+	font-size: 16px;
 	font-weight: 500;
 	opacity: 0;
 	transform: translateY(50px);
@@ -132,6 +130,13 @@ main {
 	{
 	transition: all 0.4s ease-in-out;
 }
+.event_cate_title{
+	margin-top: 20px;
+}
+.btn{
+	margin-right: 100px;
+}
+
 </style>
 </head>
 <body>
@@ -144,36 +149,161 @@ main {
 		<div class="event_title">
 			<h2>이벤트페이지</h2>
 		</div>
-		<hr>
+		<div class="event_cate_title">
+			<h3>영화이벤트</h3>
+		</div>
+		<div align="right">
+			<button type="button" class="btn btn-outline-primary" id="MovieShowMoreBtn">더 보기</button>
+		</div>
 		<div class="container">
-			<div class="item" onclick="location.href='eventDetail'">
-				<div class="imgBox">
-					<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" />
-				</div>
-				<div class="textBox">
-					<p class="textBox_name">팝콘할인해줘! 이벤트</p>
-					<p class="textBox_price">극장이벤트</p>
-				</div>
-			</div>
-			<c:forEach var="event" items="${eventList}">
-				<div class="item">
+			<c:forEach var="movieEvent" items="${movieEventList}" varStatus="loop">
+				<div class="item movie-event" onclick="event_detail(${movieEvent.event_num})">
 					<div class="imgBox">
-						<img src="${pageContext.request.contextPath}/resources/images/event_sum2.jpg" alt="썸네일" onclick="location.href='eventDetail?event_num?=${event.event_num}'"/>
+						<img src="${pageContext.request.contextPath}/resources/images/${movieEvent.event_thumbnail}" alt="썸네일" onclick="location.href='eventDetail?event_num?=${movieEvent.event_num}'"/>
 					</div>
 					<div class="textBox">
-						<p class="textBox_name">${event.event_subject}</p>
-						<p class="textBox_price">${event.event_type_name}</p>
+						<p class="textBox_name">${movieEvent.event_subject}</p>
+						<p class="textBox_price">${movieEvent.event_start}  ~  ${movieEvent.event_end}</p>
 					</div>
 				</div>
 			</c:forEach>
-
+		</div>
+		<div class="event_cate_title">
+			<h3>극장이벤트</h3>
+		</div>
+		<div align="right">
+			<button type="button" class="btn btn-outline-primary" id="TheaterShowMoreBtn">더 보기</button>
+		</div>
+		<div class="container">
+			<c:forEach var="theaterEvent" items="${theaterEventList}"  varStatus="loop">
+				<div class="item theater-event" onclick="event_detail(${theaterEvent.event_num})">
+					<div class="imgBox">
+						<img src="${pageContext.request.contextPath}/resources/images/${theaterEvent.event_thumbnail}" alt="썸네일" onclick="location.href='eventDetail?event_num?=${theaterEvent.event_num}'"/>
+					</div>
+					<div class="textBox">
+						<p class="textBox_name">${theaterEvent.event_subject}</p>
+						<p class="textBox_price">${theaterEvent.event_start}  ~  ${theaterEvent.event_end}</p>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+		<div class="event_cate_title">
+			<h3>할인이벤트</h3>
+		</div>
+		<div align="right">
+			<button type="button" class="btn btn-outline-primary" id="DiscountShowMoreBtn">더 보기</button>
+		</div>
+		<div class="container">
+			<c:forEach var="discountEvent" items="${discountEventList}" varStatus="loop">
+				<div class="item discount-event" onclick="event_detail(${discountEvent.event_num})">
+					<div class="imgBox">
+						<img src="${pageContext.request.contextPath}/resources/images/${discountEvent.event_thumbnail}" alt="썸네일" onclick="location.href='eventDetail?event_num?=${discountEvent.event_num}'"/>
+					</div>
+					<div class="textBox">
+						<p class="textBox_name">${discountEvent.event_subject}</p>
+						<p class="textBox_price">${discountEvent.event_start}  ~  ${discountEvent.event_end}</p>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
 	</main>
 
 	<footer>
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
+	<script type="text/javascript">
+		function event_detail(event_num) {
+			location.href='eventDetail?event_num=' + event_num;
+		} 
+	
+		document.addEventListener("DOMContentLoaded", function() {
+		    var movieEvents = document.querySelectorAll(".movie-event");
+		    var MovieShowMoreBtn = document.getElementById("MovieShowMoreBtn");
+		    var movieShowMore = false;
 
+		    // 처음 3개의 아이템만 보이도록 설정
+		    for (var i = 3; i < movieEvents.length; i++) {
+		        movieEvents[i].style.display = "none";
+		    }
+
+		    // "더 보기" 버튼 클릭 시 추가 아이템 보이기
+		    MovieShowMoreBtn.addEventListener("click", function() {
+		        if (!movieShowMore) {
+		            for (var i = 3; i < movieEvents.length; i++) {
+		                movieEvents[i].style.display = "block";
+		            }
+
+		            movieShowMore = true;
+		            MovieShowMoreBtn.textContent = "간략히 보기";
+		        } else {
+		            for (var i = 3; i < movieEvents.length; i++) {
+		                movieEvents[i].style.display = "none";
+		            }
+
+		            movieShowMore = false;
+		            MovieShowMoreBtn.textContent = "더 보기";
+		        }
+		    });
+		});
+		document.addEventListener("DOMContentLoaded", function() {
+		    var TheaterEvents = document.querySelectorAll(".theater-event");
+		    var showMoreButton = document.getElementById("TheaterShowMoreBtn");
+		    var theaterShowMore = false;
+
+		    // 처음 3개의 아이템만 보이도록 설정
+		    for (var i = 3; i < TheaterEvents.length; i++) {
+		    	TheaterEvents[i].style.display = "none";
+		    }
+
+		    // "더 보기" 버튼 클릭 시 추가 아이템 보이기
+		    showMoreButton.addEventListener("click", function() {
+		        if (!theaterShowMore) {
+		            for (var i = 3; i < TheaterEvents.length; i++) {
+		            	TheaterEvents[i].style.display = "block";
+		            }
+
+		            theaterShowMore = true;
+		            showMoreButton.textContent = "간략히 보기";
+		        } else {
+		            for (var i = 3; i < TheaterEvents.length; i++) {
+		            	TheaterEvents[i].style.display = "none";
+		            }
+
+		            theaterShowMore = false;
+		            showMoreButton.textContent = "더 보기";
+		        }
+		    });
+		});
+		document.addEventListener("DOMContentLoaded", function() {
+		    var DiscountEvents = document.querySelectorAll(".movie-event");
+		    var showMoreButton = document.getElementById("DiscountShowMoreBtn");
+		    var discountShowMore = false;
+
+		    // 처음 3개의 아이템만 보이도록 설정
+		    for (var i = 3; i < movieEvents.length; i++) {
+		        movieEvents[i].style.display = "none";
+		    }
+
+		    // "더 보기" 버튼 클릭 시 추가 아이템 보이기
+		    showMoreButton.addEventListener("click", function() {
+		        if (!discountShowMore) {
+		            for (var i = 3; i < DiscountEvents.length; i++) {
+		            	DiscountEvents[i].style.display = "block";
+		            }
+
+		            discountShowMore = true;
+		            showMoreButton.textContent = "간략히 보기";
+		        } else {
+		            for (var i = 3; i < DiscountEvents.length; i++) {
+		            	DiscountEvents[i].style.display = "none";
+		            }
+
+		            discountShowMore = false;
+		            showMoreButton.textContent = "더 보기";
+		        }
+		    });
+		});
+	</script>
 
 </body>
 </html>

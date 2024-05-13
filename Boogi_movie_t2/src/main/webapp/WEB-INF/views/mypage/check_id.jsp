@@ -20,8 +20,8 @@ article{
 <script type="text/javascript">
 // --------------------------------------------------------------------
 // 2. 아이디 입력란에서 커서가 빠져나갈 때 아이디 길이 체크하기 => blur 이벤트
-$("#id").blur(function() {
-    let id = $("#id").val(); // 입력받은 아이디 값 저장
+$("#member_id").blur(function() {
+    let id = $("#member_id").val(); // 입력받은 아이디 값 저장
 // 	// 아이디 입력값 검증을 위한 정규표현식 활용
 // 	// => 영문자([A-Za-z]), 숫자([0-9]), 특수문자(_) 조합 8 ~ 16자리
 // 	//    이 때, 영문자 + 숫자 + _ 기호는 \w 로 대체 가능
@@ -59,14 +59,14 @@ $("#id").blur(function() {
 <body>
 	<article>
 		<h1>아이디 중복 검사</h1>
-		<form action="CheckDupId" class="align_center">
+		<form action="CheckDupId" class="align_center" method="post">
 		<!-- pattern 속성으로 입력값 검증 수행 -->
 		<!-- 주의! submit 버튼 클릭 시 동작하며, 패턴 작성 시 / 와 / 사이의 내용만 작성 -->
-			<input type="text" name="id" value="${param.id}" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" placeholder="검색할 아이디 입력" required>
+			<input type="text" name="member_id" value="${param.member_id}" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" placeholder="검색할 아이디 입력" required>
 			<input type="submit" value="검색">
 		</form>
 		<%-- 만약, id 파라미터값이 있을 경우 아이디 중복 체크 결과 표시 --%>
-		<c:if test="${not empty param.id}">
+		<c:if test="${not empty param.member_id}">
 			<br>
 			<div class="align_center">
 				<%-- 아이디 중복 체크 결과 메세지("checkResult" 속성값) 표시 --%>
@@ -75,10 +75,10 @@ $("#id").blur(function() {
 				<%-- 아이디 중복 체크 결과("checkResult" 속성값이 true/false)에 따른 작업 수행 --%>
 				<c:choose>
 					<c:when test="${checkResult eq true }"> <%-- 아이디 중복 (사용 불가능한 아이디 = true) --%>
-						${param.id} : 이미 사용중인 아이디
+						${param.member_id} : 이미 사용중인 아이디
 					</c:when>
 					<c:otherwise> <%-- 아이디 중복 아님(사용 가능한 아이디 = false) --%>
-						${param.id} : 사용 가능한 아이디<br>
+						${param.member_id} : 사용 가능한 아이디<br>
 						<%-- 아이디가 중복이 아닐 경우 [아이디 사용하기] 버튼 표시 --%>
 						<input type="button" value="아이디 사용하기" onclick="useId()">
 					</c:otherwise>
@@ -91,7 +91,7 @@ $("#id").blur(function() {
 			// 부모창 (현재 아이디 중복 검사 창을 열게 한 창)의 아이디 입력 텍스트박스에
 			// 중복검사 완료된 아이디 파라미터값을 표시
 			// => 부모창을 제어하기 위해서는 window.opener(opener만 사용 가능!)
-			window.opener.document.fr.id.value = "${param.id}";
+			window.opener.document.fr.member_id.value = "${param.member_id}";
 			
 			// 현재 창(자식 창)닫기
 			window.close();

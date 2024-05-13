@@ -6,6 +6,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import itwillbs.p2c3.boogimovie.vo.EventVO;
+import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -24,18 +26,21 @@ public interface AdminMapper {
 	// 회원 상세보기
 	MemberVO selectMember(String id);
 
+	//========================================================
 	// 리뷰 리스트 조회
 	List<ReviewVO> selectReviewList();
 
 	// 리뷰 삭제
 	int deleteReview(String review_num);
 
+	//========================================================
 	// 예매리스트
 	List<Map<String, String>> selectReserveList();
 	
 	// 예매 상세
 	Map<String, String> selectReserve(int reservation_num);
 	
+	//========================================================
 	// 영화 리스트 조회
 	List<Map<String, String>> selectMovieList();
 	
@@ -53,6 +58,20 @@ public interface AdminMapper {
 
 	// 영화 삭제
 	int deleteMovie(String movie_num);
+	//========================================================
+	// 이벤트 등록
+	int insertEvent(EventVO event);
+	
+	// 이벤트 수정
+	int updateEvent(EventVO event);
+	
+	// 이벤트 삭제
+	int deleteEvent(EventVO event);
+	
+	
+	
+	
+	//========================================================
 
 	//공지사항 등록
 	int insertNotice(@Param("notice") NoticeVO notice, @Param("theater_num")int theater_num);
@@ -75,4 +94,12 @@ public interface AdminMapper {
 	
 	// notice 처음 게시물 번호
 	int selectMinNotice(NoticeVO notice);
+	
+	//스토어용
+	//스토어 전체 리스트 
+	List<ItemInfoVO> selectItemListFull();
+	//스토어 추가 시 개별아이템 확인
+	ItemInfoVO selectItem(String item_info_name);
+	int insertItem(ItemInfoVO item);
+	int deleteItem(String item_info_name);
 }

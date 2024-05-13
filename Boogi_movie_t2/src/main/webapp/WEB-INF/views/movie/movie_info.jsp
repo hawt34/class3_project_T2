@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
-<head>
 <style>
 * {
 	margin: 0;
@@ -20,23 +19,19 @@
 }
 
 article {
-  margin-top: 40px;
-	width: 1400px;
+	margin-top: 40px;
+ 	width: 1400px;
 	height: 600px;
 	display: flex;
-  justify-content: center;
-  align-items: center;
+    justify-content: center;
+  	align-items: center;
 }
 .movieTrail {
   /* 내부의 movieTrail을 가운데 정렬합니다. */
-  width: 900px;
-  max-width: 100%; /* 부모 요소의 너비에 맞게 설정합니다. */
-  margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬합니다. */
+ 	width: 900px;
+ 	max-width: 100%; /* 부모 요소의 너비에 맞게 설정합니다. */
+ 	margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬합니다. */
 }
-
-  
-
-
 section {
 	overflow: hidden;
 	width: 1400px;
@@ -106,8 +101,6 @@ section h1 {
 	
 }
 
-
-
 .star-rating{
 	padding-left: 10px;
 	padding-top: 10px;
@@ -176,36 +169,27 @@ section h1 {
   width: 200px;
   height: 100px;
 }
-
+.backButton {
+	margin-top: 20px;
+}
 
 footer {
 	width: 100%;
 	height: 100px;
 	/* 	background-color: #ffb300; */
-
 </style>
-
+<head>
 <meta charset="UTF-8">
-
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<%-- <link href="${pageContext.request.contextPath}/resources/css/movie_info1.css" rel="stylesheet" type="text/css"> --%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<%-- <link href="${pageContext.request.contextPath}/resources/css/movie_info.css" rel="stylesheet" type="text/css"> --%>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"	crossorigin="anonymous">
+<link rel="stylesheet" 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <script>
 	function refreshParent() {
 		location.reload(); // 원래 페이지 새로고침	
 	}
-    
 </script>
 
 <body>
@@ -231,7 +215,7 @@ footer {
 				<div class="list">
 					<div class="movie">
 						<img src="${movie.movie_poster}">
-						<button type="button" class="btn btn-outline-primary">예매하기</button>
+						<button type="button" class="btn btn-outline-primary" id="movieTicket">예매하기</button>
 					</div>
 					<div class="movieInfo">
 						<ul>
@@ -243,8 +227,12 @@ footer {
 							<li><span>상영시간 : ${movie.movie_runtime }</span></li>
 							<li><span>줄거리 : ${movie.movie_summary}</span></li>
 						</ul>
-						
+							<img src="${movie.movie_stillcut}">
+							<img src="${movie.movie_stillcut2}">
+							<img src="${movie.movie_stillcut3}">
+						<div class="backButton">	
 						<button type="button" class="btn btn-outline-primary" onclick="window.history.back()">뒤로가기</button>
+						</div>
 					</div>	
 				</div>
 			</div>
@@ -315,53 +303,57 @@ footer {
 	</div>
 </body>
 <script type="text/javascript">
-    
-    
-$("#submitReviewBtn").click(function(event) {
-    // 세션 아이디 가져오기
-    let sessionId = "${sessionScope.sId}";
+    let sId = "${sessionScope.sId}";
 	
+	$(document).ready(function() {
+    	$('#movieTicket').click(function() {
+        // 세션 아이디 확인
+        	if (!sId) {
+        		if (confirm("로그인이 필요합니다. 상단의 로그인영역으로 이동하시겠습니까?")) {
+                	// 로그인 페이지로 이동
+            		$('a[href="member_login"]').focus();
+            	}
+        		} else {
+            	// 세션 아이디가 있으면 예매 페이지로 이동
+            		window.location.href = 'tic_ticketing';
+        		}
+       
+   	 		});	
+		});
     
-    let reviewText = $("#reviewText").val().trim();
-    // 로그인 여부 확인
-    if (!sessionId) {
-        if (confirm("로그인이 필요합니다. 상단의 로그인영역으로 이동하시겠습니까?")) {
+	$("#submitReviewBtn").click(function(event) {
+    	let reviewText = $("#reviewText").val().trim();
+    	// 로그인 여부 확인
+    	if (!sId) {
+        	if (confirm("로그인이 필요합니다. 상단의 로그인영역으로 이동하시겠습니까?")) {
             // 로그인 페이지로 이동
         	$('a[href="member_login"]').focus();
-        }
-        event.preventDefault(); // 폼 제출 중단
-        return;
-    }
+        	}
+        	event.preventDefault(); // 폼 제출 중단
+       		return;
+    	}
 
+   	 // 관람평이 비어 있는지 확인
+    	if (reviewText === "") {
+        	alert("관람평을 입력해주세요.");
+        	$("#reviewText").focus();
+        	event.preventDefault(); // 폼 제출 중단
+        	return;
+    	}	
+	});
 
-    // 관람평이 비어 있는지 확인
-    if (reviewText === "") {
-        alert("관람평을 입력해주세요.");
-        $("#reviewText").focus();
-        event.preventDefault(); // 폼 제출 중단
-        return;
-    }
-
-   
-
-});
-
-function openReviewModify(review_num) {
-	var url = "reviewModify?review_num=" + review_num;
+	function openReviewModify(review_num) {
+		var url = "reviewModify?review_num=" + review_num;
 	
-	window.open(url,"","width=700,height=500");
-}
+		window.open(url,"","width=700,height=500");
+	}
 
-function confirmDelete(review_num) {
-	var url = "deleteReview?review_num=" + review_num;
-	
-	window.open(url,"","width=700,height=300");	
-}
-
+	function confirmDelete(review_num) {
+		if (confirm("정말로 이 리뷰를 삭제하시겠습니까?")) {
+			var url = "deleteReview?review_num=" + review_num;
+			window.open(url,"","width=700,height=300");	
+		}		
+	}
 
 </script>
-
-
-
-
 </html>

@@ -1,16 +1,32 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.EventService;
@@ -21,6 +37,7 @@ import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.FAQVO;
+import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -29,7 +46,6 @@ import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
-import itwillbs.p2c3.boogimovie.vo.TheaterFacilityVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
@@ -287,6 +303,8 @@ public class AdminController {
 		model.addAttribute("reviewList", reviewList);
 		return "admin/admin_member/admin_review";
 	}
+	
+	// 리뷰 삭제
 	@GetMapping("admin_review_delete")
 	public String adminReviewDelete(String review_num, Model model) {
 		int deleteCount = service.deleteReview(review_num);
@@ -295,10 +313,9 @@ public class AdminController {
 		} else {
 			model.addAttribute("msg", "삭제에 실패하였습니다");
 			return "error/fail";
-			
 		}
-		
 	}
+	
 	// 3) 회원페이지
 	@GetMapping("admin_member")
 	public String adminMember(Model model) {
@@ -328,13 +345,11 @@ public class AdminController {
 		} else {
 			model.addAttribute("msg", "회원삭제에 실패하였습니다");
 			return "error/fail";
-			
 		}
-		
 	}
 	
 	//--------------------------------------------------------------------
-	// 관리자 영화 페이지
+	// 관리자 상영관리 페이지
 	@GetMapping("admin_moviePlan")
 	public String adminMoviePlan() {
 		return "admin/admin_movie/admin_moviePlan";
@@ -377,7 +392,6 @@ public class AdminController {
 			model.addAttribute("msg", "영화삭제 실패");
 			return "redirect:/error/fail";
 		}
-		
 	}
 	
 	// 영화 등록 폼
@@ -428,36 +442,80 @@ public class AdminController {
 			model.addAttribute("msg", "영화수정 실패");
 			return "error/fail";
 		}
-		
-		
 	}
 	
 	
 	//--------------------------------------------------------------------
+	// 날짜 변환기
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+    }
+	
 	// 관리자 이벤트 
 	@GetMapping("admin_event")
 	public String adminEvent(Model model) {
 		List<EventVO> eventList = eventService.getEventList();
-		model.addAttribute(eventList);
+		model.addAttribute("eventList",eventList);
 		return "admin/admin_event/admin_event";
 	}
+	// 이벤트 등록 폼
 	@GetMapping("admin_event_form")
 	public String adminEventForm() {
-		
 		return "admin/admin_event/admin_event_form";
 	}
-	@GetMapping("admin_event_modify")
-	public String adminEventModify() {
-		
-		return "admin/admin_event/admin_event_modify";
-	}
+	
+	// 이벤트 등록 프로
 	@PostMapping("admin_event_pro")
-	public String adminEventPro() {
-		return "redirect:/admin_event";
+	public String adminEventPro(EventVO event, Model model) {
+		int insertCount = service.InsertEvent(event);
+		
+		if(insertCount > 0) {
+			return "redirect:/admin_event";
+		} else {
+			return "error/fail";
+		}
 	}
+	// 이벤트 등록 수정 폼
+	@GetMapping("admin_event_modify")
+	public String adminEventModify(EventVO event, Model model) {
+		event = eventService.getEvent(event.getEvent_num());
+		
+		if(event == null) {
+			model.addAttribute("msg", "이벤트를 불러오는데 실패하였습니다");
+			return "error/fail";
+		} else {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			event.setEvent_start(dateFormat.format(event.getEvent_start_date()));
+			event.setEvent_end(dateFormat.format(event.getEvent_end_date()));
+			model.addAttribute("event", event);
+			return "admin/admin_event/admin_event_modify";
+		}
+	}
+	// 이벤트 등록 수정 프로
+	@PostMapping("admin_event_modify_pro")
+	public String adminEventModifyPro(EventVO event, Model model) {
+		int updateCount = service.updateEvent(event);
+		if(updateCount > 0) {
+			return "redirect:/admin_event";
+		} else {
+			model.addAttribute("msg", "이벤트 수정에 실패하였습니다");
+			return "error/fail";
+		}
+	}
+	// 이벤트 삭제
 	@GetMapping("admin_event_delete")
-	public String adminEventDelete() {
-		return "redirect:/admin_event";
+	public String adminEventDelete(EventVO event, Model model) {
+		System.out.println(event);
+		int deleteCount = service.deleteEvent(event);
+		if(deleteCount > 0) {
+			return "redirect:/admin_event";
+		} else {
+			model.addAttribute("msg", "이벤트 수정에 실패했습니다");
+			return "error/fail";
+		}
 	}
 
 	//--------------------------------------------------------------------
@@ -491,21 +549,69 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 스토어 페이지
 	@GetMapping("admin_store")
-	public String adminStore() {
+	public String adminStore(Model model) {
+
+		//전체리스트를 담는 걸 하나 만듬.
+		
+		List<ItemInfoVO> itemFull = service.getItmeListFull();
+		model.addAttribute("itemFull", itemFull);
+		//전체리스트 담는 거 확인완료
 		return "admin/admin_store/admin_store";
 	}
-	@GetMapping("admin_store_form")
+	// 아이템 수정폼으로 일단 와서
+	@GetMapping("admin_store_modify")
+	public String adminStoreModify(@RequestParam String item_info_name, ItemInfoVO item, Model model) {
+		//System.out.println("여기는 스토어 아이템수정 " + item_info_name);
+		item = service.getItem(item_info_name);
+		//System.out.println("여기는 스토어 아이템수정 "+ item);
+		model.addAttribute("updateItem", item);
+		
+		return "admin/admin_store/admin_store_modify";
+	}
+	// 여기서 아이템 업데이트 폼을 다시 리다이렉트
+	
+	@PostMapping("admin_store_modifyPro")
 	public String adminStoreForm() {
-		return "admin/admin_store/admin_store_form";
+		System.out.println("진짜 스낵수정폼 수정");
+		
+		return "redirect:/admin_store";
 	}
+	
 	@PostMapping("admin_store_pro")
-	public String adminStorePro() {
-		return "redirect:/admin_store";
+	public String adminStorePro(ItemInfoVO insertItem,Model model) {
+		//System.out.println("여기는 스토어프로 인설트 아이템 확인" + insertItem); 데이터 확인완료
+		ItemInfoVO dbItem =  service.getItem(insertItem.getItem_info_name());
+		
+		if(dbItem != null) {
+			model.addAttribute("msg", "이미 등록된 스토어 아이템입니다!");
+			return "error/fail";
+		}
+		
+		int insertCount = service.insertItem(insertItem);
+		if(insertCount > 0) {
+			return "redirect:/admin_store";
+		} else {
+			model.addAttribute("msg", "스토어아이템 등록 실패");
+			return "error/fail";
+		}
+		
 	}
+	
+	
 	@GetMapping("admin_store_delete")
-	public String adminStoreDelete() {
+	public String adminStoreDelete(@RequestParam String item_info_name, Model model) {
 		System.out.println("storedelete");
-		return "redirect:/admin_store";
+		
+		
+		int deleteCount = service.deleteItem(item_info_name);
+		if(deleteCount > 0) {
+			return "redirect:/admin_event";
+		} else {
+			model.addAttribute("msg", "스토어 아이템 삭제에 실패했습니다");
+			return "error/fail";
+		}
+		
+			
 	}
 	
 	//--------------------------------------------------------------------

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.TheaterService;
+import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterFacilityVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
@@ -21,7 +22,7 @@ public class TheaterController {
 	
 	
 	@GetMapping("theater")
-	public String theater(Model model, TheaterVO theater) {
+	public String theater(Model model, TheaterVO theater, MemberVO member) {
 		// 극장 카테고리 공지사항 리스트 조회
 		List<NoticeVO> noticeList = service.getNoticeList();
 		// 극장 전체 리스트 조회
@@ -35,7 +36,7 @@ public class TheaterController {
 	}       
 	 
 	@GetMapping("theater_detail")
-	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, Model model) {
+	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, MemberVO member, Model model) {
 		
 		System.out.println("theater_num : " + theater.getTheater_num());
 			

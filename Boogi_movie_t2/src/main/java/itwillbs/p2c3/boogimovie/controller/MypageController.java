@@ -134,7 +134,7 @@ public class MypageController {
 		String id = (String)session.getAttribute("sId");
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
-			model.addAttribute("targetURL", "./MemberLogin");
+			model.addAttribute("targetURL", "./");
 			return"error/fail";
 		}
 		// 로그인 비즈니스 로직 처리 과정에서 사용한 MemberService - getMember() 메서드 재사용
@@ -153,34 +153,56 @@ public class MypageController {
 	}
 	
 	@PostMapping("myp_info_modify_pro")
-	public String mypInfoModifyPro(MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
+	public String mypInfoModifyPro(MemberVO member, Model model) {
 		System.out.println("mypInfoModifyPro");
 		
 //		 세션 아이디가 없을 경우 "error/fail" 페이지 포워딩 처리
 //		 => msg 속성값 : "잘못된 접근입니다!", targetURL 속성값 : "./"(메인페이지)
 		String id = (String)session.getAttribute("sId");
-		
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			model.addAttribute("targetURL", "./");
 			return "error/fail";
 		}
+		member = mypageInfoService.getMember(id);
+		model.addAttribute("member", member);
+		MemberVO dbMember = mypageInfoService.getDbMember(member);
+		model.addAttribute("dbMember", dbMember);
+		System.out.println("session Id : " + id);
+		System.out.println("member.getMember_id : " + member.getMember_id());
+		System.out.println("dbMember.getMember_id : " + dbMember.getMember_id());
+//		if(id.equals(member.getMember_id())) {
+//			
+//			System.out.println("id : " + id + ", member_id : " + member.getMember_id() + " 같음 ");
+			int updateCount = mypageInfoService.modifyMemberEq(member);
+		
+//		} else {
+//			
+//			System.out.println("id : " + id + ", member_id : " + member.getMember_id() + " 다름 ");
+//			int updateCount = mypageInfoService.modifyMemberNotEq(member);
+//		}
 		// ----------------------------------------------------
 		// 만약, 변경할 패스워드가 존재할 경우 패스워드 암호화
-		if(!member.getMember_pwd().equals("")) {
-			member.setMember_pwd(passwordEncoder.encode(member.getMember_pwd()));
-		}
+//		if(!member.getMember_pwd().equals("")) {
+//			member.setMember_pwd(passwordEncoder.encode(member.getMember_pwd()));
+//		}
 		// ----------------------------------------------------
 		// MemberService - modifyMember() 메서드 호출하여 회원정보 수정 요청
 		// => 파라미터 : MemberVO 객체   리턴타입 : int(updateCount)
-		int updateCount = mypageInfoService.modifyMember(member);
 		
 		// 수정 결과 판별 후 성공 시 "MemberInfo" 서블릿 요청
 		// 실패 시 "error/fail.jsp" 포워딩("회원정보 수정 실패!")
-		if(updateCount > 0) {
-			return "redirect:/myp_info_modify";
-		} else {
-			model.addAttribute("msg", "회원정보 수정 실패!");
+		if(updateCount > 0) { // 정보수정 성공 시
+//			model.addAttribute("member", updateCount);
+//			model.addAttribute("member", member);
+			System.out.println("member_id : " + member.getMember_id());
+//			session.setAttribute("member", member);
+			model.addAttribute("msg", "회원정보가 수정되었습니다");
+			model.addAttribute("targetURL", "myp_info_modify");
+			return "error/fail";
+		} else { // 정보수정 실패 시
+			model.addAttribute("msg", "회원정보 수정에 실패했습니다");
+			model.addAttribute("targetURL", "myp_info_modify");
 			return "error/fail";
 		}
 		
@@ -189,7 +211,7 @@ public class MypageController {
 	// ============================= 아이디 중복 체크 =============================
 	// => 회원 가입 화면에서 새 창이 열릴 경우 id 파라미터가 없이 요청 발생(id = null)
 	// => 아이디 중복 검사 화면에서 검색 버튼 클릭 시 id 파라미터가 포함되어 요청 발생
-	@GetMapping("CheckDupId")
+	@RequestMapping(value = "CheckDupId", method= {RequestMethod.GET, RequestMethod.POST})
 	public String checkDupId(MemberVO member, Model model) {
 		System.out.println("아이디 : " + member.getMember_id());
 		

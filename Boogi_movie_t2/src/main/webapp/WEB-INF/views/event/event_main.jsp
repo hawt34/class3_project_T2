@@ -24,7 +24,6 @@ main {
 * {
 	box-sizing: border-box;
 	padding: 0;
-	margin: 0;
 }
 
 .container {
@@ -40,7 +39,7 @@ main {
 	position: relative;
  	overflow: hidden; 
 	border-radius: 10px;
-	margin: 30px 40px;
+	margin: 10px 40px;
 }
 
 .item:after {
@@ -134,8 +133,8 @@ main {
 .event_cate_title{
 	margin-top: 20px;
 }
-.event_cate_title > button{
-	flex: right;
+.btn{
+	margin-right: 100px;
 }
 
 </style>
@@ -152,6 +151,8 @@ main {
 		</div>
 		<div class="event_cate_title">
 			<h3>영화이벤트</h3>
+		</div>
+		<div align="right">
 			<button type="button" class="btn btn-outline-primary" id="MovieShowMoreBtn">더 보기</button>
 		</div>
 		<div class="container">
@@ -169,6 +170,8 @@ main {
 		</div>
 		<div class="event_cate_title">
 			<h3>극장이벤트</h3>
+		</div>
+		<div align="right">
 			<button type="button" class="btn btn-outline-primary" id="TheaterShowMoreBtn">더 보기</button>
 		</div>
 		<div class="container">
@@ -186,6 +189,8 @@ main {
 		</div>
 		<div class="event_cate_title">
 			<h3>할인이벤트</h3>
+		</div>
+		<div align="right">
 			<button type="button" class="btn btn-outline-primary" id="DiscountShowMoreBtn">더 보기</button>
 		</div>
 		<div class="container">

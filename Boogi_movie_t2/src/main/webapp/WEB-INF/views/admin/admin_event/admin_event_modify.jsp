@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,53 +34,55 @@
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-2">이벤트 상세보기</h4>
-<%-- 				<h6 class="mb-3">이벤트코드 : ${event.event_num}</h6> --%>
-				<form class="validation-form" novalidate action="admin_event_modyfy_pro" method="post" onsubmit="return confirm('이벤트를 등록하시겠습니까?');">
+				<h6 class="mb-3">이벤트코드 : ${event.event_num}</h6>
+				<form class="validation-form" novalidate action="admin_event_modify_pro?event_num=${event.event_num}" method="post" onsubmit="return confirm('이벤트를 수정하시겠습니까?');">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="event_type_num">이벤트타입</label> 
 							<select name="event_type_num" id="event_type_num" class="form-control" required>
-								<option value="1">영화이벤트</option>
-								<option value="2">극장이벤트</option>
-								<option value="3">할인이벤트</option>
+								<option <c:if test="${event.event_type_num eq 1}"> selected </c:if> value="1">영화이벤트</option>
+								<option <c:if test="${event.event_type_num eq 2}"> selected </c:if> value="2">극장이벤트</option>
+								<option <c:if test="${event.event_type_num eq 3}"> selected </c:if> value="3">할인이벤트</option>
 							</select>
 							<div class="invalid-feedback">이벤트 제목을 선택해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="coupon_num">할인쿠폰</label> 
 							<select name="coupon_num" id="coupon_num" class="form-control" required>
-								<option value="7">미선택</option>
-								<option value="6">1000원 할인쿠폰</option>
-								<option value="5">3000원 할인쿠폰</option>
-								<option value="4">5000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_num eq 0}"> selected </c:if> value="0">미선택</option>
+								<option <c:if test="${event.coupon_num eq 1}"> selected </c:if> value="1">1000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_num eq 2}"> selected </c:if> value="2">2000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_num eq 3}"> selected </c:if> value="3">3000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_num eq 4}"> selected </c:if> value="4">4000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_num eq 5}"> selected </c:if> value="5">5000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_num eq 6}"> selected </c:if> value="6">6000원 할인쿠폰</option>
 							</select>
 							<div class="invalid-feedback">이벤트 제목을 선택해주세요.</div>
 						</div>
 					</div>
 					<div class="mb-3">
 						<label for="event_title">이벤트제목</label> 
-						<input type="text" name="event_subject" id="event_title" class="form-control" required />
+						<input type="text" name="event_subject" id="event_title" class="form-control" value="${event.event_subject}" required />
 						<div class="invalid-feedback">이벤트 제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="event_sumnail">썸네일</label> 
-						<input type="file" name="event_thumbnail" id="event_sumnail" class="form-control" required />
-						<div class="invalid-feedback">이미지를 선택해주세요.</div>
+						<label for="event_thumbnail">썸네일</label> 
+							<input type="text" name="event_thumbnail" id="event_thumbnail" class="form-control" value="${event.event_thumbnail}" readonly required />
 					</div>
 					<div class="mb-3">
-						<label for="event_img">본문이미지</label> 
-						<input type="file" id="event_img" class="form-control" required />
+						<label for="event_image">본문이미지</label> 
+						<input type="text" name="event_image" id="event_image" class="form-control" value="${event.event_image}" readonly required />
 						<div class="invalid-feedback">이미지를 선택해주세요.</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="event_start_date">이벤트 시작일</label> 
-							<input type="date" id="event_start_date" class="form-control" required>
+							<input type="date" name="event_start_date" id="event_start_date" class="form-control" value="${event.event_start}" required />
 							<div class="invalid-feedback">이벤트 시작일을 선택해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="event_start_date">이벤트 종료일</label> 
-							<input type="date" id="event_start_date" class="form-control" required>
+							<label for="event_end_date">이벤트 종료일</label> 
+							<input type="date" name="event_end_date" id="event_end_date" class="form-control" value="${event.event_end}" required>
 							<div class="invalid-feedback">이벤트 종료일을 선택해주세요.</div>
 						</div>
 					</div>
@@ -86,7 +90,7 @@
 					<hr class="mb-4">
 					
 					<div class="mb-4" align="center">
-						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block">
+						<input type="submit" value="수정하기" class="btn btn-primary btn-lg btn-block">
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
 				</form>

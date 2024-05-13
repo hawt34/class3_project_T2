@@ -1,5 +1,7 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,32 @@ public class EventController {
 		@GetMapping("event")
 		public String eventMain(Model model) {
 			List<EventVO> eventList = eventService.getEventList();
-			model.addAttribute("eventList", eventList);
+			List<EventVO> movieEventList = new ArrayList<EventVO>();
+			List<EventVO> theaterEventList = new ArrayList<EventVO>();
+			List<EventVO> discountEventList = new ArrayList<EventVO>();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			
+			for(EventVO event : eventList) {
+				String formattedStartDate = dateFormat.format(event.getEvent_start_date());
+				String formattedEndDate = dateFormat.format(event.getEvent_end_date());
+		        event.setEvent_start(formattedStartDate);
+		        event.setEvent_end(formattedEndDate);
+		        
+				if(event.getEvent_type_num() == 1) {
+					movieEventList.add(event);
+				} else if(event.getEvent_type_num() == 2) {
+					theaterEventList.add(event);
+				} else if(event.getEvent_type_num() == 3) {
+					discountEventList.add(event);
+				}
+			}
+			
+			model.addAttribute("movieEventList", movieEventList);
+			model.addAttribute("theaterEventList", theaterEventList);
+			model.addAttribute("discountEventList", discountEventList);
 			return "event/event_main";
 		}
+		
 	
 	// 썸네일 클릭시 
 		@GetMapping("eventDetail")

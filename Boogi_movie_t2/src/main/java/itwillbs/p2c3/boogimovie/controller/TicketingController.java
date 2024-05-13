@@ -311,27 +311,13 @@ public class TicketingController {
 			
 		return final_list;
 	}
-<<<<<<< HEAD
+
 	@GetMapping("payment_reservation")
 	public String paymentReserve() {
 		return "payment/payment_reservation";
 	}
 }
-=======
 
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
-		
-		
-		
-		
-		
-		
-		
-	
-	
-	
 
-	
-	}	
 		
 		

@@ -159,22 +159,20 @@ public class MypageController {
 //		 세션 아이디가 없을 경우 "error/fail" 페이지 포워딩 처리
 //		 => msg 속성값 : "잘못된 접근입니다!", targetURL 속성값 : "./"(메인페이지)
 		String id = (String)session.getAttribute("sId");
+		System.out.println("session Id : " + id);
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			model.addAttribute("targetURL", "./");
 			return "error/fail";
 		}
-		member = mypageInfoService.getMember(id);
-		model.addAttribute("member", member);
-		MemberVO dbMember = mypageInfoService.getDbMember(member);
-		model.addAttribute("dbMember", dbMember);
-		System.out.println("session Id : " + id);
-		System.out.println("member.getMember_id : " + member.getMember_id());
-		System.out.println("dbMember.getMember_id : " + dbMember.getMember_id());
+//		member = mypageInfoService.getMember(id);
+//		MemberVO dbMember = mypageInfoService.getDbMember(member);
+//		model.addAttribute("dbMember", dbMember);
+//		session.setAttribute("member", member);
+//		System.out.println("member.getMember_id : " + member.getMember_id());
 //		if(id.equals(member.getMember_id())) {
 //			
 //			System.out.println("id : " + id + ", member_id : " + member.getMember_id() + " 같음 ");
-			int updateCount = mypageInfoService.modifyMemberEq(member);
 		
 //		} else {
 //			
@@ -192,11 +190,11 @@ public class MypageController {
 		
 		// 수정 결과 판별 후 성공 시 "MemberInfo" 서블릿 요청
 		// 실패 시 "error/fail.jsp" 포워딩("회원정보 수정 실패!")
+		int updateCount = mypageInfoService.modifyMemberEq(member);
+		model.addAttribute("member", updateCount);
 		if(updateCount > 0) { // 정보수정 성공 시
-//			model.addAttribute("member", updateCount);
 //			model.addAttribute("member", member);
 			System.out.println("member_id : " + member.getMember_id());
-//			session.setAttribute("member", member);
 			model.addAttribute("msg", "회원정보가 수정되었습니다");
 			model.addAttribute("targetURL", "myp_info_modify");
 			return "error/fail";

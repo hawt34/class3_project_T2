@@ -74,7 +74,7 @@ $("#member_id").blur(function() {
 				<%-- ------------------------------------------------------- --%>
 				<%-- 아이디 중복 체크 결과("checkResult" 속성값이 true/false)에 따른 작업 수행 --%>
 				<c:choose>
-					<c:when test="${checkResult eq true }"> <%-- 아이디 중복 (사용 불가능한 아이디 = true) --%>
+					<c:when test="${checkResult eq true}"> <%-- 아이디 중복 (사용 불가능한 아이디 = true) --%>
 						${param.member_id} : 이미 사용중인 아이디
 					</c:when>
 					<c:otherwise> <%-- 아이디 중복 아님(사용 가능한 아이디 = false) --%>

@@ -127,8 +127,8 @@
 	        					 <td>${itemFull.item_info_name}</td>
 	        					 <td>${itemFull.item_info_price}</td>
 	                             <td>
-									<button type="button" class="btn btn-outline-primary" onclick="store_form()">수정</button>
-									<button type="button" class="btn btn-outline-primary" onclick="store_delete()">삭제</button>
+									<button type="button" class="btn btn-outline-primary" onclick="store_form('${itemFull.item_info_name}')">수정</button>
+									<button type="button" class="btn btn-outline-primary" onclick="store_delete('${itemFull.item_info_name}')">삭제</button>
 								 </td>
 								 </tr>
 						   </c:forEach> 
@@ -150,15 +150,15 @@
 	</footer>
 
 	<script type="text/javascript">
-			
-	
-		function store_form() {
-			window.open("admin_store_form", "_self");
-		}
-		function store_delete() {
-			if(confirm("정말 삭제하시겠습니까?")){
-				location.href="admin_store_delete";
+		function store_form(item_info_name) {
+			if(confirm("정말 수정하시겠습니까?")){
+				location.href = "admin_store_modify?item_info_name=" + encodeURIComponent(item_info_name);
 			}
+		}
+		function store_delete(item_info_name) {
+			if(confirm("정말 삭제하시겠습니까?")){
+				  location.href = "admin_store_delete?item_info_name=" + encodeURIComponent(item_info_name);
+				}
 		}
 		
 		

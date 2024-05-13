@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.EventService;
 import itwillbs.p2c3.boogimovie.service.FaqService;
-import itwillbs.p2c3.boogimovie.service.ItemInfoService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.ScreenService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
@@ -37,7 +35,6 @@ import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
-import itwillbs.p2c3.boogimovie.vo.TheaterFacilityVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
@@ -541,10 +538,25 @@ public class AdminController {
 		//전체리스트 담는 거 확인완료
 		return "admin/admin_store/admin_store";
 	}
-	@GetMapping("admin_store_form")
-	public String adminStoreForm() {
-		return "admin/admin_store/admin_store_form";
+	// 아이템 수정폼으로 일단 와서
+	@GetMapping("admin_store_modify")
+	public String adminStoreModify(@RequestParam String item_info_name, ItemInfoVO item, Model model) {
+		//System.out.println("여기는 스토어 아이템수정 " + item_info_name);
+		item = service.getItem(item_info_name);
+		//System.out.println("여기는 스토어 아이템수정 "+ item);
+		model.addAttribute("updateItem", item);
+		
+		return "admin/admin_store/admin_store_modify";
 	}
+	// 여기서 아이템 업데이트 폼을 다시 리다이렉트
+	
+	@PostMapping("admin_store_modifyPro")
+	public String adminStoreForm() {
+		System.out.println("진짜 스낵수정폼 수정");
+		
+		return "redirect:/admin_store";
+	}
+	
 	@PostMapping("admin_store_pro")
 	public String adminStorePro(ItemInfoVO insertItem,Model model) {
 		//System.out.println("여기는 스토어프로 인설트 아이템 확인" + insertItem); 데이터 확인완료
@@ -564,10 +576,22 @@ public class AdminController {
 		}
 		
 	}
+	
+	
 	@GetMapping("admin_store_delete")
-	public String adminStoreDelete() {
+	public String adminStoreDelete(@RequestParam String item_info_name, Model model) {
 		System.out.println("storedelete");
-		return "redirect:/admin_store";
+		
+		
+		int deleteCount = service.deleteItem(item_info_name);
+		if(deleteCount > 0) {
+			return "redirect:/admin_event";
+		} else {
+			model.addAttribute("msg", "스토어 아이템 삭제에 실패했습니다");
+			return "error/fail";
+		}
+		
+			
 	}
 	
 	//--------------------------------------------------------------------

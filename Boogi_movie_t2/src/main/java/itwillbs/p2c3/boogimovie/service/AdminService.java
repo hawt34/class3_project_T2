@@ -152,4 +152,10 @@ public class AdminService {
 		return mapper.insertItem(insertItem);
 	}
 	
+	//스토어 아이템삭제
+	public int deleteItem(String item_info_name) {
+		return mapper.deleteItem(item_info_name);
+	}
+	
+	
 }

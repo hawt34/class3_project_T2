@@ -98,5 +98,5 @@ public interface AdminMapper {
 	//스토어 추가 시 개별아이템 확인
 	ItemInfoVO selectItem(String item_info_name);
 	int insertItem(ItemInfoVO item);
-	
+	int deleteItem(String item_info_name);
 }

@@ -61,20 +61,7 @@
 								<tr>
 									<td>${event.event_num}</td>
 									<td>${event.event_subject}</td>
-									<td>
-										<c:choose>
-											<c:when test="${event.event_type_num eq 1}">
-												영화이벤트
-											</c:when>
-											<c:when test="${event.event_type_num eq 2}">
-												극장이벤트
-											</c:when>
-											<c:when test="${event.event_type_num eq 3}">
-												할인이벤트
-											</c:when>
-										</c:choose>
-									</td>
-									
+									<td>${event.event_type_name}</td>
 									<td>
 										<fmt:formatDate value="${event.event_reg_date}" pattern="yyyy-MM-dd" />
 									</td>

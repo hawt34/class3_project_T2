@@ -1,10 +1,20 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -16,6 +26,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.EventService;
@@ -442,6 +453,7 @@ public class AdminController {
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
+	
 	// 관리자 이벤트 
 	@GetMapping("admin_event")
 	public String adminEvent(Model model) {
@@ -459,11 +471,10 @@ public class AdminController {
 	@PostMapping("admin_event_pro")
 	public String adminEventPro(EventVO event, Model model) {
 		int insertCount = service.InsertEvent(event);
-//		System.out.println(event);
+		
 		if(insertCount > 0) {
 			return "redirect:/admin_event";
 		} else {
-			model.addAttribute("msg", "이벤트 등록에 실패했습니다");
 			return "error/fail";
 		}
 	}
@@ -471,19 +482,28 @@ public class AdminController {
 	@GetMapping("admin_event_modify")
 	public String adminEventModify(EventVO event, Model model) {
 		event = eventService.getEvent(event.getEvent_num());
+		
 		if(event == null) {
 			model.addAttribute("msg", "이벤트를 불러오는데 실패하였습니다");
 			return "error/fail";
 		} else {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			event.setEvent_start(dateFormat.format(event.getEvent_start_date()));
+			event.setEvent_end(dateFormat.format(event.getEvent_end_date()));
 			model.addAttribute("event", event);
 			return "admin/admin_event/admin_event_modify";
 		}
 	}
 	// 이벤트 등록 수정 프로
 	@PostMapping("admin_event_modify_pro")
-	public String adminEventModifyPro() {
-		
-		return "redirect:/admin_event";
+	public String adminEventModifyPro(EventVO event, Model model) {
+		int updateCount = service.updateEvent(event);
+		if(updateCount > 0) {
+			return "redirect:/admin_event";
+		} else {
+			model.addAttribute("msg", "이벤트 수정에 실패하였습니다");
+			return "error/fail";
+		}
 	}
 	// 이벤트 삭제
 	@GetMapping("admin_event_delete")

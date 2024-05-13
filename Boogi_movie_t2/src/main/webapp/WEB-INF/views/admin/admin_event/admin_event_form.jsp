@@ -46,10 +46,13 @@
 						<div class="col-md-6 mb-3">
 							<label for="coupon_num">할인쿠폰</label> 
 							<select name="coupon_num" id="coupon_num" class="form-control" required>
-								<option value="7">미선택</option>
-								<option value="6">1000원 할인쿠폰</option>
-								<option value="5">3000원 할인쿠폰</option>
-								<option value="4">5000원 할인쿠폰</option>
+								<option value="0">미선택</option>
+								<option value="1">1000원 할인쿠폰</option>
+								<option value="2">2000원 할인쿠폰</option>
+								<option value="3">3000원 할인쿠폰</option>
+								<option value="4">4000원 할인쿠폰</option>
+								<option value="5">5000원 할인쿠폰</option>
+								<option value="6">6000원 할인쿠폰</option>
 							</select>
 							<div class="invalid-feedback">이벤트 제목을 선택해주세요.</div>
 						</div>

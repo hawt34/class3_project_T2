@@ -62,6 +62,9 @@ public interface AdminMapper {
 	// 이벤트 등록
 	int insertEvent(EventVO event);
 	
+	// 이벤트 수정
+	int updateEvent(EventVO event);
+	
 	// 이벤트 삭제
 	int deleteEvent(EventVO event);
 	

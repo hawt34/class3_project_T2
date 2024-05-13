@@ -94,6 +94,11 @@ public class AdminService {
 		return mapper.insertEvent(event);
 	}
 	
+	// 이벤트 수정
+	public int updateEvent(EventVO event) {
+		return mapper.updateEvent(event);
+	}
+	
 	// 이벤트 삭제
 	public int deleteEvent(EventVO event) {
 		return mapper.deleteEvent(event);

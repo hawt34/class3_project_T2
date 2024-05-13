@@ -208,7 +208,7 @@ public class TicketingController {
 			
 		return final_list;
 	}
-}
+
 		
 		
 		
@@ -224,6 +224,6 @@ public class TicketingController {
 		return "payment/payment_reservation";
 	}
 	
-	
+	}	
 		
 		

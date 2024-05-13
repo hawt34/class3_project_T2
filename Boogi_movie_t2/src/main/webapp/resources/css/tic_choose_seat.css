@@ -1,5 +1,8 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700);
+
+
+	
 	#seat_num{
 		margin-bottom : 50px;
 		position : relative;
@@ -45,6 +48,11 @@
 	    color: white;
 	    font-size: 0.8em;
 	    border-radius : 5px;
+	}
+	
+		.seat.selected {
+	    background-color: #B2FFFF; /* 선택된 좌석 색상 변경 */
+	    color: black;
 	}
 
 	

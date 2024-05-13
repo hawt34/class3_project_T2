@@ -19,7 +19,7 @@ public class ScreenSessionVO {
 	//SELECT 용 멤버변수
 	private String screen_seat_row;
 	private String screen_seat_col;
-	private int screen_dimension;
+	private String screen_dimension;
 	private int screen_cinema_num;
 	private String select_date;
 	

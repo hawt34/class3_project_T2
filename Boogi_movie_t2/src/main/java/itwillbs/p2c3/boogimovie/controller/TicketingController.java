@@ -3,9 +3,15 @@ package itwillbs.p2c3.boogimovie.controller;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,6 +28,7 @@ import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.service.MovieInfoService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
+import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieGenreVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
@@ -72,33 +80,30 @@ public class TicketingController {
 		String start_time = final_list_data.split("/")[2];
 		String end_time = final_list_data.split("/")[3];
 		String theater_name = final_list_data.split("/")[4];
+		String selected_day = final_list_data.split("/")[5];
 		// 포스터 가져오기
 		MovieVO movie = new MovieVO();
 		movie.setMovie_name(movie_name);
 		MovieVO dbMovie = movieService.getMovieInfo(movie);
 		String movie_poster = dbMovie.getMovie_poster();
-		//현재날짜에 가지고있는 hh:mm:ss 붙여넣기
-		
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        start_time += ":00";
-        end_time += ":00";
-        Calendar cal = Calendar.getInstance();
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
-        
-        java.util.Date parsedStartDate = null;
-        java.util.Date parsedEndDate = null;
-        
+		// 날짜와 시간 형식 지정 및 합치기
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String formattedStartDateTime = selected_day + " " + start_time + ":00";
+		String formattedEndDateTime = selected_day + " " + end_time + ":00";
+		Timestamp start_date = null;
+		Timestamp end_date = null;
+		// 날짜 파싱 및 Timestamp 객체 생성
 		try {
-			parsedStartDate = dateFormat.parse(currentDate + " " + start_time);
-			parsedEndDate = dateFormat.parse(currentDate + " " + end_time);
+		    java.util.Date parsedStartDate = dateFormat.parse(formattedStartDateTime);
+		    java.util.Date parsedEndDate = dateFormat.parse(formattedEndDateTime);
+		    start_date = new Timestamp(parsedStartDate.getTime());
+		    end_date = new Timestamp(parsedEndDate.getTime());
+
+		    System.out.println(start_date);
+		    System.out.println(end_date);
 		} catch (ParseException e) {
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
-        
-        Timestamp start_date = new Timestamp(parsedStartDate.getTime());
-        Timestamp end_date = new Timestamp(parsedEndDate.getTime());	
-        System.out.println(start_date);
-        System.out.println(end_date);
 		//theater_num 가지고오기
         int theater_num = theaterService.getTheaterName(theater_name);
         //movie_num 가지고오기
@@ -109,16 +114,76 @@ public class TicketingController {
 		scs.setTheater_num(theater_num);
 		scs.setScs_start_date(start_date);
 		scs.setScs_end_date(end_date);
+		System.out.println(scs.getScs_start_date());
+		System.out.println(scs.getScs_end_date());
 		//db에서 값 가져오기
 		ScreenSessionVO dbScs = ticketingService.chooseSeatSelect(scs);
 		//뷰에 가져갈 값 저장하기
 		dbScs.setMovie_poster(movie_poster);
 		dbScs.setMovie_name(movie_name);
 		dbScs.setTheater_name(theater_name);
+		//seats 2차원 배열 만들기
+		List<String> seats = new ArrayList<>();
+		char endRow = dbScs.getScreen_seat_col().charAt(0);
+		int endCol = Integer.parseInt(dbScs.getScreen_seat_row());
 		
+		
+	    for (char row = 'A'; row <= endRow; row++) {
+	        for (int num = 1; num <= endCol; num++) {
+	            seats.add("" + row + num);
+	        }
+	    }
+        //복도 공백
+        int first_road = 3;
+        int second_road = 12;
+		//시간으로 조조,심야 걸러내기
+        String fee_time_keyword = "GT";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime time = LocalTime.parse(start_time, formatter);
+
+        LocalTime morningLimit = LocalTime.of(10, 0);
+        LocalTime nightLimit = LocalTime.of(23, 0);
+        
+        if (time.isBefore(morningLimit)) {
+        	fee_time_keyword = "MT";
+        } else if(time.isAfter(nightLimit)){
+        	fee_time_keyword = "NT";
+        }
+        
+        //주말 공휴일 걸러내기
+        String fee_day_keyword = "WD";
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(selected_day, formatter2);
+        DayOfWeek day = date.getDayOfWeek();
+        boolean isWeekend = (day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY);
+        
+        if (isWeekend) {
+        	fee_day_keyword = "HD";
+        }
+        //2D , 3D 걸러내기
+        String fee_dimension_keyword = dbScs.getScreen_dimension();
+        
+        //걸러낸값으로 select 해오기
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("fee_day_keyword", fee_day_keyword);
+        params.put("fee_time_keyword", fee_time_keyword);
+        params.put("fee_dimension_keyword", fee_dimension_keyword);
+        System.out.println(params);
+        Map<String, Object> fee_info = ticketingService.feeCalc(params);
+        
+        
 		//model에 저장
 		model.addAttribute("scs", dbScs);
-		
+		model.addAttribute("seats", seats);
+        model.addAttribute("firstRoad", first_road);
+        model.addAttribute("secondRoad", second_road);
+        model.addAttribute("endRow", endRow);
+        model.addAttribute("endCol", endCol);
+        model.addAttribute("fee_time_discount", fee_info.get("fee_time_discount"));
+        model.addAttribute("fee_day_discount", fee_info.get("fee_day_discount"));
+        model.addAttribute("fee_dimension_discount", fee_info.get("fee_dimension_discount"));
+        
+        
 		return "ticketing/tic_choose_seat";
 	}
 	
@@ -160,6 +225,44 @@ public class TicketingController {
 		
 		return myTheaters;
 	}
+	
+	@ResponseBody
+	@GetMapping(value = "api/fee_calc", produces = "application/json")
+	public int feeCalc(@RequestParam Map<String, Integer> params){
+		Integer np_num = params.getOrDefault("NP", 0);
+		Integer yp_num = params.getOrDefault("YP", 0);
+		Integer op_num = params.getOrDefault("OP", 0);
+		Integer fee_middle = params.getOrDefault("fee_middle", 0);
+		
+		List<FeeAgeVO> list = ticketingService.feeCalcAge();
+		int np_discount = 0;
+		int yp_discount = 0;
+		int op_discount = 0;
+		for(FeeAgeVO feeAge : list) {
+			if(feeAge.getFee_age_keyword().equals("NP")) {
+				np_discount = 15000 / 100 * feeAge.getFee_age_discount();
+			}else if(feeAge.getFee_age_keyword().equals("YP")) {
+				yp_discount = 15000 / 100 * feeAge.getFee_age_discount();
+			}else if(feeAge.getFee_age_keyword().equals("OP")) {
+				op_discount = 15000 / 100 * feeAge.getFee_age_discount();
+			}
+		}
+		
+		int total_fee = np_num * np_discount
+					  + yp_num * yp_discount
+					  + op_num * op_discount;
+		
+		return fee_middle + total_fee;
+	}
+				
+		
+		
+		
+			
+			
+		
+		
+		
 	
 	
 	@ResponseBody
@@ -208,6 +311,10 @@ public class TicketingController {
 			
 		return final_list;
 	}
+	@GetMapping("payment_reservation")
+	public String paymentReserve() {
+		return "payment/payment_reservation";
+	}
 }
 		
 		
@@ -219,10 +326,7 @@ public class TicketingController {
 	
 	
 	
-	@GetMapping("payment_reservation")
-	public String paymentReserve() {
-		return "payment/payment_reservation";
-	}
+
 	
 	
 		

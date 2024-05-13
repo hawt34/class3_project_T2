@@ -20,7 +20,26 @@
     	AND DATE_FORMAT(scs_end_date, '%Y-%m-%d %H:%i') = DATE_FORMAT(#{scs_end_date}, '%Y-%m-%d %H:%i')
 	</select>
 	
-
+	<select id="feeCalc" resultType="map" parameterType="map">
+		SELECT *
+		FROM fee
+		WHERE 1=1
+		<if test="fee_day_keyword != null and !fee_day_keyword.equals('')">
+			AND fee_day_keyword = #{fee_day_keyword}
+		</if>
+		<if test="fee_time_keyword != null and !fee_time_keyword.equals('')">
+			AND   fee_time_keyword = #{fee_time_keyword}
+		</if>
+		<if test="fee_dimension_keyword != null and !fee_dimension_keyword.equals('')">
+			AND   fee_dimension_keyword = #{fee_dimension_keyword}
+		</if>
+			AND   fee_age_keyword = 'NP'
+	</select>
+	
+	<select id="feeCalcAge" resultType="itwillbs.p2c3.boogimovie.vo.FeeAgeVO">
+		SELECT *
+		FROM fee_age
+	</select>
 		
 
 </mapper>

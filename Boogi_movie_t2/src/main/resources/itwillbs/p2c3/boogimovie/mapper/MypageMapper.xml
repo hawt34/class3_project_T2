@@ -33,8 +33,6 @@
 	  	WHERE member.member_id = #{id}
 	</select>
     
-    
-    
     <!-- 회원정보 -->
     <select id="selectDbMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
     	SELECT * FROM member WHERE member_id = #{member_id}
@@ -42,7 +40,7 @@
     
     <!-- 정보수정 -->
     <!-- 이름, 아이디, 비번, 생년월일, 주소, 이메일, 폰번, 취향 -->
-    <update id="updateMember">
+    <update id="updateMemberEq">
  		UPDATE member
 		SET
 			member_id = #{member_id}
@@ -59,7 +57,7 @@
 			, member_email = #{member_email}
 			, member_tel = #{member_tel}
 		WHERE
-			member_id = #{member_id}
+			member_id = #{member.member_id}
     
     </update>
     

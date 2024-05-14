@@ -99,7 +99,7 @@ body {
 					  </thead>
 					  <tbody>
 					  
-						  <c:forEach var="movie" items="${movieReservation}" varStatus="status">
+						  <c:forEach var="movie" items="${movieReservation}" varStatus="status" begin="0" end="6">
 							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
 							        <th scope="row">${status.index + 1}</th>
 							        <td>${movie.movie_name}</td>

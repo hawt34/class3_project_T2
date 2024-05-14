@@ -71,7 +71,7 @@ public class MypageController {
 			model.addAttribute("theater", infoTheater);
 			
 			// My극장 자주가는 영화관
-			MemberVO infoMyTheater = mypageInfoService.getMyTheater();
+			MemberVO infoMyTheater = mypageInfoService.getMyTheater(member);
 			model.addAttribute("infoMyTheater", infoMyTheater);
 			
 			// 예매내역 영화제목
@@ -190,7 +190,7 @@ public class MypageController {
 		
 		// 수정 결과 판별 후 성공 시 "MemberInfo" 서블릿 요청
 		// 실패 시 "error/fail.jsp" 포워딩("회원정보 수정 실패!")
-		int updateCount = mypageInfoService.modifyMemberEq(member);
+		int updateCount = mypageInfoService.modifyMember(member);
 		model.addAttribute("member", updateCount);
 		if(updateCount > 0) { // 정보수정 성공 시
 //			model.addAttribute("member", member);
@@ -242,10 +242,19 @@ public class MypageController {
 			model.addAttribute("targetURL", "./MemberLogin");
 			return"error/fail";
 		}
-		System.out.println("coupon 컨트롤러");
-		List<CouponVO> couponList = couponService.getCoupon();
-		model.addAttribute("coupon", couponList);
+		member.setMember_id(id);
+		member = mypageInfoService.getDbMember(member);
 		
+		
+		model.addAttribute("member", member);
+		
+		System.out.println("coupon 컨트롤러");
+		// coupon_num
+		List<CouponVO> couponNum = mypageInfoService.getCoupon();
+		model.addAttribute("couponNum", couponNum);
+		
+		// coupon_name
+//		List<CouponVO> couponName = 
 		return "mypage/myp_coupon";
 	}
 	

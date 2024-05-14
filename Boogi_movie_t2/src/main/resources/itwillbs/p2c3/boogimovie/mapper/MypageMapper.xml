@@ -40,7 +40,7 @@
     
     <!-- 정보수정 -->
     <!-- 이름, 아이디, 비번, 생년월일, 주소, 이메일, 폰번, 취향 -->
-    <update id="updateMemberEq">
+    <update id="updateMember">
  		UPDATE member
 		SET
 			member_id = #{member_id}
@@ -60,6 +60,17 @@
 			member_name = #{member_name} and member_email = #{member_email}
     
     </update>
+    
+    <!-- 쿠폰 -->
+    <select id="selectCoupon" resultType="itwillbs.p2c3.boogimovie.vo.CouponVO">
+		SELECT coupon.coupon_num
+		FROM coupon JOIN pay 
+		ON coupon.coupon_num = pay.coupon_num 
+		JOIN member
+		ON member.member_id = pay.member_id
+		WHERE member.member_id = #{member_id}
+    </select>
+    
     
     <!-- 탈퇴처리 -->
    	<!-- member 테이블의 member_status 컬럼값을 3(탈퇴)로 변경 탈퇴일자(withdraw_date) 를 now() 함수 -->

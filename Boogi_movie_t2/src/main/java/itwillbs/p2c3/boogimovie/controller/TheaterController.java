@@ -40,7 +40,7 @@ public class TheaterController {
 		String sId = (String)session.getAttribute("sId");
 		if(sId != null) {
 			member.setMember_id(sId);
-			member = MypageService.getMyTheater();
+			member = MypageService.getMyTheater(member);
 			model.addAttribute("member", member);
 		}
 		

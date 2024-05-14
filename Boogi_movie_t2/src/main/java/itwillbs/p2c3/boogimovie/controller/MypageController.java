@@ -102,11 +102,11 @@ public class MypageController {
 	        return "redirect:/myp_main";
     }
 	
-	@GetMapping("myp_point")
-	public String mypPoint() {
-		System.out.println("myp_point");
-		return "mypage/myp_point";
-	}
+//	@GetMapping("myp_point")
+//	public String mypPoint() {
+//		System.out.println("myp_point");
+//		return "mypage/myp_point";
+//	}
 	
 	// ============================= 정보수정 =============================
 

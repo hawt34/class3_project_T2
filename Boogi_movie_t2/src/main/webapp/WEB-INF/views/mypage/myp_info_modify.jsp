@@ -45,11 +45,6 @@ body {
 			  	<div class="form_item w-75">
 			    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" readonly>
 			    </div><!-- form item -->
-				
-				
-<!-- 				<form action="CheckDupId" class="align_center"> -->
-				<!-- pattern 속성으로 입력값 검증 수행 -->
-				<!-- 주의! submit 버튼 클릭 시 동작하며, 패턴 작성 시 / 와 / 사이의 내용만 작성 -->
 	   			<label for="member_id">아이디</label>
 			  	<div class="form_item w-75">
 <%-- 					<input type="text" name="id" value="${param.id}" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" placeholder="검색할 아이디 입력" required> --%>

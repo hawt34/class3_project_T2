@@ -261,6 +261,7 @@ body {
 	            message.textContent = ""; // 에러 메시지 지우기
 	        }
 
+	        
 	        if (tel === "") {
 	            message.textContent = "전화번호를 입력하세요"; // 메시지 설정
 	        }

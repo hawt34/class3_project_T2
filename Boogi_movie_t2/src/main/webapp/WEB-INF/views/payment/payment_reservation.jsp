@@ -7,6 +7,7 @@
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
+<!--  포트원 SDK -->
 <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 
 <link href="${pageContext.request.contextPath}/resources/css/payment.css" rel="stylesheet" type="text/css">
@@ -25,6 +26,10 @@
 		margin: 30px;
 	}
 </style>
+
+
+
+
 </head>
 <body>
 	<header>
@@ -191,7 +196,112 @@
 	<footer>
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	
+	<script>
+		// 1. SDK 초기화하기
+		IMP.init("imp00262041""); // 부기무비 고객사 식별코드
+		
+		// 2. 결제창 불러오기
+		IMP.request_pay(
+			{
+				pg: "{PG사 코드}.{상점 ID}",
+				pay_method: "card",
+				merchant_uid: `payment-${crypto.randomUUID()}`, // 주문 고유 번호
+				name: "노르웨이 회전 의자",
+				amount: 64900,
+				buyer_email: "gildong@gmail.com",
+				buyer_name: "홍길동",
+				buyer_tel: "010-4242-4242",
+				buyer_addr: "서울특별시 강남구 신사동",
+				buyer_postcode: "01181",
+			},
+			function (response) {
+				// 결제 종료 시 호출되는 콜백 함수
+				// response.imp_uid 값으로 결제 단건조회 API를 호출하여 결제 결과를 확인하고,
+				// 결제 결과를 처리하는 로직을 작성합니다.
+			},
+		);
+		
+		// 3. 결제 결과 처리하기 - SDK 반환값으로 처리하기
+		IMP.request_pay(
+			{
+			  /* 파라미터 생략 */
+			},
+			async (response) => {
+				if (response.error_code != null) {
+				  return alert(`결제에 실패하였습니다. 에러 내용: ${response.error_msg}`);
+				}
+				
+				// 고객사 서버에서 /payment/complete 엔드포인트를 구현해야 합니다.
+				// (다음 목차에서 설명합니다)
+				const notified = await fetch(`${SERVER_BASE_URL}/payment/complete`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					// imp_uid와 merchant_uid, 주문 정보를 서버에 전달합니다
+					body: JSON.stringify({
+					imp_uid: response.imp_uid,
+					merchant_uid: response.merchant_uid,
+ 					// 주문 정보...
+					}),
+				});
+			},
+		);
+		// 4. 결제 완료 처리하기
+		
+		// JSON 요청을 처리하기 위해 body-parser 미들웨어 세팅
+		app.use(bodyParser.json());
+
+		// POST 요청을 받는 /payments/complete
+		app.post("/payment/complete", async (req, res) => {
+		  try {
+		    // 요청의 body로 imp_uid와 merchant_uid가 전달되기를 기대합니다.
+		    const { imp_uid, merchant_uid } = req.body;
+
+		    // 1. 포트원 API 엑세스 토큰 발급
+		    const tokenResponse = await fetch("https://api.iamport.kr/users/getToken", {
+		      method: "POST",
+		      headers: { "Content-Type": "application/json" },
+		      body: JSON.stringify({
+		        imp_key: "imp_apikey", // REST API 키
+		        imp_secret: "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW", // REST API Secret
+		      }),
+		    });
+		    if (!tokenResponse.ok)
+		      throw new Error(`tokenResponse: ${tokenResponse.statusText}`);
+		    const { access_token } = await tokenResponse.json();
+
+		    // 2. 포트원 결제내역 단건조회 API 호출
+		    const paymentResponse = await fetch(
+		      `https://api.iamport.kr/payments/${imp_uid}`,
+		      { headers: { Authorization: access_token } },
+		    );
+		    if (!paymentResponse.ok)
+		      throw new Error(`paymentResponse: ${paymentResponse.statusText}`);
+		    const payment = await paymentResponse.json();
+
+		    // 3. 고객사 내부 주문 데이터의 가격과 실제 지불된 금액을 비교합니다.
+		    const order = await OrderService.findById(merchant_uid);
+		    if (order.amount === payment.amount) {
+		      switch (payment.status) {
+		        case "ready": {
+		          // 가상 계좌가 발급된 상태입니다.
+		          // 계좌 정보를 이용해 원하는 로직을 구성하세요.
+		          break;
+		        }
+		        case "paid": {
+		          // 모든 금액을 지불했습니다! 완료 시 원하는 로직을 구성하세요.
+		          break;
+		        }
+		      }
+		    } else {
+		      // 결제 금액이 불일치하여 위/변조 시도가 의심됩니다.
+		    }
+		  } catch (e) {
+		    // 결제 검증에 실패했습니다.
+		    res.status(400).send(e);
+		  }
+		});
+
+	</script>	
 </body>
 </html>

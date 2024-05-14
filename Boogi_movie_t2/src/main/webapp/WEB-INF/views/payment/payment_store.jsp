@@ -7,6 +7,7 @@
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
+<!--  포트원 SDK -->
 <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 <style type="text/css">
 	body { 

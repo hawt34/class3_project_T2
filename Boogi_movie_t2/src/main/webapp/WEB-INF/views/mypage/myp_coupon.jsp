@@ -66,7 +66,7 @@ body {
 						    </tr>
 						  </thead>
 						  <tbody>
-						      <c:forEach var="coupon" items="${couponNum}" varStatus="status">
+						      <c:forEach var="couponNum" items="${couponNum}" varStatus="status">
 							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
 							        <th scope="row">${status.index + 1}</th>
 							        <td>${coupon.coupon_num}</td>

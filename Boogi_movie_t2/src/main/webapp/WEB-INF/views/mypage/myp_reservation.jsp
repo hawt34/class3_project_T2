@@ -43,14 +43,6 @@ body {
 					<div class="col-10">
 						<h2>예매내역</h2>
 					</div> <!-- col-10 -->
-					<div class="col-2">
-						<select class="form-select form-select-sm box1" aria-label=".form-select-sm example">
-						  <option selected>최근 1주일</option>
-						  <option value="1">최근 1개월</option>
-						  <option value="2">최근 3개월</option>
-						  <option value="3">기간 설정</option>
-						</select>
-					</div><!-- col-2 -->
 					<hr>
 				</div><!--  하위 row -->
 				<div class="box2">

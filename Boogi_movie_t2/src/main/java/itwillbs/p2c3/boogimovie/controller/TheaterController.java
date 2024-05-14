@@ -40,7 +40,7 @@ public class TheaterController {
 		String sId = (String)session.getAttribute("sId");
 		if(sId != null) {
 			member.setMember_id(sId);
-			member = MypageService.getMyTheater();
+			member = MypageService.getMyTheater(member);
 			model.addAttribute("member", member);
 		}
 		
@@ -62,14 +62,8 @@ public class TheaterController {
 		String sId = (String)session.getAttribute("sId");
 		if(sId != null) {
 			member.setMember_id(sId);
-			member = memberService.selectTheatersMyTheater(sId);
-			
-			List<MyTheaterVO> myTheaters = new ArrayList<MyTheaterVO>();
-			myTheaters.add(new MyTheaterVO(member.getMember_my_theater1()));
-			myTheaters.add(new MyTheaterVO(member.getMember_my_theater2()));
-			myTheaters.add(new MyTheaterVO(member.getMember_my_theater3()));
-			model.addAttribute("myTheaters", myTheaters);
-			model.addAttribute("myTheaters", myTheaters);
+			member = MypageService.getMyTheater(member);
+			model.addAttribute("member", member);
 		}
 		
 		List<TheaterVO> theaterList = service.getTheater();

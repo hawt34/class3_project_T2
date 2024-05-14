@@ -129,6 +129,16 @@
 		WHERE movie_num = #{movie_num}
 	</delete>
 	
+<!-- 상영관리 - 상영관 정보 불러오기 -->
+	<select id="getScreensByTheater">
+		SELECT *
+		FROM 
+			screen_info 
+		WHERE 
+			theater_num = #{theater_num}
+	
+	</select>
+	
 <!-- 이벤트 등록 -->
 	<insert id="insertEvent">
 		INSERT INTO event(

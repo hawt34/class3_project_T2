@@ -14,6 +14,7 @@ import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
 
 @Service
 public class AdminService {
@@ -88,6 +89,12 @@ public class AdminService {
 	public int InsertMovie(MovieVO movie) {
 		return mapper.insertMovie(movie);
 	}
+	//--------------------------------------------------------------
+	// 상영관리 상영관 데이터 가져오기
+	public List<ScreenInfoVO> getScreensByTheater(String theater_num) {
+		return mapper.getScreensByTheater(theater_num);
+	}
+	
 	//--------------------------------------------------------------
 	// 이벤트 등록
 	public int InsertEvent(EventVO event) {

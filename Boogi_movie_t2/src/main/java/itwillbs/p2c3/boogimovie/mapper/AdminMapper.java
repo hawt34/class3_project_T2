@@ -13,6 +13,7 @@ import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
 
 @Mapper
 public interface AdminMapper {
@@ -59,6 +60,10 @@ public interface AdminMapper {
 	// 영화 삭제
 	int deleteMovie(String movie_num);
 	//========================================================
+	// 상영관리 - 상영관 불러오기
+	List<ScreenInfoVO> getScreensByTheater(String theater_num);
+	
+	//========================================================
 	// 이벤트 등록
 	int insertEvent(EventVO event);
 	
@@ -67,10 +72,6 @@ public interface AdminMapper {
 	
 	// 이벤트 삭제
 	int deleteEvent(EventVO event);
-	
-	
-	
-	
 	//========================================================
 
 	//공지사항 등록

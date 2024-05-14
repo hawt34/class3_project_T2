@@ -37,8 +37,8 @@
     </div>
     
     <div class="form_item">
-    	<label for="tel"><b>전화번호</b></label>
-    	<input type="text"  name="member_tel" id="member_tel" required>
+    	<label for="email"><b>이메일</b></label>
+    	<input type="text"  name="member_email" id="member_email" required>
     	<span></span>
     </div>
 </div>

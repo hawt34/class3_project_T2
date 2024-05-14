@@ -32,7 +32,7 @@
     	<input type="password"  name="member_pwd2" id="member_pwd2" required>
     	<span></span>
     </div>
-	<input type="hidden" value="${member_id }">
+	<input type="hidden" value="${member_id }" id ="member_id" name = "member_id">
 	<div class="regist_final">
 		<hr>
     	<button type="submit" class="btn btn-outline-primary">비밀번호 바꾸기</button>
@@ -45,6 +45,9 @@
 <footer>
 	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
+<script>
+// 	todo 
+</script>
 </body>
 </html>
 

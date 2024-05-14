@@ -54,7 +54,7 @@
 	<select id="memberPwdSearch" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
 		SELECT *
 		FROM member
-		WHERE member_id = #{member_id} and member_birth = #{member_birth}
+		WHERE member_id = #{member_id} and member_email = #{member_email}
 	</select>
 	
 	<select id="memberMovieGenreSearch" resultType="String">
@@ -68,5 +68,31 @@
 		FROM member
 		WHERE member_id = #{sId} 
 	</select>
-
+	
+	<insert id="insertAuthInfo">
+		INSERT INTO mail_auth_info
+		VALUES
+		(#{member_id}, #{auth_code})
+		
+	</insert>
+	
+	<select id="selectAuthInfo" resultType="itwillbs.p2c3.boogimovie.vo.MailAuthInfoVO">
+		SELECT * 
+		FROM mail_auth_info
+		WHERE member_id = #{member_id}
+		AND auth_code = #{auth_code}
+	</select>
+	
+	<delete id="deleteAuthInfo">
+		DELETE
+		FROM mail_auth_info
+		WHERE member_id = #{member_id}
+	</delete>
+	
+	<update id="updateMemberPwd">
+		UPDATE member
+		SET member_pwd = #{member_pwd}
+		WHERE member_id = #{member_id}
+	</update>
+	
 </mapper>

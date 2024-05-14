@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -114,8 +112,6 @@ public class TicketingController {
 		scs.setTheater_num(theater_num);
 		scs.setScs_start_date(start_date);
 		scs.setScs_end_date(end_date);
-		System.out.println(scs.getScs_start_date());
-		System.out.println(scs.getScs_end_date());
 		//db에서 값 가져오기
 		ScreenSessionVO dbScs = ticketingService.chooseSeatSelect(scs);
 		//뷰에 가져갈 값 저장하기
@@ -140,7 +136,7 @@ public class TicketingController {
         String fee_time_keyword = "GT";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime time = LocalTime.parse(start_time, formatter);
-
+        
         LocalTime morningLimit = LocalTime.of(10, 0);
         LocalTime nightLimit = LocalTime.of(23, 0);
         
@@ -182,7 +178,8 @@ public class TicketingController {
         model.addAttribute("fee_time_discount", fee_info.get("fee_time_discount"));
         model.addAttribute("fee_day_discount", fee_info.get("fee_day_discount"));
         model.addAttribute("fee_dimension_discount", fee_info.get("fee_dimension_discount"));
-        
+        model.addAttribute("start_date", start_date);
+        model.addAttribute("end_date", end_date);
         
 		return "ticketing/tic_choose_seat";
 	}
@@ -228,31 +225,45 @@ public class TicketingController {
 	
 	@ResponseBody
 	@GetMapping(value = "api/fee_calc", produces = "application/json")
-	public int feeCalc(@RequestParam Map<String, Integer> params){
-		Integer np_num = params.getOrDefault("NP", 0);
-		Integer yp_num = params.getOrDefault("YP", 0);
-		Integer op_num = params.getOrDefault("OP", 0);
-		Integer fee_middle = params.getOrDefault("fee_middle", 0);
-		
+	public int feeCalc(        @RequestParam("NP") Integer np_num,
+					        	@RequestParam("YP") Integer yp_num,
+					        	@RequestParam("OP") Integer op_num,
+					        	@RequestParam("fee_middle") Integer fee_middle) {
+		//요금 정책 가져오기
 		List<FeeAgeVO> list = ticketingService.feeCalcAge();
-		int np_discount = 0;
-		int yp_discount = 0;
-		int op_discount = 0;
-		for(FeeAgeVO feeAge : list) {
-			if(feeAge.getFee_age_keyword().equals("NP")) {
-				np_discount = 15000 / 100 * feeAge.getFee_age_discount();
-			}else if(feeAge.getFee_age_keyword().equals("YP")) {
-				yp_discount = 15000 / 100 * feeAge.getFee_age_discount();
-			}else if(feeAge.getFee_age_keyword().equals("OP")) {
-				op_discount = 15000 / 100 * feeAge.getFee_age_discount();
-			}
-		}
+		double total_np = 0;
+		double total_yp = 0;
+		double total_op = 0;
 		
-		int total_fee = np_num * np_discount
-					  + yp_num * yp_discount
-					  + op_num * op_discount;
+		//나이요금정책에 따른 현재 가져온값에 최종적인 한명당 가격 책정
+	    for (FeeAgeVO feeAge : list) {
+	        switch (feeAge.getFee_age_keyword()) {
+	            case "NP":
+	                total_np = (fee_middle * (feeAge.getFee_age_discount() / 100));
+	                break;
+	            case "YP":
+	            	double yp_fee = feeAge.getFee_age_discount() / 100.0;
+	            	total_yp = fee_middle * yp_fee;
+	            	break;
+	            case "OP":
+	            	double op_fee = feeAge.getFee_age_discount() / 100.0;
+	            	total_op = fee_middle * op_fee;
+	            	break;
+	        }
+	    }
+	    //500원 기준 반내림
+	    total_np = Math.floor(total_np / 500) * 500;
+	    total_yp = Math.floor(total_yp / 500) * 500;
+	    total_op = Math.floor(total_op / 500) * 500;
 		
-		return fee_middle + total_fee;
+	    //총가격 구하기
+	    total_np *= np_num;
+	    total_yp *= yp_num;
+	    total_op *= op_num;
+	    
+	    int totalFee = (int)(total_np + total_yp + total_op);
+	    
+		return totalFee;
 	}
 				
 		
@@ -311,6 +322,7 @@ public class TicketingController {
 			
 		return final_list;
 	}
+
 	@GetMapping("payment_reservation")
 	public String paymentReserve() {
 		return "payment/payment_reservation";
@@ -318,7 +330,7 @@ public class TicketingController {
 
 	
 }
-		
+
 		
 		
 		
@@ -329,5 +341,5 @@ public class TicketingController {
 	
 
 	
-		
+
 		

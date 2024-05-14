@@ -19,7 +19,15 @@
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 
-
+<form action="payment" method="post" id="fr">
+    <input type="hidden" id="movie_name" name="movie_name" value="${scs.movie_name}">
+    <input type="hidden" id="theater_name" name="theater_name" value="${scs.theater_name}">
+    <input type="hidden" id="screen_cinema_num" name="screen_cinema_num" value="${scs.screen_cinema_num}">
+    <input type="hidden" id="selected_seats" name="selected_seats">
+    <input type="hidden" id="person_info" name="person_info">
+    <input type="hidden" id="total_fee" name="total_fee">
+    <input type="hidden" id="scs_start_date" name="scs_start_date" value="${start_date}">
+    <input type="hidden" id="scs_end_date" name="scs_end_date" value="${end_date}">
 <section class="choose_seat_section">
 	<div class="choose_seat_title">
 		<h3>좌석 선택</h3>
@@ -85,7 +93,7 @@
 		</div>
 		
 		<div class="col-md-3 pay_theater">
-			<div class="theater_ex">${scs.theater_name} ${scs.screen_cinema_num }관</div>
+			<div class="theater_ex">${scs.theater_name} ${scs.screen_cinema_num }관<br>${start_date } ~<br>${end_date}</div>
 		</div>
 			
 		
@@ -109,7 +117,7 @@
 
 </div>
 </section>
-		
+</form>		
 		
 
 
@@ -121,6 +129,28 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
 "></script>
 <script>
+//폼 제출 이벤트 처리
+document.getElementById('fr').onsubmit = function (event) {
+    event.preventDefault(); // 기본 제출 이벤트 방지
+
+    // 선택된 좌석 정보 업데이트
+    document.getElementById('selected_seats').value = selectedSeatNumbers.join(", ");
+
+    // 인원 정보 업데이트
+    var personInfo = "일반: " + selectedPersonCount['NP'] + "명, " +
+                     "청소년: " + selectedPersonCount['YP'] + "명, " +
+                     "노약자: " + selectedPersonCount['OP'] + "명";
+    document.getElementById('person_info').value = personInfo;
+
+    // 총 요금 업데이트
+    var totalFee = $("#fee_ex").text();
+    document.getElementById('total_fee').value = totalFee;
+
+    // 폼 데이터 서버로 제출
+    this.submit();
+};
+
+
     var totalSeats = 0; // 전체 선택 가능한 좌석 수
     var selectedSeats = 0; // 현재 선택된 좌석 수
     var selectedSeatNumbers = []; // 선택된 좌석 번호들을 저장하는 배열
@@ -135,36 +165,34 @@
     var fee_time_discount = "${fee_time_discount}";
     var fee_dimension_discount = "${fee_dimension_discount}";
     // 좌석에 따른 요금 계산
-    var fee_middle = 15000 
-    				+ 15000 / 100 * fee_day_discount
-    				+ 15000 / 100 * fee_time_discount
-    				+ 15000 / 100 * fee_dimension_discount;
-    
+    var fee_middle = 15000 * (fee_day_discount / 100) * (fee_time_discount / 100) * (fee_dimension_discount / 100);
+					
+    				
+    				
     function feeCalc(){
     	$.ajax({
 	        url: "api/fee_calc",
 	        method: "GET",
 	        data: {
-	        	selectedPersonCount : selectedPersonCount,
-	            fee_middle : fee_middle
-	           
+	            NP: selectedPersonCount.NP,
+	            YP: selectedPersonCount.YP,
+	            OP: selectedPersonCount.OP,
+	            fee_middle: fee_middle
 	        },
 	        dataType: "json",
 	        success: function (response) {
 	            var result = $("#fee_ex");
 	            result.empty();
 				
-	            response.forEach(function (fee_calc) {
-	            	var finalDiv = resopnse + "원"; 
-						
-	                result.append(finalDiv);
-	            });
+	         // 서버에서 받은 응답을 화면에 표시
+	            var finalDiv = $("<div>").text(response + "원"); // 여기서 response는 계산된 총 요금을 담은 정수입니다.
+	            result.append(finalDiv);
 	        },
 	        error: function () {
 	            alert("요금 정보를 가져오는 데 실패했습니다.");
 	        }
 	    });
-    }
+	}
     
     // 선택 가능한 인원 수를 업데이트하는 함수
 	function updateSeatSelection(value, type) {
@@ -172,9 +200,7 @@
 	    totalSeats -= selectedPersonCount[type]; // 이전에 선택된 해당 유형의 인원 수를 총석에서 제거
 	    totalSeats += num; // 새로운 인원 수를 총석에 추가
 	    selectedPersonCount[type] = num; // 해당 유형의 선택된 인원 수 업데이트
-	
-	    console.log("Total seats to select: " + totalSeats);
-	    console.log("Selected person types:", selectedPersonCount);
+	    updatePersonInfoDisplay(); // 인원 정보 표시를 업데이트하는 함수 호출
 	    updateSeatDisplay(); // 인원 수 변경 시 좌석 표시 업데이트
 	    feeCalc();
 	}
@@ -211,7 +237,15 @@
             displayElement.textContent = "선택된 좌석: 없음";
         }
     }
-
+ // 인원 정보를 화면에 표시하는 함수
+    function updatePersonInfoDisplay() {
+        var info = "일반: " + selectedPersonCount['NP'] + "명, " +
+                   "청소년: " + selectedPersonCount['YP'] + "명, " +
+                   "노약자: " + selectedPersonCount['OP'] + "명";
+        $('.person_info h3').text("선택한 인원: " + info); // 인원 정보 영역을 업데이트
+    }
+ 
+ 
     // 모든 좌석에 클릭 이벤트 리스너 추가
 //     document.querySelectorAll('.seat').forEach(function(seat) {
 //         seat.onclick = function() { toggleSeat(this); };

@@ -108,27 +108,27 @@
         ]
       });
     </script>
-    <script>
-    // 첫 번째 선택란의 변경을 감지하여 두 번째 선택란의 옵션을 변경하는 함수
-    document.getElemenByName('notice_category').addEventListener('change', function() {
-        var firstValue = this.value; // 첫 번째 선택란의 값을 가져옴
-        var secondSelect = document.getElementByName('theater_name');
+<!--     <script> -->
+<!-- // 첫 번째 선택란의 변경을 감지하여 두 번째 선택란의 옵션을 변경하는 함수
+//     document.getElemenByName('notice_category').addEventListener('change', function() {
+//         var firstValue = this.value; // 첫 번째 선택란의 값을 가져옴
+//         var secondSelect = document.getElementByName('theater_name');
 
-        // 첫 번째 선택란의 값에 따라 두 번째 선택란의 옵션을 변경
-        switch (notice_category) {
-            case '1':
-                secondSelect.value = 'A';
-                break;
-            case '2':
-                secondSelect.value = 'B';
-                break;
-            case '3':
-                secondSelect.value = 'C';
-                break;
-            default:
-                secondSelect.value = ''; // 디폴트 값 설정
-        }
-    });
-</script>
+//         // 첫 번째 선택란의 값에 따라 두 번째 선택란의 옵션을 변경
+//         switch (notice_category) {
+//             case '1':
+//                 secondSelect.value = 'A';
+//                 break;
+//             case '2':
+//                 secondSelect.value = 'B';
+//                 break;
+//             case '3':
+//                 secondSelect.value = 'C';
+//                 break;
+//             default:
+//                 secondSelect.value = ''; // 디폴트 값 설정
+//         }
+//     }); --> 
+<!-- </script> -->
 </body>
 </html>

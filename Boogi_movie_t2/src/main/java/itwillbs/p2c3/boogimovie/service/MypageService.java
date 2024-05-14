@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import itwillbs.p2c3.boogimovie.mapper.MypageMapper;
+import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.ReservationVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Service
-public class MypageInfoService {
+public class MypageService {
 	
 	@Autowired
 	private MypageMapper mapper;
@@ -34,10 +35,9 @@ public class MypageInfoService {
 	}
 
 	// My극장 자주가는 영화관
-	public MemberVO getMyTheater() {
+	public MemberVO getMyTheater(MemberVO member) {
 		System.out.println("MypageInfoService - getMyTheater()");
-		MemberVO infoMyTheater = mapper.selectMyTheater();
-		return infoMyTheater;
+		return mapper.selectMyTheater(member);
 	}
 	
 	// 예매내역 영화제목
@@ -53,6 +53,17 @@ public class MypageInfoService {
 		return mapper.selectDbMember(member);
 	}
 	
+	// 정보수정
+	public int modifyMember(MemberVO member) {
+		return mapper.updateMember(member);
+	}
+
+	// 쿠폰
+	public List<CouponVO> getCoupon(){
+		return mapper.selectCoupon();
+	}
+	
+	
 	public ReservationVO getMovieResv(String id) {
 		System.out.println("MypageInfoService - getMovieResv");
 		ReservationVO infoMovieResv = mapper.selectMovieResv(id);
@@ -60,10 +71,6 @@ public class MypageInfoService {
 	}
 	
 	
-	// 정보수정
-	public int modifyMemberEq(MemberVO member) {
-		return mapper.updateMemberEq(member);
-	}
 	
 //	public int modifyMemberNotEq(MemberVO member) {
 //		return mapper.updateMemberNotEq(member);

@@ -48,17 +48,23 @@
 							<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
 								<img src="${pageContext.request.contextPath}/resources/images/set.svg"> MY 극장 관리</button>
 							</li>
-							<!-- 체크된 MY극장 리스트 / member_my_theater -->
-							<c:forEach var="myTheaters" items="${myTheaters}">
-								<li><a class="dropdown-item" href="#">${myTheaters.member_my_theater}</a></li>
-							</c:forEach>
+							<!-- 체크된 MY극장 리스트 / member.member_my_theater1~3 -->
+							<c:if test="${not empty member.member_my_theater1}">
+								<li><a class="dropdown-item" href="#">${member.member_my_theater1}</a></li>
+							</c:if>
+							<c:if test="${not empty member.member_my_theater2}">
+								<li><a class="dropdown-item" href="#">${member.member_my_theater2}</a></li>
+							</c:if>
+							<c:if test="${not empty member.member_my_theater3}">
+								<li><a class="dropdown-item" href="#">${member.member_my_theater3}</a></li>
+							</c:if>
 					 	</c:otherwise>
 					 </c:choose>
 				</ul>
 			</div>
 		</nav>
 		
-		<form>
+		<form action="Mytheater" method="post">
 			<!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -70,7 +76,7 @@
 						<div class="modal-body">
 							<c:forEach var="theater" items="${theaterList}">
 								<div class="form-check">
-									<input class="form-check-input" type="checkbox" value="haeundae" id="${theater.theater_num}">
+									<input class="form-check-input" type="checkbox" value="${theater.theater_name}" id="${theater.theater_num}" onclick="CountChecked(this)">
 									<label class="form-check-label" for="${theater.theater_num}">${theater.theater_name}</label>
 								</div>
 							</c:forEach>

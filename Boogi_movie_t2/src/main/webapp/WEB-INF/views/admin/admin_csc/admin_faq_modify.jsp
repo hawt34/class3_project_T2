@@ -23,21 +23,16 @@
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<h4 class="mb-4">FAQ등록</h4>
+				<h4 class="mb-4">FAQ정보 수정</h4>
 				<form class="validation-form" novalidate action="admin_faq_modify" method="post">
 				<input type="hidden" name="faq_num" value="${faq.faq_num }">
-<!-- 					<div class="mb-3"> -->
-<!-- 						<label for="movie_director">작성자</label>  -->
-<!-- 						<input type="text" id="movie_director" class="form-control" required /> -->
-<!-- 						<div class="invalid-feedback">작성자를 입력해주세요.</div> -->
-<!-- 					</div> -->
 					<select name="faq_category">
 						<option value="" >유형선택</option>
-						<option value="영화" ${faq.faq_category eq '영화' ? 'selected' : '' }>영화</option>
-						<option value="극장" ${faq.faq_category eq '극장' ? 'selected' : '' }>극장</option>
 						<option value="예매/결제" ${faq.faq_category eq '예매/결제' ? 'selected' : '' }>예매/결제</option>
+						<option value="영화관이용" ${faq.faq_category eq '영화관이용' ? 'selected' : '' }>영화관이용</option>
 						<option value="쿠폰" ${faq.faq_category eq '쿠폰' ? 'selected' : '' }>쿠폰</option>
-						<option value="회원정보" ${faq.faq_category eq '회원정보' ? 'selected' : '' }>회원정보</option>
+						<option value="스토어" ${faq.faq_category eq '스토어' ? 'selected' : '' }>스토어</option>
+						<option value="홈페이지/모바일" ${faq.faq_category eq '홈페이지/모바일' ? 'selected' : '' }>홈페이지/모바일</option>
 					</select>
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 

@@ -107,8 +107,6 @@
 </div>
 <script type="text/javascript">
 $(function() {
-	let selectCategory = $("#faq_category").val();
-	//console.log(selectCategory);
 	
 	
 	

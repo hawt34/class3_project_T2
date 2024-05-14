@@ -39,11 +39,6 @@
   		WHERE faq_num = #{faq_num}
   	</select>
   	
-  	<select id="selectFaqListCount" resultType="int">
-  		SELECT COUNT(faq_num)
-  		FROM faq
-  	</select>
-  	
   	<delete id="deleteFaq">
   		DELETE FROM faq
   		WHERE faq_num = #{faq_num}
@@ -55,4 +50,15 @@
 	  		faq_category = #{faq_category}
 	  	WHERE faq_num = #{faq_num}
   	</update>
+  	
+  	<!-- 카테고리 또는 ""값에 따른 카운트 sql -->
+  	<select id="selectFaqListCount" resultType="int">
+  		SELECT COUNT(faq_num)
+  		FROM faq
+  	</select>
+  	<select id="selectFaqListCountCag" resultType="int">
+  		SELECT COUNT(faq_num)
+  		FROM faq
+  		WHERE faq_category = #{faq_category}
+  	</select>
   </mapper>

@@ -193,4 +193,20 @@ public class MemberController {
 //	}
 	
 	
+	
+	
+	
+	
+	@PostMapping("Mytheater")
+	public String myTheaterRegist() {
+		
+		
+		
+		
+		return "redirect:/theater";
+		
+	}
+	
+	
+	
 }

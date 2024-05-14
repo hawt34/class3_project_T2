@@ -27,5 +27,8 @@ public interface FaqMapper {
 	
 	//faq 수정
 	int updateFaq(FAQVO faq);
+	
+	//카테고리에 따른 게시물 갯수
+	int selectFaqListCountCag(String category);
 
 }

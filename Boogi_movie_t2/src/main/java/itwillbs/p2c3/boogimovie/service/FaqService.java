@@ -39,4 +39,8 @@ public class FaqService {
 	public int updateFaq(FAQVO faq) {
 		return mapper.updateFaq(faq);
 	}
+	//카테고리에 따른 게시물 갯수
+	public int getfaqListCountCag(String category) {
+		return mapper.selectFaqListCountCag(category);
+	}
 }

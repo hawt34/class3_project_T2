@@ -323,11 +323,23 @@ public class TicketingController {
 		return final_list;
 	}
 
-
 	@GetMapping("payment_reservation")
 	public String paymentReserve() {
 		return "payment/payment_reservation";
 	}
+
 	
 }
 
+		
+		
+		
+		
+		
+	
+	
+	
+
+	
+
+		

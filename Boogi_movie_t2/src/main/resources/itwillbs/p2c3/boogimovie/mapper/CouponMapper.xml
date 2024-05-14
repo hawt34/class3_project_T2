@@ -5,10 +5,10 @@
   
   <mapper namespace="itwillbs.p2c3.boogimovie.mapper.CouponMapper">
   
-  <select id="selectCoupon" >
+  <select id="selectCoupon" resultType="itwillbs.p2c3.boogimovie.vo.CouponVO">
   	SELECT *
-  	FROM coupon
-  	
+  	FROM coupon_view
+  	WHERE member_id = #{member_id}
   </select>
   
   

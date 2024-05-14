@@ -78,12 +78,6 @@ a{
 					<a class="dropdown-item" href="myp_cancel">취소내역</a>
 				</div>
 			</div>
-			<div class="btn-group dropright">
-				<!-- 마우스 오버 전 카테고리 -->
-				<button type="button" class="btn" data-toggle="dropdown">
-					<h5><a href="myp_point">포인트</a></h5>
-				</button>
-			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
 					<h5><a href="myp_coupon">쿠폰</a></h5>

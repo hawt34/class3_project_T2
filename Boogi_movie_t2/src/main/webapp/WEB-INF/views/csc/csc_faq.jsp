@@ -106,10 +106,28 @@
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </div>
 <script type="text/javascript">
+//마지막 스크롤 값 저장
+let lastScroll = 0;
+
 $(function() {
+	//현재 스크롤 값
+	let currentScroll = $(this).scrollTop();
+// 	console.log(currentScroll);
 	
+	// 문서 전체 길이
+	let documentHeight = $(document).height();
+// 	console.log(documentHeight);
+// 	console.log($(window).height);
 	
+	// 현재 스크롤 값 + 현재 화면의 높이 값
+	let nowHeight = $(this).scrollTop() + $(window).height();
+// 	console.log(nowHeight);
 	
+	if(currentScroll > lastScroll) {
+		if(documentHeight < currentScroll + documentHeight*0.1) {
+			
+		}
+	}
 	
 	
 	

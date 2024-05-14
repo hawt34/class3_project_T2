@@ -6,14 +6,17 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.CouponService;
@@ -26,7 +29,6 @@ import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
-import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
 @Controller
 public class MypageController {
@@ -76,7 +78,7 @@ public class MypageController {
 			model.addAttribute("infoMyTheater", infoMyTheater);
 			
 			// 예매내역 영화제목
-			List<MovieVO> movieReservation = mypageService.getMovieReservation(id);
+			List<MovieVO> movieReservation = mypageService.getMovieReservation(member);
 			model.addAttribute("movieReservation", movieReservation);
 			
 			// 예매내역 관람날짜
@@ -240,24 +242,29 @@ public class MypageController {
 		
 		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
 			model.addAttribute("msg", "잘못된 접근입니다!");
-			model.addAttribute("targetURL", "./MemberLogin");
+			model.addAttribute("targetURL", "./member_login");
 			return"error/fail";
 		}
+		
 		member.setMember_id(id);
 		member = mypageService.getDbMember(member);
-		
-		
 		model.addAttribute("member", member);
 		
-		System.out.println("coupon 컨트롤러");
+//<<<<<<< HEAD
+//		System.out.println("coupon 컨트롤러");
 		// coupon_num
-		List<CouponVO> couponNum = mypageService.getCoupon();
-		model.addAttribute("couponNum", couponNum);
+//		List<CouponVO> couponNum = mypageService.getCoupon(member);
+//		model.addAttribute("couponNum", couponNum);
+//=======
+		List<CouponVO> couponList = couponService.getCoupon(member);
+		model.addAttribute("list", couponList);
+//>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 		
-		// coupon_name
-//		List<CouponVO> couponName = 
 		return "mypage/myp_coupon";
 	}
+		
+		
+		
 	
 	
 	// ============================= 예매 =============================
@@ -265,19 +272,19 @@ public class MypageController {
 	// 예매내역
 	@GetMapping("myp_reservation")
 	public String mypReservation(MemberVO member, Model model) {
-//		String id = (String)session.getAttribute("sId");
+		String id = (String)session.getAttribute("sId");
 		
-//		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-//			model.addAttribute("msg", "로그인이 필요한 페이지입니다!");
-//			model.addAttribute("targetURL", "./MemberLogin");
-//			return"error/fail";
-//		}
+		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다!");
+			model.addAttribute("targetURL", "./member_login");
+			return"error/fail";
+		}
 		
-//		member = mypageInfoService.getMember(id);
-//		model.addAttribute("member", member);
-//		System.out.println("myp_reservation()");
-//		List<ReservationVO> reservationList = reservationService.getReservation(id);
-//		model.addAttribute("reservation", reservationList);
+		member = mypageService.getMember(id);
+		model.addAttribute("member", member);
+		System.out.println("myp_reservation()");
+		List<MovieVO> movieReservation = mypageService.getMovieReservation(member);
+		model.addAttribute("movieReservation", movieReservation);
 //		System.out.println("reservationList" + reservationList);
 //		MovieVO sadfsdf = service.sadfsadfs();
 //		ReservationVO asdfasdf = service.asdfasdf();
@@ -287,8 +294,19 @@ public class MypageController {
 	
 	// 취소 영화 목록
 	@GetMapping("myp_cancel")
-	public String mypCancel() {
+	public String mypCancel(Model model) {
 //		System.out.println("myp_cancel()");
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("targetURL", "./member_login");
+			return"error/fail";
+		}
+		
+		
+		
 		return "mypage/myp_cancel";
 	}
 	
@@ -443,6 +461,18 @@ public class MypageController {
 		}
 		
 		return "redirect:/myp_oto_breakdown";
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
+	public ResponseEntity<String> mypMyTheater(@RequestBody List<String> checkedValues){
+	    System.out.println("Received checked values: " + checkedValues);
+	    if(checkedValues.isEmpty()) {
+	        return ResponseEntity.badRequest().body("No data received");
+	    }
+	    return ResponseEntity.ok("Data received successfully");
+	    
+	    
 	}
 
 	

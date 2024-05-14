@@ -267,17 +267,16 @@
 	            			+ "\", \"" + finalList.theater_name 
 	            			+ "\", \"" + selectedDay + "\")'>"
 	                    + "<div>" + finalList.movie_name + "</div>"
-	                    + "<div class='row'>"
+	                    + "<div class='row box1' stlye='width: 600px'>"
 	                    + "<div class='col-md-3'>"
-	                    + finalList.scs_start_time + "~" + finalList.scs_end_time
+	                    + finalList.scs_start_time + "<br>~" + finalList.scs_end_time
 	                    + "</div>"
 	                    + "<div class='col-md-5'>"
-	                    + finalList.movie_name + " || "
-	                    + finalList.screen_dimension + "D || "
-	                    + "총 " + finalList.total_seat + "석 || "
+	                    + finalList.screen_dimension + " || "
+	                    + "총 " + finalList.total_seat + "석 ||"
 	                    + finalList.scs_empty_seat + "석 남음"
 	                    + "</div>"
-	                    + "<div class='col-md-2'>"
+	                    + "<div class='col-md-3'>"
 	                    + finalList.theater_name + " || "
 	                    + finalList.screen_cinema_num + " 관"
 	                    + "</div>"

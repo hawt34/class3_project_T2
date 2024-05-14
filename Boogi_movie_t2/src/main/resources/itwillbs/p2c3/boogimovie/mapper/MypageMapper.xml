@@ -25,12 +25,12 @@
     
     <!-- 예매내역 영화제목 -->
 	<select id="selectMovieReservation" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO" parameterType="String">
-		SELECT movie_name 
+		SELECT movie.movie_name 
 		FROM movie JOIN review
 		ON movie.movie_num = review.movie_num
 		JOIN member 
 		ON member.member_id = review.member_id
-	  	WHERE member.member_id = #{id}
+	  	WHERE member.member_id = #{member_id}
 	</select>
     
     <!-- 회원정보 -->

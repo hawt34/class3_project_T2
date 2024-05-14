@@ -34,20 +34,12 @@ body {
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
 			</div>
 			<div class="col-md-9">
-				<div class="row">
+<!-- 				<div class="row"> -->
 					<div class="col-10">
 						<h2>취소내역 / 안내</h2>
 					</div>
-					<div class="col-2">						
-						<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-								  <option selected>최근 1주일</option>
-								  <option value="1">최근 1개월</option>
-								  <option value="2">최근 3개월</option>
-								  <option value="3">기간 설정</option>
-						</select>
-					</div><!-- col-2 -->
 					<hr>
-				</div><!-- row -->
+<!-- 				</div>row -->
 				<!-- 탭 메뉴 -->
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item" role="presentation">

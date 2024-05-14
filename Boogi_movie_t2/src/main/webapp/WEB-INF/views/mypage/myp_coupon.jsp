@@ -66,12 +66,12 @@ body {
 						    </tr>
 						  </thead>
 						  <tbody>
-						      <c:forEach var="coupon" items="${couponNum}" varStatus="status">
+						      <c:forEach var="coupon" items="${list }" varStatus="status">
 							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
 							        <th scope="row">${status.index + 1}</th>
 							        <td>${coupon.coupon_num}</td>
-<%-- 							        <td>${coupon.coupon_name}</td> --%>
-<%-- 							        <td>${coupon.discount_value}</td> --%>
+							        <td>${coupon.coupon_name}</td>
+							        <td>${coupon.coupon_value}원</td>
 							    </tr>
 							</c:forEach>
 						  </tbody>

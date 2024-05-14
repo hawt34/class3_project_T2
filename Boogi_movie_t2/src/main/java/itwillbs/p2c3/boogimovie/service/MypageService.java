@@ -41,10 +41,10 @@ public class MypageService {
 	}
 	
 	// 예매내역 영화제목
-	public List<MovieVO> getMovieReservation(String id) {
+	public List<MovieVO> getMovieReservation(MemberVO member) {
 		System.out.println("MypageInfoService - getMovieReservation()");
-		List<MovieVO> movieReservation = mapper.selectMovieReservation(id);
-		return movieReservation;
+		List<MovieVO> movie = mapper.selectMovieReservation(member);
+		return movie;
 	}
 	
 	// 회원정보
@@ -59,8 +59,8 @@ public class MypageService {
 	}
 
 	// 쿠폰
-	public List<CouponVO> getCoupon(){
-		return mapper.selectCoupon();
+	public List<CouponVO> getCoupon(MemberVO member){
+		return mapper.selectCoupon(member);
 	}
 	
 	

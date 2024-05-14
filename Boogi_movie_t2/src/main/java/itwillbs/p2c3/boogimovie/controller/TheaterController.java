@@ -38,6 +38,8 @@ public class TheaterController {
 	public String theater(Model model, TheaterVO theater, MemberVO member, HttpSession session) {
 		// 로그인한 경우
 		String sId = (String)session.getAttribute("sId");
+		
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+sId);
 		if(sId != null) {
 			member.setMember_id(sId);
 			member = MypageService.getMyTheater(member);
@@ -62,14 +64,8 @@ public class TheaterController {
 		String sId = (String)session.getAttribute("sId");
 		if(sId != null) {
 			member.setMember_id(sId);
-			member = memberService.selectTheatersMyTheater(sId);
-			
-			List<MyTheaterVO> myTheaters = new ArrayList<MyTheaterVO>();
-			myTheaters.add(new MyTheaterVO(member.getMember_my_theater1()));
-			myTheaters.add(new MyTheaterVO(member.getMember_my_theater2()));
-			myTheaters.add(new MyTheaterVO(member.getMember_my_theater3()));
-			model.addAttribute("myTheaters", myTheaters);
-			model.addAttribute("myTheaters", myTheaters);
+			member = MypageService.getMyTheater(member);
+			model.addAttribute("member", member);
 		}
 		
 		List<TheaterVO> theaterList = service.getTheater();

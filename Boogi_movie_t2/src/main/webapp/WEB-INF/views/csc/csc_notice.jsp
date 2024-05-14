@@ -149,7 +149,6 @@
 </footer>
 <script type="text/javascript">
 function getTheaterList(pageNum, theaterName){
-	debugger;
 	if(!pageNum) {
 		pageNum = "1";
 	}
@@ -181,6 +180,7 @@ function getTheaterList(pageNum, theaterName){
 				tr.append("<td>" + notice.notice_num + "</td>");
 	            tr.append("<td>" + notice.notice_category + "</td>");
 	            tr.append("<td>" + notice.theater_name + "</td>");
+	            debugger;
 	            tr.append("<td onclick='location.href=\"csc_notice_detail?notice_num=" + notice.notice_num + "\"'>" + notice.notice_subject + "</td>");
         		tr.append("<td>" + notice.notice_fdt + "</td>");
 
@@ -277,7 +277,7 @@ function createPagination(pageList, pageNum, theaterName) {
 
 $(function() {
 	
-	// 비동기
+	// 비동기 - 데이터 필요X : pageNum: 1, theaterName: ''
 	getTheaterList();
 	
 	//script 시작-----------------------

@@ -3,6 +3,7 @@ package itwillbs.p2c3.boogimovie.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import itwillbs.p2c3.boogimovie.service.MailService;
 import itwillbs.p2c3.boogimovie.service.MemberService;
+import itwillbs.p2c3.boogimovie.vo.MailAuthInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 
 @Controller
@@ -18,22 +21,92 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private MailService mail_service;
 	
-//	@PostMapping("member_search_pwd_pro")
-//	public String memberSearchPwdPro(MemberVO member, Model model, HttpSession session) {
-//		System.out.println("memberSearchPwdPro()");
-//		
-//		MemberVO outputMember = service.memberPwdSearch(member);
-//		
-//		if(outputMember.getMember_pwd().equals("")) {
-//			model.addAttribute("msg", "일치하는 회원이 없습니다");
-//			return "error/fail";
-//		}
-//		
-//		session.setAttribute("member", outputMember);
-//		
-//		return "redirect:/member_search_pwd_result";
-//	}
+	@PostMapping("member_pwd_update")
+	public String memberPwdUpdate(MemberVO member, Model model) {
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		member.setMember_pwd(pwdEncoder.encode(member.getMember_pwd()));
+		MemberVO outputMember = service.isCorrectUser(member);
+		
+		if(pwdEncoder.matches(member.getMember_pwd(), outputMember.getMember_pwd())) {
+			model.addAttribute("msg", "입력한 패스워드가 이전 패스워드와 같습니다");
+			return "error/fail";
+		}
+		
+		boolean isUpdateSuccess = service.updateMemberPwd(member);
+		
+		if(!isUpdateSuccess) {
+			model.addAttribute("msg", "비밀번호 변경 실패");
+			return "error/fail";
+		}
+		
+		model.addAttribute("msg", "비밀번호 변경 완료");
+		model.addAttribute("targetURL", "./");
+		
+		return "error/fail";
+		
+	}
+	@GetMapping("Member_email_auth")
+	public String MemberEmailAuth(MailAuthInfoVO auth_info, Model model, HttpSession session) {
+		MailAuthInfoVO db_auth_info = service.selectAuthInfo(auth_info);
+		if(db_auth_info == null) {
+			model.addAttribute("msg", "인증정보조회실패");
+			return "error/fail";
+		}
+		
+		session.setAttribute("auth_info", db_auth_info);
+		
+		return "redirect:/member_pwd_modify";
+	}
+		
+		
+	@GetMapping("member_pwd_modify")
+	public String memberPwdModify(HttpSession session, Model model) {
+		MailAuthInfoVO auth_info = (MailAuthInfoVO)session.getAttribute("auth_info");
+		session.invalidate();
+		boolean isDeleteSuccess = service.deleteAuthInfo(auth_info);
+		if(!isDeleteSuccess) {
+			model.addAttribute("msg", "인증 정보 삭제 실패");
+			return "error/fail";
+		}
+		model.addAttribute("member_id", auth_info.getMember_id());
+		
+		return "member/member_pwd_search_result";
+	}
+	
+	
+	@PostMapping("member_search_pwd_pro")
+	public String memberSearchPwdPro(MemberVO member, Model model, HttpSession session) {
+		MemberVO outputMember = service.memberPwdSearch(member);
+		//일치회원확인
+		if(outputMember == null) {
+			model.addAttribute("msg", "일치하는 회원이 없습니다");
+			return "error/fail";
+		}
+		//메일보내기
+		MailAuthInfoVO auth_info = mail_service.sendAuthMail(outputMember);
+		
+		if(auth_info == null) {
+			model.addAttribute("msg", "인증메일 발송 실패");
+			return "error/fail";
+		}
+			
+		int send_count = service.insertAuthInfo(auth_info);
+		if(send_count > 0) {
+			
+		}
+		
+		model.addAttribute("msg", "메일을 확인해주세요");
+		model.addAttribute("targetURL", "./");
+		
+		return "error/fail";
+	}
+	
+	
+	
+	
 	
 	@GetMapping("member_login")
 	public String memberLogin() {
@@ -77,6 +150,11 @@ public class MemberController {
 	@PostMapping("member_reg_member_pro")
 	public String memberRegComplete(MemberVO member, HttpSession session, Model model) {
 		System.out.println("member_reg_complete()");
+		//비밀번호 인코딩
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		String pwd = member.getMember_pwd();
+		member.setMember_pwd(pwdEncoder.encode(pwd));
+		
 		int insertCount = service.regMember(member);
 		
 		if(insertCount < 1) {
@@ -92,10 +170,10 @@ public class MemberController {
 	
 	@RequestMapping(value = "member_reg_member")
 	public String memberRegMember(MemberVO inputMember, Model model) {
-		System.out.println("member_reg_member()");
-		System.out.println("controller" + inputMember);
 		boolean isRegistedMember = false;
 		isRegistedMember = service.IsRegisteredMember(inputMember);
+		
+		
 		
 		if(isRegistedMember) {
 			model.addAttribute("msg" , "이미 가입한 회원입니다.");
@@ -130,20 +208,17 @@ public class MemberController {
 	
 	@GetMapping("member_search_pwd_result")
 	public String memberPwdSearchResult(HttpSession session, Model model) {
-		System.out.println("memberPwdSearchResult()");
-		MemberVO member = (MemberVO)session.getAttribute("member");
-		String member_id = member.getMember_id();
-		model.addAttribute("member_id", member_id);
 		
 		return "member/member_pwd_search_result";
 	}
 	
 	@PostMapping("member_login_pro")
 	public String memberLoginPro(MemberVO inputMember, HttpSession session, Model model) {
-		System.out.println("Controller inputMember : " + inputMember);
-		boolean isCorrectMember = false;
-		isCorrectMember =  service.isCorrectUser(inputMember);
-		if(!isCorrectMember) {
+		
+		MemberVO outputMember =  service.isCorrectUser(inputMember);
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		
+		if(!pwdEncoder.matches(inputMember.getMember_pwd(), outputMember.getMember_pwd())) {
 			model.addAttribute("msg", "로그인 실패!");
 			return "error/fail";
 		}
@@ -175,9 +250,12 @@ public class MemberController {
 	}
 	
 	@PostMapping("member_search_id_result_pro")
-	public String memberSearchIdResultPro(MemberVO inputMember,HttpSession session) {
+	public String memberSearchIdResultPro(MemberVO inputMember,HttpSession session, Model model) {
 		MemberVO outputMember = service.memberIdSearch(inputMember);
-		
+		if(outputMember == null) {
+			model.addAttribute("msg", "조회결과가 없습니다");
+			return "error/fail";
+		}
 		
 		session.setAttribute("member", outputMember);
 		

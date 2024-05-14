@@ -37,8 +37,7 @@ public class MypageService {
 	// My극장 자주가는 영화관
 	public MemberVO getMyTheater(MemberVO member) {
 		System.out.println("MypageInfoService - getMyTheater()");
-		MemberVO infoMyTheater = mapper.selectMyTheater(member);
-		return infoMyTheater;
+		return mapper.selectMyTheater(member);
 	}
 	
 	// 예매내역 영화제목

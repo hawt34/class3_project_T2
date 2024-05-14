@@ -12,7 +12,7 @@ public class EventVO {
 	private String event_subject;
 	private String event_thumbnail;
 	private String event_image;
-	private int coupon_num;
+	private int coupon_type_num;
 	private Date event_reg_date;
 	private Date event_start_date; 
 	private Date event_end_date; 

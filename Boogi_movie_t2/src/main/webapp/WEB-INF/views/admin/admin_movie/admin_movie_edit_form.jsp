@@ -85,7 +85,7 @@ body {
 						<input type="text" class="form-control" id="movie_grade" name="movie_grade" value="${movie.movie_grade}">
 					</div>
 					<div class="mb-3">
-						<label for="movie_runtime">상영시간</label> 
+						<label for="movie_runtime">상영시간(분)</label> 
 						<input type="text" class="form-control" id="movie_runtime" name="movie_runtime" value="${movie.movie_runtime}">
 					</div>
 					<div class="mb-3">

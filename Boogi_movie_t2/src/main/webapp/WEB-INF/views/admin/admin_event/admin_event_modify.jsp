@@ -49,13 +49,15 @@
 						<div class="col-md-6 mb-3">
 							<label for="coupon_num">할인쿠폰</label> 
 							<select name="coupon_num" id="coupon_num" class="form-control" required>
-								<option <c:if test="${event.coupon_num eq 0}"> selected </c:if> value="0">미선택</option>
-								<option <c:if test="${event.coupon_num eq 1}"> selected </c:if> value="1">1000원 할인쿠폰</option>
-								<option <c:if test="${event.coupon_num eq 2}"> selected </c:if> value="2">2000원 할인쿠폰</option>
-								<option <c:if test="${event.coupon_num eq 3}"> selected </c:if> value="3">3000원 할인쿠폰</option>
-								<option <c:if test="${event.coupon_num eq 4}"> selected </c:if> value="4">4000원 할인쿠폰</option>
-								<option <c:if test="${event.coupon_num eq 5}"> selected </c:if> value="5">5000원 할인쿠폰</option>
-								<option <c:if test="${event.coupon_num eq 6}"> selected </c:if> value="6">6000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_type_num eq 9}"> selected </c:if> value="9">미선택</option>
+								<option <c:if test="${event.coupon_type_num eq 1}"> selected </c:if> value="1">1000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_type_num eq 2}"> selected </c:if> value="2">2000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_type_num eq 3}"> selected </c:if> value="3">3000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_type_num eq 4}"> selected </c:if> value="4">4000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_type_num eq 5}"> selected </c:if> value="5">5000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_type_num eq 6}"> selected </c:if> value="6">6000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_type_num eq 7}"> selected </c:if> value="7">7000원 할인쿠폰</option>
+								<option <c:if test="${event.coupon_type_num eq 8}"> selected </c:if> value="8">8000원 할인쿠폰</option>
 							</select>
 							<div class="invalid-feedback">이벤트 제목을 선택해주세요.</div>
 						</div>

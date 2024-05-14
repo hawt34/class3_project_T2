@@ -149,7 +149,7 @@
 			, event_end_date
 			, event_thumbnail
 			, event_image
-			, coupon_num
+			, coupon_type_num
 		)
 		VALUES(
 			#{event_subject}
@@ -159,7 +159,7 @@
 			, #{event_end_date}
 			, #{event_thumbnail}
 			, #{event_image}
-			, #{coupon_num}
+			, #{coupon_type_num}
 		)
 	</insert>
 	
@@ -171,7 +171,7 @@
 			, event_type_num = #{event_type_num}
 			, event_start_date = #{event_start_date}
 			, event_end_date = #{event_end_date}
-			, coupon_num = #{coupon_num}
+			, coupon_type_num = #{coupon_type_num}
 		WHERE
 			event_num = #{event_num}		
 	</update>

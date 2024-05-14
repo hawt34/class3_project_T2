@@ -21,7 +21,7 @@
 
 table {
 	border-collapse: collapse;
-	width: 90%;
+	width: 1600px;
 	margin: 0rem auto;
 	box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
 	background-color: white;
@@ -173,13 +173,12 @@ th:nth-child(8), td:nth-child(8) {
 									<td>
 										<div>
 											<select id="screenSelect" class="admin_moviePlan_search">
-												
 											</select> 
 										</div>
 									</td>
 									<td>
 										<div>
-											<select id="movieSelect" class="admin_moviePlan_search">
+											<select id="movieSelect" name="movieSelect" class="admin_moviePlan_search">
 												<c:forEach var="movie" items="${movieList}">
 													<option value="${movie.movie_name}">${movie.movie_name}</option>
 												</c:forEach>
@@ -187,7 +186,7 @@ th:nth-child(8), td:nth-child(8) {
 										</div>
 									</td>
 									<td>
-										<select class="admin_moviePlan_search">
+										<select name = "screen_dimension" class="admin_moviePlan_search">
 											<option value="2D">2D</option>
 											<option value="3D">3D</option>
 										</select>
@@ -197,7 +196,7 @@ th:nth-child(8), td:nth-child(8) {
 									</td>
 									<td>
 										<select id="hourSelect" class="admin_moviePlan_search">
-											<c:forEach var="hour"  begin="9" end="24">
+											<c:forEach var="hour" begin="9" end="24">
 											    <option value="${hour}:00">${hour}:00</option>
 											</c:forEach>
 										</select>
@@ -219,9 +218,10 @@ th:nth-child(8), td:nth-child(8) {
 								<th>극장</th>
 								<th>상영관</th>
 								<th>영화제목</th>
+								<th>2D/3D</th>
 								<th>상영날짜</th>
-								<th>상영회차</th>
 								<th>상영시간</th>
+								<th>상영종료</th>
 								<th>상영일정등록</th>
 							</tr>
 						</thead>
@@ -230,8 +230,9 @@ th:nth-child(8), td:nth-child(8) {
 								<td>서면점</td>
 								<td>3관</td>
 								<td>윙카</td>
+								<td>2D</td>
 								<td>2024-04-19</td>
-								<td>3회차</td>
+								<td>09:00</td>
 								<td>12:00</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary" onclick="moviePlanEdit()">수정</button>
@@ -286,7 +287,7 @@ th:nth-child(8), td:nth-child(8) {
 		// 극장 ajax
 		$(document).ready(function() {
 		    $('#theaterSelect').change(function() {
-		        var theater_num = $(this).val();
+		        var theater_num = $("#theaterSelect").val();
 		        $.ajax({
 		            url: 'getScreens', // 상영관 정보를 가져오는 엔드포인트
 		            method: 'GET',
@@ -300,18 +301,17 @@ th:nth-child(8), td:nth-child(8) {
 		                });
 		            }
 		        });
+		    });
 		        
 		// 상영시간 ajax
 		    $('#hourSelect').change(function() {
-		        var hourSelect = $(this).val();
-		        var movieSelect = $('#movieSelect').val();
 		        $.ajax({
 		            url: 'movieEndTime', //  영화시간 정보를 가져오는 엔드포인트
 		            method: 'GET',
-		            data: { hourSelect: hourSelect,
-		            		movieSelect: movieSelect
+		            data: { hourSelect: $("#hourSelect").val(),
+		            		movieSelect: $('#movieSelect').val()
 		           	},
-		            dataType: 'json', // 전달 데이터 타입 json
+		            dataType: '', // 전달 데이터 타입 json
 		            success: function(response) {
 		                $('#movieEndTime').empty(); // 기존옵션 제거
 		                // option 요소 생성하여 추가
@@ -321,7 +321,6 @@ th:nth-child(8), td:nth-child(8) {
 		    });
 		        
 	    });
-
 
 	</script>
 </body>

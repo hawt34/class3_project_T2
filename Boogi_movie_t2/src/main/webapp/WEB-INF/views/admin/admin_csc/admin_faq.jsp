@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지 - FAQ관리</title>
-<link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -17,8 +17,12 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_list.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+
+</style>
 </head>
 <body>
+	<c:set var="pageNum" value="${empty pageNum ? 1 : pageNum }" />
 	<header>
 		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 	</header>
@@ -39,34 +43,66 @@
 					<table>
 						<thead>
 							<tr>
-								<th>FAQ 코드</th>
 								<th>FAQ번호</th>
+								<th>유형</th>
 								<th>제목</th>
-								<th>등록일</th>
-								<th>작성자</th>
-								<th>상세보기</th>
+								<th>수정</th>
 								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1259933</td>
-								<td>결제 취소는 어디서 하나요?</td>
-								<td>2023-11-12</td>
-								<td>어드민</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="faqModify()">수정</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="faqDelete()">삭제</button>
-								</td>
-							</tr>
+							<c:choose>
+								<c:when test="${empty faqList }" >
+								<tr><td align="center">게시물이 없습니다</td></tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="faq" items="${faqList }">
+										<tr>
+											<td>${faq.faq_num }</td>
+											<td>${faq.faq_category }</td>
+											<td>${faq.faq_subject }</td>
+											<td>
+												<button type="button" class="btn btn-outline-primary" onclick="faqModify(${faq.faq_num})">수정</button>
+											</td>
+											<td>
+												<button type="button" class="btn btn-outline-primary" onclick="faqDelete()">삭제</button>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 
 						</tbody>
 					</table>
 				<div class="admin_movie_footer" align="center">
-					<button onclick="FAQform()">FAQ 등록</button>
 					<button onclick="location.href='admin_faq_form'">FAQ 등록</button>
+				</div>
+				<div class="notice_pageArea">
+					<nav aria-label="Page navigation example" >
+						<ul class="pagination">
+							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
+								<a class="page-link" href="admin_faq?pageNum=${pageNum - 1}" aria-label="Previous" >
+								<span aria-hidden="true" >&laquo;</span>
+								</a>
+							</li>
+							<!-- 페이지번호 생성 -->
+							<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
+								<c:choose>
+									<c:when test="${pageNum eq i }">
+										<li class="page-item active"><a class="page-link" >${i}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="admin_faq?pageNum=${i}">${i}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
+								<a class="page-link" href="admin_faq?pageNum=${pageNum + 1}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
 				</div>
 
 				</div>
@@ -78,15 +114,13 @@
 	</footer>
 
 	<script type="text/javascript">
-		function FAQform() {
-			window.open("admin_FAQ_form", "_self");
+		function faqModify(num) {
+			location.href="admin_faq_modify?faq_num=" + num;
 		}
-// 		function FAQform() {
-// 			window.open("admin_FAQ", "_self");
-// 		}
-		function FAQwithdraw() {
-			location.href="admin_FAQ_delete";
-			location.href="admin_faq_delete";
+		function faqDelete() {
+			if(comfirm("정말 삭제하시겠습니까?")) {
+				location.href="admin_faq_delete";
+			}
 		}
 	
 	

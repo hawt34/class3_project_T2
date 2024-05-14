@@ -277,7 +277,7 @@ function createPagination(pageList, pageNum, theaterName) {
 
 $(function() {
 	
-	// 비동기
+	// 비동기 - 데이터 필요X : pageNum: 1, theaterName: ''
 	getTheaterList();
 	
 	//script 시작-----------------------

@@ -3,6 +3,7 @@ package itwillbs.p2c3.boogimovie.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	
 	
 //	@PostMapping("member_search_pwd_pro")
 //	public String memberSearchPwdPro(MemberVO member, Model model, HttpSession session) {
@@ -77,6 +79,11 @@ public class MemberController {
 	@PostMapping("member_reg_member_pro")
 	public String memberRegComplete(MemberVO member, HttpSession session, Model model) {
 		System.out.println("member_reg_complete()");
+		//비밀번호 인코딩
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		String pwd = member.getMember_pwd();
+		member.setMember_pwd(pwdEncoder.encode(pwd));
+		
 		int insertCount = service.regMember(member);
 		
 		if(insertCount < 1) {
@@ -92,10 +99,10 @@ public class MemberController {
 	
 	@RequestMapping(value = "member_reg_member")
 	public String memberRegMember(MemberVO inputMember, Model model) {
-		System.out.println("member_reg_member()");
-		System.out.println("controller" + inputMember);
 		boolean isRegistedMember = false;
 		isRegistedMember = service.IsRegisteredMember(inputMember);
+		
+		
 		
 		if(isRegistedMember) {
 			model.addAttribute("msg" , "이미 가입한 회원입니다.");
@@ -140,10 +147,11 @@ public class MemberController {
 	
 	@PostMapping("member_login_pro")
 	public String memberLoginPro(MemberVO inputMember, HttpSession session, Model model) {
-		System.out.println("Controller inputMember : " + inputMember);
-		boolean isCorrectMember = false;
-		isCorrectMember =  service.isCorrectUser(inputMember);
-		if(!isCorrectMember) {
+		
+		MemberVO outputMember =  service.isCorrectUser(inputMember);
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		
+		if(!pwdEncoder.matches(inputMember.getMember_pwd(), outputMember.getMember_pwd())) {
 			model.addAttribute("msg", "로그인 실패!");
 			return "error/fail";
 		}

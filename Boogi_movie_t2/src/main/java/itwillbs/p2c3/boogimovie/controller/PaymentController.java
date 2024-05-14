@@ -21,11 +21,3 @@ public class PaymentController {
 		return "payment/payment_reservation";
 	}
 }
-//<input type="hidden" id="movie_name" name="movie_name" value="${scs.movie_name}">
-//<input type="hidden" id="theater_name" name="theater_name" value="${scs.theater_name}">
-//<input type="hidden" id="screen_cinema_num" name="screen_cinema_num" value="${scs.screen_cinema_num}">
-//<input type="hidden" id="selected_seats" name="selected_seats">
-//<input type="hidden" id="person_info" name="person_info">
-//<input type="hidden" id="total_fee" name="total_fee">
-//<input type="hidden" id="scs_start_date" name="scs_start_date" value="${start_date}">
-//<input type="hidden" id="scs_end_date" name="scs_end_date" value="${end_date}">

@@ -29,4 +29,8 @@ public class ItemInfoService {
 		
 		return mapper.selectItemListJuice(); 
 	}
+
+	
+	
+
 }

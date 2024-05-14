@@ -153,19 +153,6 @@
 		)
 	</insert>
 	
-<!-- 이벤트 수정 -->
-	<update id="updateEvent">
-		UPDATE event
-		SET 
-			event_subject = #{event_subject}
-			, event_type_num = #{event_type_num}
-			, event_start_date = #{event_start_date}
-			, event_end_date = #{event_end_date}
-			, coupon_num = #{coupon_num}
-		WHERE
-			event_num = #{event_num}		
-	</update>
-	
 <!-- 이벤트 삭제 -->
 	<delete id="deleteEvent">
 		DELETE FROM event
@@ -248,7 +235,8 @@
 		SELECT *
 		FROM item_info
 		WHERE item_info_category IN ('콤보', '스낵', '음료', '팝콘')
-		ORDER BY item_info_category, item_info_price ASC
+		GROUP BY item_info_name
+		ORDER BY item_info_price ASC;
 	</select>	
 	
 	<select id="selectItem" resultType="itwillbs.p2c3.boogimovie.vo.ItemInfoVO">
@@ -277,16 +265,6 @@
 		WHERE item_info_name = #{item_info_name}
 	</delete>
 	
-	<update id="updateItem">
-		UPDATE item_info
-		SET 
-			item_info_category = #{item_info_category}
-			, item_info_price = #{item_info_price}
-			, item_info_image = #{item_info_image}
-		WHERE
-			item_info_name = #{item_info_name}	
-		
-	</update>
 	
 	
 </mapper>

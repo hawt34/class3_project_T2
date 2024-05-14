@@ -7,7 +7,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부기무비 전체극장</title>
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>

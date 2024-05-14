@@ -19,4 +19,7 @@
 		SELECT * FROM item_info WHERE item_info_category = '음료' ORDER BY item_info_price ASC
 	</select>
 		
+	
+	
+		
 </mapper>

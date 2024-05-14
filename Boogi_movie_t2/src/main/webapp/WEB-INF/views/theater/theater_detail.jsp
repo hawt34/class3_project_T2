@@ -6,7 +6,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>극장 정보</title>
+<title>부기무비 극장 정보</title>
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
@@ -57,15 +57,17 @@
 									<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
 										<img src="${pageContext.request.contextPath}/resources/images/set.svg"> MY 극장 관리</button>
 									</li>
-									<!-- 체크된 MY극장 리스트 / my -->
-									<li><a class="dropdown-item" href="#">정관점</a></li>
-									<li><a class="dropdown-item" href="#">서면점</a></li>
+									<!-- 체크된 MY극장 리스트 / member_my_theater -->
+									<c:forEach var="myTheaters" items="${myTheaters}">
+										<li><a class="dropdown-item" href="#">${myTheaters.member_my_theater}</a></li>
+									</c:forEach>
 							 	</c:otherwise>
 							 </c:choose>
 						</ul>
 					</div>
 				</nav>
-				<form action="">	
+				
+				<form>
 					<!-- Modal -->
 					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -77,7 +79,7 @@
 								<div class="modal-body">
 									<c:forEach var="theater" items="${theaterList}">
 										<div class="form-check">
-											<input class="form-check-input" type="checkbox" value="haeundae" id="${theater.theater_num}" onclick="CountChecked(this)">
+											<input class="form-check-input" type="checkbox" value="haeundae" id="${theater.theater_num}">
 											<label class="form-check-label" for="${theater.theater_num}">${theater.theater_name}</label>
 										</div>
 									</c:forEach>
@@ -89,9 +91,10 @@
 							</div>
 				  		</div>
 				  	</div> <!-- 모달 끝 -->
-			  	</form>	
+			  	</form>
 			</div><!-- theater_top 끝 -->
-
+			
+			<!-- 지점명 배너 -->
 			<div class="theater_name_aera" style="position: relative; width: 100%; height: 200px; background-image: url('${pageContext.request.contextPath}/resources/images/theater_CINEMA4.jpg'); background-size: cover;">
 		    	<div class="theater_name" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px; text-shadow: 1px 0 black;">
 		    		<!-- 상단에서 클릭된 극장명 / theater_name -->

@@ -48,18 +48,18 @@
 							<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
 								<img src="${pageContext.request.contextPath}/resources/images/set.svg"> MY 극장 관리</button>
 							</li>
-							<!-- 체크된 MY극장 리스트 / my -->
-							
-							<li><a class="dropdown-item" href="#">정관점</a></li>
-							<li><a class="dropdown-item" href="#">서면점</a></li>
+							<!-- 체크된 MY극장 리스트 / member_my_theater -->
+							<c:forEach var="myTheaters" items="${myTheaters}">
+								<li><a class="dropdown-item" href="#">${myTheaters.member_my_theater}</a></li>
+							</c:forEach>
 					 	</c:otherwise>
 					 </c:choose>
 				</ul>
 			</div>
 		</nav>
-				
-		<!-- Modal -->
-		<form action="">
+		
+		<form>
+			<!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -70,14 +70,14 @@
 						<div class="modal-body">
 							<c:forEach var="theater" items="${theaterList}">
 								<div class="form-check">
-									<input class="form-check-input" type="checkbox" value="haeundae" id="${theater.theater_num}"  onclick="CountChecked(this)">
+									<input class="form-check-input" type="checkbox" value="haeundae" id="${theater.theater_num}">
 									<label class="form-check-label" for="${theater.theater_num}">${theater.theater_name}</label>
 								</div>
 							</c:forEach>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-							<button type="button" class="btn btn-primary">저장</button>
+							<button type="submit" class="btn btn-primary">저장</button>
 		      			</div>
 					</div>
 		  		</div>

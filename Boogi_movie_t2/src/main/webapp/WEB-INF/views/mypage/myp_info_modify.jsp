@@ -62,7 +62,7 @@ function checkId() {
 			<hr>
 		<form action="myp_info_modify_pro" method="post" name="fr">
 			<div class="box1">
-	   			<label for="name">이름</label>
+	   			<label for="member_name">이름</label>
 			  	<div class="form_item w-75">
 			    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" readonly>
 			    </div><!-- form item -->
@@ -71,35 +71,35 @@ function checkId() {
 <!-- 				<form action="CheckDupId" class="align_center"> -->
 				<!-- pattern 속성으로 입력값 검증 수행 -->
 				<!-- 주의! submit 버튼 클릭 시 동작하며, 패턴 작성 시 / 와 / 사이의 내용만 작성 -->
-		   			<label for="id">아이디</label>
-				  	<div class="form_item w-75">
+	   			<label for="member_id">아이디</label>
+			  	<div class="form_item w-75">
 <%-- 					<input type="text" name="id" value="${param.id}" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" placeholder="검색할 아이디 입력" required> --%>
-				
-			    	<input type="text"  placeholder="아이디 입력" onclick="checkId()" name="member_id" id="member_id" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" value="${member.member_id}" required>
-				    </div><!-- form item -->
+			
+		    	<input type="text"  placeholder="아이디 입력" onclick="checkId()" name="member_id" id="member_id" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" value="${member.member_id}" required>
+			    </div><!-- form item -->
 <!-- 				</form> -->
 			
-	   			<label for="pwd">새 비밀번호</label>
+	   			<label for="member_pwd">새 비밀번호</label>
 			  	<div class="form_item w-75">
 			    	<input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd">
 <!-- 					<div id="checkPasswdResult"></div> -->
 		    		<span id="passwordMessage" style="color: red;"></span>
 			    </div><!-- form item -->
 			
-	   			<label for="pwd2">새 비밀번호확인</label>
+	   			<label for="member_pwd2">새 비밀번호확인</label>
 			  	<div class="form_item w-75 ">
 			    	<input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2">
 <!-- 	 						<div id="checkPasswd2Result"></div> -->
 		    	    <span id="passwordMessage" style="color: red;"></span>
 			    </div><!-- form item -->
 			
-	   			<label for="birth">생년월일</label>
+	   			<label for="member_birth">생년월일</label>
 			  	<div class="form_item w-75">
 			    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.member_birth}">
 		    	    <span id="passwordMessage" style="color: red;"></span>
 			    </div><!-- form item -->
 	
-	   			<label for="postCode">주소</label>
+	   			<label for="member_addr">주소</label>
 			  	<div class="form_item w-75">
 			    	<input type="text" id="member_addr" name="member_addr" size="6" onclick="search_address()" required value="${member.member_addr}" placeholder="클릭 시 주소검색">
 			    	
@@ -109,13 +109,13 @@ function checkId() {
 			    	<span id="passwordMessage" style="color: red;"></span>
 			    </div><!-- form item -->
 			
-	   			<label for="email">Email</label>
+	   			<label for="member_email">Email</label>
 			  	<div class="form_item w-75">
 			    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required value="${member.member_email}">
  				    <span id="passwordMessage" style="color: red;"></span>
 			    </div><!-- form item -->
 			
-	   			<label for="phoneNum">전화번호</label>
+	   			<label for="member_tel">전화번호</label>
 			  	<div class="form_item w-75">
 			    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" required id="member_tel" value="${member.member_tel}">
 					<span id="passwordMessage" style="color: red;"></span>
@@ -150,21 +150,21 @@ function checkId() {
 
 		
 	    // 아이디 입력값 변경 시
-// 	    $("#member_id").on("input", function() {
-// 	        let id = $("#member_id").val();
-// 	        let regex = /^[a-zA-Z가-힣0-9]{2,10}$/g;
+	    $("#member_id").on("input", function() {
+	        let id = $("#member_id").val();
+	        let regex = /^[a-zA-Z가-힣0-9]{2,10}$/g;
 	        
-// 	        if (!regex.test(id)) {
-// 	            $("#member_id").css("background-color", "red");
-// 	        } else {
-// 	            $("#member_id").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-// 	        }
+	        if (!regex.test(id)) {
+	            $("#member_id").css("background-color", "red");
+	        } else {
+	            $("#member_id").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	        }
 	
-// 	        checkFormValidity(); // 폼 유효성 검사 실행
-// 	    });
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
 	    
 	    // 비밀번호 입력값 변경 시
-	    $("#member_pwd").on("input", function()
+	    $("#member_pwd").on("input", function(){
 	        let pwd = $("#member_pwd").val();
 	        let regex = /^.{8,16}$/g;
 	        
@@ -212,14 +212,14 @@ function checkId() {
 			});
 	    
 	    // 상세주소 입력값 변경 시
-	    $("#member_address2").on("input", function() {
-	        let address2 = $("#member_address2").val();
+	    $("#member_addr").on("input", function() {
+	        let address2 = $("#member_addr").val();
 	        let regex = /^{2,20}$/g;
 	        
 	        if (!regex.test(address2)) {
-	            $("#member_address2").css("background-color", "red");
+	            $("#member_addr").css("background-color", "red");
 	        } else {
-	            $("#member_address2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#member_addr").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	        }
 		
 	        checkFormValidity(); // 폼 유효성 검사 실행
@@ -261,7 +261,7 @@ function checkId() {
 	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
 	        let pwd2IsValid = /^.{8,16}$/.test($("#member_pwd2").val());
 	        let birthIsValid = /^\d{6}$/.test($("#member_birth").val());
-	        let address2IsValid = /^.{2,20}$/.test($("#member_address2").val());
+	        let address2IsValid = /^.{2,20}$/.test($("#member_addr").val());
 	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
 	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
 	

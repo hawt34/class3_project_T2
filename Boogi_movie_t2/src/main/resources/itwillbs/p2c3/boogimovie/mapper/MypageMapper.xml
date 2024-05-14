@@ -57,7 +57,7 @@
 			, member_email = #{member_email}
 			, member_tel = #{member_tel}
 		WHERE
-			member_id = #{member.member_id}
+			member_name = #{member_name} and member_email = #{member_email}
     
     </update>
     

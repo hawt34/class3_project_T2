@@ -138,9 +138,9 @@ footer {
 							<li><span>상영시간 : ${movieFutureInfo.movie_runtime }</span></li>
 							<li><span>줄거리 : ${movieFutureInfo.movie_summary}</span></li>
 						</ul>
-						<img src="${movieFutureInfo.movie_stillcut}">
-						<img src="${movieFutureInfo.movie_stillcut2}">
-						<img src="${movieFutureInfo.movie_stillcut3}">
+						<img src="${movieFutureInfo.movie_stillCut}">
+						<img src="${movieFutureInfo.movie_stillCut2}">
+						<img src="${movieFutureInfo.movie_stillCut3}">
 						<div class="backButton">		
 						<button type="button" class="btn btn-outline-primary" onclick="window.history.back()">뒤로가기</button>
 						</div>

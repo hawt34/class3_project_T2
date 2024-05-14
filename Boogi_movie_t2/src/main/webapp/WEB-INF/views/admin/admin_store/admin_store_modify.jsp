@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>		
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,10 +22,12 @@
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<h4 class="mb-4">스낵등록</h4>
-				<form class="validation-form" novalidate action="admin_store_pro" method="post" onsubmit="return confirm('스낵정보를 등록하시겠습니까?');">
+				<h4 class="mb-4">스낵정보수정</h4>
+				<form class="validation-form" novalidate action="admin_store_modifyPro" method="post" onsubmit="return confirm('스낵정보를 등록하시겠습니까?');">
 					<div class="mb-3">
-						<label for="movie_createDate">스낵종류</label> 
+						<label for="movie_createDate">기존 스토어 상품 종류</label> 
+							<input type="text" value="${updateItem.item_info_category}">
+							<label for="movie_createDate">변경할 스토어상품 종류</label> 
 							<select id="item_info_category" name="item_info_category">
 								<option value="스낵">스낵</option>
 								<option value="음료">음료</option>
@@ -35,22 +38,21 @@
 					</div>
 					<div class="mb-3">
 						<label for="movie_name">스낵명</label> 
-						<input type="text" id="item_info_name" name="item_info_name" class="form-control" required />
+						<input type="text" id="item_info_name" name="item_info_name"  value="${updateItem.item_info_name}"class="form-control" required />
 						<div class="invalid-feedback">스낵명을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_director">판매가격</label> 
-						<input type="text" id="item_info_price" name="item_info_price"  class="form-control" required />
+						<input type="text" id="item_info_price" name="item_info_price"  value="${updateItem.item_info_price}" class="form-control" required />
 						<div class="invalid-feedback">판매가격을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_stillCut1">스낵이미지</label> 
-						<input type="text" id="item_info_image" name="item_info_image"  class="form-control" required />
+						<input type="text" id="item_info_image" name="item_info_image" value="${updateItem.item_info_image}" class="form-control" required />
 						<div class="invalid-feedback">스낵이미지를 선택해주세요.</div>
 					</div>
 					<div class="mb-4" align="center">
-						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block" >
-						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
+						<input type="submit" value="수정하기" class="btn btn-primary btn-lg btn-block" >
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
 				</form>

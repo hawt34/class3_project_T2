@@ -219,12 +219,12 @@
 	let selectedTheater = "";
 	let selectedDay = "";
 	
-	function final_list_selected(movie_name, start_time, end_time, theater_name, cinema_num){
+	function final_list_selected(movie_name, start_time, end_time, theater_name, selected_day){
 		let final_list_selected_things = "/" + movie_name + "/"
 															+ start_time + "/"
 															+ end_time + "/"
 															+ theater_name + "/"
-															+ cinema_num + "/";
+															+ selected_day + "/";
 		// 폼 선택 (ID 또는 다른 선택자를 사용하여 정확한 폼을 지정)
 	    let form = $("#fr");
 
@@ -265,7 +265,7 @@
 	            			+ "\", \"" + finalList.scs_start_time 
 	            			+ "\", \"" + finalList.scs_end_time 
 	            			+ "\", \"" + finalList.theater_name 
-	            			+ "\", \"" + finalList.screen_cinema_num + "\")'>"
+	            			+ "\", \"" + selectedDay + "\")'>"
 	                    + "<div>" + finalList.movie_name + "</div>"
 	                    + "<div class='row'>"
 	                    + "<div class='col-md-3'>"

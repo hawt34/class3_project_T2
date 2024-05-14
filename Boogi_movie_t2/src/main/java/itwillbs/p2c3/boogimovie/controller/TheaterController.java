@@ -1,15 +1,19 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
+import itwillbs.p2c3.boogimovie.vo.MyTheaterVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterFacilityVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
@@ -20,9 +24,27 @@ public class TheaterController {
 	@Autowired
 	private TheaterService service;
 	
+	@Autowired
+	private MemberService memberService;
+	
+	
+	
 	
 	@GetMapping("theater")
-	public String theater(Model model, TheaterVO theater, MemberVO member) {
+	public String theater(Model model, TheaterVO theater, MemberVO member, HttpSession session) {
+		// 로그인한 경우
+		String sId = (String)session.getAttribute("sId");
+		if(sId != null) {
+			member.setMember_id(sId);
+			member = memberService.selectTheatersMyTheater(sId);
+			
+			List<MyTheaterVO> myTheaters = new ArrayList<MyTheaterVO>();
+			myTheaters.add(new MyTheaterVO(member.getMember_my_theater1()));
+			myTheaters.add(new MyTheaterVO(member.getMember_my_theater2()));
+			myTheaters.add(new MyTheaterVO(member.getMember_my_theater3()));
+			model.addAttribute("myTheaters", myTheaters);
+		}
+		
 		// 극장 카테고리 공지사항 리스트 조회
 		List<NoticeVO> noticeList = service.getNoticeList();
 		// 극장 전체 리스트 조회
@@ -30,24 +52,37 @@ public class TheaterController {
 		
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("theaterList", theaterList);
-		
-		
+				
 		return "theater/theater_main";
 	}       
 	 
 	@GetMapping("theater_detail")
-	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, MemberVO member, Model model) {
+	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, MemberVO member, Model model, HttpSession session) {
 		
-		System.out.println("theater_num : " + theater.getTheater_num());
+		// 로그인한 경우
+		String sId = (String)session.getAttribute("sId");
+		if(sId != null) {
+			member.setMember_id(sId);
+			member = memberService.selectTheatersMyTheater(sId);
 			
+			List<MyTheaterVO> myTheaters = new ArrayList<MyTheaterVO>();
+			myTheaters.add(new MyTheaterVO(member.getMember_my_theater1()));
+			myTheaters.add(new MyTheaterVO(member.getMember_my_theater2()));
+			myTheaters.add(new MyTheaterVO(member.getMember_my_theater3()));
+			model.addAttribute("myTheaters", myTheaters);
+			model.addAttribute("myTheaters", myTheaters);
+		}
+		
+		List<TheaterVO> theaterList = service.getTheater();
 		theater = service.getTheater(theater);
 		List<TheaterFacilityVO> facilityList = service.getFacility(facility);
 		List<NoticeVO> theaterNoticeList = service.getTheaterNoticeList(notice);
 		
-		
 		model.addAttribute("theater", theater);
+		model.addAttribute("theaterList", theaterList);
 		model.addAttribute("facilityList", facilityList);
 		model.addAttribute("theaterNoticeList", theaterNoticeList);
+		
 		
 		
 		return "theater/theater_detail";

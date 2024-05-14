@@ -14,9 +14,13 @@
  		padding:0; 
  	} 
 
-	.payment_all {
+	article {
 		width: 1400px;
 		margin: 0 auto;
+	}
+	
+	.payment_all{
+		margin: 30px;
 	}
 </style>
 </head>
@@ -42,9 +46,10 @@
 							* 결제 취소 시 유효기간이 지난 멤버십 포인트는 복구되지 않습니다.
 							<hr>
 							<div class="input-group mb-3 w-50" >
-								보유 포인트 : 2,000점&nbsp;&nbsp;
+								<input type="text" class="form-control" placeholder="보유 포인트" aria-describedby="button-addon2">
+								<button class="btn btn-outline-secondary" type="button" id="button-addon1">조회</button>
 								<input type="text" class="form-control" placeholder="사용할 포인트" aria-describedby="button-addon2">
-								<button class="btn btn-outline-secondary" type="button" id="button-addon2">적용</button>
+								<button class="btn btn-outline-secondary" type="submit" id="button-addon2">적용</button>
 							</div>
 						</div>
 					</div>
@@ -153,7 +158,7 @@
 				<div class="card text-center" >
 					<div class="card-body">
 						<div class="payment_status_box">		
-							<p>영화정보(제목, 지점, 관, 날짜, 시간)</p>
+							<p>장바구니에 담긴 물건</p>
 						</div>
 						<hr>
 						<div class="payment_status_box">

@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import itwillbs.p2c3.boogimovie.service.MemberService;
+import itwillbs.p2c3.boogimovie.service.MypageInfoService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MyTheaterVO;
@@ -27,6 +29,8 @@ public class TheaterController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private MypageInfoService MypageService;
 	
 	
 	
@@ -36,13 +40,8 @@ public class TheaterController {
 		String sId = (String)session.getAttribute("sId");
 		if(sId != null) {
 			member.setMember_id(sId);
-			member = memberService.selectTheatersMyTheater(sId);
-			
-			List<MyTheaterVO> myTheaters = new ArrayList<MyTheaterVO>();
-			myTheaters.add(new MyTheaterVO(member.getMember_my_theater1()));
-			myTheaters.add(new MyTheaterVO(member.getMember_my_theater2()));
-			myTheaters.add(new MyTheaterVO(member.getMember_my_theater3()));
-			model.addAttribute("myTheaters", myTheaters);
+			member = MypageService.getMyTheater();
+			model.addAttribute("member", member);
 		}
 		
 		// 극장 카테고리 공지사항 리스트 조회
@@ -87,6 +86,14 @@ public class TheaterController {
 		
 		return "theater/theater_detail";
 	}
+	
+//	@PostMapping("")
+//	public String 
+//	
+	
+	
+	
+	
 }
 
 

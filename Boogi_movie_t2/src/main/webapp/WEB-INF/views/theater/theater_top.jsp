@@ -58,7 +58,7 @@
 			</div>
 		</nav>
 		
-		<form>
+		<form action="Mytheater" method="post">
 			<!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -70,7 +70,7 @@
 						<div class="modal-body">
 							<c:forEach var="theater" items="${theaterList}">
 								<div class="form-check">
-									<input class="form-check-input" type="checkbox" value="haeundae" id="${theater.theater_num}">
+									<input class="form-check-input" type="checkbox" value="${theater.theater_name}" id="${theater.theater_num}" onclick="CountChecked(this)">
 									<label class="form-check-label" for="${theater.theater_num}">${theater.theater_name}</label>
 								</div>
 							</c:forEach>

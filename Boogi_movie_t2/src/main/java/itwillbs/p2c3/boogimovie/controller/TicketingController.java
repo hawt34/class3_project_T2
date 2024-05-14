@@ -311,11 +311,7 @@ public class TicketingController {
 			
 		return final_list;
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	@GetMapping("payment_reservation")
 	public String paymentReserve() {
 		return "payment/payment_reservation";
@@ -323,7 +319,7 @@ public class TicketingController {
 
 	
 }
-<<<<<<< HEAD
+
 		
 		
 		
@@ -335,7 +331,5 @@ public class TicketingController {
 	
 
 	
-=======
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
-		
+
 		

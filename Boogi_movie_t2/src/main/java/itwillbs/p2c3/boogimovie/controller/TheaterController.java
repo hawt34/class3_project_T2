@@ -38,6 +38,8 @@ public class TheaterController {
 	public String theater(Model model, TheaterVO theater, MemberVO member, HttpSession session) {
 		// 로그인한 경우
 		String sId = (String)session.getAttribute("sId");
+		
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+sId);
 		if(sId != null) {
 			member.setMember_id(sId);
 			member = MypageService.getMyTheater(member);

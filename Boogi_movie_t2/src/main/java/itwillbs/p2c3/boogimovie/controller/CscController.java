@@ -53,7 +53,6 @@ public class CscController {
 	@GetMapping("csc_faq")
 	public String cscFAQ(@RequestParam(defaultValue = "1")int pageNum, FAQVO faq, Model model) {
 		//ajax를 호출하지 않은 paging을 처리하기 위한 변수
-		String noArgs = "defaultFaq";
 		
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
@@ -77,56 +76,40 @@ public class CscController {
 	
 	
 	//=======================================
-	//공지사항 List 게시판
+	//공지사항 servlet
 	@GetMapping(value="csc_notice")
-	public String cscNotice(Model model,
-							@RequestParam(defaultValue = "1")int pageNum
-							) {
-		//----------------------------------------------------
-		//ajax를 호출하지 않은 paging을 처리하기 위한 변수
-		String noArgs = "defaultNotice";
-		
-		int listLimit = 10; // 페이지당 보여줄 게시물 갯수
-		int startRow = (pageNum - 1) * listLimit; // 게시물의 시작점
-		PageInfo pageInfo = pageInfo(pageNum, listLimit, startRow, noArgs);	
-		List<NoticeVO> noticeList = noticeService.getNoticeList(listLimit, startRow);
-		//LocalDateTIme format
-		for(NoticeVO noticed : noticeList) {
-			noticed.setNotice_fdt(noticed.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-		}
-		model.addAttribute("pageList", pageInfo);
-		model.addAttribute("noticeList", noticeList);
+	public String cscNotice(@RequestParam(defaultValue = "1")int pageNum) {
 		return "csc/csc_notice";
 	}
+	
 	//공지사항 List 게시판 - ajax를 이용한 비동기 처리
 	@ResponseBody
 	@GetMapping(value="csc_notice.json")
-	public Map<String, Object> noticeCategory(Model model,
-										 @RequestParam(defaultValue = "1")int pageNum,
-										 @RequestParam(required = false)String theaterName) {
+	public Map<String, Object> noticeCategory(@RequestParam(defaultValue = "1")String pageNumArg,
+											  @RequestParam String theaterName,
+											  @RequestParam String pageName) {
+		
 		//----------------------------------------------------
+		System.out.println("1" + pageNumArg);
+		System.out.println("2" + theaterName);
+		System.out.println("3 " + pageName);
+		
+		int pageNum = Integer.parseInt(pageNumArg);
+		
 		int listLimit = 10; // 페이지당 보여줄 게시물 갯수
 		int startRow = (pageNum - 1) * listLimit; // 게시물의 시작점
-		List<NoticeVO> noticeList = null;
-		//극장명에 따른 ajax 전달 
-		if(theaterName.equals("전체1")) {
-			noticeList = noticeService.getNoticeList(listLimit, startRow);
-		} else {
-			noticeList = noticeService.getNoticeCagList(listLimit, startRow, theaterName);
-		}
-		
-		PageInfo pageInfo = pageInfo(pageNum, listLimit, startRow, theaterName);	
+		List<NoticeVO> noticeList = noticeService.getNoticeList(listLimit, startRow, theaterName);
 		//LocalDateTIme format
 		for(NoticeVO noticed : noticeList) {
 			noticed.setNotice_fdt(noticed.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 		}
+		
+		PageInfo pageInfo = pageInfo(pageNum, listLimit, startRow, theaterName, pageName);	
 		//두개의 객체전달을 위한 HashMap()
 		Map<String, Object> noticeObj = new HashMap<String, Object>();
 		noticeObj.put("noticeList", noticeList);
 		noticeObj.put("pageList", pageInfo);
 		noticeObj.put("pageNum", pageNum);
-//		model.addAttribute("pageList", pageInfo);
-//		model.addAttribute("noticeList", noticeList);
 		return noticeObj;
 	}
 	//공지사항 확인 - detail.jsp
@@ -144,6 +127,8 @@ public class CscController {
 		return "csc/csc_notice_detail";
 	}
 	
+	//--------------------------------------------------------------------
+	//1대1 문의 관련
 	@GetMapping("csc_oto")
 	public String cscOto(HttpSession session, Model model) {
 		if(session.getAttribute("sId") == null) {
@@ -178,100 +163,38 @@ public class CscController {
 		return "redirect:/myp_oto_breakdown";
 	}
 	
+	//------------------------------------------------------------------
 	//paging 처리
-	public PageInfo pageInfo(@RequestParam(defaultValue = "1")int pageNum, int listLimit, int startRow, String category) {
+	public PageInfo pageInfo(@RequestParam(defaultValue = "1")int pageNum, int listLimit, int startRow, String category, String pageName) {
 		//전체1 notice 게시판 번호
 		int listCount = 0;
-		int pageListLimit = 0;
+		int pageListLimit = 5;
 		int maxPage = 0;
 		int startPage = 0;
 		int endPage = 0;
 		
-		if(category.equals("defaultNotice")) {
-			listCount = adminService.getNoticeListCount(); //총 공지사항 갯수
-			pageListLimit = 5; //뷰에 표시할 페이지갯수
-			maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-			startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-			endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-			
-			if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-				endPage = maxPage;
+		if(pageName.equals("notice")) {
+			switch (category) {
+				case "" : listCount = adminService.getNoticeListCount(); break; 
+				default : listCount = noticeService.getNoticeListCountCag(category); break; 
+			}
+		} else if(pageName.equals("faq")) {
+			switch (category) {
+				case "" : listCount = faqService.getFaqListCount(); break; 
+				default : listCount = faqService.getfaqListCountCag(category); break; 
 			}
 			
-			return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		}
-		if(category.equals("defaultFaq")) {
-			listCount = faqService.getFaqListCount(); //총 공지사항 갯수
-			pageListLimit = 5; //뷰에 표시할 페이지갯수
-			maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-			startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-			endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-			
-			if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-				endPage = maxPage;
-			}
-			
-			return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+//		pageListLimit = 5; //뷰에 표시할 페이지갯수
+		maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+		endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+		
+		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+			endPage = maxPage;
 		}
 		
-		if(category.equals("전체1")) {
-			listCount = adminService.getNoticeListCount(); //총 공지사항 갯수
-			pageListLimit = 5; //뷰에 표시할 페이지갯수
-			maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-			startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-			endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-			
-			if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-				endPage = maxPage;
-			}
-			
-			return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-		}
-		if(category.equals("해운대점") || category.equals("센텀점")
-		   || category.equals("서면점") || category.equals("남포점")
-		   || category.equals("부산대점") || category.equals("사직점")
-		   || category.equals("영도점") || category.equals("덕천점")
-		   || category.equals("정관점") || category.equals("사상점")) {
-			listCount = noticeService.getNoticeListCountCag(category); //극장명 공지사항 갯수
-			pageListLimit = 5; //뷰에 표시할 페이지갯수
-			maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-			startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-			endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-			
-			if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-				endPage = maxPage;
-			}
-			return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-		}
-		
-		if(category.equals("전체2")) {
-			listCount = noticeService.getNoticeListCountCag(category); //극장명 공지사항 갯수
-			pageListLimit = 5; //뷰에 표시할 페이지갯수
-			maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-			startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-			endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-			
-			if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-				endPage = maxPage;
-			}
-			return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-		} 
-		
-		if(category.equals("예매/결제") || category.equals("영화관이용")
-		   || category.equals("쿠폰") || category.equals("스토어")
-		   || category.equals("홈페이지/모바일")) {
-			listCount = noticeService.getNoticeListCountCag(category); //극장명 공지사항 갯수
-			pageListLimit = 5; //뷰에 표시할 페이지갯수
-			maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-			startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-			endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-			
-			if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-				endPage = maxPage;
-			}
-			return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-		}
-		return null;
+		return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
 		
 	}//pageInfo 끝

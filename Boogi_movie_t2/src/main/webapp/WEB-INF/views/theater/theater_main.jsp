@@ -27,7 +27,6 @@
 	<h1>전체 극장</h1>
 	<hr>
 	<div class="theater_all">
-	
 		<jsp:include page="theater_top.jsp"></jsp:include>
 		
 		<div class="theater_map">

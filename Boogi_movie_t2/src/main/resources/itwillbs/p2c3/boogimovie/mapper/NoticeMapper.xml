@@ -32,20 +32,6 @@
 		ON n.theater_num = t.theater_num
 		WHERE notice_num = #{notice_num}
 	</select>
-<!-- 	<select id="selectNoticeCagList" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO"> -->
-<!-- 		SELECT n.notice_num, -->
-<!-- 			   n.notice_subject, -->
-<!-- 			   n.notice_content, -->
-<!-- 			   t.theater_name, -->
-<!-- 			   n.notice_category, -->
-<!-- 			   n.notice_date -->
-<!-- 		FROM notice n -->
-<!-- 		JOIN theater t -->
-<!-- 		ON n.theater_num = t.theater_num -->
-<!-- 		WHERE t.theater_name = #{theaterName} -->
-<!-- 		ORDER BY notice_num DESC -->
-<!-- 		limit #{startRow}, #{listLimit}; -->
-<!-- 	</select> -->
 	
 	<!-- 극장명이 동일한 게시판글 갯수 -->
 	<select id="selectNoticeListCountCag" resultType="int">

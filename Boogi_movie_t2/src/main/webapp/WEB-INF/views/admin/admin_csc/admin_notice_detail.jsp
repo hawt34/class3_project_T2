@@ -49,8 +49,8 @@
 			<hr>
 			<!-- 이전, 다음 페이징 -->
 			<div>
-				<span class="csc_paging"><a id="prevLink" href="admin_notice_detail?notice_num=${notice.notice_num - 1 }" >&larr;이전</a></span>
-				<span class="csc_paging"><a id="nextLink" href="admin_notice_detail?notice_num=${notice.notice_num + 1 }" >다음&rarr;</a></span>
+				<span class="csc_paging"><a id="prevLink" href="admin_notice_detail?notice_num=${notice.notice_num - 1 }" >&laquo;이전</a></span>
+				<span class="csc_paging"><a id="nextLink" href="admin_notice_detail?notice_num=${notice.notice_num + 1 }" >다음&raquo;</a></span>
 			</div>	
 			<!-- 목록 버튼 -->
 			<div class="csc_detail_button">
@@ -73,10 +73,11 @@
     let nextLink = $("#nextLink");
 	
     //처음 게시물 또는 마지막 게시물일 때 a태그 비활성화
+    debugger;
     if (noticeNum === minNoticeNum) {
-        prevLink.removeAttr("href");
-        prevLink.css("pointer-events", "none"); 
-        prevLink.css("color", "gray"); 
+    	prevLink.removeAttr("href");
+    	prevLink.css("pointer-events", "none"); 
+    	prevLink.css("color", "gray"); 
     }
 
     if (noticeNum === maxNoticeNum) {
@@ -84,7 +85,6 @@
         nextLink.css("pointer-events", "none");
         nextLink.css("color", "gray");
     }
-</script>
 </script>
 </body>
 </html>

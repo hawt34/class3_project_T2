@@ -14,6 +14,8 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous">
 </script>
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 <style type="text/css">
 	span {
 		color:skyblue;
@@ -47,8 +49,9 @@
 			<hr>
 			<!-- 이전, 다음 페이징 -->
 			<div>
-				<span class="csc_paging"><a id="prevLink" href="admin_notice_detail?notice_num=${notice.notice_num - 1 }" >&larr;이전</a></span>
-				<span class="csc_paging"><a id="nextLink" href="admin_notice_detail?notice_num=${notice.notice_num + 1 }" >다음&rarr;</a></span>
+				
+				<span class="csc_paging"><a id="prevLink1" href="csc_notice_detail?notice_num=${notice.notice_num - 1 }" >&laquo;이전</a></span>
+				<span class="csc_paging"><a id="nextLink1" href="csc_notice_detail?notice_num=${notice.notice_num + 1 }" >다음&raquo;</a></span>
 			</div>	
 			<!-- 목록 버튼 -->
 			<div class="csc_detail_button">
@@ -66,9 +69,9 @@
     let maxNoticeNum = ${maxNotice}; // maxNoticeNum은 마지막 notice_num 값
     let minNoticeNum = ${minNotice}; // maxNoticeNum은 마지막 notice_num 값
     
-
-    let prevLink = $("#prevLink");
-    let nextLink = $("#nextLink");
+	
+    let prevLink = $("#prevLink1");
+    let nextLink = $("#nextLink1");
 	
     //처음 게시물 또는 마지막 게시물일 때 a태그 비활성화
     if (noticeNum === minNoticeNum) {
@@ -82,6 +85,7 @@
         nextLink.css("pointer-events", "none");
         nextLink.css("color", "gray");
     }
+	
 </script>
 </body>
 </html>

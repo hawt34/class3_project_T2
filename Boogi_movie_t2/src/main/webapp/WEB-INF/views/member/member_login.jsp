@@ -65,7 +65,7 @@ $(document).ready(function() {
     // 아이디 입력값 변경 시
     $("#member_id").on("input", function() {
         let id = $("#member_id").val();
-        let regex = /^[a-zA-Z가-힣]{2,10}$/g;
+        let regex = /^[a-zA-Z0-9가-힣]{2,10}$/g;
         
         if (!regex.test(id)) {
             $("#member_id").css("background-color", "red");
@@ -78,8 +78,8 @@ $(document).ready(function() {
     
     // 폼 유효성 검사 함수
     function checkFormValidity() {
-       let idIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_id").val());
-
+       let idIsValid = /^[a-zA-Z0-9가-힣]{2,10}$/.test($("#member_id").val());
+		
        if (idIsValid) {
            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
        } else {

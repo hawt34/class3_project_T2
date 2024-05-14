@@ -82,7 +82,6 @@
 	<script>
 	
 	$(document).ready(function() {
-		debugger;
 	    // 아이디 입력값 변경 시
 	    $("#member_id").on("input", function() {
 	        let id = $("#member_id").val();

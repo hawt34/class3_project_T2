@@ -10,20 +10,9 @@ public class MemberService {
 	@Autowired
 	private MemberMapper mapper;
 	
-	public boolean isCorrectUser(MemberVO inputMember) {
-		boolean isCorrectMember = false;
-		MemberVO outputMember = mapper.isCorrectMember(inputMember);
-//		MemberVO outputMember = mapper.getMemberInfo(inputMember);
-		System.out.println(outputMember);
-		System.out.println(isCorrectMember);
+	public MemberVO isCorrectUser(MemberVO inputMember) {
 		
-		if(outputMember != null) {
-			isCorrectMember = true;
-		}
-		
-		
-		
-		return isCorrectMember;
+		return mapper.isCorrectMember(inputMember);
 		 
 	}
 	

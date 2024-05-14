@@ -24,7 +24,7 @@ public interface MypageMapper {
 	MemberVO selectMyTheater(MemberVO member);
 	
 	// 예매내역 영화제목
-	List<MovieVO> selectMovieReservation(String id);
+	List<MovieVO> selectMovieReservation(MemberVO member);
 	
 	// 회원정보
 	MemberVO selectDbMember(MemberVO member);
@@ -33,7 +33,7 @@ public interface MypageMapper {
 	int updateMember(MemberVO member);
 	
 	// 쿠폰
-	List<CouponVO> selectCoupon();
+	List<CouponVO> selectCoupon(MemberVO member);
 	
 	ReservationVO selectMovieResv(String id);
 	

@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
 body { 
@@ -169,19 +170,31 @@ body {
 					      		<form id="theaterForm" method="post" action="MyTheaterList">
 									<button type="submit" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
 						      		<script type="text/javascript">
-									    function sendCheckedValues() {
-									        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
-									        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
-									
-									        checkboxes.forEach(function(checkbox) {
-									            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
-									        });
-									
-									        // 서버로 선택된 값들을 전송
-									        // 여기서는 간단하게 alert 창에 선택된 값들을 표시하도록 했지만, 실제로는 서버로 값을 전송하는 방식을 사용해야 함
-									        alert('선택된 값들: ' + checkedValues.join(', '));
-	// 								        location.href="MyTheaterList";
-									    }
+						      		function sendCheckedValues() {
+						      		    var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
+						      		    var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
+										
+						      		    checkboxes.forEach(function(checkbox) {
+						      		        checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
+						      		    });
+										
+						      		    $.ajax({
+						      		        url: "api/myp_my_theater",
+						      		        method: "POST", 
+						      		      	contentType: "application/json",
+						      		     	data: JSON.stringify({ checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
+						      		        dataType: "json",
+						      		        success: function (response) {
+						      		            alert("영화 정보 등록을 성공하였습니다");
+						      		            location.reload();
+						      		        },
+						      		        error: function (xhr, status, error) {
+						      		            alert("영화 정보를 가져오는 데 실패했습니다. 에러 : " + error);
+						      		        }
+						      		    });
+						      		}
+										        	
+										        
 									</script>
 								</form>
 					      </div><!--modal-footer  --> <!-- 모달 폼 극장 전체 리스트 -->
@@ -239,7 +252,9 @@ body {
 	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
 </footer>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
-
+<script>
+	
+</script>
 </body>
 </html>
 

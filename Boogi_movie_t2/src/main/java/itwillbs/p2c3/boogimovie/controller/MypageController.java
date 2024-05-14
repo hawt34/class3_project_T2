@@ -6,14 +6,17 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.CouponService;
@@ -26,7 +29,6 @@ import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
-import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
 @Controller
 public class MypageController {
@@ -441,6 +443,18 @@ public class MypageController {
 		}
 		
 		return "redirect:/myp_oto_breakdown";
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
+	public ResponseEntity<String> mypMyTheater(@RequestBody List<String> checkedValues){
+	    System.out.println("Received checked values: " + checkedValues);
+	    if(checkedValues.isEmpty()) {
+	        return ResponseEntity.badRequest().body("No data received");
+	    }
+	    return ResponseEntity.ok("Data received successfully");
+	    
+	    
 	}
 
 	

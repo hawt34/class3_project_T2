@@ -15,7 +15,6 @@ public class ScreenSessionVO {
 	private Timestamp scs_end_date;
 	
 	
-	
 	//SELECT 용 멤버변수
 	private String screen_seat_row;
 	private String screen_seat_col;

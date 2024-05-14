@@ -76,7 +76,7 @@ public class MypageController {
 			model.addAttribute("infoMyTheater", infoMyTheater);
 			
 			// 예매내역 영화제목
-			List<MovieVO> movieReservation = mypageService.getMovieReservation(id);
+			List<MovieVO> movieReservation = mypageService.getMovieReservation(member);
 			model.addAttribute("movieReservation", movieReservation);
 			
 			// 예매내역 관람날짜
@@ -243,21 +243,26 @@ public class MypageController {
 			model.addAttribute("targetURL", "./member_login");
 			return"error/fail";
 		}
+		
 		member.setMember_id(id);
 		member = mypageService.getDbMember(member);
-		
-		
 		model.addAttribute("member", member);
 		
+<<<<<<< HEAD
 		System.out.println("coupon 컨트롤러");
 		// coupon_num
-		List<CouponVO> couponNum = mypageService.getCoupon();
+		List<CouponVO> couponNum = mypageService.getCoupon(member);
 		model.addAttribute("couponNum", couponNum);
+=======
+		List<CouponVO> couponList = couponService.getCoupon(member);
+		model.addAttribute("list", couponList);
+>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 		
-		// coupon_name
-//		List<CouponVO> couponName = 
 		return "mypage/myp_coupon";
 	}
+		
+		
+		
 	
 	
 	// ============================= 예매 =============================
@@ -265,19 +270,19 @@ public class MypageController {
 	// 예매내역
 	@GetMapping("myp_reservation")
 	public String mypReservation(MemberVO member, Model model) {
-//		String id = (String)session.getAttribute("sId");
+		String id = (String)session.getAttribute("sId");
 		
-//		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-//			model.addAttribute("msg", "로그인이 필요한 페이지입니다!");
-//			model.addAttribute("targetURL", "./MemberLogin");
-//			return"error/fail";
-//		}
+		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다!");
+			model.addAttribute("targetURL", "./member_login");
+			return"error/fail";
+		}
 		
-//		member = mypageInfoService.getMember(id);
-//		model.addAttribute("member", member);
-//		System.out.println("myp_reservation()");
-//		List<ReservationVO> reservationList = reservationService.getReservation(id);
-//		model.addAttribute("reservation", reservationList);
+		member = mypageService.getMember(id);
+		model.addAttribute("member", member);
+		System.out.println("myp_reservation()");
+		List<MovieVO> movie = mypageService.getMovieReservation(member);
+		model.addAttribute("movie", movie);
 //		System.out.println("reservationList" + reservationList);
 //		MovieVO sadfsdf = service.sadfsadfs();
 //		ReservationVO asdfasdf = service.asdfasdf();
@@ -287,8 +292,19 @@ public class MypageController {
 	
 	// 취소 영화 목록
 	@GetMapping("myp_cancel")
-	public String mypCancel() {
+	public String mypCancel(Model model) {
 //		System.out.println("myp_cancel()");
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("targetURL", "./member_login");
+			return"error/fail";
+		}
+		
+		
+		
 		return "mypage/myp_cancel";
 	}
 	

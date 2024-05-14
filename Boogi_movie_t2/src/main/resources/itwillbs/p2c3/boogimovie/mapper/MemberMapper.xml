@@ -73,16 +73,15 @@
 		INSERT INTO mail_auth_info
 		VALUES
 		(#{member_id}, #{auth_code})
-		
 	</insert>
-	
+		
 	<select id="selectAuthInfo" resultType="itwillbs.p2c3.boogimovie.vo.MailAuthInfoVO">
 		SELECT * 
 		FROM mail_auth_info
 		WHERE member_id = #{member_id}
 		AND auth_code = #{auth_code}
 	</select>
-	
+		
 	<delete id="deleteAuthInfo">
 		DELETE
 		FROM mail_auth_info

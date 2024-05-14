@@ -20,7 +20,9 @@ body {
 	font-style: normal;
 	
 }
-
+hr{
+	margin-top: 10px;
+}
 
 
 </style>
@@ -55,121 +57,160 @@ body {
 					</ul>
 				</div>
 				<div class="row">
-					<div class="col-md-3"> <!-- 첫번째 사진 -->
-							<img src="${pageContext.request.contextPath}/resources/images/myp_img1.jpg" style="margin-left: 30px" width="200px" height="250px">
-					</div>	
-					<div class="paybox1 col-md-6" >
-						<div class="col-md-4 d-grid gap-5">
+<%-- 				<c:forEach var="j" begin="1" end="4"> --%>
+<%-- 				</c:forEach> --%>
+					<c:forEach var="i" begin="1" end="4">
+						<div class="col-md-3"> <!-- 첫번째 사진 -->
+								<img src="${pageContext.request.contextPath}/resources/images/myp_img1.jpg" style="margin-left: 30px" width="200px" height="250px">
+						</div>	
+						<div class="col-md-2 d-grid gap-5">
 							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly >
 							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly>
 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly>
 						</div>
-						<div class="col-md-4 d-grid gap-5">
-							<input type="text" readonly class="form-control-plaintext" value="${moive.movie_name }">
+						
+						<div class="col-md-2 d-grid gap-5">
+<%-- 						<c:forEach var="movie" items="${movie}" begin="1"> --%>
+							<input type="text" readonly class="form-control-plaintext" value="${moive.movie_name}">
 							<input type="text" readonly class="form-control-plaintext" value="2024 / 04 / 24">
 							<input type="text" readonly class="form-control-plaintext" value="서면 8관">
+						
+<%-- 						</c:forEach> --%>
 						</div>
-						<div class="col-md-4 d-grid gap-5">
+						<div class="col-md-2 d-grid gap-5">
 							<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly >
 							<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly>
 							<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly>
-						</div>
-						<div class="col-md-4 d-grid gap-5">
-							<input type="text" readonly class="form-control-plaintext" value="17:00 ~ 19:20">
-							<input type="text" readonly class="form-control-plaintext" value="F9">
-							<input type="text" readonly class="form-control-plaintext" value="12,000원">
-						</div>
-					</div> <!-- paybox1 첫번째 예매칸 -->
-				</div><!-- row -->
-				<hr>
-				<div class="row"><!-- 두번째 사진 -->
-					<div class="col-md-3">
-						<img src="${pageContext.request.contextPath}/resources/images/myp_img2.jpg" style="margin-left: 30px" width="200px" height="250px">
-					</div>	
-					<div class="paybox1 col-md-6">
-						<div class="col-md-4 d-grid gap-5">
-							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly >
-							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly>
-							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly>
-						</div>
-						<div class="col-md-4 d-grid gap-5">
-							<input type="text" readonly class="form-control-plaintext" value="쿵푸팬더">
-							<input type="text" readonly class="form-control-plaintext" value="2024 / 04 / 20">
-							<input type="text" readonly class="form-control-plaintext" value="아시아드 1관">
-						</div>
-						<div class="col-md-4 d-grid gap-5">
-							<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly >
-							<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly>
-							<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly>
-						</div>
-						<div class="col-md-4 d-grid gap-5">
-							<input type="text" readonly class="form-control-plaintext" value="18:40 ~ 20:20">
-							<input type="text" readonly class="form-control-plaintext" value="H9 H10">
-							<input type="text" readonly class="form-control-plaintext" value="24,000원">	
-						</div>
-					</div> <!-- paybox1 첫번째 예매칸 -->	
-				</div><!-- row -->
-				<hr>
-				<div class="row"><!-- 세번째 사진 -->
-					<div class="col-md-3">
-						<img src="${pageContext.request.contextPath}/resources/images/myp_img3.jpg" style="margin-left: 30px" width="200px" height="250px">
-					</div>	
-					<div class="paybox1 col-md-6">
-						<div class="col-md-4 d-grid gap-5">
-							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly >
-							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly>
-							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly>
-						</div>
-						<div class="col-md-4 d-grid gap-5">
-							<input type="text" readonly class="form-control-plaintext" value="듄2">
-							<input type="text" readonly class="form-control-plaintext" value="2024 / 03 / 18">
-							<input type="text" readonly class="form-control-plaintext" value="서면 4관">
 						</div>
 					
-						<div class="col-md-4 d-grid gap-5">
-							<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly >
-							<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly>
-							<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly>
-						</div>
-						<div class="col-md-4 d-grid gap-5">
-							<input type="text" readonly class="form-control-plaintext" value="19:30 ~ 22:50">
-							<input type="text" readonly class="form-control-plaintext" value="G16">
-							<input type="text" readonly class="form-control-plaintext" value="18,000원">	
-						</div>
-					</div> <!-- paybox1 첫번째 예매칸 -->	
-				</div><!-- row -->
-				<hr>
-					<div class="row"><!-- 네번째 사진 -->
-						<div class="col-md-3">
-							<img src="${pageContext.request.contextPath}/resources/images/myp_img4.jpg" style="margin-left: 30px" width="200px" height="250px">
-						</div>	
-						<div class="paybox1 col-md-6">
-							<div class="col-md-4 d-grid gap-5">
-								<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly >
-								<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly>
-								<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly>
-							</div>
-							<div class="col-md-4 d-grid gap-5">
-								<input type="text" readonly class="form-control-plaintext" value="파묘">
-								<input type="text" readonly class="form-control-plaintext" value="2024 / 03 / 10">
-								<input type="text" readonly class="form-control-plaintext" value="삼정타워 11관">
-							</div>
+						<div class="col-md-2 d-grid gap-5">
+<%-- 						<c:forEach var="movie" items="${movieReservation}" begin="0"> --%>
+							<input type="text" readonly class="form-control-plaintext" value="${moive.movie_name }">
+							<input type="text" readonly class="form-control-plaintext" value="좌석">
+							<input type="text" readonly class="form-control-plaintext" value="금액">
 						
-							<div class="col-md-4 d-grid gap-5">
-								<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly >
-								<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly>
-								<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly>
-							</div>
-							<div class="col-md-4 d-grid gap-5">
-								<input type="text" readonly class="form-control-plaintext" value="20:20 ~ 22:50">
-								<input type="text" readonly class="form-control-plaintext" value="K13 K14 K15">
-								<input type="text" readonly class="form-control-plaintext" value="36,000원">
-							</div>
-						</div> <!-- paybox1 첫번째 예매칸 -->	
-					</div><!-- row -->
-				<hr>
-			</div><!-- col-md-10 -->
-		</div><!-- row box1 -->
+<%-- 						</c:forEach> --%>
+						</div>
+					<hr>
+					</c:forEach>
+<!-- 					<div class="paybox1 col-md-6" > -->
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly > -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly> -->
+<!-- 						</div> -->
+						
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<%-- 						<c:forEach var="movie" items="${movieReservation}" begin="0"> --%>
+<%-- 							<input type="text" readonly class="form-control-plaintext" value="${moive.movie_name }"> --%>
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="2024 / 04 / 24"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="서면 8관"> -->
+						
+<%-- 						</c:forEach> --%>
+<!-- 						</div> -->
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly > -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="17:00 ~ 19:20"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="F9"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="12,000원"> -->
+<!-- 						</div> -->
+<!-- 					</div> paybox1 첫번째 예매칸 -->
+					
+					
+				</div><!-- row -->
+<!-- 				<hr> -->
+<!-- 				<div class="row">두번째 사진 -->
+<!-- 					<div class="col-md-3"> -->
+<%-- 						<img src="${pageContext.request.contextPath}/resources/images/myp_img2.jpg" style="margin-left: 30px" width="200px" height="250px"> --%>
+<!-- 					</div>	 -->
+<!-- 					<div class="paybox1 col-md-6"> -->
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly > -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="쿵푸팬더"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="2024 / 04 / 20"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="아시아드 1관"> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly > -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="18:40 ~ 20:20"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="H9 H10"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="24,000원">	 -->
+<!-- 						</div> -->
+<!-- 					</div> paybox1 첫번째 예매칸	 -->
+<!-- 				</div>row -->
+<!-- 				<hr> -->
+<!-- 				<div class="row">세번째 사진 -->
+<!-- 					<div class="col-md-3"> -->
+<%-- 						<img src="${pageContext.request.contextPath}/resources/images/myp_img3.jpg" style="margin-left: 30px" width="200px" height="250px"> --%>
+<!-- 					</div>	 -->
+<!-- 					<div class="paybox1 col-md-6"> -->
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly > -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="듄2"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="2024 / 03 / 18"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="서면 4관"> -->
+<!-- 						</div> -->
+					
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly > -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly> -->
+<!-- 							<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-4 d-grid gap-5"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="19:30 ~ 22:50"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="G16"> -->
+<!-- 							<input type="text" readonly class="form-control-plaintext" value="18,000원">	 -->
+<!-- 						</div> -->
+<!-- 					</div> paybox1 첫번째 예매칸	 -->
+<!-- 				</div>row -->
+<!-- 				<hr> -->
+<!-- 					<div class="row">네번째 사진 -->
+<!-- 						<div class="col-md-3"> -->
+<%-- 							<img src="${pageContext.request.contextPath}/resources/images/myp_img4.jpg" style="margin-left: 30px" width="200px" height="250px"> --%>
+<!-- 						</div>	 -->
+<!-- 						<div class="paybox1 col-md-6"> -->
+<!-- 							<div class="col-md-4 d-grid gap-5"> -->
+<!-- 								<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly > -->
+<!-- 								<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly> -->
+<!-- 								<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-md-4 d-grid gap-5"> -->
+<!-- 								<input type="text" readonly class="form-control-plaintext" value="파묘"> -->
+<!-- 								<input type="text" readonly class="form-control-plaintext" value="2024 / 03 / 10"> -->
+<!-- 								<input type="text" readonly class="form-control-plaintext" value="삼정타워 11관"> -->
+<!-- 							</div> -->
+						
+<!-- 							<div class="col-md-4 d-grid gap-5"> -->
+<!-- 								<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly > -->
+<!-- 								<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly> -->
+<!-- 								<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-md-4 d-grid gap-5"> -->
+<!-- 								<input type="text" readonly class="form-control-plaintext" value="20:20 ~ 22:50"> -->
+<!-- 								<input type="text" readonly class="form-control-plaintext" value="K13 K14 K15"> -->
+<!-- 								<input type="text" readonly class="form-control-plaintext" value="36,000원"> -->
+<!-- 							</div> -->
+<!-- 						</div> paybox1 첫번째 예매칸	 -->
+<!-- 					</div>row -->
+<!-- 				<hr> -->
+<!-- 			</div>col-md-10 -->
+<!-- 		</div>row box1 -->
 	</div><!-- container2 -->
 </div> <!-- container -->
 <footer>

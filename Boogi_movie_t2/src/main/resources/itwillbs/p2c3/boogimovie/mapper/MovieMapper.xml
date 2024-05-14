@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="itwillbs.p2c3.boogimovie.mapper.MovieInfoMapper">
+<mapper namespace="itwillbs.p2c3.boogimovie.mapper.MovieMapper">
 	<select id="selectMovieInfo" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
 		SELECT *
 		FROM movie
@@ -46,5 +46,19 @@
 		from movie
 		WHERE genre_num = #{genre_num}
 	</select>
+		
+	<select id="selectMovieFuture" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
+		SELECT *
+		FROM movie
+		WHERE movie_status = '개봉예정'
+	</select>	
+	
+	<select id="selectFutureMovieInfo" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
+		SELECT *
+		FROM movie
+		WHERE movie_num = #{movie_num}
+	</select>
+		
+		
 		
 </mapper>

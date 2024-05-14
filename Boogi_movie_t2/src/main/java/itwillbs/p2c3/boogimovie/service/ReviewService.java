@@ -18,9 +18,9 @@ public class ReviewService {
 		return mapper.insertReview(review);
 	}
 	
-	public List<ReviewVO> getReviewList(int movie_num){
+	public List<ReviewVO> getReviewList(int movie_num, int startRow, int listLimit){
 		
-		return mapper.selectReviewList(movie_num);
+		return mapper.selectReviewList(movie_num, startRow, listLimit);
 	}
 
 	public List<ReviewVO> getReviewId(int review_num) {

@@ -30,7 +30,7 @@
 		ON movie.movie_num = review.movie_num
 		JOIN member 
 		ON member.member_id = review.member_id
-	  	WHERE member.member_id = #{id}
+	  	WHERE member.member_id = #{member_id}
 	</select>
     
     <!-- 회원정보 -->

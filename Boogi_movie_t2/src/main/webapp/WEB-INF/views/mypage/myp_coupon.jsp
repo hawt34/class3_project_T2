@@ -62,7 +62,7 @@ body {
 						      <th scope="col">#</th>
 						      <th scope="col">번호</th>
 						      <th scope="col">쿠폰 이름</th>
-						      <th scope="col">사용기간</th>
+						      <th scope="col">할인율</th>
 						    </tr>
 						  </thead>
 						  <tbody>

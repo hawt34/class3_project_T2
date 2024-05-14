@@ -22,11 +22,9 @@ body {
 	font-style: normal;
 }
 
-
+/* .form_item { margin-top : 0px; } */
 </style>
 
-
-</head>
 <body>
 <header>
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
@@ -41,58 +39,80 @@ body {
 			<hr>
 		<form action="myp_info_modify_pro" method="post" name="fr">
 			<div class="box1">
-	   			<label for="member_name">이름</label>
+				
+				<div class="box5">
+		   			<label for="member_name">이름</label>
+				</div>
 			  	<div class="form_item w-75">
 			    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" readonly>
 			    </div><!-- form item -->
-	   			<label for="member_id">아이디</label>
+			    
+			    
+				<div class="box5">
+		   			<label for="member_id">아이디</label>
+		   		</div>
 			  	<div class="form_item w-75">
-<%-- 					<input type="text" name="id" value="${param.id}" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" placeholder="검색할 아이디 입력" required> --%>
-			
-		    	<input type="text"  placeholder="아이디 입력" name="member_id" id="member_id" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" value="${member.member_id}" readonly required>
+		    		<input type="text"  placeholder="아이디 입력" name="member_id" id="member_id" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" value="${member.member_id}" readonly required>
 			    </div><!-- form item -->
 <!-- 				</form> -->
-			
-	   			<label for="member_pwd">새 비밀번호</label>
+				<div class="box5">
+	   				<label for="member_pwd">새 비밀번호</label>
+	   			</div>
 			  	<div class="form_item w-75">
 			    	<input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd">
-<!-- 					<div id="checkPasswdResult"></div> -->
-		    		<span id="passwordMessage" style="color: red;"></span>
+				    <div class="box4">
+			    		<span id="pwdMessage" style="color: red;"></span>
+					</div>
 			    </div><!-- form item -->
-			
-	   			<label for="member_pwd2">새 비밀번호확인</label>
+				
+				<div class="box5">
+	   				<label for="member_pwd2">새 비밀번호확인</label>
+			  	</div>
 			  	<div class="form_item w-75 ">
 			    	<input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2">
-<!-- 	 						<div id="checkPasswd2Result"></div> -->
-		    	    <span id="passwordMessage" style="color: red;"></span>
+    			    <div class="box4">
+		    	   		<span id="pwd2Message" style="color: red;"></span>
+		    	    </div>
 			    </div><!-- form item -->
-			
-	   			<label for="member_birth">생년월일</label>
+				
+				<div class="box5">
+	   				<label for="member_birth">생년월일</label>
+				</div>
 			  	<div class="form_item w-75">
 			    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.member_birth}">
-		    	    <span id="passwordMessage" style="color: red;"></span>
+<!-- 		    	   	<div class="box4"> -->
+		    	    	<span id="birthMessage" style="color: red;"></span>
+<!-- 		    	    </div> -->
 			    </div><!-- form item -->
-	
-	   			<label for="member_addr">주소</label>
+			    
+				<div class="box5">
+	   				<label for="member_addr">주소</label>
+	   			</div>
 			  	<div class="form_item w-75">
 			    	<input type="text" id="member_addr" name="member_addr" size="6" onclick="search_address()" required value="${member.member_addr}" placeholder="클릭 시 주소검색">
-			    	
-<!-- 				    <input type="text" id="postCode" name="postCode" size="6" readonly onclick="search_address()" placeholder="클릭 시 주소검색"> -->
-<!-- 					<input type="text" id="address1" name="address1" placeholder="기본주소" size="25" readonly onclick="search_address()"><br> -->
-<!-- 					<input type="text" id="member_address2" name="member_address2" placeholder="상세주소" size="25" pattern="^.{2,20}$" maxlength="20"> -->
-			    	<span id="passwordMessage" style="color: red;"></span>
+<!-- 			    	<div class="box4"> -->
+			    		<span id="addrMessage" style="color: red;"></span>
+<!-- 			    	</div> -->
 			    </div><!-- form item -->
 			
-	   			<label for="member_email">Email</label>
+				<div class="box5">
+		   			<label for="member_email">Email</label>
+				</div>
 			  	<div class="form_item w-75">
 			    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required value="${member.member_email}">
- 				    <span id="passwordMessage" style="color: red;"></span>
+					<div class="box4">
+ 				    	<span id="emailMessage" style="color: red;"></span>
+ 				    </div>
 			    </div><!-- form item -->
 			
-	   			<label for="member_tel">전화번호</label>
+				<div class="box5">
+	   				<label for="member_tel">전화번호</label>
+	   			</div>
 			  	<div class="form_item w-75">
 			    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" required id="member_tel" value="${member.member_tel}">
-					<span id="passwordMessage" style="color: red;"></span>
+					<div class="box4">
+						<span id="telMessage" style="color: red;"></span>
+					</div>
 			    </div><!-- form item -->
 			    
 <!-- 	    		<div class="row"> -->
@@ -123,30 +143,22 @@ body {
 	$(document).ready(function() {
 
 		
-	    // 아이디 입력값 변경 시
-	    $("#member_id").on("input", function() {
-	        let id = $("#member_id").val();
-	        let regex = /^[a-zA-Z가-힣0-9]{2,10}$/g;
-	        
-	        if (!regex.test(id)) {
-	            $("#member_id").css("background-color", "red");
-	        } else {
-	            $("#member_id").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-	        }
-	
-	        checkFormValidity(); // 폼 유효성 검사 실행
-	    });
-	    
 	    // 비밀번호 입력값 변경 시
 	    $("#member_pwd").on("input", function(){
 	        let pwd = $("#member_pwd").val();
 	        let regex = /^.{8,16}$/g;
+			let message = document.getElementById("pwdMessage");
 	        
 	        if (!regex.test(pwd)) {
-	            $("#member_pwd").css("background-color", "red");
+	            message.textContent = "올바른 비밀번호 형식이 아닙니다";
 	        } else {
-	            $("#member_pwd").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            message.textContent = ""; // 에러 메시지 지우기
 	        }
+
+	        if (pwd === "") {
+	            message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
+	        }
+	        
 	
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
@@ -157,13 +169,16 @@ body {
 	    	let pwd = $("#member_pwd").val();
 	        let pwd2 = $("#member_pwd2").val();
 	        let regex = /^.{8,16}$/g;
+			let message = document.getElementById("pwd2Message");
 	        
 	        if (pwd2 != pwd) {
-	            $("#member_pwd2").css("background-color", "red");
+	            message.textContent = "비밀번호가 일치하지 않습니다";
+	        } else if (pwd2 === "") {
+	            message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
 	        } else {
-	            $("#member_pwd2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            message.textContent = ""; // 에러 메시지 지우기
 	        }
-	
+
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
 	    
@@ -171,29 +186,43 @@ body {
 	    $("#member_birth").on("input", function() {
 	        let birth = $("#member_birth").val();
 //         	let regex = /^[0-9]{8}$/;
-	        let regex = /^\d{6}$/g;
+	        let regex = /\d{6}$/g; // \d는 숫자 [0-9]를 나타내는 메타 문자
+			let message = document.getElementById("birthMessage");
 	        
-			if (birth.length == 6) { // member_birth의 길이가 6일 때만 실행
-				if (!regex.test(birth)) {
-					$("#member_birth").css("background-color", "red");
-				} else {
-					$("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-				}
-	
-	            checkFormValidity(); // 폼 유효성 검사 실행
-			}
+	        if (birth.length > 6) { // member_birth의 길이가 6일때
+        		message.textContent = "생년월일을 6글자로 입력하세요";
+	        	
+	        } else { // 길이가 6이 아닐때
+	        	if(!regex.test(birth)){
+	        		message.textContent = "유효한 생년월일 양식이 아닙니다";
+	        	} else {
+	            message.textContent = ""; // 에러 메시지 지우기
+	       		}
+	        	
+	        }
+
+	        if (birth === "") {
+	            message.textContent = "생년월일을 입력하세요"; // 메시지 설정
+	        }
+		
+            checkFormValidity(); // 폼 유효성 검사 실행
 			
-			});
+		});
 	    
 	    // 상세주소 입력값 변경 시
 	    $("#member_addr").on("input", function() {
-	        let address2 = $("#member_addr").val();
-	        let regex = /^{2,20}$/g;
+	        let address = $("#member_addr").val();
+	        let regex = /.{2,20}$/g;
+			let message = document.getElementById("addrMessage");
 	        
-	        if (!regex.test(address2)) {
-	            $("#member_addr").css("background-color", "red");
+	        if (!regex.test(address)) {
+	            message.textContent = "유효한 주소 형식이 아닙니다.";
 	        } else {
-	            $("#member_addr").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            message.textContent = ""; // 에러 메시지 지우기
+	        }
+
+	        if (address === "") {
+	            message.textContent = "주소를 입력하세요"; // 메시지 설정
 	        }
 		
 	        checkFormValidity(); // 폼 유효성 검사 실행
@@ -203,13 +232,18 @@ body {
 	    $("#member_email").on("input", function() {
 	        let email = $("#member_email").val();
 	        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
+			let message = document.getElementById("emailMessage");
 	        
 	        if (!regex.test(email)) {
-	            $("#member_email").css("background-color", "red");
+	            message.textContent = "유효한 이메일 형식이 아닙니다.";
 	        } else {
-	            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            message.textContent = ""; // 에러 메시지 지우기
 	        }
-		
+
+	        if (email === "") {
+	            message.textContent = "이메일을 입력하세요"; // 메시지 설정
+	        }
+	        
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
 	    
@@ -218,28 +252,33 @@ body {
 	    $("#member_tel").on("input", function() {
 	        let tel = $("#member_tel").val();
 	        let regex = /^010\d{8}$/g;
-	        
-	        if (!regex.test(tel)) {
-	            $("#member_tel").css("background-color", "red");
+			let message = document.getElementById("telMessage");
+	        if (tel.includes("-")) {
+	            message.textContent = "'-'를 제외한 전화번호를 입력해주세요";
+	        } else if (!regex.test(tel)) {
+	            message.textContent = "유효한 전화번호 형식이 아닙니다.";
 	        } else {
-	            $("#member_tel").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            message.textContent = ""; // 에러 메시지 지우기
 	        }
-		
+
+	        
+	        if (tel === "") {
+	            message.textContent = "전화번호를 입력하세요"; // 메시지 설정
+	        }
+
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-
 	    
 		    // 폼 유효성 검사 함수
 	    function checkFormValidity() {
-	        let idIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_id").val());
 	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
 	        let pwd2IsValid = /^.{8,16}$/.test($("#member_pwd2").val());
 	        let birthIsValid = /^\d{6}$/.test($("#member_birth").val());
-	        let address2IsValid = /^.{2,20}$/.test($("#member_addr").val());
+	        let addressIsValid = /^.{2,20}$/.test($("#member_addr").val());
 	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
 	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
 	
-	        if (idIsValid && pwdIsValid && pwd2IsValid && birthIsValid && address2IsValid && emailIsValid && telIsValid) {
+	        if (pwdIsValid && pwd2IsValid && birthIsValid && addressIsValid && emailIsValid && telIsVali    d) {
 	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
 	        } else {
 	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
@@ -247,7 +286,7 @@ body {
 	    }
 	});
 	</script>
-		
+
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	

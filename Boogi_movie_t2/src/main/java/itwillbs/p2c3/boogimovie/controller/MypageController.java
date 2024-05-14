@@ -240,7 +240,7 @@ public class MypageController {
 		
 		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
 			model.addAttribute("msg", "잘못된 접근입니다!");
-			model.addAttribute("targetURL", "./MemberLogin");
+			model.addAttribute("targetURL", "./member_login");
 			return"error/fail";
 		}
 		

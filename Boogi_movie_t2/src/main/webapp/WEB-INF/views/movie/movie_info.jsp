@@ -169,6 +169,12 @@ section h1 {
   width: 200px;
   height: 100px;
 }
+#pageList {
+	margin-top: 30px;
+	margin: auto;
+	width: 1024px;
+	text-align: center;
+}
 .backButton {
 	margin-top: 20px;
 }
@@ -251,6 +257,7 @@ footer {
 				</select>
 				</div>
 				<div class="review">
+				<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
   				<p>관람평</p>
   				<c:choose>
     				<c:when test="${not empty sessionScope.sId}">
@@ -296,6 +303,25 @@ footer {
     			</div>
     			</c:forEach>
 			</div>
+			<div id="pageList">
+			
+			<input type="button" value="이전"  onclick="location.href = 'BoardList?pageNum=${pageNum - 1}'"
+					<c:if test="${pageNum eq 1}">disabled</c:if>		
+			>
+			<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+				<c:choose>
+					<c:when test="${pageNum eq i}">
+						<b>${i}</b>
+					</c:when>
+					<c:otherwise>
+						<a href="BoardList?pageNum=${i}">${i}</a>
+					</c:otherwise>
+				</c:choose>								
+			</c:forEach>
+			<input type="button" value="다음"  onclick="location.href = 'BoardList?pageNum=${pageNum + 1}'"
+					<c:if test="${pageNum eq pageInfo.maxPage}">disabled</c:if>		
+			>
+		</div>
 		</section>		    
 		<footer> 
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>

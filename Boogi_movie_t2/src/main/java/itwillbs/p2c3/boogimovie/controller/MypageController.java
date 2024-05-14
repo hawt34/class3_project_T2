@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.CouponService;
-import itwillbs.p2c3.boogimovie.service.MypageInfoService;
+import itwillbs.p2c3.boogimovie.service.MypageService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.ReservationService;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
@@ -32,7 +32,7 @@ import itwillbs.p2c3.boogimovie.vo.TicketVO;
 public class MypageController {
 	
 	@Autowired
-	private MypageInfoService mypageInfoService;
+	private MypageService mypageService;
 	
 	@Autowired
 	private OtoService otoService;
@@ -63,19 +63,20 @@ public class MypageController {
 		} else { // 성공
 			
 			// 메인페이지 아이디 
-			member = mypageInfoService.getMember(id);
+			member = mypageService.getMember(id);
 			model.addAttribute("member", member);
 			
+			
 			// My극장 극장 전체리스트
-			List<TheaterVO> infoTheater = mypageInfoService.getTheater();
+			List<TheaterVO> infoTheater = mypageService.getTheater();
 			model.addAttribute("theater", infoTheater);
 			
 			// My극장 자주가는 영화관
-			MemberVO infoMyTheater = mypageInfoService.getMyTheater(member);
+			MemberVO infoMyTheater = mypageService.getMyTheater(member);
 			model.addAttribute("infoMyTheater", infoMyTheater);
 			
 			// 예매내역 영화제목
-			List<MovieVO> movieReservation = mypageInfoService.getMovieReservation(id);
+			List<MovieVO> movieReservation = mypageService.getMovieReservation(id);
 			model.addAttribute("movieReservation", movieReservation);
 			
 			// 예매내역 관람날짜
@@ -101,11 +102,11 @@ public class MypageController {
 	        return "redirect:/myp_main";
     }
 	
-	@GetMapping("myp_point")
-	public String mypPoint() {
-		System.out.println("myp_point");
-		return "mypage/myp_point";
-	}
+//	@GetMapping("myp_point")
+//	public String mypPoint() {
+//		System.out.println("myp_point");
+//		return "mypage/myp_point";
+//	}
 	
 	// ============================= 정보수정 =============================
 
@@ -142,7 +143,7 @@ public class MypageController {
 		//    세션 아이디를 MemberVO 객체의 id 멤버변수 값으로 저장
 		
 		member.setMember_id(id);
-		member = mypageInfoService.getDbMember(member);
+		member = mypageService.getDbMember(member);
 		
 		
 		model.addAttribute("member", member);
@@ -190,7 +191,7 @@ public class MypageController {
 		
 		// 수정 결과 판별 후 성공 시 "MemberInfo" 서블릿 요청
 		// 실패 시 "error/fail.jsp" 포워딩("회원정보 수정 실패!")
-		int updateCount = mypageInfoService.modifyMember(member);
+		int updateCount = mypageService.modifyMember(member);
 		model.addAttribute("member", updateCount);
 		if(updateCount > 0) { // 정보수정 성공 시
 //			model.addAttribute("member", member);
@@ -216,7 +217,7 @@ public class MypageController {
 		// id 파라미터가 있을 경우 (member.getId()가 null이 아닐 경우)에만 아이디 검색
 		// MemberService - getMember() 메서드 재사용
 		if(member.getMember_id() != null) {
-			MemberVO dbMember = mypageInfoService.getDbMember(member); // 아이디에 대한 회원정보 조회
+			MemberVO dbMember = mypageService.getDbMember(member); // 아이디에 대한 회원정보 조회
 			
 			// 회원정보 조회 결과 판별
 			if(dbMember == null) { // 입력받은 아이디가 존재하지 않을 경우
@@ -243,14 +244,14 @@ public class MypageController {
 			return"error/fail";
 		}
 		member.setMember_id(id);
-		member = mypageInfoService.getDbMember(member);
+		member = mypageService.getDbMember(member);
 		
 		
 		model.addAttribute("member", member);
 		
 		System.out.println("coupon 컨트롤러");
 		// coupon_num
-		List<CouponVO> couponNum = mypageInfoService.getCoupon();
+		List<CouponVO> couponNum = mypageService.getCoupon();
 		model.addAttribute("couponNum", couponNum);
 		
 		// coupon_name
@@ -338,13 +339,13 @@ public class MypageController {
 		// => MemberVO 객체를 파라미터로 전달하지만 객체 내에는 데이터가 없으므로
 		//    세션 아이디를 MemberVO 객체의 id 멤버변수 값으로 저장
 		member.setMember_id(id);
-		MemberVO dbMember = mypageInfoService.getDbMember(member);
+		MemberVO dbMember = mypageService.getDbMember(member);
 //		System.out.println("dbMember pwd : " + dbMember.getMember_pwd());
 //		System.out.println("member pwd : " + password);
 //		System.out.println("dbMember : " + dbMember);
 		
 		if(dbMember != null && password.equals(dbMember.getMember_pwd())) { // 비번이 같을 때 
-			int updateCount = mypageInfoService.withdrawMember(member);
+			int updateCount = mypageService.withdrawMember(member);
 			System.out.println(dbMember.getMember_pwd());
 		// 로그인 정보 제거하기 위해 세션 초기화 후 메인페이지로 리다이렉트
 			if(updateCount > 0) { // 탈퇴 성공 시

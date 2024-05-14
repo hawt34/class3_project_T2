@@ -14,7 +14,7 @@ import itwillbs.p2c3.boogimovie.vo.ReservationVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Service
-public class MypageInfoService {
+public class MypageService {
 	
 	@Autowired
 	private MypageMapper mapper;

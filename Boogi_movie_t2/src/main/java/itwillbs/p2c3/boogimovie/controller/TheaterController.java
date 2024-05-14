@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import itwillbs.p2c3.boogimovie.service.MemberService;
-import itwillbs.p2c3.boogimovie.service.MypageInfoService;
+import itwillbs.p2c3.boogimovie.service.MypageService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MyTheaterVO;
@@ -30,7 +30,7 @@ public class TheaterController {
 	private MemberService memberService;
 	
 	@Autowired
-	private MypageInfoService MypageService;
+	private MypageService MypageService;
 	
 	
 	

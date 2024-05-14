@@ -20,7 +20,7 @@
     <select id="selectMyTheater" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
     	SELECT member_my_theater1, member_my_theater2, member_my_theater3
     	FROM member
-		WHERE member_id = #{id};
+		WHERE member_id = #{member_id};
     </select>
     
     <!-- 예매내역 영화제목 -->
@@ -40,26 +40,36 @@
     
     <!-- 정보수정 -->
     <!-- 이름, 아이디, 비번, 생년월일, 주소, 이메일, 폰번, 취향 -->
-    <update id="updateMemberEq">
+    <update id="updateMember">
  		UPDATE member
 		SET
-			member_id = #{member_id}
 			<!-- 새 패스워드(passwd) 입력 여부에 따라 패스워드 변경 여부 결정 -->
 			<!-- 마이바티스 동적 SQL 기능 중 <if></if> 활용하여 패스워드 변경 작업을 동적으로 처리 -->
 			<!-- 주의! 비교에 사용될 파라미터는 #{} 또는 ${} 제외하고 표현 -->
 			<!-- passwd 파라미터가 null 이 아니고 널스트링('')도 아닐 경우 패스워드 변경 -->
 			<!-- (실제로는 패스워드 미입력 시 널스트링이 전달되므로 null 값 판별 생략 가능) -->
 			<if test="member_pwd != null and !member_pwd.equals('')">
-				, member_pwd = #{member_pwd}
+				member_pwd = #{member_pwd},
 			</if>
-			, member_birth = #{member_birth}
+			member_birth = #{member_birth}
 			, member_addr = #{member_addr}
 			, member_email = #{member_email}
 			, member_tel = #{member_tel}
 		WHERE
-			member_name = #{member_name} and member_email = #{member_email}
+			member_id = #{member_id}
     
     </update>
+    
+    <!-- 쿠폰 -->
+    <select id="selectCoupon" resultType="itwillbs.p2c3.boogimovie.vo.CouponVO">
+		SELECT coupon.coupon_num
+		FROM coupon JOIN pay 
+		ON coupon.coupon_num = pay.coupon_num 
+		JOIN member
+		ON member.member_id = pay.member_id
+		WHERE member.member_id = #{member_id}
+    </select>
+    
     
     <!-- 탈퇴처리 -->
    	<!-- member 테이블의 member_status 컬럼값을 3(탈퇴)로 변경 탈퇴일자(withdraw_date) 를 now() 함수 -->

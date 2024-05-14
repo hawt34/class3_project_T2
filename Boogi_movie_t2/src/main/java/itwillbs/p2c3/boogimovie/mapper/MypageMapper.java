@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.ReservationVO;
@@ -20,7 +21,7 @@ public interface MypageMapper {
 	List<TheaterVO> selectTheater();
 	
 	// My극장 자주가는 영화관
-	MemberVO selectMyTheater();
+	MemberVO selectMyTheater(MemberVO member);
 	
 	// 예매내역 영화제목
 	List<MovieVO> selectMovieReservation(String id);
@@ -28,13 +29,16 @@ public interface MypageMapper {
 	// 회원정보
 	MemberVO selectDbMember(MemberVO member);
 	
+	// 정보수정
+	int updateMember(MemberVO member);
+	
+	// 쿠폰
+	List<CouponVO> selectCoupon();
 	
 	ReservationVO selectMovieResv(String id);
 	
 	
 	
-	// 정보수정
-	int updateMemberEq(MemberVO member);
 	
 //	int updateMemberNotEq(MemberVO member);
 	

@@ -62,16 +62,16 @@ body {
 						      <th scope="col">#</th>
 						      <th scope="col">번호</th>
 						      <th scope="col">쿠폰 이름</th>
-						      <th scope="col">사용기간</th>
+						      <th scope="col">할인율</th>
 						    </tr>
 						  </thead>
 						  <tbody>
-						      <c:forEach var="couponNum" items="${couponNum}" varStatus="status">
+						      <c:forEach var="coupon" items="${list }" varStatus="status">
 							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
 							        <th scope="row">${status.index + 1}</th>
 							        <td>${coupon.coupon_num}</td>
-<%-- 							        <td>${coupon.coupon_name}</td> --%>
-<%-- 							        <td>${coupon.discount_value}</td> --%>
+							        <td>${coupon.coupon_name}</td>
+							        <td>${coupon.coupon_value}원</td>
 							    </tr>
 							</c:forEach>
 						  </tbody>

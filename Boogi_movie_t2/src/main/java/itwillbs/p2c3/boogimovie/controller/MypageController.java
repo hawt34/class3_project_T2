@@ -243,21 +243,26 @@ public class MypageController {
 			model.addAttribute("targetURL", "./member_login");
 			return"error/fail";
 		}
+		
 		member.setMember_id(id);
 		member = mypageService.getDbMember(member);
-		
-		
 		model.addAttribute("member", member);
 		
+<<<<<<< HEAD
 		System.out.println("coupon 컨트롤러");
 		// coupon_num
 		List<CouponVO> couponNum = mypageService.getCoupon(member);
 		model.addAttribute("couponNum", couponNum);
+=======
+		List<CouponVO> couponList = couponService.getCoupon(member);
+		model.addAttribute("list", couponList);
+>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 		
-		// coupon_name
-//		List<CouponVO> couponName = 
 		return "mypage/myp_coupon";
 	}
+		
+		
+		
 	
 	
 	// ============================= 예매 =============================

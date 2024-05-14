@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import itwillbs.p2c3.boogimovie.mapper.CouponMapper;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
+import itwillbs.p2c3.boogimovie.vo.MemberVO;
 
 @Service
 public class CouponService {
@@ -14,8 +15,7 @@ public class CouponService {
 	@Autowired
 	private CouponMapper mapper;
 	
-	public List<CouponVO> getCoupon() {
-		System.out.println("couponservice");
-		return mapper.selectCoupon();
+	public List<CouponVO> getCoupon(MemberVO member) {
+		return mapper.selectCoupon(member);
 	}
 }

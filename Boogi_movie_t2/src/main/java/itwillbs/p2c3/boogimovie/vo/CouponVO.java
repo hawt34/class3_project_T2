@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class CouponVO {
+	private String member_id;
 	private int coupon_num;
+	private int value;
 	private String coupon_name;
-	private int discount_num;
+	private int coupon_value;
 	
 }

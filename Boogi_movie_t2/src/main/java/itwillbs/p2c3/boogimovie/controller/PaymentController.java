@@ -17,10 +17,7 @@ public class PaymentController {
 	
 	@PostMapping("payment")
 	public String payment2(ScreenSessionVO scs, String selected_seats, String person_info, String total_fee) {
-		System.out.println(scs);
-		System.out.println(selected_seats);
-		System.out.println(person_info);
-		System.out.println(total_fee);
+		
 		return "payment/payment_reservation";
 	}
 }

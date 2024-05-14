@@ -28,11 +28,6 @@
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">공지사항등록</h4>
 				<form class="validation-form" novalidate action="admin_notice_pro" method="post" onsubmit="return confirm('공지를 등록하시겠습니까?');">
-<!-- 					<div class="mb-3"> -->
-<!-- 						<label for="movie_director">작성자</label>  -->
-<!-- 						<input type="text" id="movie_director" class="form-control" required /> -->
-<!-- 						<div class="invalid-feedback">작성자를 입력해주세요.</div> -->
-<!-- 					</div> -->
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 
 						<input type="text"  id="movie_name" class="form-control" required name="notice_subject" required />
@@ -121,27 +116,5 @@ $(function () {
 	  ]
 	});
 </script>
-<!--     <script> -->
-<!-- // 첫 번째 선택란의 변경을 감지하여 두 번째 선택란의 옵션을 변경하는 함수
-//     document.getElemenByName('notice_category').addEventListener('change', function() {
-//         var firstValue = this.value; // 첫 번째 선택란의 값을 가져옴
-//         var secondSelect = document.getElementByName('theater_name');
-
-//         // 첫 번째 선택란의 값에 따라 두 번째 선택란의 옵션을 변경
-//         switch (notice_category) {
-//             case '1':
-//                 secondSelect.value = 'A';
-//                 break;
-//             case '2':
-//                 secondSelect.value = 'B';
-//                 break;
-//             case '3':
-//                 secondSelect.value = 'C';
-//                 break;
-//             default:
-//                 secondSelect.value = ''; // 디폴트 값 설정
-//         }
-//     }); --> 
-<!-- </script> -->
 </body>
 </html>

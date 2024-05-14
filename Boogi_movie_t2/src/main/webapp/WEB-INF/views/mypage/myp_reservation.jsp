@@ -70,7 +70,7 @@ hr{
 						</div>
 						
 						<div class="col-md-2 d-grid gap-5">
-<%-- 						<c:forEach var="movie" items="${movie}" begin="1"> --%>
+<%-- 						<c:forEach var="movie" items="${movieReservation}" begin="1"> --%>
 							<input type="text" readonly class="form-control-plaintext" value="${moive.movie_name}">
 							<input type="text" readonly class="form-control-plaintext" value="2024 / 04 / 24">
 							<input type="text" readonly class="form-control-plaintext" value="서면 8관">

@@ -248,15 +248,15 @@ public class MypageController {
 		member = mypageService.getDbMember(member);
 		model.addAttribute("member", member);
 		
-<<<<<<< HEAD
-		System.out.println("coupon 컨트롤러");
+//<<<<<<< HEAD
+//		System.out.println("coupon 컨트롤러");
 		// coupon_num
-		List<CouponVO> couponNum = mypageService.getCoupon(member);
-		model.addAttribute("couponNum", couponNum);
-=======
+//		List<CouponVO> couponNum = mypageService.getCoupon(member);
+//		model.addAttribute("couponNum", couponNum);
+//=======
 		List<CouponVO> couponList = couponService.getCoupon(member);
 		model.addAttribute("list", couponList);
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
+//>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 		
 		return "mypage/myp_coupon";
 	}
@@ -281,8 +281,8 @@ public class MypageController {
 		member = mypageService.getMember(id);
 		model.addAttribute("member", member);
 		System.out.println("myp_reservation()");
-		List<MovieVO> movie = mypageService.getMovieReservation(member);
-		model.addAttribute("movie", movie);
+		List<MovieVO> movieReservation = mypageService.getMovieReservation(member);
+		model.addAttribute("movieReservation", movieReservation);
 //		System.out.println("reservationList" + reservationList);
 //		MovieVO sadfsdf = service.sadfsadfs();
 //		ReservationVO asdfasdf = service.asdfasdf();

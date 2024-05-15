@@ -148,70 +148,60 @@
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </footer>
 <script type="text/javascript">
-$(function() {
-    // 페이지 이동 함수
-    function goToPage(pageNum) {
-        getTheaterList(pageNum, theaterName);
-    }
 
-    // 페이지 링크 클릭 이벤트
-    $(document).on("click", ".pageF", function() {
-        let pageNum = $(this).text();
-        let theaterName = $(this).data("theater");
-        getTheaterList(pageNum, theaterName);z
-    });
+
+    
 	
-    // 비동기 데이터 가져오기
-    function getTheaterList(pageNum = 1, theaterName = '') {
-        $.ajax({
-            type: "GET",
-            url: "csc_notice.json",
-            data: {
-                pageNumArg: pageNum,
-                theaterName: theaterName,
-                pageName: "notice"
-            },
-            dataType: "json",
-            success: function(response) {
-            debugger
-            	let noticeList = response.noticeList;
-    			
-    			let tbody = $(".noticeTheaterList");
-    			tbody.empty();
-    			
-    			$.each(noticeList, function(index, notice) {
-    				let tr = $("<tr>");
-    				
-    				tr.append("<td>" + notice.notice_num + "</td>");
-    	            tr.append("<td>" + notice.notice_category + "</td>");
-    	            tr.append("<td>" + notice.theater_name + "</td>");
-    	            debugger;
-    	            tr.append("<td onclick='location.href=\"csc_notice_detail?notice_num=" + notice.notice_num + "\"'>" + notice.notice_subject + "</td>");
-            		tr.append("<td>" + notice.notice_fdt + "</td>");
+// 비동기 데이터 가져오기
+function getTheaterList(pageNum = 1, theaterName = '') {
+    $.ajax({
+        type: "GET",
+        url: "csc_notice.json",
+        data: {
+            pageNumArg: pageNum,
+            theaterName: theaterName,
+            pageName: "notice"
+        },
+        dataType: "json",
+        success: function(response) {
+        	let noticeList = response.noticeList;
+			
+			let tbody = $(".noticeTheaterList");
+			tbody.empty();
+			
+			$.each(noticeList, function(index, notice) {
+				let tr = $("<tr>");
+				
+				tr.append("<td>" + notice.notice_num + "</td>");
+	            tr.append("<td>" + notice.notice_category + "</td>");
+	            tr.append("<td>" + notice.theater_name + "</td>");
+	            tr.append("<td onclick='location.href=\"csc_notice_detail?notice_num=" + notice.notice_num + "\"'>" + notice.notice_subject + "</td>");
+        		tr.append("<td>" + notice.notice_fdt + "</td>");
 
-    	            tbody.append(tr);
-    			}); // 게시판 비동기 처리
-    			
-    			// 페이징 비동기 처리
-    			let pageList = response.pageList;
-    			let pageNum = response.pageNum; // 현재 페이지 번호를 가져옴
-    			
-    	        createPagination(pageList, pageNum, theaterName);
-    			//----------------------------
-    			//count 처리
-    			let noticeCount = response.pageList.listCount;
-    			
-    			let countDiv = $("#noticeCount");
-    			countDiv.empty();
-    			
-    			countDiv.append("<span>전체 " + noticeCount + "건</span>");
-                createPagination(response.pageList, response.pageNum, theaterName);
-            },
-            error: function() {
-                alert("요청을 보내는 중에 오류가 발생하였습니다.");
-            }
-        });
-    }
+	            tbody.append(tr);
+			}); // 게시판 비동기 처리
+			
+			// 페이징 비동기 처리
+			let pageList = response.pageList;
+			let pageNum = response.pageNum; // 현재 페이지 번호를 가져옴
+			
+	        createPagination(pageList, pageNum, theaterName);
+			//----------------------------
+			//count 처리
+			let noticeCount = response.pageList.listCount;
+			
+			let countDiv = $("#noticeCount");
+			countDiv.empty();
+			
+			countDiv.append("<span>전체 " + noticeCount + "건</span>");
+            createPagination(response.pageList, response.pageNum, theaterName);
+        },
+        error: function() {
+            alert("요청을 보내는 중에 오류가 발생하였습니다.");
+        }
+    });
+}
+$(function() {
 
     // 페이지 로드 시 초기 데이터 가져오기
     getTheaterList();
@@ -221,14 +211,33 @@ $(function() {
         const theaterName = $(this).data("theater");
         getTheaterList(1, theaterName);
     });
+    
+ // 페이지 링크 클릭 이벤트
+    $(document).on("click", ".pageF", function() {
+        let pageNum = $(this).text();
+        let theaterName = $(this).data("theater");
+        getTheaterList(pageNum, theaterName);
+    });
+    debugger
+    $(".prev").click(function() {
+    	let pageNum = $(this).data("page");
+        let theaterName = $(this).data("theater");
+        goToPage(pageNum, theaterName);
+    });
+    
+    $(".next").click(function() {
+        let pageNum = $(this).data("page");
+        let theaterName = $(this).data("theater");
+        goToPage(pageNum, theaterName);
+    });
 });
 
 //페이징 ajax 처리
 function createPagination(pageList, pageNum, theaterName) {
-	// 페이지 이동 함수
-    function goToPage(pageNum) {
-        getTheaterList(pageNum, theaterName);
-    }
+	//페이지 이동 함수
+	function goToPage(pageNum) {
+	    getTheaterList(pageNum, theaterName);
+	}
 
     let pageLinks = [];
 
@@ -237,11 +246,14 @@ function createPagination(pageList, pageNum, theaterName) {
     if (pageNum === 1) {
         prevPageLink.addClass("disabled");
     }
+    let prevPageNum = pageNum - 1;
     prevPageLink.append(
         $("<a>", {
             class: "page-link",
             //TODO
             href: "javascript:void(0)",
+            "data-page": prevPageNum,
+            "data-theater": theaterName,
             click: function() {
             	goToPage(pageNum - 1);
             }
@@ -264,7 +276,7 @@ function createPagination(pageList, pageNum, theaterName) {
                 href: "javascript:void(0)",
                 "data-theater": theaterName,
                 click: function() {
-                    goToPage(i);
+                    goToPage(i, theaterName);
                 }
             })
         );
@@ -276,11 +288,14 @@ function createPagination(pageList, pageNum, theaterName) {
     if (pageNum === pageList.maxPage) {
         nextPageLink.addClass("disabled");
     }
+    let nextPageNum = pageNum + 1;
     nextPageLink.append(
         $("<a>", {
             class: "page-link next",
 	        //TODO
             href: "javascript:void(0)",
+            "data-page": nextPageNum,
+			"data-theater": theaterName,            
             click: function() {
             	goToPage(pageNum + 1);
             }
@@ -294,11 +309,6 @@ function createPagination(pageList, pageNum, theaterName) {
     $(".pagination").empty();
     $(".pagination").append(pageLinks);
     
-    $(".pageF").click(function() {
-        let pageNum = $(this).text(); 
-        let theaterName = $('.pageF').data("theater"); //
-        getTheaterList(pageNum, theaterName); 
-    });
 }
 
 // $(function() {

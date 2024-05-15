@@ -109,7 +109,34 @@
 //마지막 스크롤 값 저장
 let lastScroll = 0;
 
-$(function() {
+let pageNum = "1";
+
+if(!pageNum) {
+	pageNum = "1";
+}
+
+function getScroll(pageNum) {
+	$.ajax({
+		type: "GET",
+		url: "csc_faq.json",
+		data: {
+			pageNum : pageNum
+		},
+		dataType: "json",
+		success: function(response)	{
+			debugger;
+			console.log(response.faqList);
+		},
+		error: function() {
+			alert("불러오는데 실패했습니다");
+		}
+	});
+	
+	pageNum = pageNum + 1;
+}
+
+$(document).scroll(function(pageNum) {
+	
 	//현재 스크롤 값
 	let currentScroll = $(this).scrollTop();
 // 	console.log(currentScroll);
@@ -124,20 +151,15 @@ $(function() {
 // 	console.log(nowHeight);
 	
 	if(currentScroll > lastScroll) {
-		if(documentHeight < currentScroll + documentHeight*0.1) {
-			
+		if(documentHeight < (currentScroll + (documentHeight*0.1))) {
+			getScroll(pageNum);
 		}
 	}
+
+	lastScroll = currentScroll;
 	
-	
-	
-	
-	
-	
-	
-	
-	
-});
+}); 
+
 
 </script>
 </body>

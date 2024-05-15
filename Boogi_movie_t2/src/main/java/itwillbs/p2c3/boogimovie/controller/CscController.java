@@ -51,27 +51,52 @@ public class CscController {
 	}
 	//csc 페이지 faqList 가져오기
 	@GetMapping("csc_faq")
-	public String cscFAQ(@RequestParam(defaultValue = "1")int pageNum, FAQVO faq, Model model) {
+	public String cscFaq(@RequestParam(defaultValue = "1")int pageNum, FAQVO faq, Model model) {
 		//ajax를 호출하지 않은 paging을 처리하기 위한 변수
+		
 		
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
 		int listCount = faqService.getFaqListCount(); //총 공지사항 갯수
-		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-		
-		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-			endPage = maxPage;
-		}
-		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);		
+//		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+//		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+//		
+//		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+//			endPage = maxPage;
+//		}
+//		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);		
 		
 		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow);
 		
-		model.addAttribute("pageList", pageList);
+//		model.addAttribute("pageList", pageList);
 		model.addAttribute("faqList", faqList);
 		return "csc/csc_faq";
+	}
+	
+	@ResponseBody
+	@GetMapping("csc_faq.json")
+	public List<FAQVO> cscFaqJson(@RequestParam(defaultValue = "1")int pageNum, FAQVO faq, Model model) {
+		
+		int listLimit = 7;
+		int startRow = (pageNum - 1) * listLimit;
+		int listCount = faqService.getFaqListCount(); //총 공지사항 갯수
+//		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+//		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+//		
+//		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+//			endPage = maxPage;
+//		}
+//		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);		
+		
+		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow);
+		
+//		model.addAttribute("pageList", pageList);
+//		model.addAttribute("faqList", faqList);
+		return faqList;
 	}
 	
 	
@@ -88,11 +113,10 @@ public class CscController {
 	public Map<String, Object> noticeCategory(@RequestParam(defaultValue = "1")String pageNumArg,
 											  @RequestParam String theaterName,
 											  @RequestParam String pageName) {
-		
+		System.out.println("COLSLWKM" + pageNumArg);
+		System.out.println("COLSLWKM" + theaterName);
+		System.out.println("COLSLWKM" + pageName);
 		//----------------------------------------------------
-		System.out.println("1" + pageNumArg);
-		System.out.println("2" + theaterName);
-		System.out.println("3 " + pageName);
 		
 		int pageNum = Integer.parseInt(pageNumArg);
 		

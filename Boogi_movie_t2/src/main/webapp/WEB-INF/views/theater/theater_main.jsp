@@ -47,16 +47,15 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col">
-					<a href="${pageContext.request.contextPath}/resources/images/theater_event_ex2.jpg">
-						<img src="${pageContext.request.contextPath}/resources/images/theater_event_ex1.jpg" style="width:100%;">
-					</a>
-				</div>
-				<div class="col">
-					<a href="${pageContext.request.contextPath}/resources/images/theater_event_ex2.jpg">
-						<img src="${pageContext.request.contextPath}/resources/images/theater_event_ex1.jpg" style="width:100%;">
-					</a>
-				</div>
+				<c:forEach var="event" items="${eventList}" >
+					<c:if test="${event.event_type_name eq '극장이벤트'}">
+						<div class="col">
+							<a href="eventDetail?event_num=${event.event_num}">
+								<img src="${pageContext.request.contextPath}/resources/images/${event.event_thumbnail}" style="width:100%;">
+							</a>
+						</div>
+					</c:if>
+				</c:forEach>
 			</div>
 		</div>
 		<!-- 극장 관련 공지사항 불러오기 -->

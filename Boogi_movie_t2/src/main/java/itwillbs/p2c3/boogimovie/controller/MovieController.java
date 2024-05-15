@@ -27,7 +27,7 @@ public class MovieController {
 	private ReviewService serviceReview;
 	
 	@GetMapping("movie")
-	public String movie(Model model , HttpSession session,MemberVO member) {
+	public String home(Model model , HttpSession session,MemberVO member) {
 		System.out.println("현재 아이디" + member.getMember_id());
 		List<MovieVO> movieInfo = movieService.getMovieList();
 		model.addAttribute("movieInfo", movieInfo);
@@ -37,14 +37,7 @@ public class MovieController {
 		//System.out.println(movieInfo);
 		return "movie/movie";
 	}
-	@GetMapping("movieFuture")// 상영예정작리스트
-	public String movieFuture(Model model) {
-		
-		List<MovieVO> movieFuture = movieService.getMovieFuture();
-		model.addAttribute("movieFuture", movieFuture);
-		//System.out.println("여기는 무비퓨처" + movieFuture);확인완료
-	    return "movie/movieFuture";
-	}
+	
 	
 	@GetMapping("movieFutureInfo")// 상영예정작 상세보기
 	public String movieFutureInfo(int movie_num, MovieVO futureMovie, Model model) {

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <!-- 제이쿼리 -->
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <!--  포트원 SDK -->
 <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 <%-- <link href="${pageContext.request.contextPath}/resources/css/payment.css" rel="stylesheet" type="text/css"> --%>
@@ -28,7 +28,26 @@
 	}
 </style>
 
+ <script>
+	 $(() => {
+	     $('#point-modal').click((e) => {
+	         e.preventDefault();
+	         $('#pointModal').modal("show");
+	     });
+	     $('#point-close').click(() => $('#pointModal').modal("hide"));
+	     $('#coupon-submit').click(() => $('#pointModal').modal("hide"));
+	     
+	     $('#coupon-modal').click((e) => {
+	         e.preventDefault();
+	         $('#couponModal').modal("show");
+	     });
+	     $('#coupon-close').click(() => $('#couponModal').modal("hide"));
+	     $('#coupon-submit').click(() => $('#couponModal').modal("hide"));
+	    
+	 }) 
 
+
+</script>
 
 
 </head>
@@ -43,124 +62,75 @@
 		<div class="row payment_option">
 			<div class="col-8 col1">
 				<form>
-					<h3>할인 적용</h3>
-					<p class="d-inline-flex gap-1">
-					<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#member_point" aria-expanded="false" aria-controls="member_point">
-						부기무비 포인트
-					</button>
-					</p>
-					<div class="collapse" id="member_point">
-						<div class="card card-body">
-							* 예매 취소 시 유효기간이 지난 멤버십 포인트는 복구되지 않습니다.
-							<hr>
-							<div class="input-group mb-3 w-50" >
-								<input type="text" class="form-control" placeholder="보유 포인트" aria-describedby="button-addon2">
-								<button class="btn btn-outline-secondary" type="button" id="button-addon1">조회</button>
-								<input type="text" class="form-control" placeholder="사용할 포인트" aria-describedby="button-addon2">
-								<button class="btn btn-outline-secondary" type="submit" id="button-addon2">적용</button>
+					<div class="d-flex">
+						<h3 class="me-auto">할인 적용</h3>
+<!-- 						<button type="reset" class="p-2">재입력</button> -->
+						<button type="button" class="btn btn-outline-primary btn-sm">재입력</button>
+					</div>
+					<div class="card" id="member_point">
+						<h5 class="card-header">부기무비 포인트</h5>
+						<div class="card-body">
+							<p class="card-text">* 예매 취소 시 유효기간이 지난 멤버십 포인트는 복구되지 않습니다.</p>
+							<div class="w-50 input-group mb-3">
+								<input type="text" class="form-control" placeholder="보유 포인트" aria-label="Recipient's username" aria-describedby="point-modal">
+								<button class="btn btn-outline-secondary" type="button" id="point-modal" onclick="getMemberPoint()">조회</button>
 							</div>
+							
 						</div>
 					</div>
 					<br>
-					<p class="d-inline-flex gap-1">
-						<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#member_coupon" aria-expanded="false" aria-controls="member_coupon">
-							부기무비 쿠폰
-						</button>
-					</p>
-					<div class="collapse" id="member_coupon">
-						<div class="card card-body">
-							<div class="input-group mb-3 w-50" >
-								<button type="button" class="btn btn-outline-secondary">내 쿠폰 조회</button>
-								<button type="button" class="btn btn-outline-secondary" >쿠폰 등록하기</button>
+					<div class="card" id="member_coupon">
+						<h5 class="card-header">부기무비 쿠폰</h5>
+						<div class="card-body">
+							<p class="card-text">* 예매 취소 시 유효기간이 지난 쿠폰은 복구되지 않습니다.</p>
+							<div class="w-50 input-group mb-3">
+								<input type="text" class="form-control" placeholder="내 쿠폰" aria-label="Recipient's username" aria-describedby="coupon-modal">
+								<button class="btn btn-outline-secondary" type="button" id="coupon-modal" onclick="getCouponList()">조회</button>
 							</div>
-							<hr>
-							<p>적용된 쿠폰 </p>
 						</div>
 					</div>
 				</form>
 				<br>
-<!-- 				<form> -->
-<!-- 					<h3>결제 수단 선택</h3> -->
-<!-- 					<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"> -->
-						
-<!-- 						<li class="nav-item" role="presentation"> -->
-<!-- 							<input type="radio" name="payway_tab" class="nav-link" id="payway_tab1" data-bs-toggle="pill" data-bs-target="#payway1" role="tab" aria-controls="payway1" checked> -->
-<!-- 							<label for="payway_tab1">신용/체크카드</label> -->
-<!-- 						</li> -->
-<!-- 						<li class="nav-item" role="presentation"> -->
-<!-- 							<input type="radio" name="payway_tab" class="nav-link" id="payway_tab2" data-bs-toggle="pill" data-bs-target="#payway2" role="tab" aria-controls="payway2" > -->
-<!-- 							<label for="payway_tab2">휴대폰결제</label> -->
-<!-- 					 	</li> -->
-<!-- 						<li class="nav-item" role="presentation"> -->
-<!-- 							<button class="nav-link" id="payway_tab3" data-bs-toggle="pill" data-bs-target="#payway3" type="button" role="tab" aria-controls="payway3" aria-selected="false">간편결제</button> -->
-<!-- 						</li> -->
-<!-- 						<li class="nav-item" role="presentation"> -->
-<!-- 							<button class="nav-link" id="payway_tab4" data-bs-toggle="pill" data-bs-target="#payway4" type="button" role="tab" aria-controls="payway4" aria-selected="false">내통장결제</button> -->
-<!-- 						</li> -->
-						
-<!-- 					</ul> -->
-<!-- 					<div class="tab-content" id="pills-tabContent"> -->
-<!-- 						<div class="tab-pane fade show active" id="payway1" role="tabpanel" aria-labelledby="payway_tab1" tabindex="0"> -->
-<!-- 							카드사 선택 -->
-<!-- 							<select> -->
-<!-- 								<option>카드를 선택하세요</option> -->
-<!-- 								<option>비씨카드</option> -->
-<!-- 								<option>국민카드</option> -->
-<!-- 								<option>신한카드</option> -->
-<!-- 								<option>삼성카드</option> -->
-<!-- 								<option>롯데카드</option> -->
-<!-- 								<option>하나카드</option> -->
-<!-- 								<option>현대카드</option> -->
-<!-- 								<option>씨티카드</option> -->
-<!-- 								<option>제주카드</option> -->
-<!-- 								<option>우리카드</option> -->
-<!-- 								<option>수협카드</option> -->
-<!-- 								<option>전북카드</option> -->
-<!-- 								<option>광주카드</option> -->
-<!-- 								<option>신협카드</option> -->
-<!-- 								<option>카카오뱅크</option> -->
-<!-- 								<option>케이뱅크</option> -->
-<!-- 								<option>우체국카드</option> -->
-<!-- 								<option>토스카드</option> -->
-<!-- 								<option>SC제일은행비씨카드</option> -->
-<!-- 								<option>SC제일은행삼성카드</option> -->
-<!-- 								<option>IBK기업은행카드</option> -->
-<!-- 							</select> -->
-<!-- 							<input type="radio" name="payment_method1_card" id="card_app"> -->
-<!-- 							<label for="card_app">앱카드</label> -->
-<!-- 							<input type="radio" name="payment_method1_card" id="card_default"> -->
-<!-- 							<label for="card_default">일반결제</label> -->
-<!-- 							<input type="radio" name="payment_method1_card" id="card_ISP"> -->
-<!-- 							<label for="card_ISP">ISP</label> -->
-<!-- 						</div>  payway1 div 끝 -->
-<!-- 						<div class="tab-pane fade" id="payway2" role="tabpanel" aria-labelledby="payway_tab2" tabindex="0"> -->
-<!-- 							<p> -->
-<!-- 								결제하신 금액은 익월 휴대폰 요금에 합산되어 청구되며, 휴대폰 결제한도는 통산사별 월 누적 이용 제한에 따라 적용됩니다. -->
-<!-- 								매월 말일 23시30분 ~ 익월 00시 10분까지(40분간)는 시스템 점검시간으로 이용이 어려울 수 있습니다. -->
-<!-- 								휴대폰 결제와 관련된 추가 안내는 FAQ를 참조해주세요. -->
-<!-- 							</p> -->
-<!-- 						</div>  payway2 div 끝 -->
-<!-- 						<div class="tab-pane fade" id="payway3" role="tabpanel" aria-labelledby="payway_tab3" tabindex="0"> -->
-<!-- 							<input type="radio" name="payment_method_easy" id="payment_easy_toss" checked> -->
-<!-- 							<label for="payment_easy_toss">토스페이</label> -->
-<!-- 							<input type="radio" name="payment_method_easy" id="payment_easy_naver" > -->
-<!-- 							<label for="payment_easy_naver">네이버페이</label> -->
-<!-- 							<input type="radio" name="payment_method_easy" id="payment_easy_kakao" > -->
-<!-- 							<label for="payment_easy_kakao">카카오페이</label> -->
-<!-- 							<input type="radio" name="payment_method_easy" id="payment_easy_payco" > -->
-<!-- 							<label for="payment_easy_payco">페이코</label> -->
-<!-- 							<input type="radio" name="payment_method_easy" id="payment_easy_kb" > -->
-<!-- 							<label for="payment_easy_kb">KBPAY</label> -->
-<!-- 						</div>  payway3 div 끝 -->
-<!-- 						<div class="tab-pane fade" id="payway4" role="tabpanel" aria-labelledby="payway_tab4" tabindex="0"> -->
-<!-- 							<p>- 내통장결제는 본인명의의 계좌를 최초 1회 등록 후 비밀번호 입력만으로 간편하게 이용할 수 있는 현금결제 서비스 입니다.</p> -->
-<!-- 							<p>- 은행 점검시간의 경우 내통장결제서비스 이용이 불가합니다.</p> -->
-<!-- 						</div>  payway4 div 끝 -->
-<!-- 					</div>tab-content 끝 -->
-<!-- 				</form> -->
 
-   				<button onclick="requestPay()">결제하기</button> <!-- 결제하기 버튼 생성 -->
-				
+				<fieldset>
+	                <legend>이용 약관</legend>
+	
+	                <div class="container pay-agmt-container">
+	                    <div class="row">
+	                        <div class="col">
+	                            <label for="agmt-all" class="form-check-label">전체 동의</label>
+	                        </div>
+	                        <div class="col form-check-reverse">
+	                            <input type="checkbox" class="form-check-input" name="agmt-all" id="agmt-all"
+	                                onclick='selectAll(this)'>
+	                        </div>
+	                    </div>
+	                    <div class="row">
+	                        <div class="col">
+	                            <label for="agmt-age" class="form-check-label">만 14세 이상 결제 동의</label>
+	                        </div>
+	                        <div class="col form-check-reverse">
+	                            <input type="checkbox" class="form-check-input select" name="agmt" id="agmt-age"
+	                                onclick='checkSelectAll(this)' required>
+	                            <div class="invalid-feedback">
+	                                약관에 동의해 주세요.
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="row">
+	                        <div class="col">
+	                            <label for="agmt-confirm" class="form-check-label">주문내용 확인 및 결제동의</label>
+	                        </div>
+	                        <div class="col form-check-reverse">
+	                            <input type="checkbox" class="form-check-input select" name="agmt" id="agmt-confirm"
+	                                onclick='checkSelectAll(this)' required>
+	                            <div class="invalid-feedback">
+	                                약관에 동의해 주세요.
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+            </fieldset>
 			</div> <!-- col1 끝 -->
 			
 			<div class="col col2">
@@ -194,12 +164,57 @@
 			</div> <!--  col2 끝 -->
 		</div> <!-- row payment_option 끝 -->
 	</div><!-- payment_all  끝 -->
+	
+	<!-- 포인트팝업(모달창) -->
+    <div class="modal fade" id="pointModal" tabindex="-1" role="dialog" aria-labelledby="payModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="payModalLabel">사용가능 포인트</h5>
+                    <button type="button" class="btn-close" id="point-close" aria-label="Close"></button>
+                </div>
+                <form onsubmit="applyPoint(select.value)">
+                    <div class="modal-body">
+                        <div class="wrapper">
+                            <div class="box"></div>
+                            <input type="radio" class="coupon-select" name="select" id="">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" id="point-submit">적용</button>
+                        </div>
+                   </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+	<!-- 쿠폰팝업(모달창) -->
+    <div class="modal fade" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="payModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="payModalLabel">사용가능 쿠폰 <span>3</span></h5>
+                    <button type="button" class="btn-close" id="coupon-close" aria-label="Close"></button>
+                </div>
+                <form onsubmit="applyCoupon(select.value)">
+                    <div class="modal-body">
+                        <div class="wrapper">
+                            <div class="box"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" id="coupon-submit">적용</button>
+                        </div>
+                   </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 	</article>
 	<footer>
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
-	
+	<script src="${pageContext.request.contextPath}/resources/js/payment.js"></script>
 	<script>
 		// 1. SDK 초기화하기
 		var IMP = window.IMP;
@@ -213,6 +228,32 @@
         var makeMerchantUid = hours +  minutes + seconds + milliseconds;
 		
 		// 2. 결제창 불러오기
+// 		IMP.request_pay(
+// 			{
+// 				pg: 'kakao', // "kakao.store-2dcc6398-b8ee-4e3d-a855-9b05a8cbbd6d", 
+// 				pay_method: "card",
+// 				merchant_uid: "IMP" + makeMerchantUid, // 주문 고유 번호
+// 				name: "부기무비 영화 예매",
+// 				amount: 1000,
+// 				buyer_email: "gildong@gmail.com",
+// 				buyer_name: "홍길동",
+// 				buyer_tel: "010-4242-4242",
+// 				buyer_addr: "서울특별시 강남구 신사동",
+// 				buyer_postcode: "01181",
+// 			},
+// 			function (response) { 
+// 				// 결제 종료 시 호출되는 콜백 함수
+// 				// response.imp_uid 값으로 결제 단건조회 API를 호출하여 결제 결과를 확인하고,
+// 				// 결제 결과를 처리하는 로직을 작성합니다.
+// 				 if (rsp.success) {
+//                     console.log(rsp);
+//                 } else {
+//                     console.log(rsp);
+//                 }
+// 			},
+// 		);
+		
+		// 3. 결제 결과 처리하기 - SDK 반환값으로 처리하기
 		IMP.request_pay(
 			{
 				pg: 'kakao', // "kakao.store-2dcc6398-b8ee-4e3d-a855-9b05a8cbbd6d", 
@@ -226,30 +267,12 @@
 				buyer_addr: "서울특별시 강남구 신사동",
 				buyer_postcode: "01181",
 			},
-			function (response) { 
-				// 결제 종료 시 호출되는 콜백 함수
-				// response.imp_uid 값으로 결제 단건조회 API를 호출하여 결제 결과를 확인하고,
-				// 결제 결과를 처리하는 로직을 작성합니다.
-				 if (rsp.success) {
-                    console.log(rsp);
-                } else {
-                    console.log(rsp);
-                }
-			},
-		);
-		
-		// 3. 결제 결과 처리하기 - SDK 반환값으로 처리하기
-		IMP.request_pay(
-			{
-			  /* 파라미터 생략 */
-			},
 			async (response) => {
 				if (response.error_code != null) {
 				  return alert(`결제에 실패하였습니다. 에러 내용: ${response.error_msg}`);
 				}
 				
 				// 고객사 서버에서 /payment/complete 엔드포인트를 구현해야 합니다.
-				// (다음 목차에서 설명합니다)
 				const notified = await fetch(`${SERVER_BASE_URL}/payment/complete`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },

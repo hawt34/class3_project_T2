@@ -14,10 +14,12 @@ public interface FaqMapper {
 	int insertFaq(FAQVO faq);
 	
 	//faq List 가져오기
-	List<FAQVO> selectFaqList(@Param("listLimit")int listLimit, @Param("startRow")int startRow);
+	List<FAQVO> selectFaqList(@Param("listLimit")int listLimit,
+							  @Param("startRow")int startRow,
+							  @Param("faqCategory")String faqCategory);
 	
 	//faq List Count 가져오기
-	int selectFaqListCount();
+	int selectFaqListCount(String faqCategory);
 	
 	//faq 삭제
 	int deleteFaq(FAQVO faq);

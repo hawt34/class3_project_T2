@@ -2,18 +2,22 @@ package itwillbs.p2c3.boogimovie.controller;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.CouponService;
@@ -26,7 +30,6 @@ import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
-import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
 @Controller
 public class MypageController {
@@ -75,14 +78,9 @@ public class MypageController {
 			MemberVO infoMyTheater = mypageService.getMyTheater(member);
 			model.addAttribute("infoMyTheater", infoMyTheater);
 			
-			// 예매내역 영화제목
-			List<MovieVO> movieReservation = mypageService.getMovieReservation(member);
+			// 예매내역
+			List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
 			model.addAttribute("movieReservation", movieReservation);
-			
-			// 예매내역 관람날짜
-//			List<TicketVO> dateReservation = reservationService.getDateReservation(id);
-//			model.addAttribute("dateReservation", dateReservation);
-//			System.out.println("dateReservation" + dateReservation);
 			
 //			List<Object> combinedList = new ArrayList<>();
 //			combinedList.addAll(movieReservation);
@@ -207,31 +205,6 @@ public class MypageController {
 		
 	}
 	
-	// ============================= 아이디 중복 체크 =============================
-	// => 회원 가입 화면에서 새 창이 열릴 경우 id 파라미터가 없이 요청 발생(id = null)
-	// => 아이디 중복 검사 화면에서 검색 버튼 클릭 시 id 파라미터가 포함되어 요청 발생
-	@RequestMapping(value = "CheckDupId", method= {RequestMethod.GET, RequestMethod.POST})
-	public String checkDupId(MemberVO member, Model model) {
-		System.out.println("아이디 : " + member.getMember_id());
-		
-		// id 파라미터가 있을 경우 (member.getId()가 null이 아닐 경우)에만 아이디 검색
-		// MemberService - getMember() 메서드 재사용
-		if(member.getMember_id() != null) {
-			MemberVO dbMember = mypageService.getDbMember(member); // 아이디에 대한 회원정보 조회
-			
-			// 회원정보 조회 결과 판별
-			if(dbMember == null) { // 입력받은 아이디가 존재하지 않을 경우
-//				model.addAttribute("checkResult", "사용 가능한 아이디 ");
-				model.addAttribute("checkResult", false); // 중복이 아니므로 false 값 저장
-			} else { // 입력받은 아이디가 존재할 경우 
-//				model.addAttribute("checkResult", "이미 사용중인 아이디 ");
-				model.addAttribute("checkResult", true); // 중복이므로 true 값 저장
-			}
-		}
-		return"mypage/check_id";
-	}
-	
-	
 	// ============================= 쿠폰 =============================
 
 	@GetMapping("myp_coupon")
@@ -239,7 +212,7 @@ public class MypageController {
 		String id = (String)session.getAttribute("sId");
 		
 		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다!");
 			model.addAttribute("targetURL", "./member_login");
 			return"error/fail";
 		}
@@ -248,15 +221,15 @@ public class MypageController {
 		member = mypageService.getDbMember(member);
 		model.addAttribute("member", member);
 		
-<<<<<<< HEAD
-		System.out.println("coupon 컨트롤러");
+//<<<<<<< HEAD
+//		System.out.println("coupon 컨트롤러");
 		// coupon_num
-		List<CouponVO> couponNum = mypageService.getCoupon(member);
-		model.addAttribute("couponNum", couponNum);
-=======
+//		List<CouponVO> couponNum = mypageService.getCoupon(member);
+//		model.addAttribute("couponNum", couponNum);
+//=======
 		List<CouponVO> couponList = couponService.getCoupon(member);
 		model.addAttribute("list", couponList);
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
+//>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 		
 		return "mypage/myp_coupon";
 	}
@@ -281,11 +254,9 @@ public class MypageController {
 		member = mypageService.getMember(id);
 		model.addAttribute("member", member);
 		System.out.println("myp_reservation()");
-		List<MovieVO> movie = mypageService.getMovieReservation(member);
-		model.addAttribute("movie", movie);
-//		System.out.println("reservationList" + reservationList);
-//		MovieVO sadfsdf = service.sadfsadfs();
-//		ReservationVO asdfasdf = service.asdfasdf();
+		// 예매정보
+		List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
+		model.addAttribute("movieReservation", movieReservation);
 		
 		return "mypage/myp_reservation";
 	}
@@ -298,7 +269,7 @@ public class MypageController {
 		String id = (String)session.getAttribute("sId");
 		
 		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
 			model.addAttribute("targetURL", "./member_login");
 			return"error/fail";
 		}
@@ -459,6 +430,18 @@ public class MypageController {
 		}
 		
 		return "redirect:/myp_oto_breakdown";
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
+	public ResponseEntity<String> mypMyTheater(@RequestBody List<String> checkedValues){
+	    System.out.println("Received checked values: " + checkedValues);
+	    if(checkedValues.isEmpty()) {
+	        return ResponseEntity.badRequest().body("No data received");
+	    }
+	    return ResponseEntity.ok("Data received successfully");
+	    
+	    
 	}
 
 	

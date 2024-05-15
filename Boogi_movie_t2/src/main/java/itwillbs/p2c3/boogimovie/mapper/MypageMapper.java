@@ -1,6 +1,7 @@
 package itwillbs.p2c3.boogimovie.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,8 +24,8 @@ public interface MypageMapper {
 	// My극장 자주가는 영화관
 	MemberVO selectMyTheater(MemberVO member);
 	
-	// 예매내역 영화제목
-	List<MovieVO> selectMovieReservation(MemberVO member);
+	// 예매내역
+	List<Map<String , Object>> selectMovieReservation(MemberVO member);
 	
 	// 회원정보
 	MemberVO selectDbMember(MemberVO member);

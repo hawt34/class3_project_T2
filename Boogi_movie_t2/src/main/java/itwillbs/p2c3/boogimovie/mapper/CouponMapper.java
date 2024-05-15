@@ -10,4 +10,6 @@ import itwillbs.p2c3.boogimovie.vo.MemberVO;
 @Mapper
 public interface CouponMapper {
 	List<CouponVO> selectCoupon(MemberVO member);
+
+	List<CouponVO> selectMemberCoupon(MemberVO member);
 }

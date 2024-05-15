@@ -52,12 +52,12 @@
 			<div class="row mt-3">
 				<div class="csc_faq_sel">
 					<select id="faq_category" name="faq_category" class="form-select form-select-sm w-25" aria-label="Small select example">
-						<option selected>전체</option>
-						<option value="예매/결제">예매/결제</option>
-						<option value="영화관이용">영화관이용</option>
-						<option value="쿠폰">쿠폰</option>
-						<option value="스토어">스토어</option>
-						<option value="홈페이지/모바일">홈페이지/모바일</option>
+						<option value="">전체</option>
+						<option value="예매/결제" data-category="예매/결제">예매/결제</option>
+						<option value="영화관이용" data-category="영화관이용">영화관이용</option>
+						<option value="쿠폰" data-category="쿠폰">쿠폰</option>
+						<option value="스토어" data-category="스토어">스토어</option>
+						<option value="홈페이지/모바일" data-category="홈페이지/모바일">홈페이지/모바일</option>
 					</select>
 				</div>
 			</div>
@@ -80,24 +80,7 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-<!-- 				<input type="checkbox" id="answer2"> -->
-<!-- 				<label for="answer2">제목<em></em></label> -->
-<!-- 				<div><p>본문내용을 여기다 넣을 겁니다. -->
-<!-- 					꽁꽁얼어 붙은 한강 위로 고양이가 걸어다닙니다.</p>  -->
-<!-- 				</div> -->
-<!-- 				<input type="checkbox" id="answer3"> -->
-<!-- 				<label for="answer3">제목<em></em></label> -->
-<!-- 				<div><p>본문내용을 여기다 넣을 겁니다. -->
-<!-- 					꽁꽁얼어 붙은 한강 위로 고양이가 걸어다닙니다.</p>  -->
-<!-- 				</div> -->
-				
-				
-			<!-- 페이지네이션-페이징 -->
 			<hr>
-			
-	
-	
-	
 		</div>
 	</div>
 </div>
@@ -106,19 +89,92 @@
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </div>
 <script type="text/javascript">
+//마지막 스크롤 값 저장
+let lastScroll = 0;
+
+let pageNum = 1;
+let isLoading = false;
+
+if(!pageNum) {
+	pageNum = 1;
+}
+function getScroll(faqCatecory = '') {
+	if (isLoading) return; // 이미 데이터를 불러오고 있는 중이라면 중복 요청 방지
+	isLoading = true; // 데이터 요청 중 플래그 설정
+	
+	$.ajax({
+		type: "GET",
+		url: "csc_faq.json",
+		data: {
+			parsedPageNum : pageNum,
+			faqCategory : faqCategory
+		},
+		dataType: "json",
+		success: function(response)	{
+			debugger;
+			let faqList = response;
+			$.each(faqList, function(index, faq) {
+				let accordion = $(".csc_accordion");
+			    let checkbox = $("<input>", {
+			        type: "checkbox",
+			        id: "answer" + (index + 1)
+			    });
+
+			    let label = $("<label>", {
+			        for: "answer" + (index + 1)
+			    }).append(
+			        $("<span>", {
+			            class: "faq_category",
+			            text: "[" + faq.faq_category + "]"
+			        }),
+			        $("<span>", {
+			            text: faq.faq_subject
+			        }),
+			        $("<em>")
+			    );
+
+			    let answerDiv = $("<div>").append(
+			        $("<span>").append(
+			            $("<em>")
+			        ).text("ANSWER"),
+			        $("<br>"),
+			        $("<p>", {
+			            text: faq.faq_content
+			        })
+			    );
+
+			    accordion.append(checkbox, label, answerDiv);
+			});
+		},
+		error: function() {
+			alert("불러오는데 실패했습니다");
+		},
+		complete: function() {
+            isLoading = false; // 데이터 요청 완료 후 플래그 해제
+            pageNum++; // 페이지 번호 증가
+        }
+	});
+	
+}
+
+$(document).scroll(function() {
+    let currentScroll = $(this).scrollTop();
+    let documentHeight = $(document).height();
+    let windowHeight = $(window).height();
+    
+    let nowHeight = currentScroll + windowHeight;
+    
+    // 화면 하단까지 스크롤되었을 때 추가 데이터 가져오기
+    if (documentHeight < (nowHeight + (documentHeight*0.1))) {
+        getScroll(); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
+    }
+}); 
+
 $(function() {
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	$("#faq_category").change(function() {
+		let faqCategory = $("#faq_category").val();
+		getScroll(faqCategory);
+	});
 });
 
 </script>

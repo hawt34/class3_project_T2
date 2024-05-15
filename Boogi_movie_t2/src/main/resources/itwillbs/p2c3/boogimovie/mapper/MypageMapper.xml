@@ -23,14 +23,30 @@
 		WHERE member_id = #{member_id};
     </select>
     
-    <!-- 예매내역 영화제목 -->
-	<select id="selectMovieReservation" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO" parameterType="String">
-		SELECT movie.movie_name 
-		FROM movie JOIN review
-		ON movie.movie_num = review.movie_num
-		JOIN member 
-		ON member.member_id = review.member_id
-	  	WHERE member.member_id = #{member_id}
+    <!-- 예매내역 -->
+	<select id="selectMovieReservation" resultType="map">
+ 		SELECT
+		   movie.movie_name,
+		   movie.movie_poster,
+<!-- 		   screen_session.scs_start_time, -->
+<!-- 		   screen_session.scs_end_time, -->
+		   CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time,
+<!-- 		   theater.theater_name, -->
+<!-- 		   theater.theater_num, -->
+		   CONCAT(theater.theater_name, ' ', theater.theater_num, '관') AS theater_info,
+		   ticket.ticket_seat_info,
+		   ticket.ticket_price,
+		   screen_session.scs_date
+		FROM
+			screen_session
+		JOIN pay ON screen_session.scs_num = pay.scs_num 
+		JOIN member ON member.member_id = pay.member_id 
+		JOIN theater ON theater.theater_num = screen_session.theater_num
+		JOIN movie ON movie.movie_num = screen_session.movie_num
+		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num 
+		WHERE member.member_id = #{member_id}
+	 
+		
 	</select>
     
     <!-- 회원정보 -->

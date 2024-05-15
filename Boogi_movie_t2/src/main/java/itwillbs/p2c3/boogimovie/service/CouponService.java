@@ -18,4 +18,8 @@ public class CouponService {
 	public List<CouponVO> getCoupon(MemberVO member) {
 		return mapper.selectCoupon(member);
 	}
+
+	public List<CouponVO> getMemberCoupon(MemberVO member) {
+		return mapper.selectMemberCoupon(member);
+	}
 }

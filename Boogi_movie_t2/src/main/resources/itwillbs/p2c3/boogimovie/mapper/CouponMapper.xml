@@ -12,7 +12,13 @@
   </select>
   
   
-  
+  <select id="selectMemberCoupon" resultType="itwillbs.p2c3.boogimovie.vo.CouponVO">
+	SELECT *
+  	FROM coupon c
+  	JOIN coupon_type ct
+  	ON c.coupon_type_num = ct.coupon_type_num
+  	WHERE coupon_status = 1 AND member_id = 'admin22'
+  </select>
   
   
   </mapper>

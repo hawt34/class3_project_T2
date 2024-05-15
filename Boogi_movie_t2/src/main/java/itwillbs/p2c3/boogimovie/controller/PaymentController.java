@@ -20,4 +20,13 @@ public class PaymentController {
 		
 		return "payment/payment_reservation";
 	}
+	
+	@GetMapping("pay_test")
+	public String paymentTest() {
+		return "payment/pay_test";
+	}
+	
+	
+	
+	
 }

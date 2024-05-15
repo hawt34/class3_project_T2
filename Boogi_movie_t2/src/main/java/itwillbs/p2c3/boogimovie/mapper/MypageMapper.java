@@ -27,8 +27,6 @@ public interface MypageMapper {
 	// 예매내역
 	List<Map<String , Object>> selectMovieReservation(MemberVO member);
 	
-	List<Map<String , Object>> selectDateReservation(MemberVO member);
-	
 	// 회원정보
 	MemberVO selectDbMember(MemberVO member);
 	

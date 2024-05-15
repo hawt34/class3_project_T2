@@ -100,15 +100,15 @@ body {
 					  </thead>
 					  <tbody>
 					  
-						  <c:forEach var="movie" items="${movieReservation}" varStatus="status" begin="0" end="6">
+						  <c:forEach var="map" items="${movieReservation}" varStatus="status" begin="0" end="6">
 							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
 							        <th scope="row">${status.index + 1}</th>
-							        <td>${movie.movie_name}</td>
-<%-- 							        <td>${ticket.screen_date}</td> --%>
-<%-- 							        <td>${reservation.discsount_num}</td> --%>
-<%-- 							        <td>${reservation.discsount_num}</td> --%>
-<%-- 							        <td>${reservation.discsount_num}</td> --%>
-<%-- 							        <td>${reservation.discsount_num}</td> --%>
+							        <td>${map.movie_name}</td>
+							        <td>${map.scs_date}</td>
+							        <td>${map.theater_info}</td>
+							        <td>${map.session_time}</td>
+							        <td>${map.ticket_seat_info}</td>
+							        <td>${map.ticket_price}</td>
 							    </tr>
 							</c:forEach>
 					  

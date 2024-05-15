@@ -78,14 +78,9 @@ public class MypageController {
 			MemberVO infoMyTheater = mypageService.getMyTheater(member);
 			model.addAttribute("infoMyTheater", infoMyTheater);
 			
-			// 예매내역 영화제목
-//			List<MovieVO> movieReservation = mypageService.getMovieReservation(member);
-//			model.addAttribute("movieReservation", movieReservation);
-			
-			// 예매내역 관람날짜
-//			List<TicketVO> dateReservation = reservationService.getDateReservation(id);
-//			model.addAttribute("dateReservation", dateReservation);
-//			System.out.println("dateReservation" + dateReservation);
+			// 예매내역
+			List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
+			model.addAttribute("movieReservation", movieReservation);
 			
 //			List<Object> combinedList = new ArrayList<>();
 //			combinedList.addAll(movieReservation);
@@ -217,7 +212,7 @@ public class MypageController {
 		String id = (String)session.getAttribute("sId");
 		
 		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다!");
 			model.addAttribute("targetURL", "./member_login");
 			return"error/fail";
 		}
@@ -259,13 +254,10 @@ public class MypageController {
 		member = mypageService.getMember(id);
 		model.addAttribute("member", member);
 		System.out.println("myp_reservation()");
-		// 좌석 정보, 티켓 가격
+		// 예매정보
 		List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
 		model.addAttribute("movieReservation", movieReservation);
 		
-		// 예매날짜
-//		List<Map<String , Object>> movieReservation = mypageService.getDateReservation(member);
-//		model.addAttribute("dateReservation", movieReservation);
 		return "mypage/myp_reservation";
 	}
 	
@@ -277,7 +269,7 @@ public class MypageController {
 		String id = (String)session.getAttribute("sId");
 		
 		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
 			model.addAttribute("targetURL", "./member_login");
 			return"error/fail";
 		}

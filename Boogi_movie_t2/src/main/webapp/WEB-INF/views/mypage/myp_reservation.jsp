@@ -127,8 +127,7 @@ hr{
 <c:forEach items="${movieReservation}" var="map">
     <div class="row">
         <div class="col-md-3">
-            <!-- 이미지 처리 방법은 예시이며, 실제 데이터 모델에 따라 달라질 수 있습니다. -->
-            <img src="${pageContext.request.contextPath}/resources/images/myp_img1.jpg" style="margin-left: 30px" width="200px" height="250px">
+        	<img src="${map.movie_poster }" style="margin-left: 30px" width="200px" height="250px">
         </div>
         <div class="paybox1 col-md-6">
             <div class="col-md-4 d-grid gap-5">
@@ -139,7 +138,7 @@ hr{
             <div class="col-md-4 d-grid gap-5">
                 <input type="text" readonly class="form-control-plaintext" value="${map.movie_name}">
                 <input type="text" readonly class="form-control-plaintext" value="${map.scs_date}">
-                <input type="text" readonly class="form-control-plaintext" value="${map.theater_name}">
+                <input type="text" readonly class="form-control-plaintext" value="${map.theater_info}">
             </div>
             <div class="col-md-4 d-grid gap-5">
                 <input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example" disabled readonly>
@@ -147,7 +146,7 @@ hr{
                 <input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example" disabled readonly>
             </div>
             <div class="col-md-4 d-grid gap-5">
-                <input type="text" readonly class="form-control-plaintext" value="${map.scs_start_time}">
+                <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
                 <input type="text" readonly class="form-control-plaintext" value="${map.ticket_seat_info}">
                 <input type="text" readonly class="form-control-plaintext" value="${map.ticket_price}">
             </div>

@@ -41,17 +41,12 @@ public class MypageService {
 		return mapper.selectMyTheater(member);
 	}
 	
-	// 예매내역 좌석정보, 티켓가격
+	// 예매내역 
 	public List<Map<String , Object>> getMovieReservation(MemberVO member) {
 		System.out.println("MypageInfoService - getMovieReservation()");
 		return mapper.selectMovieReservation(member);
 	}
 	
-	// 예매내역 관람날짜
-	public List<Map<String , Object>> getDateReservation(MemberVO member){
-		System.out.println("MypageInfoService - getDateReservation()");
-		return mapper.selectDateReservation(member);
-	}
 	// 회원정보
 	public MemberVO getDbMember(MemberVO member) {
 		System.out.println("MypageInfoService - getDbMember");

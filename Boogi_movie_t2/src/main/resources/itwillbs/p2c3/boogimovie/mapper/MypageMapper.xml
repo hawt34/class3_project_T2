@@ -25,36 +25,29 @@
     
     <!-- 예매내역 -->
 	<select id="selectMovieReservation" resultType="map">
-<!-- 		SELECT ticket.ticket_seat_info, ticket.ticket_price -->
-<!-- 		FROM ticket JOIN pay -->
-<!-- 		ON ticket.ticket_pay_num = pay.ticket_pay_num  -->
-<!-- 		JOIN member -->
-<!-- 		ON member.member_id = pay.member_id  -->
-<!-- 		WHERE member.member_id = #{member_id} -->
-		
-	    SELECT
-	        ticket.ticket_seat_info,
-	        ticket.ticket_price,
-	        screen_session.scs_date
-	    FROM
-	        ticket
-	    JOIN pay ON ticket.ticket_pay_num = pay.ticket_pay_num
-	    JOIN member ON member.member_id = pay.member_id
-	    JOIN screen_session ON screen_session.scs_num = pay.scs_num
-	    WHERE
-	        member.member_id = #{member_id}
+ 		SELECT
+		   movie.movie_name,
+		   movie.movie_poster,
+<!-- 		   screen_session.scs_start_time, -->
+<!-- 		   screen_session.scs_end_time, -->
+		   CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time,
+<!-- 		   theater.theater_name, -->
+<!-- 		   theater.theater_num, -->
+		   CONCAT(theater.theater_name, ' ', theater.theater_num, '관') AS theater_info,
+		   ticket.ticket_seat_info,
+		   ticket.ticket_price,
+		   screen_session.scs_date
+		FROM
+			screen_session
+		JOIN pay ON screen_session.scs_num = pay.scs_num 
+		JOIN member ON member.member_id = pay.member_id 
+		JOIN theater ON theater.theater_num = screen_session.theater_num
+		JOIN movie ON movie.movie_num = screen_session.movie_num
+		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num 
+		WHERE member.member_id = #{member_id}
 	 
 		
 	</select>
-    
-<!--     <select id="selectDateReservation"> -->
-<!-- 	    SELECT scs_date -->
-<!-- 		FROM screen_session JOIN pay  -->
-<!-- 		ON screen_session.scs_num = pay.scs_num  -->
-<!-- 		JOIN member -->
-<!-- 		ON member.member_id = pay.member_id  -->
-<!-- 		WHERE member.member_id = #{member_id} -->
-<!--     </select> -->
     
     <!-- 회원정보 -->
     <select id="selectDbMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">

@@ -64,12 +64,12 @@
 			 <div class="theater_parking"> <!-- 주차 안내 -->
 				<h5>■ 주차</h5>	
 				<div class="theater_parking_info">
-					<p>주차안내</p>
+					<b>주차안내</b><br>
 					${theater.theater_parking_info}
 				</div>
 				<br>
 				<div class="theater_parking_fee">
-					<p>주차요금</p>
+					<b>주차요금</b><br>
 					${theater.theater_parking_fee}
 				</div>		
 			 </div> <!-- theater_parking 끝 -->

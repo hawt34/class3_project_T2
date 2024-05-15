@@ -34,8 +34,6 @@ public class TheaterController {
 	@Autowired
 	private MypageService mypageService;
 	
-	@Autowired
-	private EventService eventService;
 	
 	
 	
@@ -46,7 +44,6 @@ public class TheaterController {
 		// 로그인한 경우
 		String sId = (String)session.getAttribute("sId");
 		
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+sId);
 		if(sId != null) {
 			member.setMember_id(sId);
 			member = mypageService.getMyTheater(member);
@@ -58,7 +55,7 @@ public class TheaterController {
 		// 극장 전체 리스트 조회
 		List<TheaterVO> theaterList = service.getTheater();
 		// 극장 이벤트 조회
-		List<EventVO> eventList = eventService.getEventList();
+		List<EventVO> eventList = service.getTheaterEventList();
 		
 		
 		model.addAttribute("noticeList", noticeList);

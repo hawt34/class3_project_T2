@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterFacilityVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
@@ -46,6 +47,9 @@ public interface TheaterMapper {
 
 	// 관리자 > 극장 관리 > 극장삭제
 	int deleteTheater(TheaterVO theater);
+
+	// 극장 메인 > 극장 관련 이벤트 목록
+	List<EventVO> selectTheaterEventList();
 
 
 

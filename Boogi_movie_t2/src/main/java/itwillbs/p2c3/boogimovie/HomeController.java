@@ -40,7 +40,7 @@ public class HomeController {
 		//System.out.println(movieInfo);
 		return "movie/movie";
 	}
-<<<<<<< HEAD
+
 //	@GetMapping("movieFuture")// 상영예정작리스트
 //	public String movieFuture(Model model) {
 //		
@@ -49,6 +49,5 @@ public class HomeController {
 //		//System.out.println("여기는 무비퓨처" + movieFuture);확인완료
 //	    return "movie/movieFuture";
 //	}
-=======
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
+
 }

@@ -23,15 +23,38 @@
 		WHERE member_id = #{member_id};
     </select>
     
-    <!-- 예매내역 영화제목 -->
-	<select id="selectMovieReservation" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO" parameterType="String">
-		SELECT movie.movie_name 
-		FROM movie JOIN review
-		ON movie.movie_num = review.movie_num
-		JOIN member 
-		ON member.member_id = review.member_id
-	  	WHERE member.member_id = #{member_id}
+    <!-- 예매내역 -->
+	<select id="selectMovieReservation" resultType="map">
+<!-- 		SELECT ticket.ticket_seat_info, ticket.ticket_price -->
+<!-- 		FROM ticket JOIN pay -->
+<!-- 		ON ticket.ticket_pay_num = pay.ticket_pay_num  -->
+<!-- 		JOIN member -->
+<!-- 		ON member.member_id = pay.member_id  -->
+<!-- 		WHERE member.member_id = #{member_id} -->
+		
+	    SELECT
+	        ticket.ticket_seat_info,
+	        ticket.ticket_price,
+	        screen_session.scs_date
+	    FROM
+	        ticket
+	    JOIN pay ON ticket.ticket_pay_num = pay.ticket_pay_num
+	    JOIN member ON member.member_id = pay.member_id
+	    JOIN screen_session ON screen_session.scs_num = pay.scs_num
+	    WHERE
+	        member.member_id = #{member_id}
+	 
+		
 	</select>
+    
+<!--     <select id="selectDateReservation"> -->
+<!-- 	    SELECT scs_date -->
+<!-- 		FROM screen_session JOIN pay  -->
+<!-- 		ON screen_session.scs_num = pay.scs_num  -->
+<!-- 		JOIN member -->
+<!-- 		ON member.member_id = pay.member_id  -->
+<!-- 		WHERE member.member_id = #{member_id} -->
+<!--     </select> -->
     
     <!-- 회원정보 -->
     <select id="selectDbMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">

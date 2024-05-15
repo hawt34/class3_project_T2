@@ -278,7 +278,7 @@ body {
 	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
 	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
 	
-	        if (pwdIsValid && pwd2IsValid && birthIsValid && addressIsValid && emailIsValid && telIsVali    d) {
+	        if (pwdIsValid && pwd2IsValid && birthIsValid && addressIsValid && emailIsValid && telIsValid) {
 	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
 	        } else {
 	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화

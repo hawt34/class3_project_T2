@@ -18,6 +18,7 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous">
 </script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css">
 <style>
 #event_type_num{
@@ -117,6 +118,23 @@
 	        }, false);
 	      });
 	    }, false);
+	    
+	    $(function() {
+			$("#event_end_date").change(function() {
+				if($("#event_start_date").val() == ""){
+					alert("이벤트 시작일을 먼저 선택해주세요");
+					$('#event_end_date').val('');
+					$("#event_start_date").focus();
+				} else {
+		            var startDateValue = $("#event_start_date").val();
+		            $('#event_end_date').attr('min', startDateValue);
+		        }
+			});
+		    $('#event_start_date').change(function() {
+		        $('#event_end_date').attr('min', $(this).val());
+		    });
+		});    
+	  
 	    
  	</script>
 </body>

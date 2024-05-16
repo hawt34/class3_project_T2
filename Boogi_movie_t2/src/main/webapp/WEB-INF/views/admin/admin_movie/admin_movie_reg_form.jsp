@@ -88,10 +88,6 @@ body {
 						<input type="text" class="form-control" id="movie_runtime" name="movie_runtime" required/>
 					</div>
 					<div class="mb-3">
-						<label for="movie_status">개봉현황</label> 
-						<input type="text" class="form-control" id="movie_status" name="movie_status" required/>
-					</div>
-					<div class="mb-3">
 						<label for="movie_open_date">개봉일</label> 
 						<input type="date" name="movie_open_date" id="movie_open_date" class="form-control" required/>
 						<div class="invalid-feedback">개봉일을 선택해주세요.</div>

@@ -1,10 +1,12 @@
 package itwillbs.p2c3.boogimovie.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.mapper.AdminMapper;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
@@ -15,6 +17,7 @@ import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 
 @Service
 public class AdminService {
@@ -93,6 +96,26 @@ public class AdminService {
 	// 상영관리 상영관 데이터 가져오기
 	public List<ScreenInfoVO> getScreensByTheater(String theater_num) {
 		return mapper.getScreensByTheater(theater_num);
+	}
+	
+	// 상영일정 등록
+	public int insertMoviePlan(ScreenSessionVO screenSession) {
+		return mapper.insertMoviePlan(screenSession);
+	}
+	
+	// 상영일정 삭제
+	public int deleteMoviePlan(int scs_num) {
+		return mapper.deleteMoviePlan(scs_num);
+	}
+	
+	// 상영관 일정 가져오기
+	public List<Map<String, String>> selectMoviePlanList() {
+		return mapper.selectMoviePlanList();
+	}
+	
+	// 시작, 종료시간 가져오기
+	public List<Map<String, String>> getMovieTimeList(int theaterSelect, int screenSelect, Date scs_date) {
+		return mapper.getMovieTimeList( theaterSelect,  screenSelect,  scs_date);
 	}
 	
 	//--------------------------------------------------------------

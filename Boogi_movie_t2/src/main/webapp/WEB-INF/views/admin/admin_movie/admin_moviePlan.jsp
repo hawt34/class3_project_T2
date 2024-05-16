@@ -46,37 +46,6 @@ tbody tr:hover {
 	cursor: pointer;
 }
 
-/* 테이블 비율 */
-th:nth-child(1), td:nth-child(1) {
-	width: 10%;
-}
-
-th:nth-child(2), td:nth-child(2) {
-	width: 7%;
-}
-
-th:nth-child(3), td:nth-child(3) {
-	width: 30%;
-}
-
-th:nth-child(4), td:nth-child(4) {
-	width: 5%;
-}
-
-th:nth-child(5), td:nth-child(5) {
-	width: 10%;
-}
-
-th:nth-child(6), td:nth-child(6) {
-	width: 8%;
-}
-th:nth-child(7), td:nth-child(7) {
-	width: 8%;
-}
-th:nth-child(8), td:nth-child(8) {
-	width: 10%;
-}
-
 .admin_plan_head {
 	margin: 50px 0;
 	text-align: right;
@@ -155,7 +124,7 @@ th:nth-child(8), td:nth-child(8) {
 								<tr>
 									<td>
 										<div>
-											<select id="theaterSelect" class="admin_moviePlan_search">
+											<select id="theaterSelect" class="admin_moviePlan_search" name="theater_num">
 												<option value="0">극장선택</option>
 												<option value="1">해운대점</option>
 												<option value="2">센텀점</option>
@@ -172,15 +141,15 @@ th:nth-child(8), td:nth-child(8) {
 									</td>
 									<td>
 										<div>
-											<select id="screenSelect" class="admin_moviePlan_search">
+											<select id="screenSelect" class="admin_moviePlan_search" name="screen_cinema_num">
 											</select> 
 										</div>
 									</td>
 									<td>
 										<div>
-											<select id="movieSelect" name="movieSelect" class="admin_moviePlan_search">
+											<select id="movieSelect" name="movie_num" class="admin_moviePlan_search">
 												<c:forEach var="movie" items="${movieList}">
-													<option value="${movie.movie_name}">${movie.movie_name}</option>
+													<option value="${movie.movie_num}">${movie.movie_name}</option>
 												</c:forEach>
 											</select> 
 										</div>
@@ -192,17 +161,17 @@ th:nth-child(8), td:nth-child(8) {
 										</select>
 									</td>
 									<td>
-										<input type="date" class="admin_moviePlan_search" id="myDate" name="myDate" min="yyyy-mm-dd">
+										<input type="date" class="admin_moviePlan_search" id="scs_date" name="scs_date" min="yyyy-mm-dd">
 									</td>
 									<td>
-										<select id="hourSelect" class="admin_moviePlan_search">
+										<select id="hourSelect" name="scs_start_time" class="admin_moviePlan_search">
 											<c:forEach var="hour" begin="9" end="24">
-											    <option value="${hour}:00">${hour}:00</option>
+											    <option value="${hour}:00" >${hour}:00</option>
 											</c:forEach>
 										</select>
 									</td>
 									<td>
-										<input type="text" id="movieEndTime" class="admin_moviePlan_search" readonly>
+										<input type="text" id="movieEndTime" name="scs_end_time" class="admin_moviePlan_search" readonly>
 									</td>
 									<td>
 										<button type="submit" class="btn btn-outline-primary">등록하기</button>
@@ -215,6 +184,7 @@ th:nth-child(8), td:nth-child(8) {
 					<table>
 						<thead>
 							<tr>
+								<th>상영번호</th>
 								<th>극장</th>
 								<th>상영관</th>
 								<th>영화제목</th>
@@ -222,24 +192,26 @@ th:nth-child(8), td:nth-child(8) {
 								<th>상영날짜</th>
 								<th>상영시간</th>
 								<th>상영종료</th>
-								<th>상영일정등록</th>
+								<th>상영일정수정</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>서면점</td>
-								<td>3관</td>
-								<td>윙카</td>
-								<td>2D</td>
-								<td>2024-04-19</td>
-								<td>09:00</td>
-								<td>12:00</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="moviePlanEdit()">수정</button>
-									<button type="button" class="btn btn-outline-primary" onclick="moviePlanWithdraw()">삭제</button>
-								</td>
-							</tr>
-							
+							<c:forEach var="moviePlan" items="${moviePlanList}">
+								<tr>
+									<td>${moviePlan.scs_num}</td>
+									<td>${moviePlan.theater_name}</td>
+									<td>${moviePlan.screen_cinema_num}</td>
+									<td>${moviePlan.movie_name}</td>
+									<td>${moviePlan.screen_dimension}</td>
+									<td>${moviePlan.scs_date}</td>
+									<td>${moviePlan.scs_start_time}</td>
+									<td>${moviePlan.scs_end_time}</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" onclick="moviePlanEdit()">수정</button>
+										<button type="button" class="btn btn-outline-primary" onclick="moviePlanWithdraw(${moviePlan.scs_num})">삭제</button>
+									</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -263,29 +235,58 @@ th:nth-child(8), td:nth-child(8) {
 		}
 		
 		// 상영관리 삭제하기
-		function moviePlanWithdraw() {
+		function moviePlanWithdraw(scs_num) {
 			if(confirm("정말 삭제하시겠습니까?")){
-				location.href = "admin_moviePlan_delete";
+				location.href = "admin_moviePlan_delete?scs_num=" + scs_num;
 			}
 		}
 		
 		// 오늘 이전 날짜 설정 disable 시키기
 		var now = new Date();
-	    var yyyy = now.getFullYear();
-	    var mm = now.getMonth() + 1; // 0부터 시작하므로 1을 더함
-	    var dd = now.getDate();
-	    
-	    if(mm < 10){
-	        mm = '0' + mm;
-	    }
-	    if(dd < 10){
-	        dd = '0' + dd;
-	    }
-	    var minDate = yyyy + '-' + mm + '-' + dd;
-	    document.getElementById('myDate').setAttribute('min', minDate);
+		var year = now.getFullYear();
+		var month = (now.getMonth() + 1).toString().padStart(2, '0');
+		var day = now.getDate().toString().padStart(2, '0');
+	    var minDate = year + '-' + month + '-' + day;
+	    document.getElementById('scs_date').setAttribute('min', minDate);
 		
 		// 극장 ajax
 		$(document).ready(function() {
+			
+			$('#scs_date').change(function(){
+				
+				// 날짜 정보가 변할떄 코드 시작
+				let theaterSelect = $('#theaterSelect').val();
+				let screenSelect = $('#screenSelect').val();
+				let scs_date = $('#scs_date').val();
+				
+				// 영화번호
+// 				let movieSelect = $('#movieSelect').val();
+				$.ajax({
+					type: "GET",
+					url: "moviePlan_time",
+					data: {
+						theaterSelect : theaterSelect,
+						screenSelect : screenSelect,
+						scs_date : scs_date,
+					},
+					success : function(data) {
+		 				for(movieTime of data){
+		 					for(let i = movieTime.start; i < movieTime.end; i++ ){
+		 						$("#hourSelect option[value*='"+time+":00']").prop('disabled',true);	
+		 					}
+	 					}						
+					},
+					error : function() {
+						alert("상영시간 선택 오류발생!");
+					}
+					
+				});
+				
+
+				
+			});
+			
+			
 		    $('#theaterSelect').change(function() {
 		        var theater_num = $("#theaterSelect").val();
 		        $.ajax({
@@ -297,7 +298,7 @@ th:nth-child(8), td:nth-child(8) {
 		                $('#screenSelect').empty(); // 기존옵션 제거
 		                // option 요소 생성하여 추가
 		                $.each(response, function(index, screen_info){
-		                	$('#screenSelect').append('<option value="' + screen_info.screen_num + '">' + screen_info.screen_cinema_num + '관</option>');
+		                	$('#screenSelect').append('<option value="' + screen_info.screen_cinema_num + '">' + screen_info.screen_cinema_num + '관</option>');
 		                });
 		            }
 		        });
@@ -319,7 +320,6 @@ th:nth-child(8), td:nth-child(8) {
 		            }
 		        });
 		    });
-		        
 	    });
 
 	</script>

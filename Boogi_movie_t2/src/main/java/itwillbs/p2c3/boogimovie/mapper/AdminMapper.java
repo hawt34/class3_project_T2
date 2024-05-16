@@ -1,5 +1,6 @@
 package itwillbs.p2c3.boogimovie.mapper;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 
 @Mapper
 public interface AdminMapper {
@@ -62,6 +64,21 @@ public interface AdminMapper {
 	//========================================================
 	// 상영관리 - 상영관 불러오기
 	List<ScreenInfoVO> getScreensByTheater(String theater_num);
+	
+	// 상영 등록
+	int insertMoviePlan(ScreenSessionVO screenSession);
+
+	// 상영 삭제
+	int deleteMoviePlan(int scs_num);
+	
+	// 상영일정 리스트
+	List<Map<String, String>> selectMoviePlanList();
+	
+	// 상영 시작, 종료시간 가져오기
+	List<Map<String, String>> getMovieTimeList(@Param("theaterSelect") int theaterSelect,
+											   @Param("screenSelect") int screenSelect,
+											   @Param("scs_date") Date scs_date
+											   );
 	
 	//========================================================
 	// 이벤트 등록

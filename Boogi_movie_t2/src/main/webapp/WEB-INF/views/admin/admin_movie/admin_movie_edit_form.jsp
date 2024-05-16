@@ -99,10 +99,6 @@ body {
 						<div class="invalid-feedback">종영일을 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_status">개봉현황</label> 
-						<input type="text" class="form-control" id="movie_status" name="movie_status" value="${movie.movie_status}" />
-					</div>
-					<div class="mb-3">
 						<label for="movie_poster">포스터</label> 
 						<input type="text" name="movie_poster" id="movie_poster" class="form-control" required value="${movie.movie_poster}" />
 						<div class="invalid-feedback">포스터를 선택해주세요.</div>

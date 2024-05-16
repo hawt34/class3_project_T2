@@ -82,11 +82,11 @@ public class AdminController {
 	// 관리자 고객센터
 	// faq List view에 포워딩
 	@GetMapping("admin_faq")
-	public String adminFAQ(@RequestParam(defaultValue = "1")int pageNum, Model model) {
+	public String adminFAQ(@RequestParam(defaultValue = "1")int pageNum, Model model, String faqCategory) {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
 		
-		int listCount = faqService.getFaqListCount(); //총 공지사항 갯수
+		int listCount = faqService.getFaqListCount(faqCategory); //총 공지사항 갯수
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
@@ -97,7 +97,7 @@ public class AdminController {
 		}
 		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
-		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow);
+		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow, faqCategory);
 		
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("faqList", faqList);

@@ -51,7 +51,7 @@
 			<!-- 구분 카테고리 시작 -->
 			<div class="row mt-3">
 				<div class="csc_faq_sel">
-					<select id="faq_category" name="faq_category" class="form-select form-select-sm w-25" aria-label="Small select example">
+					<select id="faq_category" name="faq_category" class="form-select form-select-sm w-25">
 						<option value="">전체</option>
 						<option value="예매/결제" data-category="예매/결제">예매/결제</option>
 						<option value="영화관이용" data-category="영화관이용">영화관이용</option>
@@ -90,15 +90,21 @@
 </div>
 <script type="text/javascript">
 //마지막 스크롤 값 저장
-let lastScroll = 0;
 
 let pageNum = 1;
-let isLoading = false;
 
 if(!pageNum) {
 	pageNum = 1;
 }
-function getScroll(faqCatecory = '') {
+//유형데이터 가져오기
+let faqCategory = $("#faq_category");
+
+
+//로딩중 중복 요청 방지
+let isLoading = false;
+
+debugger;
+function getScroll(faqCatecory) {
 	if (isLoading) return; // 이미 데이터를 불러오고 있는 중이라면 중복 요청 방지
 	isLoading = true; // 데이터 요청 중 플래그 설정
 	
@@ -111,7 +117,6 @@ function getScroll(faqCatecory = '') {
 		},
 		dataType: "json",
 		success: function(response)	{
-			debugger;
 			let faqList = response;
 			$.each(faqList, function(index, faq) {
 				let accordion = $(".csc_accordion");
@@ -169,10 +174,13 @@ $(document).scroll(function() {
         getScroll(); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
     }
 }); 
-
 $(function() {
+	
 	$("#faq_category").change(function() {
-		let faqCategory = $("#faq_category").val();
+		if(!faqCategory) {
+			faqCategory = '';
+		}
+		console.log(faqCategory);
 		getScroll(faqCategory);
 	});
 });

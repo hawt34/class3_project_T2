@@ -11,8 +11,6 @@ public class ScreenSessionVO {
 	private int theater_num;
 	private int scs_empty_seat;
 	private Date scs_date;
-	private String scs_start_date;
-	private String scs_end_date;
 	private String screen_dimension;
 	private int screen_cinema_num;
 	
@@ -21,6 +19,7 @@ public class ScreenSessionVO {
 	private String screen_seat_row;
 	private String screen_seat_col;
 	private String select_date;
+	private Date current_date;
 	
 	//뷰페이지용 멤버변수
 	private String scs_start_time;

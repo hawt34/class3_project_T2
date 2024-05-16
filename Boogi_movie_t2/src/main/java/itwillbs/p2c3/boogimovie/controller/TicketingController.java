@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
 public class TicketingController {
-	
+		
 	@Autowired
 	private MovieInfoService movieService;
 	@Autowired
@@ -110,8 +111,8 @@ public class TicketingController {
 		ScreenSessionVO scs = new ScreenSessionVO();
 		scs.setMovie_num(movie_num);
 		scs.setTheater_num(theater_num);
-		scs.setScs_start_date(start_date);
-		scs.setScs_end_date(end_date);
+//		scs.setScs_start_date(start_date);
+//		scs.setScs_end_date(end_date);
 		//db에서 값 가져오기
 		ScreenSessionVO dbScs = ticketingService.chooseSeatSelect(scs);
 		//뷰에 가져갈 값 저장하기
@@ -279,22 +280,30 @@ public class TicketingController {
 		
 		//가져온 극장 정보로 극장번호 가져오기
 		TheaterVO theater = new TheaterVO();
-		theater.setTheater_name(selectedDay);
+		theater.setTheater_name(selectedTheater);
 		int theater_num = theaterService.getTheaterName(selectedTheater);
 		
 		//종합한 정보를 vo에 담아 db접근
 		ScreenSessionVO scs = new ScreenSessionVO();
 		scs.setMovie_num(movie_num);
 		scs.setTheater_num(theater_num);
-		scs.setSelect_date(selectedDay);
+		Date date = null;
+		//포멧
+		try {
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			date = formatter.parse(selectedDay);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		scs.setScs_date(date);
+		scs.setCurrent_date(new Date());
 		List<ScreenSessionVO> final_list = ticketingService.finalListSelect(scs);
 		
+		
+		
 		//final_list값 수정,채워넣기
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 		for(ScreenSessionVO dbscs : final_list) {
-			//날짜 > 시간변환
-			dbscs.setScs_start_time(sdf.format(dbscs.getScs_start_date()));
-			dbscs.setScs_end_time(sdf.format(dbscs.getScs_end_date()));
 			//영화이름 채워넣기
 			dbscs.setMovie_name(selectedMovie);
 			//관 이름 채워넣기
@@ -305,8 +314,8 @@ public class TicketingController {
 	        // screenSeatCol을 정수로 변환 (A=1, B=2, ..., H=8)
 	        int numCols = dbscs.getScreen_seat_col().charAt(0) - 'A' + 1;
 	        dbscs.setTotal_seat(numRows * numCols);
-	        
 		}
+	        
 		System.out.println(final_list);
 		
 			
@@ -314,20 +323,4 @@ public class TicketingController {
 		return final_list;
 	}
 
-
-
-	
 }
-
-		
-		
-		
-		
-		
-	
-	
-	
-
-	
-
-		

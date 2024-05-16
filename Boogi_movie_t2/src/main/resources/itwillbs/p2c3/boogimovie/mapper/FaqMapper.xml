@@ -27,7 +27,7 @@
   			   faq_read_count
   		FROM faq
   		ORDER BY faq_num DESC
-  		<if test="!faqCategory.equals('') and faqCategory != null">
+  		<if test="faqCategory != null and faqCategory != ''">
 	  		WHERE faq_category = #{faqCategory}
   		</if>
   		LIMIT #{startRow}, #{listLimit}

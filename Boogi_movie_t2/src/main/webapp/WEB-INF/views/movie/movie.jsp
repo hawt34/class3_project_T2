@@ -6,10 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/resources/css/movie.css"	rel="stylesheet" type="text/css">
+<%-- <link href="${pageContext.request.contextPath}/resources/css/movie.css"	rel="stylesheet" type="text/css"> --%>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -64,9 +63,9 @@
 			        
 			        if (!sId) {
 			            // 로그인되어 있지 않다면 확인 후 이동
-			            if (confirm("로그인이 필요합니다. 상단의 로그인 영역으로 이동하시겠습니까?")) {
+			            if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
 			                // 로그인 페이지로 이동
-			            	$('a[href="member_login"]').focus();
+			            	 window.location.href = 'member_login';
 			            }
 			        } else {
 			            // 로그인되어 있다면 예매 페이지로 이동

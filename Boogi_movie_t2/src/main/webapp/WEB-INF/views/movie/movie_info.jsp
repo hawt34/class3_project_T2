@@ -335,10 +335,10 @@ footer {
     	$('#movieTicket').click(function() {
         // 세션 아이디 확인
         	if (!sId) {
-        		if (confirm("로그인이 필요합니다. 상단의 로그인영역으로 이동하시겠습니까?")) {
-                	// 로그인 페이지로 이동
-            		$('a[href="member_login"]').focus();
-            	}
+        		 if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
+		                // 로그인 페이지로 이동
+		            	 window.location.href = 'member_login';
+		            }
         		} else {
             	// 세션 아이디가 있으면 예매 페이지로 이동
             		window.location.href = 'tic_ticketing';
@@ -351,9 +351,10 @@ footer {
     	let reviewText = $("#reviewText").val().trim();
     	// 로그인 여부 확인
     	if (!sId) {
-        	if (confirm("로그인이 필요합니다. 상단의 로그인영역으로 이동하시겠습니까?")) {
-            // 로그인 페이지로 이동
-        	$('a[href="member_login"]').focus();
+    		 if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
+	                // 로그인 페이지로 이동
+	            	 window.location.href = 'member_login';
+	            }
         	}
         	event.preventDefault(); // 폼 제출 중단
        		return;

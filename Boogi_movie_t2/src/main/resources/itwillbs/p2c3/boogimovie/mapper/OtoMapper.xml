@@ -39,6 +39,12 @@
 		 FROM oto o
 		 JOIN theater t
    		on o.theater_num = t.theater_num
+   		<if test="faqCategory != null and faqCategory != ''">
+   			WHERE oto_category = #{faqCategory}
+   		</if>
+   		<if test="theaterName != null and theaterName != ''">
+   			WHERE theater_name = #{theaterName}
+   		</if>
 		ORDER BY oto_num DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
@@ -80,9 +86,18 @@
 		SET oto_reply_status = '답변'
 		WHERE oto_num = #{oto_num}
 	</update>
+	
 	<!-- 1대1 문의 게시물 갯수 -->
 	<select id="getOtoListCount" resultType="int">
 		SELECT COUNT(oto_num)
-		FROM oto
+		FROM oto o
+		JOIN theater t
+   		on o.theater_num = t.theater_num
+		<if test="faqCategory != null and faqCategory != ''">
+   			WHERE oto_category = #{faqCategory}
+   		</if>
+   		<if test="theaterName != null and theaterName != ''">
+   			WHERE theater_name = #{theaterName}
+   		</if>
 	</select>
 </mapper>

@@ -22,7 +22,7 @@
 </style>
 </head>
 <body>
-	<c:set var="pageNum" value="${empty pageNum ? 1 : pageNum }" />
+	<c:set var="pageNum" value="${empty pageNum ? 1 : param.pageNum }" />
 	<header>
 		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 	</header>

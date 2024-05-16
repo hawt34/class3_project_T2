@@ -16,6 +16,8 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous">
 </script>
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 <style type="text/css">
 	.admin_csc_selectBox {
 		display: flex;
@@ -111,150 +113,171 @@
 </style>
 </head>
 <body>
-	<header>
-		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
-	</header>
-	
+<header>
+	<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
+</header>
+
 <!-- 	<div class="container"> -->
-		<div class="row">
-		
-			<!-- side 영역 -->
-			<div class="col-2">
-				<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
-			</div>
-			<!-- content 영역 -->
-			<div class="col-9">
-				<div class="admin_ono_head">
-					<div class="admin_ono_title">1대1 문의 관리</div>
-						<div class="admin_ono_search">
-							<table>
-								<tr>
-									<td>
-							<!-- 문의 유형 카테고리 -->
-										<select class="form-select form-select-sm w-50"
-											aria-label="Default select example" name="csc_category" id="admin_faq">
-											<option selected value="" >문의 유형 선택</option>
-											<option value="예매/결제">예매/결제</option>
-											<option value="영화관이용">영화관이용</option>
-											<option value="쿠폰">쿠폰</option>
-											<option value="스토어">스토어</option>
-											<option value="홈페이지/모바일">홈페이지/모바일</option>
-										</select> 
-									</td>
-									<td>
-										<select class="form-select form-select-sm w-50"
-											aria-label="Default select example" name="csc_theater" id="admin_theater">
-											<option selected>문의 지점 선택</option>
-											<option value="해운대점">해운대점</option>
-											<option value="서면점">서면점</option>
-											<option value="남포점">남포점</option>
-											<option value="부산대점">부산대점</option>
-											<option value="사직점">사직점</option>
-											<option value="영도점">영도점</option>
-											<option value="사직점">사직점</option>
-											<option value="덕천점">덕천점</option>
-											<option value="정관점">정관점</option>
-											<option value="사상점">사상점</option>
-										</select>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				
-				<div class="admin_ono_body">
+<div class="row">
+	<c:set var="pageNum" value="${empty pageNum ? 1 : param.pageNum }" />
+	<!-- side 영역 -->
+	<div class="col-2">
+		<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
+	</div>
+	<!-- content 영역 -->
+	<div class="col-9">
+		<div class="admin_ono_head">
+			<div class="admin_ono_title">1대1 문의 관리</div>
+				<div class="admin_ono_search">
 					<table>
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>작성자</th>
-								<th>문의제목</th>
-								<th>문의유형</th>
-								<th>문의지점</th>
-								<th>작성일</th>
-								<th>답변상태</th>
-								<th>답변</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:choose>
-								<c:when test="${empty otoList }">
-									<tr>
-										<td colspan="7">게시물이 없습니다</td>
-									</tr>
-								</c:when>
-								<c:otherwise>
-									<c:forEach var="oto" items="${otoList }">
-										<tr>
-											<td>${oto.oto_num }</td>
-											<td>${oto.member_id }</td>
-											<td>${oto.oto_subject }</td>
-											<td>${oto.oto_category }</td>
-											<td>${oto.theater_name }</td>
-											<td>${oto.oto_date }</td>
-											<td>${oto.oto_reply_status }</td> <!-- 답변 상태 -->
-											<td>
-												<c:choose>
-													<c:when test="${oto.oto_reply_status eq '답변'}">
-														<button type="button" class="btn btn-outline-primary" onclick="admin_oto_reply(${oto.oto_num})" style="display: none;">답변하기</button>
-													</c:when>
-													<c:otherwise>
-														<button type="button" class="btn btn-outline-primary" onclick="admin_oto_reply(${oto.oto_num})">답변하기</button>
-													</c:otherwise>
-												</c:choose>
-											</td>
-										</tr>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-							
-						</tbody>
+						<tr>
+							<td>
+					<!-- 문의 유형 카테고리 -->
+								<select class="form-select form-select-sm w-50"
+									aria-label="Default select example" name="csc_category" id="admin_faq">
+									<option value = "">문의 유형 선택</option>
+									<option value="예매/결제">예매/결제</option>
+									<option value="영화관이용">영화관이용</option>
+									<option value="쿠폰">쿠폰</option>
+									<option value="스토어">스토어</option>
+									<option value="홈페이지/모바일">홈페이지/모바일</option>
+								</select> 
+							</td>
+							<td>
+								<select class="form-select form-select-sm w-50"
+									aria-label="Default select example" name="csc_theater" id="admin_theater">
+									<option value = "">문의 지점 선택</option>
+									<option value="해운대점">해운대점</option>
+									<option value="서면점">서면점</option>
+									<option value="남포점">남포점</option>
+									<option value="부산대점">부산대점</option>
+									<option value="사직점">사직점</option>
+									<option value="영도점">영도점</option>
+									<option value="사직점">사직점</option>
+									<option value="덕천점">덕천점</option>
+									<option value="정관점">정관점</option>
+									<option value="사상점">사상점</option>
+								</select>
+							</td>
+						</tr>
 					</table>
 				</div>
-				<div class="notice_pageArea">
-				<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
-								<a class="page-link" href="admin_oto?pageNum=${pageNum - 1}" aria-label="Previous" >
-								<span aria-hidden="true" >&laquo;</span>
-								</a>
-							</li>
-							<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
-								<c:choose>
-									<c:when test="${pageNum eq i }">
-										<li class="page-item active"><a class="page-link">${i}</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link" href="admin_oto?pageNum=${i}">${i}</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-							<li class="page-item <c:if test="${pageNum eq pageList.maxPage}">disabled</c:if>">
-								<a class="page-link" href="admin_oto?pageNum=${pageNum + 1}" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
 			</div>
+		
+		<div class="admin_ono_body">
+			<table>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>작성자</th>
+						<th>문의제목</th>
+						<th>문의유형</th>
+						<th>문의지점</th>
+						<th>작성일</th>
+						<th>답변상태</th>
+						<th>답변</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:choose>
+						<c:when test="${empty otoList }">
+							<tr>
+								<td colspan="7">게시물이 없습니다</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="oto" items="${otoList }">
+								<tr>
+									<td>${oto.oto_num }</td>
+									<td>${oto.member_id }</td>
+									<td>${oto.oto_subject }</td>
+									<td>${oto.oto_category }</td>
+									<td>${oto.theater_name }</td>
+									<td>${oto.oto_date }</td>
+									<td>${oto.oto_reply_status }</td> <!-- 답변 상태 -->
+									<td>
+										<c:choose>
+											<c:when test="${oto.oto_reply_status eq '답변'}">
+												<button type="button" class="btn btn-outline-primary" onclick="admin_oto_reply(${oto.oto_num})" style="display: none;">답변하기</button>
+											</c:when>
+											<c:otherwise>
+												<button type="button" class="btn btn-outline-primary" onclick="admin_oto_reply(${oto.oto_num})">답변하기</button>
+											</c:otherwise>
+										</c:choose>
+									</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+					
+				</tbody>
+			</table>
 		</div>
+		<div class="notice_pageArea">
+<%-- 		<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" /> --%>
+			<c:choose>
+				<c:when test="">
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
+						<a class="page-link" href="admin_oto?pageNum=${pageNum - 1}&oto_category=${oto.oto_category}&theater_name=${oto.theater_name }"  >
+						<span aria-hidden="true" >&laquo;</span>
+						</a>
+					</li>
+					<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
+						<c:choose>
+							<c:when test="${pageNum eq i }">
+								<li class="page-item active"><a class="page-link">${i}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="admin_oto?pageNum=${i}&theater_name=${oto.theater_name}">${i}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<li class="page-item <c:if test="${pageNum eq pageList.maxPage}">disabled</c:if>">
+						<a class="page-link" href="admin_oto?pageNum=${pageNum + 1}&oto_category=${oto.oto_category}&theater_name=${oto.theater_name}" >
+						<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+
+<footer>
+	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
+</footer>
 	
-	<footer>
-		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
-	</footer>
+<script type="text/javascript">
+$(function () {
+	$("#admin_faq").change(function() {
+		let faqCategory = $(this).val();
+		location.href="admin_oto?faqCategory=" + faqCategory;
+// 		console.log(faqCategory);
+	});
 	
-	<script type="text/javascript">
-		function admin_oto_reply(num) {
-			window.open("admin_oto_detail?oto_num=" + num, "_self");
-		}
-		function admin_notice_withdraw() {
-			location.href="admin_notice_delete";
-		}
-	
-	
-	</script>
+	$("#admin_theater").change(function() {
+		let theaterName = $(this).val();
+		location.href="admin_oto?theaterName=" + theaterName;		
+		console.log(theaterName);
+	});
+}); 
+
+
+function admin_oto_reply(num) {
+	window.open("admin_oto_detail?oto_num=" + num, "_self");
+}
+function admin_notice_withdraw() {
+	location.href="admin_notice_delete";
+}
+
+
+</script>
 	
 </body>
 </html>

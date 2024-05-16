@@ -23,10 +23,8 @@ import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.CouponService;
 import itwillbs.p2c3.boogimovie.service.MypageService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
-import itwillbs.p2c3.boogimovie.service.ReservationService;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
-import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
@@ -43,8 +41,6 @@ public class MypageController {
 	@Autowired
 	private CouponService couponService;
 	
-	@Autowired
-	private ReservationService reservationService;
 	
 	@Autowired
 	private AdminService service;
@@ -164,20 +160,6 @@ public class MypageController {
 			model.addAttribute("targetURL", "./");
 			return "error/fail";
 		}
-//		member = mypageInfoService.getMember(id);
-//		MemberVO dbMember = mypageInfoService.getDbMember(member);
-//		model.addAttribute("dbMember", dbMember);
-//		session.setAttribute("member", member);
-//		System.out.println("member.getMember_id : " + member.getMember_id());
-//		if(id.equals(member.getMember_id())) {
-//			
-//			System.out.println("id : " + id + ", member_id : " + member.getMember_id() + " 같음 ");
-		
-//		} else {
-//			
-//			System.out.println("id : " + id + ", member_id : " + member.getMember_id() + " 다름 ");
-//			int updateCount = mypageInfoService.modifyMemberNotEq(member);
-//		}
 		// ----------------------------------------------------
 		// 만약, 변경할 패스워드가 존재할 경우 패스워드 암호화
 //		if(!member.getMember_pwd().equals("")) {
@@ -242,7 +224,7 @@ public class MypageController {
 	
 	// 예매내역
 	@GetMapping("myp_reservation")
-	public String mypReservation(MemberVO member, Model model) {
+	public String mypReservation(MemberVO member, Model model, @RequestParam(defaultValue = "1")int pageNum) {
 		String id = (String)session.getAttribute("sId");
 		
 		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
@@ -250,20 +232,47 @@ public class MypageController {
 			model.addAttribute("targetURL", "./member_login");
 			return"error/fail";
 		}
-		
 		member = mypageService.getMember(id);
 		model.addAttribute("member", member);
+		System.out.println("member : " + member);
+		System.out.println("member.getMember_id" + member.getMember_id());
 		System.out.println("myp_reservation()");
 		// 예매정보
 		List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
 		model.addAttribute("movieReservation", movieReservation);
 		
+		
+		int listLimit = 4;
+		int startRow = (pageNum - 1) * listLimit;
+		String member_id = member.getMember_id();
+		List<Map<String, Object>> resvList = mypageService.getResvList(startRow, listLimit, member_id);
+		int listCount = mypageService.getResvCount(member); // 총 예매영화 갯수
+		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+		
+		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+			endPage = maxPage;
+		}
+		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+
+//		if(pageNum < 1 || pageNum > maxPage){
+//			model.addAttribute("msg", "존재하지 않는 페이지입니다!");
+//			model.addAttribute("targetURL", "myp_reservation");
+//		}
+		model.addAttribute("pageList", pageList);
+		model.addAttribute("resvList", resvList);
+		
 		return "mypage/myp_reservation";
 	}
 	
+	// ============================= 취소 =============================
+	
 	// 취소 영화 목록
 	@GetMapping("myp_cancel")
-	public String mypCancel(Model model) {
+	public String mypCancel(Model model, MemberVO member) {
 //		System.out.println("myp_cancel()");
 		
 		String id = (String)session.getAttribute("sId");
@@ -274,6 +283,12 @@ public class MypageController {
 			return"error/fail";
 		}
 		
+		member = mypageService.getMember(id);
+		model.addAttribute("member", member);
+		
+		System.out.println("mypcontroller - myp_cancel()");
+		List<Map<String, Object>> cancelList = mypageService.getCancelList(member);
+		model.addAttribute("cancelList", cancelList);
 		
 		
 		return "mypage/myp_cancel";
@@ -314,7 +329,6 @@ public class MypageController {
 		// 세션 아이디 존재 여부 판별
 		// 회원 정보 조회 후 아이디 일치 여부와 패스워드 일치 여부 확인
 		String id = (String)session.getAttribute("sId");
-//		System.out.println("password : " + password);
 //		System.out.println("myp_withdraw_finish_pro");
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다");
@@ -322,14 +336,8 @@ public class MypageController {
 			return"error/fail";
 		}
 		
-		// 로그인 비즈니스 로직 처리 과정에서 사용한 MemberService - getMember() 메서드 재사용
-		// => MemberVO 객체를 파라미터로 전달하지만 객체 내에는 데이터가 없으므로
-		//    세션 아이디를 MemberVO 객체의 id 멤버변수 값으로 저장
 		member.setMember_id(id);
 		MemberVO dbMember = mypageService.getDbMember(member);
-//		System.out.println("dbMember pwd : " + dbMember.getMember_pwd());
-//		System.out.println("member pwd : " + password);
-//		System.out.println("dbMember : " + dbMember);
 		
 		if(dbMember != null && password.equals(dbMember.getMember_pwd())) { // 비번이 같을 때 
 			int updateCount = mypageService.withdrawMember(member);

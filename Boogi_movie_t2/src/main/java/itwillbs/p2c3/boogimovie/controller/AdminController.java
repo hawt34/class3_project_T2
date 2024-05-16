@@ -1,23 +1,14 @@
 package itwillbs.p2c3.boogimovie.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -26,7 +17,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.EventService;
@@ -46,6 +37,7 @@ import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
@@ -370,16 +362,37 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 상영관리 페이지
 	@GetMapping("admin_moviePlan")
-	public String adminMoviePlan() {
+	public String adminMoviePlan(Model model) {
+		List<Map<String, String>> movieList = service.getmovieList();
+		List<Map<String, String>> moviePlanList = service.selectMoviePlanList();
+		model.addAttribute("movieList", movieList);
+		model.addAttribute("moviePlanList", moviePlanList);
 		return "admin/admin_movie/admin_moviePlan";
 	}
 	@PostMapping("admin_moviePlan_reg")
-	public String adminMoviePlanReg() {
-		return "redirect:/admin_moviePlan";
+	public String adminMoviePlanReg(ScreenSessionVO screenSession, Model model) {
+		System.out.println(screenSession);
+		int insertCount = service.insertMoviePlan(screenSession);
+		
+		if(insertCount > 0) {
+			model.addAttribute("msg", "상영일정이 등록되었습니다");
+			model.addAttribute("targetURL", "admin_moviePlan");
+			return "error/fail";
+		} else {
+			model.addAttribute("msg", "일정등록에 실패하였습니다");
+			return "error/fail";
+		}
+		
 	}
 	@GetMapping("admin_moviePlan_delete")
-	public String adminMoviePlanDelete() {
-		return "redirect:/admin_moviePlan";
+	public String adminMoviePlanDelete(ScreenSessionVO screenSession, Model model) {
+		int deleteCount = service.deleteMoviePlan(screenSession.getScs_num());
+		if(deleteCount > 0) {
+			return "redirect:/admin_moviePlan";
+		} else {
+			model.addAttribute("msg", "삭제에 실패하였습니다");
+			return "error/fail";
+		}
 	}
 	@GetMapping("admin_moviePlan_form")
 	public String adminMoviePlanForm() {
@@ -390,6 +403,56 @@ public class AdminController {
 		return "redirect:/admin_moviePlan";
 	}
 	
+	// 상영관리 AJAX
+	
+	@GetMapping("getScreens")
+	@ResponseBody
+	public List<ScreenInfoVO> getScreens(@RequestParam("theater_num") String theater_num) {
+		List<ScreenInfoVO> screen_info = service.getScreensByTheater(theater_num);
+		System.out.println(screen_info);
+		return screen_info;
+	}
+	
+	@GetMapping("movieEndTime")
+	@ResponseBody
+	public ResponseEntity<String> movieEndTime(@RequestParam String hourSelect, @RequestParam String movieSelect) {
+		MovieVO movie = service.SelectMovie(Integer.parseInt(movieSelect));
+		String runtime = movie.getMovie_runtime();
+		
+     	String[] parts = hourSelect.split(":"); // 시간을 시와 분으로 분할
+	    int hours = Integer.parseInt(parts[0], 10); // 시간 부분을 정수로 변환
+	    int mins = Integer.parseInt(parts[1], 10); // 분 부분을 정수로 변환
+
+	    mins += Integer.parseInt(runtime); // 분에 분을 더함
+	    hours += Math.floor(mins / 60); // 60분을 초과한 부분을 시간에 추가
+	    mins = mins % 60; // 분을 60으로 나눈 나머지를 계산하여 분에 할당
+
+	    // 24시간 형식으로 시간 조정
+	    hours = (hours + 24) % 24;
+
+	    // 시간과 분을 2자리로 포맷팅
+	    var hoursFormatted = String.format("%02d", hours);
+	    var minsFormatted = String.format("%02d", mins);
+
+	    String endTime = "";
+	    endTime = hoursFormatted + ':' + minsFormatted;
+	    System.out.println(endTime);
+		
+		return ResponseEntity.ok().body(endTime);
+	}
+	
+	@GetMapping("moviePlan_time")
+	@ResponseBody
+	public List<Map<String, String>> moviePlanTime(@RequestParam int theaterSelect, @RequestParam int screenSelect, @RequestParam Date scs_date) {
+		List<Map<String, String>> movieTimeList = service.getMovieTimeList(theaterSelect, screenSelect, scs_date);
+		System.out.println("movieTimeList: " + movieTimeList);
+		for(Map<String, String> movieTime: movieTimeList) {
+			System.out.println(movieTime);
+		}
+		return movieTimeList;
+	}
+	
+	//--------------------------------------------------------------------
 	// 영화 리스트 조회 
 	@GetMapping("admin_movie")
 	public String adminMovie(Model model) {
@@ -472,6 +535,8 @@ public class AdminController {
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
+	
+	
 	
 	// 관리자 이벤트 
 	@GetMapping("admin_event")

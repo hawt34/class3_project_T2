@@ -38,4 +38,11 @@ public class ReviewService {
 		return mapper.deleteReview(review_id);
 	}
 	
+	 public int getTotalReviews(int movie_num) {
+	        return mapper.countReviews(movie_num);
+	 }
+
+	
+	
+	
 }

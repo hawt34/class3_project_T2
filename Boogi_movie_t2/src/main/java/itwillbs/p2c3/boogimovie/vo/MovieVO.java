@@ -22,7 +22,6 @@ public class MovieVO {
 	private String movie_stillCut3;
 	private String movie_genre;
 	
-	
 }
 	
 	

@@ -140,8 +140,11 @@ footer {
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
     $(document).ready(function() {
-        // 예매하기 및 상세보기 버튼 클릭 이벤트 처리
-        $(".list").on("click", ".movieTicket, .detail_button", function() {
+    	$(".list").on("click", ".detail_button", function() {
+    	    let movie_num = $(this).siblings(".movie_num").val();
+    	    window.location.href = 'movieInfo?movie_num=' + movie_num; // 영화 상세 정보 페이지로 이동
+    	});
+        $(".list").on("click", ".movieTicket", function() {
             let sId = "${sessionScope.sId}";
             let movie_num = $(this).siblings(".movie_num").val();
             
@@ -152,9 +155,7 @@ footer {
             } else {
                 if ($(this).hasClass("movieTicket")) {
                     window.location.href = 'tic_ticketing'; // 예매 페이지로 이동
-                } else {
-                    window.location.href = 'movieInfo?movie_num=' + movie_num; // 상세보기 페이지로 이동
-                }
+                } 
             }
         });
         

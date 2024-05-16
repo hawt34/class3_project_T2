@@ -96,17 +96,7 @@ body {
 					</div>
 					<div class="mb-3">
 						<label for="member_status">회원상태</label> 
-						<c:choose>
-							<c:when test="${member.member_status eq 1}">
-							<input type="text" id="member_status" class="form-control" readonly value="활동회원">
-							</c:when>
-							<c:when test="${member.member_status eq 2}">
-								<input type="text" id="member_status" class="form-control" readonly value="휴면">
-							</c:when>
-							<c:when test="${member.member_status eq 3}">
-								<input type="text" id="member_status" class="form-control" readonly value="탈퇴">
-							</c:when>
-						</c:choose>
+						<input type="text" id="member_status" class="form-control" readonly value="${member.member_status}">
 					</div>
 					
 					<hr class="mb-4">

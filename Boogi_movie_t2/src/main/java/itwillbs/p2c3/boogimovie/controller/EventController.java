@@ -41,7 +41,7 @@ public class EventController {
 					discountEventList.add(event);
 				}
 			}
-			
+			model.addAttribute("eventList", eventList);
 			model.addAttribute("movieEventList", movieEventList);
 			model.addAttribute("theaterEventList", theaterEventList);
 			model.addAttribute("discountEventList", discountEventList);

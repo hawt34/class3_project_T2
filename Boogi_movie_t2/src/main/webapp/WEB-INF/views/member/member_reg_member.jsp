@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -11,9 +14,6 @@
 <link href="${pageContext.request.contextPath}/resources/css/member_default.css" rel="stylesheet" type="text/css">
 <body>
 
-
-
-
 <header>
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
@@ -23,7 +23,7 @@
 	    <h3>회원가입</h3>
 	    <hr>
     </div>
-<form action="member_reg_member_pro" method="post" name="fr">
+<form action="member_reg_member_pro" method="post" name="fr" class="needs-validation">
 	<div class="member_row">
 		
 	    <div class="form_item">
@@ -32,45 +32,49 @@
 	    	<span></span>
 	    </div>
 	
-	
 	<label for="member_id"><b>아이디</b></label>
-    <input type="text" placeholder="아이디 입력" name="member_id" id="member_id" required autocapitalize="off">
+    <input type="text" placeholder="아이디 입력" name="member_id" id="member_id" required autocapitalize="off" maxlength="10">
+    <label id="msg_id" class="msg_id"></label><br>
     <label for="pwd"><b>비밀번호</b></label>
-    <input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd" required>
+    <input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd" required maxlength="16">
+    <label id="msg_pwd" class="msg_pwd"></label><br>
     <label for="pwd2"><b>비밀번호 확인</b></label>
-    <input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2" required>
+    <input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2" required maxlength="16">
+    <label id="msg_pwd2" class="msg_pwd2"></label><br>
     <label for="birth"><b>생년월일</b></label>
-    <input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.member_birth }" readonly="readonly">	
+    <input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.member_birth }" readonly="readonly">
+    <label id="msg_birth" class="msg_birth"></label><br>	
     <label for="postCode"><b>주소</b></label>
-    <input type="text" id="postCode" name="postCode" size="6" readonly onclick="search_address()" placeholder="클릭 시 주소검색">
+    <input type="text" id="post_code" name="post_code" size="6" readonly onclick="search_address()" placeholder="클릭 시 주소검색">
 	<input type="text" id="address1" name="address1" placeholder="기본주소" size="25" readonly onclick="search_address()"><br>
-	<input type="text" id="member_address2" name="member_address2" placeholder="상세주소" size="25" pattern="^.{2,20}$" maxlength="20">
+	<input type="text" id="address2" name="address2" placeholder="상세주소" size="25" pattern="^.{2,20}$" maxlength="20">
+	<label id="msg_addr" class="msg_addr"></label><br>
     <label for="member_email"><b>Email</b></label>
-    <input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required>
+    <input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required maxlength="30">
+    <label id="msg_email" class="msg_email"></label><br>
     <label for="member_tel"><b>전화번호</b></label>
-	
-    <input type="text" placeholder="전화번호 입력" name="member_tel" id="member_tel" placeholder="-제외한 전화번호를 입력해주세요" required >
-    
-		<div class="form_item">
+    <input type="text" placeholder="전화번호 입력" name="member_tel" id="member_tel" placeholder="-제외한 전화번호를 입력해주세요" required maxlength="11">
+    <label id="msg_tel" class="msg_tel"></label><br>
+    		<div class="form_item">
 			<label for="member_movie_genre"><b>영화취향</b></label>
 				<div class="member_movie_genre">
 					<label><input type="checkbox" name="member_movie_genre" value="공포">공포</label>
 					<label><input type="checkbox" name="member_movie_genre" value="코믹">코믹</label>
-					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
-					<label><input type="checkbox" name="member_movie_genre" value="시사">시사</label>
+					<label><input type="checkbox" name="member_movie_genre" value="액션">액션</label>
+					<label><input type="checkbox" name="member_movie_genre" value="범죄">범죄</label>
+					<label><input type="checkbox" name="member_movie_genre" value="SF">SF</label>
+					<label><input type="checkbox" name="member_movie_genre" value="코미디">코미디</label>
+					<label><input type="checkbox" name="member_movie_genre" value="스릴러">스릴러</label>
+					<label><input type="checkbox" name="member_movie_genre" value="전쟁">전쟁</label>
+					<label><input type="checkbox" name="member_movie_genre" value="스포츠">스포츠</label>
 				</div>
 			</div>
 		<div class="regist_fianl">
 			<hr>
 			<button type="submit" class="btn btn-outline-primary">가입하기</button>
 			<button type="button" class="btn btn-outline-primary" onclick="history.back()">돌아가기</button>
+		</div>
 	</div>
-</div>
 </form>
 </section>
 
@@ -85,12 +89,14 @@
 	    // 아이디 입력값 변경 시
 	    $("#member_id").on("input", function() {
 	        let id = $("#member_id").val();
-	        let regex = /^[a-zA-Z가-힣0-9]{2,10}$/g;
+	        let regex = /^[a-zA-Z0-9]{2,10}$/g;
 	        
 	        if (!regex.test(id)) {
 	            $("#member_id").css("background-color", "red");
+	            $("#msg_id").text("특수문자, 한글 제외 2~10글자를 입력해주세요");
 	        } else {
 	            $("#member_id").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_id").empty();
 	        }
 	
 	        checkFormValidity(); // 폼 유효성 검사 실행
@@ -98,14 +104,41 @@
 	    
 	    // 비밀번호 입력값 변경 시
 	    $("#member_pwd").on("input", function() {
-	        let pwd = $("#member_pwd").val();
-	        let regex = /^.{8,16}$/g;
+	    	let pwd = $("#member_pwd").val();
+		    let msg = "";
+		    let color = "";
+		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
 	        
-	        if (!regex.test(pwd)) {
-	            $("#member_pwd").css("background-color", "red");
-	        } else {
-	            $("#member_pwd").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-	        }
+		    if(lengthRegx.exec(pwd)) {
+// 		    	$("#checkPasswdResult").text("사용 가능한 패스워드");
+// 				$("#checkPasswdResult").css("color", "BLUE");
+		    	let engUpperRegex = /[A-Z]/;
+		    	let engLowerRegex = /[a-z]/;
+		    	let numRegex = /\d/;
+		    	let specRegex = /[!@#$%]/;
+		    	let count = 0;
+		    	
+		    	if(engUpperRegex.exec(pwd)) count++;
+		    	
+		    	if(engLowerRegex.exec(pwd)) count++;
+		    	
+		    	if(numRegex.exec(pwd)) count++;
+		    	
+		    	if(specRegex.exec(pwd)) count++;
+		    	
+
+		        switch (count) {
+		            case 4: msg = "안전"; color="Green"; checkPasswdResult = true; break;
+		            case 3: msg = "보통"; color="Orange"; checkPasswdResult = true; break;
+		            case 2: msg = "위험"; color="RED"; checkPasswdResult = true; break;
+		            case 1: 
+		            case 0: msg = "!,@,#,$ 영문자와 숫자조합 8~16자리를 입력해주세요"; color="RED"; checkPasswdResult = false;  
+		        }
+			
+		    } 
+		    	$("#msg_pwd").text(msg);
+				$("#msg_pwd").css("color", color);
+
 	
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
@@ -115,12 +148,13 @@
 	    $("#member_pwd2").on("input", function() {
 	    	let pwd = $("#member_pwd").val();
 	        let pwd2 = $("#member_pwd2").val();
-	        let regex = /^.{8,16}$/g;
 	        
 	        if (pwd2 != pwd) {
 	            $("#member_pwd2").css("background-color", "red");
+	            $("#msg_pwd2").text("비밀번호가 일치하지 않습니다");
 	        } else {
 	            $("#member_pwd2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_pwd2").empty();
 	        }
 	
 	        checkFormValidity(); // 폼 유효성 검사 실행
@@ -134,8 +168,10 @@
 	        
 	        if (!regex.test(address2)) {
 	            $("#member_address2").css("background-color", "red");
+	            $("#msg_addr").text("모든 문자 2~20 글자를 입력해주세요");
 	        } else {
 	            $("#member_address2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_addr").empty();
 	        }
 		
 	        checkFormValidity(); // 폼 유효성 검사 실행
@@ -148,8 +184,10 @@
 	        
 	        if (!regex.test(email)) {
 	            $("#member_email").css("background-color", "red");
+	            $("#msg_email").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
 	        } else {
 	            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("msg_email").empty();
 	        }
 		
 	        checkFormValidity(); // 폼 유효성 검사 실행
@@ -163,8 +201,10 @@
 	        
 	        if (!regex.test(tel)) {
 	            $("#member_tel").css("background-color", "red");
+	            $("#msg_tel").text("전화번호 형식이 맞지 않습니다(예: 01000000000)");
 	        } else {
 	            $("#member_tel").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_tel").empty();
 	        }
 		
 	        checkFormValidity(); // 폼 유효성 검사 실행
@@ -204,7 +244,7 @@
 	                console.log(data);
 	                // 1) 우편번호(= 국가기초구역번호 = zonecode 속성값) 가져와서 
 	                //    우편번호 입력란(postCode)에 출력
-	                document.fr.postCode.value = data.zonecode;
+	                document.fr.post_code.value = data.zonecode;
 	        		
 	        		// 2) 기본주소(address 속성값) 가져와서 기본주소 항목(address1)에 출력
 // 	        		document.fr.address1.value = data.address; // 기본주소

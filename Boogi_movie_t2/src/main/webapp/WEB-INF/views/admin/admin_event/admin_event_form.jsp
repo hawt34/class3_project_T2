@@ -16,6 +16,7 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous">
 </script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css">
 <style>
 #event_type_num{
@@ -46,13 +47,15 @@
 						<div class="col-md-6 mb-3">
 							<label for="coupon_num">할인쿠폰</label> 
 							<select name="coupon_num" id="coupon_num" class="form-control" required>
-								<option value="0">미선택</option>
+								<option value="9">미선택</option>
 								<option value="1">1000원 할인쿠폰</option>
 								<option value="2">2000원 할인쿠폰</option>
 								<option value="3">3000원 할인쿠폰</option>
 								<option value="4">4000원 할인쿠폰</option>
 								<option value="5">5000원 할인쿠폰</option>
 								<option value="6">6000원 할인쿠폰</option>
+								<option value="7">7000원 할인쿠폰</option>
+								<option value="8">8000원 할인쿠폰</option>
 							</select>
 							<div class="invalid-feedback">이벤트 제목을 선택해주세요.</div>
 						</div>
@@ -79,8 +82,8 @@
 							<div class="invalid-feedback">이벤트 시작일을 선택해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="event_start_date">이벤트 종료일</label> 
-							<input type="date" id="event_start_date" name="event_end_date" class="form-control" required>
+							<label for="event_end_date">이벤트 종료일</label> 
+							<input type="date" id="event_end_date" name="event_end_date" class="form-control" required>
 							<div class="invalid-feedback">이벤트 종료일을 선택해주세요.</div>
 						</div>
 					</div>
@@ -113,6 +116,22 @@
 	        }, false);
 	      });
 	    }, false);
+	    
+	    $(function() {
+			$("#event_end_date").change(function() {
+				if($("#event_start_date").val() == ""){
+					alert("이벤트 시작일을 먼저 선택해주세요");
+					$('#event_end_date').val('');
+					$("#event_start_date").focus();
+				} else {
+		            var startDateValue = $("#event_start_date").val();
+		            $('#event_end_date').attr('min', startDateValue);
+		        }
+			});
+		    $('#event_start_date').change(function() {
+		        $('#event_end_date').attr('min', $(this).val());
+		    });
+		});    
 	    
  	</script>
 </body>

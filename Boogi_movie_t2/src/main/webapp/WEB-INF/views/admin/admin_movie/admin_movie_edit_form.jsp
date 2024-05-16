@@ -85,7 +85,7 @@ body {
 						<input type="text" class="form-control" id="movie_grade" name="movie_grade" value="${movie.movie_grade}">
 					</div>
 					<div class="mb-3">
-						<label for="movie_runtime">상영시간</label> 
+						<label for="movie_runtime">상영시간(분)</label> 
 						<input type="text" class="form-control" id="movie_runtime" name="movie_runtime" value="${movie.movie_runtime}">
 					</div>
 					<div class="mb-3">
@@ -97,10 +97,6 @@ body {
 						<label for="movie_end_date">종영일</label> 
 						<input type="date" id="movie_end_date" class="form-control" name="movie_end_date"  value="${movie.movie_end_date}"/>
 						<div class="invalid-feedback">종영일을 선택해주세요.</div>
-					</div>
-					<div class="mb-3">
-						<label for="movie_status">개봉현황</label> 
-						<input type="text" class="form-control" id="movie_status" name="movie_status" value="${movie.movie_status}" />
 					</div>
 					<div class="mb-3">
 						<label for="movie_poster">포스터</label> 

@@ -64,21 +64,21 @@
 			<hr>
 			<!-- 자주묻는 질문 게시판 -->
 			<div class="csc_accordion" >
-				<c:choose>
-					<c:when test="${empty faqList }">
-						<div align="center">faq 게시물이 없습니다</div>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="faq" items="${faqList }" varStatus="status">
-							<input type="checkbox" id="answer${status.index + 1 }">
-							<label for="answer${status.index + 1}"><span class="faq_category">[${faq.faq_category}]</span> ${faq.faq_subject }<em></em></label>
-							<div>
-								<span><em></em>ANSWER</span><br>
-								<p>${faq.faq_content }</p> 
-							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+<%-- 				<c:choose> --%>
+<%-- 					<c:when test="${empty faqList }"> --%>
+<!-- 						<div align="center">faq 게시물이 없습니다</div> -->
+<%-- 					</c:when> --%>
+<%-- 					<c:otherwise> --%>
+<%-- 						<c:forEach var="faq" items="${faqList }" varStatus="status"> --%>
+<%-- 							<input type="checkbox" id="answer${status.index + 1 }"> --%>
+<%-- 							<label for="answer${status.index + 1}"><span class="faq_category">[${faq.faq_category}]</span> ${faq.faq_subject }<em></em></label> --%>
+<!-- 							<div> -->
+<!-- 								<span><em></em>ANSWER</span><br> -->
+<%-- 								<p>${faq.faq_content }</p>  --%>
+<!-- 							</div> -->
+<%-- 						</c:forEach> --%>
+<%-- 					</c:otherwise> --%>
+<%-- 				</c:choose> --%>
 			</div>
 			<hr>
 		</div>
@@ -91,98 +91,104 @@
 <script type="text/javascript">
 //마지막 스크롤 값 저장
 
-let pageNum = 1;
+// let pageNum = 1;
 
-if(!pageNum) {
-	pageNum = 1;
-}
-//유형데이터 가져오기
-let faqCategory = $("#faq_category");
+// if(!pageNum) {
+// 	pageNum = 1;
+// }
+// //유형데이터 가져오기
+// let faqCategory = $("#faq_category").val();
+// if(!faqCategory) {
+// 	faqCategory = "";
+// }
 
-
-//로딩중 중복 요청 방지
+// 로딩중 중복 요청 방지
 let isLoading = false;
+let faqCategory = '';
+let isEmpty = false;
 
-debugger;
-function getScroll(faqCatecory) {
-	if (isLoading) return; // 이미 데이터를 불러오고 있는 중이라면 중복 요청 방지
-	isLoading = true; // 데이터 요청 중 플래그 설정
-	
-	$.ajax({
-		type: "GET",
-		url: "csc_faq.json",
-		data: {
-			parsedPageNum : pageNum,
-			faqCategory : faqCategory
-		},
-		dataType: "json",
-		success: function(response)	{
-			let faqList = response;
-			$.each(faqList, function(index, faq) {
-				let accordion = $(".csc_accordion");
-			    let checkbox = $("<input>", {
-			        type: "checkbox",
-			        id: "answer" + (index + 1)
-			    });
+// let pageNum = 1;
+function getScroll(pageNum = 1, newFaqCategory = "", isEmpty) {
+    if (isLoading) return; // 이미 데이터를 불러오고 있는 중이라면 중복 요청 방지
+    isLoading = true; // 데이터 요청 중 플래그 설정
 
-			    let label = $("<label>", {
-			        for: "answer" + (index + 1)
-			    }).append(
-			        $("<span>", {
-			            class: "faq_category",
-			            text: "[" + faq.faq_category + "]"
-			        }),
-			        $("<span>", {
-			            text: faq.faq_subject
-			        }),
-			        $("<em>")
-			    );
-
-			    let answerDiv = $("<div>").append(
-			        $("<span>").append(
-			            $("<em>")
-			        ).text("ANSWER"),
-			        $("<br>"),
-			        $("<p>", {
-			            text: faq.faq_content
-			        })
-			    );
-
-			    accordion.append(checkbox, label, answerDiv);
-			});
-		},
-		error: function() {
-			alert("불러오는데 실패했습니다");
-		},
-		complete: function() {
+    $.ajax({
+        type: "GET",
+        url: "csc_faq.json",
+        data: {
+            parsedPageNum: pageNum,
+            faqCategory: newFaqCategory || faqCategory
+        },
+        dataType: "json",
+        success: function(response) {
+            let faqList = response;
+			//true면 기존 아코디언 비움
+            if(isEmpty) {
+				$(".csc_accordion").empty(); 	
+            }
+			//반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달            
+            $.each(faqList, function(index, faq) {
+                let accordion = $(".csc_accordion");
+                let checkbox = $("<input>", {
+                    type: "checkbox",
+                    id: "answer" + (index + 1)
+                });
+                let label = $("<label>", {
+                    for: "answer" + (index + 1)
+                }).append(
+                    $("<span>", {
+                        class: "faq_category",
+                        text: "[" + faq.faq_category + "]"
+                    }),
+                    $("<span>", {
+                        text: faq.faq_subject
+                    }),
+                    $("<em>")
+                );
+                let answerDiv = $("<div>").append(
+                    $("<span>").append(
+                        $("<em>")
+                    ).text("ANSWER"),
+                    $("<br>"),
+                    $("<p>", {
+                        text: faq.faq_content
+                    })
+                );
+                accordion.append(checkbox, label, answerDiv);
+            });
+        },
+        error: function() {
+            alert("불러오는데 실패했습니다");
+        },
+        complete: function() {
             isLoading = false; // 데이터 요청 완료 후 플래그 해제
             pageNum++; // 페이지 번호 증가
         }
-	});
-	
+    });
 }
 
 $(document).scroll(function() {
     let currentScroll = $(this).scrollTop();
     let documentHeight = $(document).height();
     let windowHeight = $(window).height();
-    
     let nowHeight = currentScroll + windowHeight;
-    
+    let bottom = 20; //딱 맞게 scroll바가 아래로 가지 않아도 ajax 호출하도록
+
     // 화면 하단까지 스크롤되었을 때 추가 데이터 가져오기
-    if (documentHeight < (nowHeight + (documentHeight*0.1))) {
-        getScroll(); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
+    if (currentScroll >= documentHeight - windowHeight - bottom) {
+//     if (documentHeight < (nowHeight + (documentHeight * 0.1))) {
+        getScroll(pageNum, faqCategory, false); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
     }
-}); 
+});
+
 $(function() {
-	
-	$("#faq_category").change(function() {
-		if(!faqCategory) {
-			faqCategory = '';
-		}
-		console.log(faqCategory);
-		getScroll(faqCategory);
-	});
+    getScroll();
+
+    $("#faq_category").change(function() {
+        let newFaqCategory = $(this).val();
+        faqCategory = newFaqCategory || ''; // faqCategory 업데이트
+        getScroll(pageNum, newFaqCategory, true);
+    });
 });
 
 </script>

@@ -132,24 +132,29 @@
 									<td>
 							<!-- 문의 유형 카테고리 -->
 										<select class="form-select form-select-sm w-50"
-											aria-label="Default select example" name="csc_category">
-											<option selected value="">문의 유형 선택</option>
-											<option value="movie">영화</option>
-											<option value="theater">극장</option>
-											<option value="payment">예매/결제</option>
-											<option value="coupon">쿠폰</option>
-											<option value="memberInfo">회원정보</option>
+											aria-label="Default select example" name="csc_category" id="admin_faq">
+											<option selected value="" >문의 유형 선택</option>
+											<option value="예매/결제">예매/결제</option>
+											<option value="영화관이용">영화관이용</option>
+											<option value="쿠폰">쿠폰</option>
+											<option value="스토어">스토어</option>
+											<option value="홈페이지/모바일">홈페이지/모바일</option>
 										</select> 
 									</td>
 									<td>
 										<select class="form-select form-select-sm w-50"
-											aria-label="Default select example" name="csc_theater">
+											aria-label="Default select example" name="csc_theater" id="admin_theater">
 											<option selected>문의 지점 선택</option>
-											<option value="부산진구">부산진구</option>
-											<option value="해운대구">해운대구</option>
-											<option value="북구">북구</option>
-											<option value="남구">남구</option>
-											<option value="서구">서구</option>
+											<option value="해운대점">해운대점</option>
+											<option value="서면점">서면점</option>
+											<option value="남포점">남포점</option>
+											<option value="부산대점">부산대점</option>
+											<option value="사직점">사직점</option>
+											<option value="영도점">영도점</option>
+											<option value="사직점">사직점</option>
+											<option value="덕천점">덕천점</option>
+											<option value="정관점">정관점</option>
+											<option value="사상점">사상점</option>
 										</select>
 									</td>
 								</tr>

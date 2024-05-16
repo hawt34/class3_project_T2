@@ -51,27 +51,22 @@ public class CscController {
 	}
 	//csc 페이지 faqList 가져오기
 	@GetMapping("csc_faq")
-	public String cscFaq(@RequestParam(defaultValue = "1")int pageNum, FAQVO faq, Model model, @RequestParam(required = false)String faqCategory) {
-		//ajax를 호출하지 않은 paging을 처리하기 위한 변수
-		
-		
-		int listLimit = 7;
-		int startRow = (pageNum - 1) * listLimit;
-//		int listCount = faqService.getFaqListCount(faqCategory); //총 공지사항 갯수
-//		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-//		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-//		
-//		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-//			endPage = maxPage;
-//		}
-//		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);		
-		
-		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow, faqCategory);
-		
+	public String cscFaq(@RequestParam(defaultValue = "1")int pageNum, FAQVO faq, @RequestParam(required = false)String faqCategory) {
+//		//ajax를 호출하지 않은 paging을 처리하기 위한 변수
+//		int listLimit = 7;
+//		int startRow = (pageNum - 1) * listLimit;
+////		int listCount = faqService.getFaqListCount(faqCategory); //총 공지사항 갯수
+////		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+////		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+////		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+////		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+////		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+////			endPage = maxPage;
+////		}
+////		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);		
+//		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow, faqCategory);
 //		model.addAttribute("pageList", pageList);
-		model.addAttribute("faqList", faqList);
+//		model.addAttribute("faqList", faqList);
 		return "csc/csc_faq";
 	}
 	
@@ -80,7 +75,7 @@ public class CscController {
 	public List<FAQVO> cscFaqJson(@RequestParam(defaultValue = "1")String parsedPageNum,
 								  @RequestParam String faqCategory,
 								  FAQVO faq) {
-//		System.out.println("@KWKL@@@" + parsedPageNum);
+		System.out.println("@KWKL@@@" + faqCategory);
 		int pageNum = Integer.parseInt(parsedPageNum);
 		
 		int listLimit = 7;
@@ -111,7 +106,7 @@ public class CscController {
 	
 	//공지사항 List 게시판 - ajax를 이용한 비동기 처리
 	@ResponseBody
-	@GetMapping(value="csc_notice.json")
+	@GetMapping(value="csc_notice.json", produces = "api/json")
 	public Map<String, Object> noticeCategory(@RequestParam(defaultValue = "1")String pageNumArg,
 											  @RequestParam String theaterName,
 											  @RequestParam String pageName) {

@@ -208,7 +208,7 @@ $(function() {
 
     // 극장 구분 클릭 이벤트
     $(".csc_local").click(function() {
-        const theaterName = $(this).data("theater");
+        let theaterName = $(this).data("theater");
         getTheaterList(1, theaterName);
     });
     
@@ -218,7 +218,7 @@ $(function() {
         let theaterName = $(this).data("theater");
         getTheaterList(pageNum, theaterName);
     });
-    debugger
+ 
     $(".prev").click(function() {
     	let pageNum = $(this).data("page");
         let theaterName = $(this).data("theater");
@@ -310,33 +310,6 @@ function createPagination(pageList, pageNum, theaterName) {
     $(".pagination").append(pageLinks);
     
 }
-
-// $(function() {
-	
-// 	// 비동기 - 데이터 필요X : pageNum: 1, theaterName: ''
-// 	getTheaterList();
-	
-// 	//구분을 눌렀을 때
-// 	$(".csc_local").click(function() {
-// 		const theaterName = $(this).data("theater");
-// 		getTheaterList(1, theaterName);
-// 	});	
-	
-// 	$(".pageF").click(function() {
-//         let pageNum = $(this).text(); 
-//         let theaterName = $('.pageF').data("theater"); // 극장 이름 가져오기
-//         getTheaterList(pageNum, theaterName);
-        
-// 	});
-	
-// // 	$.(".next").click(function() {
-		
-// // 		getTheaterList(pageNum, theaterName);
-// // 	});
-	
-// });
-
-
 </script>
 </body>
 </html>

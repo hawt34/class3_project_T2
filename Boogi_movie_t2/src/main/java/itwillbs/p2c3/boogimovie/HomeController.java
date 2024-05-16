@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -39,5 +40,18 @@ public class HomeController {
 		//System.out.println(movieInfo);
 		return "movie/movie";
 	}
-	
+<<<<<<< HEAD
 }
+=======
+
+//	@GetMapping("movieFuture")// 상영예정작리스트
+//	public String movieFuture(Model model) {
+//		
+//		List<MovieVO> movieFuture = movieService.getMovieFuture();
+//		model.addAttribute("movieFuture", movieFuture);
+//		//System.out.println("여기는 무비퓨처" + movieFuture);확인완료
+//	    return "movie/movieFuture";
+//	}
+
+}
+>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git

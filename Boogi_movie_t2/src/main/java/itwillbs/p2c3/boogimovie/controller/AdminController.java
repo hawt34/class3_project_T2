@@ -654,7 +654,7 @@ public class AdminController {
 		
 		int deleteCount = service.deleteItem(item_info_name);
 		if(deleteCount > 0) {
-			return "redirect:/admin_event";
+			return "redirect:/admin_store";
 		} else {
 			model.addAttribute("msg", "스토어 아이템 삭제에 실패했습니다");
 			return "error/fail";

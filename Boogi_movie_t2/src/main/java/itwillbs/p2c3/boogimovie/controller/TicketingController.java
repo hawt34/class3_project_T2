@@ -314,10 +314,7 @@ public class TicketingController {
 		return final_list;
 	}
 
-	@GetMapping("pay_test")
-	public String paymentTest() {
-		return "payment/pay_test";
-	}
+
 
 	
 }

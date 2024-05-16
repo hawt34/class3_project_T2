@@ -1,6 +1,7 @@
 package itwillbs.p2c3.boogimovie.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,10 @@ public class MypageService {
 		return mapper.selectMyTheater(member);
 	}
 	
-	// 예매내역 영화제목
-	public List<MovieVO> getMovieReservation(MemberVO member) {
+	// 예매내역 
+	public List<Map<String , Object>> getMovieReservation(MemberVO member) {
 		System.out.println("MypageInfoService - getMovieReservation()");
-		List<MovieVO> movie = mapper.selectMovieReservation(member);
-		return movie;
+		return mapper.selectMovieReservation(member);
 	}
 	
 	// 회원정보

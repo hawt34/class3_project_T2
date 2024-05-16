@@ -19,12 +19,12 @@ public class FaqService {
 		return mapper.insertFaq(faq);
 	}
 	//faq List 가져오기
-	public List<FAQVO> getFaqList(int listLimit, int startRow) {
-		return mapper.selectFaqList(listLimit, startRow);
+	public List<FAQVO> getFaqList(int listLimit, int startRow, String faqCategory) {
+		return mapper.selectFaqList(listLimit, startRow, faqCategory);
 	}
 	// faq 게시글 갯수
-	public int getFaqListCount() {
-		return mapper.selectFaqListCount();
+	public int getFaqListCount(String faqCategory) {
+		return mapper.selectFaqListCount(faqCategory);
 	}
 	//faq 삭제
 	public int deleteFaq(FAQVO faq) {

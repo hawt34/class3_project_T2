@@ -172,39 +172,76 @@
 							<div id="scs_start_time"></div>
 							<div id="scs_end_time"></div>
 						</div>
-						<hr>
-						<div class="payment_status_box">
-							<div id="person_info">
-								<p>성인2&nbsp;30,000원</p>
-								<p>청소년1&nbsp;12,000원</p>
+						<!-- 수정 중 -->
+						<div class="card payment_status_box">
+							<div id="movie_poster">
+								<img src="..." class="card-img-top" alt="...">
 							</div>
-							<hr>
-							<div id="total_fee">
-								<p><b>금액 42,000원</b></p>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<div id="person_info">
+										<p>예매인원 <span></span></p>
+									</div>	
+								</li>
+							</ul>
+							<div class="card-footer">
+								<div id="total_fee">
+									<p>총 금액 <span></span>원</p>
+								</div>
 							</div>
 						</div>
-						<div class="payment_status_box">
-							<div id="point_apply">
-								<p>적용된 포인트&nbsp;2,000점</p>
-							</div>	
-							<div id="coupon_apply">
-								<p>적용된 쿠폰&nbsp;2,000점</p>
-							</div>	
-							<hr>
-							<p><b>할인적용 2,000원</b></p>
+						<br>
+						<div class="card payment_status_box">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<div id="person_info">
+										<p>예매인원 <span></span></p>
+									</div>	
+								</li>
+							</ul>
+							<div class="card-footer">
+								<div id="total_fee">
+									<p>총 금액 <span></span>원</p>
+								</div>
+							</div>
 						</div>
-						<div class="payment_status_box">
-							<div id="final_amount">
-								<p><b>최종결제금액 40,000원</b></p>
-							</div>	
-							<hr>
-							<div id="pay_way_apply">
-								<p>결제수단&nbsp;카드결제</p>
-							</div>	
+						<br>
+						<div class="card payment_status_box">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<div id="point_apply">
+										<p>사용 포인트 <span></span>점</p>
+									</div>	
+								</li>
+								<li class="list-group-item">
+									<div id="coupon_apply">
+										<p>사용 쿠폰 <span></span></p>
+									</div>	
+								</li>
+							</ul>
+							<div class="card-footer">
+								<p><b>총 할인 적용 <span></span></b>원</p>
+							</div>
 						</div>
+						<br>
+						<div class="card payment_status_box">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<div id="final_amount">
+										<p><b>최종 결제금액 <span></span>원</b></p>
+									</div>	
+								</li>
+								<li class="list-group-item">
+									<div id="pay_way_apply">
+										<p>결제수단 <span></span></p>
+									</div>	
+								</li>
+							</ul>
+						</div>
+						
 					</div> <!-- card-body 끝 -->
-					<div class="card-footer container">
-						<div class="btn-group" role="group" aria-label="Basic example">
+					<div class="card-footer" >
+						<div class="btn-group nav nav-pills nav-fill" role="group"  >
 							<button type="button" class="btn btn-secondary btn-lg" onclick="history.back();">이전</button>
 							<button type="submit" class="btn btn-primary btn-lg">결제</button>
 						</div>
@@ -295,8 +332,11 @@
 			 		if(checkDupPointResult == "false") {
 			 			alert("포인트를 사용할 수 없습니다.");
 			 		} else {
-			 			alert("포인트를 사용가능!");
-			 			// 사용 포인트만큼 최종 가격에서 차감 처리 필요
+			 			if(confirm ("포인트를 사용하시겠습니까?")){
+				 			$("#point_apply > p > span").html($("#useMemberPoint").val());
+			 			} else {
+			 				$("#useMemberPoint").val("");
+			 			}
 			 		}
 					
 				}, 

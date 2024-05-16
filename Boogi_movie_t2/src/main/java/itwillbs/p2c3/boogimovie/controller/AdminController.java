@@ -77,11 +77,11 @@ public class AdminController {
 	// 관리자 고객센터
 	// faq List view에 포워딩
 	@GetMapping("admin_faq")
-	public String adminFAQ(@RequestParam(defaultValue = "1")int pageNum, Model model) {
+	public String adminFAQ(@RequestParam(defaultValue = "1")int pageNum, Model model, @RequestParam(required = false)String faqCategory) {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
 		
-		int listCount = faqService.getFaqListCount(); //총 공지사항 갯수
+		int listCount = faqService.getFaqListCount(faqCategory); //총 공지사항 갯수
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
@@ -92,7 +92,7 @@ public class AdminController {
 		}
 		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
-		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow);
+		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow, faqCategory);
 		
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("faqList", faqList);
@@ -242,7 +242,10 @@ public class AdminController {
 	//----------------------------------------------------------
 	//일대일 문의 controller
 	@GetMapping("admin_oto")
-	public String adminOto(@RequestParam(defaultValue = "1")int pageNum, Model model) {
+	public String adminOto(@RequestParam(defaultValue = "1")int pageNum,
+						   Model model,
+						   @RequestParam(required = false)String faqCategory,
+						   @RequestParam(required = false)String theaterName) {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
 		
@@ -257,12 +260,50 @@ public class AdminController {
 		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
 			endPage = maxPage;
 		}
-		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+//		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory); //faq 페이지네이션
 		
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("otoList", otoList);
 		return "admin/admin_csc/admin_oto";
 	}
+	//category 페이징
+	public PageInfo pageInfoCategory(int pageNum, int listLimit, int startRow,  String faqCategory) {
+		
+		
+		
+		
+		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
+		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+		
+		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+			endPage = maxPage;
+		}
+		return null;
+	}
+	//theater 페이징
+	public PageInfo pageInfoTheater(int pageNum, int listLimit, int startRow,  String theaterName) {
+		
+		
+		
+		
+		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
+		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+		
+		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+			endPage = maxPage;
+		}
+		return null;
+	}
+	
+	
+	
 	//1대1 문의 답변하기
 	@GetMapping("admin_oto_detail")
 	public String adminOtoDetail(Model model, int oto_num) {

@@ -26,10 +26,10 @@
   			   faq_category,
   			   faq_read_count
   		FROM faq
-  		ORDER BY faq_num DESC
-  		<if test="!faqCategory.equals('') and faqCategory != null">
+  		<if test="faqCategory != null and faqCategory != ''">
 	  		WHERE faq_category = #{faqCategory}
   		</if>
+  		ORDER BY faq_num DESC
   		LIMIT #{startRow}, #{listLimit}
   	</select>
   	
@@ -58,7 +58,7 @@
   	<select id="selectFaqListCount" resultType="int">
   		SELECT COUNT(faq_num)
   		FROM faq
-  		<if test="!faqCategory.equals('') and faqCategory != null">
+  		<if test="!faqCategory != '' and faqCategory != null">
 	  		WHERE faq_category = #{faqCategory}
   		</if>
   	</select>

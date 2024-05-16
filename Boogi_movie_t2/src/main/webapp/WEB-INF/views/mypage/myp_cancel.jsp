@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,14 +33,12 @@ body {
 		<div class="row box1">  
 			<div class="col-md-2 sidebar1">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
-			</div>
+			</div><!-- col-md-2 sidebar1 -->
 			<div class="col-md-9">
-<!-- 				<div class="row"> -->
-					<div class="col-10">
-						<h2>취소내역 / 안내</h2>
-					</div>
-					<hr>
-<!-- 				</div>row -->
+				<div class="col-10">
+					<h2>취소내역 / 안내</h2>
+				</div><!-- col-10 -->
+				<hr>
 				<!-- 탭 메뉴 -->
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item" role="presentation">
@@ -47,83 +46,39 @@ body {
 							aria-controls="userinfo" aria-selected="true">취소한 영화 목록</button>
 						</li>
 					</ul>
-					
 				<!-- 내용 -->
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show active" id="userinfo2" role="tabpanel" aria-labelledby="userinfo-tab">
 						<table class="table2 table table-hover" >
 						  <thead>
 						    <tr>
-						      <th scope="col">#</th>
-						      <th scope="col">영화</th>
-						      <th scope="col">날짜</th>
-						      <th scope="col">상영시간</th>
-						      <th scope="col">상영관</th>
-						      <th scope="col">인원정보</th>
-						      <th scope="col">가격</th>
+					      <th scope="col">#</th>
+					      <th scope="col">영화</th>
+					      <th scope="col">관람날짜</th>
+					      <th scope="col">상영시간</th>
+					      <th scope="col">상영관</th>
+					      <th scope="col">관람좌석</th>
+					      <th scope="col">결제금액</th>
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <tr  class="table-secondary">
-						      <th scope="row">1</th>
-							      <td>듄2</td>
-							      <td>2024 / 04 / 16</td>
-							      <td>17:00 ~ 19:20</td>
-							      <td>서면 8관</td>
-							      <td>1명 / H9</td>
-							      <td>15,000원</td>
-						    </tr>      
-						    <tr>
-						      <th scope="row">2</th>
-						        <td>아바타3</td>
-						        <td>2024 / 03 / 29</td>
-						        <td>18:20 ~ 20:15</td>
-						        <td>서면 3관</td>
-						        <td>2명 / I9 I10</td>
-						        <td>15,000원</td>
-						    </tr>
-						    <tr  class="table-secondary">
-						      <th scope="row">3</th>
-					            <td>토이스토리</td>
-					            <td>2024 / 01 / 18</td>
-					            <td>21:10 ~ 23:10</td>
-					            <td>서면 2관</td>
-					            <td>2명 / G13 G14</td>
-					            <td>12,000원</td>
-					         </tr>
-							<tr>
-						      <th scope="row">4</th>
-								<td>파묘</td>
-			          			<td>2024 / 03 / 18</td>
-			            		<td>12:10 ~ 14:30</td>
-			           			<td>아시아드 1관</td>
-			           			<td>3명 / J9 J10 J11</td>
-			            		<td>12,000원</td>
-			          		</tr>
-			          		<tr  class="table-secondary">
-						      <th scope="row">5</th>
-						      	<td>폴라익스프레스</td>
-				              	<td>2013 / 12 / 25</td>
-								<td>21:00 ~ 23:10</td>
-				            	<td>아시아드 5관</td>
-				            	<td>2명 / K14 K15</td>
-				            	<td>9,000원</td>
-			         		</tr>
-			          		<tr>
-						      <th scope="row">6</th>
-			          			<td>엘리멘탈</td>
-			            		<td>2023 / 10 / 29</td>
-					            <td>19:35 ~ 22:10</td>
-					            <td>삼정타워 11관</td>
-					            <td>1명 / H15</td>
-					            <td>12,000원</td>
-					          </tr>
+							  <c:forEach var="map" items="${cancelList}" varStatus="status" begin="0" end="6">
+							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+							        <th scope="row">${status.index + 1}</th>
+							        <td>${map.movie_name}</td>
+							        <td>${map.scs_date}</td>
+							        <td>${map.theater_info}</td>
+							        <td>${map.session_time}</td>
+							        <td>${map.ticket_seat_info}</td>
+							        <td>${map.ticket_price}</td>
+							    </tr>
+							</c:forEach>
 						  </tbody>
 						</table>
 					</div><!-- 첫번째 탭 -->
 				</div><!--  tab-content -->
-			</div><!-- col-md-10 -->
-		</div><!-- row 첫번째 줄-->
+			</div><!-- col-md-9 -->
+		</div><!-- row box1 첫번째 줄-->
 			<div class="row ">
 				<div class="col-md-2"> </div>
 					<!-- 탭 메뉴 -->
@@ -211,7 +166,7 @@ body {
 							</textarea>		
 						</div><!-- tab-pane  -->
 					</div><!-- tab-content -->
-				</div><!-- col-md-10 -->
+				</div><!-- col-md-9 -->
 			</div><!-- row 두번째 줄 -->
 	</div><!-- contaier2 -->		
 </div> <!-- contaier1 -->

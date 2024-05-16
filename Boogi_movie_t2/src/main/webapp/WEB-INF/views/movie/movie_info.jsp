@@ -171,6 +171,7 @@ section h1 {
 }
 #pageList {
 	margin-top: 30px;
+	height: 100px;
 	margin: auto;
 	width: 1024px;
 	text-align: center;
@@ -304,9 +305,22 @@ footer {
     			</c:forEach>
 			</div>
 			<div id="pageList">
-			
+			<input type="button" value="이전" onclick="location.href='movieInfo?movie_num=${movie.movie_num}&pageNum=${pageNum - 1}'"
+               <c:if test="${pageNum == 1}">disabled</c:if> />
+        		 <c:forEach var="i" begin="1" end="${maxPage}">
+            	<c:choose>
+                <c:when test="${pageNum == i}">
+                    <b>${i}</b>
+                </c:when>
+                <c:otherwise>
+                    <a href="movieInfo?movie_num=${movie.movie_num}&pageNum=${i}">${i}</a>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+         <input type="button" value="다음" onclick="location.href='movieInfo?movie_num=${movie.movie_num}&pageNum=${pageNum + 1}'"
+               <c:if test="${pageNum == maxPage}">disabled</c:if> />
+    	</div>
 		
-			</div>
 		</section>		    
 		<footer> 
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>

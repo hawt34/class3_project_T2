@@ -12,7 +12,7 @@
 * {
 	margin: 0;
 	padding: 0;
-/*  	border: 1px solid skyblue;  */
+/*   	border: 1px solid skyblue;   */
 }
 
 #wrap {
@@ -146,7 +146,7 @@ footer {
 					</div>	
 				</div>
 			</div>
-			
+						
 		</section>
 		<footer> 
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>

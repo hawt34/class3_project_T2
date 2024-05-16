@@ -71,7 +71,7 @@ public class MovieController {
         model.addAttribute("pageNum", pageNum);
         
 
-        System.out.println(reviews+"리뷰리스트확인"); //확인완료 주석처리
+        //System.out.println(reviews+"리뷰리스트확인"); 확인완료 주석처리
         model.addAttribute("reviews", reviews);
         return "movie/movie_info"; 
     }

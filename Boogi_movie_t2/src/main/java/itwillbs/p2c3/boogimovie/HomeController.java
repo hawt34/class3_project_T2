@@ -50,5 +50,4 @@ public class HomeController {
 //		//System.out.println("여기는 무비퓨처" + movieFuture);확인완료
 //	    return "movie/movieFuture";
 //	}
-
 //}

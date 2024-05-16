@@ -40,7 +40,6 @@ import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
-import itwillbs.p2c3.boogimovie.vo.reserve_viewVO;
 import retrofit2.http.GET;
 
 @Controller

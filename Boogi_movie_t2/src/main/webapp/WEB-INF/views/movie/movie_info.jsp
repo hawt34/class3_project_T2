@@ -305,23 +305,8 @@ footer {
 			</div>
 			<div id="pageList">
 			
-			<input type="button" value="이전"  onclick="location.href = 'BoardList?pageNum=${pageNum - 1}'"
-					<c:if test="${pageNum eq 1}">disabled</c:if>		
-			>
-			<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-				<c:choose>
-					<c:when test="${pageNum eq i}">
-						<b>${i}</b>
-					</c:when>
-					<c:otherwise>
-						<a href="BoardList?pageNum=${i}">${i}</a>
-					</c:otherwise>
-				</c:choose>								
-			</c:forEach>
-			<input type="button" value="다음"  onclick="location.href = 'BoardList?pageNum=${pageNum + 1}'"
-					<c:if test="${pageNum eq pageInfo.maxPage}">disabled</c:if>		
-			>
-		</div>
+		
+			</div>
 		</section>		    
 		<footer> 
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
@@ -329,58 +314,57 @@ footer {
 	</div>
 </body>
 <script type="text/javascript">
-    let sId = "${sessionScope.sId}";
-	
 	$(document).ready(function() {
-    	$('#movieTicket').click(function() {
-        // 세션 아이디 확인
-        	if (!sId) {
-        		 if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
-		                // 로그인 페이지로 이동
-		            	 window.location.href = 'member_login';
-		            }
-        		} else {
-            	// 세션 아이디가 있으면 예매 페이지로 이동
-            		window.location.href = 'tic_ticketing';
-        		}
-       
-   	 		});	
-		});
+    	let sId = "${sessionScope.sId}";
     
-	$("#submitReviewBtn").click(function(event) {
-    	let reviewText = $("#reviewText").val().trim();
-    	// 로그인 여부 확인
-    	if (!sId) {
-    		 if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
-	                // 로그인 페이지로 이동
-	            	 window.location.href = 'member_login';
+    	$('#movieTicket').click(function() {
+        // 세션 아이디 확인 후 로그인 페이지로 이동
+	        if (!sId) {
+	            if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
+	                window.location.href = 'member_login';
 	            }
-        	}
-        	event.preventDefault(); // 폼 제출 중단
-       		return;
-    	}
-
-   	 // 관람평이 비어 있는지 확인
-    	if (reviewText === "") {
-        	alert("관람평을 입력해주세요.");
-        	$("#reviewText").focus();
-        	event.preventDefault(); // 폼 제출 중단
-        	return;
-    	}	
-	});
-
-	function openReviewModify(review_num) {
-		var url = "reviewModify?review_num=" + review_num;
+	        } else {
+	            // 세션 아이디가 있으면 예매 페이지로 이동
+	            window.location.href = 'tic_ticketing';
+	        }
+	    });
 	
-		window.open(url,"","width=700,height=500");
+	    // 리뷰 제출 버튼 클릭 시
+	    $("#submitReviewBtn").click(function(event) {
+	        // 관람평 입력값 가져오기
+	        let reviewText = $("#reviewText").val().trim();
+	        
+	        // 로그인 여부 확인 후 로그인 페이지로 이동
+	        if (!sId) {
+	            if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
+	                window.location.href = 'member_login';
+	            }
+	            event.preventDefault(); // 폼 제출 중단
+	            return;
+	        }
+	
+	        // 관람평이 비어 있는지 확인 후 알림 표시
+	        if (reviewText === "") {
+	            alert("관람평을 입력해주세요.");
+	            $("#reviewText").focus();
+	            event.preventDefault(); // 폼 제출 중단
+	            return;
+	        }
+	    });
+	});
+	
+	// 리뷰 수정 버튼 클릭 시
+	function openReviewModify(review_num) {
+	    var url = "reviewModify?review_num=" + review_num;
+	    window.open(url, "", "width=700,height=500,left=" + ((window.screen.width - 700) / 2) + ",top=" + ((window.screen.height - 500) / 2));
 	}
-
+	
+	// 리뷰 삭제 버튼 클릭 시
 	function confirmDelete(review_num) {
-		if (confirm("정말로 이 리뷰를 삭제하시겠습니까?")) {
-			var url = "deleteReview?review_num=" + review_num;
-			window.open(url,"","width=700,height=300");	
-		}		
+	    if (confirm("정말로 이 리뷰를 삭제하시겠습니까?")) {
+	        var url = "deleteReview?review_num=" + review_num;
+	        window.open(url, "", "width=700,height=300,left=" + ((window.screen.width - 700) / 2) + ",top=" + ((window.screen.height - 300) / 2));
+	    }       
 	}
-
 </script>
 </html>

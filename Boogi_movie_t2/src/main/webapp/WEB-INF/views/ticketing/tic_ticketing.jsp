@@ -31,7 +31,7 @@
 	pageContext.setAttribute("nowDay", nowDay);
 	pageContext.setAttribute("day", inputDay > maxDay ? maxDay : inputDay);
 	pageContext.setAttribute("currentDate", currentDate);
-	
+	pageContext.setAttribute("maxDay", maxDay);
 %>
 
 
@@ -119,9 +119,6 @@
 									<li><a onclick="javascript:theaterType('MyTheater','${sessionScope.sId}')">MY영화관</a></li>
 								</ul>
 							</div>
-								
-								
-								
 							<!-- theater 리스트2 -->
 							<!--  -->
 							<div class="col-sm-6 theaterlist scroll" id="theaterlist">
@@ -145,23 +142,35 @@
 							${currentDate }
 						</div>
 							<div class="finallist">
-							
-
-
-
-
-					
 								<div class="daylist scroll">
 									<div>
-										<c:forEach begin="${nowDay }" end="${day}" var="i">
-											
-											<input type="button" onclick="javascript:dayClick('${currentDate }', ${i })" value="${i }일">&nbsp;
+<%-- 										<c:forEach begin="${nowDay }" end="${day}" var="i"> --%>
+<%-- 											<input type="button" onclick="javascript:dayClick('${currentDate }', ${i })" value="${i }일">&nbsp; --%>
+<%-- 										</c:forEach> --%>
+										<c:forEach begin="1" end="10" var="i">
+										   		<c:choose>
+        											<c:when test="${nowDay <= maxDay}">
+									           			<input type="button" onclick="javascript:dayClick('${currentDate }', ${nowDay })" value="${nowDay }일">&nbsp;
+											            <%
+											                nowDay++;
+											            pageContext.setAttribute("nowDay", nowDay);
+											            %>
+								      				</c:when>
+								        			<c:otherwise>
+								            			//
+											            <%
+											                nowDay = 1;
+											            pageContext.setAttribute("nowDay", nowDay);
+											            %>
+											        </c:otherwise>
+						  						 </c:choose>
 										</c:forEach>
+                
+            
 									</div>
 								</div>
 								<div class="finalmovielist scroll" id="finalmovielist">
 									<div style="height : 300px">
-
 <!-- 										영화관 과 상영관 을 선택해주세요 -->
 										<c:forEach var="i" begin="1" end="20">
 										<div class="final_list">

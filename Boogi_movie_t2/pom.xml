@@ -178,6 +178,13 @@
 		    <version>0.2.23</version>
 		</dependency>
 		
+		<!-- 네이버로그인을 위한 json.org -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20210307</version>
+		</dependency>
+		
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

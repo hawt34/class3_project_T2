@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="itwillbs.p2c3.boogimovie.mapper.PaymentMapper">
+
+	<select id="getMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO"> 
+		SELECT *
+		FROM member
+		WHERE member_id = #{member_id}
+	</select>
+	
+	<update id="usePoint">
+		UPDATE member
+		SET member_point = #{member_point}
+		WHERE member_id = #{member_id}
+	</update>
+	
+
+</mapper>

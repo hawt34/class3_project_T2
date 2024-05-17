@@ -17,7 +17,9 @@ public interface OtoMapper {
 				  @Param("id")String id);
 
 	List<OTOVO> selectOtoList(@Param("startRow")int startRow, 
-							  @Param("listLimit")int listLimit);
+							  @Param("listLimit")int listLimit,
+							  @Param("faqCategory")String faqCategory,
+							  @Param("theaterName")String theaterName);
 
 	OTOVO selectOto(int oto_num);
 
@@ -30,5 +32,6 @@ public interface OtoMapper {
 
 	int updateResponse(int oto_num);
 
-	int getOtoListCount();
+	int getOtoListCount(@Param("faqCategory")String faqCategory,
+						@Param("theaterName")String theaterName);
 }

@@ -94,14 +94,14 @@ html * {
     transition: all .3s ease;
 }
 
-#kakao-connect {
-    background: rgb(255, 255, 255) url('../images/kakao_yellow.png') no-repeat scroll 5px 1px / 45px 45px padding-box border-box;
+#naver-connect {
+    background: rgb(255, 255, 255) url('../images/naver_login_default.png') no-repeat scroll 5px 1px / 45px 45px padding-box border-box;
     border: 1px solid rgb(85, 172, 238);
 }
 
-#kakao-connect:hover {
+#naver-connect:hover {
 	  border-color: rgb(85, 172, 238);
-	  background: rgb(85, 172, 238) url('../images/kakao_brown.png') no-repeat scroll 5px 1px / 45px 45px padding-box border-box;
+	  background: rgb(85, 172, 238) url('../images/naver_login_hover.png') no-repeat scroll 5px 1px / 45px 45px padding-box border-box;
 	  -webkit-transition: all .8s ease-out;
     -moz-transition: all .3s ease;
     -ms-transition: all .3s ease;
@@ -109,7 +109,7 @@ html * {
     transition: all .3s ease-out;
 }
 
-#kakao-connect span {
+#naver-connect span {
 	  box-sizing: border-box;
     color: rgb(85, 172, 238);
     cursor: pointer;
@@ -124,7 +124,7 @@ html * {
     transition: all .3s ease;
 }
 
-#kakao-connect:hover span {
+#naver-connect:hover span {
 	  color: #FFF;
 	  -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;

@@ -23,7 +23,14 @@ body {
 hr{
 	margin-top: 10px;
 }
+.breakdown_pageArea {
+	margin-top: 20px;
+	text-align: center;
+}
 
+.breakdown_pageArea > nav {
+	display: inline-block;
+}
 
 </style>
 </head>
@@ -34,6 +41,7 @@ hr{
 </header>
 <div class="container1">
 	<div class="container2">
+		<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
 		<div class="row">
 			<div class="col-md-2 box1">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
@@ -55,195 +63,69 @@ hr{
 								aria-selected="true">예매내역</button>
 						</li>
 					</ul>
-				</div>
-<!-- 				<div class="row"> -->
-<%-- 				<c:forEach var="j" begin="1" end="4"> --%>
-<%-- 				</c:forEach> --%>
-<%-- 					<c:forEach var="i" begin="1" end="4"> --%>
-<!-- 						<div class="col-md-3"> 첫번째 사진 -->
-<%-- 								<img src="${pageContext.request.contextPath}/resources/images/myp_img1.jpg" style="margin-left: 30px" width="200px" height="250px"> --%>
-<!-- 						</div>	 -->
-<!-- 						<div class="col-md-2 d-grid gap-5"> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly > -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly> -->
-<!-- 						</div> -->
-						
-<!-- 						<div class="col-md-2 d-grid gap-5"> -->
-<%-- 						<c:forEach var="map" items="${movieReservation}" begin="1" end="4"> --%>
-<%-- 							<input type="text" readonly class="form-control-plaintext" value="${map.ticket_reservation_date}"> --%>
-<%-- 							<input type="text" readonly class="form-control-plaintext" value="${map.ticket_seat_info}"> --%>
-<%-- 							<input type="text" readonly class="form-control-plaintext" value="${map.ticket_price}"> --%>
-						
-<%-- 						</c:forEach> --%>
-<!-- 						</div> -->
-<!-- 						<div class="col-md-2 d-grid gap-5"> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly > -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly> -->
-<!-- 						</div> -->
-					
-<!-- 						<div class="col-md-2 d-grid gap-5"> -->
-<%-- 						<c:forEach var="movie" items="${movieReservation}" begin="0"> --%>
-<%-- 							<input type="text" readonly class="form-control-plaintext" value="${moive.movie_name }"> --%>
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="좌석"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="금액"> -->
-						
-<%-- 						</c:forEach> --%>
-<!-- 						</div> -->
-<!-- 					<hr> -->
-<%-- 					</c:forEach> --%>
-<!-- 					<div class="paybox1 col-md-6" > -->
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly > -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly> -->
-<!-- 						</div> -->
-						
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<%-- 						<c:forEach var="movie" items="${movieReservation}" begin="0"> --%>
-<%-- 							<input type="text" readonly class="form-control-plaintext" value="${moive.movie_name }"> --%>
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="2024 / 04 / 24"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="서면 8관"> -->
-						
-<%-- 						</c:forEach> --%>
-<!-- 						</div> -->
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly > -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="17:00 ~ 19:20"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="F9"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="12,000원"> -->
-<!-- 						</div> -->
-<!-- 					</div> paybox1 첫번째 예매칸 -->
-					
-					
-<!-- 				</div>row -->
-<!-- 				<hr> -->
-
-<c:forEach items="${movieReservation}" var="map">
-    <div class="row">
-        <div class="col-md-3">
-        	<img src="${map.movie_poster }" style="margin-left: 30px" width="200px" height="250px">
-        </div>
-        <div class="paybox1 col-md-6">
-            <div class="col-md-4 d-grid gap-5">
-                <input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example" disabled readonly>
-                <input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example" disabled readonly>
-                <input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example" disabled readonly>
-            </div>
-            <div class="col-md-4 d-grid gap-5">
-                <input type="text" readonly class="form-control-plaintext" value="${map.movie_name}">
-                <input type="text" readonly class="form-control-plaintext" value="${map.scs_date}">
-                <input type="text" readonly class="form-control-plaintext" value="${map.theater_info}">
-            </div>
-            <div class="col-md-4 d-grid gap-5">
-                <input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example" disabled readonly>
-                <input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example" disabled readonly>
-                <input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example" disabled readonly>
-            </div>
-            <div class="col-md-4 d-grid gap-5">
-                <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
-                <input type="text" readonly class="form-control-plaintext" value="${map.ticket_seat_info}">
-                <input type="text" readonly class="form-control-plaintext" value="${map.ticket_price}">
-            </div>
-        </div>
-    </div>
-    <hr>
-</c:forEach>
-<!-- 				<div class="row">두번째 사진 -->
-<!-- 					<div class="col-md-3"> -->
-<%-- 						<img src="${pageContext.request.contextPath}/resources/images/myp_img2.jpg" style="margin-left: 30px" width="200px" height="250px"> --%>
-<!-- 					</div>	 -->
-<!-- 					<div class="paybox1 col-md-6"> -->
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly > -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="쿵푸팬더"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="2024 / 04 / 20"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="아시아드 1관"> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly > -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="18:40 ~ 20:20"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="H9 H10"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="24,000원">	 -->
-<!-- 						</div> -->
-<!-- 					</div> paybox1 첫번째 예매칸	 -->
-<!-- 				</div>row -->
-<!-- 				<hr> -->
-<!-- 				<div class="row">세번째 사진 -->
-<!-- 					<div class="col-md-3"> -->
-<%-- 						<img src="${pageContext.request.contextPath}/resources/images/myp_img3.jpg" style="margin-left: 30px" width="200px" height="250px"> --%>
-<!-- 					</div>	 -->
-<!-- 					<div class="paybox1 col-md-6"> -->
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly > -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="듄2"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="2024 / 03 / 18"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="서면 4관"> -->
-<!-- 						</div> -->
-					
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly > -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly> -->
-<!-- 							<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-md-4 d-grid gap-5"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="19:30 ~ 22:50"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="G16"> -->
-<!-- 							<input type="text" readonly class="form-control-plaintext" value="18,000원">	 -->
-<!-- 						</div> -->
-<!-- 					</div>paybox1 첫번째 예매칸 	 -->
-<!-- 				</div>row -->
-<!-- 				<hr> -->
-<!-- 					<div class="row">네번째 사진 -->
-<!-- 						<div class="col-md-3"> -->
-<%-- 							<img src="${pageContext.request.contextPath}/resources/images/myp_img4.jpg" style="margin-left: 30px" width="200px" height="250px"> --%>
-<!-- 						</div>	 -->
-<!-- 						<div class="paybox1 col-md-6"> -->
-<!-- 							<div class="col-md-4 d-grid gap-5"> -->
-<!-- 								<input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example " disabled readonly > -->
-<!-- 								<input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example " disabled readonly> -->
-<!-- 								<input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example " disabled readonly> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-md-4 d-grid gap-5"> -->
-<!-- 								<input type="text" readonly class="form-control-plaintext" value="파묘"> -->
-<!-- 								<input type="text" readonly class="form-control-plaintext" value="2024 / 03 / 10"> -->
-<!-- 								<input type="text" readonly class="form-control-plaintext" value="삼정타워 11관"> -->
-<!-- 							</div> -->
-						
-<!-- 							<div class="col-md-4 d-grid gap-5"> -->
-<!-- 								<input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example " disabled readonly > -->
-<!-- 								<input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example " disabled readonly> -->
-<!-- 								<input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example " disabled readonly> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-md-4 d-grid gap-5"> -->
-<!-- 								<input type="text" readonly class="form-control-plaintext" value="20:20 ~ 22:50"> -->
-<!-- 								<input type="text" readonly class="form-control-plaintext" value="K13 K14 K15"> -->
-<!-- 								<input type="text" readonly class="form-control-plaintext" value="36,000원"> -->
-<!-- 							</div> -->
-<!-- 						</div> paybox1 첫번째 예매칸	 -->
-<!-- 					</div>row -->
-<!-- 				<hr> -->
-<!-- 			</div>col-md-10 -->
-<!-- 		</div>row box1 -->
+				</div><!-- box2 -->
+				<c:forEach items="${movieReservation}" var="map" varStatus="loop" begin="0" end="3">
+				    <div class="row">
+				        <div class="col-md-3">
+				        	<img src="${map.movie_poster}" style="margin-left: 30px" width="200px" height="250px">
+				        </div>
+				        <div class="paybox1 col-md-6">
+				            <div class="col-md-4 d-grid gap-5">
+				                <input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example" disabled readonly>
+				                <input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example" disabled readonly>
+				                <input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example" disabled readonly>
+				            </div>
+				            <div class="col-md-4 d-grid gap-5">
+				                <input type="text" readonly class="form-control-plaintext" value="${map.movie_name}">
+				                <input type="text" readonly class="form-control-plaintext" value="${map.scs_date}">
+				                <input type="text" readonly class="form-control-plaintext" value="${map.theater_info}">
+				            </div>
+				            <div class="col-md-4 d-grid gap-5">
+				                <input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example" disabled readonly>
+				                <input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example" disabled readonly>
+				                <input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example" disabled readonly>
+				            </div>
+				            <div class="col-md-4 d-grid gap-5">
+				                <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
+				                <input type="text" readonly class="form-control-plaintext" value="${map.ticket_seat_info}">
+				                <input type="text" readonly class="form-control-plaintext" value="${map.ticket_price}">
+				            </div>
+				        </div>
+				    </div>
+				    <hr>
+				</c:forEach>
+					<!-- 페이징 시작 -->
+					<div class="breakdown_pageArea">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" > 
+								<a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}" aria-label="Previous" >
+								<span aria-hidden="true" >&laquo;</span>
+								</a>
+							</li>
+							<c:forEach var="i" begin="${pageList.startPage}" end="${pageList.endPage}">
+								<c:choose>
+									<c:when test="${pageNum eq i }">
+										<li class="page-item active"><a class="page-link">${i}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}">${i}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
+								<a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+					</div>
+					<!-- 페이징 끝 -->
+			</div><!-- col-md-9 box-in -->
+		</div> <!-- row -->
 	</div><!-- container2 -->
-</div> <!-- container -->
+</div><!-- container -->
 <footer>
 	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
 </footer>

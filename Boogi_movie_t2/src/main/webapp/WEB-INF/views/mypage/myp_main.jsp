@@ -91,16 +91,15 @@ body {
 					    <tr>
 					      <th scope="col">#</th>
 					      <th scope="col">영화</th>
-					      <th scope="col">날짜</th>
+					      <th scope="col">관람날짜</th>
 					      <th scope="col">상영시간</th>
-					      <th scope="col">극장</th>
-					      <th scope="col">좌석</th>
-					      <th scope="col">가격</th>
+					      <th scope="col">상영관</th>
+					      <th scope="col">관람좌석</th>
+					      <th scope="col">결제금액</th>
 					    </tr>
 					  </thead>
 					  <tbody>
-					  
-						  <c:forEach var="map" items="${movieReservation}" varStatus="status" begin="0" end="6">
+						  <c:forEach var="map" items="${movieReservation}" varStatus="status" begin="0" end="4">
 							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
 							        <th scope="row">${status.index + 1}</th>
 							        <td>${map.movie_name}</td>
@@ -111,25 +110,6 @@ body {
 							        <td>${map.ticket_price}</td>
 							    </tr>
 							</c:forEach>
-					  
-<!-- 					    <tr  class="table-secondary"> -->
-<!-- 					      <th scope="row">1</th> -->
-<%-- 						      <td>${movie.movie_name}</td> --%>
-<!-- 						      <td>2024 / 04 / 16</td> -->
-<!-- 						      <td>17:00 ~ 19:20</td> -->
-<!-- 						      <td>서면</td> -->
-<!-- 						      <td>K9</td> -->
-<!-- 						      <td>15,000원</td> -->
-<!-- 					    </tr>       -->
-<!-- 					    <tr> -->
-<!-- 					      <th scope="row">2</th> -->
-<!-- 					        <td>아바타3</td> -->
-<!-- 					        <td>2024 / 03 / 29</td> -->
-<!-- 					        <td>18:20 ~ 20:15</td> -->
-<!-- 					        <td>서면</td> -->
-<!-- 					        <td>H8</td> -->
-<!-- 					        <td>15,000원</td> -->
-<!-- 					    </tr> -->
 					  </tbody>
 					</table>
 				</div><!-- col-md-6 -->
@@ -167,10 +147,10 @@ body {
 					      </div><!-- modal-body -->
 					      
 					      <div class="modal-footer"> <!-- 모달 폼 극장 전체 리스트 -->
-					      		<form id="theaterForm" method="post" action="MyTheaterList">
-									<button type="submit" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
-						      		<script type="text/javascript">
-						      		function sendCheckedValues() {
+				      		<form id="theaterForm" method="post" action="MyTheaterList">
+								<button type="submit" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
+					      		<script type="text/javascript">
+					      			function sendCheckedValues() {
 						      		    var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
 						      		    var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
 										
@@ -180,8 +160,8 @@ body {
 										
 						      		    $.ajax({
 						      		        url: "api/myp_my_theater",
-						      		        method: "POST", 
-						      		      	contentType: "application/json",
+						      		        type: "POST", 
+						      		      	contentType: "application/json", // String 으로 변경된 JSON 객체가 JSON인지 알려주기 위해 필요  
 						      		     	data: JSON.stringify({ checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
 						      		        dataType: "json",
 						      		        success: function (response) {
@@ -193,10 +173,9 @@ body {
 						      		        }
 						      		    });
 						      		}
-										        	
 										        
-									</script>
-								</form>
+								</script>
+							</form>
 					      </div><!--modal-footer  --> <!-- 모달 폼 극장 전체 리스트 -->
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->

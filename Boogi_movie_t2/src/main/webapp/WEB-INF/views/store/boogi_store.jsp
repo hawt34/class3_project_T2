@@ -9,7 +9,7 @@
 * {
 	margin: 0;
 	padding: 0;
-  	border: 1px solid white;  
+  	border: 1px solid skyblue;  
 }
 
 body {
@@ -106,10 +106,8 @@ footer {
 
 </style>
 <title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
-" rel="stylesheet" type="text/css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<header>
@@ -124,11 +122,11 @@ footer {
 				<form action="storePay" method="post">
 				<div class="snack1">
 					<div class= "snack1_name"> 부기스낵</div>
-						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_popCol.jpg">
 						<div class = "snack1_box">
 						<h4>종류 및 가격</h4>
 						<select name="category1_snack" id="category1_snack" >
   					  	<c:forEach items="${itemInfoSnack}" var="item_snack">
+						<img src="${pageContext.request.contextPath}/resources/images/${item_snack.item_info_image}">
         				<option value="${item_snack.item_info_price}">${item_snack.item_info_name} - ${item_snack.item_info_price}원</option>
     					</c:forEach>
 						</select>
@@ -143,16 +141,14 @@ footer {
 				        </select>
 				        </div>
 						<div id="totalSnack"></div>
-        				
-						 
-				</div>		
+        		</div>		
 				<div class="snack2">
 					<div class= "snack2_name"> 부기팝콘</div> 
-						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_pop.jpg">
 						<div class = "snack2_box">
 						<h4>종류 및 가격</h4>
 						<select name="category2_pop" id="category2_pop">
   					  	<c:forEach items="${itemInfoPop}" var="item_pop">
+						<img src="${pageContext.request.contextPath}/resources/images/store_corn_L.png">
         				<option value="${item_pop.item_info_price}">${item_pop.item_info_name} ${item_pop.item_info_price}원</option>
     					</c:forEach>
 						</select>
@@ -166,31 +162,39 @@ footer {
             			<option value="5">5개</option>
 				        </select>
 				        </div>
+				        <c:forEach items="${itemInfoPop}" var="item_pop">
+    					<img src="${pageContext.request.contextPath}/resources/images/nacho_combo.png" >
+						</c:forEach>
 						<div id="totalPop"></div> 						
 					
 				</div>
 				<div class="snack3">
-					<div class= "snack3_name"> 부기음료</div> 
-						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_col.jpg">
-						<div class = "snack3_box">
-						<h4>종류 및 가격</h4>
-						<select name="category3_juice" id="category3_juice">
-  					  	<c:forEach items="${itemInfoJuice}" var="item_Juice">
-        				<option value="${item_Juice.item_info_price}">${item_Juice.item_info_name} ${item_Juice.item_info_price}원</option>
-    					</c:forEach>
-						</select>
-						<h4>수량</h4>
-						<select name="snackJuice" id="snackJuice" >
-						<option value="0" selected>음료 미선택</option>
-            			<option value="1">1개</option>
-            			<option value="2">2개</option>
-            			<option value="3">3개</option>
-            			<option value="4">4개</option>
-            			<option value="5">5개</option>
-				        </select>
-				        </div>
-				        <div id="totalJuice"></div>
-				</div>
+    			<div class="snack3_name">부기음료</div>
+    			<div class="snack3_box">
+        <h4>종류 및 가격</h4>
+        <select name="category3_juice" id="category3_juice" onchange="updateJuiceImage()">
+            <c:forEach items="${itemInfoJuice}" var="item_Juice">
+                <option value="${item_Juice.item_info_price}" data-image="${pageContext.request.contextPath}/resources/images/${item_Juice.item_info_image}">
+                    ${item_Juice.item_info_name} ${item_Juice.item_info_price}원
+                </option>
+            </c:forEach>
+        </select>
+        <h4>수량</h4>
+        <select name="snackJuice" id="snackJuice">
+            <option value="0" selected>음료 미선택</option>
+            <option value="1">1개</option>
+            <option value="2">2개</option>
+            <option value="3">3개</option>
+            <option value="4">4개</option>
+            <option value="5">5개</option>
+        </select>
+    </div>
+    <div id="totalJuice"></div>
+    <!-- 이미지 표시를 위한 img 태그 추가 -->
+    <div id="juiceImageContainer">
+        <img id="juiceImage" src="" alt="선택된 음료 이미지" style="display:none; width:100px; height:auto;"/>
+    </div>
+</div>
 				<div class="snack4">
 					<div class= "snack4_name">부기콤보</div> 
 						<img src="${pageContext.request.contextPath}/resources/images/boogi_store_snack.jpg">
@@ -280,10 +284,9 @@ footer {
 		    
 		    // 로그인 여부 확인
 		    if (!sessionId) {
-		        if (confirm("로그인이 필요합니다. 상단의 로그인영역으로 이동하시겠습니까?")) {
-		            // 로그인 페이지로 이동
-		        	$('a[href="member_login"]').focus();
-		        }
+		    	if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
+                    window.location.href = 'member_login';
+                }
 		        event.preventDefault(); // 폼 제출 중단
 		        return;
 		    }
@@ -294,6 +297,22 @@ footer {
 // 	        // 팝업 창 띄우기
 // 	        window.open("storePay", "장바구니", "width=400, height=300, top=100, left=100");
 // 	    }); //get방식으로만 가능..
-	 
+	 function updateJuiceImage() {
+        // 셀렉트 박스와 이미지 요소를 가져오기
+        var selectBox = document.getElementById('category3_juice');
+        var imageElement = document.getElementById('juiceImage');
+
+        // 선택된 옵션 가져오기
+        var selectedOption = selectBox.options[selectBox.selectedIndex];
+        var imageUrl = selectedOption.getAttribute('data-image');
+
+        // 이미지 업데이트
+        if (imageUrl) {
+            imageElement.src = imageUrl;
+            imageElement.style.display = 'block';
+        } else {
+            imageElement.style.display = 'none';
+        }
+    }
 	</script>
 </html>

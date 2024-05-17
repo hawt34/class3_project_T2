@@ -1,6 +1,8 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.siot.IamportRestClient.IamportClient;
 
 import itwillbs.p2c3.boogimovie.service.CouponService;
 import itwillbs.p2c3.boogimovie.service.MemberService;
+import itwillbs.p2c3.boogimovie.service.PaymentService;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
@@ -24,6 +28,9 @@ import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 public class PaymentController {
 	
 	private IamportClient api;
+	
+	@Autowired
+	private PaymentService service;
 	
 	@Autowired
 	private MemberService memberService;
@@ -37,7 +44,6 @@ public class PaymentController {
 	
 	@GetMapping("payment")
 	public String payment(MemberVO member, Model model, HttpSession session) {
-		System.out.println("payment");
 		
 		String id = (String)session.getAttribute("sId");
 		if(id == null) {
@@ -58,7 +64,23 @@ public class PaymentController {
 	}
 	
 	@PostMapping("payment")
-	public String payment2(ScreenSessionVO scs, String selected_seats, String person_info, String total_fee) {
+	public String payment2(ScreenSessionVO scs, String selected_seats, String person_info, String total_fee, MemberVO member, HttpSession session, Model model) {
+		
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "로그인 후 다시 시도해주세요.");
+			model.addAttribute("targetURL", "member_login");
+			
+			return "error/fail";
+		}
+		
+		member.setMember_id(id);
+		member = memberService.isCorrectUser(member);
+		List<CouponVO> couponList = couponService.getMemberCoupon(member);
+		
+		model.addAttribute("member", member);
+		model.addAttribute("couponList", couponList);
+		
 		
 		return "payment/payment_reservation";
 	}
@@ -68,13 +90,36 @@ public class PaymentController {
 		return "payment/pay_test";
 	}
 	
+	// 포인트 적용 버튼 (입력 값 디비값과 비교)
+	@ResponseBody
+	@GetMapping("memberPoint")
+	public String memberPoint(MemberVO member, @RequestParam int use_point, Model model){
+		System.out.println("아이디 : " + member.getMember_id() + ", use_point : " + use_point);
+		
+		member = service.getMember(member);
+		int member_point_num = Integer.parseInt(member.getMember_point());
+		
+		if(member_point_num < use_point) {
+			
+			return "false"; // 포인트 차감 불가 
+		} 
+		
+		// 포인트 적용 디비 업데이트 
+//		member_point_num -= use_point;
+//		member.setMember_point(member_point_num + "");
+//		System.out.println(member);
+		
+//		int updateCount = service.usePoint(member);
+//		if(updateCount < 1) {
+//			model.addAttribute("msg", "포인트 적용 오류 발생");
+//			return "error/fail";
+//		}
+				
+		
+		return "true";  // 포인트 차감 가능
+	}
 	
-//	@ResponseBody
-//	@GetMapping("memberPoint")
-//	public MemberVO memberPoint(){
-//		MemberVO member = movieService.getMovieListAbc();
-//		return member; 
-//	}
+	
 	
 	@ResponseBody
 	@GetMapping("memberCoupon")

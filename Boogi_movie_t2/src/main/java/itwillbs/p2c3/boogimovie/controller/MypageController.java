@@ -23,10 +23,8 @@ import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.CouponService;
 import itwillbs.p2c3.boogimovie.service.MypageService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
-import itwillbs.p2c3.boogimovie.service.ReservationService;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
-import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
@@ -44,9 +42,6 @@ public class MypageController {
 	private CouponService couponService;
 	
 	@Autowired
-	private ReservationService reservationService;
-	
-	@Autowired
 	private AdminService service;
 	
 	@Autowired
@@ -59,7 +54,7 @@ public class MypageController {
 //		System.out.println( "session ID 값 : " + id);
 		
 		if(id == null) { // 실패
-			model.addAttribute("msg", "로그인이 필요한 페이지입니다.");
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
 			model.addAttribute("targetURL", "member_login");
 //			System.out.println("myp_main 실패");
 			return "error/fail";
@@ -79,8 +74,8 @@ public class MypageController {
 			model.addAttribute("infoMyTheater", infoMyTheater);
 			
 			// 예매내역
-			List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
-			model.addAttribute("movieReservation", movieReservation);
+//			List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
+//			model.addAttribute("movieReservation", movieReservation);
 			
 //			List<Object> combinedList = new ArrayList<>();
 //			combinedList.addAll(movieReservation);
@@ -95,35 +90,50 @@ public class MypageController {
 	// ============================= My극장 체크박스 =============================
 	@PostMapping("MyTheaterList") // 마이페이지 My극장 모달폼 극장 전체 리스트
 	public String handleFormSubmit(@RequestParam(name = "theaterIds", required = false, defaultValue = "") List<String> theaterIds, HttpSession session, TheaterVO theater) {
-
-	    System.out.println(" 나의 극장 : " + theaterIds);
+		
+		
+//	    System.out.println(" 나의 극장 : " + theaterIds);
 	        return "redirect:/myp_main";
     }
 	
-//	@GetMapping("myp_point")
-//	public String mypPoint() {
-//		System.out.println("myp_point");
-//		return "mypage/myp_point";
-//	}
+	
+	
+	
+	@ResponseBody
+	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
+	public ResponseEntity<String> mypMyTheater(@RequestBody List<String> checkedValues){
+	    System.out.println("Received checked values: " + checkedValues);
+	    if(checkedValues.isEmpty()) {
+	        return ResponseEntity.badRequest().body("No data received");
+	    }
+	    return ResponseEntity.ok("Data received successfully");
+	    
+	    
+	}
+	
+	// ============================= 포인트 =============================
+	
+	@GetMapping("myp_point")
+	public String mypPoint(Model model, MemberVO member) {
+		System.out.println("myp_point");
+		
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
+			model.addAttribute("targetURL", "member_login");
+			return"error/fail";
+		}
+		
+		member.setMember_id(id);
+		member = mypageService.getDbMember(member);
+		
+		model.addAttribute("member", member);
+		
+		return "mypage/myp_point";
+	}
 	
 	// ============================= 정보수정 =============================
 
-//	@RequestMapping(value = "myp_info_modify", method = {RequestMethod.GET, RequestMethod.POST})
-//	public String mypInfoModify(Model model, MemberVO member) {
-//	    String id = (String) session.getAttribute("sId");
-//	    System.out.println(id);
-//	    if (id == null) { // 세션 아이디 존재 안할경우
-//	        model.addAttribute("msg", "잘못된 접근입니다!");
-//	        model.addAttribute("targetURL", "member_login");
-//	        return "error/fail";
-//	    } else { // 아이디 존재할 경우
-//	         회원정보 수정 폼으로 이동
-//	    	MemberVO infoMember = mypageInfoService.getMember(id);
-//	    	model.addAttribute("member", infoMember);
-//	        return "mypage/myp_info_modify";
-//	    }
-//	}
-	
 	@GetMapping("myp_info_modify")
 	public String mypInfoModify(MemberVO member, Model model) {
 		
@@ -132,13 +142,10 @@ public class MypageController {
 		// => msg 속성값 : "잘못된 접근입니다!", targetURL 속성값 : "./"(메인페이지)
 		String id = (String)session.getAttribute("sId");
 		if(id == null) {
-			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("msg", "잘못된 접근입니다");
 			model.addAttribute("targetURL", "./");
 			return"error/fail";
 		}
-		// 로그인 비즈니스 로직 처리 과정에서 사용한 MemberService - getMember() 메서드 재사용
-		// => MemberVO 객체를 파라미터로 전달하지만 객체 내에는 데이터가 없으므로
-		//    세션 아이디를 MemberVO 객체의 id 멤버변수 값으로 저장
 		
 		member.setMember_id(id);
 		member = mypageService.getDbMember(member);
@@ -160,35 +167,11 @@ public class MypageController {
 		String id = (String)session.getAttribute("sId");
 		System.out.println("session Id : " + id);
 		if(id == null) {
-			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("msg", "잘못된 접근입니다");
 			model.addAttribute("targetURL", "./");
 			return "error/fail";
 		}
-//		member = mypageInfoService.getMember(id);
-//		MemberVO dbMember = mypageInfoService.getDbMember(member);
-//		model.addAttribute("dbMember", dbMember);
-//		session.setAttribute("member", member);
-//		System.out.println("member.getMember_id : " + member.getMember_id());
-//		if(id.equals(member.getMember_id())) {
-//			
-//			System.out.println("id : " + id + ", member_id : " + member.getMember_id() + " 같음 ");
-		
-//		} else {
-//			
-//			System.out.println("id : " + id + ", member_id : " + member.getMember_id() + " 다름 ");
-//			int updateCount = mypageInfoService.modifyMemberNotEq(member);
-//		}
-		// ----------------------------------------------------
-		// 만약, 변경할 패스워드가 존재할 경우 패스워드 암호화
-//		if(!member.getMember_pwd().equals("")) {
-//			member.setMember_pwd(passwordEncoder.encode(member.getMember_pwd()));
-//		}
-		// ----------------------------------------------------
-		// MemberService - modifyMember() 메서드 호출하여 회원정보 수정 요청
-		// => 파라미터 : MemberVO 객체   리턴타입 : int(updateCount)
-		
-		// 수정 결과 판별 후 성공 시 "MemberInfo" 서블릿 요청
-		// 실패 시 "error/fail.jsp" 포워딩("회원정보 수정 실패!")
+
 		int updateCount = mypageService.modifyMember(member);
 		model.addAttribute("member", updateCount);
 		if(updateCount > 0) { // 정보수정 성공 시
@@ -212,8 +195,8 @@ public class MypageController {
 		String id = (String)session.getAttribute("sId");
 		
 		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-			model.addAttribute("msg", "로그인이 필요한 페이지입니다!");
-			model.addAttribute("targetURL", "./member_login");
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
+			model.addAttribute("targetURL", "member_login");
 			return"error/fail";
 		}
 		
@@ -234,50 +217,89 @@ public class MypageController {
 		return "mypage/myp_coupon";
 	}
 		
-		
-		
 	
 	
 	// ============================= 예매 =============================
 	
 	// 예매내역
-	@GetMapping("myp_reservation")
-	public String mypReservation(MemberVO member, Model model) {
-		String id = (String)session.getAttribute("sId");
-		
-		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-			model.addAttribute("msg", "로그인이 필요한 페이지입니다!");
-			model.addAttribute("targetURL", "./member_login");
-			return"error/fail";
-		}
-		
-		member = mypageService.getMember(id);
-		model.addAttribute("member", member);
-		System.out.println("myp_reservation()");
-		// 예매정보
-		List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
-		model.addAttribute("movieReservation", movieReservation);
-		
-		return "mypage/myp_reservation";
-	}
+//	@GetMapping("myp_reservation")
+//	public String mypReservation(MemberVO member, Model model, @RequestParam(defaultValue = "1")int pageNum) {
+//		String id = (String)session.getAttribute("sId");
+//		
+//		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
+//			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
+//			model.addAttribute("targetURL", "member_login");
+//			return"error/fail";
+//		}
+//		member = mypageService.getMember(id);
+//		model.addAttribute("member", member);
+//		System.out.println("member : " + member);
+//		System.out.println("member.getMember_id" + member.getMember_id());
+//		System.out.println("myp_reservation()");
+//		// 예매정보
+//		List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
+//		model.addAttribute("movieReservation", movieReservation);
+//		System.out.println("pageNum : " + pageNum);
+//		
+//		int listLimit = 4;
+//		int startRow = (pageNum - 1) * listLimit;
+//		System.out.println("startRow : " + startRow);
+//		System.out.println("listLimit : " + listLimit);
+//		String member_id = member.getMember_id();
+//		List<Map<String, Object>> resvList = mypageService.getResvList(startRow, listLimit, member_id);
+//		int listCount = mypageService.getResvCount(member); // 총 예매영화 갯수
+//		System.out.println("listCount : " + listCount);
+//		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
+//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+//		System.out.println("maxPage : " + maxPage);
+//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+//		System.out.println("startPage : " + startPage);
+//		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+//		System.out.println("endPage : " + endPage);
+//		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+//			endPage = maxPage;
+//		}
+//		
+//		System.out.println("endPage : " + endPage);
+//		System.out.println("maxPage : " + maxPage);
+//		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+//		
+//
+//		if(pageNum < 1 || pageNum > maxPage){
+//			model.addAttribute("msg", "존재하지 않는 페이지입니다");
+//			model.addAttribute("targetURL", "myp_reservation");
+//		}
+//		model.addAttribute("pageList", pageList);
+//		model.addAttribute("resvList", resvList);
+//		
+//		return "mypage/myp_reservation";
+//	}
+	
+	// ============================= 취소 =============================
 	
 	// 취소 영화 목록
-	@GetMapping("myp_cancel")
-	public String mypCancel(Model model) {
-//		System.out.println("myp_cancel()");
-		
-		String id = (String)session.getAttribute("sId");
-		
-		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
-			model.addAttribute("targetURL", "./member_login");
-			return"error/fail";
-		}
-		
-		
-		
-		return "mypage/myp_cancel";
-	}
+//	@GetMapping("myp_cancel")
+//	public String mypCancel(Model model, MemberVO member) {
+////		System.out.println("myp_cancel()");
+//		
+//		String id = (String)session.getAttribute("sId");
+//		
+//		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
+//			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
+//			model.addAttribute("targetURL", "member_login");
+//			return"error/fail";
+//		}
+//		
+//		member = mypageService.getMember(id);
+//		model.addAttribute("member", member);
+//		
+//		System.out.println("mypcontroller - myp_cancel()");
+//		List<Map<String, Object>> cancelList = mypageService.getCancelList(member);
+//		model.addAttribute("cancelList", cancelList);
+//		
+//		
+//		return "mypage/myp_cancel";
+//	}
 	
 	// ============================= 탈퇴 =============================
 	
@@ -314,7 +336,6 @@ public class MypageController {
 		// 세션 아이디 존재 여부 판별
 		// 회원 정보 조회 후 아이디 일치 여부와 패스워드 일치 여부 확인
 		String id = (String)session.getAttribute("sId");
-//		System.out.println("password : " + password);
 //		System.out.println("myp_withdraw_finish_pro");
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다");
@@ -322,14 +343,8 @@ public class MypageController {
 			return"error/fail";
 		}
 		
-		// 로그인 비즈니스 로직 처리 과정에서 사용한 MemberService - getMember() 메서드 재사용
-		// => MemberVO 객체를 파라미터로 전달하지만 객체 내에는 데이터가 없으므로
-		//    세션 아이디를 MemberVO 객체의 id 멤버변수 값으로 저장
 		member.setMember_id(id);
 		MemberVO dbMember = mypageService.getDbMember(member);
-//		System.out.println("dbMember pwd : " + dbMember.getMember_pwd());
-//		System.out.println("member pwd : " + password);
-//		System.out.println("dbMember : " + dbMember);
 		
 		if(dbMember != null && password.equals(dbMember.getMember_pwd())) { // 비번이 같을 때 
 			int updateCount = mypageService.withdrawMember(member);
@@ -343,8 +358,8 @@ public class MypageController {
 				return "redirect:/myp_withdraw_finish";
 			} else { // 실패시
 //				System.out.println("탈퇴실패");
-				model.addAttribute("msg", "탈퇴에 실패했습니다!");
-				model.addAttribute("targetURL", "./");
+				model.addAttribute("msg", "탈퇴에 실패했습니다");
+				model.addAttribute("targetURL", "myp_withdraw_info");
 				return"error/fail";
 			}
 		} else { // 비번이 일치하지 않을 경우
@@ -366,12 +381,15 @@ public class MypageController {
 	
 	// CSC 관련 List
 	@RequestMapping(value = "myp_oto_breakdown", method = {RequestMethod.POST, RequestMethod.GET})
-	public String mypOtoBreakdown(Model model, @RequestParam(defaultValue = "1")int pageNum) {
+	public String mypOtoBreakdown(Model model,
+								  @RequestParam(defaultValue = "1")int pageNum,
+								  @RequestParam(required = false)String faqCategory,
+								  @RequestParam(required = false)String theaterName) {
 //			System.out.println("myp_withdraw_finish()");
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
-		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit);
-		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
+		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, theaterName, theaterName);
+		int listCount = otoService.getOtoListCount(theaterName, theaterName); //총 공지사항 갯수
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
@@ -432,17 +450,7 @@ public class MypageController {
 		return "redirect:/myp_oto_breakdown";
 	}
 	
-	@ResponseBody
-	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
-	public ResponseEntity<String> mypMyTheater(@RequestBody List<String> checkedValues){
-	    System.out.println("Received checked values: " + checkedValues);
-	    if(checkedValues.isEmpty()) {
-	        return ResponseEntity.badRequest().body("No data received");
-	    }
-	    return ResponseEntity.ok("Data received successfully");
-	    
-	    
-	}
+
 
 	
 }

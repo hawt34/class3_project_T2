@@ -15,4 +15,6 @@ public interface ReviewMapper {
 	List<ReviewVO> selectReviewId(int review_num);
 	int updateReview(ReviewVO review2);
 	int deleteReview(int review_num);
+	int countReviews(@Param("movie_num") int movie_num);
+
 }

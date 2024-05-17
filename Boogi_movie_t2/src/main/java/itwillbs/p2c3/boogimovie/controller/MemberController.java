@@ -15,6 +15,7 @@ import itwillbs.p2c3.boogimovie.service.MailService;
 import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.vo.MailAuthInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
+import retrofit2.http.GET;
 
 @Controller
 public class MemberController {
@@ -23,6 +24,7 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private MailService mail_service;
+	
 	
 	@PostMapping("member_pwd_update")
 	public String memberPwdUpdate(MemberVO member, Model model) {
@@ -112,14 +114,12 @@ public class MemberController {
 	public String memberLogin() {
 		System.out.println("MemberLogin()");
 			
-			
 		return "member/member_login";
 	}
 	
 	@GetMapping("member_search_id")
 	public String memberIdSearch() {
 		System.out.println("member_search_id()");
-			
 			
 		return "member/member_id_search";
 	}
@@ -134,7 +134,6 @@ public class MemberController {
 	public String memberPwdSearch(MemberVO member,Model model) {
 		System.out.println("member_search_pwd()");
 		model.addAttribute("member_id", member.getMember_id());
-		
 		
 		return "member/member_pwd_search";
 	}
@@ -154,7 +153,8 @@ public class MemberController {
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
 		String pwd = member.getMember_pwd();
 		member.setMember_pwd(pwdEncoder.encode(pwd));
-		
+		String addr = member.getPost_code() + "/" + member.getAddress1() + "/" + member.getAddress2();
+		member.setMember_addr(addr);
 		int insertCount = service.regMember(member);
 		
 		if(insertCount < 1) {
@@ -172,8 +172,6 @@ public class MemberController {
 	public String memberRegMember(MemberVO inputMember, Model model) {
 		boolean isRegistedMember = false;
 		isRegistedMember = service.IsRegisteredMember(inputMember);
-		
-		
 		
 		if(isRegistedMember) {
 			model.addAttribute("msg" , "이미 가입한 회원입니다.");
@@ -244,8 +242,6 @@ public class MemberController {
 		session.removeAttribute("member");
 		model.addAttribute("member_name",member.getMember_name());
 			
-		
-		
 		return "member/member_reg_complete";
 	}
 	
@@ -259,31 +255,19 @@ public class MemberController {
 		
 		session.setAttribute("member", outputMember);
 		
-		
-		
 		return "redirect:/member_search_id_result";
 	}
 	
 	
-//	@PostMapping("member_pwd_update")
-//	public String memberPwdInsert() {
-//		
-//	}
-	
-	
-	
-	
-	
+
 	
 	@PostMapping("Mytheater")
 	public String myTheaterRegist() {
 		
-		
-		
-		
 		return "redirect:/theater";
 		
 	}
+	
 	
 	
 	

@@ -11,7 +11,9 @@
  	</insert>
  	
  	 <select id="selectReviewList" resultType="itwillbs.p2c3.boogimovie.vo.ReviewVO" >
-        SELECT * FROM review WHERE movie_num = #{movie_num}
+     	SELECT * FROM review
+    	WHERE movie_num = #{movie_num}
+    	LIMIT #{startRow}, #{listLimit}
     </select>
  	
  	<select id="selectReviewId" resultType="itwillbs.p2c3.boogimovie.vo.ReviewVO">
@@ -28,8 +30,11 @@
  	<delete id="deleteReview">
  		DELETE FROM review
  		WHERE review_num = #{review_num}	 
- 	
  	</delete>
+ 	<select id="countReviews" resultType="int">
+        SELECT COUNT(*) FROM review
+        WHERE movie_num = #{movie_num}
+    </select>
  	
  	
  </mapper>

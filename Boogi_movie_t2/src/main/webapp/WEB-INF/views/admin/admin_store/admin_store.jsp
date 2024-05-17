@@ -96,12 +96,12 @@
 				<div class="admin_store_head">
 					<div class="admin_store_title">스토어 관리</div>
 					<div class="admin_store_search">
-						  <select id="categorySelect">
-                            <option value="전체">전체</option> <!-- 전체 카테고리를 선택하는 옵션을 추가할 수 있습니다. -->
-                           	<option value="음료">음료</option> <!-- 귀찮아서 그냥 전체로 끌고옴. -->
-                           	<option value="음료">음료</option>
-                           	<option value="음료">음료</option>
-                          </select> 
+<!-- 						  <select id="categorySelect"> -->
+<!--                             <option value="전체">전체</option> 전체 카테고리를 선택하는 옵션을 추가할 수 있습니다. -->
+<!--                            	<option value="음료">음료</option> 귀찮아서 그냥 전체로 끌고옴. -->
+<!--                            	<option value="음료">음료</option> -->
+<!--                            	<option value="음료">음료</option> -->
+<!--                           </select>  -->
 					</div>
 				</div>
 
@@ -115,7 +115,8 @@
 								<th>스낵 종류</th>
 								<th>스낵 이름</th>
 								<th>스낵 가격</th>
-								<th>수정/삭제</th>
+								<th>이미지</th>
+								<th>수정삭제</th>
 							</tr>
 						</thead>
 				<!--  이 부분을 반복문을 통해서 상영관 정보를 담은 리스트를 
@@ -126,6 +127,7 @@
 	        					 <td>${itemFull.item_info_category}</td>
 	        					 <td>${itemFull.item_info_name}</td>
 	        					 <td>${itemFull.item_info_price}</td>
+	        					 <td>${itemFull.item_info_image}</td>
 	                             <td>
 									<button type="button" class="btn btn-outline-primary" onclick="store_form('${itemFull.item_info_name}')">수정</button>
 									<button type="button" class="btn btn-outline-primary" onclick="store_delete('${itemFull.item_info_name}')">삭제</button>
@@ -137,7 +139,7 @@
 				</div>
 				
 				<div class="admin_store_footer" align="center">
-					<button onclick="store_form()">스낵 등록</button>
+					<button onclick="location.href='admin_store_form'">스낵 등록</button>
 				</div>
 
 			</div>

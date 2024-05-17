@@ -85,12 +85,17 @@ a{
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
+					<h5><a href="myp_point">포인트</a></h5>
+				</button>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn" data-toggle="dropdown">
 					<h5><a href="myp_oto_breakdown">문의내역</a></h5>
 				</button>
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5><a href="myp_info_modify">정보수정</a></h5>
+					<h5><a href="myp_info_modify">회원정보수정</a></h5>
 				</button>
 			</div>
 			<div class="btn-group">

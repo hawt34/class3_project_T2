@@ -21,5 +21,9 @@ public class MemberVO {
 	private String member_my_theater1;
 	private String member_my_theater2;
 	private String member_my_theater3;
+	
+	private String post_code;
+	private String address1;
+	private String address2;
 		
 }

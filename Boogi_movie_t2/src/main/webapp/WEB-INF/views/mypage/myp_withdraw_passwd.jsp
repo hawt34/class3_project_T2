@@ -23,6 +23,7 @@ body {
 .container1{
 	height : 900px;
 	width: 1400px; /* 해상도 1200*/
+	margin : auto;
 }
 
 .container2{

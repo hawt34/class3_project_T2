@@ -30,107 +30,110 @@ body {
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 <div class="container1">
-	<div class="row">
-		<div class="col-md-2">
-			<jsp:include page="inc/myp_aside.jsp"></jsp:include>
-		</div>	<!-- col-md-2 사이드바  -->
-		<div class="col-md-9">
-			<h2>회원정보수정</h2>
-			<hr>
-		<form action="myp_info_modify_pro" method="post" name="fr">
-			<div class="box1">
-				
-				<div class="box5">
-		   			<label for="member_name">이름</label>
-				</div>
-			  	<div class="form_item w-75">
-			    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" readonly>
-			    </div><!-- form item -->
-			    
-			    
-				<div class="box5">
-		   			<label for="member_id">아이디</label>
-		   		</div>
-			  	<div class="form_item w-75">
-		    		<input type="text"  placeholder="아이디 입력" name="member_id" id="member_id" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" value="${member.member_id}" readonly required>
-			    </div><!-- form item -->
-<!-- 				</form> -->
-				<div class="box5">
-	   				<label for="member_pwd">새 비밀번호</label>
-	   			</div>
-			  	<div class="form_item w-75">
-			    	<input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd">
-				    <div class="box4">
-			    		<span id="pwdMessage" style="color: red;"></span>
-					</div>
-			    </div><!-- form item -->
-				
-				<div class="box5">
-	   				<label for="member_pwd2">새 비밀번호확인</label>
-			  	</div>
-			  	<div class="form_item w-75 ">
-			    	<input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2">
-    			    <div class="box4">
-		    	   		<span id="pwd2Message" style="color: red;"></span>
-		    	    </div>
-			    </div><!-- form item -->
-				
-				<div class="box5">
-	   				<label for="member_birth">생년월일</label>
-				</div>
-			  	<div class="form_item w-75">
-			    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.member_birth}">
-<!-- 		    	   	<div class="box4"> -->
-		    	    	<span id="birthMessage" style="color: red;"></span>
-<!-- 		    	    </div> -->
-			    </div><!-- form item -->
-			    
-				<div class="box5">
-	   				<label for="member_addr">주소</label>
-	   			</div>
-			  	<div class="form_item w-75">
-			    	<input type="text" id="member_addr" name="member_addr" size="6" onclick="search_address()" required value="${member.member_addr}" placeholder="클릭 시 주소검색">
-<!-- 			    	<div class="box4"> -->
-			    		<span id="addrMessage" style="color: red;"></span>
-<!-- 			    	</div> -->
-			    </div><!-- form item -->
-			
-				<div class="box5">
-		   			<label for="member_email">Email</label>
-				</div>
-			  	<div class="form_item w-75">
-			    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required value="${member.member_email}">
-					<div class="box4">
- 				    	<span id="emailMessage" style="color: red;"></span>
- 				    </div>
-			    </div><!-- form item -->
-			
-				<div class="box5">
-	   				<label for="member_tel">전화번호</label>
-	   			</div>
-			  	<div class="form_item w-75">
-			    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" required id="member_tel" value="${member.member_tel}">
-					<div class="box4">
-						<span id="telMessage" style="color: red;"></span>
-					</div>
-			    </div><!-- form item -->
-			    
-<!-- 	    		<div class="row"> -->
-<!-- 					<label for="movie_genre"><b>영화취향</b></label> -->
-<!-- 						<div class="col-md-8 box3"> -->
-<!-- 				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="공포" name="member_movie_genre">공포</div> -->
-<!-- 				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="코믹" name="member_movie_genre">코믹</div> -->
-<!-- 				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="시사" name="member_movie_genre">시사</div> -->
-<!-- 									<div class="col-md-2"><input type="checkbox" id="cb_all">전체선택</div> -->
-<!-- 						</div> -->
-<!-- 			    </div> -->
-			</div><!-- box1 -->
-			<div class="d-grid gap-2 col-3 box2">
-				  <button class="btn btn-outline-primary btn-lg" type="submit" onclick="myp_info_modify_pro">수정완료</button>
-			</div> <!-- d-grid gap-2 col-3 box2 -->
-		</form>
-		</div><!-- col-md-9 -->
-	</div><!-- row -->
+	<div class="container2">
+		<div class="row">
+			<div class="col-md-2">
+				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+			</div>	<!-- col-md-2 사이드바  -->
+			<div class="col-md-9">
+				<h2>회원정보수정</h2>
+				<hr>
+				<form action="myp_info_modify_pro" method="post" name="fr">
+					<div class="box1">
+						
+						<div class="box5">
+				   			<label for="member_name">이름</label>
+						</div>
+					  	<div class="form_item w-75">
+					    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" readonly>
+					    </div><!-- form item -->
+					    
+					    
+						<div class="box5">
+				   			<label for="member_id">아이디</label>
+				   		</div>
+					  	<div class="form_item w-75">
+				    		<input type="text"  placeholder="아이디 입력" name="member_id" id="member_id" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" value="${member.member_id}" readonly required>
+					    </div><!-- form item -->
+		<!-- 				</form> -->
+						<div class="box5">
+			   				<label for="member_pwd">새 비밀번호</label>
+			   			</div>
+					  	<div class="form_item w-75">
+					    	<input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd">
+						    <div class="box4">
+					    		<span id="pwdMessage" style="color: red;"></span>
+							</div>
+							    <label id="msg_pwd" class="msg_pwd"></label><br>
+					    </div><!-- form item -->
+						
+						<div class="box5">
+			   				<label for="member_pwd2">새 비밀번호확인</label>
+					  	</div>
+					  	<div class="form_item w-75 ">
+					    	<input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2">
+		    			    <div class="box4">
+				    	   		<span id="pwd2Message" style="color: red;"></span>
+				    	    </div>
+					    </div><!-- form item -->
+						
+						<div class="box5">
+			   				<label for="member_birth">생년월일</label>
+						</div>
+					  	<div class="form_item w-75">
+					    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.member_birth}">
+		<!-- 		    	   	<div class="box4"> -->
+				    	    	<span id="birthMessage" style="color: red;"></span>
+		<!-- 		    	    </div> -->
+					    </div><!-- form item -->
+					    
+						<div class="box5">
+			   				<label for="member_addr">주소</label>
+			   			</div>
+					  	<div class="form_item w-75">
+					    	<input type="text" id="member_addr" name="member_addr" size="6" onclick="search_address()" required value="${member.member_addr}" placeholder="클릭 시 주소검색">
+		<!-- 			    	<div class="box4"> -->
+					    		<span id="addrMessage" style="color: red;"></span>
+		<!-- 			    	</div> -->
+					    </div><!-- form item -->
+					
+						<div class="box5">
+				   			<label for="member_email">Email</label>
+						</div>
+					  	<div class="form_item w-75">
+					    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required value="${member.member_email}">
+							<div class="box4">
+		 				    	<span id="emailMessage" style="color: red;"></span>
+		 				    </div>
+					    </div><!-- form item -->
+					
+						<div class="box5">
+			   				<label for="member_tel">전화번호</label>
+			   			</div>
+					  	<div class="form_item w-75">
+					    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" required id="member_tel" value="${member.member_tel}">
+							<div class="box4">
+								<span id="telMessage" style="color: red;"></span>
+							</div>
+					    </div><!-- form item -->
+					    
+		<!-- 	    		<div class="row"> -->
+		<!-- 					<label for="movie_genre"><b>영화취향</b></label> -->
+		<!-- 						<div class="col-md-8 box3"> -->
+		<!-- 				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="공포" name="member_movie_genre">공포</div> -->
+		<!-- 				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="코믹" name="member_movie_genre">코믹</div> -->
+		<!-- 				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="시사" name="member_movie_genre">시사</div> -->
+		<!-- 									<div class="col-md-2"><input type="checkbox" id="cb_all">전체선택</div> -->
+		<!-- 						</div> -->
+		<!-- 			    </div> -->
+					</div><!-- box1 -->
+					<div class="d-grid gap-2 col-3 box2">
+						  <button class="btn btn-outline-primary btn-lg" type="submit" onclick="myp_info_modify_pro">수정완료</button>
+					</div> <!-- d-grid gap-2 col-3 box2 -->
+				</form>
+			</div><!-- col-md-9 -->
+		</div><!-- row -->
+	</div><!-- container2 -->
 </div><!-- container1  -->	
 	<footer>
 		<jsp:include page="inc/myp_footer.jsp"></jsp:include>
@@ -146,29 +149,75 @@ body {
 	    // 비밀번호 입력값 변경 시
 	    $("#member_pwd").on("input", function(){
 	        let pwd = $("#member_pwd").val();
-	        let regex = /^.{8,16}$/g;
-			let message = document.getElementById("pwdMessage");
-	        
-	        if (!regex.test(pwd)) {
-	            message.textContent = "올바른 비밀번호 형식이 아닙니다";
-	        } else {
-	            message.textContent = ""; // 에러 메시지 지우기
-	        }
+		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
+		    let message = document.getElementById("pwdMessage");
+		    let msgPwd = document.getElementById("msg_pwd");
+		    
+		    // 초기화
+		    message.textContent = "";
+		    msgPwd.textContent = "";
+		    msgPwd.style.color = "";
+		    
+		    // 패스워드 입력값 검증(복잡도 검사 포함)
+		    let msg = "";
+		    let color = "";
+		    let checkPasswdResult = false;
 
-	        if (pwd === "") {
-	            message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
-	        }
-	        
-	
-	        checkFormValidity(); // 폼 유효성 검사 실행
-	    });
-	    
+		    if (pwd === "") {
+		        message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
+		    } else if (!lengthRegx.test(pwd)) {
+		        message.textContent = "!,@,#,$ 영문자와 숫자조합 8~16자리를 입력해주세요";
+		    } else {
+		        // 패스워드 복잡도(안전도) 검사
+		        let engUpperRegex = /[A-Z]/;
+		        let engLowerRegex = /[a-z]/;
+		        let numRegex = /\d/; // /[0-9]/랑 동일
+		        let specRegex = /[!@#$%]/;
+
+		        // 각 규칙에 대한 부분 검사를 통해 일치하는 항목 카운팅 변수 1씩 증가시키기
+		        let count = 0;
+
+		        if (engUpperRegex.test(pwd)) count++; // 대문자 포함할 경우
+		        if (engLowerRegex.test(pwd)) count++; // 소문자 포함할 경우
+		        if (numRegex.test(pwd)) count++;     // 숫자 포함할 경우
+		        if (specRegex.test(pwd)) count++;    // 특수문자 포함할 경우
+
+		        switch (count) {
+		            case 4:
+		                msg = "안전";
+		                color = "Green";
+		                checkPasswdResult = true;
+		                break;
+		            case 3:
+		                msg = "보통";
+		                color = "Orange";
+		                checkPasswdResult = true;
+		                break;
+		            case 2:
+		                msg = "위험";
+		                color = "Red";
+		                checkPasswdResult = true;
+		                break;
+		            case 1:
+		            case 0:
+		                msg = "!,@,#,$ 영문자와 숫자조합 8~16자리를 입력해주세요";
+		                color = "RED";
+		                checkPasswdResult = false;
+		                break;
+		        }
+		        
+		        msgPwd.textContent = msg;
+		        msgPwd.style.color = color;
+		    }
+
+		    checkFormValidity(); // 폼 유효성 검사 실행
+		});
 	    
 	    // 비밀번호2 입력값 변경 시
 	    $("#member_pwd2").on("input", function() {
 	    	let pwd = $("#member_pwd").val();
 	        let pwd2 = $("#member_pwd2").val();
-	        let regex = /^.{8,16}$/g;
+		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
 			let message = document.getElementById("pwd2Message");
 	        
 	        if (pwd2 != pwd) {
@@ -189,18 +238,13 @@ body {
 	        let regex = /\d{6}$/g; // \d는 숫자 [0-9]를 나타내는 메타 문자
 			let message = document.getElementById("birthMessage");
 	        
-	        if (birth.length > 6) { // member_birth의 길이가 6일때
+	        if (birth.length != 6) { // member_birth의 길이가 6일때
         		message.textContent = "생년월일을 6글자로 입력하세요";
 	        	
-	        } else { // 길이가 6이 아닐때
-	        	if(!regex.test(birth)){
-	        		message.textContent = "유효한 생년월일 양식이 아닙니다";
-	        	} else {
+	        } else {
 	            message.textContent = ""; // 에러 메시지 지우기
-	       		}
+       		}
 	        	
-	        }
-
 	        if (birth === "") {
 	            message.textContent = "생년월일을 입력하세요"; // 메시지 설정
 	        }
@@ -212,11 +256,11 @@ body {
 	    // 상세주소 입력값 변경 시
 	    $("#member_addr").on("input", function() {
 	        let address = $("#member_addr").val();
-	        let regex = /.{2,20}$/g;
+	        let regex = /^.{2,20}$/g;
 			let message = document.getElementById("addrMessage");
 	        
 	        if (!regex.test(address)) {
-	            message.textContent = "유효한 주소 형식이 아닙니다.";
+	            message.textContent = "주소를 20 글자 이내로 입력해주세요";
 	        } else {
 	            message.textContent = ""; // 에러 메시지 지우기
 	        }
@@ -235,7 +279,7 @@ body {
 			let message = document.getElementById("emailMessage");
 	        
 	        if (!regex.test(email)) {
-	            message.textContent = "유효한 이메일 형식이 아닙니다.";
+	            message.textContent = "이메일 형식을 맞춰 입력해주세요 (example@example.exam)";
 	        } else {
 	            message.textContent = ""; // 에러 메시지 지우기
 	        }
@@ -253,6 +297,7 @@ body {
 	        let tel = $("#member_tel").val();
 	        let regex = /^010\d{8}$/g;
 			let message = document.getElementById("telMessage");
+			
 	        if (tel.includes("-")) {
 	            message.textContent = "'-'를 제외한 전화번호를 입력해주세요";
 	        } else if (!regex.test(tel)) {

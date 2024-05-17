@@ -148,6 +148,7 @@ tbody tr:hover {
 									<td>
 										<div>
 											<select id="movieSelect" name="movie_num" class="admin_moviePlan_search">
+												<option value="">영화선택</option>
 												<c:forEach var="movie" items="${movieList}">
 													<option value="${movie.movie_num}">${movie.movie_name}</option>
 												</c:forEach>
@@ -165,6 +166,7 @@ tbody tr:hover {
 									</td>
 									<td>
 										<select id="hourSelect" name="scs_start_time" class="admin_moviePlan_search">
+											<option value="">시간선택</option>
 											<c:forEach var="hour" begin="9" end="24">
 											    <option value="${hour}:00" >${hour}:00</option>
 											</c:forEach>

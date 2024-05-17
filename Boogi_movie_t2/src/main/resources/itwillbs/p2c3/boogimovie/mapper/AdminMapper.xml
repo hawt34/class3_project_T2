@@ -137,45 +137,45 @@
 	</select>
 	
 <!-- 상영 등록 -->
-	<insert id="insertMoviePlan">
-		INSERT INTO
-			screen_session
-		VALUES(
-			null
-			, #{movie_num}
-			, #{theater_num}
-			, #{scs_empty_seat}
-			, #{screen_dimension}
-			, #{scs_date}
-			, #{scs_start_time}
-			, #{scs_end_time}
-			, #{screen_cinema_num}
-		)
-	</insert>
+<!-- 	<insert id="insertMoviePlan"> -->
+<!-- 		INSERT INTO -->
+<!-- 			screen_session -->
+<!-- 		VALUES( -->
+<!-- 			null -->
+<!-- 			, #{movie_num} -->
+<!-- 			, #{theater_num} -->
+<!-- 			, #{scs_empty_seat} -->
+<!-- 			, #{screen_dimension} -->
+<!-- 			, #{scs_date} -->
+<!-- 			, #{scs_start_time} -->
+<!-- 			, #{scs_end_time} -->
+<!-- 			, #{screen_cinema_num} -->
+<!-- 		) -->
+<!-- 	</insert> -->
 	
 <!-- 상영일정 삭제 -->
-	<delete id="deleteMoviePlan">
-		DELETE FROM 
-			screen_session
-		WHERE 
-			scs_num = #{scs_num}
-	</delete>
+<!-- 	<delete id="deleteMoviePlan"> -->
+<!-- 		DELETE FROM  -->
+<!-- 			screen_session -->
+<!-- 		WHERE  -->
+<!-- 			scs_num = #{scs_num} -->
+<!-- 	</delete> -->
 	
 <!-- 상영일정 리스트 -->
-	<select id="selectMoviePlanList">
-		SELECT 
-			ss.*, t.theater_name, mv.movie_name 
-		From 
-			screen_session ss
-		Join 
-			theater t 
-		ON 
-			t.theater_num =ss.theater_num
-		JOIN 
-			movie mv 
-		ON 
-			mv.movie_num = ss.movie_num
-	</select>
+<!-- 	<select id="selectMoviePlanList"> -->
+<!-- 		SELECT  -->
+<!-- 			ss.*, t.theater_name, mv.movie_name  -->
+<!-- 		From  -->
+<!-- 			screen_session ss -->
+<!-- 		Join  -->
+<!-- 			theater t  -->
+<!-- 		ON  -->
+<!-- 			t.theater_num =ss.theater_num -->
+<!-- 		JOIN  -->
+<!-- 			movie mv  -->
+<!-- 		ON  -->
+<!-- 			mv.movie_num = ss.movie_num -->
+<!-- 	</select> -->
 	
 <!-- 상영 시작, 종료시간 가져오기 -->
 	<select id="getMovieTimeList">

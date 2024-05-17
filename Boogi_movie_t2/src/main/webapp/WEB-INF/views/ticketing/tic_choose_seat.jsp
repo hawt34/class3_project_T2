@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,7 @@
     <input type="hidden" id="total_fee" name="total_fee">
     <input type="hidden" id="scs_start_time" name="scs_start_time" value="${start_time}">
     <input type="hidden" id="scs_end_time" name="scs_end_time" value="${end_time}">
-    <input type="hidden" id="scs_date" name="scs_date" value="${scs_date}">
+    <input type="hidden" id="scs_date2" name="scs_date2" value="${scs_date }">
     
 <section class="choose_seat_section">
 	<div class="choose_seat_title">

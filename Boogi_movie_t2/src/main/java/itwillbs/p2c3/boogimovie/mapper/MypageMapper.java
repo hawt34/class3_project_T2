@@ -42,6 +42,9 @@ public interface MypageMapper {
 	// 쿠폰
 	List<CouponVO> selectCoupon(MemberVO member);
 	
+	// 자주가는 극장
+	void insertMyTheater(List<String> checkedValues);
+	
 	ReservationVO selectMovieResv(String id);
 	
 	// 탈퇴처리

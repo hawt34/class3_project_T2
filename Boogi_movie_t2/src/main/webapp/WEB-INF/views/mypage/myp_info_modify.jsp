@@ -222,6 +222,9 @@ body {
 	        
 	        if (pwd2 != pwd) {
 	            message.textContent = "비밀번호가 일치하지 않습니다";
+	        } else if () {
+	        	message.textContent = "비밀번호 일치";
+	        	
 	        } else if (pwd2 === "") {
 	            message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
 	        } else {

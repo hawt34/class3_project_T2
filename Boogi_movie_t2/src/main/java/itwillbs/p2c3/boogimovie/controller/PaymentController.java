@@ -44,7 +44,6 @@ public class PaymentController {
 	
 	@GetMapping("payment")
 	public String payment(MemberVO member, Model model, HttpSession session) {
-		System.out.println("payment");
 		
 		String id = (String)session.getAttribute("sId");
 		if(id == null) {
@@ -65,7 +64,23 @@ public class PaymentController {
 	}
 	
 	@PostMapping("payment")
-	public String payment2(ScreenSessionVO scs, String selected_seats, String person_info, String total_fee) {
+	public String payment2(ScreenSessionVO scs, String selected_seats, String person_info, String total_fee, MemberVO member, HttpSession session, Model model) {
+		
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "로그인 후 다시 시도해주세요.");
+			model.addAttribute("targetURL", "member_login");
+			
+			return "error/fail";
+		}
+		
+		member.setMember_id(id);
+		member = memberService.isCorrectUser(member);
+		List<CouponVO> couponList = couponService.getMemberCoupon(member);
+		
+		model.addAttribute("member", member);
+		model.addAttribute("couponList", couponList);
+		
 		
 		return "payment/payment_reservation";
 	}

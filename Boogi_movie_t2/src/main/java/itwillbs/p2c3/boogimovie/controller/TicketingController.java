@@ -178,6 +178,9 @@ public class TicketingController {
         System.out.println(params);
         Map<String, Object> fee_info = ticketingService.feeCalc(params);
         
+        //결제 테이블에서 결제된 좌석값 구하기
+        
+        
         
 		//model에 저장
 		model.addAttribute("scs", dbScs);

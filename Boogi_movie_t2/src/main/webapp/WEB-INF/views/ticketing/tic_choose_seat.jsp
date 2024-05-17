@@ -64,7 +64,7 @@
 		  	</select>
 		</div>
 		
-		<label class="person_option">노약자</label>
+		<label class="person_option">우대</label>
 		<div class="custom-select">
 		  	<select onchange="updateSeatSelection(this.value, 'OP')">
 			    <option>0명</option>
@@ -142,7 +142,7 @@ document.getElementById('fr').onsubmit = function (event) {
     // 인원 정보 업데이트
     var personInfo = "일반: " + selectedPersonCount['NP'] + "명, " +
                      "청소년: " + selectedPersonCount['YP'] + "명, " +
-                     "노약자: " + selectedPersonCount['OP'] + "명";
+                     "우대: " + selectedPersonCount['OP'] + "명";
     document.getElementById('person_info').value = personInfo;
 
     // 총 요금 업데이트
@@ -244,7 +244,7 @@ document.getElementById('fr').onsubmit = function (event) {
     function updatePersonInfoDisplay() {
         var info = "일반: " + selectedPersonCount['NP'] + "명, " +
                    "청소년: " + selectedPersonCount['YP'] + "명, " +
-                   "노약자: " + selectedPersonCount['OP'] + "명";
+                   "우대: " + selectedPersonCount['OP'] + "명";
         $('.person_info h3').text("선택한 인원: " + info); // 인원 정보 영역을 업데이트
     }
  

@@ -17,11 +17,12 @@
 	
 	<select id="chooseSeatSelect" resultType="itwillbs.p2c3.boogimovie.vo.ScreenSessionVO">
 		SELECT *
-		FROM tic_final_list
+		FROM reserve_view
 		WHERE movie_num = #{movie_num}
 		AND theater_num = #{theater_num}
-		AND DATE_FORMAT(scs_start_date, '%Y-%m-%d %H:%i') = DATE_FORMAT(#{scs_start_date}, '%Y-%m-%d %H:%i')
-    	AND DATE_FORMAT(scs_end_date, '%Y-%m-%d %H:%i') = DATE_FORMAT(#{scs_end_date}, '%Y-%m-%d %H:%i')
+		AND scs_date = #{scs_date}
+		AND scs_start_time = #{scs_start_time} 
+		AND scs_end_time = #{scs_end_time}
 	</select>
 	
 	<select id="feeCalc" resultType="map" parameterType="map">

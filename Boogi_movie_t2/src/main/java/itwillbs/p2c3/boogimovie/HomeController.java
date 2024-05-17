@@ -39,3 +39,13 @@ public class HomeController {
 		return "movie/movie";
 	}
 }
+
+//	@GetMapping("movieFuture")// 상영예정작리스트
+//	public String movieFuture(Model model) {
+//		
+//		List<MovieVO> movieFuture = movieService.getMovieFuture();
+//		model.addAttribute("movieFuture", movieFuture);
+//		//System.out.println("여기는 무비퓨처" + movieFuture);확인완료
+//	    return "movie/movieFuture";
+//	}
+//}

@@ -110,13 +110,13 @@ tbody tr:hover {
 						<table class="admin_plan_body_search">
 							<thead>
 								<tr>
-									<th>극장</th>
-									<th>상영관</th>
-									<th>영화제목</th>
-									<th>2D/3D</th>
-									<th>상영날짜</th>
-									<th>상영시간</th>
-									<th>상영종료</th>
+									<th width="200px">극장</th>
+									<th width="100px">상영관</th>
+									<th width="300px">영화제목</th>
+									<th width="80px">2D/3D</th>
+									<th width="200px">상영날짜</th>
+									<th width="150px">상영시간</th>
+									<th width="150px">상영종료</th>
 									<th>상영일정등록</th>
 								</tr>
 							</thead>
@@ -148,6 +148,7 @@ tbody tr:hover {
 									<td>
 										<div>
 											<select id="movieSelect" name="movie_num" class="admin_moviePlan_search">
+												<option value="">영화선택</option>
 												<c:forEach var="movie" items="${movieList}">
 													<option value="${movie.movie_num}">${movie.movie_name}</option>
 												</c:forEach>
@@ -165,6 +166,7 @@ tbody tr:hover {
 									</td>
 									<td>
 										<select id="hourSelect" name="scs_start_time" class="admin_moviePlan_search">
+											<option value="">시간선택</option>
 											<c:forEach var="hour" begin="9" end="24">
 											    <option value="${hour}:00" >${hour}:00</option>
 											</c:forEach>
@@ -271,8 +273,8 @@ tbody tr:hover {
 					},
 					success : function(data) {
 		 				for(movieTime of data){
-		 					for(let i = movieTime.start; i < movieTime.end; i++ ){
-		 						$("#hourSelect option[value*='"+time+":00']").prop('disabled',true);	
+		 					for(let time = movieTime.scs_start_time; time < movieTime.scs_end_time; time++ ){
+		 						$("#hourSelect option[value*='"+time+":00']").prop('disabled',true).css({"background": "lightgray", "color" : "white"});
 		 					}
 	 					}						
 					},

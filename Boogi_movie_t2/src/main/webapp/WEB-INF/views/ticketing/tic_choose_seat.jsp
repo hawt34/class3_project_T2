@@ -26,8 +26,10 @@
     <input type="hidden" id="selected_seats" name="selected_seats">
     <input type="hidden" id="person_info" name="person_info">
     <input type="hidden" id="total_fee" name="total_fee">
-    <input type="hidden" id="scs_start_date" name="scs_start_date" value="${start_date}">
-    <input type="hidden" id="scs_end_date" name="scs_end_date" value="${end_date}">
+    <input type="hidden" id="scs_start_time" name="scs_start_time" value="${start_time}">
+    <input type="hidden" id="scs_end_time" name="scs_end_time" value="${end_time}">
+    <input type="hidden" id="scs_date" name="scs_date" value="${scs_date}">
+    
 <section class="choose_seat_section">
 	<div class="choose_seat_title">
 		<h3>좌석 선택</h3>
@@ -93,7 +95,7 @@
 		</div>
 		
 		<div class="col-md-3 pay_theater">
-			<div class="theater_ex">${scs.theater_name} ${scs.screen_cinema_num }관<br>${start_date } ~<br>${end_date}</div>
+			<div class="theater_ex">${scs.theater_name} ${scs.screen_cinema_num }관<br>${start_time } ~<br>${end_time}</div>
 		</div>
 			
 		

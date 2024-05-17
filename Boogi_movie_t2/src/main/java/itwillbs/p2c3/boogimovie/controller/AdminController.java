@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,6 +40,7 @@ import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
+import retrofit2.http.GET;
 
 @Controller
 public class AdminController {
@@ -284,8 +286,12 @@ public class AdminController {
 		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
 			endPage = maxPage;
 		}
+//		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
 		return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 	}
+	
+	
 	
 	//1대1 문의 답변하기
 	@GetMapping("admin_oto_detail")
@@ -313,6 +319,7 @@ public class AdminController {
 		return "redirect:/admin_oto";
 	}
 	//관리자 고객센터 controller 끝 =========================================================
+
 	// 관리자 회원 페이지
 
 	// 2) 리뷰 페이지

@@ -9,6 +9,7 @@
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <style>
 main {
 	width: 1400px;
@@ -130,13 +131,30 @@ main {
 	{
 	transition: all 0.4s ease-in-out;
 }
-.event_cate_title{
-	margin-top: 20px;
-}
-.btn{
-	margin-right: 100px;
+.category-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
+.category-btn {
+  background-color: #ddd;
+  border: none;
+  color: #333;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-btn.active,
+.category-btn:hover,
+.category-btn.active:hover {
+  background-color: #007bff;
+  color: #fff;
+}
 </style>
 </head>
 <body>
@@ -151,11 +169,11 @@ main {
 		</div>
 		
 		
-		<div class="event_cate_title">
-			<h3>이벤트</h3>
-		</div>
-		<div align="right">
-			<button type="button" class="btn btn-outline-primary" id="ShowMoreBtn">더 보기</button>
+		<div class="category-bar">
+		  <button class="category-btn active">전체이벤트</button>
+		  <button class="category-btn">영화이벤트</button>
+		  <button class="category-btn">극장이벤트</button>
+		  <button class="category-btn">할인이벤트</button>
 		</div>
 		<div class="container">
 			<c:forEach var="eventList" items="${eventList}" >
@@ -171,70 +189,70 @@ main {
 			</c:forEach>
 		</div>
 		
-		<div class="event_cate_title">
-			<h3>영화 이벤트</h3>
-		</div>
-		<div align="right">
-			<button type="button" class="btn btn-outline-primary" id="ShowMoreBtn">더 보기</button>
-		</div>
-		<div class="container">
-			<c:set var="movieEvent"/>
-			<c:forEach var="movieEvent" items="${movieEventList}" varStatus="loop" begin="0" end="2">
-				<div class="item movie-event" onclick="event_detail(${movieEvent.event_num})">
-					<div class="imgBox">
-						<img src="${pageContext.request.contextPath}/resources/images/${movieEvent.event_thumbnail}" alt="썸네일" onclick="location.href='eventDetail?event_num?=${movieEvent.event_num}'"/>
-					</div>
-					<div class="textBox">
-						<p class="textBox_name">${movieEvent.event_subject}</p>
-						<p class="textBox_price">${movieEvent.event_start}  ~  ${movieEvent.event_end}</p>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
+<!-- 		<div class="event_cate_title"> -->
+<!-- 			<h3>영화 이벤트</h3> -->
+<!-- 		</div> -->
+<!-- 		<div align="right"> -->
+<!-- 			<button type="button" class="btn btn-outline-primary" id="ShowMoreBtn">더 보기</button> -->
+<!-- 		</div> -->
+<!-- 		<div class="container"> -->
+<%-- 			<c:set var="movieEvent"/> --%>
+<%-- 			<c:forEach var="movieEvent" items="${movieEventList}" varStatus="loop" begin="0" end="2"> --%>
+<%-- 				<div class="item movie-event" onclick="event_detail(${movieEvent.event_num})"> --%>
+<!-- 					<div class="imgBox"> -->
+<%-- 						<img src="${pageContext.request.contextPath}/resources/images/${movieEvent.event_thumbnail}" alt="썸네일" onclick="location.href='eventDetail?event_num?=${movieEvent.event_num}'"/> --%>
+<!-- 					</div> -->
+<!-- 					<div class="textBox"> -->
+<%-- 						<p class="textBox_name">${movieEvent.event_subject}</p> --%>
+<%-- 						<p class="textBox_price">${movieEvent.event_start}  ~  ${movieEvent.event_end}</p> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<%-- 			</c:forEach> --%>
+<!-- 		</div> -->
 		
 		
-		<div class="event_cate_title">
-			<h3>극장이벤트</h3>
-		</div>
-		<div align="right">
-			<button type="button" class="btn btn-outline-primary" id="TheaterShowMoreBtn">더 보기</button>
-		</div>
-		<div class="container">
+<!-- 		<div class="event_cate_title"> -->
+<!-- 			<h3>극장이벤트</h3> -->
+<!-- 		</div> -->
+<!-- 		<div align="right"> -->
+<!-- 			<button type="button" class="btn btn-outline-primary" id="TheaterShowMoreBtn">더 보기</button> -->
+<!-- 		</div> -->
+<!-- 		<div class="container"> -->
 		
-			<c:forEach var="theaterEvent" items="${theaterEventList}"  varStatus="loop" begin="0" end="2">
-				<div class="item theater-event" onclick="event_detail(${theaterEvent.event_num})">
-					<div class="imgBox">
-						<img src="${pageContext.request.contextPath}/resources/images/${theaterEvent.event_thumbnail}" alt="썸네일" onclick="location.href='eventDetail?event_num?=${theaterEvent.event_num}'"/>
-					</div>
-					<div class="textBox">
-						<p class="textBox_name">${theaterEvent.event_subject}</p>
-						<p class="textBox_price">${theaterEvent.event_start}  ~  ${theaterEvent.event_end}</p>
-					</div>
-				</div>
-			</c:forEach>
+<%-- 			<c:forEach var="theaterEvent" items="${theaterEventList}"  varStatus="loop" begin="0" end="2"> --%>
+<%-- 				<div class="item theater-event" onclick="event_detail(${theaterEvent.event_num})"> --%>
+<!-- 					<div class="imgBox"> -->
+<%-- 						<img src="${pageContext.request.contextPath}/resources/images/${theaterEvent.event_thumbnail}" alt="썸네일" onclick="location.href='eventDetail?event_num?=${theaterEvent.event_num}'"/> --%>
+<!-- 					</div> -->
+<!-- 					<div class="textBox"> -->
+<%-- 						<p class="textBox_name">${theaterEvent.event_subject}</p> --%>
+<%-- 						<p class="textBox_price">${theaterEvent.event_start}  ~  ${theaterEvent.event_end}</p> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<%-- 			</c:forEach> --%>
 			
-		</div>
-		<div class="event_cate_title">
-			<h3>할인이벤트</h3>
-		</div>
-		<div align="right">
-			<button type="button" class="btn btn-outline-primary" id="DiscountShowMoreBtn">더 보기</button>
-		</div>
-		<div class="container">
+<!-- 		</div> -->
+<!-- 		<div class="event_cate_title"> -->
+<!-- 			<h3>할인이벤트</h3> -->
+<!-- 		</div> -->
+<!-- 		<div align="right"> -->
+<!-- 			<button type="button" class="btn btn-outline-primary" id="DiscountShowMoreBtn">더 보기</button> -->
+<!-- 		</div> -->
+<!-- 		<div class="container"> -->
 		
-			<c:forEach var="discountEvent" items="${discountEventList}" varStatus="loop" begin="0" end="2">
-				<div class="item discount-event" onclick="event_detail(${discountEvent.event_num})">
-					<div class="imgBox">
-						<img src="${pageContext.request.contextPath}/resources/images/${discountEvent.event_thumbnail}" alt="썸네일" onclick="location.href='eventDetail?event_num?=${discountEvent.event_num}'"/>
-					</div>
-					<div class="textBox">
-						<p class="textBox_name">${discountEvent.event_subject}</p>
-						<p class="textBox_price">${discountEvent.event_start}  ~  ${discountEvent.event_end}</p>
-					</div>
-				</div>
-			</c:forEach>
+<%-- 			<c:forEach var="discountEvent" items="${discountEventList}" varStatus="loop" begin="0" end="2"> --%>
+<%-- 				<div class="item discount-event" onclick="event_detail(${discountEvent.event_num})"> --%>
+<!-- 					<div class="imgBox"> -->
+<%-- 						<img src="${pageContext.request.contextPath}/resources/images/${discountEvent.event_thumbnail}" alt="썸네일" onclick="location.href='eventDetail?event_num?=${discountEvent.event_num}'"/> --%>
+<!-- 					</div> -->
+<!-- 					<div class="textBox"> -->
+<%-- 						<p class="textBox_name">${discountEvent.event_subject}</p> --%>
+<%-- 						<p class="textBox_price">${discountEvent.event_start}  ~  ${discountEvent.event_end}</p> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<%-- 			</c:forEach> --%>
 			
-		</div>
+<!-- 		</div> -->
 	</main>
 
 	<footer>
@@ -246,27 +264,42 @@ main {
 		} 
 		
 		$(function() {
-			
-			$.ajax({
-				type: "GET",
-				url: "getEvent?" + event_type_num = $("#event_type_num"),
-				data: {},
-				success : function() {
-					
-				},
-				error: function() {
-					alert("이벤트 조회 오류!");	
-				}
+			$('.category-btn').click(function() {
+				$('.category-btn').removeClass('active');
+				$(this).addClass('active');
 			});
+// 			$('.category-btn').hover(
+// 				function() {
+// 			    	$(this).addClass('hover');
+// 			    },
+// 			    function() {
+// 			    	$(this).removeClass('hover');
+// 			    }
+// 			);
 		});
-	
-		document.addEventListener("DOMContentLoaded", function() {
-
-		    // "더 보기" 버튼 클릭 시 추가 아이템 보이기
-		   document.getElementById("MovieShowMoreBtn").addEventListener("click", function() {
 		
-		    });
-		});
+// 		$(function() {
+			
+// 			$.ajax({
+// 				type: "GET",
+// 				url: "getEvent?" + event_type_num = $("#event_type_num"),
+// 				data: {},
+// 				success : function() {
+					
+// 				},
+// 				error: function() {
+// 					alert("이벤트 조회 오류!");	
+// 				}
+// 			});
+// 		});
+	
+// 		document.addEventListener("DOMContentLoaded", function() {
+
+// 		    // "더 보기" 버튼 클릭 시 추가 아이템 보이기
+// 		   document.getElementById("MovieShowMoreBtn").addEventListener("click", function() {
+		
+// 		    });
+// 		});
 		
 	</script>
 

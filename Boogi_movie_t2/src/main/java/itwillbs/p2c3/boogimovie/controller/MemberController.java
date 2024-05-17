@@ -15,6 +15,7 @@ import itwillbs.p2c3.boogimovie.service.MailService;
 import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.vo.MailAuthInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
+import retrofit2.http.GET;
 
 @Controller
 public class MemberController {
@@ -266,6 +267,7 @@ public class MemberController {
 		return "redirect:/theater";
 		
 	}
+	
 	
 	
 	

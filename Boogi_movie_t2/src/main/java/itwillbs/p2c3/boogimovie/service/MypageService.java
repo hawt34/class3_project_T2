@@ -41,23 +41,23 @@ public class MypageService {
 	}
 	
 	// 예매내역 
-	public List<Map<String , Object>> getMovieReservation(MemberVO member) {
-		System.out.println("MypageService - getMovieReservation()");
-		return mapper.selectMovieReservation(member);
-	}
-	
-	public List<Map<String, Object>> getResvList(int startRow, int listLimit, String member_id){
-		return mapper.selectResvList(startRow, listLimit, member_id);
-	}
-	
-	public int getResvCount(MemberVO member) {
-		return mapper.selectResvCount(member);
-	}
-	// 취소내역
-	public List<Map<String, Object>> getCancelList(MemberVO member){
-		System.out.println("MypageService - getCancelList()");
-		return mapper.selectCancelList(member);
-	}
+//	public List<Map<String , Object>> getMovieReservation(MemberVO member) {
+//		System.out.println("MypageService - getMovieReservation()");
+//		return mapper.selectMovieReservation(member);
+//	}
+//	
+//	public List<Map<String, Object>> getResvList(int startRow, int listLimit, String member_id){
+//		return mapper.selectResvList(startRow, listLimit, member_id);
+//	}
+//	
+//	public int getResvCount(MemberVO member) {
+//		return mapper.selectResvCount(member);
+//	}
+//	// 취소내역
+//	public List<Map<String, Object>> getCancelList(MemberVO member){
+//		System.out.println("MypageService - getCancelList()");
+//		return mapper.selectCancelList(member);
+//	}
 	
 	// 회원정보
 	public MemberVO getDbMember(MemberVO member) {

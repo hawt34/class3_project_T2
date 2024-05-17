@@ -74,6 +74,7 @@ public class TicketingController {
 	
 	@PostMapping("tic_choose_seat")
 	public String choose_seat(String final_list_data, Model model) {
+		System.out.println(final_list_data);
 		//data 쪼개서 저장
 		String movie_name  = final_list_data.split("/")[1];
 		String start_time = final_list_data.split("/")[2];
@@ -86,23 +87,32 @@ public class TicketingController {
 		MovieVO dbMovie = movieService.getMovieInfo(movie);
 		String movie_poster = dbMovie.getMovie_poster();
 		// 날짜와 시간 형식 지정 및 합치기
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String formattedStartDateTime = selected_day + " " + start_time + ":00";
-		String formattedEndDateTime = selected_day + " " + end_time + ":00";
-		Timestamp start_date = null;
-		Timestamp end_date = null;
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		String formattedStartDateTime = selected_day + " " + start_time + ":00";
+//		String formattedEndDateTime = selected_day + " " + end_time + ":00";
+//		Timestamp start_date = null;
+//		Timestamp end_date = null;
 		// 날짜 파싱 및 Timestamp 객체 생성
-		try {
-		    java.util.Date parsedStartDate = dateFormat.parse(formattedStartDateTime);
-		    java.util.Date parsedEndDate = dateFormat.parse(formattedEndDateTime);
-		    start_date = new Timestamp(parsedStartDate.getTime());
-		    end_date = new Timestamp(parsedEndDate.getTime());
-
-		    System.out.println(start_date);
-		    System.out.println(end_date);
-		} catch (ParseException e) {
-		    e.printStackTrace();
-		}
+//		try {
+//		    java.util.Date parsedStartDate = dateFormat.parse(formattedStartDateTime);
+//		    java.util.Date parsedEndDate = dateFormat.parse(formattedEndDateTime);
+//		    start_date = new Timestamp(parsedStartDate.getTime());
+//		    end_date = new Timestamp(parsedEndDate.getTime());
+//
+//		    System.out.println(start_date);
+//		    System.out.println(end_date);
+//		} catch (ParseException e) {
+//		    e.printStackTrace();
+//		}
+		//Selected_day Date로 변환
+		Date date = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		 try {
+	            // 문자열을 Date 객체로 변환
+	            date = formatter.parse(selected_day);
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	        }
 		//theater_num 가지고오기
         int theater_num = theaterService.getTheaterName(theater_name);
         //movie_num 가지고오기
@@ -111,8 +121,9 @@ public class TicketingController {
 		ScreenSessionVO scs = new ScreenSessionVO();
 		scs.setMovie_num(movie_num);
 		scs.setTheater_num(theater_num);
-//		scs.setScs_start_date(start_date);
-//		scs.setScs_end_date(end_date);
+		scs.setScs_start_time(start_time);
+		scs.setScs_end_time(end_time);
+		scs.setScs_date(date);
 		//db에서 값 가져오기
 		ScreenSessionVO dbScs = ticketingService.chooseSeatSelect(scs);
 		//뷰에 가져갈 값 저장하기
@@ -135,8 +146,8 @@ public class TicketingController {
         int second_road = 12;
 		//시간으로 조조,심야 걸러내기
         String fee_time_keyword = "GT";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime time = LocalTime.parse(start_time, formatter);
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime time = LocalTime.parse(start_time, formatter2);
         
         LocalTime morningLimit = LocalTime.of(10, 0);
         LocalTime nightLimit = LocalTime.of(23, 0);
@@ -149,9 +160,9 @@ public class TicketingController {
         
         //주말 공휴일 걸러내기
         String fee_day_keyword = "WD";
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(selected_day, formatter2);
-        DayOfWeek day = date.getDayOfWeek();
+        DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date2 = LocalDate.parse(selected_day, formatter3);
+        DayOfWeek day = date2.getDayOfWeek();
         boolean isWeekend = (day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY);
         
         if (isWeekend) {
@@ -179,9 +190,9 @@ public class TicketingController {
         model.addAttribute("fee_time_discount", fee_info.get("fee_time_discount"));
         model.addAttribute("fee_day_discount", fee_info.get("fee_day_discount"));
         model.addAttribute("fee_dimension_discount", fee_info.get("fee_dimension_discount"));
-        model.addAttribute("start_date", start_date);
-        model.addAttribute("end_date", end_date);
-        
+        model.addAttribute("start_time", start_time);
+        model.addAttribute("end_time", end_time);
+        model.addAttribute("scs_date", date);
 		return "ticketing/tic_choose_seat";
 	}
 	

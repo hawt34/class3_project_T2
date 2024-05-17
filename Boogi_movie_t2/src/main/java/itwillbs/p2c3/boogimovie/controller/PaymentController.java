@@ -108,6 +108,7 @@ public class PaymentController {
 	@ResponseBody
 	@GetMapping("memberPoint")
 	public String memberPoint(MemberVO member, @RequestParam int use_point, Model model){
+		
 		System.out.println("아이디 : " + member.getMember_id() + ", use_point : " + use_point);
 		
 		member = service.getMember(member);

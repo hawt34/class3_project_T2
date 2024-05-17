@@ -62,6 +62,9 @@ public interface AdminMapper {
 	// 영화 삭제
 	int deleteMovie(String movie_num);
 	//========================================================
+	// 상영관 좌석 정보 가져오기
+	ScreenInfoVO getSeatInfo(ScreenSessionVO screenSession);
+	
 	// 상영관리 - 상영관 불러오기
 	List<ScreenInfoVO> getScreensByTheater(String theater_num);
 	

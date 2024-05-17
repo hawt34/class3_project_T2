@@ -170,12 +170,12 @@ main {
 		
 		
 		<div class="category-bar">
-		  <button class="category-btn active">전체이벤트</button>
-		  <button class="category-btn">영화이벤트</button>
-		  <button class="category-btn">극장이벤트</button>
-		  <button class="category-btn">할인이벤트</button>
+		  <button class="category-btn active totalEvent">전체이벤트</button>
+		  <button class="category-btn movieEvent">영화이벤트</button>
+		  <button class="category-btn theaterEvent">극장이벤트</button>
+		  <button class="category-btn discountEvent">할인이벤트</button>
 		</div>
-		<div class="container">
+		<div class="container eventMain">
 			<c:forEach var="eventList" items="${eventList}" >
 				<div class="item movie-event" onclick="event_detail(${eventList.event_num})">
 					<div class="imgBox">
@@ -268,38 +268,28 @@ main {
 				$('.category-btn').removeClass('active');
 				$(this).addClass('active');
 			});
-// 			$('.category-btn').hover(
-// 				function() {
-// 			    	$(this).addClass('hover');
-// 			    },
-// 			    function() {
-// 			    	$(this).removeClass('hover');
-// 			    }
-// 			);
+			$('.category-btn').hover(
+				function() {
+			    	$(this).addClass('hover');
+			    },
+			    function() {
+			    	$(this).removeClass('hover');
+			    }
+			);
+			
+// 			$(".movieEvent").click(function() {
+				
+// 			});
+// 			$(".theaterEvent").click(function() {
+				
+// 			});
+// 			$(".discountEvent").click(function() {
+				
+// 			});
+			
 		});
 		
-// 		$(function() {
-			
-// 			$.ajax({
-// 				type: "GET",
-// 				url: "getEvent?" + event_type_num = $("#event_type_num"),
-// 				data: {},
-// 				success : function() {
-					
-// 				},
-// 				error: function() {
-// 					alert("이벤트 조회 오류!");	
-// 				}
-// 			});
-// 		});
-	
-// 		document.addEventListener("DOMContentLoaded", function() {
-
-// 		    // "더 보기" 버튼 클릭 시 추가 아이템 보이기
-// 		   document.getElementById("MovieShowMoreBtn").addEventListener("click", function() {
 		
-// 		    });
-// 		});
 		
 	</script>
 

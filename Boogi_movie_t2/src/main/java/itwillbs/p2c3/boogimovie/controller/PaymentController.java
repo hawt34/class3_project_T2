@@ -120,7 +120,7 @@ public class PaymentController {
 	}
 	
 	
-	
+	// ================================================================================
 	@ResponseBody
 	@GetMapping("memberCoupon")
 	public List<CouponVO> memberCoupon(MemberVO member, Model model){

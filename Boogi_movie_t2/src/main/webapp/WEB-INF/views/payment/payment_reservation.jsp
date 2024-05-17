@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>부기무비 결제하기</title>
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
@@ -231,7 +232,7 @@
 								</li>
 							</ul>
 							<div class="card-footer">
-								<p><b>총 할인 적용 <span id="discount_val" class="pay_number">0</span></b>원</p>
+								<p><b>총 할인 적용 <span id="discount_sum" class="pay_number">0</span></b>원</p>
 							</div>
 						</div>
 						<br>
@@ -239,12 +240,12 @@
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
 									<p><b>최종 결제금액 
-										<span id="final_amount" class="pay_number">0</span>
+										<span id="final_amount" class="pay_number">50000</span> <!-- 첫 금액은  total_fee랑 같아야 함-->
 									원</b></p>
 								</li>
 								<li class="list-group-item">
 									<p>결제수단 
-										<span id="pay_way_apply"  class="pay_number">미선택</span>
+										<span id="pay_way_apply" class="pay_number">미선택</span>
 									</p>
 								</li>
 							</ul>
@@ -330,13 +331,15 @@
 				return;
 			}
 
-			let total_fee = document.querySelector("#total_fee").innerText;
-			let use_point = $("#useMemberPoint").val();
-			let final_amount = parseInt(total_fee) -  parseInt(use_point);
+			let total_fee = document.querySelector("#total_fee").innerText; // 넘어온 총 결제 값
+			let use_point = $("#useMemberPoint").val();	// 입력된 사용할 포인트 값
 			
-			console.log("total_fee : " + total_fee);
-			console.log("use_point : " + use_point);
-			console.log("final_amount : " + final_amount);
+			// 총 할인 적용 값
+			let coupon_apply = document.querySelector("#coupon_apply").innerText; 	// 결제란 적용된 쿠폰 항목
+// 			let use_coupon = $("#getMemberCoupon").val();
+			let discount_sum = parseInt(use_point) + parseInt(coupon_apply); 		// 결제란 적용된 비타민 + 쿠폰 항목
+			let final_amount = parseInt(total_fee) - parseInt(discount_sum); 		// 현재 최종 값 - 총 할인금액 
+			
 			
 			$.ajax({
 				type : "GET",
@@ -351,8 +354,15 @@
 			 			alert("포인트를 사용할 수 없습니다.");
 			 		} else {
 			 			if(confirm ("포인트를 사용하시겠습니까?")){
-				 			$("#point_apply").html(use_point);
-				 			$("#final_amount").html(final_amount);
+				 			$("#point_apply").html(use_point);			// 적용할 포인트 값
+				 			$("#final_amount").html(final_amount);		// 총 결제금액에  적용 값 
+				 			$("#discount_sum").html(discount_sum); 		// 총 할인 적용 값
+				 			
+				 			console.log("total_fee : " + total_fee)
+				 			console.log("use_point : " + use_point)
+				 			console.log("coupon_apply : " + coupon_apply)
+				 			console.log("discount_sum : " + discount_sum)
+				 			console.log("final_amount : " + final_amount)
 				 			
 			 			} else {
 			 				$("#useMemberPoint").val("");
@@ -380,12 +390,23 @@
 		// 쿠폰 적용 버튼 누를 시 쿠폰 적용
 		$("#coupon-submit").on("click", function() {
 			event.preventDefault(); // 폼 제출 기본 동작 막기
-			let selectedCoupon = document.querySelector('input[name=select]:checked');
-// 			let couponName = selectedCoupon.parentElement.querySelector('label').innerText; 
+			
+			
+			let total_fee = document.querySelector("#total_fee").innerText; // 넘어온 총 결제 값
+			let selectedCoupon = document.querySelector('input[name=select]:checked').value.replace("-", ""); // 선택한 쿠폰값
+			
+			// 총 할인 적용 값
+			let point_apply = document.querySelector("#point_apply").innerText;		// 결제란 적용된 포인트 항목
+			let coupon_apply = document.querySelector("#coupon_apply").innerText; 	// 결제란 적용된 쿠폰 항목
+			let discount_sum = parseInt(point_apply) + parseInt(coupon_apply); 		// 결제란 적용된 비타민 + 쿠폰 항목
+			let final_amount = parseInt(total_fee) - parseInt(discount_sum); 		// 현재 최종 값 - 총 할인금액 
+			
 			
 			if(confirm ("선택하신 쿠폰을 사용하시겠습니까?")){
-	 			$("#getMemberCoupon").val(selectedCoupon.value.replace("-", ""));
-	 			$("#coupon_apply").html(selectedCoupon.value.replace("-", ""));
+	 			$("#getMemberCoupon").val(selectedCoupon); 	// 사용한 쿠폰 인풋 박스에 출력
+	 			$("#coupon_apply").html(selectedCoupon);	// 적용할 쿠폰 값
+	 			$("#final_amount").html(final_amount);		// 총 결제금액 적용 값
+	 			$("#discount_sum").html(discount_sum);		// 총 할인 적용 값
 	 			
  			} else {
  				history.back();

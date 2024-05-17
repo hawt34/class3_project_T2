@@ -44,7 +44,7 @@
 			<div class="row">
 			
 				<div class="col-1 mt-3" id ="noticeCount">
-					<span id="count">전체 ${pageList.listCount }건</span>
+					<span id="count"><!--전체 갯수, 각 구분마다 갯수 --></span>
 				</div>
 				
 				<div class="col-11">

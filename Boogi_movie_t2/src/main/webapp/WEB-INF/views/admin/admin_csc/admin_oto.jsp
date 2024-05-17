@@ -216,35 +216,36 @@
 		<div class="notice_pageArea">
 <%-- 		<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" /> --%>
 			<c:choose>
-				<c:when test="">
+				<c:when test="${empty otoList }">
+					<h3>Non-paging</h3>
 				</c:when>
 				<c:otherwise>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item <c:if test="${param.pageNum eq 1 }">disabled</c:if>" >
+								<a class="page-link" href="admin_oto?pageNum=${param.pageNum - 1}&faqCategory=${faqCategory}&theaterName=${theaterName }"  >
+								<span aria-hidden="true" >&laquo;</span>
+								</a>
+							</li>
+							<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
+								<c:choose>
+									<c:when test="${param.pageNum eq i}">
+										<li class="page-item active"><a class="page-link">${i}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="admin_oto?pageNum=${i}&faqCategory=${faqCategory }&theaterName=${theaterName}">${i}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<li class="page-item <c:if test="${param.pageNum eq pageList.maxPage}">disabled</c:if>">
+								<a class="page-link" href="admin_oto?pageNum=${param.pageNum + 1}&faqCategory=${faqCategory}&theaterName=${theaterName}" >
+								<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
 				</c:otherwise>
 			</c:choose>
-			<nav aria-label="Page navigation example">
-				<ul class="pagination">
-					<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
-						<a class="page-link" href="admin_oto?pageNum=${pageNum - 1}&oto_category=${oto.oto_category}&theater_name=${oto.theater_name }"  >
-						<span aria-hidden="true" >&laquo;</span>
-						</a>
-					</li>
-					<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
-						<c:choose>
-							<c:when test="${pageNum eq i }">
-								<li class="page-item active"><a class="page-link">${i}</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="admin_oto?pageNum=${i}&theater_name=${oto.theater_name}">${i}</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<li class="page-item <c:if test="${pageNum eq pageList.maxPage}">disabled</c:if>">
-						<a class="page-link" href="admin_oto?pageNum=${pageNum + 1}&oto_category=${oto.oto_category}&theater_name=${oto.theater_name}" >
-						<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
 		</div>
 	</div>
 </div>
@@ -255,15 +256,16 @@
 	
 <script type="text/javascript">
 $(function () {
+	let pageNum = 1;
 	$("#admin_faq").change(function() {
 		let faqCategory = $(this).val();
-		location.href="admin_oto?faqCategory=" + faqCategory;
+		location.href="admin_oto?pageNum=" + pageNum + "&faqCategory=" + faqCategory;
 // 		console.log(faqCategory);
 	});
 	
 	$("#admin_theater").change(function() {
 		let theaterName = $(this).val();
-		location.href="admin_oto?theaterName=" + theaterName;		
+		location.href="admin_oto?pageNum=" + pageNum + "&theaterName=" + theaterName;		
 		console.log(theaterName);
 	});
 }); 

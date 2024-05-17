@@ -1,6 +1,5 @@
 package itwillbs.p2c3.boogimovie.controller;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -213,11 +212,22 @@ public class TicketingController {
 	@ResponseBody
 	@GetMapping(value = "api/movieLikeMovie", produces = "application/json")
 	public List<MovieVO> movieLikeMovie(@RequestParam String sId){
+		//세션에 저장된 아이디를 이용해 회원장르 추출
+		
 		String memberMovieGenre = memberService.movieGenreSearch(sId);
-		MovieGenreVO movieGenre = new MovieGenreVO();
-		movieGenre.setGenre_name(memberMovieGenre);
-		int genre_num = movieService.getMovieGenreNum(movieGenre);
-		List<MovieVO> movies = movieService.getMovieListGenre(genre_num);
+		//,로 쪼개서 배열에 저장
+		String[] movieGenres = memberMovieGenre.split(",");
+		//배열에 저장된 요소들을 리스트에 저장
+		List<String> genreList = new ArrayList<String>();
+		for(String genres : movieGenres) {
+			genreList.add(genres);
+		}
+//		System.out.println(genreList);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("genreList", genreList);
+		
+		List<MovieVO> movies = movieService.getMovieListGenre(param);
 		
 		return movies;
 	}

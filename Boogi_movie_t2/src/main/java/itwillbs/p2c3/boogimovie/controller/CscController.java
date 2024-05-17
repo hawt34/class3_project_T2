@@ -72,12 +72,12 @@ public class CscController {
 	
 	@ResponseBody
 	@GetMapping("csc_faq.json")
-	public List<FAQVO> cscFaqJson(@RequestParam(defaultValue = "1")String parsedPageNum,
+	public List<FAQVO> cscFaqJson(@RequestParam String parsedPageNum,
 								  @RequestParam String faqCategory,
 								  FAQVO faq) {
 		System.out.println("@KWKL@@@" + faqCategory);
 		int pageNum = Integer.parseInt(parsedPageNum);
-		
+		System.out.println("PAGENUM!!" +  pageNum);
 		int listLimit = 7;
 		int startRow = (pageNum - 1) * listLimit;
 		int listCount = faqService.getFaqListCount(faqCategory); //총 공지사항 갯수
@@ -106,7 +106,7 @@ public class CscController {
 	
 	//공지사항 List 게시판 - ajax를 이용한 비동기 처리
 	@ResponseBody
-	@GetMapping(value="csc_notice.json", produces = "api/json")
+	@GetMapping(value="csc_notice.json")
 	public Map<String, Object> noticeCategory(@RequestParam(defaultValue = "1")String pageNumArg,
 											  @RequestParam String theaterName,
 											  @RequestParam String pageName) {

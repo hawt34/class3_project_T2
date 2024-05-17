@@ -41,10 +41,15 @@
 		WHERE genre_name = #{genre_name}
 	</select>
 	
-	<select id="selectMovieInfoGenre" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
-		SELECT *
-		from movie
-		WHERE genre_num = #{genre_num}
+	<select id="selectMovieInfoGenre" parameterType="map" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
+        SELECT *
+        FROM movie
+        WHERE 1=1 
+        <if test="genreList != null and genreList.size() > 0">
+	        <foreach item="genre" collection="genreList" open="AND (" separator=" OR " close=")">
+	         movie_genre LIKE CONCAT('%', #{genre}, '%')
+	        </foreach>
+        </if>
 	</select>
 		
 	<select id="selectMovieFuture" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">

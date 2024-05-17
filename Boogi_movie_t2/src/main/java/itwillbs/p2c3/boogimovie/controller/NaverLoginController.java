@@ -19,7 +19,7 @@ public class NaverLoginController {
     private String clientId = "YYIJQmFYT8uB2h0xYs1o";
     private String clientSecret = "2Ey9itLWp0";
     private String redirectURI = "http://localhost:8081/test2/NaverLoginCallback";
-
+    
     @RequestMapping("NaverLoginCallback")
     public String naverLoginCallback(@RequestParam(required = false) String code, @RequestParam(required = false) String state, HttpSession session, Model model) {
         String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id="
@@ -90,6 +90,7 @@ public class NaverLoginController {
                 e.printStackTrace();
             }
         }
+        session.setAttribute("sId", "김아무개");
 //        model.addAttribute("msg", "네이버 로그인 실패");
         return "redirect://";
     }

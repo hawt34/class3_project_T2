@@ -89,29 +89,20 @@
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </div>
 <script type="text/javascript">
-//마지막 스크롤 값 저장
 
-// let pageNum = 1;
-
-// if(!pageNum) {
-// 	pageNum = 1;
-// }
-// //유형데이터 가져오기
-// let faqCategory = $("#faq_category").val();
-// if(!faqCategory) {
-// 	faqCategory = "";
-// }
-
-// 로딩중 중복 요청 방지
 let isLoading = false;
-let faqCategory = '';
 let isEmpty = false;
+let faqCategory = '';
+let pageNum = 1;
 
-// let pageNum = 1;
-function getScroll(pageNum = 1, newFaqCategory = "", isEmpty) {
-    if (isLoading) return; // 이미 데이터를 불러오고 있는 중이라면 중복 요청 방지
-    isLoading = true; // 데이터 요청 중 플래그 설정
 
+function getScroll(pageNum, newFaqCategory = "", isEmpty) {
+	
+   	
+	if (isLoading) return; // 이미 데이터를 불러오고 있는 중이라면 중복 요청 방지
+	isLoading = true; // 데이터 요청 중 플래그 설정
+	
+	
     $.ajax({
         type: "GET",
         url: "csc_faq.json",
@@ -124,7 +115,8 @@ function getScroll(pageNum = 1, newFaqCategory = "", isEmpty) {
             let faqList = response;
 			//true면 기존 아코디언 비움
             if(isEmpty) {
-				$(".csc_accordion").empty(); 	
+				$(".csc_accordion").empty();
+// 				pageNum = 2;
             }
 			//반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달            
             $.each(faqList, function(index, faq) {
@@ -156,38 +148,40 @@ function getScroll(pageNum = 1, newFaqCategory = "", isEmpty) {
                 );
                 accordion.append(checkbox, label, answerDiv);
             });
+			
+			isLoading = false; // 데이터 요청 완료 후 플래그 해제
         },
+        
         error: function() {
             alert("불러오는데 실패했습니다");
-        },
-        complete: function() {
-            isLoading = false; // 데이터 요청 완료 후 플래그 해제
-            pageNum++; // 페이지 번호 증가
         }
     });
 }
 
-$(document).scroll(function() {
-    let currentScroll = $(this).scrollTop();
-    let documentHeight = $(document).height();
-    let windowHeight = $(window).height();
-    let nowHeight = currentScroll + windowHeight;
-    let bottom = 20; //딱 맞게 scroll바가 아래로 가지 않아도 ajax 호출하도록
-
-    // 화면 하단까지 스크롤되었을 때 추가 데이터 가져오기
-    if (currentScroll >= documentHeight - windowHeight - bottom) {
-//     if (documentHeight < (nowHeight + (documentHeight * 0.1))) {
-        getScroll(pageNum, faqCategory, false); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
-    }
-});
 
 $(function() {
-    getScroll();
-
+	//초기 로딩
+    getScroll(1, "", false);
+    
     $("#faq_category").change(function() {
         let newFaqCategory = $(this).val();
         faqCategory = newFaqCategory || ''; // faqCategory 업데이트
+        pageNum = 1;
         getScroll(pageNum, newFaqCategory, true);
+    });
+    
+    $(document).scroll(function() {
+        let currentScroll = $(this).scrollTop();
+        let documentHeight = $(document).height();
+        let windowHeight = $(window).height();
+        let nowHeight = currentScroll + windowHeight;
+        let bottom = 20; //딱 맞게 scroll바가 아래로 가지 않아도 ajax 호출하도록
+    	
+        // 화면 하단까지 스크롤되었을 때 추가 데이터 가져오기
+		if (currentScroll >= documentHeight - windowHeight - bottom) {
+			console.log("스크롤 이벤트 발생 - pageNum = " + pageNum);
+			getScroll(pageNum, faqCategory, false); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
+        }
     });
 });
 

@@ -59,13 +59,13 @@ input[type=password] {
 	        clientId: "YYIJQmFYT8uB2h0xYs1o",
 	        callbackUrl: "http://localhost:8081/test2/NaverLoginCallback",
 	        isPopup: false, // 팝업 방식으로 할 경우 true로 설정
-	        loginButton: {color: "green", type: 3, height: 60} // 로그인 버튼의 스타일 설정
 	    });
 	
 	    // 네이버 로그인 초기화
 	    naverLogin.init();
 	    
         document.getElementById('naver-connect').onclick = function() {
+        	debugger;
             naverLogin.authorize();
             return false;
         };

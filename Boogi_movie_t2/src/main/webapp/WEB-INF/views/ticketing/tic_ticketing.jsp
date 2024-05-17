@@ -365,53 +365,53 @@
 	function getGradeIcon(grade) {
         var contextPath = "${pageContext.request.contextPath}";
         switch (grade) {
-            case "ALL":
+            case "전체관람가":
                 return "<img src='" + contextPath + "/resources/images/tic_icon_all.gif' style='width: 48px; height: 48px;'>";
-            case "12세":
+            case "12세관람가":
                 return "<img src='" + contextPath + "/resources/images/tic_icon_over12.gif' style='width: 48px; height: 48px;'>";
-            case "15세":
+            case "15세관람가":
                 return "<img src='" + contextPath + "/resources/images/tic_icon_over15.gif' style='width: 48px; height: 48px;'>";
-            case "19세":
-                return "<img src='" + contextPath + "/resources/images/tic_icon_over19.gif' style='width: 48px; height: 48px;'>";
+            case "18세관람가(청소년관람불가)":
+                return "<img src='" + contextPath + "/resources/images/tic_icon_over18.gif' style='width: 48px; height: 48px;'>";
             default:
                 return "";
         }
     }
 	
 	
-// 	function loadMovies(orderBy, sId) {	
-// 		$.ajax({
-//             url: "api/movie" + orderBy,
-//             method: "GET",
-//             data: {
-//                 sId: sId
-//             },
-//             dataType: "json",
-//             success: function (response) {
-//             	var result = $("#movielist");
-//                 result.empty();
-//                 response.forEach(function (movie) {
-//                     var movieDiv = "<div class='movie_atrbt'>"
-//                         + getGradeIcon(movie.movie_grade)
-//                         + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-//                         + "<span>"
-//                         + "<a onclick='movieClick(\"" + movie.movie_name + "\")'>" + movie.movie_name + "</a>"
-//                         + "</span>"
-//                         + "</div>";
+	function loadMovies(orderBy, sId) {	
+		$.ajax({
+            url: "api/movie" + orderBy,
+            method: "GET",
+            data: {
+                sId: sId
+            },
+            dataType: "json",
+            success: function (response) {
+            	var result = $("#movielist");
+                result.empty();
+                response.forEach(function (movie) {
+                    var movieDiv = "<div class='movie_atrbt'>"
+                        + getGradeIcon(movie.movie_grade)
+                        + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                        + "<span>"
+                        + "<a onclick='movieClick(\"" + movie.movie_name + "\")'>" + movie.movie_name + "</a>"
+                        + "</span>"
+                        + "</div>";
 
-//                     result.append(movieDiv);
-//                 });
-//             },
-//             error: function () {
-//                 alert("영화 정보를 가져오는 데 실패했습니다.");
-//             }
-//         });
-// 	}
+                    result.append(movieDiv);
+                });
+            },
+            error: function () {
+                alert("영화 정보를 가져오는 데 실패했습니다.");
+            }
+        });
+	}
 	
 	
 	
-// 	$(document).ready(function () {
-<%-- 		var sId = '<%= session.getAttribute("sId") %>'; --%>
+	$(document).ready(function () {
+		var sId = '<%= session.getAttribute("sId") %>';
 // 		$("#movieOrderby").change(function () {
 // 			var orderBy = $(this).val();
 // 			loadMovies(orderBy);
@@ -419,20 +419,20 @@
 		 
 		
 
-// 	    $("#like_movie").change(function () {
-// 	        var likeMovie = $(this).is(":checked");
-// 	        var orderBy = "LikeMovie";
+	    $("#like_movie").change(function () {
+	        var likeMovie = $(this).is(":checked");
+	        var orderBy = "LikeMovie";
 	        
-// 	        if(likeMovie){
-// 	        	loadMovies(orderBy,sId);	
-// 	        }else{
-// 	        	orderBy = "Like";
-// 	        	loadMovies(orderBy);
-// 	        }
+	        if(likeMovie){
+	        	loadMovies(orderBy,sId);	
+	        }else{
+	        	orderBy = "Abc";
+	        	loadMovies(orderBy);
+	        }
 		        
 		    
-// 		});	
-// 	});
+		});	
+	});
 </script>
 </body>
 </html>

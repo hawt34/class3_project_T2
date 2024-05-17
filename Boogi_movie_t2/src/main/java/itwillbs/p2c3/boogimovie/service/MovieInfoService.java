@@ -1,6 +1,7 @@
 package itwillbs.p2c3.boogimovie.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,8 +43,8 @@ public class MovieInfoService {
 		return mapper.selectMovieGenreNum(movieGenre);
 	}
 	
-	public List<MovieVO> getMovieListGenre(int genre_num){
-		return mapper.selectMovieInfoGenre(genre_num);
+	public List<MovieVO> getMovieListGenre(Map<String, Object> genreList){
+		return mapper.selectMovieInfoGenre(genreList);
 	}
 
 

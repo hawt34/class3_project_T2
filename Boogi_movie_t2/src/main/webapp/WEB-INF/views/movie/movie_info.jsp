@@ -315,12 +315,11 @@ footer {
                 <c:otherwise>
                     <a href="movieInfo?movie_num=${movie.movie_num}&pageNum=${i}">${i}</a>
                 </c:otherwise>
-            </c:choose>
+            	</c:choose>
         </c:forEach>
          <input type="button" value="다음" onclick="location.href='movieInfo?movie_num=${movie.movie_num}&pageNum=${pageNum + 1}'"
                <c:if test="${pageNum == maxPage}">disabled</c:if> />
     	</div>
-		
 		</section>		    
 		<footer> 
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>

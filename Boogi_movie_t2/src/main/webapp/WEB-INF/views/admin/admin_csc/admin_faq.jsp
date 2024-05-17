@@ -80,15 +80,15 @@
 				<div class="notice_pageArea">
 					<nav aria-label="Page navigation example" >
 						<ul class="pagination">
-							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
-								<a class="page-link" href="admin_faq?pageNum=${pageNum - 1}" aria-label="Previous" >
+							<li class="page-item <c:if test="${param.pageNum eq 1 }">disabled</c:if>" >
+								<a class="page-link" href="admin_faq?pageNum=${param.pageNum - 1}" aria-label="Previous" >
 								<span aria-hidden="true" >&laquo;</span>
 								</a>
 							</li>
 							<!-- 페이지번호 생성 -->
 							<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
 								<c:choose>
-									<c:when test="${pageNum eq i }">
+									<c:when test="${param.pageNum eq i }">
 										<li class="page-item active"><a class="page-link" >${i}</a></li>
 									</c:when>
 									<c:otherwise>
@@ -96,8 +96,8 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-							<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
-								<a class="page-link" href="admin_faq?pageNum=${pageNum + 1}" aria-label="Next">
+							<li class="page-item <c:if test="${param.pageNum eq pageList.maxPage }">disabled</c:if>">
+								<a class="page-link" href="admin_faq?pageNum=${param.pageNum + 1}" aria-label="Next">
 								<span aria-hidden="true">&raquo;</span>
 								</a>
 							</li>

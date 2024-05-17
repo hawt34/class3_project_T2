@@ -241,12 +241,20 @@ public class AdminController {
 	@GetMapping("admin_oto")
 	public String adminOto(@RequestParam(defaultValue = "1")int pageNum,
 						   Model model,
-						   @RequestParam(required = false)String faqCategory,
-						   @RequestParam(required = false)String theaterName) {
+						   String faqCategory,
+						   String theaterName) {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
+		System.out.println("$$@#@#" + theaterName);
+		System.out.println("$$@#@#" + faqCategory);
 		
 		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, faqCategory, theaterName);
+		
+		model.addAttribute("faqCategory", faqCategory);
+		if(faqCategory != null && !faqCategory.equals("")) {model.addAttribute("faqCategory", faqCategory);} 
+		if(theaterName != null && !theaterName.equals("")) {model.addAttribute("theaterName", theaterName);} 
+			
+		
 		
 //		int listCount = otoService.getOtoListCount(faqCategory, theaterName); //총 공지사항 갯수
 //		int pageListLimit = 5; //뷰에 표시할 페이지갯수

@@ -111,9 +111,9 @@
 					<h5>고객센터</h5>
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="admin_notice">공지사항</a> 
-					<a class="dropdown-item" href="admin_faq">자주묻는질문</a> 
-					<a class="dropdown-item" href="admin_oto">1:1문의</a>
+					<a class="dropdown-item" href="admin_notice?pageNum=1">공지사항</a> 
+					<a class="dropdown-item" href="admin_faq?pageNum=1">자주묻는질문</a> 
+					<a class="dropdown-item" href="admin_oto?pageNum=1">1:1문의</a>
 				</div>
 			</div>
 			<div class="btn-group">

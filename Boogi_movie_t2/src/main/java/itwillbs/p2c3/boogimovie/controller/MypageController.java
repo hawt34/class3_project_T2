@@ -2,7 +2,6 @@ package itwillbs.p2c3.boogimovie.controller;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -101,11 +100,12 @@ public class MypageController {
 	
 	@ResponseBody
 	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
-	public ResponseEntity<String> mypMyTheater(@RequestBody List<String> checkedValues){
-	    System.out.println("Received checked values: " + checkedValues);
+	public ResponseEntity<String> mypMyTheater(@RequestBody List<String> checkedValues, TheaterVO theater){
+	    System.out.println("Received checked values: ~~~!~!~~~~~~~~~~ " + checkedValues);
 	    if(checkedValues.isEmpty()) {
 	        return ResponseEntity.badRequest().body("No data received");
 	    }
+	    mypageService.myTheater(checkedValues);
 	    return ResponseEntity.ok("Data received successfully");
 	    
 	    

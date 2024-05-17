@@ -75,6 +75,15 @@ public class MypageService {
 		return mapper.selectCoupon(member);
 	}
 	
+	// 자주가는극장 
+	public void myTheater(List<String> checkedValues) {
+		mapper.insertMyTheater(checkedValues);
+	}
+	
+	
+	
+	
+	
 	
 	public ReservationVO getMovieResv(String id) {
 		System.out.println("MypageInfoService - getMovieResv");

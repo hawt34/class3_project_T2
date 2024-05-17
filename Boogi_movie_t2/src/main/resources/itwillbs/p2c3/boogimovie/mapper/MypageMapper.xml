@@ -140,6 +140,17 @@
 		WHERE member.member_id = #{member_id}
     </select>
     
+    <insert id="insertMyTheater">
+	    INSERT INTO member (member_my_theater1, member_my_theater2, member_my_theater3)
+		<foreach collection="checkedValues" item="item" separator=",">
+        	VALUES (#{item})
+		</foreach>
+    </insert>
+    
+    
+    
+    
+    
     <!-- 탈퇴처리 -->
    	<!-- member 테이블의 member_status 컬럼값을 3(탈퇴)로 변경 탈퇴일자(withdraw_date) 를 now() 함수 -->
     <update id="updateMemberForWithdraw">

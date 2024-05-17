@@ -252,63 +252,19 @@ public class AdminController {
 		
 		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, faqCategory, theaterName);
 		
-<<<<<<< HEAD
-//		int listCount = otoService.getOtoListCount(faqCategory, theaterName); //총 공지사항 갯수
-//		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-//		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-//		
-//		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-//			endPage = maxPage;
-//		}
-=======
+
 		model.addAttribute("faqCategory", faqCategory);
 		if(faqCategory != null && !faqCategory.equals("")) {model.addAttribute("faqCategory", faqCategory);} 
 		if(theaterName != null && !theaterName.equals("")) {model.addAttribute("theaterName", theaterName);} 
 			
-		
-		
-//		int listCount = otoService.getOtoListCount(faqCategory, theaterName); //총 공지사항 갯수
-//		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-//		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-//		
-//		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-//			endPage = maxPage;
-//		}
-//		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+
 		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory, theaterName); //faq 페이지네이션
 		
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("otoList", otoList);
 		return "admin/admin_csc/admin_oto";
 	}
-	// 페이징
-	public PageInfo pageInfoCategory(int pageNum, int listLimit, int startRow,  String faqCategory, String theaterName) {
-		
-		int listCount = otoService.getOtoListCount(faqCategory, theaterName); //총 공지사항 갯수
-		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-		
-		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-			endPage = maxPage;
-		}
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
-//		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-<<<<<<< HEAD
-		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory, theaterName); //faq 페이지네이션
-=======
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
-		
-<<<<<<< HEAD
-		model.addAttribute("pageList", pageList);
-		model.addAttribute("otoList", otoList);
-		return "admin/admin_csc/admin_oto";
-	}
+
 	// 페이징
 	public PageInfo pageInfoCategory(int pageNum, int listLimit, int startRow,  String faqCategory, String theaterName) {
 		
@@ -323,12 +279,8 @@ public class AdminController {
 		}
 		return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 	}
-=======
-		return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-	}
 	
 	
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	
 	//1대1 문의 답변하기
 	@GetMapping("admin_oto_detail")

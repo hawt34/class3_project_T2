@@ -93,6 +93,11 @@ public class AdminService {
 		return mapper.insertMovie(movie);
 	}
 	//--------------------------------------------------------------
+	// 극장 이름 가져오기
+	public List<Map<String, String>> getTheaterList(){
+		return mapper.getTheaterList();
+	}
+	
 	// 상영관리 상영관 데이터 가져오기
 	public List<ScreenInfoVO> getScreensByTheater(String theater_num) {
 		return mapper.getScreensByTheater(theater_num);

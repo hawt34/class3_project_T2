@@ -248,31 +248,28 @@ public class AdminController {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
 		
-		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit);
+		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, faqCategory, theaterName);
 		
-		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
-		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-		
-		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-			endPage = maxPage;
-		}
+//		int listCount = otoService.getOtoListCount(faqCategory, theaterName); //총 공지사항 갯수
+//		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+//		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+//		
+//		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+//			endPage = maxPage;
+//		}
 //		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory); //faq 페이지네이션
+		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory, theaterName); //faq 페이지네이션
 		
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("otoList", otoList);
 		return "admin/admin_csc/admin_oto";
 	}
-	//category 페이징
-	public PageInfo pageInfoCategory(int pageNum, int listLimit, int startRow,  String faqCategory) {
+	// 페이징
+	public PageInfo pageInfoCategory(int pageNum, int listLimit, int startRow,  String faqCategory, String theaterName) {
 		
-		
-		
-		
-		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
+		int listCount = otoService.getOtoListCount(faqCategory, theaterName); //총 공지사항 갯수
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
@@ -281,27 +278,8 @@ public class AdminController {
 		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
 			endPage = maxPage;
 		}
-		return null;
+		return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 	}
-	//theater 페이징
-	public PageInfo pageInfoTheater(int pageNum, int listLimit, int startRow,  String theaterName) {
-		
-		
-		
-		
-		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
-		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-		
-		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-			endPage = maxPage;
-		}
-		return null;
-	}
-	
-	
 	
 	//1대1 문의 답변하기
 	@GetMapping("admin_oto_detail")
@@ -389,14 +367,20 @@ public class AdminController {
 	@GetMapping("admin_moviePlan")
 	public String adminMoviePlan(Model model) {
 		List<Map<String, String>> movieList = service.getmovieList();
+		List<Map<String, String>> theaterNameList = service.getTheaterList();
 		List<Map<String, String>> moviePlanList = service.selectMoviePlanList();
+		
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("moviePlanList", moviePlanList);
+		model.addAttribute("theaterNameList", theaterNameList);
+		
 		return "admin/admin_movie/admin_moviePlan";
 	}
+	
 	@PostMapping("admin_moviePlan_reg")
 	public String adminMoviePlanReg(ScreenSessionVO screenSession, Model model) {
-		System.out.println(screenSession);
+//		System.out.println(screenSession);
+		
 		int insertCount = service.insertMoviePlan(screenSession);
 		
 		if(insertCount > 0) {
@@ -409,6 +393,7 @@ public class AdminController {
 		}
 		
 	}
+	
 	@GetMapping("admin_moviePlan_delete")
 	public String adminMoviePlanDelete(ScreenSessionVO screenSession, Model model) {
 		int deleteCount = service.deleteMoviePlan(screenSession.getScs_num());
@@ -419,10 +404,12 @@ public class AdminController {
 			return "error/fail";
 		}
 	}
+	
 	@GetMapping("admin_moviePlan_form")
 	public String adminMoviePlanForm() {
 		return "admin/admin_movie/admin_moviePlan_form";
 	}
+	
 	@PostMapping("admin_moviePlan_pro")
 	public String adminMoviePlanPro() {
 		return "redirect:/admin_moviePlan";
@@ -690,6 +677,13 @@ public class AdminController {
 			return "error/fail";
 		}
 	}
+	@GetMapping("admin_store_form")
+	public String adminStoreInsert() {
+		
+		return "admin/admin_store/admin_store_form";
+	}
+	
+	
 	
 	@PostMapping("admin_store_pro")
 	public String adminStorePro(ItemInfoVO insertItem,Model model) {

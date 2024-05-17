@@ -126,6 +126,14 @@
 		WHERE movie_num = #{movie_num}
 	</delete>
 	
+<!-- 극장이름 리스트 -->
+	<select id="getTheaterList">
+		SELECT 
+			theater_num, theater_name
+		FROM
+			theater
+	</select>
+	
 <!-- 상영관리 - 상영관 정보 불러오기 -->
 	<select id="getScreensByTheater">
 		SELECT *
@@ -137,61 +145,77 @@
 	</select>
 	
 <!-- 상영 등록 -->
-<!-- 	<insert id="insertMoviePlan"> -->
-<!-- 		INSERT INTO -->
-<!-- 			screen_session -->
-<!-- 		VALUES( -->
-<!-- 			null -->
-<!-- 			, #{movie_num} -->
-<!-- 			, #{theater_num} -->
-<!-- 			, #{scs_empty_seat} -->
-<!-- 			, #{screen_dimension} -->
-<!-- 			, #{scs_date} -->
-<!-- 			, #{scs_start_time} -->
-<!-- 			, #{scs_end_time} -->
-<!-- 			, #{screen_cinema_num} -->
-<!-- 		) -->
-<!-- 	</insert> -->
+	<insert id="insertMoviePlan">
+		<selectKey keyProperty="screen_num" resultType="int" order="BEFORE">
+			SELECT screen_num 
+			FROM
+				screen_info
+			WHERE
+				theater_num = #{theater_num}
+			AND
+				screen_cinema_num = #{screen_cinema_num}
+		</selectKey>
+		INSERT INTO
+			screen_session
+		VALUES(
+			null
+			, #{movie_num}
+			, #{scs_empty_seat}
+			, #{screen_dimension}
+			, #{scs_date}
+			, #{scs_start_time}
+			, #{scs_end_time}
+			, #{screen_num}
+		)
+	</insert>
 	
 <!-- 상영일정 삭제 -->
-<!-- 	<delete id="deleteMoviePlan"> -->
-<!-- 		DELETE FROM  -->
-<!-- 			screen_session -->
-<!-- 		WHERE  -->
-<!-- 			scs_num = #{scs_num} -->
-<!-- 	</delete> -->
+	<delete id="deleteMoviePlan">
+		DELETE FROM 
+			screen_session
+		WHERE 
+			scs_num = #{scs_num}
+	</delete>
 	
 <!-- 상영일정 리스트 -->
-<!-- 	<select id="selectMoviePlanList"> -->
-<!-- 		SELECT  -->
-<!-- 			ss.*, t.theater_name, mv.movie_name  -->
-<!-- 		From  -->
-<!-- 			screen_session ss -->
-<!-- 		Join  -->
-<!-- 			theater t  -->
-<!-- 		ON  -->
-<!-- 			t.theater_num =ss.theater_num -->
-<!-- 		JOIN  -->
-<!-- 			movie mv  -->
-<!-- 		ON  -->
-<!-- 			mv.movie_num = ss.movie_num -->
-<!-- 	</select> -->
+	<select id="selectMoviePlanList">
+		SELECT 
+			ss.*, si.screen_cinema_num, t.theater_name, mv.movie_name 
+		From 
+			screen_session ss
+		Join 
+			screen_info si
+		ON 
+			ss.screen_num =si.screen_num
+		JOIN 
+			movie mv 
+		ON 
+			mv.movie_num = ss.movie_num
+		JOIN 
+			theater t
+		ON 
+			t.theater_num = si.theater_num
+	</select>
 	
 <!-- 상영 시작, 종료시간 가져오기 -->
 	<select id="getMovieTimeList">
 		SELECT 
-			cast((scs_start_time + 0) as char) as scs_start_time
-		  , cast((scs_end_time + 1) as char) as scs_end_time  
+			cast((ss.scs_start_time + 0) as char) as scs_start_time
+		  , cast((ss.scs_end_time + 1) as char) as scs_end_time  
 		FROM 
-			screen_session
+			screen_session ss
+		JOIN 
+			screen_info si
+		ON 
+			ss.screen_num = si.screen_num
 		WHERE 
 			1=1
 		AND 
-			theater_num = #{theaterSelect}
+			si.theater_num = #{theaterSelect}
 		AND 
-			screen_cinema_num = #{screenSelect}
+			si.screen_cinema_num = #{screenSelect}
 		AND 
-			scs_date = #{scs_date}
+			ss.scs_date = #{scs_date}
 	</select>
 
 	

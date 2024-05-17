@@ -48,11 +48,11 @@ tbody tr:hover {
 
 .admin_plan_head {
 	margin: 50px 0;
-	text-align: right;
 }
 
 .admin_plan_body {
 	margin-bottom: 100px;
+	margin-top: 100px;
 }
 
 .admin_moviePlan_search {
@@ -117,7 +117,7 @@ tbody tr:hover {
 									<th width="200px">상영날짜</th>
 									<th width="150px">상영시간</th>
 									<th width="150px">상영종료</th>
-									<th>상영일정등록</th>
+									<th width="100px">상영일정등록</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -125,17 +125,10 @@ tbody tr:hover {
 									<td>
 										<div>
 											<select id="theaterSelect" class="admin_moviePlan_search" name="theater_num">
-												<option value="0">극장선택</option>
-												<option value="1">해운대점</option>
-												<option value="2">센텀점</option>
-												<option value="3">서면점</option>
-												<option value="4">남포점</option>
-												<option value="5">부산대점</option>
-												<option value="6">사직점</option>
-												<option value="7">영도점</option>
-												<option value="8">덕천점</option>
-												<option value="9">정관점</option>
-												<option value="10">사상점</option>
+												<option value="">미선택</option>
+											<c:forEach var="theaterName" items="${theaterNameList}">
+												<option value="${theaterName.theater_num}">${theaterName.theater_name}</option>
+											</c:forEach>
 											</select> 
 										</div>
 									</td>
@@ -209,7 +202,7 @@ tbody tr:hover {
 									<td>${moviePlan.scs_start_time}</td>
 									<td>${moviePlan.scs_end_time}</td>
 									<td>
-										<button type="button" class="btn btn-outline-primary" onclick="moviePlanEdit()">수정</button>
+										<button type="button" class="btn btn-outline-primary" onclick="moviePlanEdit(${moviePlan.scs_num})">수정</button>
 										<button type="button" class="btn btn-outline-primary" onclick="moviePlanWithdraw(${moviePlan.scs_num})">삭제</button>
 									</td>
 								</tr>
@@ -232,8 +225,8 @@ tbody tr:hover {
 	
 	<script type="text/javascript">
 		// 상영관리 상세보기
-		function moviePlanEdit() {
-			window.open("admin_moviePlan_form", "_self", "width=1000, height=800, top=100, left=400");
+		function moviePlanEdit(scs_num) {
+			location.href = "admin_moviePlan_form?scs_num=" + scs_num;
 		}
 		
 		// 상영관리 삭제하기
@@ -255,6 +248,24 @@ tbody tr:hover {
 		$(document).ready(function() {
 			
 			$('#scs_date').change(function(){
+				if($('#theaterSelect').val() == "" ){
+					alert("극장정보를 선택해주세요");
+					$('#scs_date').val("");
+					$('#theaterSelect').focus();
+					return;
+				}
+				if($('#screenSelect').val() == "" ){
+					alert("상영관을 선택해주세요");
+					$('#scs_date').val("");
+					$('#screenSelect').focus();
+					return;
+				}
+				if($("#movieSelect").val() == ""){
+					alert("영화를 선택해주세요");
+					$('#scs_date').val("");
+					$('#movieSelect').focus();
+					return;
+				}
 				
 				// 날짜 정보가 변할떄 코드 시작
 				let theaterSelect = $('#theaterSelect').val();
@@ -279,16 +290,14 @@ tbody tr:hover {
 	 					}						
 					},
 					error : function() {
-						alert("상영시간 선택 오류발생!");
+// 						alert("상영시간 선택 오류발생!");
 					}
 					
 				});
 				
-
-				
 			});
 			
-			
+			// 극장 선택시 상영관 선택
 		    $('#theaterSelect').change(function() {
 		        var theater_num = $("#theaterSelect").val();
 		        $.ajax({
@@ -299,6 +308,7 @@ tbody tr:hover {
 		            success: function(response) {
 		                $('#screenSelect').empty(); // 기존옵션 제거
 		                // option 요소 생성하여 추가
+	                	$('#screenSelect').append('<option value="">미선택</option>');
 		                $.each(response, function(index, screen_info){
 		                	$('#screenSelect').append('<option value="' + screen_info.screen_cinema_num + '">' + screen_info.screen_cinema_num + '관</option>');
 		                });
@@ -306,8 +316,33 @@ tbody tr:hover {
 		        });
 		    });
 		        
-		// 상영시간 ajax
+			// 상영시간 ajax
 		    $('#hourSelect').change(function() {
+		    	if($('#theaterSelect').val() == "" ){
+					alert("극장정보를 선택해주세요");
+					$('#hourSelect').val("");
+					$('#theaterSelect').focus();
+					return;
+				}
+		    	if($('#screenSelect').val() == "" ){
+					alert("상영관을 선택해주세요");
+					$('#scs_date').val("");
+					$('#screenSelect').focus();
+					return;
+				}
+				if($("#movieSelect").val() == ""){
+					alert("영화를 선택해주세요");
+					$('#hourSelect').val("");
+					$('#movieSelect').focus();
+					return;
+				}
+				if($("#scs_date").val() == ""){
+					alert("상영날짜를 선택해주세요");
+					$('#hourSelect').val("");
+					$('#scs_date').focus();
+					return;
+				}
+				
 		        $.ajax({
 		            url: 'movieEndTime', //  영화시간 정보를 가져오는 엔드포인트
 		            method: 'GET',

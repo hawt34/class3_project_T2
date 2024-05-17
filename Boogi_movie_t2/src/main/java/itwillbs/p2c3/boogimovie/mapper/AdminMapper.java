@@ -79,6 +79,8 @@ public interface AdminMapper {
 											   @Param("screenSelect") int screenSelect,
 											   @Param("scs_date") Date scs_date
 											   );
+	// 극장이름 가져오기
+	List<Map<String, String>> getTheaterList();
 	
 	//========================================================
 	// 이벤트 등록

@@ -41,6 +41,7 @@ hr{
 </header>
 <div class="container1">
 	<div class="container2">
+		<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
 		<div class="row">
 			<div class="col-md-2 box1">
 				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
@@ -63,7 +64,7 @@ hr{
 						</li>
 					</ul>
 				</div><!-- box2 -->
-				<c:forEach items="${movieReservation}" var="map" begin="0" end="3">
+				<c:forEach items="${movieReservation}" var="map" varStatus="loop" begin="0" end="3">
 				    <div class="row">
 				        <div class="col-md-3">
 				        	<img src="${map.movie_poster}" style="margin-left: 30px" width="200px" height="250px">

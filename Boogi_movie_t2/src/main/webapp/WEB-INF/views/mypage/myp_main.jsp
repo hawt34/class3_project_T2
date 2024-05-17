@@ -147,10 +147,10 @@ body {
 					      </div><!-- modal-body -->
 					      
 					      <div class="modal-footer"> <!-- 모달 폼 극장 전체 리스트 -->
-					      		<form id="theaterForm" method="post" action="MyTheaterList">
-									<button type="submit" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
-						      		<script type="text/javascript">
-						      		function sendCheckedValues() {
+				      		<form id="theaterForm" method="post" action="MyTheaterList">
+								<button type="submit" onclick="sendCheckedValues()" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
+					      		<script type="text/javascript">
+					      			function sendCheckedValues() {
 						      		    var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
 						      		    var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
 										
@@ -160,8 +160,8 @@ body {
 										
 						      		    $.ajax({
 						      		        url: "api/myp_my_theater",
-						      		        method: "POST", 
-						      		      	contentType: "application/json",
+						      		        type: "POST", 
+						      		      	contentType: "application/json", // String 으로 변경된 JSON 객체가 JSON인지 알려주기 위해 필요  
 						      		     	data: JSON.stringify({ checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
 						      		        dataType: "json",
 						      		        success: function (response) {
@@ -173,10 +173,9 @@ body {
 						      		        }
 						      		    });
 						      		}
-										        	
 										        
-									</script>
-								</form>
+								</script>
+							</form>
 					      </div><!--modal-footer  --> <!-- 모달 폼 극장 전체 리스트 -->
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->

@@ -20,11 +20,7 @@ body {
 .container1{
 	height : 900px;
 	width: 1400px; /* 해상도 1200*/
-/* 	min-width: 1200px; 페이지 최소 너비를 1200으로 설정 해상도 1200 */
-/* 	margin: 0 auto; 중앙정렬 해상도 1200 */
-/* 	margin-top: 15%; */
-/* 	margin-left: 20%; */
-/* 	    display: flex; */
+	margin : auto;
 }
 
 .container2{

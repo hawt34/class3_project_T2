@@ -187,7 +187,7 @@ tbody tr:hover {
 								<th>상영날짜</th>
 								<th>상영시간</th>
 								<th>상영종료</th>
-								<th>상영일정수정</th>
+								<th>상영일정삭제</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -202,7 +202,7 @@ tbody tr:hover {
 									<td>${moviePlan.scs_start_time}</td>
 									<td>${moviePlan.scs_end_time}</td>
 									<td>
-										<button type="button" class="btn btn-outline-primary" onclick="moviePlanEdit(${moviePlan.scs_num})">수정</button>
+<%-- 										<button type="button" class="btn btn-outline-primary" onclick="moviePlanEdit(${moviePlan.scs_num})">수정</button> --%>
 										<button type="button" class="btn btn-outline-primary" onclick="moviePlanWithdraw(${moviePlan.scs_num})">삭제</button>
 									</td>
 								</tr>
@@ -272,7 +272,7 @@ tbody tr:hover {
 				let screenSelect = $('#screenSelect').val();
 				let scs_date = $('#scs_date').val();
 				
-				// 영화번호
+				// 상영 가능 시간 정보 ajax
 // 				let movieSelect = $('#movieSelect').val();
 				$.ajax({
 					type: "GET",

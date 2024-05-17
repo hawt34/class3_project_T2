@@ -381,6 +381,18 @@ public class AdminController {
 	@PostMapping("admin_moviePlan_reg")
 	public String adminMoviePlanReg(ScreenSessionVO screenSession, Model model) {
 //		System.out.println(screenSession);
+		ScreenInfoVO seatInfo = service.getSeatInfo(screenSession);
+		String col = seatInfo.getScreen_seat_col();
+		String row = seatInfo.getScreen_seat_row();
+		
+		// ASCII 값으로 변환
+        int seatRowAscii = Integer.parseInt(row);
+        int seatColAscii = (int) col.charAt(0);
+        // 'A'의 ASCII 값
+        int asciiA = (int) 'A';
+        // 계산 및 대입
+        int emptySeat = seatRowAscii * (seatColAscii - asciiA + 1);
+        screenSession.setScs_empty_seat(emptySeat);
 		
 		int insertCount = service.insertMoviePlan(screenSession);
 		
@@ -459,9 +471,8 @@ public class AdminController {
 	public List<Map<String, String>> moviePlanTime(@RequestParam int theaterSelect, @RequestParam int screenSelect, @RequestParam Date scs_date) {
 		List<Map<String, String>> movieTimeList = service.getMovieTimeList(theaterSelect, screenSelect, scs_date);
 		System.out.println("movieTimeList: " + movieTimeList);
-		for(Map<String, String> movieTime: movieTimeList) {
-			System.out.println(movieTime);
-		}
+//		for(Map<String, String> movieTime: movieTimeList) {
+//		}
 		return movieTimeList;
 	}
 	

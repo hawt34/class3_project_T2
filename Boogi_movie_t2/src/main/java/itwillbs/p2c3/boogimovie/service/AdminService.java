@@ -98,6 +98,11 @@ public class AdminService {
 		return mapper.getTheaterList();
 	}
 	
+	// 상영관 좌석 정보 가져오기
+	public ScreenInfoVO getSeatInfo(ScreenSessionVO screenSession) {
+		return mapper.getSeatInfo(screenSession);
+	}
+	
 	// 상영관리 상영관 데이터 가져오기
 	public List<ScreenInfoVO> getScreensByTheater(String theater_num) {
 		return mapper.getScreensByTheater(theater_num);

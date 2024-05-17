@@ -76,6 +76,7 @@ body {
 </style>
 </head>
 <body>
+<input type="hidden" value="${param.scs_num}">
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">

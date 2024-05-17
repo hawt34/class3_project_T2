@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import itwillbs.p2c3.boogimovie.mapper.TicketingMapper;
 import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
 @Service
 public class TicketingService {
@@ -30,6 +31,14 @@ public class TicketingService {
 	
 	public List<FeeAgeVO> feeCalcAge(){
 		return mapper.feeCalcAge();
+	}
+
+	public List<TicketVO> selectPayedSeat(int pay_num) {
+		return mapper.selectPayedSeat(pay_num);
+	}
+	
+	public int selectPayNum(int scs_num) {
+		return mapper.selectPayNum(scs_num);
 	}
 	
 	

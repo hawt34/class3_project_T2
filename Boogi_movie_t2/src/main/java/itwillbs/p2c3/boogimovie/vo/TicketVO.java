@@ -1,15 +1,16 @@
 package itwillbs.p2c3.boogimovie.vo;
 
-import java.time.LocalTime;
+import java.util.Date;
 
 import lombok.Data;
 
 @Data
 public class TicketVO {
 	private int ticket_num;
-	private int ticket_info_num;
-	private LocalTime ticket_reservation_date;
+	private Date ticket_reservation_date;
 	private String ticket_seat_info;
-	private int reservation_num;
+	private int ticket_price;
+	private String ticket_keyword;
+	private int ticket_pay_num;
 	
 }

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.MyTheaterVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
+import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
 @Controller
 public class TicketingController {
@@ -178,10 +180,16 @@ public class TicketingController {
         System.out.println(params);
         Map<String, Object> fee_info = ticketingService.feeCalc(params);
         
+        
+        //pay_num 가져오기
+        int pay_num = ticketingService.selectPayNum(dbScs.getScs_num());
+        
         //결제 테이블에서 결제된 좌석값 구하기
-        
-        
-        
+        List<TicketVO> payedSheets = ticketingService.selectPayedSeat(pay_num);
+        String seats2 = "";
+        for(TicketVO ticket : payedSheets) {
+        	seats2 += "/" + ticket.getTicket_seat_info();
+        }
 		//model에 저장
 		model.addAttribute("scs", dbScs);
 		model.addAttribute("seats", seats);
@@ -195,6 +203,8 @@ public class TicketingController {
         model.addAttribute("start_time", start_time);
         model.addAttribute("end_time", end_time);
         model.addAttribute("scs_date", date);
+        model.addAttribute("payedSeats", seats2);
+        
 		return "ticketing/tic_choose_seat";
 	}
 	

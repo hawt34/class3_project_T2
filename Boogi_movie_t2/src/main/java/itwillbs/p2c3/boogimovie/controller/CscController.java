@@ -1,9 +1,16 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.FaqService;
@@ -161,17 +169,54 @@ public class CscController {
 	
 	//1대1 문의 작성 db저장
 	@PostMapping("csc_oto")
-	public String cscOtoPro(OTOVO oto, String theater_name, HttpSession session, Model model) {
+	public String cscOtoPro(OTOVO oto, HttpSession session, Model model) {
 		String id = (String)session.getAttribute("sId");
 		
 		// 극장 번호 가져오기
-		int theater_num = otoService.getTheaterNum(theater_name);
-		
+		System.out.println("idddd" + oto.getTheater_name());
+		int theater_num = otoService.getTheaterNum(oto.getTheater_name());
 		
 		if(id == null) {
 			model.addAttribute("msg", "로그인 후 이용");
 			model.addAttribute("targetURL", "./");
 		}
+		//파일저장 경로 생성
+		String uploadDir = "resources/upload";
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		
+		String subDir = "";
+		
+		//경로상에 날짜별로 디렉토리 생성
+		LocalDate today = LocalDate.now();
+		String datePattern = "yyyy" + File.separator + "MM" + File.separator + "dd";
+		//날짜 포멧 yyyy\MM\dd
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(datePattern);
+		subDir = today.format(dtf);
+		saveDir += File.separator + subDir;
+		
+		try {
+			Path path = Paths.get(saveDir);
+			Files.createDirectories(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		MultipartFile mFile1 = oto.getFile1(); 
+		MultipartFile mFile2 = oto.getFile2();
+		
+		String uuid = UUID.randomUUID().toString();
+		//null대신 ""(널 스트링)값 저장
+		oto.setOto_file1("");
+		oto.setOto_file2("");
+		String fileName1 = uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename();
+		String fileName2 = uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename();
+		if(!mFile1.getOriginalFilename().equals("")) {
+			oto.setOto_file1(subDir + File.separator + fileName1);
+		}
+		
+		if(!mFile2.getOriginalFilename().equals("")) {
+			oto.setOto_file2(subDir + File.separator + fileName2);
+		}
+		
 		
 		//1대1 문의 db 등록
 		int insertCount = otoService.insertOto(oto, theater_num, id);
@@ -180,6 +225,20 @@ public class CscController {
 			model.addAttribute("msg", "1대1 문의 실패");
 			return "error/fail";
 		}
+		try {
+			if(!mFile1.getOriginalFilename().equals("")) {
+				mFile1.transferTo(new File(saveDir, fileName1));
+			}
+			
+			if(!mFile2.getOriginalFilename().equals("")) {
+				mFile2.transferTo(new File(saveDir, fileName2));
+			}
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		
 		return "redirect:/myp_oto_breakdown";
 	}

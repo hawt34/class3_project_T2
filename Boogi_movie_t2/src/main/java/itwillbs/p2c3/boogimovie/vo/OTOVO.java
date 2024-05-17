@@ -2,6 +2,8 @@ package itwillbs.p2c3.boogimovie.vo;
 
 import java.time.LocalDateTime;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -15,6 +17,14 @@ public class OTOVO {
 	private String oto_reply_status;
 	private LocalDateTime oto_date;
 	private String theater_name;
+	private String oto_file1;
+	private String oto_file2;
+	
+	private MultipartFile file1;
+	private MultipartFile file2;
+	
+	
+	
 	
 	
 }

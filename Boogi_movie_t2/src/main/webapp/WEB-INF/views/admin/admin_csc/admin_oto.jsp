@@ -148,12 +148,12 @@
 									aria-label="Default select example" name="csc_theater" id="admin_theater">
 									<option value = "">문의 지점 선택</option>
 									<option value="해운대점">해운대점</option>
+									<option value="센텀점">센텀점</option>
 									<option value="서면점">서면점</option>
 									<option value="남포점">남포점</option>
 									<option value="부산대점">부산대점</option>
 									<option value="사직점">사직점</option>
 									<option value="영도점">영도점</option>
-									<option value="사직점">사직점</option>
 									<option value="덕천점">덕천점</option>
 									<option value="정관점">정관점</option>
 									<option value="사상점">사상점</option>

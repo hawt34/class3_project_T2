@@ -25,7 +25,7 @@
 		</div>
 		<!-- content 영역 -->
 		<div class="col-9">
-			<form method="post" action="csc_oto">
+			<form method="post" action="csc_oto" enctype="multipart/form-data">
 				<div id="csc_mainTitle">
 					<h1 class="csc-title">1 대 1 문의</h1>
 				</div>
@@ -85,7 +85,7 @@
 					<div class="row mb-2">
 						<label for="inquiry_type" class="col-sm-2 col-form-label inquiry_warning_star">문의지점</label>
 						<div class="col-sm-10">
-							<select name="theater_name" class="form-select form-select-sm w-25" aria-label="Default select example" required>
+							<select name="theater_name" id="theater_name" class="form-select form-select-sm w-25" required>
 								<option selected disabled>문의 지점 선택</option>
 								<option value="해운대점">해운대점</option>
 								<option value="센텀점">센텀점</option>
@@ -95,6 +95,8 @@
 								<option value="사직점">사직점</option>
 								<option value="영도점">영도점</option>
 								<option value="덕천점">덕천점</option>
+								<option value="정관점">정관점</option>
+								<option value="사상점">사상점</option>
 							</select>
 						</div>
 					</div>
@@ -110,6 +112,13 @@
 						<label for="client_content" class="col-2 col-form-label inquiry_warning_star" >내용</label>
 						<div class="col-sm-10">
 							<textarea class="form-control" name="oto_content" rows="13" id="client_content" required style="resize: none"></textarea>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<label for="client_file" class="col-2 col-form-label" >파일첨부</label>
+						<div class="col-sm-10">
+							<input type="file" name="oto_file1" class="form-control form-control-sm" id="client_file">
+							<input type="file" name="oto_file2" class="form-control form-control-sm" id="client_file">
 						</div>
 					</div>
 					<hr>

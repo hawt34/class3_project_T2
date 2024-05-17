@@ -200,6 +200,7 @@ td:nth-child(7) {
 					</nav>
 					</div>
 					<!-- 페이징 끝 -->
+				<!-- 문의 내역확인 영역 -->
 				</div>
 				<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 					<div class="myp_inquiry">

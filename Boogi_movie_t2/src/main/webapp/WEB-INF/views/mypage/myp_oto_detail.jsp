@@ -75,37 +75,44 @@
 	<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 </header>
 	<div class="container">
-		<form action="myp_oto_modifyPro" method="post">
-			<table>
-				<tr>
-					<td>제목</td>
-					<td>${oto.oto_subject }</td>
-					<td>작성자</td>
-					<td>${oto.member_id }</td>
-				</tr>
-				<tr>
-					<td>문의 유형</td>
-					<td><span>[${oto.oto_category }]</span></td>
-					<td>문의 지점</td>
-					<td><span>[${oto.theater_name }]</span></td>
-				</tr>
-				<tr>
-					<td>작성일</td>
-					<td>${otoDate}</td>
-					<td colspan="2"></td>
-				</tr>
-				<tr>
-					<td colspan="4">
-						<textarea rows="20" cols="100" style="resize: none" disabled>${oto.oto_content }</textarea>
-					</td>
-				</tr>
-				
-			</table>
-			<!-- 답변 버튼 -->
-			<div class="detail_button">
-				<input type="button" value="목록" onclick="history.back()">
+		<div class="row">
+			<div class="col-2">
+				<jsp:include page="/WEB-INF/views/mypage/inc/myp_aside.jsp"></jsp:include>
 			</div>
-		</form>
+			<div class="col-10">
+				<form action="myp_oto_modifyPro" method="post">
+					<table>
+						<tr>
+							<td>제목</td>
+							<td>${oto.oto_subject }</td>
+							<td>작성자</td>
+							<td>${oto.member_id }</td>
+						</tr>
+						<tr>
+							<td>문의 유형</td>
+							<td><span>[${oto.oto_category }]</span></td>
+							<td>문의 지점</td>
+							<td><span>[${oto.theater_name }]</span></td>
+						</tr>
+						<tr>
+							<td>작성일</td>
+							<td>${otoDate}</td>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<textarea rows="20" cols="100" style="resize: none" disabled>${oto.oto_content }</textarea>
+							</td>
+						</tr>
+						
+					</table>
+					<!-- 답변 버튼 -->
+					<div class="detail_button">
+						<input type="button" value="목록" onclick="history.back()">
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 <footer>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>

@@ -12,7 +12,9 @@
 						oto_category,
 						oto_reply_status,
 						theater_num,
-						member_id
+						member_id,
+						oto_file1,
+						oto_file2
 						)
 		VALUES (null,
 				#{oto.oto_subject},
@@ -21,7 +23,9 @@
 				#{oto.oto_category},
 				'미답',
 				#{theater_num},
-				#{id}
+				#{id},
+				#{oto_file1},
+				#{oto_file2}
 				)
 	</insert>
 	

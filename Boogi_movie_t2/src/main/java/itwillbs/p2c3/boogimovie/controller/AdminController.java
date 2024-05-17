@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -246,31 +247,28 @@ public class AdminController {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
 		
-		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit);
+		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, faqCategory, theaterName);
 		
-		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
-		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-		
-		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-			endPage = maxPage;
-		}
+//		int listCount = otoService.getOtoListCount(faqCategory, theaterName); //총 공지사항 갯수
+//		int pageListLimit = 5; //뷰에 표시할 페이지갯수
+//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+//		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+//		
+//		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+//			endPage = maxPage;
+//		}
 //		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory); //faq 페이지네이션
+		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory, theaterName); //faq 페이지네이션
 		
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("otoList", otoList);
 		return "admin/admin_csc/admin_oto";
 	}
-	//category 페이징
-	public PageInfo pageInfoCategory(int pageNum, int listLimit, int startRow,  String faqCategory) {
+	// 페이징
+	public PageInfo pageInfoCategory(int pageNum, int listLimit, int startRow,  String faqCategory, String theaterName) {
 		
-		
-		
-		
-		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
+		int listCount = otoService.getOtoListCount(faqCategory, theaterName); //총 공지사항 갯수
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
@@ -279,27 +277,8 @@ public class AdminController {
 		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
 			endPage = maxPage;
 		}
-		return null;
+		return new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 	}
-	//theater 페이징
-	public PageInfo pageInfoTheater(int pageNum, int listLimit, int startRow,  String theaterName) {
-		
-		
-		
-		
-		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
-		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-		
-		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-			endPage = maxPage;
-		}
-		return null;
-	}
-	
-	
 	
 	//1대1 문의 답변하기
 	@GetMapping("admin_oto_detail")
@@ -687,6 +666,13 @@ public class AdminController {
 			return "error/fail";
 		}
 	}
+	@GetMapping("admin_store_form")
+	public String adminStoreInsert() {
+		
+		return "admin/admin_store/admin_store_form";
+	}
+	
+	
 	
 	@PostMapping("admin_store_pro")
 	public String adminStorePro(ItemInfoVO insertItem,Model model) {

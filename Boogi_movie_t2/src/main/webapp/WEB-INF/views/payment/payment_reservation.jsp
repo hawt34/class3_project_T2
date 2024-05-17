@@ -32,6 +32,11 @@
 	#pay_agreement {
 		padding: 30px;
 	}
+	
+	.pay_number {
+		font-weight: bold;
+		color: #0054FF;
+	}
 </style>
 
  
@@ -46,7 +51,7 @@
 		<h1>빠른 예매</h1>
 		<hr>
 		<div class="row payment_option">
-			<div class="col-8 col1">
+			<div class="col-7 col1">
 				<form>
 					<div class="d-flex">
 						<h3 class="me-auto">할인 적용</h3>
@@ -82,7 +87,7 @@
 					</div>
 				</form>
 				<br>
-				<h3>결제하기</h3>
+				<h3>결제 방법</h3>
 				<div class="card" >
 					<h5 class="card-header">결제 수단</h5>
 					<div class="card-body">
@@ -161,80 +166,86 @@
 				<div class="card " >
 					<h5 class="card-header">결제 정보</h5>
 					<div class="card-body text-center">
-						<div class="payment_status_box">		
-							<p>영화정보(포스터, 제목, 지점, 관, 좌석, 날짜, 시간)</p>
-							<div id="movie_poster"></div>
-							<div id="movie_name"></div>
-							<div id="theater_name"></div>
-							<div id="screen_cinema_num"></div>
-							<div id="selected_seats"></div>
-							<div id="select_date"></div>
-							<div id="scs_start_time"></div>
-							<div id="scs_end_time"></div>
-						</div>
-						<!-- 수정 중 -->
 						<div class="card payment_status_box">
-							<div id="movie_poster">
-								<img src="..." class="card-img-top" alt="...">
-							</div>
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">
-									<div id="person_info">
-										<p>예매인원 <span></span></p>
-									</div>	
-								</li>
-							</ul>
-							<div class="card-footer">
-								<div id="total_fee">
-									<p>총 금액 <span></span>원</p>
+
+							<div class="row ">
+								<div class="col text-center">
+									<img src="${pageContext.request.contextPath}/resources/images/pay_test.jpg" id="movie_poster" alt="포스터썸네일" style="width: 250px;" >
 								</div>
-							</div>
-						</div>
-						<br>
-						<div class="card payment_status_box">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">
-									<div id="person_info">
-										<p>예매인원 <span></span></p>
-									</div>	
-								</li>
-							</ul>
-							<div class="card-footer">
-								<div id="total_fee">
-									<p>총 금액 <span></span>원</p>
+								<div class="col">
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item">
+											<p>제목
+												<span id="movie_name">영화 제목 없음</span>
+											</p>
+										</li>
+										<li class="list-group-item">
+											<p>
+												<span id="theater_name">극장 없음</span>
+												<span id="screen_cinema_num">상영관 없음</span>
+											</p>
+										</li>
+										<li class="list-group-item">
+											<p>
+												<span id="selected_seats">좌석 없음</span>
+											</p>
+										</li>
+										<li class="list-group-item">
+											<p>
+												<span id="select_date">날짜 없음</span>
+											</p>
+										</li>
+										<li class="list-group-item">
+											<p>
+												<span id="scs_start_time">시작 시간 없음</span>~
+												<span id="scs_end_time">종료 시간 없음</span>
+											</p>
+										</li>
+										<li class="list-group-item">
+											<p>예매인원 
+												<span id="person_info">0</span>
+											</p>
+										</li>
+									</ul>
 								</div>
-							</div>
+							</div> <!-- row -->
+								
+							<div class="card-footer">
+								<p><b> 총 금액
+									<span id="total_fee"  class="pay_number"></span>
+								원</b></p>
+							</div> <!-- card-footer -->
 						</div>
 						<br>
 						<div class="card payment_status_box">
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
-									<div id="point_apply">
-										<p>사용 포인트 <span></span>점</p>
-									</div>	
+									<p>사용 포인트 
+										<span id="point_apply"  class="pay_number">0</span>
+									</p>
 								</li>
 								<li class="list-group-item">
-									<div id="coupon_apply">
-										<p>사용 쿠폰 <span></span></p>
-									</div>	
+									<p>사용 쿠폰 
+										<span id="coupon_apply"  class="pay_number">0</span>
+									</p>
 								</li>
 							</ul>
 							<div class="card-footer">
-								<p><b>총 할인 적용 <span></span></b>원</p>
+								<p><b>총 할인 적용 <span id="discount_val" class="pay_number">0</span></b>원</p>
 							</div>
 						</div>
 						<br>
 						<div class="card payment_status_box">
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
-									<div id="final_amount">
-										<p><b>최종 결제금액 <span></span>원</b></p>
-									</div>	
+									<p><b>최종 결제금액 
+										<span id="final_amount"  class="pay_number">0</span>
+									원</b></p>
 								</li>
 								<li class="list-group-item">
-									<div id="pay_way_apply">
-										<p>결제수단 <span></span></p>
-									</div>	
+									<p>결제수단 
+										<span id="pay_way_apply"  class="pay_number">미선택</span>
+									</p>
 								</li>
 							</ul>
 						</div>
@@ -253,7 +264,7 @@
 	
 	<!-- 쿠폰팝업(모달창) -->
     <div class="modal fade" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="payModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="payModalLabel">사용가능 쿠폰 <span>${fn:length(couponList)}</span></h5>
@@ -275,9 +286,9 @@
                         </div>
                    </div>
                 </form>
-            </div>
-        </div>
-    </div>
+            </div> <!-- modal-content -->
+        </div> <!-- modal-dialog -->
+    </div> <!-- couponModal -->
 
 	</article>
 	<footer>
@@ -333,7 +344,9 @@
 			 			alert("포인트를 사용할 수 없습니다.");
 			 		} else {
 			 			if(confirm ("포인트를 사용하시겠습니까?")){
-				 			$("#point_apply > p > span").html($("#useMemberPoint").val());
+				 			$("#point_apply").html($("#useMemberPoint").val());
+				 			
+				 			
 			 			} else {
 			 				$("#useMemberPoint").val("");
 			 			}
@@ -359,23 +372,30 @@
 		
 		// 쿠폰 적용 버튼 누를 시 쿠폰 적용
 		const applyCoupon = (selectValue) => {
-			event.preventDefault();
+// 			event.preventDefault();
 			   
-			let dcPct = document.querySelector(`#${selectValue} .text-dc-pct`).innerText;
-			dcPct = dcPct.substring(0, dcPct.lastIndexOf("%"));
-			console.log(dcPct);
+// 			let dcPct = document.querySelector(`#${selectValue} .text-dc-pct`).innerText;
+// 			dcPct = dcPct.substring(0, dcPct.lastIndexOf("%"));
+// 			console.log(dcPct);
 			
-			// 클래스 정가
-			let originAmount = document.querySelector("#original-amount>p").innerText;
-			originAmount = originAmount.replace(",", "");
-			originAmount = Number(originAmount.substring(0, originAmount.lastIndexOf("원")));
+// 			// 클래스 정가
+// 			let originAmount = document.querySelector("#original-amount>p").innerText;
+// 			originAmount = originAmount.replace(",", "");
+// 			originAmount = Number(originAmount.substring(0, originAmount.lastIndexOf("원")));
 			
-			// 할인금액
-			const discountAmount = originAmount * (Number(dcPct) * 0.01);
-			document.querySelector("#coupon-modal>a").innerText = discountAmount.toLocaleString() + "원";
+// 			// 할인금액
+// 			const discountAmount = originAmount * (Number(dcPct) * 0.01);
+// 			document.querySelector("#coupon-modal>a").innerText = discountAmount.toLocaleString() + "원";
 			
-			// 최종 결제 금액
-			document.querySelector("#total-amount>p").innerText = (originAmount - discountAmount).toLocaleString() + "원";
+// 			// 최종 결제 금액
+// 			document.querySelector("#total-amount>p").innerText = (originAmount - discountAmount).toLocaleString() + "원";
+			
+			
+			
+			
+			
+			
+			
 		} // applyCoupon
 
 		

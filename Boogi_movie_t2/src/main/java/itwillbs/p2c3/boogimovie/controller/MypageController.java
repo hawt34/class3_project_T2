@@ -374,12 +374,15 @@ public class MypageController {
 	
 	// CSC 관련 List
 	@RequestMapping(value = "myp_oto_breakdown", method = {RequestMethod.POST, RequestMethod.GET})
-	public String mypOtoBreakdown(Model model, @RequestParam(defaultValue = "1")int pageNum) {
+	public String mypOtoBreakdown(Model model,
+								  @RequestParam(defaultValue = "1")int pageNum,
+								  @RequestParam(required = false)String faqCategory,
+								  @RequestParam(required = false)String theaterName) {
 //			System.out.println("myp_withdraw_finish()");
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
-		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit);
-		int listCount = otoService.getOtoListCount(); //총 공지사항 갯수
+		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, theaterName, theaterName);
+		int listCount = otoService.getOtoListCount(theaterName, theaterName); //총 공지사항 갯수
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호

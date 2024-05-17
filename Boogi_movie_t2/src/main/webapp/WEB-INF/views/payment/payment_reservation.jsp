@@ -80,7 +80,7 @@
 						<div class="card-body">
 							<p class="card-text">* 예매 취소 시 유효기간이 지난 쿠폰은 복구되지 않습니다.</p>
 							<div class="w-50 input-group mb-3">
-								<input type="text" class="form-control" placeholder="내 쿠폰" aria-label="Recipient's username" aria-describedby="coupon-modal">
+								<input type="text" class="form-control" placeholder="내 쿠폰" id="getMemberCoupon">
 								<button class="btn btn-outline-secondary" type="button" id="coupon-modal" >조회</button>
 							</div>
 						</div>
@@ -212,7 +212,7 @@
 								
 							<div class="card-footer">
 								<p><b> 총 금액
-									<span id="total_fee"  class="pay_number"></span>
+									<span id="total_fee" class="pay_number">50000</span>
 								원</b></p>
 							</div> <!-- card-footer -->
 						</div>
@@ -221,12 +221,12 @@
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
 									<p>사용 포인트 
-										<span id="point_apply"  class="pay_number">0</span>
+										<span id="point_apply" class="pay_number">0</span>
 									</p>
 								</li>
 								<li class="list-group-item">
 									<p>사용 쿠폰 
-										<span id="coupon_apply"  class="pay_number">0</span>
+										<span id="coupon_apply" class="pay_number">0</span>
 									</p>
 								</li>
 							</ul>
@@ -239,7 +239,7 @@
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
 									<p><b>최종 결제금액 
-										<span id="final_amount"  class="pay_number">0</span>
+										<span id="final_amount" class="pay_number">0</span>
 									원</b></p>
 								</li>
 								<li class="list-group-item">
@@ -267,22 +267,22 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="payModalLabel">사용가능 쿠폰 <span>${fn:length(couponList)}</span></h5>
+                    <h5 class="modal-title" id="payModalLabel">사용가능 쿠폰  총 <span>${fn:length(couponList)}</span>개</h5>
                     <button type="button" class="btn-close" id="coupon-close" aria-label="Close"></button>
                 </div>
-                <form onsubmit="applyCoupon(select.value)">
+                <form >
                     <div class="modal-body">
                         <div class="wrapper">
                             <div class="box">
 	                            <c:forEach var="coupon" items="${couponList}">
-	                        		<input type="radio" class="coupon-select" name="select" id="coupon_${coupon.coupon_num}" value="${coupon.coupon_num}">
-	                        		<label for="coupon_${coupon.coupon_num}" class="coupon-select">${coupon.coupon_name}</label>
+	                        		<input type="radio" class="coupon-select" name="select" id="${coupon.coupon_num}" value="${coupon.coupon_value}">
+	                        		<label for="${coupon.coupon_num}" class="coupon-select" >${coupon.coupon_name}</label>
 	                        		<br>
 	                        	</c:forEach>
                         	</div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary" id="coupon-submit">적용</button>
+                            <button type="submit" class="btn btn-primary" id="coupon-submit">적용</button>
                         </div>
                    </div>
                 </form>
@@ -294,8 +294,8 @@
 	<footer>
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
-	<script src="${pageContext.request.contextPath}/resources/js/payment.js"></script>
-	<script>
+<script src="${pageContext.request.contextPath}/resources/js/payment.js"></script>
+<script>
  	$(function() {
 
 		// 포인트 조회 버튼 눌러서 포인트 가져오기
@@ -306,10 +306,10 @@
 		// 사용할 포인트 값 입력 검증
 		$("#useMemberPoint").on("keyup",function() {
 			let point = $(this).val();
-			let regex = /^[0-9]+00$/; // 숫자만 입력 가능, 100원 단위로만(마지막 두 자리는 0으로만) 입력 가능
+			let regex = /^[1-9][0-9]*00$/; // 숫자만 입력 가능, 100원 단위로만(마지막 두 자리는 0으로만) 입력 가능
 			
 			if(!regex.exec(point)) {
-				$("#checkPointArea").text("100원 단위 숫자로만 입력 가능합니다.");
+				$("#checkPointArea").text("100원 단위 숫자만 입력 가능합니다.");
 				$("#checkPointArea").css("color","red");
 			} else {
 	            $("#checkPointArea").text("");
@@ -330,6 +330,13 @@
 				return;
 			}
 
+			let total_fee = document.querySelector("#total_fee").innerText;
+			let use_point = $("#useMemberPoint").val();
+			let final_amount = parseInt(total_fee) -  parseInt(use_point);
+			
+			console.log("total_fee : " + total_fee);
+			console.log("use_point : " + use_point);
+			console.log("final_amount : " + final_amount);
 			
 			$.ajax({
 				type : "GET",
@@ -344,8 +351,8 @@
 			 			alert("포인트를 사용할 수 없습니다.");
 			 		} else {
 			 			if(confirm ("포인트를 사용하시겠습니까?")){
-				 			$("#point_apply").html($("#useMemberPoint").val());
-				 			
+				 			$("#point_apply").html(use_point);
+				 			$("#final_amount").html(final_amount);
 				 			
 			 			} else {
 			 				$("#useMemberPoint").val("");
@@ -353,8 +360,8 @@
 			 		}
 					
 				}, 
-				error :function() {
-					alert("AJAX 오류");
+				error : function() {
+					alert("사용할 포인트를 입력하세요.");
 				}
 				
 			});
@@ -371,7 +378,23 @@
 	    
 		
 		// 쿠폰 적용 버튼 누를 시 쿠폰 적용
-		const applyCoupon = (selectValue) => {
+		$("#coupon-submit").on("click", function() {
+			event.preventDefault(); // 폼 제출 기본 동작 막기
+			let selectedCoupon = document.querySelector('input[name=select]:checked');
+// 			let couponName = selectedCoupon.parentElement.querySelector('label').innerText; 
+			
+			if(confirm ("선택하신 쿠폰을 사용하시겠습니까?")){
+	 			$("#getMemberCoupon").val(selectedCoupon.value.replace("-", ""));
+	 			$("#coupon_apply").html(selectedCoupon.value.replace("-", ""));
+	 			
+ 			} else {
+ 				history.back();
+ 			}
+			
+			
+		});
+		
+// 		const applyCoupon = (selectValue) => {
 // 			event.preventDefault();
 			   
 // 			let dcPct = document.querySelector(`#${selectValue} .text-dc-pct`).innerText;
@@ -390,13 +413,7 @@
 // 			// 최종 결제 금액
 // 			document.querySelector("#total-amount>p").innerText = (originAmount - discountAmount).toLocaleString() + "원";
 			
-			
-			
-			
-			
-			
-			
-		} // applyCoupon
+// 		} // applyCoupon
 
 		
 		//체크박스 전체선택
@@ -415,6 +432,7 @@
 
 		    if (!checkbox.checked) {
 		        selectall.checked = false;
+		        
 		    } // if
 
 		} // checkSelectAll

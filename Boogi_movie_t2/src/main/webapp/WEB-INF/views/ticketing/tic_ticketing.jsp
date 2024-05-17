@@ -133,7 +133,6 @@
 					</div>
 				</div>	
 				<!-- tic_theater 종료 -->
-				
 				<!-- tic_final 시작 -->
 				<div class="col-md-6 tic" style="padding-left: 20px; padding-right: 20px;">
 					<div class="tic_final">
@@ -165,8 +164,6 @@
 											        </c:otherwise>
 						  						 </c:choose>
 										</c:forEach>
-                
-            
 									</div>
 								</div>
 								<div class="finalmovielist scroll" id="finalmovielist">

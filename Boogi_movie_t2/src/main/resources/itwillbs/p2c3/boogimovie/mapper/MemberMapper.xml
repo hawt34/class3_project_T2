@@ -94,4 +94,6 @@
 		WHERE member_id = #{member_id}
 	</update>
 	
+
+	
 </mapper>

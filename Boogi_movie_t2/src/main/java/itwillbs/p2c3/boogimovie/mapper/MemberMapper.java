@@ -28,5 +28,6 @@ public interface MemberMapper {
 	
 	int updateMemberPwd(MemberVO member);
 //	MemberVO getMemberInfo(MemberVO member);
+
 	
 }

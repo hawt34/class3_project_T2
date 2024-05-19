@@ -16,5 +16,28 @@
 		WHERE member_id = #{member_id}
 	</update>
 	
+	<update id="updateMemberPoint">
+		UPDATE member
+		SET member_point = #{member_point}
+		WHERE member_id = #{member_id}
+	</update>
+	
+	<insert id="savePayInfo">
+		INSERT INTO pay
+		VALUES (
+			   null
+			 , #{ticket_pay_type}
+			 , null
+			 , #{ticket_pay_status}
+			 , null
+			 , #{ticket_pay_price}
+			 , #{member_id}
+			 , #{scs_num}
+			 , #{coupon_num}
+			 , #{merchant_uid}
+			 , #{use_point}
+		)
+	</insert>
+	
 
 </mapper>

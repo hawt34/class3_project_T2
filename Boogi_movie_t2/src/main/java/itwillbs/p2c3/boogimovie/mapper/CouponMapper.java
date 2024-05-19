@@ -12,4 +12,6 @@ public interface CouponMapper {
 	List<CouponVO> selectCoupon(MemberVO member);
 
 	List<CouponVO> selectMemberCoupon(MemberVO member);
+
+	void useCoupon(String coupon_num);
 }

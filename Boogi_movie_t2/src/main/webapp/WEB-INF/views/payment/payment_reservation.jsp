@@ -6,14 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>부기무비 결제하기</title>
+<title>부기무비 빠른예매</title>
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <!-- 제이쿼리 -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <!--  포트원 SDK -->
-<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <%-- <link href="${pageContext.request.contextPath}/resources/css/payment.css" rel="stylesheet" type="text/css"> --%>
 <style type="text/css">
 	body { 
@@ -40,8 +40,6 @@
 	}
 </style>
 
- 
-
 </head>
 <body>
 	<header>
@@ -51,12 +49,11 @@
 		<div class="payment_all">
 		<h1>빠른 예매</h1>
 		<hr>
-		<div class="row payment_option">
-			<div class="col-7 col1">
-				<form>
+		<form name="payForm" onsubmit="goPayment()">
+			<div class="row payment_option">
+				<div class="col-7 col1">
 					<div class="d-flex">
 						<h3 class="me-auto">할인 적용</h3>
-<!-- 						<button type="reset" class="p-2">재입력</button> -->
 						<button type="reset" class="btn btn-outline-primary btn-sm" id="discount_reset">할인적용 초기화</button>
 					</div>
 					<div class="card" id="member_point">
@@ -72,9 +69,8 @@
 								<button class="btn btn-outline-secondary" type="button" id="useMemberPointBtn">적용</button>
 							</div>
 							<div id="checkPointArea"></div>
-							
 						</div>
-					</div>
+					</div> <!-- member_point -->
 					<br>
 					<div class="card" id="member_coupon">
 						<h5 class="card-header">부기무비 쿠폰</h5>
@@ -85,182 +81,180 @@
 								<button class="btn btn-outline-secondary" type="button" id="coupon-modal" >조회</button>
 							</div>
 						</div>
-					</div>
-				</form>
-				<br>
-				<h3>결제 방법</h3>
-				<div class="card" >
-					<h5 class="card-header">결제 수단</h5>
-					<div class="card-body">
-						 <div class="pay-method-container">
-		                    <div class="row justify-content-center">
-		                        <div class="col" >
-		                            <input type="radio" class="btn-check" name="pg" id="btn-check-normal" value="html5_inicis" autocomplete="off" checked>
-		                            <label class="btn pay_way" for="btn-check-normal">
-		                                <img src="${pageContext.request.contextPath}/resources/images/pay_credit-card.svg" alt="일반결제 이미지" style="width: 50px;">
-		                                일반결제
-		                            </label>
-		                        </div>
-		
+					</div><!-- member_coupon -->
+					<br>
+					<h3>결제 방법</h3>
+					<div class="card" >
+						<h5 class="card-header">결제 수단</h5>
+						<div class="card-body">
+							 <div class="pay-method-container">
+			                    <div class="row justify-content-center">
+			                        <div class="col" >
+			                            <input type="radio" class="btn-check" name="pg" id="btn-check-normal" value="html5_inicis" autocomplete="off" checked>
+			                            <label class="btn pay_way" for="btn-check-normal">
+			                                <img src="${pageContext.request.contextPath}/resources/images/pay_credit-card.svg" alt="일반결제 이미지" style="width: 50px;">
+			                                &nbsp;&nbsp;일반결제&nbsp;&nbsp;
+			                            </label>
+			                        </div>
+			
+			                        <div class="col">
+			                            <input type="radio" class="btn-check" name="pg" id="btn-check-kakao" value="kakaopay" autocomplete="off">
+			                            <label class="btn pay_way" for="btn-check-kakao">
+			                                <img src="${pageContext.request.contextPath}/resources/images/pay_kakao.svg" alt="카카오페이 이미지" style="width: 100px;">
+			                                카카오페이
+			                            </label>
+			                        </div>
+			                        
+			                        <div class="col">
+			                            <input type="radio" class="btn-check" name="pg" id="btn-check-tosspay" value="tosspay" autocomplete="off">
+			                            <label class="btn pay_way" for="btn-check-tosspay">
+			                                <img src="${pageContext.request.contextPath}/resources/images/pay_toss.png" alt="토스페이 이미지" style="width: 100px; ">
+			                                토스페이
+			                            </label>
+			                        </div>
+			                    </div>
+			                </div><!-- pay-method-container -->
+						</div><!-- card-body -->
+					</div><!-- 결제수단 card -->
+					<br>
+					<div class="card" >
+						<h5 class="card-header">이용 약관</h5>
+						<div class="card-body"id="pay_agreement">
+		                    <div class="row">
 		                        <div class="col">
-		                            <input type="radio" class="btn-check" name="pg" id="btn-check-kakao" value="kakaopay" autocomplete="off">
-		                            <label class="btn pay_way" for="btn-check-kakao">
-		                                <img src="${pageContext.request.contextPath}/resources/images/pay_kakao.svg" alt="카카오페이 이미지" style="width: 100px;">
-		                                카카오페이
-		                            </label>
+		                            <label for="agmt-all" class="form-check-label">전체 동의</label>
 		                        </div>
-		                        
-		                        <div class="col">
-		                            <input type="radio" class="btn-check" name="pg" id="btn-check-tosspay" value="tosspay" autocomplete="off">
-		                            <label class="btn pay_way" for="btn-check-tosspay">
-		                                <img src="${pageContext.request.contextPath}/resources/images/pay_toss.png" alt="토스페이 이미지" style="width: 100px; ">
-		                                토스페이
-		                            </label>
+		                        <div class="col form-check-reverse">
+		                            <input type="checkbox" class="form-check-input" name="agmt-all" id="agmt-all">
 		                        </div>
 		                    </div>
-		                </div>
-					</div>
-				</div>
-				<br>
-				<div class="card" >
-					<h5 class="card-header">이용 약관</h5>
-					<div class="card-body"id="pay_agreement">
-	                    <div class="row">
-	                        <div class="col">
-	                            <label for="agmt-all" class="form-check-label">전체 동의</label>
-	                        </div>
-	                        <div class="col form-check-reverse">
-	                            <input type="checkbox" class="form-check-input" name="agmt-all" id="agmt-all"
-	                                onclick='selectAll(this)'>
-	                        </div>
-	                    </div>
-	                    <div class="row">
-	                        <div class="col">
-	                            <label for="agmt-age" class="form-check-label">만 14세 이상 결제 동의</label>
-	                        </div>
-	                        <div class="col form-check-reverse">
-	                            <input type="checkbox" class="form-check-input select" name="agmt" id="agmt-age"
-	                                onclick='checkSelectAll(this)' required>
-	                            <div class="invalid-feedback">
-	                                약관에 동의해 주세요.
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="row">
-	                        <div class="col">
-	                            <label for="agmt-confirm" class="form-check-label">주문내용 확인 및 결제동의</label>
-	                        </div>
-	                        <div class="col form-check-reverse">
-	                            <input type="checkbox" class="form-check-input select" name="agmt" id="agmt-confirm"  required>
-	                            <div class="invalid-feedback">
-	                                약관에 동의해 주세요.
-	                            </div>
-	                        </div>
-	                    </div>
-					</div>
-				</div> <!-- pay_agreement -->
-			</div> <!-- col1 끝 -->
-			
-			<div class="col col2">
-				<h3>결제하기</h3>
-				<div class="card " >
-					<h5 class="card-header">결제 정보</h5>
-					<div class="card-body text-center">
-						<div class="card payment_status_box">
-
-							<div class="row ">
-								<div class="col text-center">
-									<img src="${movie.movie_poster}" id="movie_poster" alt="포스터썸네일" style="width: 250px;" >
-								</div>
-								<div class="col">
-									<ul class="list-group list-group-flush">
-										<li class="list-group-item">
-											<p><!-- 영화 제목 -->
-												<span id="movie_name">${scs.movie_name}</span>
-											</p>
-										</li>
-										<li class="list-group-item">
-											<p><!-- 극장명, 상영관 명 -->
-												<span id="theater_name">${scs.theater_name} / </span>
-												<span id="screen_cinema_num">${scs.screen_cinema_num}관</span>
-											</p>
-										</li>
-										<li class="list-group-item">
-											<p>좌석 <!-- 선택된 좌석 -->
-												<span id="selected_seats">${selected_seats}</span>
-											</p>
-										</li>
-										<li class="list-group-item">
-											<p> <!-- 상영 시간 -->
-												<span id="select_date">${formattedDate}</span>
-											</p>
-										</li>
-										<li class="list-group-item">
-											<p><!-- 상영 시작 시간~ 끝나는 시간 -->
-												<img src="${pageContext.request.contextPath}/resources/images/pay_clock.svg" style="width: 15px;">
-												<span id="scs_start_time"> ${start_time}</span> ~
-												<span id="scs_end_time">${end_time}</span>
-											</p>
-										</li>
-										<li class="list-group-item">
-											<p><!-- 예매 인원 정보 -->
-												<span id="person_info">${person_info}</span>
-											</p>
-										</li>
-									</ul>
-								</div>
-							</div> <!-- row -->
-								
-							<div class="card-footer">
-								<p><b> 총 금액
-									<span id="total_fee" class="pay_number">${total_fee}</span>
-								</b></p>
-							</div> <!-- card-footer -->
-						</div>
-						<br>
-						<div class="card payment_status_box">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">
-									<p>사용 포인트 
-										<span id="point_apply" class="pay_number">0</span>
-									</p>
-								</li>
-								<li class="list-group-item">
-									<p>사용 쿠폰 
-										<span id="coupon_apply" class="pay_number">0</span>
-									</p>
-								</li>
-							</ul>
-							<div class="card-footer">
-								<p><b>총 할인 적용 <span id="discount_sum" class="pay_number">0</span></b>원</p>
-							</div>
-						</div>
-						<br>
-						<div class="card payment_status_box">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">
-									<p><b>최종 결제금액 
-										<span id="final_amount" class="pay_number">${total_fee}</span> <!-- 첫 금액은  total_fee랑 같아야 함-->
-									원</b></p>
-								</li>
-								<li class="list-group-item">
-									<p><b>결제수단 
-										<span id="pay_way_apply" class="pay_number" style="color: red;">일반결제</span>
+		                    <div class="row">
+		                        <div class="col">
+		                            <label for="agmt-age" class="form-check-label">만 14세 이상 결제 동의</label>
+		                        </div>
+		                        <div class="col form-check-reverse">
+		                            <input type="checkbox" class="form-check-input select" name="agmt" id="agmt-age" required>
+		                            <div class="invalid-feedback">
+		                                약관에 동의해 주세요.
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                        <div class="col">
+		                            <label for="agmt-confirm" class="form-check-label">주문내용 확인 및 결제동의</label>
+		                        </div>
+		                        <div class="col form-check-reverse">
+		                            <input type="checkbox" class="form-check-input select" name="agmt" id="agmt-confirm"  required>
+		                            <div class="invalid-feedback">
+		                                약관에 동의해 주세요.
+		                            </div>
+		                        </div>
+		                    </div>
+						</div><!-- pay_agreement -->
+					</div> <!--이용약관 card -->
+				</div> <!-- col1 끝 -->
+				
+				<div class="col col2">
+					<h3>결제하기</h3>
+					<div class="card " >
+						<h5 class="card-header">결제 정보</h5>
+						<div class="card-body text-center">
+							<div class="card payment_status_box">
+	
+								<div class="row ">
+									<div class="col text-center">
+										<img src="${movie.movie_poster}" id="movie_poster" alt="포스터썸네일" style="width: 250px;" >
+									</div>
+									<div class="col">
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item">
+												<p><!-- 영화 제목 -->
+													<span id="movie_name">${scs.movie_name}</span>
+												</p>
+											</li>
+											<li class="list-group-item">
+												<p><!-- 극장명, 상영관 명 -->
+													<span id="theater_name">${scs.theater_name} / </span>
+													<span id="screen_cinema_num">${scs.screen_cinema_num}관</span>
+												</p>
+											</li>
+											<li class="list-group-item">
+												<p>좌석 <!-- 선택된 좌석 -->
+													<span id="selected_seats">${selected_seats}</span>
+												</p>
+											</li>
+											<li class="list-group-item">
+												<p> <!-- 상영 시간 -->
+													<span id="select_date">${formattedDate}</span>
+												</p>
+											</li>
+											<li class="list-group-item">
+												<p><!-- 상영 시작 시간~ 끝나는 시간 -->
+													<img src="${pageContext.request.contextPath}/resources/images/pay_clock.svg" style="width: 15px;">
+													<span id="scs_start_time"> ${scs.scs_start_time}</span> ~
+													<span id="scs_end_time">${scs.scs_end_time}</span>
+												</p>
+											</li>
+											<li class="list-group-item">
+												<p><!-- 예매 인원 정보 -->
+													<span id="person_info">${person_info}</span>
+												</p>
+											</li>
+										</ul>
+									</div>
+								</div> <!-- row -->
+									
+								<div class="card-footer">
+									<p><b> 총 금액
+										<span id="total_fee" class="pay_number">${total_fee}</span>
 									</b></p>
-								</li>
-							</ul>
-						</div>
-						
-					</div> <!-- card-body 끝 -->
-					<div class="card-footer" >
-						<div class="btn-group nav nav-pills nav-fill" role="group"  >
-							<button type="button" class="btn btn-secondary btn-lg" onclick="history.back();">이전</button>
-							<button type="submit" class="btn btn-primary btn-lg">결제</button>
-						</div>
-					</div><!-- card-footer -->
-				</div><!-- card -->
-			</div> <!--  col2 끝 -->
-		</div> <!-- row payment_option 끝 -->
+								</div> <!-- card-footer -->
+							</div>
+							<br>
+							<div class="card payment_status_box">
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item">
+										<p>사용 포인트 
+											<span id="point_apply" class="pay_number">0</span>
+										</p>
+									</li>
+									<li class="list-group-item">
+										<p>사용 쿠폰 
+											<span id="coupon_apply" class="pay_number">0</span>
+										</p>
+									</li>
+								</ul>
+								<div class="card-footer">
+									<p><b>총 할인 적용 <span id="discount_sum" class="pay_number">0</span></b>원</p>
+								</div>
+							</div>
+							<br>
+							<div class="card payment_status_box">
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item">
+										<p><b>최종 결제금액 
+											<span id="final_amount" class="pay_number">${total_fee}</span> <!-- 첫 금액은  total_fee랑 같아야 함-->
+										원</b></p>
+									</li>
+									<li class="list-group-item">
+										<p><b>결제수단 
+											<span id="pay_way_apply" class="pay_number" style="color: red;">일반결제</span>
+										</b></p>
+									</li>
+								</ul>
+							</div>
+							
+						</div> <!-- card-body 끝 -->
+						<div class="card-footer" >
+							<div class="btn-group nav nav-pills nav-fill" role="group"  >
+								<button type="button" class="btn btn-secondary btn-lg" onclick="history.back();">이전</button>
+								<button type="submit" class="btn btn-primary btn-lg" onclick="goPayment();">결제</button>
+							</div>
+						</div><!-- card-footer -->
+					</div><!-- card -->
+				</div> <!--  col2 끝 -->
+			</div> <!-- row payment_option 끝 -->
+		</form>
 	</div><!-- payment_all  끝 -->
 	
 		<!-- 쿠폰팝업(모달창) -->
@@ -295,7 +289,6 @@
 	<footer>
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
-<%-- <script src="${pageContext.request.contextPath}/resources/js/payment.js"></script> --%>
 <script>
  	$(function() {
 	
@@ -453,7 +446,115 @@
 		
 		
 	}); 
+ 	
+ 	
+ 	
+	// 결제 버튼 클릭 시 결제처리 요청함수
+	function goPayment() {
+		console.clear();
+		console.log('goPayment() 호출됨');
+		
+		event.preventDefault();
+		
+		var IMP = window.IMP;   // 생략 가능
+ 		IMP.init("imp00262041"); // 예: imp00000000 
+ 		
+ 		let pg = document.querySelector("input[name=pg]:checked").value;
+ 		let productName = "부기무비 영화 예매 / ${scs.movie_name}";
+ 		let amount = parseInt(document.querySelector("#final_amount").innerText);	
+ 		let member_email = "${member.member_email}";
+ 		let member_name = "${member.member_name}";
+ 		let member_tel = "${member.member_tel}";
+ 		
+		// IMP.request_pay 결제창 호출
+ 	    IMP.request_pay(
+ 	        {
+ 	            pg: pg,
+ 	            pay_method: "card",
+ 	            merchant_uid: "order_" + new Date().getTime(),
+ 	            name: productName,
+ 	            amount: amount,
+ 	            buyer_email: member_email,
+ 	            buyer_name: member_name,
+ 	            buyer_tel: member_tel
+ 	        },
+ 	        function (rsp) {
+ 	            console.log(rsp);
 
+ 	            if(rsp.success) {
+	                
+ 	                verifyAndSavePayInfo(rsp.imp_uid, rsp.merchant_uid);
+
+ 	            } else {
+ 	                alert("결제에 실패하였습니다. ${rsp.error_code} : ${rsp.error_msg}");
+	                
+ 	            } // if-else
+
+ 	        } // function(rsp)
+
+ 	    ); // .request_pay
+		
+		
+		
+	}; // goPayment()
+	
+
+	// 결제검증 후 DB업데이트
+	function verifyAndSavePayInfo(imp_uid, merchant_uid) {
+		
+		let use_point =  document.querySelector("#point_apply").innerText;
+		let coupon_num = document.querySelector('input[name=select]:checked').id;
+		let member_id = "${member.member_id}";
+		let amount = parseInt(document.querySelector("#final_amount").innerText);	
+		
+		let movie_name = "${scs.movie_name}";
+		let theater_name = "${scs.theater_name}";
+		let screen_cinema_num = "${scs.screen_cinema_num}";
+		let formattedDate = "${formattedDate}";
+		let selected_seats = "${selected_seats}";
+		let start_time = "${scs.scs_start_time}";
+		let end_time = "${scs.scs_end_time}";
+		let person_info = "${person_info}";
+
+	    const params = {
+	        "use_point": use_point,
+	        "coupon_num": coupon_num,
+	        "member_id" : member_id,
+	        "amount" : amount,
+	        "movie_name": movie_name,
+	        "theater_name" : theater_name,
+	        "screen_cinema_num" : screen_cinema_num,
+	        "formattedDate" : formattedDate,
+	        "scs_start_time" : start_time,
+	        "scs_start_time" : end_time,
+	        "person_info" : person_info,
+	        "selected_seats" : selected_seats
+	    }
+	    
+	    $.ajax({
+
+	        type: "POST",
+	        url: "payVerify" + imp_uid,
+	        data: params,
+	        success: function(payVerify) {
+	            console.log(payVerify);
+
+	            if(payVerify) {
+	                location.href = "success_reserve" + merchant_uid;
+
+	            } else {
+	                alert('처리 중 오류가 발생하였습니다. 다시 시도해 주세요');
+
+	            } // if-else
+	
+	        }, // success
+	        error : function() {
+				console.log("AJAX 요청 에러 발생!");
+			}
+
+	    }) // .ajax
+
+	} // savePayInfo
 
 </script>
 </body>

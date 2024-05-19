@@ -14,7 +14,7 @@ public class MemberVO {
 	private String member_addr;
 	private String member_movie_genre;
 	private String member_status;
-	private String member_point;
+	private int member_point;
 	private String member_birth;
 	private Date member_reg_date;
 	private Date member_withdraw_date;

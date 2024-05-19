@@ -23,6 +23,11 @@ public class CouponService {
 	public List<CouponVO> getMemberCoupon(MemberVO member) {
 		return mapper.selectMemberCoupon(member);
 	}
+
+	public void useCoupon(String coupon_num) {
+		mapper.useCoupon(coupon_num);
+		
+	}
 	
 	
 	

@@ -14,8 +14,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
 
-
-
 <header>
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
@@ -169,9 +167,8 @@ document.getElementById('fr').onsubmit = function (event) {
     var fee_dimension_discount = "${fee_dimension_discount}";
     // 좌석에 따른 요금 계산
     var fee_middle = 15000 * (fee_day_discount / 100) * (fee_time_discount / 100) * (fee_dimension_discount / 100);
-					
-    				
-    				
+	
+    
     function feeCalc(){
     	$.ajax({
 	        url: "api/fee_calc",
@@ -248,7 +245,49 @@ document.getElementById('fr').onsubmit = function (event) {
         $('.person_info h3').text("선택한 인원: " + info); // 인원 정보 영역을 업데이트
     }
  
- 
+    window.onload = function() {
+        var payedSeats = "${payedSeats}";
+        
+        // 문자열을 '/'로 분할
+        var seatsArray = payedSeats.split('/');
+        
+        // 분할된 배열의 각 요소를 로그로 출력
+        seatsArray.forEach(function(seat) {
+        	 var seatElement = document.querySelector('.seat[value="' + seat + '"]');
+             if (seatElement) {
+                 // 좌석을 비활성화 (클릭 이벤트 제거)
+                 seatElement.classList.add('disabled');
+                 seatElement.onclick = null;
+             }
+        });
+    };
+    
+    function toggleSeat(element) {
+        if (element.classList.contains('disabled')) {
+            // 비활성화된 좌석은 선택하지 않음
+            return;
+        }
+        
+        var seatNumber = element.getAttribute("value");
+        if (element.classList.contains('selected')) {
+            // 이미 선택된 좌석을 해제하는 경우
+            element.classList.remove('selected');
+            selectedSeats--;
+            // 선택된 좌석 배열에서 좌석 번호 제거
+            selectedSeatNumbers = selectedSeatNumbers.filter(num => num !== seatNumber);
+        } else {
+            // 새로운 좌석을 선택하는 경우
+            if (selectedSeats < totalSeats) {
+                element.classList.add('selected');
+                selectedSeats++;
+                selectedSeatNumbers.push(seatNumber); // 배열에 좌석 번호 추가
+            } else {
+                alert("최대 선택 가능한 좌석 수를 초과하였습니다.");
+            }
+        }
+        updateSeatDisplay();
+        console.log("Selected seats: " + selectedSeats);
+    }
     // 모든 좌석에 클릭 이벤트 리스너 추가
 //     document.querySelectorAll('.seat').forEach(function(seat) {
 //         seat.onclick = function() { toggleSeat(this); };

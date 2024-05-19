@@ -47,11 +47,24 @@ section {
 	margin-top: 10px;
 	margin-left: 10px;
 	width: 700px;
-	height: 1300px;
+	height: 1400px;
 	float: right;
+	font-size: 20px;
+	overflow-y: auto;
 }
-
-
+.cart-item {
+    float: right;
+    margin-right: 200px;
+    align-items: center;
+}
+.cart-item input[type="number"] {
+    text-align: right; /* 넘버박스 숫자를 오른쪽으로 정렬 */
+    padding-right: 15px;
+    font-size: 20px;
+}
+.cart-item button {
+   float: right;
+}
 .snack1_box, .snack2_box, .snack3_box, .snack4_box{
 	font-size:24px;
 	height:200px;
@@ -138,7 +151,7 @@ footer {
                                 ${item_snack.item_info_name} - ${item_snack.item_info_price}원
                             </option>
                         </c:forEach>
-                    	</select>
+                    	</select><br>
                     	<input type="button" class="btn btn-outline-primary" value="담기" id="snackbutton" >
 						</div>
 						<div class = "snack1_image">
@@ -196,7 +209,7 @@ footer {
 			
 		</div>
 		<div class="contentPay">
-			<h2>담은 품목</h2>
+			<h4>담은 품목</h4>
 			<div class="bottomButton">
 			<input type="button" class="btn btn-outline-primary" value="뒤로가기" onclick="history.back()"> 
 			</div>
@@ -228,6 +241,11 @@ footer {
 	            $(imgId).attr('src', selectedImage);
 	        });
 	    }
+	    // 이미지 설정
+	    setImage('#category1_snack', '#snack1_image');
+	    setImage('#category2_pop', '#snack2_image');
+	    setImage('#category3_juice', '#snack3_image');
+	    setImage('#category4_combo', '#snack4_image');
 
 	    // 장바구니에 추가하는 함수
 	    function addToCart(categoryId) {
@@ -243,14 +261,24 @@ footer {
 	            },
 	            success: function(response) {
 	                alert("장바구니에 추가되었습니다!");
-	                $(".contentPay").append(
-	                    "<div class='cart-item' data-name='" + response.itemName + "'>" +
-	                    "<p>" + response.itemName + " - " + selectedItemPrice + "원 </p>" +
-	                    "<input type='number' class='quantity' value='1' min='1'>" +
-	                    "<button class='remove-item btn btn-danger'>취소</button>" +
-	                    "</div>"
-	                );
-	            },
+	                let quantity = 1;
+	                let totalPrice = selectedItemPrice * quantity;
+	                let itemHtml = "<div class='cart-item' data-name='" + response.itemName + "'>" +
+	                "<p>" + response.itemName + " - " + selectedItemPrice + "원 </p>" +
+	                "<input type='number' class='quantity' value='" + quantity + "' min='1'>" +
+	                "<p class='total-price'>선택 품목 가격: " + totalPrice + "원</p>" + // 총 가격 표시
+	                "<button class='remove-item btn btn-danger'>취소</button>" +
+	                "</div>";
+	            	let newItem = $(itemHtml);
+	           		 $(".contentPay").append(newItem)
+					
+	                    // 수량 변경 이벤트 리스너 추가
+	                    newItem.find('.quantity').on('input', function() {
+	                        let newQuantity = parseInt($(this).val());
+	                        let newTotalPrice = selectedItemPrice * newQuantity;
+	                        newItem.find('.total-price').text("선택 품목 가격: " + newTotalPrice + "원");
+	                    });
+	                },
 	            error: function(xhr) {
 	                if (xhr.status === 409) {
 	                    var errorResponse = JSON.parse(xhr.responseText);
@@ -299,11 +327,6 @@ footer {
 	        removeFromCart(itemName);
 	    });
 
-	    // 이미지 설정
-	    setImage('#category1_snack', '#snack1_image');
-	    setImage('#category2_pop', '#snack2_image');
-	    setImage('#category3_juice', '#snack3_image');
-	    setImage('#category4_combo', '#snack4_image');
 	});
 	</script>
 </html>

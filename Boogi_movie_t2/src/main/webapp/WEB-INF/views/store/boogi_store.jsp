@@ -12,10 +12,7 @@
   	border: 1px solid skyblue;  
 }
 
-body {
-	/* 	background-color: #fffde7; */
-	
-}
+
 
 #wrap {
 	width: 1400px;

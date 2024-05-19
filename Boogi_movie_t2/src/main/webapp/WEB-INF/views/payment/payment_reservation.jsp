@@ -64,7 +64,7 @@
 						<div class="card-body">
 							<p class="card-text">* 예매 취소 시 유효기간이 지난 멤버십 포인트는 복구되지 않습니다.</p>
 							<div class="w-50 input-group mb-3">
-								<input type="text" class="form-control" placeholder="보유 포인트" id="getMemberPoint" >
+								<input type="text" class="form-control" placeholder="보유 포인트" id="getMemberPoint" readonly>
 								<button class="btn btn-outline-secondary" type="button" id="getMemberPointBtn" >조회</button>
 							</div>
 							<div class="w-50 input-group mb-3">
@@ -81,7 +81,7 @@
 						<div class="card-body">
 							<p class="card-text">* 예매 취소 시 유효기간이 지난 쿠폰은 복구되지 않습니다.</p>
 							<div class="w-50 input-group mb-3">
-								<input type="text" class="form-control" placeholder="내 쿠폰" id="getMemberCoupon">
+								<input type="text" class="form-control" placeholder="내 쿠폰" id="getMemberCoupon" readonly>
 								<button class="btn btn-outline-secondary" type="button" id="coupon-modal" >조회</button>
 							</div>
 						</div>
@@ -170,40 +170,41 @@
 
 							<div class="row ">
 								<div class="col text-center">
-									<img src="${pageContext.request.contextPath}/resources/images/pay_test.jpg" id="movie_poster" alt="포스터썸네일" style="width: 250px;" >
+									<img src="${movie.movie_poster}" id="movie_poster" alt="포스터썸네일" style="width: 250px;" >
 								</div>
 								<div class="col">
 									<ul class="list-group list-group-flush">
 										<li class="list-group-item">
-											<p>제목
-												<span id="movie_name">영화 제목 없음</span>
+											<p><!-- 영화 제목 -->
+												<span id="movie_name">${scs.movie_name}</span>
 											</p>
 										</li>
 										<li class="list-group-item">
-											<p>
-												<span id="theater_name">극장 없음</span>
-												<span id="screen_cinema_num">상영관 없음</span>
+											<p><!-- 극장명, 상영관 명 -->
+												<span id="theater_name">${scs.theater_name} / </span>
+												<span id="screen_cinema_num">${scs.screen_cinema_num}관</span>
 											</p>
 										</li>
 										<li class="list-group-item">
-											<p>
-												<span id="selected_seats">좌석 없음</span>
+											<p>좌석 <!-- 선택된 좌석 -->
+												<span id="selected_seats">${selected_seats}</span>
 											</p>
 										</li>
 										<li class="list-group-item">
-											<p>
-												<span id="select_date">날짜 없음</span>
+											<p> <!-- 상영 시간 -->
+												<span id="select_date">${formattedDate}</span>
 											</p>
 										</li>
 										<li class="list-group-item">
-											<p>
-												<span id="scs_start_time">시작 시간 없음</span>~
-												<span id="scs_end_time">종료 시간 없음</span>
+											<p><!-- 상영 시작 시간~ 끝나는 시간 -->
+												<img src="${pageContext.request.contextPath}/resources/images/pay_clock.svg" style="width: 15px;">
+												<span id="scs_start_time"> ${start_time}</span> ~
+												<span id="scs_end_time">${end_time}</span>
 											</p>
 										</li>
 										<li class="list-group-item">
-											<p>예매인원 
-												<span id="person_info">0</span>
+											<p><!-- 예매 인원 정보 -->
+												<span id="person_info">${person_info}</span>
 											</p>
 										</li>
 									</ul>
@@ -212,8 +213,8 @@
 								
 							<div class="card-footer">
 								<p><b> 총 금액
-									<span id="total_fee" class="pay_number">50000</span>
-								원</b></p>
+									<span id="total_fee" class="pay_number">${total_fee}</span>
+								</b></p>
 							</div> <!-- card-footer -->
 						</div>
 						<br>
@@ -239,13 +240,13 @@
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
 									<p><b>최종 결제금액 
-										<span id="final_amount" class="pay_number">50000</span> <!-- 첫 금액은  total_fee랑 같아야 함-->
+										<span id="final_amount" class="pay_number">${total_fee}</span> <!-- 첫 금액은  total_fee랑 같아야 함-->
 									원</b></p>
 								</li>
 								<li class="list-group-item">
-									<p>결제수단 
-										<span id="pay_way_apply" class="pay_number">일반결제</span>
-									</p>
+									<p><b>결제수단 
+										<span id="pay_way_apply" class="pay_number" style="color: red;">일반결제</span>
+									</b></p>
 								</li>
 							</ul>
 						</div>
@@ -297,8 +298,6 @@
 <%-- <script src="${pageContext.request.contextPath}/resources/js/payment.js"></script> --%>
 <script>
  	$(function() {
-// 	document.addEventListener("DOMContentLoaded", function() {
-		
 	
 		// 포인트 조회 버튼 눌러서 포인트 가져오기
 		$("#getMemberPointBtn").on("click", function() {
@@ -445,7 +444,7 @@
 		
 		// 할인정보 리셋 시 결제정보에도 반영
 		$("#discount_reset").click(function() {
-			$("#final_amount").html(0);		// 총 결제금액 적용 값
+			$("#final_amount").html("${total_fee}");		// 총 결제금액 적용 값
  			$("#discount_sum").html(0);		// 총 할인 적용 값
 			
 		});

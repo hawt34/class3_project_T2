@@ -14,7 +14,7 @@
 		<h2>정상적으로 <span>결제 완료</span> 되었습니다. </h2>	
 		<div>
 			<h5>결제 내역</h5>
-			<p>예매 번호, 결제 시간, 결제 금액</p>
+			<p>${pay.merchant_uid}, 결제 시간, ${pay.ticket_pay_price}</p>
 		</div>
 		<div>
 			<h5>결제 정보</h5>

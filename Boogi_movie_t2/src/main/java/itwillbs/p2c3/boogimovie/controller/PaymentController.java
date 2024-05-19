@@ -203,14 +203,6 @@ public class PaymentController {
 			
 			service.savePayInfo(pay);
 			
-			model.addAttribute("pay", pay);
-			model.addAttribute("movie", movie);
-			model.addAttribute("theater_name", theater_name);
-			model.addAttribute("screen_cinema_num", screen_cinema_num);
-			model.addAttribute("person_info", person_info);
-			model.addAttribute("formattedDate", formattedDate);
-			model.addAttribute("selected_seats", selected_seats);
-			
 			return true; 
 			
 		} else if(payment.getStatus().equals("failed")) {
@@ -226,25 +218,26 @@ public class PaymentController {
 	
 	// ================================================================================
 	
-	@GetMapping("success_reserve{uid}")
-	public String successReserve(@PathVariable("uid") String orderNum, Model model, PayVO pay, ScreenSessionVO scs, MovieVO movie,
+	@GetMapping("success_reserve{merchant_uid}")
+	public String successReserve(@PathVariable("merchant_uid") String merchant_uid, Model model, PayVO pay, ScreenSessionVO scs, MovieVO movie,
 			String theater_name, String screen_cinema_num, String person_info, String formattedDate, String selected_seats) {
+//		
+//		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------uid : " + orderNum);
+//		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------pay : " + pay);
+//		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------movie : " + movie);
+//		
+//		movie = movieService.getMovieInfo(movie);
+//		model.addAttribute("pay", pay);
+//		model.addAttribute("scs", scs);
+//		model.addAttribute("movie", movie);
+//		model.addAttribute("theater_name", theater_name);
+//		model.addAttribute("screen_cinema_num", screen_cinema_num);
+//		model.addAttribute("person_info", person_info);
+//		model.addAttribute("formattedDate", formattedDate);
+//		model.addAttribute("selected_seats", selected_seats);
 		
-		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------uid : " + orderNum);
-		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------pay : " + pay);
-		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------movie : " + movie);
-		
-		movie = movieService.getMovieInfo(movie);
+		pay = service.getPayInfo(merchant_uid);
 		model.addAttribute("pay", pay);
-		model.addAttribute("scs", scs);
-		model.addAttribute("movie", movie);
-		model.addAttribute("theater_name", theater_name);
-		model.addAttribute("screen_cinema_num", screen_cinema_num);
-		model.addAttribute("person_info", person_info);
-		model.addAttribute("formattedDate", formattedDate);
-		model.addAttribute("selected_seats", selected_seats);
-		
-		
 		
 		
 		return "payment/payment_success_reserve";

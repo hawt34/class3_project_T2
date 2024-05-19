@@ -39,5 +39,9 @@
 		)
 	</insert>
 	
-
+	<select id="getPayInfo" resultType="itwillbs.p2c3.boogimovie.vo.PayVO">
+		SELECT *
+		FROM pay
+		WHERE merchant_uid = #{merchant_uid}
+	</select>
 </mapper>

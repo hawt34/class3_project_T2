@@ -555,6 +555,11 @@
 	    }) // .ajax
 
 	} // savePayInfo
+	
+	
+	function paySuccess() {
+		
+	}
 
 </script>
 </body>

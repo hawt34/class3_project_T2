@@ -16,4 +16,6 @@ public interface PaymentMapper {
 
 	void savePayInfo(PayVO pay);
 
+	PayVO getPayInfo(String merchant_uid);
+
 }

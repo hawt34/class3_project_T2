@@ -29,6 +29,10 @@ public class PaymentService {
 		mapper.savePayInfo(pay);
 		
 	}
+
+	public PayVO getPayInfo(String merchant_uid) {
+		return mapper.getPayInfo(merchant_uid);
+	}
 	
 	
 

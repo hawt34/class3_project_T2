@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import itwillbs.p2c3.boogimovie.mapper.MypageMapper;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
@@ -76,8 +77,11 @@ public class MypageService {
 	}
 	
 	// 자주가는극장 
-	public void myTheater(List<String> checkedValues) {
-		mapper.insertMyTheater(checkedValues);
+	@Transactional
+	public MemberVO myTheater(List<String> checkedValues, String member_id, MemberVO member) {
+	    System.out.println("Checked Values: " + checkedValues); // 디버깅 로그 추가
+
+		return mapper.insertMyTheater(checkedValues, member_id, member);
 	}
 	
 	

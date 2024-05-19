@@ -43,7 +43,7 @@ public interface MypageMapper {
 	List<CouponVO> selectCoupon(MemberVO member);
 	
 	// 자주가는 극장
-	void insertMyTheater(List<String> checkedValues);
+	MemberVO insertMyTheater(@Param("checkedValues") List<String> checkedValues, @Param("member_id")String member_id, @Param("member") MemberVO member);
 	
 	ReservationVO selectMovieResv(String id);
 	

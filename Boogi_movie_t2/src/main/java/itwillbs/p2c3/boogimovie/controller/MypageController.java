@@ -2,6 +2,7 @@ package itwillbs.p2c3.boogimovie.controller;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -98,17 +99,52 @@ public class MypageController {
 	
 	
 	
+//	@ResponseBody
+//	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
+//	public ResponseEntity<String> mypMyTheater(@RequestBody List<String> checkedValues, Model model, @RequestBody String member_id){
+//	    System.out.println("Received checked values: ~~~!~!~~~~~~~~~~ " + checkedValues);
+//	    
+//	    if(checkedValues.isEmpty()) {
+//	        return ResponseEntity.badRequest().body("No data received");
+//	    }
+//	    MemberVO member = mypageService.myTheater(checkedValues, member_id);
+//	    
+//	    if(member == null) {
+//	    	
+//	    	return ResponseEntity.badRequest().body("Failed to process data");
+//	    }
+//	    model.addAttribute("member", member);
+//	    System.out.println("memberrrrrrr : " + member);
+////	    model.addAttribute("member", member);
+//	    
+//	    return ResponseEntity.ok("Data received successfully");
+//	    
+//	    
+//	}
+	
 	@ResponseBody
 	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
-	public ResponseEntity<String> mypMyTheater(@RequestBody List<String> checkedValues, TheaterVO theater){
-	    System.out.println("Received checked values: ~~~!~!~~~~~~~~~~ " + checkedValues);
-	    if(checkedValues.isEmpty()) {
+	public ResponseEntity<String> mypMyTheater(@RequestBody Map<String, Object> payload, Model model, MemberVO member){
+	    System.out.println("Received member ID: " + payload.get("member_id"));
+	    System.out.println("Member ID: " + payload.get("member_id"));
+
+	    List<String> checkedValues = (List<String>) payload.get("checkedValues");
+	    String member_id = (String) payload.get("member_id");
+
+	    if(checkedValues == null || checkedValues.isEmpty()) {
 	        return ResponseEntity.badRequest().body("No data received");
 	    }
-	    mypageService.myTheater(checkedValues);
+
+	    MemberVO dbMember = mypageService.myTheater(checkedValues, member_id, member);
+
+	    if(dbMember == null) {
+	        return ResponseEntity.badRequest().body("Failed to process data");
+	    }
+	    
+	    model.addAttribute("member", dbMember);
+	    System.out.println("Member : " + member);
+
 	    return ResponseEntity.ok("Data received successfully");
-	    
-	    
 	}
 	
 	// ============================= 포인트 =============================
@@ -141,15 +177,23 @@ public class MypageController {
 		// 세션 아이디가 없을 경우 "error/fail" 페이지 포워딩 처리
 		// => msg 속성값 : "잘못된 접근입니다!", targetURL 속성값 : "./"(메인페이지)
 		String id = (String)session.getAttribute("sId");
+		
+		
+		
+		
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다");
 			model.addAttribute("targetURL", "./");
 			return"error/fail";
 		}
 		
+		
 		member.setMember_id(id);
 		member = mypageService.getDbMember(member);
 		
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		String pwd = member.getMember_pwd();
+		member.setMember_pwd(pwdEncoder.encode(pwd));
 		
 		model.addAttribute("member", member);
 		

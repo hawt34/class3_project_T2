@@ -138,9 +138,17 @@ body {
 							<div class="form-check">
 								<div>
 									<c:forEach begin="0" var="theater" items="${theater}">
-										  <input onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_name}" type="checkbox" id="flexCheckDefault" name="theaterId">
-										  ${theater.theater_name}<br>
-										  <br>
+<%-- 										  <input onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_name}" type="checkbox" id="theaterId" name="theaterId"> --%>
+<%-- 										  ${theater.theater_name}<br> --%>
+<!-- 										  <br> -->
+										  
+<%-- 										  <label for="theaterId" onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_name}" type="checkbox" id="theaterId" name="theaterId"> --%>
+										  
+<%-- 										  ${theater.theater_name} --%>
+<!-- 										  </label><br> -->
+										  
+										      <input onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_name}" type="checkbox" id="theaterId_${theater.theater_name}" name="theaterId">
+											  <label for="theaterId_${theater.theater_name}">${theater.theater_name}</label><br>
 									</c:forEach>
 								</div>
 							</div>
@@ -150,32 +158,64 @@ body {
 								<button type="button" onclick="sendCheckedValues(event)" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
 					      </div><!--modal-footer  --> <!-- 모달 폼 극장 전체 리스트 -->
 					      
-							<script type="text/javascript">
-							    function sendCheckedValues(event) {
-							        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
-							        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
+<!-- 							<script type="text/javascript"> -->
+<!-- 							    function sendCheckedValues(event) { -->
+<!-- 							        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열 -->
+<!-- 							        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴 -->
 							        
-							        checkboxes.forEach(function(checkbox) {
-							            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
-							        });
+<!-- 							        checkboxes.forEach(function(checkbox) { -->
+<!-- 							            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가 -->
+<!-- 							        }); -->
 							        
-							        $.ajax({
-							            url: "api/myp_my_theater",
-							            type: "POST", 
-							            contentType: "application/json", // String 으로 변경된 JSON 객체가 JSON인지 알려주기 위해 필요  
-	// 						            data: JSON.stringify({ checkedValues: checkedValues }), 
-										data: JSON.stringify(checkedValues), // JSON 문자열로 변환하여 전송
-							            dataType: "json",
-							            success: function(response) {
-							                alert("영화 정보 등록을 성공하였습니다");
-							                location.reload();
-							            },
-							            error: function(xhr, status, error) {
-							                alert("영화 정보를 가져오는 데 실패했습니다. 에러 : " + error);
-							            }
-							        });
-							    }
-							</script>
+<!-- 							        $.ajax({ -->
+<!-- 							            url: "api/myp_my_theater", -->
+<!-- 							            type: "POST",  -->
+<!-- 							            contentType: "application/json", // String 으로 변경된 JSON 객체가 JSON인지 알려주기 위해 필요   -->
+<!-- 	// 						            data: JSON.stringify({ checkedValues: checkedValues }),  -->
+<!-- 										data: JSON.stringify(checkedValues), // JSON 문자열로 변환하여 전송 -->
+<!-- 							            dataType: "json", -->
+<!-- 							            success: function(response) { -->
+<!-- 							                alert("영화 정보 등록을 성공하였습니다"); -->
+<!-- 							                location.reload(); -->
+<!-- 							            }, -->
+<!-- 							            error: function(xhr, status, error) { -->
+<!-- 							                alert("영화 정보를 가져오는 데 실패했습니다. 에러 : " + error); -->
+<!-- 							            } -->
+<!-- 							        }); -->
+<!-- 							    } -->
+<!-- 							</script> -->
+					      
+					      <script type="text/javascript">
+						    function sendCheckedValues(event) {
+						        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
+						        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
+						        
+						        checkboxes.forEach(function(checkbox) {
+						            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
+						        });
+						
+						        var member_id = "${member.member_id}"; // 여기서 memberId를 어떻게 가져올지 정해야 합니다.
+// 						        var member_id = document.getElementById("member_id").value;
+						        $.ajax({
+						            url: "api/myp_my_theater",
+						            type: "POST", 
+						            contentType: "application/json", // 서버에게 내용이 JSON임을 알려주는 헤더
+						            data: JSON.stringify({ member_id: member_id, checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
+						            dataType: "json",
+						            success: function(response) {
+						                alert("영화 정보 등록을 성공하였습니다");
+						                location.reload();
+						            },
+						            error: function(xhr, status, error) {
+						                alert("영화 정보를 가져오는 데 실패했습니다. 에러 : " + error);
+						            }
+						        });
+						    }
+						</script>
+					      
+					      
+					      
+					      
 					      
 					      
 					    </div><!-- modal-content -->

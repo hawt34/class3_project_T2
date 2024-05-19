@@ -160,7 +160,7 @@ body {
 					<a href="member_pre_reg_member"> &nbsp; 회원가입 &nbsp; | </a> 
 			</c:if>
 				
-			<c:if test="${sId eq 'admin' or sId eq 'admin22'}">
+			<c:if test="${sId eq 'admin' or sId eq 'admin22' or sId eq 'admin33'}">
 				<a href="admin_main"> &nbsp; 관리자페이지 &nbsp; | </a>
 			</c:if>
 		</div>

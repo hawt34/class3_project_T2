@@ -64,7 +64,7 @@ body {
 						    <div class="box4">
 					    		<span id="pwdMessage" style="color: red;"></span>
 							</div>
-							    <label id="msg_pwd" class="msg_pwd"></label><br>
+							    <label id="msg_pwd" class="msg_pwd" ></label><br>
 					    </div><!-- form item -->
 						
 						<div class="box5">
@@ -165,8 +165,10 @@ body {
 
 		    if (pwd === "") {
 		        message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
+		        color = "red";
 		    } else if (!lengthRegx.test(pwd)) {
 		        message.textContent = "!,@,#,$ 영문자와 숫자조합 8~16자리를 입력해주세요";
+		        color = "red";
 		    } else {
 		        // 패스워드 복잡도(안전도) 검사
 		        let engUpperRegex = /[A-Z]/;
@@ -220,16 +222,25 @@ body {
 		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
 			let message = document.getElementById("pwd2Message");
 	        
+		    message.style.color = "";
+		    let checkPasswdResult = false;
+
 	        if (pwd2 != pwd) {
 	            message.textContent = "비밀번호가 일치하지 않습니다";
-	        } else if () {
+	            color = "red";
+	        } else if (pwd2 == pwd) {
 	        	message.textContent = "비밀번호 일치";
-	        	
+	        	color = "blue";
+                checkPasswdResult = true;
+
 	        } else if (pwd2 === "") {
 	            message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
-	        } else {
-	            message.textContent = ""; // 에러 메시지 지우기
-	        }
+	            color = "red";
+	        } // else {
+// 	            message.textContent = ""; // 에러 메시지 지우기
+// 	        }
+	        
+	        message.style.color = color;
 
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
@@ -278,11 +289,13 @@ body {
 	    // 이메일 입력값 변경 시
 	    $("#member_email").on("input", function() {
 	        let email = $("#member_email").val();
-	        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
+	        let regex = /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
 			let message = document.getElementById("emailMessage");
 	        
 	        if (!regex.test(email)) {
 	            message.textContent = "이메일 형식을 맞춰 입력해주세요 (example@example.exam)";
+	        } else if (!/^[a-zA-Z0-9._%+-]{4,}/.test(email)) {
+	            message.textContent = "이메일의 사용자명 부분을 4자리 이상 입력하세요";
 	        } else {
 	            message.textContent = ""; // 에러 메시지 지우기
 	        }
@@ -319,12 +332,13 @@ body {
 	    
 		    // 폼 유효성 검사 함수
 	    function checkFormValidity() {
-	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
-	        let pwd2IsValid = /^.{8,16}$/.test($("#member_pwd2").val());
-	        let birthIsValid = /^\d{6}$/.test($("#member_birth").val());
-	        let addressIsValid = /^.{2,20}$/.test($("#member_addr").val());
-	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
-	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
+	        let pwdIsValid = /^[A-Za-z0-9!@#$%]{8,16}$/.test($("#member_pwd").val());
+// 	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
+	        let pwd2IsValid = /^[A-Za-z0-9!@#$%]{8,16}$/.test($("#member_pwd2").val());
+	        let birthIsValid = /\d{6}$/g.test($("#member_birth").val());
+	        let addressIsValid = /^.{2,20}$/g.test($("#member_addr").val());
+	        let emailIsValid = /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g.test($("#member_email").val());
+	        let telIsValid = /^010\d{8}$/g.test($("#member_tel").val());
 	
 	        if (pwdIsValid && pwd2IsValid && birthIsValid && addressIsValid && emailIsValid && telIsValid) {
 	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화

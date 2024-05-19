@@ -47,6 +47,9 @@ public interface MypageMapper {
 	
 	ReservationVO selectMovieResv(String id);
 	
+	void updateTheater( @Param("id")String id, @Param("theater")String theater, @Param("theaterNumber")int theaterNumber);
+	
+	
 	// 탈퇴처리
 	int updateMemberForWithdraw(MemberVO member);
 	

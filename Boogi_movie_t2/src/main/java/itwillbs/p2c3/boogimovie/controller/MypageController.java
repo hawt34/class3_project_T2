@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -146,6 +147,34 @@ public class MypageController {
 
 	    return ResponseEntity.ok("Data received successfully");
 	}
+	
+	
+
+    
+    @ResponseBody
+    @PostMapping("updateTheater")
+    public ResponseEntity<String> updateTheater(@RequestParam String theater, @RequestParam int theaterNumber) {
+        try {
+            String id = (String)session.getAttribute("sId");
+            
+            mypageService.updateTheater(id, theater, theaterNumber);
+            return ResponseEntity.ok("성공적으로 업데이트되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("업데이트 실패");
+        }
+        
+        
+        
+        
+        
+    }
+	
+	
+	
+	
+	
+	
+	
 	
 	// ============================= 포인트 =============================
 	

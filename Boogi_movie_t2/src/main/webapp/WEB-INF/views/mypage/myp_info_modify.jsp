@@ -294,8 +294,6 @@ body {
 	        
 	        if (!regex.test(email)) {
 	            message.textContent = "이메일 형식을 맞춰 입력해주세요 (example@example.exam)";
-	        } else if (!/^[a-zA-Z0-9._%+-]{4,}/.test(email)) {
-	            message.textContent = "이메일의 사용자명 부분을 4자리 이상 입력하세요";
 	        } else {
 	            message.textContent = ""; // 에러 메시지 지우기
 	        }
@@ -303,7 +301,9 @@ body {
 	        if (email === "") {
 	            message.textContent = "이메일을 입력하세요"; // 메시지 설정
 	        }
-	        
+	        if (!/^[a-zA-Z0-9._%+-]{4,}/.test(email)) {
+	            message.textContent = "이메일의 사용자명 부분을 4자리 이상 입력하세요";
+	        } 
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
 	    

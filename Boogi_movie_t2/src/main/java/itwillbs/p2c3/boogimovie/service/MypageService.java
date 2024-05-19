@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.mapper.MypageMapper;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
@@ -84,7 +85,9 @@ public class MypageService {
 		return mapper.insertMyTheater(checkedValues, member_id, member);
 	}
 	
-	
+	public void updateTheater(String id, String theater, int theaterNumber) {
+		mapper.updateTheater(id, theater, theaterNumber);
+	}
 	
 	
 	

@@ -140,21 +140,8 @@
 		WHERE member.member_id = #{member_id}
     </select>
     
-<!-- 	<insert id="insertMyTheater"> -->
-<!-- 	    <foreach collection="checkedValues" item="item" index="index" separator=";"> -->
-<!-- 	        INSERT INTO member (member_my_theater1, member_my_theater2, member_my_theater3) -->
-<!-- 	        VALUES (#{item}, #{item}, #{item}) -->
-<!-- 	    </foreach> -->
-<!-- 	</insert> -->
     
-<!--     <insert id="insertMyTheater" parameterType="java.util.List"> -->
-<!-- 	        INSERT INTO member (member_my_theater1, member_my_theater2, member_my_theater3) -->
-<!-- 	        VALUES -->
-<!--  	    <foreach collection="list" item="checkedValues" separator=";"> --> 
-<!-- 	    <foreach collection="list" item="checkedValues" > -->
-<!-- 	        (#{checkedValues}.split(",")[0], #{checkedValues}.split(",")[1], #{checkedValues}.split(",")[2]) -->
-<!-- 	    </foreach> -->
-<!-- 	</insert> -->
+
 <!-- 	<insert id="insertMyTheater" parameterType="map"> -->
 <!-- 	    <if test="member.member_id == #{member_id}"> -->
 <!-- 	        INSERT INTO member (member_my_theater1, member_my_theater2, member_my_theater3) -->
@@ -165,6 +152,7 @@
 <!-- 	        ) -->
 <!-- 	    </if> -->
 <!-- 	</insert> -->
+
 		<update id="insertMyTheater">
 		    UPDATE member
 		    SET member_my_theater1 = #{checkedValues[0]},
@@ -172,13 +160,16 @@
 		        member_my_theater3 = #{checkedValues[2]}
 		    WHERE member_id = #{member_id}
 		</update>
-<!-- 	<insert id="insertMyTheater"> -->
-<!-- 		INSERT INTO member (member_my_theater1, member_my_theater2, member_my_theater3) -->
-<!-- 		SELECT #{checkedValues[0]}, #{checkedValues[1]}, #{checkedValues[2]} -->
-<!-- 		FROM member -->
-<!-- 		WHERE member_id = #{member_id} -->
-	
-<!-- 	</insert> -->
+
+
+<!-- 		<update id="updateTheater"> -->
+<!-- 			UPDATE -->
+<!-- 			SET -->
+<!-- 			WHERE -->
+		
+<!-- 		</update> -->
+
+
     <!-- 탈퇴처리 -->
    	<!-- member 테이블의 member_status 컬럼값을 3(탈퇴)로 변경 탈퇴일자(withdraw_date) 를 now() 함수 -->
     <update id="updateMemberForWithdraw">

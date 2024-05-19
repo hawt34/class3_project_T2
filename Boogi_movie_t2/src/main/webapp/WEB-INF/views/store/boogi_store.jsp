@@ -134,11 +134,12 @@ footer {
 						<h4>종류 및 가격</h4>
 						<select name="category1_snack" id="category1_snack">
                         <c:forEach items="${itemInfoSnack}" var="item_snack">
-							<option value="${item_snack.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_snack.item_info_image}">
+							<option value="${item_snack.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_snack.item_info_image}" data-price="${item_snack.item_info_price}">
                                 ${item_snack.item_info_name} - ${item_snack.item_info_price}원
                             </option>
                         </c:forEach>
                     	</select>
+                    	<input type="button" class="btn btn-outline-primary" value="담기" id="snackbutton" >
 						</div>
 						<div class = "snack1_image">
 							<img id="snack1_image" src="" >
@@ -150,10 +151,11 @@ footer {
 						<h4>종류 및 가격</h4>
 						<select name="category2_pop" id="category2_pop">
   					  	<c:forEach items="${itemInfoPop}" var="item_pop">
-        				<option value="${item_pop.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_pop.item_info_image}">
+        				<option value="${item_pop.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_pop.item_info_image}" data-price="${item_pop.item_info_price}">
         				${item_pop.item_info_name} ${item_pop.item_info_price}원</option>
     					</c:forEach>
 						</select>
+						<input type="button" class="btn btn-outline-primary" value="담기" id="snackpop">
 						</div>
 						<div class = "snack2_image">
 							<img id="snack2_image" src="" >
@@ -165,10 +167,11 @@ footer {
         				<h4>종류 및 가격</h4>
        				    <select name="category3_juice" id="category3_juice" >
             			<c:forEach items="${itemInfoJuice}" var="item_juice">
-                		<option value="${item_juice.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_juice.item_info_image}">
+                		<option value="${item_juice.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_juice.item_info_image}" data-price="${item_juice.item_info_price}">
                 		${item_juice.item_info_name} ${item_juice.item_info_price}원</option> 
                 		</c:forEach>
         				</select>
+        				<input type="button" class="btn btn-outline-primary" value="담기" id="snackjuice">
            				</div>
            				<div class = "snack3_image">
            					<img id="snack3_image" src="" >
@@ -180,22 +183,23 @@ footer {
 						<h4>종류 및 가격</h4>
 						<select name="category4_combo" id ="category4_combo">
   					  	<c:forEach items="${itemInfoCombo}" var="item_combo">
-        				<option value="${item_combo.item_info_name}"  data-image="${pageContext.request.contextPath}/resources/images/${item_combo.item_info_image}">
+        				<option value="${item_combo.item_info_name}"  data-image="${pageContext.request.contextPath}/resources/images/${item_combo.item_info_image}" data-price="${item_combo.item_info_price}">
         				${item_combo.item_info_name}  ${item_combo.item_info_price}원</option>
     					</c:forEach>
 						</select>
+						<input type="button" class="btn btn-outline-primary" value="담기" id="snackcombo">
 						</div>
 						<div class = "snack4_image">
 							<img id="snack4_image" src="" >
 						</div>
 				</div>
-			<div class="bottomButton">
-				<button type="submit" id="cartButton" class="btn btn-outline-primary" >장바구니 </button>
-				<input type="button" class="btn btn-outline-primary" value="뒤로가기" onclick="history.back()"> 
-			</div>
+			
 		</div>
 		<div class="contentPay">
 			<h2>담은 품목</h2>
+			<div class="bottomButton">
+			<input type="button" class="btn btn-outline-primary" value="뒤로가기" onclick="history.back()"> 
+			</div>
 		</div>				
 		</section>
 		<footer> 
@@ -206,60 +210,100 @@ footer {
 </body>
 	<script>
 	$(document).ready(function() {
-	    // 페이지가 로드될 때 초기 이미지를 설정
-	    var initialImageSrc = $('#category1_snack').find('option:first').data('image');
-	    $('#snack1_image').attr('src', initialImageSrc);
+	    // 로그인 여부를 위한 배열
+	    const snackButtons = [
+	        { buttonId: "#snackbutton", categoryId: "#category1_snack" },
+	        { buttonId: "#snackpop", categoryId: "#category2_pop" },
+	        { buttonId: "#snackjuice", categoryId: "#category3_juice" },
+	        { buttonId: "#snackcombo", categoryId: "#category4_combo" }
+	    ];
 
-	    // 셀렉트 박스의 변경 이벤트를 감지하여 이미지를 변경
-	    $('#category1_snack').change(function() {
-	        var selectedImageSrc = $(this).find(':selected').data('image');
-	        $('#snack1_image').attr('src', selectedImageSrc);
+	    // 이미지 설정 함수 이거 안 하면 처음에 화면이 없음.. 
+	    function setImage(selectId, imgId) {
+	        let firstImage = $(selectId).find('option:first').data('image');
+	        $(imgId).attr('src', firstImage);
+
+	        $(selectId).change(function() {
+	            let selectedImage = $(this).find(':selected').data('image');
+	            $(imgId).attr('src', selectedImage);
+	        });
+	    }
+
+	    // 장바구니에 추가하는 함수
+	    function addToCart(categoryId) {
+	        let selectedItem = $(categoryId).val();
+	        let selectedItemPrice = $(categoryId).find(':selected').data('price');
+
+	        $.ajax({
+	            type: "POST",
+	            url: "add_to_cart",
+	            data: {
+	                itemName: selectedItem,
+	                itemPrice: selectedItemPrice
+	            },
+	            success: function(response) {
+	                alert("장바구니에 추가되었습니다!");
+	                $(".contentPay").append(
+	                    "<div class='cart-item' data-name='" + response.itemName + "'>" +
+	                    "<p>" + response.itemName + " - " + selectedItemPrice + "원 </p>" +
+	                    "<input type='number' class='quantity' value='1' min='1'>" +
+	                    "<button class='remove-item btn btn-danger'>취소</button>" +
+	                    "</div>"
+	                );
+	            },
+	            error: function(xhr) {
+	                if (xhr.status === 409) {
+	                    var errorResponse = JSON.parse(xhr.responseText);
+	                    var errorMessage = errorResponse.msg;
+	                    alert(errorMessage);
+	                } else {
+	                    alert("장바구니 추가 중 오류가 발생했습니다.");
+	                }
+	            }
+	        });
+	    }
+
+	    // 장바구니에서 제거하는 함수
+	    function removeFromCart(itemName) {
+	        $.ajax({
+	            type: "POST",
+	            url: "remove_from_cart",
+	            data: { itemName: itemName },
+	            success: function(response) {
+	                alert(response.message);
+	                $(".cart-item[data-name='" + itemName + "']").remove();
+	            },
+	            error: function() {
+	                alert("장바구니에서 항목을 제거하는 중 오류가 발생했습니다.");
+	            }
+	        });
+	    }
+	    snackButtons.forEach(function(button) {
+	        $(button.buttonId).click(function() {
+	            // 로그인 여부 확인
+	            let sessionId = "${sessionScope.sId}";
+	            if (!sessionId) {
+	                if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
+	                    window.location.href = 'member_login'; // 로그인 페이지로 이동
+	                }
+	            } else {
+	                addToCart(button.categoryId);
+	            }
+	        });
 	    });
-		
-	    var initialImageSrc2 = $('#category2_pop').find('option:first').data('image');
-	    $('#snack2_image').attr('src', initialImageSrc2);
+	    
 
-	    // 셀렉트 박스의 변경 이벤트를 감지하여 이미지를 변경
-	    $('#category2_pop').change(function() {
-	        var selectedImageSrc2 = $(this).find(':selected').data('image');
-	        $('#snack2_image').attr('src', selectedImageSrc2);
+	    // 장바구니에서 항목 제거 버튼에 이벤트 바인딩
+	    $(".contentPay").on("click", ".remove-item", function() {
+	        let itemName = $(this).parent().data("name");
+	        removeFromCart(itemName);
 	    });
-	    
-	    
-	    var initialImageSrc3 = $('#category3_juice').find('option:first').data('image');
-	    $('#snack3_image').attr('src', initialImageSrc3);
 
-	    $('#category3_juice').change(function() {
-	        var selectedImageSrc3 = $(this).find(':selected').data('image');
-	        $('#snack3_image').attr('src', selectedImageSrc3);
-	    });
-	   
-	    var initialImageSrc4 = $('#category4_combo').find('option:first').data('image');
-	    $('#snack4_image').attr('src', initialImageSrc4);
-
-	    $('#category4_combo').change(function() {
-	        var selectedImageSrc4 = $(this).find(':selected').data('image');
-	        $('#snack4_image').attr('src', selectedImageSrc4);
-	    });
-	   
-	    
-	    
-	    
-	 
-	 $("#cartButton").click(function(event) {
-		    // 세션 아이디 가져오기
-		    let sessionId = "${sessionScope.sId}";
-			    
-		    // 로그인 여부 확인
-		    if (!sessionId) {
-		    	if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
-                    window.location.href = 'member_login';
-                }
-		        event.preventDefault(); // 폼 제출 중단
-		        return;
-		    }
-		});
-
- 	});   
+	    // 이미지 설정
+	    setImage('#category1_snack', '#snack1_image');
+	    setImage('#category2_pop', '#snack2_image');
+	    setImage('#category3_juice', '#snack3_image');
+	    setImage('#category4_combo', '#snack4_image');
+	});
 	</script>
 </html>

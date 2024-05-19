@@ -1,15 +1,22 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import itwillbs.p2c3.boogimovie.service.ItemInfoService;
+import itwillbs.p2c3.boogimovie.vo.CartItemVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 
 
@@ -37,28 +44,41 @@ public class StoreController {
 		
 		return "store/boogi_store";
 	}
-	//스토어 돈계산
-	@PostMapping("storePay")
-	 public String storePay(@RequestParam("category1_snack") int category1_snack,  @RequestParam("snackNum") int snackNum,
-             				@RequestParam("category2_pop") int category2_pop,  @RequestParam("snackPop") int snackPop,
-             				@RequestParam("category3_juice") int category3_juice,  @RequestParam("snackJuice") int snackJuice,
-             				@RequestParam("category4_combo") int category4_combo,  @RequestParam("snackCombo") int snackCombo,   Model model) {
-		model.addAttribute("snack", category1_snack);
-		model.addAttribute("snackNum", snackNum);
-		model.addAttribute("pop", category2_pop);
-		model.addAttribute("snackPop", snackPop);
-		model.addAttribute("juice", category3_juice);
-		model.addAttribute("snackJuice", snackJuice);
-		model.addAttribute("combo", category4_combo);
-		model.addAttribute("snackCombo", snackCombo);
-
-		//System.out.println(category1_snack +""+ snackNum);데이터 확인완료
-		//System.out.println(category2_pop +""+ snackPop);
-		//나중에 결제페이지 연결하면 됨.
-		return "store/storePay"; 
+	//스토어 장바구니 ajax관련해서 처리할꺼임. 한글이 자꾸 깨져서 온갖 삽질 다함. 
+	private Map<String, CartItemVO> cart = new HashMap<>();
+	@PostMapping(value = "add_to_cart",  produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
+    @ResponseBody
+    public ResponseEntity<?> addToCart(@RequestParam String itemName, @RequestParam int itemPrice) {
+		for (CartItemVO item : cart.values()) {
+	        if (item.getItemName().equals(itemName)) {
+	        	Map<String, String> response = new HashMap<>();
+	            response.put("msg" ,"이미 장바구니에 담은 품목입니다.");
+	            
+	            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	        }
+	    }
+	    
+	    CartItemVO cartItem = new CartItemVO(itemName, itemPrice);
+	    cart.put(itemName, cartItem);
+	    
+	    return ResponseEntity.ok().body(cartItem);
+	}	
+	
+	
+    //@PostMapping("remove_from_cart")
+	@PostMapping(value = "remove_from_cart", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
+	@ResponseBody
+    public ResponseEntity<?> removeFromCart(@RequestParam String itemName) {
+        // 장바구니에서 상품 제거
+        cart.remove(itemName);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "장바구니에서 상품이 제거되었습니다.");
+        
+        return ResponseEntity.ok().body(response);
 	}
-	
-	
+    
+    
+    
 	@GetMapping("payment_store")
 	public String paymentStore() {
 		

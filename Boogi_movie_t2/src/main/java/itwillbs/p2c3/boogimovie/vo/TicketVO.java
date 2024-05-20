@@ -1,7 +1,5 @@
 package itwillbs.p2c3.boogimovie.vo;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data

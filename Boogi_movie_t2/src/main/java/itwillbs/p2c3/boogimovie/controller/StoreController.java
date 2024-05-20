@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import itwillbs.p2c3.boogimovie.service.ItemInfoService;
-import itwillbs.p2c3.boogimovie.vo.CartItemVO;
+import itwillbs.p2c3.boogimovie.vo.CartVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 
 
@@ -45,11 +45,11 @@ public class StoreController {
 		return "store/boogi_store";
 	}
 	//스토어 장바구니 ajax관련해서 처리할꺼임. 한글이 자꾸 깨져서 온갖 삽질 다함. 
-	private Map<String, CartItemVO> cart = new HashMap<>();
+	private Map<String, CartVO> cart = new HashMap<>();
 	@PostMapping(value = "add_to_cart",  produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
     @ResponseBody
     public ResponseEntity<?> addToCart(@RequestParam String itemName, @RequestParam int itemPrice) {
-		for (CartItemVO item : cart.values()) {
+		for (CartVO item : cart.values()) {
 	        if (item.getItemName().equals(itemName)) {
 	        	Map<String, String> response = new HashMap<>();
 	            response.put("msg" ,"이미 장바구니에 담은 품목입니다.");
@@ -58,7 +58,7 @@ public class StoreController {
 	        }
 	    }
 	    
-	    CartItemVO cartItem = new CartItemVO(itemName, itemPrice);
+	    CartVO cartItem = new CartVO(itemName, itemPrice);
 	    cart.put(itemName, cartItem);
 	    
 	    return ResponseEntity.ok().body(cartItem);

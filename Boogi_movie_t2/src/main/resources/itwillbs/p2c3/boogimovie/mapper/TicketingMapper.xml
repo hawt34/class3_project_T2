@@ -65,7 +65,8 @@
 		FROM reserve_view
 		WHERE scs_num = #{scs_num} 
 	</select>
-		
+	
+	
 		
 
 </mapper>

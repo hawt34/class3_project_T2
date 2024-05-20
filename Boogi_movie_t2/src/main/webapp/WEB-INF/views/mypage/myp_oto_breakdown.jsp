@@ -159,7 +159,7 @@ td:nth-child(7) {
 											<td>${oto.theater_name }</td>
 											<td>
 												<button type="button" class="btn btn-outline-primary" 
-													onclick="location.href='myp_oto_modifyForm?oto_num=${oto.oto_num}'">수정</button>
+													onclick="location.href='myp_oto_modifyForm?oto_num=${oto.oto_num}&pageNum=${pageNum }'">수정</button>
 											</td>
 											<td>
 												<button type="button" class="btn btn-outline-primary" onclick="otoConfirm(${oto.oto_num})">삭제</button>

@@ -8,7 +8,5 @@ public class ItemInfoVO {
 	private String item_info_category;
 	private String item_info_name;
 	private String item_info_image;
-	private String item_info_price;
-	
-	
+	private int item_info_price;
 }

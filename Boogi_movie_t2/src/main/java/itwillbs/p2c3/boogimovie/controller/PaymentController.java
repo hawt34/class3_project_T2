@@ -36,6 +36,8 @@ import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.PayVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
+import itwillbs.p2c3.boogimovie.vo.TicketInfoVO;
+import itwillbs.p2c3.boogimovie.vo.TicketVO;
 import retrofit2.http.POST;
 
 @Controller
@@ -58,9 +60,6 @@ public class PaymentController {
 	@Autowired
 	private TicketingService ticketService;
 	
-	@Autowired
-	private TheaterService theaterService;
-	
 	
 	public PaymentController() {
 		this.api = new IamportClient("3531856454755108", "ue5UeHzRddcp4PozEatgw9W9SD1To4172hH0vQZebn5ZqW95F8WDgrZ3mD7EIyhoKuaEIHZ1HiYMz1TJ");
@@ -74,7 +73,6 @@ public class PaymentController {
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
-	
 	
 	
 	
@@ -176,14 +174,7 @@ public class PaymentController {
 	@PostMapping("payVerify{imp_uid}")
 	public boolean payVerify(@PathVariable(value = "imp_uid") String imp_uid, String use_point, String coupon_num, MemberVO member, String amount, 
 			String formattedDate, MovieVO movie, String theater_name, String screen_cinema_num, ScreenSessionVO scs, String person_info, PayVO pay, 
-			String selected_seats, Model model) throws IamportResponseException, IOException{
-					
-		
-		System.out.println("imp_uid : " + imp_uid);
-		System.out.println("use_point : " + use_point);
-		System.out.println("coupon_num : " + coupon_num);
-		System.out.println("member : " + member);
-		System.out.println("amount : " + amount);
+			String selected_seats, TicketVO ticket) throws IamportResponseException, IOException{
 
 		Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 검증처리
 		
@@ -199,8 +190,6 @@ public class PaymentController {
 			 
 			member = service.getMember(member);
 			member.setMember_point(member.getMember_point() + apply_point);
-			
-			
 			service.updateMemberPoint(member);
 			couponService.useCoupon(coupon_num);
 			pay.setCoupon_num(Integer.parseInt(coupon_num));
@@ -212,7 +201,10 @@ public class PaymentController {
 			pay.setTicket_pay_status("결제");
 			pay.setTicket_pay_type(payment.getPgProvider());
 			
-			service.savePayInfo(pay);
+			service.savePayInfo(pay); // pay 테이블에 결제 정보 저장
+			
+//			ticket.setTicket_pay_num(pay.getTicket_pay_num());
+//			service.saveTicketInfo(ticket); // ticket 테이블에 티켓 정보 저장
 			
 			return true; 
 			
@@ -237,6 +229,8 @@ public class PaymentController {
 		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------pay : " + pay);
 		
 		
+		
+		
 		model.addAttribute("pay", pay);
 		
 		
@@ -256,16 +250,38 @@ public class PaymentController {
 		return "payment/payment_store";
 	}
 	
-	
+	// ===================================================================================
 	// 뷰 확인 용
 	@GetMapping("payment_store")
-	public String paymentStore2() {
+	public String paymentStore2(MemberVO member, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "로그인 후 다시 시도해주세요.");
+			model.addAttribute("targetURL", "member_login");
+			
+			return "error/fail";
+		}
+		
+		member.setMember_id(id);
+		member = memberService.isCorrectUser(member);
+		List<CouponVO> couponList = couponService.getMemberCoupon(member);
+		
+		model.addAttribute("member", member);
+		model.addAttribute("couponList", couponList);
+		
+		
+		
+		
 		return "payment/payment_store";
 	}
+	
 	
 	// 뷰 확인 용
 	@GetMapping("success_store")
 	public String successStore() {
+		
+		
 		return "payment/payment_success_store";
 	}
 	

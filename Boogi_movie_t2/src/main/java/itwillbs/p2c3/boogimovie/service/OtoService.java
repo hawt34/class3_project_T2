@@ -31,9 +31,6 @@ public class OtoService {
 		return mapper.selectTheaterName(theater_num);
 	}
 
-	public int updateOto(int oto_num, String oto_content) {
-		return mapper.updateOto(oto_num, oto_content);
-	}
 
 	public int deleteOto(int oto_num) {
 		return mapper.deleteOto(oto_num);
@@ -50,5 +47,14 @@ public class OtoService {
 	// 1대1 문의 게시물 갯수
 	public int getOtoListCount(String faqCategory, String theaterName) {
 		return mapper.getOtoListCount(faqCategory, theaterName);
+	}
+	
+	// 1대1 문의 첨부파일 삭제
+	public int removeOtoFile(OTOVO oto) {
+		return mapper.deleteOtoFile(oto);
+	}
+	//1대1 문의 수정
+	public int updateOto(OTOVO oto) {
+		return mapper.updateOto(oto);
 	}
 }

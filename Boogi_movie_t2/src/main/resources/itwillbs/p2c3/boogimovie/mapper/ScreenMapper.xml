@@ -40,7 +40,6 @@
 			  , #{screen_seat_row}
 			  , #{screen_seat_col}
 			  , #{screen_status}
-			  , null
 		)
 	</insert>
 	

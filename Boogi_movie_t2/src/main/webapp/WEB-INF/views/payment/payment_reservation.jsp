@@ -144,7 +144,7 @@
 		                            <label for="agmt-confirm" class="form-check-label">주문내용 확인 및 결제동의</label>
 		                        </div>
 		                        <div class="col form-check-reverse">
-		                            <input type="checkbox" class="form-check-input select" name="agmt" id="agmt-confirm"  required>
+		                            <input type="checkbox" class="form-check-input select" name="agmt" id="agmt-confirm" required>
 		                            <div class="invalid-feedback">
 		                                약관에 동의해 주세요.
 		                            </div>
@@ -323,6 +323,7 @@
 				return;
 			}
 
+			let member_point = parseInt("${member.member_point}"); // 보유 포인트
 			let total_fee = document.querySelector("#total_fee").innerText; // 넘어온 총 결제 값
 			let use_point = $("#useMemberPoint").val();	// 입력된 사용할 포인트 값
 			
@@ -331,6 +332,10 @@
 // 			let use_coupon = $("#getMemberCoupon").val();
 			let discount_sum = parseInt(use_point) + parseInt(coupon_apply); 		// 결제란 적용된 비타민 + 쿠폰 항목
 			let final_amount = parseInt(total_fee) - parseInt(discount_sum); 		// 현재 최종 값 - 총 할인금액 
+			
+			if() {
+				
+			}
 			
 			
 			$.ajax({

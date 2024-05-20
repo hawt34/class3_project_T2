@@ -76,12 +76,6 @@
 		FROM theater
 		WHERE theater_name = #{theater_name}
 	</select>
-	<!-- 1대1 문의 content 수정 -->
-	<update id="updateOto">
-		UPDATE oto
-		SET oto_content = #{oto_content}
-		WHERE oto_num = #{oto_num}
-	</update>
 	<delete id="deleteOto">
 		DELETE FROM oto
 		WHERE oto_num = #{oto_num}
@@ -106,4 +100,26 @@
    			WHERE theater_name = #{theaterName}
    		</if>
 	</select>
+	
+	<!-- 1대1문의 파일 삭제 -->
+	<update id="deleteOtoFile">
+		UPDATE oto
+		SET
+			oto_file1 = CASE WHEN oto_file1 = #{oto_file1} THEN '' ELSE oto_file1 END,
+			oto_file2 = CASE WHEN oto_file2 = #{oto_file1} THEN '' ELSE oto_file2 END
+		WHERE oto_num = #{oto_num}
+	</update>
+<!-- 	1대1 문의 수정 -->
+	<update id="updateOto">
+		UPDATE oto
+		SET
+			oto_content = #{oto_content}
+			<if test="oto_file1 != null and oto_file1 != ''">
+				, oto_file1 = #{oto_file1}
+			</if>
+			<if test="oto_file2 != null and oto_file2 != ''">
+				, oto_file2 = #{oto_file2}
+			</if>
+		WHERE oto_num = #{oto_num}
+	</update>
 </mapper>

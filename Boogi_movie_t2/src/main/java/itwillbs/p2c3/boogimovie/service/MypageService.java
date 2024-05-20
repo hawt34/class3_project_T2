@@ -56,10 +56,10 @@ public class MypageService {
 		return mapper.selectResvCount(member);
 	}
 //	// 취소내역
-//	public List<Map<String, Object>> getCancelList(MemberVO member){
-//		System.out.println("MypageService - getCancelList()");
-//		return mapper.selectCancelList(member);
-//	}
+	public List<Map<String, Object>> getCancelList(MemberVO member){
+		System.out.println("MypageService - getCancelList()");
+		return mapper.selectCancelList(member);
+	}
 	
 	// 회원정보
 	public MemberVO getDbMember(MemberVO member) {

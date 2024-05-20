@@ -69,6 +69,10 @@
 	span {
 		color:#6699FF;
 	}
+	input[value="첨부파일"] {
+		background-color: skyblue;
+		
+	}
 	
 </style>
 </head>
@@ -109,14 +113,14 @@
 										<c:set var="original_fileName1" value="${fn:substringAfter(oto.oto_file1, '_') }"/>
 											${original_fileName1 }
 										<%-- 다운로드 버튼 활용하여 해당 파일 다운로드(버튼에 하이퍼링크 지정) --%>
-										<a href="${pageContext.request.contextPath }/resources/upload/${oto.oto_file1}" download="${original_fileName1 }"><input type="button" value="첨부파일1">
+										<a href="${pageContext.request.contextPath }/resources/upload/${oto.oto_file1}" download="${original_fileName1 }"><input type="button" value="첨부파일">
 										</a><br>
 									</c:if>
 									<c:if test="${not empty oto.oto_file2 }">
 										<c:set var="original_fileName2" value="${fn:substringAfter(oto.oto_file2, '_') }"/>
 											${original_fileName2 }
 										<%-- 다운로드 버튼 활용하여 해당 파일 다운로드(버튼에 하이퍼링크 지정) --%>
-										<a href="${pageContext.request.contextPath }/resources/upload/${oto.oto_file1}" download="${original_fileName2 }"><input type="button" value="첨부파일2">
+										<a href="${pageContext.request.contextPath }/resources/upload/${oto.oto_file1}" download="${original_fileName2 }"><input type="button" value="첨부파일">
 										</a>
 									</c:if>
 								</div>
@@ -131,7 +135,7 @@
 					</table>
 					<!-- 답변 버튼 -->
 					<div class="detail_button">
-						<input type="button" value="목록" onclick="history.back()">
+						<input type="button" value="목록" onclick="location.href='myp_oto_breakdown'">
 					</div>
 				</form>
 			</div>

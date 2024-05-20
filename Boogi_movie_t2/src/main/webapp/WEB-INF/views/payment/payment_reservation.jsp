@@ -525,6 +525,7 @@
 		let start_time = "${scs.scs_start_time}";
 		let end_time = "${scs.scs_end_time}";
 		let person_info = "${person_info}";
+		let scs_num = "${scs.scs_num}";
 
 	    const params = {
 	        "use_point": use_point,
@@ -538,7 +539,8 @@
 	        "scs_start_time" : start_time,
 	        "scs_start_time" : end_time,
 	        "person_info" : person_info,
-	        "selected_seats" : selected_seats
+	        "selected_seats" : selected_seats,
+	        "scs_num" : scs_num
 	    }
 	    
 	    $.ajax({

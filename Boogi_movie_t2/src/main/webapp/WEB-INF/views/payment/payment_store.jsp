@@ -161,57 +161,41 @@
 						<div class="card-body text-center">
 							<div class="card payment_status_box">
 								
-								<div class="row ">
-									<!-- 결제 항목 노출 -->
-									<div class="col text-center">
-										<img src="${movie.movie_poster}" id="movie_poster" alt="포스터썸네일" style="width: 250px;" >
-									</div>
-									<div class="col">
-										<ul class="list-group list-group-flush">
-											<li class="list-group-item">
-												<p><!-- 영화 제목 -->
-													<span id="movie_name">${scs.movie_name}</span>
-												</p>
-											</li>
-											<li class="list-group-item">
-												<p><!-- 극장명, 상영관 명 -->
-													<span id="theater_name">${scs.theater_name} / </span>
-													<span id="screen_cinema_num">${scs.screen_cinema_num}관</span>
-												</p>
-											</li>
-											<li class="list-group-item">
-												<p>좌석 <!-- 선택된 좌석 -->
-													<span id="selected_seats">${selected_seats}</span>
-												</p>
-											</li>
-											<li class="list-group-item">
-												<p> <!-- 상영 시간 -->
-													<span id="select_date">${formattedDate}</span>
-												</p>
-											</li>
-											<li class="list-group-item">
-												<p><!-- 상영 시작 시간~ 끝나는 시간 -->
-													<img src="${pageContext.request.contextPath}/resources/images/pay_clock.svg" style="width: 15px;">
-													<span id="scs_start_time"> ${scs.scs_start_time}</span> ~
-													<span id="scs_end_time">${scs.scs_end_time}</span>
-												</p>
-											</li>
-											<li class="list-group-item">
-												<p><!-- 예매 인원 정보 -->
-													<span id="person_info">${person_info}</span>
-												</p>
-											</li>
-										</ul>
-									</div>
-								</div> <!-- row -->
+								<!-- 결제 항목 노출 -->
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item"> <!--  항목 하나 -->
+										<div class="row ">
+											<div class="col text-center">
+												<img src="${itemInfo.item_info_image}" id="item_info_image" alt="아이템 이미지" style="width: 250px;" >
+											</div>
+											<div class="col">
+												<p><span id="item_info_num">아이템 항목 이름</span></p>
+												<p>	<span id="item_quantity">항목 구매 수량</span> / <span id="item_price">항목 가격</span></p>
+											</div>	
+										</div> <!-- row -->	
+									</li><!--  여기까지 -->
 									
+									<li class="list-group-item"> <!--  항목 하나 -->
+										<div class="row ">
+											<div class="col text-center">
+												<img src="${itemInfo.item_info_image}" id="item_info_image" alt="아이템 이미지" style="width: 250px;" >
+											</div>
+											<div class="col">
+												<p><span id="item_info_num">아이템 항목 이름</span></p>
+												<p>	<span id="item_quantity">항목 구매 수량</span> / <span id="item_price">항목 가격</span></p>
+											</div>	
+										</div> <!-- row -->	
+									</li><!--  여기까지 -->
+								</ul>
 								<div class="card-footer">
 									<p><b> 총 금액
-										<span id="total_fee" class="pay_number">$cart.item_total_price}</span>
+										<span id="total_fee" class="pay_number">0</span>원<!-- ${cart.item_total_price} -->
 									</b></p>
 								</div> <!-- card-footer -->
-							</div>
+							</div> <!-- payment_status_box -->
+							
 							<br>
+							
 							<div class="card payment_status_box">
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item">
@@ -226,7 +210,7 @@
 									</li>
 								</ul>
 								<div class="card-footer">
-									<p><b>총 할인 적용 <span id="discount_sum" class="pay_number">0</span></b>원</p>
+									<p><b>총 할인 적용 <span id="discount_sum" class="pay_number">0</span>원</b></p>
 								</div>
 							</div>
 							<br>
@@ -234,7 +218,7 @@
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item">
 										<p><b>최종 결제금액 
-											<span id="final_amount" class="pay_number">${total_fee}</span> <!-- 첫 금액은  total_fee랑 같아야 함-->
+											<span id="final_amount" class="pay_number">0</span> <!-- 첫 금액은  total_fee랑 같아야 함-->
 										원</b></p>
 									</li>
 									<li class="list-group-item">
@@ -470,7 +454,7 @@
  		IMP.init("imp00262041"); // 예: imp00000000 
  		
  		let pg = document.querySelector("input[name=pg]:checked").value;
- 		let productName = "부기무비 영화 예매 / ${scs.movie_name}";
+ 		let productName = "부기무비 스토어 구매";
  		let amount = parseInt(document.querySelector("#final_amount").innerText);	
  		let member_email = "${member.member_email}";
  		let member_name = "${member.member_name}";

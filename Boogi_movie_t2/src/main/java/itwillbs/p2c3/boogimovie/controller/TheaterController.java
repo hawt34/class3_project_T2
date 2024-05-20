@@ -81,6 +81,7 @@ public class TheaterController {
 		List<TheaterFacilityVO> facilityList = service.getFacility(facility);
 		List<NoticeVO> theaterNoticeList = service.getTheaterNoticeList(notice);
 		
+		
 		model.addAttribute("theater", theater);
 		model.addAttribute("theaterList", theaterList);
 		model.addAttribute("facilityList", facilityList);

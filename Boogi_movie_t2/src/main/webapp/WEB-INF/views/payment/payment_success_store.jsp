@@ -33,7 +33,9 @@
 			<h2>정상적으로 <span>결제 완료</span> 되었습니다. </h2>	
 			<div>
 				<h5>결제 내역</h5>
-				<p>${pay.merchant_uid}, 결제 시간, 결제 금액</p>
+				<p>주문번호 : ${store_pay.merchant_uid}</p>
+				<p>${store_pay.store_pay_date}</p> 
+				<p>${store_pay.store_pay_price}</p> 
 			</div>
 			<div>
 				<h5>결제 정보</h5>

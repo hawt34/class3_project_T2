@@ -231,9 +231,6 @@ public class PaymentController {
 		pay = service.getPayInfo(merchant_uid);
 		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------pay : " + pay);
 		
-		
-		
-		
 		model.addAttribute("pay", pay);
 		
 		

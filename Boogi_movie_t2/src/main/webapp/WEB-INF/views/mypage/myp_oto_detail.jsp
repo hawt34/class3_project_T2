@@ -7,7 +7,7 @@
 <title>admin_detail</title>
 <style>
 	.container {
-		width:850px;
+		width:750px;
 		height:auto;
 		margin: 0 auto;
 /* 		border:1px solid #6699FF; */
@@ -18,14 +18,14 @@
 	table {
 		border-top:1px solid black;
 		border-bottom:1px solid black;
-		width:800px;
+		width:80%;
 		margin: 0 auto;
 		border-collapse: collapse;
 		text-align: center;
 	}
 	table tr td {
 		border:1px solid black;
-		padding : 15px;
+		padding : 10px;
 	}
 	
 	td:nth-child(odd) {
@@ -101,7 +101,7 @@
 						</tr>
 						<tr>
 							<td colspan="4">
-								<textarea rows="20" cols="100" style="resize: none" disabled>${oto.oto_content }</textarea>
+								<textarea rows="18" cols="90" style="resize: none" disabled>${oto.oto_content }</textarea>
 							</td>
 						</tr>
 						

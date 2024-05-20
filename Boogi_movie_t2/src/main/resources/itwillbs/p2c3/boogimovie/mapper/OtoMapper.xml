@@ -24,8 +24,8 @@
 				'미답',
 				#{theater_num},
 				#{id},
-				#{oto_file1},
-				#{oto_file2}
+				#{oto.oto_file1},
+				#{oto.oto_file2}
 				)
 	</insert>
 	

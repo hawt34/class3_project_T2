@@ -25,7 +25,8 @@ public class OtoService {
 	public OTOVO getOto(int oto_num) {
 		return mapper.selectOto(oto_num);
 	}
-
+	
+	//극장명 가져오기
 	public String getTheaterName(int theater_num) {
 		return mapper.selectTheaterName(theater_num);
 	}

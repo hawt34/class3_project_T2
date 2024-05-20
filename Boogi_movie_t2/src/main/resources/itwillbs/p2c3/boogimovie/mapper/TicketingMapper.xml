@@ -62,7 +62,7 @@
 	
 	<select id="getScreenSession" resultType="itwillbs.p2c3.boogimovie.vo.ScreenSessionVO">
 		SELECT *
-		FROM screen_session
+		FROM reserve_view
 		WHERE scs_num = #{scs_num} 
 	</select>
 		

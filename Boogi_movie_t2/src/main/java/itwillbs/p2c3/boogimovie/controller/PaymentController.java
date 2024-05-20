@@ -28,12 +28,14 @@ import itwillbs.p2c3.boogimovie.service.CouponService;
 import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.service.MovieInfoService;
 import itwillbs.p2c3.boogimovie.service.PaymentService;
+import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.PayVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 import retrofit2.http.POST;
 
 @Controller
@@ -55,6 +57,9 @@ public class PaymentController {
 	
 	@Autowired
 	private TicketingService ticketService;
+	
+	@Autowired
+	private TheaterService theaterService;
 	
 	
 	public PaymentController() {
@@ -98,7 +103,7 @@ public class PaymentController {
 	
 	@PostMapping("payment")
 	public String paymentReserve(MemberVO member, HttpSession session, Model model, ScreenSessionVO scs, MovieVO movie,
-			String selected_seats, String person_info, String total_fee, String scs_date2) {
+			String selected_seats, String person_info, String total_fee, String scs_date2, TheaterVO theater) {
 		
 		// 세션 확인
 		String id = (String)session.getAttribute("sId");
@@ -113,7 +118,8 @@ public class PaymentController {
 		List<CouponVO> couponList = couponService.getMemberCoupon(member);
 		movie = movieService.getMovieInfo(movie);
 		scs = ticketService.getScreenSession(scs.getScs_num());
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----------------------------scs" + scs);
+		scs.setTheater_name(theater.getTheater_name());
+		
 		
 		// 선택 날짜 String scs_date2 > Date 변환  > "yyyy.MM.dd(E)" 형식으로 재가공
 		SimpleDateFormat originalFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
@@ -229,6 +235,8 @@ public class PaymentController {
 		
 		pay = service.getPayInfo(merchant_uid);
 		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------pay : " + pay);
+		
+		
 		model.addAttribute("pay", pay);
 		
 		

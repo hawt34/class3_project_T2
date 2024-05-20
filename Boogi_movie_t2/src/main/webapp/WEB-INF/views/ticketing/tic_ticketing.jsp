@@ -15,28 +15,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
     .selected {
-        background-color: #FFD700; /* 원하는 배경색으로 변경하세요 */
+        background-color: #FFD700; /* 선택된 항목의 배경색을 설정합니다. */
     }
-    
-   	a {
-	  text-decoration-line: none;
-	}
-	
-	 a:link { 
-		color: red; 
-		text-decoration: none;
-	} 
-	
-	a:visited { 
-		color: black; 
-		text-decoration: none;
-	}
-	
-	a:hover { 
-		color: blue; 
-		text-decoration: underline;
-	}
-	
 </style>
 </head>
 
@@ -79,7 +59,7 @@
                     <!-- select박스 -->
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="checkbox" id ="like_movie" name="like_movie" value="나의취향" class="col-md-3">내취향
+                            <input type="checkbox" id="like_movie" name="like_movie" value="나의취향" class="col-md-3">내취향
                         </div>
                     </div>
                     <!-- 영화정보 -->
@@ -88,16 +68,16 @@
                             <div class="movie_atrbt">
                                 <c:choose>
                                     <c:when test="${movie.movie_grade eq '전체관람가' }">
-                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_all.gif" style="width : 48px; height : 48px;">
+                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_all.gif" style="width: 48px; height: 48px;">
                                     </c:when>
                                     <c:when test="${movie.movie_grade eq '12세관람가' }">
-                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_over12.gif" style="width : 48px; height : 48px;">
+                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_over12.gif" style="width: 48px; height: 48px;">
                                     </c:when>
                                     <c:when test="${movie.movie_grade eq '15세관람가' }">
-                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_over15.gif" style="width : 48px; height : 48px;">
+                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_over15.gif" style="width: 48px; height: 48px;">
                                     </c:when>
                                     <c:when test="${movie.movie_grade eq '18세관람가(청소년관람불가)' }">
-                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_over18.gif" style="width : 48px; height : 48px;">
+                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_over18.gif" style="width: 48px; height: 48px;">
                                     </c:when>
                                 </c:choose>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -112,7 +92,7 @@
                 </div>
             </div>
             <!-- tic_movie종료 -->
-            
+
                 <!-- tic_theater 시작 -->
                 <div class="col-md-3 tic" style="padding-left: 20px; padding-right: 20px;">
                     <div class="tic_theater">
@@ -124,18 +104,18 @@
                             <!-- theater 리스트1 -->
                             <div class="col-sm-6" style="border-right: solid 3px black; text-align: left;">
                                 <ul>
-                                    <li><a class="theater-link" onclick="javascript:theaterType('EntireTheater', 'entire')">전체극장</a></li>
-                                </ul>    
+                                    <li><a class="theater-link" id="entireTheaterLink" onclick="theaterType('EntireTheater', 'entire', this)">전체극장</a></li>
+                                </ul>
                                 <ul>
-                                    <li><a class="theater-link" onclick="javascript:theaterType('MyTheater','${sessionScope.sId}')">MY영화관</a></li>
+                                    <li><a class="theater-link" id="myTheaterLink" onclick="theaterType('MyTheater','${sessionScope.sId}', this)">MY영화관</a></li>
                                 </ul>
                             </div>
                             <!-- theater 리스트2 -->
                             <div class="col-sm-6 theaterlist scroll" id="theaterlist">
                                 <c:forEach items="${theaterList }" var="theater">
                                     <ul>
-                                        <li><a class="theater-link" onclick="javascript:theaterClick('${theater.theater_name}')">${theater.theater_name }</a> </li>
-                                    </ul>    
+                                        <li><a class="theater-link" onclick="theaterClick('${theater.theater_name}', this)">${theater.theater_name }</a> </li>
+                                    </ul>
                                 </c:forEach>
                             </div>
                         </div>
@@ -155,7 +135,7 @@
                                         <c:forEach begin="1" end="10" var="i">
                                             <c:choose>
                                                 <c:when test="${nowDay <= maxDay}">
-                                                    <input type="button" onclick="javascript:dayClick('${currentDate }', ${nowDay })" value="${nowDay }일">&nbsp;
+                                                    <input type="button" onclick="javascript:dayClick('${currentDate }', ${nowDay }, this)" value="${nowDay }일">&nbsp;
                                                     <%
                                                         nowDay++;
                                                     pageContext.setAttribute("nowDay", nowDay);
@@ -173,10 +153,10 @@
                                     </div>
                                 </div>
                                 <div class="finalmovielist scroll" id="finalmovielist">
-                                    <div style="height : 300px">
-                                    <br>
+                                    <div style="height: 300px">
+                                        <br>
                                         <div align="center">영화 와 상영관 을 선택해주세요</div>
-                                </div>
+                                    </div>
                                 </div>
                             </div>
                     </div>
@@ -280,11 +260,15 @@
         });
     }
 
-    function theaterType(type, sId) {
+    function theaterType(type, sId, element) {
         if (sId == null || sId == "") {
             alert("로그인 후 이용해주세요");
             return;
         }
+
+        // 전체극장 및 MY영화관 선택 시 이전 선택된 항목의 selected 클래스를 제거
+        $(".theater-link").removeClass("selected");
+        $(element).addClass("selected");
 
         $.ajax({
             url: "api/theater" + type,
@@ -304,24 +288,25 @@
 
                 if (response.length < 4) {
                     response.forEach(function (theater) {
-                        var theaterDiv = '<ul><li><a class="theater-link" onclick="theaterClick(\'' + theater.member_my_theater + '\')">' + theater.member_my_theater + '</a></li></ul>';
+                        var theaterDiv = "";
+                        if (theater.member_my_theater == null) {
+                            theaterDiv = "<div>My 영화관 정보가 없습니다.</div>";
+                        }
+                        theaterDiv = '<ul><li><a class="theater-link" onclick="theaterClick(\'' + theater.member_my_theater + '\', this)">' + theater.member_my_theater + '</a></li></ul>';
                         result.append(theaterDiv);
                     });
                 } else {
                     response.forEach(function (theater) {
-                        var staticHtml = '<ul><li><a class="theater-link" onclick="theaterClick(\'' + theater.theater_name + '\')">' + theater.theater_name + '</a></li></ul>';
+                        var staticHtml = '<ul><li><a class="theater-link" onclick="theaterClick(\'' + theater.theater_name + '\', this)">' + theater.theater_name + '</a></li></ul>';
                         result.append(staticHtml);
                     });
                 }
-
-                // 새롭게 생성된 theater 항목에 클릭 이벤트 핸들러를 추가합니다.
-                $("#theaterlist .theater-link").click(function () {
-                    $("#theaterlist .theater-link").removeClass("selected");
-                    $(this).addClass("selected");
-                });
             },
             error: function () {
-                alert("영화 정보를 가져오는 데 실패했습니다.");
+                var result2 = $("#theaterlist");
+                var theaterDiv2 = "<div>My 영화관 <br>정보가 없습니다.</div>";
+                result2.empty();
+                result2.append(theaterDiv2);
             }
         });
     }
@@ -337,7 +322,7 @@
         $("#movie_" + movie_num + " .movie-link").addClass("selected");
     }
 
-    function theaterClick(theater_name) {
+    function theaterClick(theater_name, element) {
         selectedTheater = theater_name;
         var result = $("#theaterSelected");
         result.empty();
@@ -345,10 +330,10 @@
 
         // 선택된 상영관의 배경색 변경
         $("#theaterlist .theater-link").removeClass("selected");
-        $(".theater-link:contains('" + theater_name + "')").addClass("selected");
+        $(element).addClass("selected");
     }
 
-    function dayClick(date, nowDay) {
+    function dayClick(date, nowDay, element) {
         if (!selectedMovie || !selectedTheater) {
             alert("영화와 상영관을 선택해주세요.");
             return;
@@ -362,7 +347,7 @@
 
         // 선택된 날짜의 배경색 변경
         $(".daylist input").removeClass("selected");
-        $(this).addClass("selected");
+        $(element).addClass("selected");
 
         result.empty();
         result.append(formattedDate);
@@ -427,6 +412,10 @@
 
     $(document).ready(function () {
         var sId = '<%= session.getAttribute("sId") %>';
+
+        // 페이지 로드 시 전체극장이 선택되도록 설정
+        $("#entireTheaterLink").addClass("selected");
+        theaterType('EntireTheater', 'entire', $("#entireTheaterLink")[0]);
 
         $("#like_movie").change(function () {
             var likeMovie = $(this).is(":checked");

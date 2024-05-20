@@ -316,3 +316,12 @@ select[multiple] {
 	height : 20%;
 	margin-bottom : 100px;
 }
+
+  	a {
+	  text-decoration: none!important;
+	  color : black!important;
+	}
+	
+	*.selected{
+		background-color : yellow;
+	}

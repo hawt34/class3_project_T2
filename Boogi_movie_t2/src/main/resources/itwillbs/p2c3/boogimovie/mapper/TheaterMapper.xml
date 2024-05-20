@@ -107,4 +107,5 @@
 		WHERE event.event_type_num = '2'
 	</select>
 	
+	
 </mapper>

@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>MY-page</title>
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 <style>
 	.container {
 		width:850px;
@@ -99,7 +101,7 @@
 // 						console.log($("$fileItemArea" + index).html());
 						//--------------------------------------------
 						// 1번 방법 활용하여 duv 태그 내에 파일 업로드 폼 표시
-						console.log($(".file").eq(index - 1).html('<input type="file" name="file' + index + '">'));
+						$(".file").eq(index - 1).html('<input type="file" name="file' + index + '">');
 					} else {
 						alert("파일 삭제 실패!")
 					}
@@ -118,62 +120,70 @@
 	<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 </header>
 	<div class="container">
-		<form action="myp_oto_modifyPro" method="post">
-			<input type="hidden" name="oto_num" value="${oto.oto_num} ">
-			<table>
-				<tr>
-					<td>제목</td>
-					<td>${oto.oto_subject }</td>
-					<td>작성자</td>
-					<td>${oto.member_id }</td>
-				</tr>
-				<tr>
-					<td>문의 유형</td>
-					<td><span>[${oto.oto_category }]</span></td>
-					<td>문의 지점</td>
-					<td><span>[${oto.theater_name }]</span></td>
-				</tr>
-				<tr>
-					<td>작성일</td>
-					<td>${otoDate}</td>
-					<td colspan="2"></td>
-				</tr>
-				<tr>
-					<td>첨부파일</td>
-					<td colspan="3">
-						<c:forEach var="fileName" items="${fileNames }" varStatus="status">
-							<div class="file">
-								<c:choose>
-									<c:when test="${not empty fileName}">
-										<c:set var="original_fileName" value="${fn:substringAfter(fileName, '_') }" />
-										${original_fileName }
-										<a href="${pageContext.request.contextPath }/resources/upload/${fileName}" download="${original_fileName}">
-											<input type="button" value="첨부파일"></a>
-										<a href="javascript: deleteFile(${oto.oto_num}, '${fileName}', ${status.count})" title="파일 삭제">
-											<img alt="delete" src="${pageContext.request.contextPath }/resources/images/xIcon.png">
-										</a>
-									</c:when>
-									<c:otherwise>
-										<!-- fileName이 empty 일때 -->
-										<input type="file" name="file${status.count }">
-									</c:otherwise>
-								</c:choose>							
-							</div>
-						</c:forEach>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="4">
-						<textarea rows="20" cols="100" style="resize: none" name="oto_content">${oto.oto_content }</textarea>
-					</td>
-				</tr>
-				
-			</table>
-			<!-- 답변 버튼 -->
-			<div class="detail_button">
-				<input type="submit" value="수정완료">
+		<div class="row">
+			<div class="col-2">
+				<jsp:include page="/WEB-INF/views/mypage/inc/myp_aside.jsp"></jsp:include>
 			</div>
-		</form>
+			<div class="col-10">
+				<form action="myp_oto_modifyPro" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="oto_num" value="${oto.oto_num} ">
+					<input type="hidden" name="pageNum" value="${param.pageNum} ">
+					<table>
+						<tr>
+							<td>제목</td>
+							<td>${oto.oto_subject }</td>
+							<td>작성자</td>
+							<td>${oto.member_id }</td>
+						</tr>
+						<tr>
+							<td>문의 유형</td>
+							<td><span>[${oto.oto_category }]</span></td>
+							<td>문의 지점</td>
+							<td><span>[${oto.theater_name }]</span></td>
+						</tr>
+						<tr>
+							<td>작성일</td>
+							<td>${otoDate}</td>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td>첨부파일</td>
+							<td colspan="3">
+								<c:forEach var="fileName" items="${fileNames }" varStatus="status">
+									<div class="file">
+										<c:choose>
+											<c:when test="${not empty fileName}">
+												<c:set var="original_fileName" value="${fn:substringAfter(fileName, '_') }" />
+												${original_fileName }
+												<a href="${pageContext.request.contextPath }/resources/upload/${fileName}" download="${original_fileName}">
+													<input type="button" value="첨부파일"></a>
+												<a href="javascript: deleteFile(${oto.oto_num}, '${fileName}', ${status.count})" title="파일 삭제">
+													<img alt="delete" src="${pageContext.request.contextPath }/resources/images/xIcon.png">
+												</a>
+											</c:when>
+											<c:otherwise>
+												<!-- fileName이 empty 일때 -->
+												<input type="file" name="file${status.count }">
+											</c:otherwise>
+										</c:choose>							
+									</div>
+								</c:forEach>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<textarea rows="20" cols="100" style="resize: none" name="oto_content">${oto.oto_content }</textarea>
+							</td>
+						</tr>
+						
+					</table>
+					<!-- 답변 버튼 -->
+					<div class="detail_button">
+						<input type="submit" value="수정완료">
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 <footer>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>

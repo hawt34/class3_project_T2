@@ -1,8 +1,15 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.CouponService;
@@ -457,8 +465,15 @@ public class MypageController {
 	public String mypOtoBreakdown(Model model,
 								  @RequestParam(defaultValue = "1")int pageNum,
 								  @RequestParam(required = false)String faqCategory,
-								  @RequestParam(required = false)String theaterName) {
-//			System.out.println("myp_withdraw_finish()");
+								  @RequestParam(required = false)String theaterName,
+								  HttpSession session) {
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "./");
+			return "error/fail";
+		}
+		
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
 		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, theaterName, theaterName);
@@ -481,7 +496,9 @@ public class MypageController {
 	
 	//1대1 문의 삭제
 	@GetMapping("myp_oto_detail")
-	public String mypOtoDetail(int oto_num, Model model) {
+	public String mypOtoDetail(int oto_num,
+							   Model model,
+							   @RequestParam(defaultValue = "1")String pageNum) {
 		OTOVO oto = otoService.getOto(oto_num);
 		String otoDate = oto.getOto_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		
@@ -512,20 +529,91 @@ public class MypageController {
 	@ResponseBody
 	@PostMapping("otoDeleteFile")
 	public String otoDeleteFile(OTOVO oto, HttpSession session) {
+//		System.out.println("!!oto_num: " + oto.getOto_num());
+//		System.out.println("!!oto_file: " + oto.getOto_file1());
+		int removeCount = otoService.removeOtoFile(oto);
 		
-		
-		
+		if(removeCount > 0) {
+			String saveDir = session.getServletContext().getRealPath(uploadDir);
+			if(!oto.getOto_file1().equals("")) {
+				try {
+					Path path = Paths.get(saveDir + "/" + oto.getOto_file1());
+					Files.deleteIfExists(path);
+					
+					return "true";
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		return "false";
 	}
 	
+	// 1대1 문의 수정
 	@PostMapping("myp_oto_modifyPro")
-	public String myOtoModifyPro(int oto_num, String oto_content, Model model) {
-		int updateCount = otoService.updateOto(oto_num, oto_content);
-		if(updateCount == 0) {
-			model.addAttribute("msg", "수정에 실패하였습니다");
+	public String myOtoModifyPro(@RequestParam(defaultValue = "1")String pageNum, OTOVO oto, Model model) {
+		String saveDir = session.getServletContext().getRealPath(uploadDir); //실제 경로
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		String subDir = now.format(dtf);
+		
+		//실제 경로에 서브 디렉토리 경로 결합
+		saveDir += "/" + subDir;
+		
+		//서버 파일 업로드 처리
+		try {
+			Path path = Paths.get(saveDir); //경로 관리 path 객체 생성
+			Files.createDirectories(path); //업로드
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		//----------------------------------------------------------
+		// 파일명 중복 방지 
+		//실제 파일 정보가 관리되는 MultuPartFile 타입 객체 활용
+		MultipartFile mFile1 = oto.getFile1();
+		MultipartFile mFile2 = oto.getFile2();
+		
+		oto.setOto_file1("");
+		oto.setOto_file2("");
+		
+		//업로드 파일명을 저장할 fileNameX 변수를 ""으로 초기화
+		String fileName1 = "";
+		String fileName2 = "";
+		
+		if(mFile1 != null && !mFile1.getOriginalFilename().equals("")) {
+			fileName1 = UUID.randomUUID().toString().substring(0, 8) + "_" + mFile1.getOriginalFilename();
+			//boarVO 객체의 board_fileX 멤버변수에 업로드 경로명 + "/" + 파일명 문자열 결합 저장
+			oto.setOto_file1(subDir + "/" + fileName1);
+		}
+		if(mFile2 != null && !mFile2.getOriginalFilename().equals("")) {
+			fileName2 = UUID.randomUUID().toString().substring(0, 8) + "_" + mFile2.getOriginalFilename();
+			//boarVO 객체의 board_fileX 멤버변수에 업로드 경로명 + "/" + 파일명 문자열 결합 저장
+			oto.setOto_file2(subDir + "/" + fileName2);
+		}
+		
+		int updateCount = otoService.updateOto(oto);
+		if(updateCount > 0) {
+			try {
+				if(!oto.getOto_file1().equals("")) {
+					//multipartFile을 경로는 savDir, 이름은 fileName1(UUID + "_" + mFile.getOriginalFilename()
+					mFile1.transferTo(new File(saveDir, fileName1));
+				}
+				if(!oto.getOto_file2().equals("")) {
+					mFile2.transferTo(new File(saveDir, fileName2));
+				}
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//글 상세정보조회 페이지 리다이렉트
+			return "redirect:/myp_oto_detail?oto_num=" + oto.getOto_num() + "&pageNum=" + pageNum;
+			
+		} else {
+			// "글 수정 실패!" 출력 및 이전페이지 돌아가기 처리
+			model.addAttribute("msg", "글 수정 실패!");
 			return "error/fail";
 		}
-		return "redirect:/myp_oto_breakdown";
 	}
 	//1대1 문의 삭제
 	@GetMapping("myp_oto_delete")
@@ -536,10 +624,32 @@ public class MypageController {
 			model.addAttribute("targetURL", "member_login");
 			return "error/fail";
 		}
+		OTOVO oto = otoService.getOto(oto_num);
+		
+		if(oto == null && !id.equals(oto.getMember_id())) {
+			model.addAttribute("msg", "잘못된 접근입니다");
+			return "error/fail";
+		}
 		
 		int deleteOtoCount = otoService.deleteOto(oto_num);
 		if(deleteOtoCount == 0) {
 			model.addAttribute("msg", "삭제 실패");
+		}
+		//실제 경로
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		
+		String[] arrFileNames = {
+			oto.getOto_file1(),	
+			oto.getOto_file2()	
+		};
+		//실제 파일이 저장된 디렉토리의 파일 지우기
+		for(String fileName : arrFileNames) {
+			Path path = Paths.get(saveDir + "/" + fileName);
+			try {
+				Files.deleteIfExists(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return "redirect:/myp_oto_breakdown";

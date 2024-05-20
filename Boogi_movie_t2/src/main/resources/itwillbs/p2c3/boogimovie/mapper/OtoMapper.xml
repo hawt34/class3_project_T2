@@ -62,7 +62,9 @@
 			   o.oto_reply_status,
 			   o.theater_num,
 			   o.member_id,
-			   t.theater_name
+			   t.theater_name,
+			   o.oto_file1,
+			   o.oto_file2
 		 FROM oto o
 		 JOIN theater t
    		on o.theater_num = t.theater_num

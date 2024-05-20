@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>admin_detail</title>
+<title>MY-page</title>
 <style>
 	.container {
 		width:850px;
@@ -39,7 +41,7 @@
 	  text-align: left;
 	}
 	
-	 tr:nth-child(4) td {
+	 tr:nth-child(5) td {
 	 	text-align: center;
 	 	background-color: white;
 	 }
@@ -67,8 +69,49 @@
 	span {
 		color:#6699FF;
 	}
+	input[value="첨부파일"] {
+		background-color: skyblue;
+		
+	}
 	
 </style>
+<script>
+	function deleteFile(oto_num, fileName, index) { //글번호, 업로드 파일명, 순서번호
+		if(confirm(index + "번 파일을 삭제하시겠습니까?")) {
+			// 파일삭제 작업을 AJAX로 요청 및 처리 - POST
+			$.ajax({
+				type: "POST",
+				url: "otoDeleteFile",
+				data: {
+					"oto_num": oto_num,
+					"oto_file1": fileName
+				},
+				dataType: "json",
+				success: function(result) {
+					
+					//삭제 성공/실패 여부 판별
+					if(result) {
+						//<input type="file" name="file${status.count }">
+						// -----------------------------------------------
+						//1. class 선택자 "file"에 해당하는 div 태그들 중 index-1 번 요소 탐색
+// 						console.log($(.file).eq(index - 1).html());
+						//2. id선택자 "fileItemAreaX" 에 해당하는 div 태그 탐색
+// 						console.log($("$fileItemArea" + index).html());
+						//--------------------------------------------
+						// 1번 방법 활용하여 duv 태그 내에 파일 업로드 폼 표시
+						console.log($(".file").eq(index - 1).html('<input type="file" name="file' + index + '">'));
+					} else {
+						alert("파일 삭제 실패!")
+					}
+					
+				},
+				error: function() {
+					alert("응답 실패")
+				}
+			});
+		}
+	}
+</script>
 </head>
 <body>
 <header>
@@ -94,6 +137,30 @@
 					<td>작성일</td>
 					<td>${otoDate}</td>
 					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td>첨부파일</td>
+					<td colspan="3">
+						<c:forEach var="fileName" items="${fileNames }" varStatus="status">
+							<div class="file">
+								<c:choose>
+									<c:when test="${not empty fileName}">
+										<c:set var="original_fileName" value="${fn:substringAfter(fileName, '_') }" />
+										${original_fileName }
+										<a href="${pageContext.request.contextPath }/resources/upload/${fileName}" download="${original_fileName}">
+											<input type="button" value="첨부파일"></a>
+										<a href="javascript: deleteFile(${oto.oto_num}, '${fileName}', ${status.count})" title="파일 삭제">
+											<img alt="delete" src="${pageContext.request.contextPath }/resources/images/xIcon.png">
+										</a>
+									</c:when>
+									<c:otherwise>
+										<!-- fileName이 empty 일때 -->
+										<input type="file" name="file${status.count }">
+									</c:otherwise>
+								</c:choose>							
+							</div>
+						</c:forEach>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="4">

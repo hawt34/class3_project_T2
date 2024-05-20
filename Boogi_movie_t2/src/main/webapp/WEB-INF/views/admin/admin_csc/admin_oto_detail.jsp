@@ -105,16 +105,14 @@
 									<c:set var="original_fileName1" value="${fn:substringAfter(oto.oto_file1, '_') }"/>
 										${original_fileName1 }
 									<%-- 다운로드 버튼 활용하여 해당 파일 다운로드(버튼에 하이퍼링크 지정) --%>
-									<a href="${pageContext.request.contextPath }/resources/upload/${oto.oto_file1}" download="${orignal_fileName1 }">
-										<input type="button" value="다운로드">
-									</a>
+									<a href="${pageContext.request.contextPath }/resources/upload/${oto.oto_file1}" download="${original_fileName1 }"><input type="button" value="첨부파일1">
+									</a><br>
 								</c:if>
 								<c:if test="${not empty oto.oto_file2 }">
 									<c:set var="original_fileName2" value="${fn:substringAfter(oto.oto_file2, '_') }"/>
 										${original_fileName2 }
 									<%-- 다운로드 버튼 활용하여 해당 파일 다운로드(버튼에 하이퍼링크 지정) --%>
-									<a href="${pageContext.request.contextPath }/resources/upload/${oto.oto_file1}" download="${orignal_fileName2 }">
-										<input type="button" value="다운로드">
+									<a href="${pageContext.request.contextPath }/resources/upload/${oto.oto_file1}" download="${original_fileName2 }"><input type="button" value="첨부파일2">
 									</a>
 								</c:if>
 							</div>

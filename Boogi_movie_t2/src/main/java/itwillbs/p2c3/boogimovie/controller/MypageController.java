@@ -48,6 +48,8 @@ public class MypageController {
 	@Autowired
 	private HttpSession session;
 	
+	//중복되는 코드 - 파일 가상 저장 path
+	String uploadDir = "/resources/upload";
 	
 	@GetMapping("myp_main")
 	public String mypMain(Model model, MemberVO member) {
@@ -493,12 +495,27 @@ public class MypageController {
 	public String mypOtoModifyForm(int oto_num, Model model) {
 		OTOVO oto = otoService.getOto(oto_num);
 		String otoDate = oto.getOto_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-//		String otoTheater = otoService.getTheaterName(oto.getTheater_num());
-
-//		model.addAttribute("otoTheater", otoTheater);
+		
+		//file 배열
+		String[] arrFileNames = {
+			oto.getOto_file1(),	
+			oto.getOto_file2()
+		};
+		
+		model.addAttribute("fileNames", arrFileNames);
 		model.addAttribute("otoDate", otoDate);
 		model.addAttribute("oto", oto);
 		return "mypage/myp_oto_modifyForm";
+	}
+	
+	//파일삭제 ajax 호출------
+	@ResponseBody
+	@PostMapping("otoDeleteFile")
+	public String otoDeleteFile(OTOVO oto, HttpSession session) {
+		
+		
+		
+		return "false";
 	}
 	
 	@PostMapping("myp_oto_modifyPro")

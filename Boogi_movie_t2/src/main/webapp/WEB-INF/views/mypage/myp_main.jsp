@@ -120,7 +120,7 @@ body {
 							<h2>MY 극장</h2>
 						</div><!-- col-5 -->
 						<div class="col-2">
-							<img src="${pageContext.request.contextPath}/resources/images/myp_mytheater.png" data-bs-toggle="modal" data-bs-target="#exampleModal" width="25px" height="25px">
+							<img src="${pageContext.request.contextPath}/resources/images/myp_mytheater.png" data-bs-toggle="modal" data-bs-target="#exampleModal" width="25px" height="25px"  onclick="initializeModal()">
 						</div><!-- col-7 -->
 					</div>	<!-- row -->	
 								
@@ -177,6 +177,25 @@ body {
 <!-- 							</script> -->
 					      
 					      <script type="text/javascript">
+					      function initializeModal() {
+					    	    var myTheaters = [
+					    	      "${member.member_my_theater1}",
+					    	      "${member.member_my_theater2}",
+					    	      "${member.member_my_theater3}"
+					    	    ];
+
+					    	    $('.form-check-input').each(function() {
+					    	      var theaterName = $(this).val();
+					    	      if (myTheaters.includes(theaterName)) {
+					    	        $(this).prop('checked', true);
+					    	        count++;
+					    	      } else {
+					    	        $(this).prop('checked', false);
+					    	      }
+					    	    });
+					    	  }
+					      
+					      
 						    function sendCheckedValues(event) {
 						        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
 						        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
@@ -194,14 +213,18 @@ body {
 // 						        var member_id = document.getElementById("member_id").value;
 						        $.ajax({
 						            url: "api/myp_my_theater",
-						            type: "POST", 
+						            type: "POST",
+						            dataType: "json",
 						            contentType: "application/json", // 서버에게 내용이 JSON임을 알려줌
 						            data: JSON.stringify({ member_id: member_id, checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
 // 						            data: JSON.stringify({ member_id, checkedValues }),
 // 									dataType : 'json',
 						            success: function(response) {
-						                alert("영화 정보 등록을 성공하였습니다");
-						                location.reload();
+						            	if(response){
+						            		alert("영화 정보 등록을 성공하였습니다");
+							                location.reload();	
+						            	}
+						                
 						            },
 						            error: function(xhr, status, error) {
 						                console.error("Error details:", xhr, status, error); // 디버깅 정보 출력

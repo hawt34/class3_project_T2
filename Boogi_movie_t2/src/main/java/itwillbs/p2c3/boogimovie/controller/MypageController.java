@@ -123,7 +123,7 @@ public class MypageController {
 	
 	@ResponseBody
 	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
-	public ResponseEntity<String> mypMyTheater(@RequestBody Map<String, Object> check, Model model, MemberVO member){
+	public String mypMyTheater(@RequestBody Map<String, Object> check, Model model, MemberVO member){
 		//  List<String> checkedValues랑 String member_id를 map으로 가져옴
 	    System.out.println("Member ID: " + check.get("member_id"));
 
@@ -131,7 +131,7 @@ public class MypageController {
 	    String member_id = (String) check.get("member_id");
 
 	    if(checkedValues == null || checkedValues.isEmpty()) {
-	        return ResponseEntity.badRequest().body("No data received");
+	    	return "false";
 	    }
 
 //	    MemberVO dbMember = mypageService.myTheater(checkedValues, member_id, member);
@@ -144,7 +144,7 @@ public class MypageController {
 //	    model.addAttribute("member", dbMember);
 //	    System.out.println("Member : " + member);
 
-	    return ResponseEntity.ok("Data received successfully");
+	    return "true";
 	}
 	
 

@@ -25,7 +25,7 @@
 		</div>
 		<!-- content 영역 -->
 		<div class="col-9">
-			<form method="post" action="csc_oto" enctype="multipart/form-data">
+			<form action="csc_oto" method="post" enctype="multipart/form-data">
 				<div id="csc_mainTitle">
 					<h1 class="csc-title">1 대 1 문의</h1>
 				</div>
@@ -117,8 +117,8 @@
 					<div class="row mb-2">
 						<label for="client_file" class="col-2 col-form-label" >파일첨부</label>
 						<div class="col-sm-10">
-							<input type="file" name="oto_file1" class="form-control form-control-sm" id="client_file">
-							<input type="file" name="oto_file2" class="form-control form-control-sm" id="client_file">
+							<input type="file" name="file1" class="form-control form-control-sm" id="client_file">
+							<input type="file" name="file2" class="form-control form-control-sm" id="client_file">
 						</div>
 					</div>
 					<hr>

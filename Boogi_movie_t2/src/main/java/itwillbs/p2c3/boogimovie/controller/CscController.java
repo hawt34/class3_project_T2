@@ -171,11 +171,19 @@ public class CscController {
 	@PostMapping("csc_oto")
 	public String cscOtoPro(OTOVO oto, HttpSession session, Model model) {
 		String id = (String)session.getAttribute("sId");
-		
+		System.out.println(oto);
 		// 극장 번호 가져오기
-		System.out.println("idddd" + oto.getTheater_name());
+		if (oto.getTheater_name() == null) {
+	        System.out.println("Theater name is null!!" + oto.getTheater_name());
+	        System.out.println("Theater name is null!!" + oto.getOto_category());
+	        System.out.println("Theater name is null!!" + oto.getOto_subject());
+	        System.out.println("Theater name is null!!" + oto.getOto_content());
+	    } else {
+	        System.out.println("Theater name: " + oto.getTheater_name());
+	    }
 		int theater_num = otoService.getTheaterNum(oto.getTheater_name());
 		
+		//로그인 필요 확인
 		if(id == null) {
 			model.addAttribute("msg", "로그인 후 이용");
 			model.addAttribute("targetURL", "./");
@@ -183,7 +191,7 @@ public class CscController {
 		//파일저장 경로 생성
 		String uploadDir = "resources/upload";
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
-		
+		System.out.println("saveDir: " + saveDir);
 		String subDir = "";
 		
 		//경로상에 날짜별로 디렉토리 생성
@@ -217,6 +225,8 @@ public class CscController {
 			oto.setOto_file2(subDir + File.separator + fileName2);
 		}
 		
+		System.out.println("oto_file1 : " + oto.getOto_file1());
+		System.out.println("oto_file2 : " + oto.getOto_file2());
 		
 		//1대1 문의 db 등록
 		int insertCount = otoService.insertOto(oto, theater_num, id);

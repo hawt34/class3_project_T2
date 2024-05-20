@@ -46,21 +46,18 @@ section {
 	width: 700px;
 	height: 1400px;
 	float: right;
-	font-size: 20px;
+	font-size: 25px;
 	overflow-y: auto;
 }
-.cart-item {
-    float: right;
-    margin-right: 200px;
-    align-items: center;
-}
+
+
 .cart-item input[type="number"] {
     text-align: right; /* 넘버박스 숫자를 오른쪽으로 정렬 */
-    padding-right: 15px;
     font-size: 20px;
+    width: 50px;
 }
 .cart-item button {
-   float: right;
+   
 }
 .snack1_box, .snack2_box, .snack3_box, .snack4_box{
 	font-size:24px;
@@ -111,8 +108,8 @@ section {
 }
 .bottomButton {
 	text-align: center;
-	margin-bottom: 10px;
-	margin-top: 10px;
+	margin-top: 10px
+	margin-right:30px;
 	font-size: 24px;
 }
 
@@ -144,7 +141,7 @@ footer {
 						<h4>종류 및 가격</h4>
 						<select name="category1_snack" id="category1_snack">
                         <c:forEach items="${itemInfoSnack}" var="item_snack">
-							<option value="${item_snack.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_snack.item_info_image}" data-price="${item_snack.item_info_price}">
+							<option value="${item_snack.item_info_num}" data-name="${item_snack.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_snack.item_info_image}" data-price="${item_snack.item_info_price}">
                                 ${item_snack.item_info_name} - ${item_snack.item_info_price}원
                             </option>
                         </c:forEach>
@@ -161,7 +158,7 @@ footer {
 						<h4>종류 및 가격</h4>
 						<select name="category2_pop" id="category2_pop">
   					  	<c:forEach items="${itemInfoPop}" var="item_pop">
-        				<option value="${item_pop.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_pop.item_info_image}" data-price="${item_pop.item_info_price}">
+        				<option value="${item_pop.item_info_num}" data-name="${item_pop.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_pop.item_info_image}" data-price="${item_pop.item_info_price}">
         				${item_pop.item_info_name} ${item_pop.item_info_price}원</option>
     					</c:forEach>
 						</select>
@@ -177,7 +174,7 @@ footer {
         				<h4>종류 및 가격</h4>
        				    <select name="category3_juice" id="category3_juice" >
             			<c:forEach items="${itemInfoJuice}" var="item_juice">
-                		<option value="${item_juice.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_juice.item_info_image}" data-price="${item_juice.item_info_price}">
+                		<option value="${item_juice.item_info_num}" data-name="${item_juice.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_juice.item_info_image}" data-price="${item_juice.item_info_price}">
                 		${item_juice.item_info_name} ${item_juice.item_info_price}원</option> 
                 		</c:forEach>
         				</select>
@@ -193,7 +190,7 @@ footer {
 						<h4>종류 및 가격</h4>
 						<select name="category4_combo" id ="category4_combo">
   					  	<c:forEach items="${itemInfoCombo}" var="item_combo">
-        				<option value="${item_combo.item_info_name}"  data-image="${pageContext.request.contextPath}/resources/images/${item_combo.item_info_image}" data-price="${item_combo.item_info_price}">
+        				<option value="${item_combo.item_info_num}"   data-name="${item_combo.item_info_name}" data-image="${pageContext.request.contextPath}/resources/images/${item_combo.item_info_image}" data-price="${item_combo.item_info_price}">
         				${item_combo.item_info_name}  ${item_combo.item_info_price}원</option>
     					</c:forEach>
 						</select>
@@ -207,9 +204,35 @@ footer {
 		</div>
 		<div class="contentPay">
 			<h4>담은 품목</h4>
-			<div class="bottomButton">
-			<input type="button" class="btn btn-outline-primary" value="뒤로가기" onclick="history.back()"> 
-			</div>
+			<form action="/checkout" method="post">
+        	<table id="cartTable" class="table">
+        <thead>
+            <tr>
+                <th colspan="3">품목명</th>
+                <th>가격</th>
+                <th>수량</th>
+                <th>총 가격</th>
+                <th>취소</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 여기에 장바구니 항목이 추가될 예정 -->
+        </tbody>
+        <tfoot>
+      <tr>
+        <td colspan="6"></td> <!-- 여유 공간 -->
+        <td></td>
+      </tr>
+    </tfoot>
+    </table>
+    <div class="realTotalPrice">
+    <P>총 가격</P>
+    </div>
+	<div class="bottomButton">
+	<input type="button" class="btn btn-outline-primary" value="뒤로가기" onclick="history.back()"> 
+     <input type="submit" value="결제하기" class="btn btn-outline-primary">
+	</div>
+    </form>
 		</div>				
 		</section>
 		<footer> 
@@ -248,34 +271,54 @@ footer {
 	    function addToCart(categoryId) {
 	        let selectedItem = $(categoryId).val();
 	        let selectedItemPrice = $(categoryId).find(':selected').data('price');
-
+	        let selectedItemName = $(categoryId).find(':selected').data('name');
+	        // 배열로 보내기.
+	        let cartItem = {
+	                item_info_num: selectedItem,  // 아이템 번호
+	                item_quantity: 1,              // 수량은 일단 1로 설정
+	                item_price: selectedItemPrice, // 가격
+	                member_id: "${sessionScope.sId}",  // 회원 ID
+	            };
+	        
+	        
+	        
 	        $.ajax({
 	            type: "POST",
 	            url: "add_to_cart",
-	            data: {
-	                itemName: selectedItem,
-	                itemPrice: selectedItemPrice
-	            },
+	            contentType: "application/json",
+	            data: JSON.stringify([cartItem]),
 	            success: function(response) {
 	                alert("장바구니에 추가되었습니다!");
 	                let quantity = 1;
 	                let totalPrice = selectedItemPrice * quantity;
-	                let itemHtml = "<div class='cart-item' data-name='" + response.itemName + "'>" +
-	                "<p>" + response.itemName + " - " + selectedItemPrice + "원 </p>" +
-	                "<input type='number' class='quantity' value='" + quantity + "' min='1'>" +
-	                "<p class='total-price'>선택 품목 가격: " + totalPrice + "원</p>" + // 총 가격 표시
-	                "<button class='remove-item btn btn-danger'>취소</button>" +
-	                "</div>";
-	            	let newItem = $(itemHtml);
-	           		 $(".contentPay").append(newItem)
+	                let itemHtml = "<tr class='cart-item' data-name='" + selectedItemName + "'>" +
+                    "<td  colspan='3'>" + selectedItemName + "</td>" +
+                    "<td>" + selectedItemPrice + "원 </td>" +
+                    "<td><input type='number' class='quantity' value='" + quantity + "' min='1'></td>" +
+                    "<td class='total-price'>" + totalPrice + "원</td>" +
+                    "<input type='hidden' class='item_info_num' value='" + selectedItem + "'>" + 
+                    "<td><button class='remove-item btn btn-danger'>취소</button></td>" +
+                	"</tr>";
+					$("#cartTable tbody").append(itemHtml);
 					
-	                    // 수량 변경 이벤트 리스너 추가
-	                    newItem.find('.quantity').on('input', function() {
-	                        let newQuantity = parseInt($(this).val());
-	                        let newTotalPrice = selectedItemPrice * newQuantity;
-	                        newItem.find('.total-price').text("선택 품목 가격: " + newTotalPrice + "원");
-	                    });
-	                },
+					$(".contentPay").on("change", ".quantity", function() {
+					    let newQuantity = parseInt($(this).val());
+					    let selectedItemPrice = parseFloat($(this).closest("tr").find("td:nth-child(2)").text()); // 선택된 품목의 가격
+					    let newTotalPrice = selectedItemPrice * newQuantity;
+					    $(this).closest("tr").find("td:nth-child(4)").text(newTotalPrice.toLocaleString() + "원"); // 총 가격 업데이트
+					    
+					    //한 열의 총 가격을 계산
+					    let totalSum = 0;
+					    $(".contentPay .total-price").each(function() {
+					        let totalPrice = parseInt($(this).text().replace("원", "").replace(",", "")); // 총 가격에서 숫자값만 추출하여 합산
+					        totalSum += totalPrice;
+					    });
+					    
+					    // 전체 총 가격 업데이트
+					    $(".realTotalPrice p").text("총 가격: " + totalSum.toLocaleString() + "원");
+					});
+	                        
+	            },
 	            error: function(xhr) {
 	                if (xhr.status === 409) {
 	                    var errorResponse = JSON.parse(xhr.responseText);
@@ -288,15 +331,22 @@ footer {
 	        });
 	    }
 
+	    // 장바구니에서 항목 제거 버튼에 이벤트 바인딩
+	   $(".contentPay").on("click", ".remove-item", function(event) {
+    	event.preventDefault(); // 폼의 제출을 방지
+        let itemNum = $(this).closest("tr").find(".item_info_num").val();
+        removeFromCart(itemNum);
+		});
 	    // 장바구니에서 제거하는 함수
-	    function removeFromCart(itemName) {
+	    function removeFromCart(itemNum) {
 	        $.ajax({
 	            type: "POST",
 	            url: "remove_from_cart",
-	            data: { itemName: itemName },
+	            data: { item_info_num: itemNum },
 	            success: function(response) {
-	                alert(response.message);
-	                $(".cart-item[data-name='" + itemName + "']").remove();
+	            	alert(response.message);
+	                $(".cart-item[data-item-num='" + itemNum + "']").remove();
+	                window.location.href = "boogi_store";
 	            },
 	            error: function() {
 	                alert("장바구니에서 항목을 제거하는 중 오류가 발생했습니다.");
@@ -318,12 +368,7 @@ footer {
 	    });
 	    
 
-	    // 장바구니에서 항목 제거 버튼에 이벤트 바인딩
-	    $(".contentPay").on("click", ".remove-item", function() {
-	        let itemName = $(this).parent().data("name");
-	        removeFromCart(itemName);
-	    });
-
+			    
 	});
 	</script>
 </html>

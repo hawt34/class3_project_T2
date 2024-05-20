@@ -14,7 +14,6 @@ public class CartVO {
     private int item_quantity;
     private int item_price;
     private String member_id;
-    
     private int item_total_price;
     
 

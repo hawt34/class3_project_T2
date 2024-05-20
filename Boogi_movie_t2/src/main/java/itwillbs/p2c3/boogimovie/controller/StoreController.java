@@ -1,8 +1,12 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Iterator;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,39 +49,58 @@ public class StoreController {
 		
 		return "store/boogi_store";
 	}
-	//스토어 장바구니 ajax관련해서 처리할꺼임. 한글이 자꾸 깨져서 온갖 삽질 다함. 
-	private Map<String, CartVO> cart = new HashMap<>();
-	@PostMapping(value = "add_to_cart",  produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
-    @ResponseBody
-    public ResponseEntity<?> addToCart(@RequestParam String itemName, @RequestParam int itemPrice) {
-		for (CartVO item : cart.values()) {
-	        if (item.getItemName().equals(itemName)) {
-	        	Map<String, String> response = new HashMap<>();
-	            response.put("msg" ,"이미 장바구니에 담은 품목입니다.");
-	            
-	            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	//스토어 장바구니 ajax관련해서 처리할꺼임. 
+	private List<CartVO> cart = new ArrayList<>();
+
+	@PostMapping("add_to_cart")
+	@ResponseBody
+	public ResponseEntity<?> addToCart(@RequestBody List<CartVO> cartItems) {
+	    for (CartVO newItem : cartItems) {
+	        for (CartVO existingItem : cart) {
+	            if (existingItem.getItem_info_num() == newItem.getItem_info_num()) {
+	                Map<String, String> response = new HashMap<>();
+	                response.put("msg", "이미 장바구니에 담은 품목입니다.");
+	                return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	            }
+	        }
+	        // 장바구니에 상품을 추가합니다.
+	        cart.add(newItem);
+	    }
+	    // 정상적으로 장바구니에 추가되었음을 응답합니다.
+	    return ResponseEntity.ok().body(cartItems);
+	}
+
+	
+    //@PostMapping("remove_from_cart")
+	@PostMapping("remove_from_cart")
+	@ResponseBody
+	public ResponseEntity<?> removeFromCart(@RequestParam int item_info_num) {
+	    // 아이템의 고유 식별자로 해당 아이템을 찾아서 제거
+	    Iterator<CartVO> iterator = cart.iterator();
+	    while (iterator.hasNext()) {
+	        CartVO item = iterator.next();
+	        if (item.getItem_info_num() == item_info_num) {
+	            iterator.remove(); // 아이템 제거
+	            Map<String, String> response = new HashMap<>();
+	            response.put("message", "장바구니에서 상품이 제거되었습니다.");
+	            return ResponseEntity.ok().body(response);
 	        }
 	    }
 	    
-	    CartVO cartItem = new CartVO(itemName, itemPrice);
-	    cart.put(itemName, cartItem);
-	    
-	    return ResponseEntity.ok().body(cartItem);
-	}	
-	
-	
-    //@PostMapping("remove_from_cart")
-	@PostMapping(value = "remove_from_cart", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
-	@ResponseBody
-    public ResponseEntity<?> removeFromCart(@RequestParam String itemName) {
-        // 장바구니에서 상품 제거
-        cart.remove(itemName);
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "장바구니에서 상품이 제거되었습니다.");
-        
-        return ResponseEntity.ok().body(response);
+	    // 아이템이 없는 경우
+	    Map<String, String> response = new HashMap<>();
+	    response.put("message", "장바구니에서 해당 상품을 찾을 수 없습니다.");
+	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 	}
     
-    
-	
+	@GetMapping("cartCheck")
+	public String check(HttpServletRequest request) {
+	    Enumeration<String> parameterNames = request.getParameterNames();
+	    while (parameterNames.hasMoreElements()) {
+	        String paramName = parameterNames.nextElement();
+	        String paramValue = request.getParameter(paramName);
+	        System.out.println("잘 넘어오는지 확인" + paramName + " : " + paramValue);
+	    }
+	return"";
+	}
 }

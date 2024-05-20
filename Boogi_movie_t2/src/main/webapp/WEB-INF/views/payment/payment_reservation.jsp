@@ -169,7 +169,8 @@
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item">
 												<p><!-- 영화 제목 -->
-													<span id="movie_name">${scs.movie_name}</span>
+													<span id="movie_name">${movie.movie_name}</span> | 
+													<span id="movie_name">${scs.screen_dimension}</span>
 												</p>
 											</li>
 											<li class="list-group-item">
@@ -289,6 +290,7 @@
 	<footer>
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
+	
 <script>
  	$(function() {
 	
@@ -444,8 +446,7 @@
 		
 		
 		
-		
-	}); 
+	}); // $(function() {}
  	
  	
  	
@@ -557,9 +558,6 @@
 	} // savePayInfo
 	
 	
-	function paySuccess() {
-		
-	}
 
 </script>
 </body>

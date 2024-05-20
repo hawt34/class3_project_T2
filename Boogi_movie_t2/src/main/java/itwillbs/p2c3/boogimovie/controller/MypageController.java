@@ -125,7 +125,7 @@ public class MypageController {
 	
 	@ResponseBody
 	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
-	public ResponseEntity<String> mypMyTheater(@RequestBody Map<String, Object> check, Model model, MemberVO member){
+	public String mypMyTheater(@RequestBody Map<String, Object> check, Model model, MemberVO member){
 		//  List<String> checkedValues랑 String member_id를 map으로 가져옴
 	    System.out.println("Member ID: " + check.get("member_id"));
 
@@ -133,7 +133,7 @@ public class MypageController {
 	    String member_id = (String) check.get("member_id");
 
 	    if(checkedValues == null || checkedValues.isEmpty()) {
-	        return ResponseEntity.badRequest().body("No data received");
+	    	return "false";
 	    }
 
 //	    MemberVO dbMember = mypageService.myTheater(checkedValues, member_id, member);
@@ -146,7 +146,7 @@ public class MypageController {
 //	    model.addAttribute("member", dbMember);
 //	    System.out.println("Member : " + member);
 
-	    return ResponseEntity.ok("Data received successfully");
+	    return "true";
 	}
 	
 
@@ -295,58 +295,58 @@ public class MypageController {
 	// ============================= 예매 =============================
 	
 	// 예매내역
-//	@GetMapping("myp_reservation")
-//	public String mypReservation(MemberVO member, Model model, @RequestParam(defaultValue = "1")int pageNum) {
-//		String id = (String)session.getAttribute("sId");
-//		
-//		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-//			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
-//			model.addAttribute("targetURL", "member_login");
-//			return"error/fail";
-//		}
-//		member = mypageService.getMember(id);
-//		model.addAttribute("member", member);
-//		System.out.println("member : " + member);
-//		System.out.println("member.getMember_id" + member.getMember_id());
-//		System.out.println("myp_reservation()");
-//		// 예매정보
-//		List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
-//		model.addAttribute("movieReservation", movieReservation);
-//		System.out.println("pageNum : " + pageNum);
-//		
-//		int listLimit = 4;
-//		int startRow = (pageNum - 1) * listLimit;
-//		System.out.println("startRow : " + startRow);
-//		System.out.println("listLimit : " + listLimit);
-//		String member_id = member.getMember_id();
-//		List<Map<String, Object>> resvList = mypageService.getResvList(startRow, listLimit, member_id);
-//		int listCount = mypageService.getResvCount(member); // 총 예매영화 갯수
-//		System.out.println("listCount : " + listCount);
-//		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
-//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-//		System.out.println("maxPage : " + maxPage);
-//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-//		System.out.println("startPage : " + startPage);
-//		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-//		System.out.println("endPage : " + endPage);
-//		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-//			endPage = maxPage;
-//		}
-//		
-//		System.out.println("endPage : " + endPage);
-//		System.out.println("maxPage : " + maxPage);
-//		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-//		
-//
-//		if(pageNum < 1 || pageNum > maxPage){
-//			model.addAttribute("msg", "존재하지 않는 페이지입니다");
-//			model.addAttribute("targetURL", "myp_reservation");
-//		}
-//		model.addAttribute("pageList", pageList);
-//		model.addAttribute("resvList", resvList);
-//		
-//		return "mypage/myp_reservation";
-//	}
+	@GetMapping("myp_reservation")
+	public String mypReservation(MemberVO member, Model model, @RequestParam(defaultValue = "1")int pageNum) {
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
+			model.addAttribute("targetURL", "member_login");
+			return"error/fail";
+		}
+		member = mypageService.getMember(id);
+		model.addAttribute("member", member);
+		System.out.println("member : " + member);
+		System.out.println("member.getMember_id" + member.getMember_id());
+		System.out.println("myp_reservation()");
+		// 예매정보
+		List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
+		model.addAttribute("movieReservation", movieReservation);
+		System.out.println("pageNum : " + pageNum);
+		
+		int listLimit = 4;
+		int startRow = (pageNum - 1) * listLimit;
+		System.out.println("startRow : " + startRow);
+		System.out.println("listLimit : " + listLimit);
+		String member_id = member.getMember_id();
+		List<Map<String, Object>> resvList = mypageService.getResvList(startRow, listLimit, member_id);
+		int listCount = mypageService.getResvCount(member); // 총 예매영화 갯수
+		System.out.println("listCount : " + listCount);
+		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
+		System.out.println("maxPage : " + maxPage);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+		System.out.println("startPage : " + startPage);
+		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
+		System.out.println("endPage : " + endPage);
+		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
+			endPage = maxPage;
+		}
+		
+		System.out.println("endPage : " + endPage);
+		System.out.println("maxPage : " + maxPage);
+		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+
+		if(pageNum < 1 || pageNum > maxPage){
+			model.addAttribute("msg", "존재하지 않는 페이지입니다");
+			model.addAttribute("targetURL", "myp_reservation");
+		}
+		model.addAttribute("pageList", pageList);
+		model.addAttribute("resvList", resvList);
+		
+		return "mypage/myp_reservation";
+	}
 	
 	// ============================= 취소 =============================
 	

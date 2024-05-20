@@ -25,11 +25,11 @@ public interface MypageMapper {
 	MemberVO selectMyTheater(MemberVO member);
 	
 	// 예매내역
-//	List<Map<String , Object>> selectMovieReservation(MemberVO member);
+	List<Map<String , Object>> selectMovieReservation(MemberVO member);
 //	
-//	List<Map<String, Object>> selectResvList(@Param("startRow") int startRow, @Param("listLimit") int listLimit, @Param("member_id") String member_id);
+	List<Map<String, Object>> selectResvList(@Param("startRow") int startRow, @Param("listLimit") int listLimit, @Param("member_id") String member_id);
 	
-//	int selectResvCount(MemberVO member);
+	int selectResvCount(MemberVO member);
 	// 취소내역 
 //	List<Map<String, Object>> selectCancelList(MemberVO member);
 	

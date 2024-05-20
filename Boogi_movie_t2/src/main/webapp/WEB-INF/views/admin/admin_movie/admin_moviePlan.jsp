@@ -247,33 +247,66 @@ tbody tr:hover {
 		// 극장 ajax
 		$(document).ready(function() {
 			
+			// 상영시간 제약조건 초기화
+			function resetHourSelect() {
+		         $('#hourSelect option').prop('disabled', false).css({"background": "", "color": ""});
+		    }
+	
+			
+			// 극장 선택시 상영관 선택
+		    $('#theaterSelect').change(function() {
+		        var theater_num = $("#theaterSelect").val();
+		        $.ajax({
+		            url: 'getScreens', // 상영관 정보를 가져오는 엔드포인트
+		            method: 'GET',
+		            data: { theater_num: theater_num },
+		            dataType: 'json', // 전달 데이터 타입 json
+		            success: function(response) {
+		            	// 기존옵션 제거
+		                $('#screenSelect').val("");
+		                $('#scs_date').val("");
+		                $('#movieSelect').val("");
+		                $('#hourSelect').val("");
+		                $('#movieEndTime').val("");
+		                resetHourSelect();
+		                // option 요소 생성하여 추가
+	                	$('#screenSelect').append('<option value="">미선택</option>');
+		                $.each(response, function(index, screen_info){
+		                	$('#screenSelect').append('<option value="' + screen_info.screen_cinema_num + '">' + screen_info.screen_cinema_num + '관</option>');
+		                });
+		            }
+		        });
+		    });
+			
+			// 날짜 정보가 변할떄 코드 시작
 			$('#scs_date').change(function(){
-				if($('#theaterSelect').val() == "" ){
+				let theaterSelect = $('#theaterSelect').val();
+				let screenSelect = $('#screenSelect').val();
+				let movieSelect = $('#movieSelect').val();
+				let scs_date = $('#scs_date').val();
+				
+				if(theaterSelect == "" ){
 					alert("극장정보를 선택해주세요");
 					$('#scs_date').val("");
 					$('#theaterSelect').focus();
 					return;
 				}
-				if($('#screenSelect').val() == "" ){
+				if(screenSelect == "" ){
 					alert("상영관을 선택해주세요");
 					$('#scs_date').val("");
 					$('#screenSelect').focus();
 					return;
 				}
-				if($("#movieSelect").val() == ""){
+				if(movieSelect == ""){
 					alert("영화를 선택해주세요");
 					$('#scs_date').val("");
 					$('#movieSelect').focus();
 					return;
 				}
 				
-				// 날짜 정보가 변할떄 코드 시작
-				let theaterSelect = $('#theaterSelect').val();
-				let screenSelect = $('#screenSelect').val();
-				let scs_date = $('#scs_date').val();
+				resetHourSelect(); // 시간 선택 초기화
 				
 				// 상영 가능 시간 정보 ajax
-// 				let movieSelect = $('#movieSelect').val();
 				$.ajax({
 					type: "GET",
 					url: "moviePlan_time",
@@ -283,6 +316,9 @@ tbody tr:hover {
 						scs_date : scs_date,
 					},
 					success : function(data) {
+						// 기존 옵션 비우기
+						$('#hourSelect').val("");
+						// 이미 일정이 있는 시간 disabled
 		 				for(movieTime of data){
 		 					for(let time = movieTime.scs_start_time; time < movieTime.scs_end_time; time++ ){
 		 						$("#hourSelect option[value*='"+time+":00']").prop('disabled',true).css({"background": "lightgray", "color" : "white"});
@@ -297,25 +333,6 @@ tbody tr:hover {
 				
 			});
 			
-			// 극장 선택시 상영관 선택
-		    $('#theaterSelect').change(function() {
-		        var theater_num = $("#theaterSelect").val();
-		        $.ajax({
-		            url: 'getScreens', // 상영관 정보를 가져오는 엔드포인트
-		            method: 'GET',
-		            data: { theater_num: theater_num },
-		            dataType: 'json', // 전달 데이터 타입 json
-		            success: function(response) {
-		                $('#screenSelect').empty(); // 기존옵션 제거
-		                // option 요소 생성하여 추가
-	                	$('#screenSelect').append('<option value="">미선택</option>');
-		                $.each(response, function(index, screen_info){
-		                	$('#screenSelect').append('<option value="' + screen_info.screen_cinema_num + '">' + screen_info.screen_cinema_num + '관</option>');
-		                });
-		            }
-		        });
-		    });
-		        
 			// 상영시간 ajax
 		    $('#hourSelect').change(function() {
 		    	if($('#theaterSelect').val() == "" ){
@@ -342,7 +359,6 @@ tbody tr:hover {
 					$('#scs_date').focus();
 					return;
 				}
-				
 		        $.ajax({
 		            url: 'movieEndTime', //  영화시간 정보를 가져오는 엔드포인트
 		            method: 'GET',
@@ -357,8 +373,14 @@ tbody tr:hover {
 		            }
 		        });
 		    });
+		    // theaterSelect, screenSelect 변경 시에도 hourSelect 초기화
+	        $('#theaterSelect, #screenSelect').change(function() {
+	            resetHourSelect(); // 시간 선택 초기화
+	        });
+			
 	    });
-
+		
+	
 	</script>
 </body>
 </html>

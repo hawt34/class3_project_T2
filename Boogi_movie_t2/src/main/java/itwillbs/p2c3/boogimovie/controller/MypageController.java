@@ -527,9 +527,16 @@ public class MypageController {
 		}
 		return "redirect:/myp_oto_breakdown";
 	}
-	
+	//1대1 문의 삭제
 	@GetMapping("myp_oto_delete")
-	public String myOtoDelete(int oto_num, Model model) {
+	public String myOtoDelete(int oto_num, Model model, HttpSession session) {
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "로그인 필요합니다!");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		int deleteOtoCount = otoService.deleteOto(oto_num);
 		if(deleteOtoCount == 0) {
 			model.addAttribute("msg", "삭제 실패");

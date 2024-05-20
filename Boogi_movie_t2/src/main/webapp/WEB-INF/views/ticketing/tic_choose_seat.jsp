@@ -46,9 +46,6 @@
 	</div>
 	<div class="row">
 	
-	<div class="col-md-2">
-		<jsp:include page="../inc/admin_aside.jsp"></jsp:include>
-	</div>
 	
 <div class="box1 col-md-10">
 <div class="choose_person">

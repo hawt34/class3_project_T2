@@ -219,6 +219,11 @@ public class TicketingController {
 	@GetMapping(value = "api/movieLike", produces = "application/json")
 	public List<MovieVO> movieLike(){
 		List<MovieVO> movies = movieService.getMovieListLike();
+		if(movies.get(0) == null) {
+			MovieVO movie = new MovieVO();
+			movie.setMovie_name("영화X");
+			movies.add(movie);
+		}
 		return movies; 
 	}
 	
@@ -250,6 +255,9 @@ public class TicketingController {
 	public List<MyTheaterVO> theaterMyTheater(@RequestParam String sId){
 		MemberVO member = memberService.selectTheatersMyTheater(sId);
 		List<MyTheaterVO> myTheaters = new ArrayList<MyTheaterVO>();
+		if(myTheaters.isEmpty()) {
+			return null;
+		}
 		myTheaters.add(new MyTheaterVO(member.getMember_my_theater1()));
 		myTheaters.add(new MyTheaterVO(member.getMember_my_theater2()));
 		myTheaters.add(new MyTheaterVO(member.getMember_my_theater3()));

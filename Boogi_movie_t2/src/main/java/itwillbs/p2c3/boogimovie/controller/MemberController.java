@@ -216,6 +216,12 @@ public class MemberController {
 		MemberVO outputMember =  service.isCorrectUser(inputMember);
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
 		
+		if(outputMember == null) {
+			model.addAttribute("msg", "로그인 실패!");
+			return "error/fail";
+		}
+		
+		
 		if(!pwdEncoder.matches(inputMember.getMember_pwd(), outputMember.getMember_pwd())) {
 			model.addAttribute("msg", "로그인 실패!");
 			return "error/fail";

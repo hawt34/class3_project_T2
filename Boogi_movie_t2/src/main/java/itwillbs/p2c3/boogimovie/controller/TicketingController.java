@@ -211,7 +211,7 @@ public class TicketingController {
 	@ResponseBody
 	@GetMapping(value = "api/movieAbc", produces = "application/json")
 	public List<MovieVO> movieAbc(){
-		List<MovieVO> movies = movieService.getMovieListAbc();
+		List<MovieVO> movies = movieService.getMovieList();
 		return movies; 
 	}
 	
@@ -356,5 +356,18 @@ public class TicketingController {
 			
 		return final_list;
 	}
+	
+	
+	
+	@ResponseBody
+	@GetMapping(value = "api/theaterEntireTheater", produces = "application/json")
+	public List<TheaterVO> theaterEntireTheater (){
+		System.out.println("전체 극장 목록 조회");
+		List<TheaterVO> theaterList = theaterService.getTheatersOrderbyName();
+		
+		return theaterList;
+	}
+	
+	
 
 }

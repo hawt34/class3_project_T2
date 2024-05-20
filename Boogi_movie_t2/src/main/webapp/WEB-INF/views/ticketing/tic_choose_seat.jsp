@@ -8,6 +8,14 @@
 <meta charset="UTF-8">
 <title>좌석 선택</title>
 </head>
+<style>
+    .seat.disabled {
+        background-image: url("${pageContext.request.contextPath}/resources/images/tic_payed_seat.png");
+        background-size: cover; /* 이미지가 좌석 크기에 맞게 조정되도록 설정 */
+        cursor: not-allowed; /* 마우스 커서가 not-allowed로 표시되도록 설정 */
+       	background-color: transparent;
+    }
+</style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
 " rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/tic_choose_seat.css" rel="stylesheet" type="text/css">

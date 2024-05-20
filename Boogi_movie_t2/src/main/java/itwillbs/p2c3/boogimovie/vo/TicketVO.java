@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 public class TicketVO {
 	private int ticket_num;
-	private Date ticket_reservation_date;
 	private String ticket_seat_info;
 	private int ticket_price;
 	private String ticket_keyword;

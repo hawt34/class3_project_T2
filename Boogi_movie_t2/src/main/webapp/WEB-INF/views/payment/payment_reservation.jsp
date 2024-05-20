@@ -144,7 +144,7 @@
 		                            <label for="agmt-confirm" class="form-check-label">주문내용 확인 및 결제동의</label>
 		                        </div>
 		                        <div class="col form-check-reverse">
-		                            <input type="checkbox" class="form-check-input select" name="agmt" id="agmt-confirm"  required>
+		                            <input type="checkbox" class="form-check-input select" name="agmt" id="agmt-confirm" required>
 		                            <div class="invalid-feedback">
 		                                약관에 동의해 주세요.
 		                            </div>

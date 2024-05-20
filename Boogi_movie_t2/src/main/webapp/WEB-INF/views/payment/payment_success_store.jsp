@@ -14,7 +14,7 @@
 		<h2>정상적으로 <span>결제 완료</span> 되었습니다. </h2>	
 		<div>
 			<h5>결제 내역</h5>
-			<p>${pay.merchant_uid}, 결제 시간, ${pay.ticket_pay_price}</p>
+			<p>${pay.merchant_uid}, 결제 시간, 결제 금액</p>
 		</div>
 		<div>
 			<h5>결제 정보</h5>
@@ -28,10 +28,10 @@
 			<p><b>최종 결제금액</b></p>
 		</div>
 		<div>
-			<h5>예매 정보</h5>
-			<p>영화 포스터, 제목, 극장명, 상영관명, 날짜, 시간, 좌석, 인원수</p>
+			<h5>구매 정보</h5>
+			<p>결제항목 이미지, 항목, 구매 수량</p>
 		</div>
-		<button class="btn btn-primary" type="button" onclick="location.href='myp_main'">확인</button>
+		<button class="btn btn-primary" type="button" onclick="myp_main">확인</button>
 	</div>
 
 </body>

@@ -201,6 +201,8 @@ public class PaymentController {
 			member.setMember_point(member.getMember_point() + apply_point);
 			
 			
+			
+			
 			service.updateMemberPoint(member);
 			couponService.useCoupon(coupon_num);
 			pay.setCoupon_num(Integer.parseInt(coupon_num));
@@ -235,6 +237,8 @@ public class PaymentController {
 		
 		pay = service.getPayInfo(merchant_uid);
 		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------pay : " + pay);
+		
+		
 		
 		
 		model.addAttribute("pay", pay);

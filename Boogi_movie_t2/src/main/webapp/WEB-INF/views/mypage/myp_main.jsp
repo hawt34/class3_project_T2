@@ -149,6 +149,7 @@ body {
 								<button type="button" onclick="sendCheckedValues(event)" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
 					      </div><!--modal-footer  --> <!-- 모달 폼 극장 전체 리스트 -->
 					      
+<<<<<<< HEAD
 					      
 					      <script type="text/javascript">
 					      function initializeModal() {
@@ -214,6 +215,8 @@ body {
 					      
 					      
 					      
+=======
+>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->
 					</div><!-- modal fade 모달 div 끝 -->
@@ -258,45 +261,6 @@ body {
 								</c:choose>
 							</td>
 						</tr>
-						
-<!-- 						<tr> -->
-<!-- 						    <td> -->
-<%-- 						        <c:choose> --%>
-<%-- 						            <c:when test="${empty member.member_my_theater1}"> --%>
-<!-- 						                <a href="#" class="theater-link" data-theater-number="1">+</a> -->
-<%-- 						            </c:when> --%>
-<%-- 						            <c:otherwise> --%>
-<%-- 						                <a href="#" class="theater-link" data-theater-number="1">${member.member_my_theater1}</a> --%>
-<%-- 						            </c:otherwise> --%>
-<%-- 						        </c:choose> --%>
-<!-- 						    </td> -->
-<!-- 						</tr> -->
-						
-<!-- 						<tr> -->
-<!-- 						    <td> -->
-<%-- 						        <c:choose> --%>
-<%-- 						            <c:when test="${empty member.member_my_theater2}"> --%>
-<!-- 						                <a href="#" class="theater-link" data-theater-number="2">+</a> -->
-<%-- 						            </c:when> --%>
-<%-- 						            <c:otherwise> --%>
-<%-- 						                <a href="#" class="theater-link" data-theater-number="2">${member.member_my_theater2}</a> --%>
-<%-- 						            </c:otherwise> --%>
-<%-- 						        </c:choose> --%>
-<!-- 						    </td> -->
-<!-- 						</tr> -->
-						
-<!-- 						<tr> -->
-<!-- 						    <td> -->
-<%-- 						        <c:choose> --%>
-<%-- 						            <c:when test="${empty member.member_my_theater3}"> --%>
-<!-- 						                <a href="#" class="theater-link" data-theater-number="3">+</a> -->
-<%-- 						            </c:when> --%>
-<%-- 						            <c:otherwise> --%>
-<%-- 						                <a href="#" class="theater-link" data-theater-number="3">${member.member_my_theater3}</a> --%>
-<%-- 						            </c:otherwise> --%>
-<%-- 						        </c:choose> --%>
-<!-- 						    </td> -->
-<!-- 						</tr> -->
 					</table>
 				</div><!-- col-md-3-->
 		</div> <!-- row -->
@@ -307,30 +271,63 @@ body {
 	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
 </footer>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
-<!-- <script> -->
-<!-- 		$(document).ready(function() { -->
-<!-- 		    $(".theater-link").click(function(event) { -->
-<!-- 		        event.preventDefault(); -->
-<!-- 		        let theaterNumber = $(this).data("theater-number"); -->
-<!-- 		        let theater = prompt("새로운 자주가는 영화관을 입력하세요:"); -->
-		
-<!-- 		        if (theater != null && theater.trim() != "") { -->
-<!-- 		            $.ajax({ -->
-<!-- 		                type: "POST", -->
-<!-- 		                url: "/updateTheater", -->
-<!-- 		                data: { theater: theater, theaterNumber: theaterNumber }, -->
-<!-- 		                success: function(response) { -->
-<!-- 		                    alert(response); -->
-<!-- 		                    location.reload(); // 페이지 새로고침하여 업데이트된 내용을 표시 -->
-<!-- 		                }, -->
-<!-- 		                error: function(xhr, status, error) { -->
-<!-- 		                    alert("영화관 업데이트에 실패했습니다."); -->
-<!-- 		                } -->
-<!-- 		            }); -->
-<!-- 		        } -->
-<!-- 		    }); -->
-<!-- 		}); -->
-<!-- </script> -->
+
+<script type="text/javascript">
+	function initializeModal() {
+		var myTheaters = [
+		  "${member.member_my_theater1}",
+		  "${member.member_my_theater2}",
+		  "${member.member_my_theater3}"
+		];
+
+	    $('.form-check-input').each(function() {
+      		var theaterName = $(this).val();
+      		if (myTheaters.includes(theaterName)) {
+		        $(this).prop('checked', true);
+		        count++;
+	      	} else {
+      			$(this).prop('checked', false);
+			}
+	    });
+	}
+	
+    function sendCheckedValues(event) {
+        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
+        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
+        
+        checkboxes.forEach(function(checkbox) {
+            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
+        });
+						        
+	    // checkedValues 배열의 길이가 3이 되도록 null 값 추가
+	    while (checkedValues.length < 3) {
+	        checkedValues.push(null);
+	    }
+    
+   		var member_id = "${member.member_id}"; // memberId를 가져옴
+// 						        var member_id = document.getElementById("member_id").value;
+	    $.ajax({
+	        url: "api/myp_my_theater",
+	        type: "POST",
+	        dataType: "json",
+	        contentType: "application/json", // 서버에게 내용이 JSON임을 알려줌
+	        data: JSON.stringify({ member_id: member_id, checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
+	// 						            data: JSON.stringify({ member_id, checkedValues }),
+			success: function(response) {
+				if(response){
+					alert("영화 정보 등록을 성공하였습니다");
+				    location.reload();	
+				}
+				  
+			},
+			error: function(xhr, status, error) {
+				console.error("Error details:", xhr, status, error); // 디버깅 정보 출력
+				
+				alert("에러ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ : " + error);
+			}
+		});
+	}
+</script>
 </body>
 </html>
 

@@ -235,7 +235,7 @@
 									<li class="list-group-item">
 										<p><b>최종 결제금액 
 											<span id="final_amount" class="pay_number">${total_fee}</span> <!-- 첫 금액은  total_fee랑 같아야 함-->
-										원</b></p>
+										</b></p>
 									</li>
 									<li class="list-group-item">
 										<p><b>결제수단 
@@ -349,7 +349,7 @@
 			 		} else {
 			 			if(confirm ("포인트를 사용하시겠습니까?")){
 				 			$("#point_apply").html(use_point);			// 적용할 포인트 값
-				 			$("#final_amount").html(final_amount);		// 총 결제금액에  적용 값 
+				 			$("#final_amount").html(final_amount+"원");		// 총 결제금액에  적용 값 
 				 			$("#discount_sum").html(discount_sum); 		// 총 할인 적용 값
 				 			
 			 			} else {
@@ -393,7 +393,7 @@
 			if(confirm ("선택하신 쿠폰을 사용하시겠습니까?")){
 	 			$("#getMemberCoupon").val(selectedCoupon); 	// 사용한 쿠폰 인풋 박스에 출력
 	 			$("#coupon_apply").html(selectedCoupon);	// 적용할 쿠폰 값
-	 			$("#final_amount").html(final_amount);		// 총 결제금액 적용 값
+	 			$("#final_amount").html(final_amount+"원");		// 총 결제금액 적용 값
 	 			$("#discount_sum").html(discount_sum);		// 총 할인 적용 값
 	 			
  			} else {
@@ -457,7 +457,16 @@
 		
 		event.preventDefault();
 		
-		var IMP = window.IMP;   // 생략 가능
+		// 폼 유효성 검사
+	    let form = document.forms['payForm'];
+	    if (!form.checkValidity()) {
+	        alert("이용 약관 동의 필수!");
+	        $("#agmt-all").focus();
+	        
+	        return;
+	    }
+		
+		let IMP = window.IMP;   // 생략 가능
  		IMP.init("imp00262041"); // 예: imp00000000 
  		
  		let pg = document.querySelector("input[name=pg]:checked").value;

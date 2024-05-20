@@ -25,83 +25,90 @@
     </select>
     
     <!-- 예매내역 -->
-<!-- 	<select id="selectMovieReservation" resultType="map"> -->
-<!--  		SELECT DISTINCT -->
-<!-- 		   movie.movie_name, -->
-<!-- 		   movie.movie_poster, -->
-<!-- 		   CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time, -->
-<!-- 		   CONCAT(theater.theater_name, ' ', screen_info.screen_cinema_num, '관') AS theater_info, -->
-<!-- 		   ticket.ticket_seat_info, -->
-<!-- 		   ticket.ticket_price, -->
-<!-- 		   screen_session.scs_date -->
-<!-- 		FROM -->
-<!-- 			screen_session -->
-<!-- 		JOIN pay ON screen_session.scs_num = pay.scs_num  -->
-<!-- 		JOIN member ON member.member_id = pay.member_id  -->
-<!-- 		JOIN theater ON theater.theater_num = screen_session.theater_num -->
-<!-- 		JOIN movie ON movie.movie_num = screen_session.movie_num -->
-<!-- 		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num  -->
-<!-- 		JOIN screen_info ON screen_info.screen_cinema_num = screen_session.screen_cinema_num -->
-<!-- 		WHERE member.member_id = #{member_id} AND pay.ticket_pay_status = '1' -->
-<!-- 		ORDER BY screen_session.scs_date DESC -->
-<!-- 	</select> -->
+	<select id="selectMovieReservation" resultType="map">
+	    SELECT DISTINCT
+		    movie.movie_poster,
+		    movie.movie_name,
+		    screen_session.scs_date,
+		   	CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time,
+		   	CONCAT(theater.theater_name, ' ', screen_info.screen_cinema_num, '관') AS theater_info,
+		    ticket.ticket_seat_info,
+		    ticket.ticket_price
+		FROM
+		    pay
+		JOIN member ON member.member_id = pay.member_id 
+		JOIN screen_session ON screen_session.scs_num = pay.scs_num
+		JOIN movie ON movie.movie_num = screen_session.movie_num 
+		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num
+		JOIN screen_info ON screen_info.screen_num = screen_session.screen_num
+		JOIN theater ON theater.theater_num = screen_info.theater_num
+		WHERE
+		    member.member_id = #{member_id} AND pay.ticket_pay_status = '결제'
+		ORDER BY
+		    screen_session.scs_date DESC
+	</select>
     
-<!--     <select id="selectResvList" resultType="map"> -->
-<!--  		SELECT  DISTINCT  -->
-<!-- 		   movie.movie_name, -->
-<!-- 		   movie.movie_poster, -->
-<!-- 		   CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time, -->
-<!-- 		   CONCAT(theater.theater_name, ' ', screen_info.screen_cinema_num, '관') AS theater_info, -->
-<!-- 		   ticket.ticket_seat_info, -->
-<!-- 		   ticket.ticket_price, -->
-<!-- 		   screen_session.scs_date -->
-<!-- 		FROM -->
-<!-- 			screen_session -->
-<!-- 		JOIN pay ON screen_session.scs_num = pay.scs_num  -->
-<!-- 		JOIN member ON member.member_id = pay.member_id  -->
-<!-- 		JOIN theater ON theater.theater_num = screen_session.theater_num -->
-<!-- 		JOIN movie ON movie.movie_num = screen_session.movie_num -->
-<!-- 		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num  -->
-<!-- 		JOIN screen_info ON screen_info.screen_cinema_num = screen_session.screen_cinema_num -->
-<!-- 		WHERE member.member_id = #{member_id} AND pay.ticket_pay_status = '1' -->
-<!--     	ORDER BY screen_session.scs_date DESC -->
-<!--     	LIMIT #{startRow}, #{listLimit} -->
-<!--     </select> -->
+    <select id="selectResvList" resultType="map">
+	    SELECT DISTINCT
+		    movie.movie_poster,
+		    movie.movie_name,
+		    screen_session.scs_date,
+		   	CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time,
+		   	CONCAT(theater.theater_name, ' ', screen_info.screen_cinema_num, '관') AS theater_info,
+		    ticket.ticket_seat_info,
+		    ticket.ticket_price
+		FROM
+		    pay
+		JOIN member ON member.member_id = pay.member_id 
+		JOIN screen_session ON screen_session.scs_num = pay.scs_num
+		JOIN movie ON movie.movie_num = screen_session.movie_num 
+		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num
+		JOIN screen_info ON screen_info.screen_num = screen_session.screen_num
+		JOIN theater ON theater.theater_num = screen_info.theater_num
+		WHERE
+		    member.member_id = #{member_id} AND pay.ticket_pay_status = '결제'
+		ORDER BY
+		    screen_session.scs_date DESC
+    	LIMIT #{startRow}, #{listLimit}
+    </select>
     
     <!-- 예매한 영화 갯수 -->
-<!--     <select id="selectResvCount" resultType="int"> -->
-<!-- 	   SELECT COUNT(DISTINCT screen_session.scs_num) -->
-<!-- 		FROM -->
-<!-- 			screen_session -->
-<!-- 		JOIN pay ON screen_session.scs_num = pay.scs_num  -->
-<!-- 		JOIN member ON member.member_id = pay.member_id  -->
-<!-- 		JOIN theater ON theater.theater_num = screen_session.theater_num -->
-<!-- 		JOIN movie ON movie.movie_num = screen_session.movie_num -->
-<!-- 		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num  -->
-<!-- 		JOIN screen_info ON screen_info.screen_cinema_num = screen_session.screen_cinema_num -->
-<!-- 		WHERE member.member_id = #{member_id} AND pay.ticket_pay_status = '1' -->
-<!--     </select> -->
+    <select id="selectResvCount" resultType="int">
+	   SELECT COUNT(DISTINCT screen_session.scs_num)
+		FROM
+		    pay
+		JOIN member ON member.member_id = pay.member_id 
+		JOIN screen_session ON screen_session.scs_num = pay.scs_num
+		JOIN movie ON movie.movie_num = screen_session.movie_num 
+		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num
+		JOIN screen_info ON screen_info.screen_num = screen_session.screen_num
+		JOIN theater ON theater.theater_num = screen_info.theater_num
+		WHERE
+		    member.member_id = #{member_id} AND pay.ticket_pay_status = '결제'
+    </select>
     <!-- 취소내역 -->
-<!--     <select id="selectCancelList" resultType="map"> -->
-<!-- 	 	SELECT DISTINCT  -->
-<!-- 		   movie.movie_name, -->
-<!-- 		   movie.movie_poster, -->
-<!-- 		   CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time, -->
-<!-- 		   CONCAT(theater.theater_name, ' ', screen_info.screen_cinema_num, '관') AS theater_info, -->
-<!-- 		   ticket.ticket_seat_info, -->
-<!-- 		   ticket.ticket_price, -->
-<!-- 		   screen_session.scs_date -->
-<!-- 		FROM -->
-<!-- 			screen_session -->
-<!-- 		JOIN pay ON screen_session.scs_num = pay.scs_num  -->
-<!-- 		JOIN member ON member.member_id = pay.member_id -->
-<!-- 		JOIN theater ON theater.theater_num = screen_session.theater_num -->
-<!-- 		JOIN movie ON movie.movie_num = screen_session.movie_num -->
-<!-- 		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num -->
-<!-- 		JOIN screen_info ON screen_info.screen_cinema_num = screen_session.screen_cinema_num -->
-<!-- 		WHERE member.member_id = #{member_id} AND pay.ticket_pay_status = '2' -->
-<!-- 		ORDER BY screen_session.scs_date DESC -->
-<!--     </select> -->
+    <select id="selectCancelList" resultType="map">
+	    SELECT DISTINCT
+		    movie.movie_poster,
+		    movie.movie_name,
+		    screen_session.scs_date,
+		   	CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time,
+		   	CONCAT(theater.theater_name, ' ', screen_info.screen_cinema_num, '관') AS theater_info,
+		    ticket.ticket_seat_info,
+		    ticket.ticket_price
+		FROM
+		    pay
+		JOIN member ON member.member_id = pay.member_id 
+		JOIN screen_session ON screen_session.scs_num = pay.scs_num
+		JOIN movie ON movie.movie_num = screen_session.movie_num 
+		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num
+		JOIN screen_info ON screen_info.screen_num = screen_session.screen_num
+		JOIN theater ON theater.theater_num = screen_info.theater_num
+		WHERE
+		    member.member_id = #{member_id} AND pay.ticket_pay_status = '취소'
+		ORDER BY
+		    screen_session.scs_date DESC
+    </select>
     
     <!-- 회원정보 -->
     <select id="selectDbMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">

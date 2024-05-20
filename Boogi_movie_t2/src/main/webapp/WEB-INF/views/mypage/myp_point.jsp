@@ -51,27 +51,20 @@ body {
 				<hr>
 				<!-- 탭 메뉴 -->
 				<div class="row">
-				<div class="col-10">
-				<ul class="nav nav-tabs" id="myTab" role="tablist">
-					<li class="nav-item" role="presentation">
-						<button class="nav-link active" id="userinfo-tab" data-bs-toggle="tab"
-							data-bs-target="#userinfo" type="button" role="tab" aria-controls="userinfo"
-							aria-selected="true">적립내역</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="myreview-tab" data-bs-toggle="tab"
-							data-bs-target="#myreview" type="button" role="tab"
-							aria-controls="myreview" aria-selected="false">사용내역</button>
-					</li>
-				</ul>
-				</div>
-					<div class="col-md-2 selectbox1">
-						<select class="form-select form-select-sm" aria-label=".form-select-sm example">
-						  <option selected>최근 1주일</option>
-						  <option value="1">최근 1개월</option>
-						  <option value="2">최근 3개월</option>
-						</select>
-					</div><!-- col-md-2 selectbox1 -->
+					<div class="col-12">
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link active" id="userinfo-tab" data-bs-toggle="tab"
+								data-bs-target="#userinfo" type="button" role="tab" aria-controls="userinfo"
+								aria-selected="true">적립내역</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="myreview-tab" data-bs-toggle="tab"
+								data-bs-target="#myreview" type="button" role="tab"
+								aria-controls="myreview" aria-selected="false">사용내역</button>
+						</li>
+					</ul>
+					</div>
 				</div>
 					<!-- 내용 -->
 					<div class="tab-content" id="myTabContent">

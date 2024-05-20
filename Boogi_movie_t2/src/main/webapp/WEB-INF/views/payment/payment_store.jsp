@@ -207,7 +207,7 @@
 									
 								<div class="card-footer">
 									<p><b> 총 금액
-										<span id="total_fee" class="pay_number">${total_fee}</span>
+										<span id="total_fee" class="pay_number">$cart.item_total_price}</span>
 									</b></p>
 								</div> <!-- card-footer -->
 							</div>
@@ -457,7 +457,16 @@
 		
 		event.preventDefault();
 		
-		var IMP = window.IMP;   // 생략 가능
+		// 폼 유효성 검사
+	    let form = document.forms['payForm'];
+	    if (!form.checkValidity()) {
+	        alert("이용 약관 동의 필수!");
+	        $("#agmt-all").focus();
+	        
+	        return;
+	    }
+		
+		let IMP = window.IMP;   // 생략 가능
  		IMP.init("imp00262041"); // 예: imp00000000 
  		
  		let pg = document.querySelector("input[name=pg]:checked").value;

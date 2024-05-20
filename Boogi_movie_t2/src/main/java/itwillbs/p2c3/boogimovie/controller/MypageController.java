@@ -98,23 +98,21 @@ public class MypageController {
     }
 	
 	
-	
-	
 //	@ResponseBody
 //	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
-//	public ResponseEntity<String> mypMyTheater(@RequestBody List<String> checkedValues, Model model, @RequestBody String member_id){
+//	public ResponseEntity<String> mypMyTheater(@RequestBody List<String> checkedValues, Model model, @RequestBody String member_id, MemberVO member){
 //	    System.out.println("Received checked values: ~~~!~!~~~~~~~~~~ " + checkedValues);
 //	    
 //	    if(checkedValues.isEmpty()) {
 //	        return ResponseEntity.badRequest().body("No data received");
 //	    }
-//	    MemberVO member = mypageService.myTheater(checkedValues, member_id);
+//	    MemberVO dbMember = mypageService.myTheater(checkedValues, member_id, member);
 //	    
-//	    if(member == null) {
+//	    if(dbMember == null) {
 //	    	
 //	    	return ResponseEntity.badRequest().body("Failed to process data");
 //	    }
-//	    model.addAttribute("member", member);
+//	    model.addAttribute("member", dbMember);
 //	    System.out.println("memberrrrrrr : " + member);
 ////	    model.addAttribute("member", member);
 //	    
@@ -125,29 +123,29 @@ public class MypageController {
 	
 	@ResponseBody
 	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
-	public ResponseEntity<String> mypMyTheater(@RequestBody Map<String, Object> payload, Model model, MemberVO member){
-	    System.out.println("Received member ID: " + payload.get("member_id"));
-	    System.out.println("Member ID: " + payload.get("member_id"));
+	public ResponseEntity<String> mypMyTheater(@RequestBody Map<String, Object> check, Model model, MemberVO member){
+		//  List<String> checkedValues랑 String member_id를 map으로 가져옴
+	    System.out.println("Member ID: " + check.get("member_id"));
 
-	    List<String> checkedValues = (List<String>) payload.get("checkedValues");
-	    String member_id = (String) payload.get("member_id");
+	    List<String> checkedValues = (List<String>) check.get("checkedValues");
+	    String member_id = (String) check.get("member_id");
 
 	    if(checkedValues == null || checkedValues.isEmpty()) {
 	        return ResponseEntity.badRequest().body("No data received");
 	    }
 
-	    MemberVO dbMember = mypageService.myTheater(checkedValues, member_id, member);
+//	    MemberVO dbMember = mypageService.myTheater(checkedValues, member_id, member);
+	    mypageService.myTheater(checkedValues, member_id, member);
 
-	    if(dbMember == null) {
-	        return ResponseEntity.badRequest().body("Failed to process data");
-	    }
+//	    if(dbMember == null) {
+//	        return ResponseEntity.badRequest().body("Failed to process data");
+//	    }
 	    
-	    model.addAttribute("member", dbMember);
-	    System.out.println("Member : " + member);
+//	    model.addAttribute("member", dbMember);
+//	    System.out.println("Member : " + member);
 
 	    return ResponseEntity.ok("Data received successfully");
 	}
-	
 	
 
     

@@ -79,10 +79,10 @@ public class MypageService {
 	
 	// 자주가는극장 
 	@Transactional
-	public MemberVO myTheater(List<String> checkedValues, String member_id, MemberVO member) {
+	public void myTheater(List<String> checkedValues, String member_id, MemberVO member) {
 	    System.out.println("Checked Values: " + checkedValues); // 디버깅 로그 추가
 
-		return mapper.insertMyTheater(checkedValues, member_id, member);
+		mapper.updateMyTheater(checkedValues, member_id, member);
 	}
 	
 	public void updateTheater(String id, String theater, int theaterNumber) {

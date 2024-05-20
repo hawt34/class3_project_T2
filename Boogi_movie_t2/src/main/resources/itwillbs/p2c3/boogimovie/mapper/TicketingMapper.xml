@@ -58,6 +58,13 @@
 		FROM ticket
 		WHERE ticket_pay_num = #{pay_num} 
 	</select>
+	
+	
+	<select id="selectPayedSeat" resultType="itwillbs.p2c3.boogimovie.vo.ScreenSessionVO">
+		SELECT *
+		FROM screen_session
+		WHERE scs_num = #{scs_num} 
+	</select>
 		
 		
 

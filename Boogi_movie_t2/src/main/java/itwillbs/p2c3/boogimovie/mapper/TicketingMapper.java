@@ -18,4 +18,5 @@ public interface TicketingMapper {
 	List<FeeAgeVO> feeCalcAge();
 	List<TicketVO> selectPayedSeat(int pay_num);
 	int selectPayNum(int scs_num);
+	ScreenSessionVO getScreenSession(int scs_num);
 }

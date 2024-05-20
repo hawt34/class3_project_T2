@@ -33,6 +33,7 @@ import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.PayVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import retrofit2.http.POST;
 
 @Controller
 public class PaymentController {
@@ -92,7 +93,7 @@ public class PaymentController {
 	
 	
 	@PostMapping("payment")
-	public String paymentPro(MemberVO member, HttpSession session, Model model, ScreenSessionVO scs, MovieVO movie,
+	public String paymentReserve(MemberVO member, HttpSession session, Model model, ScreenSessionVO scs, MovieVO movie,
 			String selected_seats, String person_info, String total_fee, String scs_date2) {
 		
 		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%----------------------------scs" + scs);
@@ -246,7 +247,15 @@ public class PaymentController {
 	
 	
 	
+	// ================================================================================
 	
+	@PostMapping("payment_store")
+	public String paymentStore() {
+		
+		
+		
+		return "payment/payment_store";
+	}
 	
 	
 }

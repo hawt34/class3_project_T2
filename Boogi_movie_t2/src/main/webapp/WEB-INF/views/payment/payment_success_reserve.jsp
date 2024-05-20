@@ -31,7 +31,7 @@
 			<h5>예매 정보</h5>
 			<p>영화 포스터, 제목, 극장명, 상영관명, 날짜, 시간, 좌석, 인원수</p>
 		</div>
-		<button class="btn btn-primary" type="button" onclick="myp_main">확인</button>
+		<button class="btn btn-primary" type="button" onclick="location.href='myp_main'">확인</button>
 	</div>
 
 </body>

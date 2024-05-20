@@ -323,7 +323,6 @@
 				return;
 			}
 
-			let member_point = parseInt("${member.member_point}"); // 보유 포인트
 			let total_fee = document.querySelector("#total_fee").innerText; // 넘어온 총 결제 값
 			let use_point = $("#useMemberPoint").val();	// 입력된 사용할 포인트 값
 			
@@ -332,10 +331,6 @@
 // 			let use_coupon = $("#getMemberCoupon").val();
 			let discount_sum = parseInt(use_point) + parseInt(coupon_apply); 		// 결제란 적용된 비타민 + 쿠폰 항목
 			let final_amount = parseInt(total_fee) - parseInt(discount_sum); 		// 현재 최종 값 - 총 할인금액 
-			
-			if() {
-				
-			}
 			
 			
 			$.ajax({

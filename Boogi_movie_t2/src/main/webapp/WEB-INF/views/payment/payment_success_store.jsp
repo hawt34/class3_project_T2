@@ -31,7 +31,7 @@
 			<h5>구매 정보</h5>
 			<p>결제항목 이미지, 항목, 구매 수량</p>
 		</div>
-		<button class="btn btn-primary" type="button" onclick="myp_main">확인</button>
+		<button class="btn btn-primary" type="button" onclick="location.href='myp_main'">확인</button>
 	</div>
 
 </body>

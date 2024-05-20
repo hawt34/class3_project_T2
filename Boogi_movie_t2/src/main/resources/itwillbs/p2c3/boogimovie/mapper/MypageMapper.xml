@@ -140,34 +140,32 @@
 		WHERE member.member_id = #{member_id}
     </select>
     
-    
 
-<!-- 	<insert id="insertMyTheater" parameterType="map"> -->
-<!-- 	    <if test="member.member_id == #{member_id}"> -->
-<!-- 	        INSERT INTO member (member_my_theater1, member_my_theater2, member_my_theater3) -->
-<!-- 	        VALUES ( -->
-<!-- 	            #{checkedValues[0]}, -->
-<!-- 	            #{checkedValues[1]}, -->
-<!-- 	            #{checkedValues[2]} -->
-<!-- 	        ) -->
-<!-- 	    </if> -->
-<!-- 	</insert> -->
-
-		<update id="insertMyTheater">
+		<update id="updateMyTheater">
 		    UPDATE member
-		    SET member_my_theater1 = #{checkedValues[0]},
-		        member_my_theater2 = #{checkedValues[1]},
-		        member_my_theater3 = #{checkedValues[2]}
+		    <set> <!-- 자동으로 쉼표 처리. 각 항목 뒤에 쉼표를 추가하고 조건이 충족되지 않으면 마지막 쉼표를 제거함  -->
+	   			<if test="checkedValues[0] != null and !checkedValues[0].equals('')">
+			    	member_my_theater1 = #{checkedValues[0]},
+			     </if>
+			    <if test="checkedValues[0] == null">
+			    	member_my_theater1 = null,
+			    </if>
+	   			<if test="checkedValues[1] != null and !checkedValues[1].equals('')">
+			        member_my_theater2 = #{checkedValues[1]},
+				</if>
+				<if test="checkedValues[1] == null">
+			  		member_my_theater2 = null,
+				</if>
+	   			<if test="checkedValues[2] != null and !checkedValues[2].equals('')">
+			        member_my_theater3 = #{checkedValues[2]}
+				</if>
+				<if test="checkedValues[2] == null">
+				    member_my_theater3 = null,
+				</if>
+			</set>
+<!-- 			SET member_my_theater = CASE WHEN member_my_theater = #{checkedValues[0]} THEN checkedValues[0] ELSE NULL, -->
 		    WHERE member_id = #{member_id}
 		</update>
-
-
-<!-- 		<update id="updateTheater"> -->
-<!-- 			UPDATE -->
-<!-- 			SET -->
-<!-- 			WHERE -->
-		
-<!-- 		</update> -->
 
 
     <!-- 탈퇴처리 -->

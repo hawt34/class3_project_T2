@@ -138,17 +138,8 @@ body {
 							<div class="form-check">
 								<div>
 									<c:forEach begin="0" var="theater" items="${theater}">
-<%-- 										  <input onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_name}" type="checkbox" id="theaterId" name="theaterId"> --%>
-<%-- 										  ${theater.theater_name}<br> --%>
-<!-- 										  <br> -->
-										  
-<%-- 										  <label for="theaterId" onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_name}" type="checkbox" id="theaterId" name="theaterId"> --%>
-										  
-<%-- 										  ${theater.theater_name} --%>
-<!-- 										  </label><br> -->
-										  
-										      <input onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_name}" type="checkbox" id="theaterId_${theater.theater_name}" name="theaterId">
-											  <label for="theaterId_${theater.theater_name}">${theater.theater_name}</label><br>
+										      <input onclick="CountChecked(this)" class="form-check-input" value="${theater.theater_name}" type="checkbox" id="${theater.theater_name}" name="theaterId">
+											  <label for="${theater.theater_name}">${theater.theater_name}</label><br>
 									</c:forEach>
 								</div>
 							</div>
@@ -193,21 +184,29 @@ body {
 						        checkboxes.forEach(function(checkbox) {
 						            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
 						        });
-						
-						        var member_id = "${member.member_id}"; // 여기서 memberId를 어떻게 가져올지 정해야 합니다.
+						        
+// 						        // checkedValues 배열의 길이가 3이 되도록 null 값 추가
+						        while (checkedValues.length < 3) {
+						            checkedValues.push(null);
+						        }
+						        
+						        var member_id = "${member.member_id}"; // memberId를 가져옴
 // 						        var member_id = document.getElementById("member_id").value;
 						        $.ajax({
 						            url: "api/myp_my_theater",
 						            type: "POST", 
-						            contentType: "application/json", // 서버에게 내용이 JSON임을 알려주는 헤더
+						            contentType: "application/json", // 서버에게 내용이 JSON임을 알려줌
 						            data: JSON.stringify({ member_id: member_id, checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
-						            dataType: "json",
+// 						            data: JSON.stringify({ member_id, checkedValues }),
+// 									dataType : 'json',
 						            success: function(response) {
 						                alert("영화 정보 등록을 성공하였습니다");
 						                location.reload();
 						            },
 						            error: function(xhr, status, error) {
-						                alert("영화 정보를 가져오는 데 실패했습니다. 에러 : " + error);
+						                console.error("Error details:", xhr, status, error); // 디버깅 정보 출력
+
+						                alert("에러ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ : " + error);
 						            }
 						        });
 						    }
@@ -224,83 +223,83 @@ body {
 					
 					<table class="table3 table table-bordered">
 					
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<%-- 								<c:choose> --%>
-<%-- 									<c:when test="${empty member.member_my_theater1}">자주가는 영화관 미설정시 --%>
-<!-- 										<a href="#">+</a> -->
-<%-- 									</c:when> --%>
-<%-- 									<c:otherwise> --%>
-<%-- 										<a href="#">${member.member_my_theater1}</a> --%>
-<%-- 									</c:otherwise> --%>
-<%-- 								</c:choose> --%>
-<!-- 							</td> -->
-<!-- 						</tr> -->
-						
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<%-- 								<c:choose> --%>
-<%-- 									<c:when test="${empty member.member_my_theater2}"> --%>
-<!-- 										<a href="#">+</a> -->
-<%-- 									</c:when> --%>
-<%-- 									<c:otherwise> --%>
-<%-- 										<a href="#">${member.member_my_theater2}</a> --%>
-<%-- 									</c:otherwise> --%>
-<%-- 								</c:choose> --%>
-<!-- 							</td> -->
-<!-- 						</tr> -->
-						
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<%-- 								<c:choose> --%>
-<%-- 									<c:when test="${empty member.member_my_theater3}"> --%>
-<!-- 										<a href="#">+</a> -->
-<%-- 									</c:when> --%>
-<%-- 									<c:otherwise> --%>
-<%-- 										<a href="#">${member.member_my_theater3}</a> --%>
-<%-- 									</c:otherwise> --%>
-<%-- 								</c:choose> --%>
-<!-- 							</td> -->
-<!-- 						</tr> -->
-						
 						<tr>
-						    <td>
-						        <c:choose>
-						            <c:when test="${empty member.member_my_theater1}">
-						                <a href="#" class="theater-link" data-theater-number="1">+</a>
-						            </c:when>
-						            <c:otherwise>
-						                <a href="#" class="theater-link" data-theater-number="1">${member.member_my_theater1}</a>
-						            </c:otherwise>
-						        </c:choose>
-						    </td>
+							<td>
+								<c:choose>
+									<c:when test="${empty member.member_my_theater1}"> <!-- 자주가는 영화관 미설정시 -->
+										<a href="#">+</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#">${member.member_my_theater1}</a>
+									</c:otherwise>
+								</c:choose>
+							</td>
 						</tr>
 						
 						<tr>
-						    <td>
-						        <c:choose>
-						            <c:when test="${empty member.member_my_theater2}">
-						                <a href="#" class="theater-link" data-theater-number="2">+</a>
-						            </c:when>
-						            <c:otherwise>
-						                <a href="#" class="theater-link" data-theater-number="2">${member.member_my_theater2}</a>
-						            </c:otherwise>
-						        </c:choose>
-						    </td>
+							<td>
+								<c:choose>
+									<c:when test="${empty member.member_my_theater2}">
+										<a href="#">+</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#">${member.member_my_theater2}</a>
+									</c:otherwise>
+								</c:choose>
+							</td>
 						</tr>
 						
 						<tr>
-						    <td>
-						        <c:choose>
-						            <c:when test="${empty member.member_my_theater3}">
-						                <a href="#" class="theater-link" data-theater-number="3">+</a>
-						            </c:when>
-						            <c:otherwise>
-						                <a href="#" class="theater-link" data-theater-number="3">${member.member_my_theater3}</a>
-						            </c:otherwise>
-						        </c:choose>
-						    </td>
+							<td>
+								<c:choose>
+									<c:when test="${empty member.member_my_theater3}">
+										<a href="#">+</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#">${member.member_my_theater3}</a>
+									</c:otherwise>
+								</c:choose>
+							</td>
 						</tr>
+						
+<!-- 						<tr> -->
+<!-- 						    <td> -->
+<%-- 						        <c:choose> --%>
+<%-- 						            <c:when test="${empty member.member_my_theater1}"> --%>
+<!-- 						                <a href="#" class="theater-link" data-theater-number="1">+</a> -->
+<%-- 						            </c:when> --%>
+<%-- 						            <c:otherwise> --%>
+<%-- 						                <a href="#" class="theater-link" data-theater-number="1">${member.member_my_theater1}</a> --%>
+<%-- 						            </c:otherwise> --%>
+<%-- 						        </c:choose> --%>
+<!-- 						    </td> -->
+<!-- 						</tr> -->
+						
+<!-- 						<tr> -->
+<!-- 						    <td> -->
+<%-- 						        <c:choose> --%>
+<%-- 						            <c:when test="${empty member.member_my_theater2}"> --%>
+<!-- 						                <a href="#" class="theater-link" data-theater-number="2">+</a> -->
+<%-- 						            </c:when> --%>
+<%-- 						            <c:otherwise> --%>
+<%-- 						                <a href="#" class="theater-link" data-theater-number="2">${member.member_my_theater2}</a> --%>
+<%-- 						            </c:otherwise> --%>
+<%-- 						        </c:choose> --%>
+<!-- 						    </td> -->
+<!-- 						</tr> -->
+						
+<!-- 						<tr> -->
+<!-- 						    <td> -->
+<%-- 						        <c:choose> --%>
+<%-- 						            <c:when test="${empty member.member_my_theater3}"> --%>
+<!-- 						                <a href="#" class="theater-link" data-theater-number="3">+</a> -->
+<%-- 						            </c:when> --%>
+<%-- 						            <c:otherwise> --%>
+<%-- 						                <a href="#" class="theater-link" data-theater-number="3">${member.member_my_theater3}</a> --%>
+<%-- 						            </c:otherwise> --%>
+<%-- 						        </c:choose> --%>
+<!-- 						    </td> -->
+<!-- 						</tr> -->
 					</table>
 				</div><!-- col-md-3-->
 		</div> <!-- row -->
@@ -311,30 +310,30 @@ body {
 	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
 </footer>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
-<script>
-		$(document).ready(function() {
-		    $(".theater-link").click(function(event) {
-		        event.preventDefault();
-		        let theaterNumber = $(this).data("theater-number");
-		        let theater = prompt("새로운 자주가는 영화관을 입력하세요:");
+<!-- <script> -->
+<!-- 		$(document).ready(function() { -->
+<!-- 		    $(".theater-link").click(function(event) { -->
+<!-- 		        event.preventDefault(); -->
+<!-- 		        let theaterNumber = $(this).data("theater-number"); -->
+<!-- 		        let theater = prompt("새로운 자주가는 영화관을 입력하세요:"); -->
 		
-		        if (theater != null && theater.trim() != "") {
-		            $.ajax({
-		                type: "POST",
-		                url: "/updateTheater",
-		                data: { theater: theater, theaterNumber: theaterNumber },
-		                success: function(response) {
-		                    alert(response);
-		                    location.reload(); // 페이지 새로고침하여 업데이트된 내용을 표시
-		                },
-		                error: function(xhr, status, error) {
-		                    alert("영화관 업데이트에 실패했습니다.");
-		                }
-		            });
-		        }
-		    });
-		});
-</script>
+<!-- 		        if (theater != null && theater.trim() != "") { -->
+<!-- 		            $.ajax({ -->
+<!-- 		                type: "POST", -->
+<!-- 		                url: "/updateTheater", -->
+<!-- 		                data: { theater: theater, theaterNumber: theaterNumber }, -->
+<!-- 		                success: function(response) { -->
+<!-- 		                    alert(response); -->
+<!-- 		                    location.reload(); // 페이지 새로고침하여 업데이트된 내용을 표시 -->
+<!-- 		                }, -->
+<!-- 		                error: function(xhr, status, error) { -->
+<!-- 		                    alert("영화관 업데이트에 실패했습니다."); -->
+<!-- 		                } -->
+<!-- 		            }); -->
+<!-- 		        } -->
+<!-- 		    }); -->
+<!-- 		}); -->
+<!-- </script> -->
 </body>
 </html>
 

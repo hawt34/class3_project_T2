@@ -75,8 +75,8 @@ public class MypageController {
 			model.addAttribute("infoMyTheater", infoMyTheater);
 			
 			// 예매내역
-//			List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
-//			model.addAttribute("movieReservation", movieReservation);
+			List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
+			model.addAttribute("movieReservation", movieReservation);
 			
 //			List<Object> combinedList = new ArrayList<>();
 //			combinedList.addAll(movieReservation);
@@ -304,21 +304,22 @@ public class MypageController {
 		}
 		member = mypageService.getMember(id);
 		model.addAttribute("member", member);
-		System.out.println("member : " + member);
-		System.out.println("member.getMember_id" + member.getMember_id());
-		System.out.println("myp_reservation()");
+//		System.out.println("member : " + member);
+//		System.out.println("member.getMember_id" + member.getMember_id());
 		// 예매정보
 		List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
 		model.addAttribute("movieReservation", movieReservation);
-		System.out.println("pageNum : " + pageNum);
 		
+		System.out.println("pageNum : " + pageNum);
 		int listLimit = 4;
 		int startRow = (pageNum - 1) * listLimit;
 		System.out.println("startRow : " + startRow);
 		System.out.println("listLimit : " + listLimit);
 		String member_id = member.getMember_id();
+		
 		List<Map<String, Object>> resvList = mypageService.getResvList(startRow, listLimit, member_id);
 		int listCount = mypageService.getResvCount(member); // 총 예매영화 갯수
+		
 		System.out.println("listCount : " + listCount);
 		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
@@ -346,31 +347,38 @@ public class MypageController {
 		return "mypage/myp_reservation";
 	}
 	
+	// ============================= 스토어 =============================
+	
+	@GetMapping("myp_store")
+	public String mypStore() {
+		
+		return "mypage/myp_store";
+	}
 	// ============================= 취소 =============================
 	
 	// 취소 영화 목록
-//	@GetMapping("myp_cancel")
-//	public String mypCancel(Model model, MemberVO member) {
-////		System.out.println("myp_cancel()");
-//		
-//		String id = (String)session.getAttribute("sId");
-//		
-//		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-//			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
-//			model.addAttribute("targetURL", "member_login");
-//			return"error/fail";
-//		}
-//		
-//		member = mypageService.getMember(id);
-//		model.addAttribute("member", member);
-//		
-//		System.out.println("mypcontroller - myp_cancel()");
-//		List<Map<String, Object>> cancelList = mypageService.getCancelList(member);
-//		model.addAttribute("cancelList", cancelList);
-//		
-//		
-//		return "mypage/myp_cancel";
-//	}
+	@GetMapping("myp_cancel")
+	public String mypCancel(Model model, MemberVO member) {
+//		System.out.println("myp_cancel()");
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
+			model.addAttribute("targetURL", "member_login");
+			return"error/fail";
+		}
+		
+		member = mypageService.getMember(id);
+		model.addAttribute("member", member);
+		
+		System.out.println("mypcontroller - myp_cancel()");
+		List<Map<String, Object>> cancelList = mypageService.getCancelList(member);
+		model.addAttribute("cancelList", cancelList);
+		
+		
+		return "mypage/myp_cancel";
+	}
 	
 	// ============================= 탈퇴 =============================
 	

@@ -31,7 +31,7 @@ public interface MypageMapper {
 	
 	int selectResvCount(MemberVO member);
 	// 취소내역 
-//	List<Map<String, Object>> selectCancelList(MemberVO member);
+	List<Map<String, Object>> selectCancelList(MemberVO member);
 	
 	// 회원정보
 	MemberVO selectDbMember(MemberVO member);

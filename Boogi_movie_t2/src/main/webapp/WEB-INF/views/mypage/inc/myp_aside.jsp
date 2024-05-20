@@ -75,6 +75,7 @@ a{
 				</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="myp_reservation">예매내역</a> 
+					<a class="dropdown-item" href="myp_store">스토어</a> 
 					<a class="dropdown-item" href="myp_cancel">취소내역</a>
 				</div>
 			</div>

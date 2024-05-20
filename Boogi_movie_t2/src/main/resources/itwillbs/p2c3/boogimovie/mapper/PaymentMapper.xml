@@ -27,7 +27,7 @@
 		VALUES (
 			   null
 			 , #{ticket_pay_type}
-			 , now()
+			 , null
 			 , #{ticket_pay_status}
 			 , null
 			 , #{ticket_pay_price}

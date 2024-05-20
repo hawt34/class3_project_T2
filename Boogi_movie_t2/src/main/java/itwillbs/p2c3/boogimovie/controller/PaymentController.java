@@ -30,6 +30,7 @@ import itwillbs.p2c3.boogimovie.service.MovieInfoService;
 import itwillbs.p2c3.boogimovie.service.PaymentService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
+import itwillbs.p2c3.boogimovie.vo.CartVO;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
@@ -175,7 +176,8 @@ public class PaymentController {
 	public boolean payVerify(@PathVariable(value = "imp_uid") String imp_uid, String use_point, String coupon_num, MemberVO member, String amount, 
 			String formattedDate, MovieVO movie, String theater_name, String screen_cinema_num, ScreenSessionVO scs, String person_info, PayVO pay, 
 			String selected_seats, TicketVO ticket) throws IamportResponseException, IOException{
-
+		
+		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------scs : " + scs);
 		Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 검증처리
 		
 		if(payment.getStatus().equals("paid")) {
@@ -198,6 +200,7 @@ public class PaymentController {
 			pay.setTicket_pay_price(amountInt);
 			pay.setUse_point(usePointInt);
 			pay.setScs_num(scs.getScs_num());
+			System.out.println(scs.getScs_num());
 			pay.setTicket_pay_status("결제");
 			pay.setTicket_pay_type(payment.getPgProvider());
 			
@@ -253,7 +256,7 @@ public class PaymentController {
 	// ===================================================================================
 	// 뷰 확인 용
 	@GetMapping("payment_store")
-	public String paymentStore2(MemberVO member, Model model, HttpSession session) {
+	public String paymentStore2(MemberVO member, Model model, HttpSession session, CartVO cart) {
 		
 		String id = (String)session.getAttribute("sId");
 		if(id == null) {
@@ -266,9 +269,11 @@ public class PaymentController {
 		member.setMember_id(id);
 		member = memberService.isCorrectUser(member);
 		List<CouponVO> couponList = couponService.getMemberCoupon(member);
+//		List<CartVO> cartList = couponService.getStoreCart(cart);
 		
 		model.addAttribute("member", member);
 		model.addAttribute("couponList", couponList);
+//		model.addAttribute("cartList", cartList);
 		
 		
 		

@@ -12,7 +12,10 @@ public class CartVO {
 	private String cart_id;
     private int item_info_num;
     private int item_quantity;
-    private int item_total_price;
+    private int item_price;
     private String member_id;
+    
+    private int item_total_price;
+    
 
 }

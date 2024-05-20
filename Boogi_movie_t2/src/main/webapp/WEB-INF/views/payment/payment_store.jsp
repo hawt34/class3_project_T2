@@ -207,7 +207,7 @@
 									
 								<div class="card-footer">
 									<p><b> 총 금액
-										<span id="total_fee" class="pay_number">${total_fee}</span>
+										<span id="total_fee" class="pay_number">$cart.item_total_price}</span>
 									</b></p>
 								</div> <!-- card-footer -->
 							</div>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
@@ -17,8 +18,8 @@ public interface TicketingMapper {
 	Map<String, Object> feeCalc(Map<String, String> params);
 	List<FeeAgeVO> feeCalcAge();
 	List<TicketVO> selectPayedSeat(int pay_num);
-	int selectPayNum(int scs_num);
-	
-	
-	
+	int selectPayNum(@Param("scs_num") int scs_num,@Param("id") String id);
 }
+	
+	
+	

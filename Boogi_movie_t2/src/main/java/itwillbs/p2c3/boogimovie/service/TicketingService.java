@@ -37,8 +37,9 @@ public class TicketingService {
 		return mapper.selectPayedSeat(pay_num);
 	}
 	
-	public int selectPayNum(int scs_num) {
-		return mapper.selectPayNum(scs_num);
+
+	public int selectPayNum(int scs_num, String id) {
+		return mapper.selectPayNum(scs_num, id);
 	}
 
 	

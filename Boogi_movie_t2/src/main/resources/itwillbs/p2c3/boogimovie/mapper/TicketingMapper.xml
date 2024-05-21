@@ -49,8 +49,12 @@
 	<select id="selectPayNum" resultType="int">
 		SELECT ticket_pay_num
 		FROM pay
-		WHERE scs_num = #{scs_num}
+		WHERE 
+			1=1
+		AND scs_num = #{scs_num}
+		AND member_id = #{id}
 	</select>
+		
 	
 	
 	<select id="selectPayedSeat" resultType="itwillbs.p2c3.boogimovie.vo.TicketVO">

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +10,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <!-- 극장 theater.css  -->
-<link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
+<%-- <link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css"> --%>
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
+
 </head>
 <body>
 	<div class="theater_timetable_all" >
@@ -52,7 +57,7 @@
 			</div>
 			<div class=time_schedule_day>
 				<label for="calendar" class="time_schedule_day">
-					<img src="${pageContext.request.contextPath}/resources/images/calendar3.svg" width="25px;" >
+					<img id="calendarIcon" src="${pageContext.request.contextPath}/resources/images/calendar3.svg" width="25px;" >
 				</label>	
 				<input type="date" id="calendar" style="display: none;" > 
 			</div>
@@ -63,6 +68,15 @@
 		</div>
 		
 	</div>
+	
+<script>
+    $(function() {
+        // 이미지를 클릭했을 때 input type="date"를 열도록 설정
+        $("#calendarIcon").click(function() {
+            $("#calendar").click();
+        });
+    });
+</script>
 
 </body>
 </html>

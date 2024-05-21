@@ -16,11 +16,10 @@
 	$(function() {
 		// 서버에서 전달된 feeMap 객체를 JSON.parse를 통해 자바스크립트 객체로 변환
 		let feeMap = JSON.parse('${feeMap}');
-		// feeMap 객체를 반복하여 키와 값을 처리
+		
 		for (let keyword in feeMap) {
             if (feeMap.hasOwnProperty(keyword)) {
                 let price = feeMap[keyword];
-                console.log("keyword: " + keyword + " / price: " + price);
                 let formattedPrice = price.toLocaleString();
                 $("#" + keyword).html(formattedPrice + "원");
             }

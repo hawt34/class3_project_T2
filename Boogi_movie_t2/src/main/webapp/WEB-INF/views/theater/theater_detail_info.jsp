@@ -120,7 +120,6 @@
 						<tr>
 							<td scope="row">${notice.theater_name}</td>
 							<td>${notice.notice_subject}</td>
-<%-- 							<td>${notice.notice_date}</td> --%>
 							<td>
 								<fmt:parseDate var="parseNotice_date" value="${notice.notice_date}" 
 												pattern="yyyy-MM-dd'T'HH:mm" type="both" />
@@ -134,6 +133,7 @@
 	
 	</div> <!-- theater_info 끝  -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622&libraries=services"></script>
+	
 	<script>
 		
 		var theater_map_x = ${theater.theater_map_x};

@@ -80,15 +80,7 @@ public class TheaterController {
 		theater = service.getTheater(theater);
 		List<TheaterFacilityVO> facilityList = service.getFacility(facility);
 		List<NoticeVO> theaterNoticeList = service.getTheaterNoticeList(notice);
-		List<FeeAgeVO> feeInfoList = service.getFeeInfoList();
 		List<FeeAgeVO> feeList = service.getFeeList();
-		
-		
-		Map<String, Object> feeInfo = new HashMap<String, Object>();
-		for(FeeAgeVO fee : feeInfoList) {
-//			discount = price - (price * (fee.getDiscount() / 100.0));
-			feeInfo.put(fee.getKeyword(), fee.getDiscount());
-		}
 		
 		Map<String, Integer> feeMap = new HashMap<String, Integer>();
 		for(FeeAgeVO fee : feeList) {
@@ -104,32 +96,21 @@ public class TheaterController {
 			price *= fee.getFee_age_discount() / 100.0;
 			// 반내림 계산
             price = (int) (Math.floor(price / 500.0) * 500);
-			System.out.println("keyword : " + keyword + " / price : " + price);
 			feeMap.put(keyword, price);
 			
 		}
-		
-		System.out.println("feeList : " + feeList);
-		System.out.println("feeInfoList : " + feeInfoList);
-		System.out.println("feeInfo : " + feeInfo);
-		System.out.println("feeMap : " + feeMap);
 		
 		model.addAttribute("theater", theater);
 		model.addAttribute("theaterList", theaterList);
 		model.addAttribute("facilityList", facilityList);
 		model.addAttribute("theaterNoticeList", theaterNoticeList);
-//		model.addAttribute("feeMap", feeMap);
 		JSONObject json = new JSONObject(feeMap);
         model.addAttribute("feeMap", json.toString());
-		
 		
 		
 		return "theater/theater_detail";
 	}
 	
-//	@PostMapping("")
-//	public String 
-//	
 	
 	
 	

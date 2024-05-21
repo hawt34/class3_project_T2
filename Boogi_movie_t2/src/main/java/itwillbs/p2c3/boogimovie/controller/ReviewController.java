@@ -1,5 +1,9 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +21,10 @@ public class ReviewController {
 	@PostMapping("reviewPro")
 	public String reviewInfo(Model model, ReviewVO review) {
 	 
-		System.out.println("리뷰" + review);
+		//System.out.println("리뷰" + review);
 
 		int insertCount = service.registReview(review);
-		System.out.println("실행결과" + insertCount);
+		//System.out.println("실행결과" + insertCount);
 		
 		int movieNum = review.getMovie_num();
 	    return "redirect:/movieInfo?movie_num=" + movieNum;
@@ -40,6 +44,20 @@ public class ReviewController {
 		}
 					
 	}
+	@GetMapping("reviewModify")
+	public String reviewModify(int review_num, Model model,HttpSession session) {
+		//System.out.println("여기는 리뷰모디파이"+ review_id); 확인완료주석처리
+		
+		List<ReviewVO> reviews = service.getReviewId(review_num);
+		model.addAttribute("reviews", reviews);
+		//System.out.println(reviews); 확인완료 주석처리
+		
+		
+		return "movie/review_modify";
+	}
+	
+	
+	
 	
 	@GetMapping("deleteReview")
 	public String deleteReview(int review_num, Model model) {

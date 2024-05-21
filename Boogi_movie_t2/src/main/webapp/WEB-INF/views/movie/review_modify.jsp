@@ -53,10 +53,9 @@ textarea {
 <body>
 	<div class="showReview">
 		<form action="reviewUpdate" method="post">
-		<c:forEach var="review" items="${reviews}">
-		<p>${review.member_id}님께서 작성한 별점과 관람평</p>
+		<p>${reviews.member_id}님께서 작성한 별점과 관람평</p>
         <div class="ratingCover">
-        내가 선택한 별점: ${review.review_rating} 점
+        내가 선택한 별점: ${reviews.review_rating} 점
         <p>변경할 별점</p>
         <select id="review_rating" name="review_rating" class="form-select" >
 				<option value="0" selected>별점 선택(미선택시 0점 ☆)</option>
@@ -69,11 +68,11 @@ textarea {
         </div>
         <div class="reviewTexts">
       	<p>내가 적은 관람평</p>
-        <textarea class="review-text" name="review_text"  rows="4" cols="35" >${review.review_text}</textarea>
+        <textarea class="review-text" name="review_text"  rows="4" cols="35" >${reviews.review_text}</textarea>
    		<input type="hidden" name="member_id" value="${sessionScope.sId}">    
-   		<input type="hidden" name="review_num" value="${review.review_num}">    
+   		<input type="hidden" name="review_num" value="${reviews.review_num}">    
     	</div>
-    	</c:forEach>
+<%--     	</c:forEach> --%>
 		<div class = "buttonBottom">
         <button type="submit" class="btn btn-outline-primary" >수정</button> 
         <button onclick="closeWindow()" class="btn btn-outline-primary" >취소하기</button>

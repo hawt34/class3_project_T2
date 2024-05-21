@@ -128,7 +128,7 @@ input[value="답변확인"] {
 				<h1>1 대 1 문의 내역</h1>
 			</div>
 			<hr>
-			<div class="mp_wrap">
+			<div class="myp_inquiry">
 				<img src="${pageContext.request.contextPath }/resources/images/inquiryIcon.svg">나의 문의내역
 			</div>
 			<!--문의 내역 게시판-->

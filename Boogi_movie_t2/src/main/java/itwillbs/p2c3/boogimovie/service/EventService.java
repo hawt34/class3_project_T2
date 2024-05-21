@@ -29,4 +29,8 @@ public class EventService {
 	public List<EventTypeVO> getEventTypeList() {
 		return mapper.getEventTypeList();
 	}
+	
+	public int insertCoupon(String id, EventVO event) {
+		return mapper.insertCoupon(id, event);
+	}
 }

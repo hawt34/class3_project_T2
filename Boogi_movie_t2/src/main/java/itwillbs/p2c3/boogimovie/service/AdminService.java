@@ -129,6 +129,11 @@ public class AdminService {
 	}
 	
 	//--------------------------------------------------------------
+	// 쿠폰 타입 리스트
+	public List<Map<String, String>> getCouponTypeList() {
+		return mapper.getCouponTypeList();
+	}
+	
 	// 이벤트 등록
 	public int InsertEvent(EventVO event) {
 		return mapper.insertEvent(event);

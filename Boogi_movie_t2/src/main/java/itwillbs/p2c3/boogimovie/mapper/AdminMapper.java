@@ -86,6 +86,9 @@ public interface AdminMapper {
 	List<Map<String, String>> getTheaterList();
 	
 	//========================================================
+	// 쿠폰타입 리스트 가져오기
+	List<Map<String, String>> getCouponTypeList();
+	
 	// 이벤트 등록
 	int insertEvent(EventVO event);
 	

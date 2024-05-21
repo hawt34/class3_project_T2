@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,7 @@
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">이벤트등록</h4>
-				<form class="validation-form" novalidate action="admin_event_pro" method="post" onsubmit="return confirm('이벤트를 등록하시겠습니까?');">
+				<form class="validation-form" novalidate action="admin_event_pro" method="post" enctype="multipart/form-data" onsubmit="return confirm('이벤트를 등록하시겠습니까?');">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="event_type_num">이벤트타입</label> 
@@ -45,17 +46,11 @@
 							<div class="invalid-feedback">이벤트 제목을 선택해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="coupon_num">할인쿠폰</label> 
-							<select name="coupon_num" id="coupon_num" class="form-control" required>
-								<option value="9">미선택</option>
-								<option value="1">1000원 할인쿠폰</option>
-								<option value="2">2000원 할인쿠폰</option>
-								<option value="3">3000원 할인쿠폰</option>
-								<option value="4">4000원 할인쿠폰</option>
-								<option value="5">5000원 할인쿠폰</option>
-								<option value="6">6000원 할인쿠폰</option>
-								<option value="7">7000원 할인쿠폰</option>
-								<option value="8">8000원 할인쿠폰</option>
+							<label for="coupon_type_num">할인쿠폰</label> 
+							<select name="coupon_type_num" id="coupon_type_num" class="form-control" required>
+								<c:forEach var="couponType" items="${couponTypeList}">
+									<option value="${couponType.coupon_type_num}">${couponType.coupon_name}</option>
+								</c:forEach>
 							</select>
 							<div class="invalid-feedback">이벤트 제목을 선택해주세요.</div>
 						</div>
@@ -66,13 +61,13 @@
 						<div class="invalid-feedback">이벤트 제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="event_sumnail">썸네일</label> 
-						<input type="file" name="event_thumbnail" id="event_sumnail" class="form-control" required />
+						<label for="event_thumbFile">썸네일</label> 
+						<input type="file" name="event_thumbFile" id="event_thumbFile" class="form-control" required />
 						<div class="invalid-feedback">이미지를 선택해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="event_img">본문이미지</label> 
-						<input type="file" id="event_img" name="event_image" class="form-control" required />
+						<label for="event_imageFile">본문이미지</label> 
+						<input type="file" id="event_imageFile" name="event_imageFile" class="form-control" required />
 						<div class="invalid-feedback">이미지를 선택해주세요.</div>
 					</div>
 					<div class="row">
@@ -117,6 +112,7 @@
 	      });
 	    }, false);
 	    
+	    // 이벤트 시작일, 종료일 처리
 	    $(function() {
 			$("#event_end_date").change(function() {
 				if($("#event_start_date").val() == ""){
@@ -128,8 +124,13 @@
 		            $('#event_end_date').attr('min', startDateValue);
 		        }
 			});
+			
 		    $('#event_start_date').change(function() {
 		        $('#event_end_date').attr('min', $(this).val());
+		        if($('#event_end_date').val() != '' && $('#event_start_date').val() > $('#event_end_date').val()){
+		        	alert("이벤트 종료일을 체크해주세요");
+		        	$('#event_start_date').val('');
+		        }
 		    });
 		});    
 	    

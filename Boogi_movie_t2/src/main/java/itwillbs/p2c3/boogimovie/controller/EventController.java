@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +40,7 @@ public class EventController {
 			return "event/event_main";
 		}
 		
+		// 이벤트 타입 선택에 따른 ajax 처리
 		@ResponseBody
 		@GetMapping("eventType")
 		public List<EventVO> eventType(@RequestParam String eventType) {
@@ -87,5 +90,20 @@ public class EventController {
 			model.addAttribute("event", event);
 			
 			return "event/event_detail";
+		}
+		
+	// 쿠폰 발급
+		@GetMapping("giveCoupon")
+		public String giveCoupon(EventVO event, HttpSession session, Model model) {
+			String id = (String)session.getAttribute("sId");
+			int insertCount = eventService.insertCoupon(id, event);
+			System.out.println("쿠폰타입: " + event.getCoupon_type_num());
+			
+			if(insertCount > 0) {
+				return "redirect:/eventDetail?event_num=" + event.getEvent_num();
+			} else {
+				model.addAttribute("msg", "쿠폰등록 오류!");
+				return "error/fail";
+			}
 		}
 }

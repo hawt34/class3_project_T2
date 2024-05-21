@@ -181,10 +181,10 @@ td:nth-child(8) {
 									<td>${reserve.scs_start_time} - ${reserve.scs_end_time}</td>
 									<td>${reserve.theater_name} / ${reserve.screen_cinema_num}관</td>
 									<c:choose>
-										<c:when test="${reserve.ticket_pay_status eq 1}">
+										<c:when test="${reserve.ticket_pay_status eq '결제'}">
 											<td style="color: green;">결제완료</td>
 										</c:when>
-										<c:when test="${reserve.ticket_pay_status eq 2}">
+										<c:when test="${reserve.ticket_pay_status eq '취소'}">
 											<td style="color: orange;">결제취소</td>
 										</c:when>
 									</c:choose>

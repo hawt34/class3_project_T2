@@ -24,6 +24,22 @@
 	 	FROM
 	 		event_type
 	</select>
+	
+	<insert id="insertCoupon" parameterType="map">
+	<selectKey keyProperty="coupon_type_num" resultType="int" order="BEFORE">
+		SELECT coupon_type_num
+		FROM event
+		WHERE event_num = #{event.event_num}
+	</selectKey>
+		INSERT INTO 
+			coupon
+		VALUES (
+			null
+			, #{coupon_type_num}
+			, #{id}
+			, 1
+		)
+	</insert>
 
 
 

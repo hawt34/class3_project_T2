@@ -276,6 +276,13 @@
 		AND 
 			ss.scs_date = #{scs_date}
 	</select>
+	
+<!-- 쿠폰타입리스트 -->
+	<select id="getCouponTypeList" resultType="hashmap">
+		SELECT *	
+		FROM 
+			coupon_type
+	</select>
 
 	
 <!-- 이벤트 등록 -->

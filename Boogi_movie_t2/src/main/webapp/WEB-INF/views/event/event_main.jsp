@@ -182,7 +182,7 @@ main {
 			<c:forEach var="eventList" items="${eventList}" >
 				<div class="item movie-event" onclick="event_detail(${eventList.event_num})">
 					<div class="imgBox">
-						<img src="${pageContext.request.contextPath}/resources/images/${eventList.event_thumbnail}" alt="썸네일"/>
+						<img src="${pageContext.request.contextPath}/resources/upload/${eventList.event_thumbnail}" alt="썸네일"/>
 					</div>
 					<div class="textBox">
 						<p class="textBox_name">${eventList.event_subject}</p>
@@ -295,7 +295,7 @@ main {
 		                data.forEach(function(eventList) {
 		                    eventHtml += '<div class="item movie-event" onclick="event_detail(' + eventList.event_num + ')">' +
 		                                    '<div class="imgBox">' +
-		                                        '<img src="resources/images/' + eventList.event_thumbnail + '" alt="썸네일"/>' +
+		                                        '<img src="resources/upload/' + eventList.event_thumbnail + '" alt="썸네일"/>' +
 		                                    '</div>' +
 		                                    '<div class="textBox">' +
 		                                        '<p class="textBox_name">' + eventList.event_subject + '</p>' +

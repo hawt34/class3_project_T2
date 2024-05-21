@@ -28,7 +28,7 @@ tr td{
 }
 .eventTable{
 	margin: 0 auto;
-	width: 1200px;
+	width: 60%;
 	text-align: center;
 	font-size: 20px;
 	margin-top: 40px;
@@ -37,7 +37,7 @@ tr{
 	height: 60px;
 }
 td > img{
-	width: 1200px;
+	width: 100%;
 }
 
 </style>
@@ -63,7 +63,11 @@ td > img{
 			<tr>
 				<td colspan="4">
 					<c:if test="${not empty event.event_image}">
-						<img alt="본문이미지" src="${pageContext.request.contextPath}/resources/images/${event.event_image}">
+						<img alt="본문이미지" src="${pageContext.request.contextPath}/resources/upload/${event.event_image}"
+							<c:if test="${event.event_type_name eq '할인이벤트'}"> 
+								onclick="giveCoupon(${event.event_num})"
+							</c:if>
+						>
 					</c:if>
 				</td>
 			</tr>
@@ -76,6 +80,13 @@ td > img{
 	<footer>
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
+	
+	<script type="text/javascript">
+		function giveCoupon(event_num) {
+			location.href = "giveCoupon?event_num=" + event_num;
+			alert("쿠폰이 발급되었습니다!");
+		}
+	</script>
 
 
 </body>

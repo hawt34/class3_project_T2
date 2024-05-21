@@ -1,11 +1,21 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -20,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.EventService;
@@ -561,8 +572,6 @@ public class AdminController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
 	
-	
-	
 	// 관리자 이벤트 
 	@GetMapping("admin_event")
 	public String adminEvent(Model model) {
@@ -572,16 +581,79 @@ public class AdminController {
 	}
 	// 이벤트 등록 폼
 	@GetMapping("admin_event_form")
-	public String adminEventForm() {
+	public String adminEventForm(Model model) {
+		List<Map<String, String>> couponTypeList = service.getCouponTypeList();
+		model.addAttribute("couponTypeList", couponTypeList);
+		
 		return "admin/admin_event/admin_event_form";
 	}
 	
 	// 이벤트 등록 프로
 	@PostMapping("admin_event_pro")
-	public String adminEventPro(EventVO event, Model model) {
+	public String adminEventPro(HttpServletRequest request, HttpSession session, EventVO event, Model model) {
+		
+		String uploadDir = "/resources/upload";
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		System.out.println("실제 업로드 경로(session): " + saveDir);
+		// 실제 업로드 경로
+		// D:\Spring\workspace_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Boogi_movie_t2\resources\ upload\2024/05/21
+		
+		String subDir = "";
+		LocalDate today = LocalDate.now();
+		String datePattern = "yyyy/MM/dd";
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(datePattern);
+		System.out.println(today.format(dtf));
+		subDir = today.format(dtf);
+		
+		saveDir += "/" + subDir;
+		System.out.println(saveDir);
+		
+		Path path = Paths.get(saveDir);
+		
+		try {
+			// Files 클래스의 createDirectories() 메서드 호출하여 실제 경로 생성
+			Files.createDirectories(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		MultipartFile mfile1 = event.getEvent_thumbFile();
+		MultipartFile mfile2 = event.getEvent_imageFile();
+//		String uuid = UUID.randomUUID().toString();
+		
+		event.setEvent_thumbnail("");
+		event.setEvent_image("");
+		
+		String fileName1 = UUID.randomUUID().toString().substring(0, 8) + "_" + mfile1.getOriginalFilename();
+		String fileName2 = UUID.randomUUID().toString().substring(0, 8) + "_" + mfile2.getOriginalFilename();
+		
+		if(!mfile1.getOriginalFilename().equals("")) {
+			event.setEvent_thumbnail(subDir + "/" + fileName1);      
+		}
+		if(!mfile2.getOriginalFilename().equals("")) {
+			event.setEvent_image(subDir + "/" + fileName2);      
+		}
+		
+		System.out.println("업로드 파일명: " + event.getEvent_thumbnail());
+		System.out.println("업로드 파일명: " + event.getEvent_image());
+		
 		int insertCount = service.InsertEvent(event);
 		
 		if(insertCount > 0) {
+			try {
+				if(!mfile1.getOriginalFilename().equals("")) {
+					mfile1.transferTo(new File(saveDir, fileName1));
+				}
+				if(!mfile2.getOriginalFilename().equals("")) {
+					mfile2.transferTo(new File(saveDir, fileName2));
+				}
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 			return "redirect:/admin_event";
 		} else {
 			return "error/fail";
@@ -589,7 +661,7 @@ public class AdminController {
 	}
 	// 이벤트 등록 수정 폼
 	@GetMapping("admin_event_modify")
-	public String adminEventModify(EventVO event, Model model) {
+	public String adminEventModify(HttpSession session, EventVO event, Model model) {
 		event = eventService.getEvent(event.getEvent_num());
 		
 		if(event == null) {
@@ -616,10 +688,30 @@ public class AdminController {
 	}
 	// 이벤트 삭제
 	@GetMapping("admin_event_delete")
-	public String adminEventDelete(EventVO event, Model model) {
-		System.out.println(event);
+	public String adminEventDelete(HttpSession session, EventVO event, Model model) {
+		EventVO dbEvent = eventService.getEvent(event.getEvent_num());
+		
 		int deleteCount = service.deleteEvent(event);
 		if(deleteCount > 0) {
+			String uploadDir = "/resources/upload";
+			String saveDir = session.getServletContext().getRealPath(uploadDir);
+			
+			String[] arrFileNames = {
+				dbEvent.getEvent_thumbnail(),
+				dbEvent.getEvent_image()
+			};
+			
+			for(String fileName : arrFileNames) {
+				if(!fileName.equals("")) {
+					Path path = Paths.get(saveDir + "/" + fileName);
+					try {
+						Files.deleteIfExists(path);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
 			return "redirect:/admin_event";
 		} else {
 			model.addAttribute("msg", "이벤트 수정에 실패했습니다");

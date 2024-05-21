@@ -1,5 +1,7 @@
 package itwillbs.p2c3.boogimovie.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +9,7 @@ import itwillbs.p2c3.boogimovie.mapper.PaymentMapper;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.PayVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
 @Service
@@ -41,7 +44,7 @@ public class PaymentService {
 		return mapper.getScreenSession(scs_num);
 	}
 
-	public PayVO selectPayInfo(PayVO pay) {
+	public List<PayVO> selectPayInfo(PayVO pay) {
 		return mapper.selectPayInfo(pay);
 	}
 
@@ -49,7 +52,9 @@ public class PaymentService {
 		mapper.saveTicketInfo(ticket2);
 	}
 	
-	
+	public List<StorePayVO> selectStorePayInfo(String member_id){
+		return mapper.selectStorePayInfo(member_id);
+	}
 	
 
 }

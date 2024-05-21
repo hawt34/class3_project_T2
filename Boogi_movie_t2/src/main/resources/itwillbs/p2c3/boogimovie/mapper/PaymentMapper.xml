@@ -54,7 +54,14 @@
 	<select id="selectPayInfo" resultType="itwillbs.p2c3.boogimovie.vo.PayVO">
 		SELECT *
 		FROM pay
-		WHERE 
+		WHERE member_id = #{member_id}
+	</select>
+	
+	
+	<select id="selectStorePayInfo" resultType="itwillbs.p2c3.boogimovie.vo.StorePayVO">
+		SELECT *
+		FROM store_pay
+		WHERE member_id = #{member_id}
 	</select>
 	
 	

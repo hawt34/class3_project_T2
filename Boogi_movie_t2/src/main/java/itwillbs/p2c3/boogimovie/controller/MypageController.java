@@ -6,7 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -32,11 +36,17 @@ import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.CouponService;
 import itwillbs.p2c3.boogimovie.service.MypageService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
+import itwillbs.p2c3.boogimovie.service.PaymentService;
+import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
+import itwillbs.p2c3.boogimovie.vo.PayVO;
+import itwillbs.p2c3.boogimovie.vo.PointVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
@@ -53,6 +63,12 @@ public class MypageController {
 	
 	@Autowired
 	private AdminService service;
+	
+	@Autowired
+	private	PaymentService paymentService;
+	
+	@Autowired
+	private TheaterService theaterService;
 	
 	@Autowired
 	private HttpSession session;
@@ -201,7 +217,37 @@ public class MypageController {
 		member.setMember_id(id);
 		member = mypageService.getDbMember(member);
 		
+		PayVO pay = new PayVO();
+		pay.setMember_id(id);
+		List<PayVO> payList = paymentService.selectPayInfo(pay);
+		List<StorePayVO> storePayList = paymentService.selectStorePayInfo(id);
+		List<PointVO> combinedList = new ArrayList<PointVO>();
+		int scs_num = 0;
+        for (PayVO pay2 : payList) {
+        	scs_num = pay2.getScs_num();
+        	ScreenSessionVO scs = paymentService.getScreenSession(scs_num);
+        	TheaterVO theater = new TheaterVO();
+        	theater.setTheater_num(scs.getTheater_num());
+        	TheaterVO dbTheater = theaterService.getTheater(theater);
+            combinedList.add(new PointVO(pay2.getTicket_pay_price()/10, pay2.getUse_point(), pay2.getTicket_pay_date(), pay2.getTicket_pay_type(), dbTheater.getTheater_name()));
+        }
+        
+        int store_price = 0;
+        String price_str = "";
+        LocalDate currentDate = LocalDate.now();
+        LocalDateTime localDateTime = null;
+        for (StorePayVO storePay : storePayList) {
+        	price_str = storePay.getStore_pay_price().replace(",", "");
+        	store_price = Integer.parseInt(price_str);
+        	localDateTime = localDateTime.of(currentDate, storePay.getStore_pay_date());
+            combinedList.add(new PointVO(store_price/10, storePay.getUse_point(), localDateTime, storePay.getStore_pay_type(), "스토어"));
+        }
+            	
+        Collections.sort(combinedList, Comparator.comparing(PointVO::getDate));
+        
 		model.addAttribute("member", member);
+		model.addAttribute("combinedList", combinedList);
+		
 		
 		return "mypage/myp_point";
 	}

@@ -97,13 +97,4 @@ public class StoreController {
 	}
     
 
-	@GetMapping("checkout")
-	public String check() {
-
-		
-		model.addAttribute("cartList", cartList);	
-		
-	return"";
-	
-	}
 }

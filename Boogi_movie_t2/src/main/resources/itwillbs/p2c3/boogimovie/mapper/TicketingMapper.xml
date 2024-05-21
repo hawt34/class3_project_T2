@@ -49,9 +49,10 @@
 	<select id="selectPayNum" resultType="int">
 		SELECT ticket_pay_num
 		FROM pay
-		WHERE scs_num = #{scs_num}
+		WHERE 
+			1=1
+		AND scs_num = #{scs_num}
 	</select>
-	
 	
 	<select id="selectPayedSeat" resultType="itwillbs.p2c3.boogimovie.vo.TicketVO">
 		SELECT *
@@ -59,14 +60,4 @@
 		WHERE ticket_pay_num = #{pay_num} 
 	</select>
 	
-	
-	<select id="getScreenSession" resultType="itwillbs.p2c3.boogimovie.vo.ScreenSessionVO">
-		SELECT *
-		FROM reserve_view
-		WHERE scs_num = #{scs_num} 
-	</select>
-	
-	
-		
-
 </mapper>

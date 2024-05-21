@@ -3,6 +3,7 @@ package itwillbs.p2c3.boogimovie.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,7 @@ import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.Payment;
 
 import itwillbs.p2c3.boogimovie.service.CouponService;
+import itwillbs.p2c3.boogimovie.service.ItemInfoService;
 import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.service.MovieInfoService;
 import itwillbs.p2c3.boogimovie.service.PaymentService;
@@ -63,6 +65,9 @@ public class PaymentController {
 	
 	@Autowired
 	private TicketingService ticketService;
+	
+	@Autowired
+	private ItemInfoService itemService;
 	
 	
 	public PaymentController() {
@@ -115,13 +120,20 @@ public class PaymentController {
 			return "error/fail";
 		}
 		
+		System.out.println("%%%%%%%%%%%%%%%%%%%%$---------------scs : " + scs);
+		System.out.println("%%%%%%%%%%%%%%%%%%%%$---------------movie : " + movie);
+		
 		member.setMember_id(id);
 		member = memberService.isCorrectUser(member);
 		List<CouponVO> couponList = couponService.getMemberCoupon(member);
 		movie = movieService.getMovieInfo(movie);
-		scs = service.getScreenSession(scs.getScs_num());
-		scs.setTheater_name(theater.getTheater_name());
+		ScreenSessionVO dbscs = service.getScreenSession(scs.getScs_num());
+		dbscs.setTheater_name(scs.getTheater_name());
+		dbscs.setMovie_name(movie.getMovie_name());
+		dbscs.setMovie_poster(movie.getMovie_poster());
 		
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&---------------movie : " + movie);
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&---------------dbscs : " + dbscs);
 		
 		// 선택 날짜 String scs_date2 > Date 변환  > "yyyy.MM.dd(E)" 형식으로 재가공
 		SimpleDateFormat originalFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
@@ -139,8 +151,7 @@ public class PaymentController {
         model.addAttribute("keyword", keyword);
 		model.addAttribute("member", member);
 		model.addAttribute("couponList", couponList);
-		model.addAttribute("movie", movie);
-		model.addAttribute("scs", scs);
+		model.addAttribute("scs", dbscs);
 		model.addAttribute("formattedDate", formattedDate);
 		model.addAttribute("selected_seats", selected_seats);
 		model.addAttribute("person_info", person_info);
@@ -162,12 +173,8 @@ public class PaymentController {
 		
 		member = service.getMember(member);
 		
-		if(member.getMember_point() < use_point) {
-			
-			return "false"; // 포인트 차감 불가 
-		} 
 		
-		return "true";  // 포인트 차감 가능
+		return !(member.getMember_point() < use_point)+""; 
 		
 	} // memberPoint()
 	
@@ -358,7 +365,25 @@ public class PaymentController {
 	
 	
 	@PostMapping("payment_store")
-	public String paymentStore() {
+	public String paymentStore(String itemName, String quantity, String totalPrice, Model model) {
+		String[] items = itemName.split(",");
+		String[] quantities = quantity.split(",");
+		String[] totalPrices = totalPrice.split(",");
+		List<CartVO> cartList = new ArrayList<CartVO>();
+		for(int i = 0; i < items.length;i++) {
+			CartVO cart = new CartVO();
+			int item_num = itemService.getItemNum(items[i]);
+			cart.setItem_info_num(item_num);
+			int quan = Integer.parseInt(quantities[i]);
+			int price = Integer.parseInt(totalPrices[i]);
+			cart.setItem_quantity(quan);
+			cart.setItem_info_name(items[i]);
+			cart.setItem_total_price(price);
+			cart.setItem_price(price/items.length);
+			cartList.add(cart);
+		}
+		
+		
 		
 		
 		return "payment/payment_store";

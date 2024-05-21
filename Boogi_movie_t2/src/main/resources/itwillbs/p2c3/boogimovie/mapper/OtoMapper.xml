@@ -122,4 +122,16 @@
 			</if>
 		WHERE oto_num = #{oto_num}
 	</update>
+	
+	<!-- reply가져오기 -->
+	<select id="selectOtoReply">
+		SELECT 
+			oto_reply_content,
+			oto_reply_date
+		FROM oto_reply
+		WHERE oto_num = #{oto_num}
+	</select>
+	
+	
+	
 </mapper>

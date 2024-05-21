@@ -33,7 +33,7 @@
 
     <script>
         function requestAuth() {
-            $.post("/requestAuth", $("#authForm").serialize(), function(data) {
+            $.post("requestAuth", $("#authForm").serialize(), function(data) {
                 if (data) {
                     alert("Authentication request sent. Please check your phone.");
                     $("#verifyForm").show();
@@ -45,7 +45,7 @@
         }
 
         function verifyAuth() {
-            $.post("/verifyAuth", $("#verifyForm").serialize(), function(data) {
+            $.post("verifyAuth", $("#verifyForm").serialize(), function(data) {
                 if (data) {
                     alert("Authentication verified.");
                 } else {

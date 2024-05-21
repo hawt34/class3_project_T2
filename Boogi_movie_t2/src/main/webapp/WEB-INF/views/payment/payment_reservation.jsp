@@ -475,6 +475,7 @@
  		let member_email = "${member.member_email}";
  		let member_name = "${member.member_name}";
  		let member_tel = "${member.member_tel}";
+ 		let keyword = "${keyword}";
  		
 		// IMP.request_pay 결제창 호출
  	    IMP.request_pay(
@@ -486,7 +487,8 @@
  	            amount: amount,
  	            buyer_email: member_email,
  	            buyer_name: member_name,
- 	            buyer_tel: member_tel
+ 	            buyer_tel: member_tel,
+ 	            buyer_keyword : keyword
  	        },
  	        function (rsp) {
  	            console.log(rsp);

@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,6 +34,7 @@ import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.CartVO;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
+import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.PayVO;
@@ -102,7 +105,7 @@ public class PaymentController {
 	
 	@PostMapping("payment")
 	public String paymentReserve(MemberVO member, HttpSession session, Model model, ScreenSessionVO scs, MovieVO movie,
-			String selected_seats, String person_info, String total_fee, String scs_date2, TheaterVO theater) {
+			String selected_seats, String person_info, String total_fee, String scs_date2, TheaterVO theater, String keyword) {
 		
 		// 세션 확인
 		String id = (String)session.getAttribute("sId");
@@ -133,7 +136,7 @@ public class PaymentController {
         String formattedDate  = targetFormat.format(date);
 		
         
-        
+        model.addAttribute("keyword", keyword);
 		model.addAttribute("member", member);
 		model.addAttribute("couponList", couponList);
 		model.addAttribute("movie", movie);
@@ -175,7 +178,7 @@ public class PaymentController {
 	@PostMapping("payVerify{imp_uid}")
 	public boolean payVerify(@PathVariable(value = "imp_uid") String imp_uid, String use_point, String coupon_num, MemberVO member, String amount, 
 			String formattedDate, MovieVO movie, String theater_name, String screen_cinema_num, ScreenSessionVO scs, String person_info, PayVO pay, 
-			String selected_seats, TicketVO ticket) throws IamportResponseException, IOException{
+			String selected_seats, TicketVO ticket, String keyword) throws IamportResponseException, IOException{
 		
 		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------scs : " + scs);
 		Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 검증처리
@@ -206,10 +209,121 @@ public class PaymentController {
 			
 			service.savePayInfo(pay); // pay 테이블에 결제 정보 저장
 			
-//			ticket.setTicket_pay_num(pay.getTicket_pay_num());
-//			service.saveTicketInfo(ticket); // ticket 테이블에 티켓 정보 저장
+			PayVO payInfo = service.getPayInfo(pay.getMerchant_uid());
+			// 티켓처리
 			
-			return true; 
+			//person_info에서 숫자만 남기기
+			
+	        // Step 1: 쉼표(,)로 분리
+	        String[] parts = person_info.split(",\\s*");
+	        
+	        // Step 2: 숫자 값만 추출
+	        int[] numbers = new int[parts.length];
+	        for (int i = 0; i < parts.length; i++) {
+	            String part = parts[i];
+	            String numberStr = part.replaceAll("[^0-9]", ""); // 숫자만 남기기
+	            numbers[i] = Integer.parseInt(numberStr);
+	        }
+	        String[] seats = selected_seats.split(",");
+	        String seat = "";
+	        int seat_price = 0;
+	        int NP_num = 0;
+	        int YP_num = 0;
+	        int OP_num = 0;
+	        
+	        Map<String, String> fee_map = new HashMap<String, String>();
+	        fee_map.put("fee_dimension_keyword", parts[0]);
+	        fee_map.put("fee_day_keyword", parts[1]);
+	        fee_map.put("fee_time_keyword", parts[2]);
+	        
+	        // 결과 출력
+			for(int i = 0; i < numbers.length;i++) {
+				switch (i) {
+				case 0: 
+					NP_num 	= numbers[i]; 
+					seat 	= seats[i];
+					
+					Map<String, Object> dbfee_map = ticketService.feeCalc(fee_map);
+					
+					int fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100) 
+									* ((int)dbfee_map.get("fee_time_discount") / 100) 
+									* ((int)dbfee_map.get("fee_dimension_discount") / 100);
+					List<FeeAgeVO> feeAge =  ticketService.feeCalcAge();
+					for(FeeAgeVO fa : feeAge) {
+						if(fa.getFee_age_keyword().equals("NP")) {
+							fee = fee * (fa.getFee_age_discount() / 100);
+						}
+					}
+					int pay_num = payInfo.getTicket_pay_num();
+					TicketVO ticket2 = new TicketVO();
+					ticket2.setTicket_keyword(keyword + "NP");
+					ticket2.setTicket_pay_num(pay_num);
+					ticket2.setTicket_price(fee);
+					ticket2.setTicket_seat_info(seat);
+					
+					for(int j = 0; j < NP_num;j++) {
+						service.saveTicketInfo(ticket2);
+					}
+					
+					
+					break;
+				case 1: 
+					YP_num 	= numbers[i]; 
+					seat 	= seats[i];
+					
+					dbfee_map = ticketService.feeCalc(fee_map);
+					
+					fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100) 
+									* ((int)dbfee_map.get("fee_time_discount") / 100) 
+									* ((int)dbfee_map.get("fee_dimension_discount") / 100);
+					feeAge =  ticketService.feeCalcAge();
+					for(FeeAgeVO fa : feeAge) {
+						if(fa.getFee_age_keyword().equals("YP")) {
+							fee = fee * (fa.getFee_age_discount() / 100);
+						}
+					}
+					pay_num = payInfo.getTicket_pay_num();
+					TicketVO ticket3 = new TicketVO();
+					ticket3.setTicket_keyword(keyword + "YP");
+					ticket3.setTicket_pay_num(pay_num);
+					ticket3.setTicket_price(fee);
+					ticket3.setTicket_seat_info(seat);
+					
+					for(int j = 0; j < YP_num;j++) {
+						service.saveTicketInfo(ticket3);
+					}
+					break;
+				case 2: 
+					OP_num 	= numbers[i]; 
+					seat 	= seats[i];
+					
+					dbfee_map = ticketService.feeCalc(fee_map);
+					
+					fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100) 
+									* ((int)dbfee_map.get("fee_time_discount") / 100) 
+									* ((int)dbfee_map.get("fee_dimension_discount") / 100);
+					feeAge =  ticketService.feeCalcAge();
+					for(FeeAgeVO fa : feeAge) {
+						if(fa.getFee_age_keyword().equals("OP")) {
+							fee = fee * (fa.getFee_age_discount() / 100);
+						}
+					}
+					pay_num = payInfo.getTicket_pay_num();
+					TicketVO ticket4 = new TicketVO();
+					ticket4.setTicket_keyword(keyword + "OP");
+					ticket4.setTicket_pay_num(pay_num);
+					ticket4.setTicket_price(fee);
+					ticket4.setTicket_seat_info(seat);
+					
+					for(int j = 0; j < OP_num;j++) {
+						service.saveTicketInfo(ticket4);
+					}
+				}
+			}
+			
+			
+			
+			return true;
 			
 		} else if(payment.getStatus().equals("failed")) {
 			System.out.println("payVerify - failed ");
@@ -217,7 +331,7 @@ public class PaymentController {
 			
 			
 		}
-		return false; 
+		return true; 
 		
 		
 	} // payVerify()

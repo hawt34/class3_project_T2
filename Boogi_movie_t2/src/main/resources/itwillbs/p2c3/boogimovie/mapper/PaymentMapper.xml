@@ -51,5 +51,11 @@
 		WHERE scs_num = #{scs_num} 
 	</select>
 	
+	<select id="selectPayInfo" resultType="itwillbs.p2c3.boogimovie.vo.PayVO">
+		SELECT *
+		FROM pay
+		WHERE 
+	</select>
+	
 	
 </mapper>

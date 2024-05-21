@@ -13,8 +13,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class PhoneAuthService {
-    private static final String API_KEY = "your_api_key_here";
-    private static final String REQUEST_URL = "https://api.portone.io/certifications";
+    private static final String API_KEY = "3531856454755108";
+    private static final String REQUEST_URL = "https://api.portone.io/certifications/imp00262041";
     private static final String VERIFY_URL = "https://api.portone.io/certifications/verify";
 
     public Map<String, Object> requestAuth(String phone, String name, String birth, int gender, String carrier) {
@@ -25,7 +25,7 @@ public class PhoneAuthService {
 
         Map<String, Object> body = new HashMap<>();
         body.put("merchant_uid", "order_id_" + System.currentTimeMillis());
-        body.put("company", "회사명");
+        body.put("company", "boogimovie");
         body.put("phone", phone);
         body.put("name", name);
         body.put("birth", birth);

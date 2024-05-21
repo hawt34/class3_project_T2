@@ -112,5 +112,11 @@
 		FROM fee_info
 	</select>
 	
+	<select id="selectFeeList" resultType="itwillbs.p2c3.boogimovie.vo.FeeAgeVO">
+		SELECT *
+		FROM fee
+	
+	</select>
+	
 	
 </mapper>

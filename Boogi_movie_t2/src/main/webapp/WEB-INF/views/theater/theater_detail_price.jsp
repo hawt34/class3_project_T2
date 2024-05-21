@@ -14,61 +14,17 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <script type="text/javascript">
 	$(function() {
-		
-		// 요금표내 숫자 포맷팅, 500원 단위로 반내림
-		$('table').find('*').filter(function() {
-	        // 숫자인지 확인 (정규 표현식 사용)
-	        return $.isNumeric($(this).text());
-	    }).each(function() {
-	        // 숫자를 포맷팅하여 변경
-	        let formattedNumber = new Intl.NumberFormat().format(parseFloat($(this).text()));
-	        $(this).text(formattedNumber);
-	    });
-		
-		
-		let price = 15000; // 기본 표준 가격 = 2D/평일/낮/성인
-		let discount = 0;
-		
-		if($('.2d')) {
-			
-			discount + ${feeInfo}.OP; 
-		}
-		
-		
-// 		// 2D 평일 성인 요금 
-// 		let fee_2DWDGTNP = price;			//	낮
-// 		let fee_2DWDMTNP = fee_2DWDGTNP * 0.8;	//	조조
-// 		let fee_2DWDNTNP = fee_2DWDGTNP * 0.9;	//	심야
-// 		// 2D 주말 성인 요금 
-// 		let fee_2DHDGTNP = fee_2DWDGTNP * 1.2;	// 낮
-// 		let fee_2DHDMTNP = fee_2DHDGTNP * 0.8;	// 조조
-// 		let fee_2DHDNTNP = fee_2DHDGTNP * 0.9;	// 심야
-// 		// 3D 평일 성인 요금 
-// 		let fee_3DWDGTNP = fee_2DWDGTNP * 1.2;	// 낮
-// 		let fee_3DWDMTNP = fee_3DWDGTNP * 0.8;	// 조조
-// 		let fee_3DWDNTNP = fee_3DWDGTNP * 0.9;	// 심야
-// 		// 3D 주말 성인 요금
-// 		let fee_3DHDGTNP = fee_3DWDGTNP * 1.2;	// 낮
-// 		let fee_3DHDMTNP = fee_3DHDGTNP * 1.2;	// 조조
-// 		let fee_3DHDNTNP = fee_3DHDGTNP * 1.2;	// 심야
-		
-// 		$("#2DWDGTNP").html(fee_2DWDGTNP);
-// 		$("#2DWDMTNP").html(fee_2DWDMTNP);
-// 		$("#2DWDNTNP").html(fee_2DWDNTNP);
-		
-// 		$("#2DHDGTNP").html(fee_2DHDGTNP);
-// 		$("#2DHDMTNP").html(fee_2DHDMTNP);
-// 		$("#2DHDNTNP").html(fee_2DHDNTNP);
-		
-// 		$("#3DWDGTNP").html(fee_3DWDGTNP);
-// 		$("#3DWDMTNP").html(fee_3DWDMTNP);
-// 		$("#3DWDNTNP").html(fee_3DWDNTNP);
-		
-// 		$("#3DHDGTNP").html(fee_3DHDGTNP);
-// 		$("#3DHDMTNP").html(fee_3DHDMTNP);
-// 		$("#3DHDNTNP").html(fee_3DHDNTNP);
-		
-		
+		// 서버에서 전달된 feeMap 객체를 JSON.parse를 통해 자바스크립트 객체로 변환
+		let feeMap = JSON.parse('${feeMap}');
+		// feeMap 객체를 반복하여 키와 값을 처리
+		for (let keyword in feeMap) {
+            if (feeMap.hasOwnProperty(keyword)) {
+                let price = feeMap[keyword];
+                console.log("keyword: " + keyword + " / price: " + price);
+                let formattedPrice = price.toLocaleString();
+                $("#" + keyword).html(formattedPrice + "원");
+            }
+        }
 		
 	});
 
@@ -99,13 +55,13 @@
 					      <td id="2DWDMTOP" class="OP"></td>
 					    </tr>
 					    <tr>
-					    	<td class="GT">일반(10:01~)</td>
+					    	<td class="GT">일반</td>
 					    	<td id="2DWDGTNP" class="NP"></td>
 					    	<td id="2DWDGTYP" class="YP"></td>
 					    	<td id="2DWDGTOP" class="OP"></td>
 					    </tr>
 					    <tr>
-					    	<td class="NT">심야(23:01~)</td>
+					    	<td class="NT">심야</td>
 					    	<td id="2DWDNTNP" class="NP"></td>
 					    	<td id="2DWDNTYP" class="YP"></td>
 					    	<td id="2DWDNTOP" class="OP"></td>
@@ -118,13 +74,13 @@
 					      	<td id="2DHDMTOP" class="OP"></td>
 					    </tr>
 					    <tr>
-					    	<td class="GT">일반(10:01~)</td>
+					    	<td class="GT">일반</td>
 					      	<td id="2DHDGTNP" class="NP"></td>
 					      	<td id="2DHDGTYP" class="YP"></td>
 					      	<td id="2DHDGTOP" class="OP"></td>
 					    </tr>
 					      <tr>
-					    	<td class="NT">심야(23:01~)</td>
+					    	<td class="NT">심야</td>
 					    	<td id="2DHDNTNP" class="NP"></td>
 					    	<td id="2DHDNTYP" class="YP"></td>
 					    	<td id="2DHDNTOP" class="OP"></td>
@@ -153,13 +109,13 @@
 							<td id="3DWDMTOP" class="OP"></td>
 						</tr>
 					    <tr>
-					    	<td class="GT">일반(10:01~)</td>
+					    	<td class="GT">일반</td>
 					    	<td id="3DWDGTNP" class="NP"></td>
 					    	<td id="3DWDGTYP" class="YP"></td>
 					    	<td id="3DWDGTOP" class="OP"></td>
 					    </tr>
 					      <tr>
-					    	<td class="NT">심야(23:01~)</td>
+					    	<td class="NT">심야</td>
 					    	<td id="3DWDNTNP" class="NP"></td>
 					    	<td id="3DWDNTYP" class="YP"></td>
 					    	<td id="3DWDNTOP" class="OP"></td>
@@ -172,13 +128,13 @@
 					      	<td id="3DHDMTOP" class="OP"></td>
 					    </tr>
 					    <tr>
-					    	<td class="GT">일반(10:01~)</td>
+					    	<td class="GT">일반</td>
 					      	<td id="3DHDGTNP" class="NP"></td>
 					      	<td id="3DHDGTYP" class="YP"></td>
 					      	<td id="3DHDGTOP" class="OP"></td>
 					    </tr>
 					     <tr>
-					    	<td class="NT">심야(23:01~)</td>
+					    	<td class="NT">심야</td>
 					    	<td id="3DHDNTNP" class="NP"></td>
 					    	<td id="3DHDNTYP" class="YP"></td>
 					    	<td id="3DHDNTOP" class="OP"></td>
@@ -187,7 +143,8 @@
 				</table>
 			</div><!-- col -->
 		</div><!--row-->
-		<p>
+		<p><b>조조</b> 10:00 이전까지 / <b>심야</b> : 23:00 이후부터</p>
+		<br>
 		<h4 class="text-primary">요금제</h4>
 		<ul>
 			<li>경로 만65세 이상 본인에 한함(신분증 확인)</li>

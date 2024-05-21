@@ -56,6 +56,9 @@ public interface TheaterMapper {
 	List<FeeAgeVO> selectFeeInfo();
 
 
+	List<FeeAgeVO> selectFeeList();
+
+
 
 
 

@@ -77,6 +77,11 @@ public class TheaterService {
 		return mapper.selectFeeInfo();
 	}
 
+	public List<FeeAgeVO> getFeeList() {
+		// TODO Auto-generated method stub
+		return mapper.selectFeeList();
+	}
+
 	
 	
 	

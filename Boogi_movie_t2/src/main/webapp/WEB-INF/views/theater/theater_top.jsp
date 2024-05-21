@@ -89,6 +89,9 @@
 		}); // ajax
 		
 	} // sendCheckedValues()
+	
+
+	
 </script>
 </head>
 <body>
@@ -106,7 +109,7 @@
 					 	</c:when>
 					 	<c:otherwise> <!-- 로그인 상태 -->
 							<!-- 나의극장 관리 모달 버튼 -->
-							<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"  onclick="initializeModal()">
 								<img src="${pageContext.request.contextPath}/resources/images/set.svg"> MY 극장 관리</button>
 							</li>
 							<!-- 체크된 MY극장 리스트 / member.member_my_theater1~3 -->

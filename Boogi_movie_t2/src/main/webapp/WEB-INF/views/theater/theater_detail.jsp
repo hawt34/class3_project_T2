@@ -90,6 +90,26 @@
 		}); // ajax
 		
 	} // sendCheckedValues()
+	
+	function initializeModal() {
+		var myTheaters = [
+			"${member.member_my_theater1}",
+			"${member.member_my_theater2}",
+			"${member.member_my_theater3}"
+		];
+
+		$('.form-check-input').each(function() {
+			var theaterName = $(this).val();
+      		if (myTheaters.includes(theaterName)) {
+		        $(this).prop('checked', true);
+		        count++;
+	      	} else {
+      			$(this).prop('checked', false);
+			}
+	    });
+		
+	} // initializeModal()
+	
 </script>
 
 </head>
@@ -113,7 +133,7 @@
 							 	</c:when>
 							 	<c:otherwise> <!-- 로그인 상태 -->
 									<!-- 나의극장 관리 모달 버튼 -->
-									<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+									<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"  onclick="initializeModal()">
 										<img src="${pageContext.request.contextPath}/resources/images/set.svg"> MY 극장 관리</button>
 									</li>
 									<!-- 체크된 MY극장 리스트 / member.member_my_theater1~3 -->
@@ -139,7 +159,7 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<h1 class="modal-title fs-5" id="exampleModalLabel">MY 극장 관리</h1>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
 								</div>
 								<div class="modal-body">
 									<c:forEach var="theater" items="${theaterList}">

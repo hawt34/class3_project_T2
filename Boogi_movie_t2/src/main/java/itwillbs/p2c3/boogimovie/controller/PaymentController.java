@@ -112,13 +112,20 @@ public class PaymentController {
 			return "error/fail";
 		}
 		
+		System.out.println("%%%%%%%%%%%%%%%%%%%%$---------------scs : " + scs);
+		System.out.println("%%%%%%%%%%%%%%%%%%%%$---------------movie : " + movie);
+		
 		member.setMember_id(id);
 		member = memberService.isCorrectUser(member);
 		List<CouponVO> couponList = couponService.getMemberCoupon(member);
 		movie = movieService.getMovieInfo(movie);
-		scs = ticketService.getScreenSession(scs.getScs_num());
-		scs.setTheater_name(theater.getTheater_name());
+		ScreenSessionVO dbscs = service.getScreenSession(scs.getScs_num());
+		dbscs.setTheater_name(scs.getTheater_name());
+		dbscs.setMovie_name(movie.getMovie_name());
+		dbscs.setMovie_poster(movie.getMovie_poster());
 		
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&---------------movie : " + movie);
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&---------------dbscs : " + dbscs);
 		
 		// 선택 날짜 String scs_date2 > Date 변환  > "yyyy.MM.dd(E)" 형식으로 재가공
 		SimpleDateFormat originalFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
@@ -133,11 +140,9 @@ public class PaymentController {
         String formattedDate  = targetFormat.format(date);
 		
         
-        
 		model.addAttribute("member", member);
 		model.addAttribute("couponList", couponList);
-		model.addAttribute("movie", movie);
-		model.addAttribute("scs", scs);
+		model.addAttribute("scs", dbscs);
 		model.addAttribute("formattedDate", formattedDate);
 		model.addAttribute("selected_seats", selected_seats);
 		model.addAttribute("person_info", person_info);
@@ -159,12 +164,8 @@ public class PaymentController {
 		
 		member = service.getMember(member);
 		
-		if(member.getMember_point() < use_point) {
-			
-			return "false"; // 포인트 차감 불가 
-		} 
 		
-		return "true";  // 포인트 차감 가능
+		return !(member.getMember_point() < use_point)+""; 
 		
 	} // memberPoint()
 	

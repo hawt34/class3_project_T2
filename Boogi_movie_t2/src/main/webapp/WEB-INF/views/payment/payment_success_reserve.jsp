@@ -32,12 +32,13 @@
 			<h2>정상적으로 <span>결제 완료</span> 되었습니다. </h2>	
 			<div>
 				<h5>결제 내역</h5>
-				<p>${pay.merchant_uid}, ${pay.ticket_pay_date}, ${pay.ticket_pay_price}</p>
+				<p>주문 번호 : ${pay.merchant_uid}</p>
+				<p>결제일 : ${pay.ticket_pay_date}}</p>
+				<p>결제 금액 : ${pay.ticket_pay_price}</p>
 			</div>
 			<div>
 				<h5>결제 정보</h5>
-				<p>결제수단</p>
-				<p>카드사</p>
+				<p>결제수단 : ${pay.ticket_pay_type}}</p>
 				<hr>
 				<p>티켓 가격</p>
 				<p>포인트 사용</p>

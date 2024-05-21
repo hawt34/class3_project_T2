@@ -284,6 +284,10 @@ public class MemberController {
 	}
 	
 	
+	@GetMapping("TestAuth")
+	public String testAuth() {
+		return "member/member_phone_auth";
+	}
 	
 	
 }

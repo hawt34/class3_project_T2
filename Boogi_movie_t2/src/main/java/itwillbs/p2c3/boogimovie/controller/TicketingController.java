@@ -74,7 +74,7 @@ public class TicketingController {
 	
 	
 	@PostMapping("tic_choose_seat")
-	public String choose_seat(String final_list_data, Model model) {
+	public String choose_seat(String final_list_data, Model model, HttpSession session) {
 		System.out.println(final_list_data);
 		//data 쪼개서 저장
 		String movie_name  = final_list_data.split("/")[1];
@@ -180,16 +180,24 @@ public class TicketingController {
         System.out.println(params);
         Map<String, Object> fee_info = ticketingService.feeCalc(params);
         
-        
+        System.out.println("ㅁㄴㅇㄻㄴㅇscs_num : " + dbScs.getScs_num());
         //pay_num 가져오기
+        
         int pay_num = ticketingService.selectPayNum(dbScs.getScs_num());
         
+        
         //결제 테이블에서 결제된 좌석값 구하기
-        List<TicketVO> payedSheets = ticketingService.selectPayedSeat(pay_num);
+    	List<TicketVO> tickets = ticketingService.selectPayedSeat(pay_num);
+        
+        
+        
+        
         String seats2 = "";
-        for(TicketVO ticket : payedSheets) {
+        for(TicketVO ticket : tickets) {
         	seats2 += "/" + ticket.getTicket_seat_info();
         }
+        
+        
 		//model에 저장
 		model.addAttribute("scs", dbScs);
 		model.addAttribute("seats", seats);

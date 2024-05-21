@@ -16,6 +16,7 @@ import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.service.MypageService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
+import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MyTheaterVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
@@ -66,7 +67,7 @@ public class TheaterController {
 	}       
 	 
 	@GetMapping("theater_detail")
-	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, MemberVO member, Model model, HttpSession session) {
+	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, MemberVO member, Model model, HttpSession session, FeeAgeVO fee) {
 		
 		// 로그인한 경우
 		String sId = (String)session.getAttribute("sId");
@@ -80,12 +81,15 @@ public class TheaterController {
 		theater = service.getTheater(theater);
 		List<TheaterFacilityVO> facilityList = service.getFacility(facility);
 		List<NoticeVO> theaterNoticeList = service.getTheaterNoticeList(notice);
+//		List<FeeAgeVO> feeList = service.getFeeInfoList();
+		
 		
 		
 		model.addAttribute("theater", theater);
 		model.addAttribute("theaterList", theaterList);
 		model.addAttribute("facilityList", facilityList);
 		model.addAttribute("theaterNoticeList", theaterNoticeList);
+//		model.addAttribute("feeList", feeList);
 		
 		
 		

@@ -3,14 +3,14 @@ package itwillbs.p2c3.boogimovie.controller;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Iterator;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,8 +50,9 @@ public class StoreController {
 		return "store/boogi_store";
 	}
 	//스토어 장바구니 ajax관련해서 처리할꺼임. 
+	
 	private List<CartVO> cart = new ArrayList<>();
-
+	
 	@PostMapping("add_to_cart")
 	@ResponseBody
 	public ResponseEntity<?> addToCart(@RequestBody List<CartVO> cartItems) {
@@ -70,8 +71,8 @@ public class StoreController {
 	    return ResponseEntity.ok().body(cartItems);
 	}
 
+
 	
-    //@PostMapping("remove_from_cart")
 	@PostMapping("remove_from_cart")
 	@ResponseBody
 	public ResponseEntity<?> removeFromCart(@RequestParam int item_info_num) {
@@ -93,6 +94,7 @@ public class StoreController {
 	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 	}
     
+
 	@GetMapping("cartCheck")
 	public String check(HttpServletRequest request) {
 	    Enumeration<String> parameterNames = request.getParameterNames();

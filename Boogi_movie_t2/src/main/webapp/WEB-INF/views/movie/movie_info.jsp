@@ -329,7 +329,8 @@ footer {
 <script type="text/javascript">
 	$(document).ready(function() {
     	let sId = "${sessionScope.sId}";
-    
+    	
+
     	$('#movieTicket').click(function() {
         // 세션 아이디 확인 후 로그인 페이지로 이동
 	        if (!sId) {
@@ -368,8 +369,10 @@ footer {
 	
 	// 리뷰 수정 버튼 클릭 시
 	function openReviewModify(review_num) {
-	    var url = "reviewModify?review_num=" + review_num;
-	    window.open(url, "", "width=700,height=500,left=" + ((window.screen.width - 700) / 2) + ",top=" + ((window.screen.height - 500) / 2));
+		 if (confirm("정말로 이 리뷰를 수정하시겠습니까?")) {
+	        var url = "reviewModify?review_num=" + review_num;
+	        window.open(url, "", "width=700,height=500,left=" + ((window.screen.width - 700) / 2) + ",top=" + ((window.screen.height - 500) / 2));
+		 }
 	}
 	
 	// 리뷰 삭제 버튼 클릭 시

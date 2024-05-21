@@ -97,4 +97,8 @@ public class StoreController {
 	}
     
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 }

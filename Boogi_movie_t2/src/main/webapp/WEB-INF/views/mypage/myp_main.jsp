@@ -192,8 +192,6 @@ body {
 						            dataType: "json",
 						            contentType: "application/json", // 서버에게 내용이 JSON임을 알려줌
 						            data: JSON.stringify({ member_id: member_id, checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
-// 						            data: JSON.stringify({ member_id, checkedValues }),
-// 									dataType : 'json',
 						            success: function(response) {
 						            	if(response){
 						            		alert("영화 정보 등록을 성공하였습니다");

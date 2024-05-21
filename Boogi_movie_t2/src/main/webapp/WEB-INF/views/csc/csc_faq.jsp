@@ -96,12 +96,10 @@ let faqCategory = '';
 let pageNum = 1;
 
 
-function getScroll(pageNum, newFaqCategory = "", isEmpty) {
+function getScroll(newFaqCategory = "", isEmpty) {
 	
-   	
 	if (isLoading) return; // 이미 데이터를 불러오고 있는 중이라면 중복 요청 방지
 	isLoading = true; // 데이터 요청 중 플래그 설정
-	
 	
     $.ajax({
         type: "GET",
@@ -118,7 +116,8 @@ function getScroll(pageNum, newFaqCategory = "", isEmpty) {
 				$(".csc_accordion").empty();
 // 				pageNum = 2;
             }
-			//반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달            
+			//반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달
+			let imgPath = "${pageContext.request.contextPath}/resources/images/cscBulb.png";
             $.each(faqList, function(index, faq) {
                 let accordion = $(".csc_accordion");
                 let checkbox = $("<input>", {
@@ -139,7 +138,7 @@ function getScroll(pageNum, newFaqCategory = "", isEmpty) {
                 );
                 let answerDiv = $("<div>").append(
                     $("<span>").append(
-                        $("<em>")
+                    	$("<em>")
                     ).text("ANSWER"),
                     $("<br>"),
                     $("<p>", {
@@ -150,6 +149,7 @@ function getScroll(pageNum, newFaqCategory = "", isEmpty) {
             });
 			
 			isLoading = false; // 데이터 요청 완료 후 플래그 해제
+			pageNum++;
         },
         
         error: function() {
@@ -161,13 +161,13 @@ function getScroll(pageNum, newFaqCategory = "", isEmpty) {
 
 $(function() {
 	//초기 로딩
-    getScroll(1, "", false);
+    getScroll("", false);
     
     $("#faq_category").change(function() {
         let newFaqCategory = $(this).val();
         faqCategory = newFaqCategory || ''; // faqCategory 업데이트
         pageNum = 1;
-        getScroll(pageNum, newFaqCategory, true);
+        getScroll(newFaqCategory, true);
     });
     
     $(document).scroll(function() {
@@ -180,7 +180,7 @@ $(function() {
         // 화면 하단까지 스크롤되었을 때 추가 데이터 가져오기
 		if (currentScroll >= documentHeight - windowHeight - bottom) {
 			console.log("스크롤 이벤트 발생 - pageNum = " + pageNum);
-			getScroll(pageNum, faqCategory, false); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
+			getScroll(faqCategory, false); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
         }
     });
 });

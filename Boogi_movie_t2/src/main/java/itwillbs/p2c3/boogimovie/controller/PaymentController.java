@@ -85,29 +85,6 @@ public class PaymentController {
 	
 	
 	
-	@GetMapping("payment")
-	public String payment(MemberVO member, Model model, HttpSession session) {
-		
-		String id = (String)session.getAttribute("sId");
-		if(id == null) {
-			model.addAttribute("msg", "로그인 후 다시 시도해주세요.");
-			model.addAttribute("targetURL", "member_login");
-			
-			return "error/fail";
-		}
-		
-		member.setMember_id(id);
-		member = memberService.isCorrectUser(member);
-		List<CouponVO> couponList = couponService.getMemberCoupon(member);
-		
-		model.addAttribute("member", member);
-		model.addAttribute("couponList", couponList);
-		
-		return "payment/payment_reservation";
-	}
-	
-	
-	
 	@PostMapping("payment")
 	public String paymentReserve(MemberVO member, HttpSession session, Model model, ScreenSessionVO scs, MovieVO movie,
 			String selected_seats, String person_info, String total_fee, String scs_date2, TheaterVO theater, String keyword) {
@@ -180,11 +157,11 @@ public class PaymentController {
 	
 	
 	// ================================================================================
-	
+	// 예매 결제 검증 및 DB 업데이트
 	@ResponseBody
 	@PostMapping("payVerify{imp_uid}")
 	public boolean payVerify(@PathVariable(value = "imp_uid") String imp_uid, String use_point, String coupon_num, MemberVO member, String amount, 
-			String formattedDate, MovieVO movie, String theater_name, String screen_cinema_num, ScreenSessionVO scs, String person_info, PayVO pay, 
+			MovieVO movie, String theater_name, String screen_cinema_num, ScreenSessionVO scs, String person_info, PayVO pay, 
 			String selected_seats, TicketVO ticket, String keyword) throws IamportResponseException, IOException{
 		
 		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------scs : " + scs);
@@ -215,6 +192,7 @@ public class PaymentController {
 			pay.setTicket_pay_type(payment.getPgProvider());
 			
 			service.savePayInfo(pay); // pay 테이블에 결제 정보 저장
+			System.out.println("pay  : " + pay);
 			
 			PayVO payInfo = service.getPayInfo(pay.getMerchant_uid());
 			// 티켓처리
@@ -338,7 +316,7 @@ public class PaymentController {
 			
 			
 		}
-		return true; 
+		return false; 
 		
 		
 	} // payVerify()
@@ -365,7 +343,18 @@ public class PaymentController {
 	
 	
 	@PostMapping("payment_store")
-	public String paymentStore(String itemName, String quantity, String totalPrice, Model model) {
+	public String paymentStore(String itemName, String quantity, String totalPrice, Model model,  HttpSession session, MemberVO member) {
+		// 세션 확인
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "로그인 후 다시 시도해주세요.");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		member.setMember_id(id);
+		member = memberService.isCorrectUser(member);
+				
+		
 		String[] items = itemName.split(",");
 		String[] quantities = quantity.split(",");
 		String[] totalPrices = totalPrice.split(",");
@@ -373,51 +362,61 @@ public class PaymentController {
 		for(int i = 0; i < items.length;i++) {
 			CartVO cart = new CartVO();
 			int item_num = itemService.getItemNum(items[i]);
+			String item_image = itemService.getItemImage(item_num);
 			cart.setItem_info_num(item_num);
 			int quan = Integer.parseInt(quantities[i]);
 			int price = Integer.parseInt(totalPrices[i]);
 			cart.setItem_quantity(quan);
 			cart.setItem_info_name(items[i]);
 			cart.setItem_total_price(price);
+			cart.setItem_info_image(item_image);
 			cart.setItem_price(price/items.length);
 			cartList.add(cart);
 		}
-		
-		
-		
-		
-		return "payment/payment_store";
-	}
-	
-	// ===================================================================================
-	// 뷰 확인 용
-	@GetMapping("payment_store")
-	public String paymentStore2(MemberVO member, Model model, HttpSession session, CartVO cart) {
-		
-		String id = (String)session.getAttribute("sId");
-		if(id == null) {
-			model.addAttribute("msg", "로그인 후 다시 시도해주세요.");
-			model.addAttribute("targetURL", "member_login");
-			
-			return "error/fail";
-		}
-		
-		member.setMember_id(id);
-		member = memberService.isCorrectUser(member);
 		List<CouponVO> couponList = couponService.getMemberCoupon(member);
-//		List<CartVO> cartList = couponService.getStoreCart(cart);
 		
-		model.addAttribute("member", member);
 		model.addAttribute("couponList", couponList);
-//		model.addAttribute("cartList", cartList);
-		
-		
-		
+		model.addAttribute("member", member);
+		model.addAttribute("cartList", cartList);
 		
 		return "payment/payment_store";
 	}
 	
+
+	//================================================================================
+	// 예매 결제 검증 및 DB 업데이트
+	@ResponseBody
+	@PostMapping("payVerifyStore{imp_uid}")
+	public boolean payVerifyStore(@PathVariable(value = "imp_uid") String imp_uid, String use_point, String coupon_num, MemberVO member, String amount, 
+			String formattedDate, MovieVO movie, String theater_name, String screen_cinema_num, ScreenSessionVO scs, String person_info, PayVO pay, 
+			String selected_seats, TicketVO ticket, String keyword) throws IamportResponseException, IOException{
+		
+		
+		
+//		store_pay_type
+//		store_pay_status
+//		store_pay_cancel_date
+//		store_pay_price
+//		coupon_num
+//		member_id
+//		merchant_uid
+//		use_point
+//		cart_num
+//		
+		
+		
+		
+		
+		
+		
+		return true;
+	}
 	
+	
+	
+	
+
+	//================================================================================
 	// 뷰 확인 용
 	@GetMapping("success_store")
 	public String successStore() {
@@ -425,6 +424,4 @@ public class PaymentController {
 		
 		return "payment/payment_success_store";
 	}
-	
-	
 }

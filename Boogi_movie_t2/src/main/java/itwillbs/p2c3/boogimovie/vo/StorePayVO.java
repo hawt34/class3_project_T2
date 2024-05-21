@@ -17,5 +17,9 @@ public class StorePayVO {
 	private String merchant_uid;
 	private int use_point;
 	private int cart_num;
+<<<<<<< HEAD
+=======
+	
+>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 	
 }

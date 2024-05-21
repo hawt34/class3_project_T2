@@ -14,5 +14,6 @@ public interface ItemMapper {
 	List<ItemInfoVO> selectItemListJuice();
 	List<ItemInfoVO> selectItemListFull();
 	int selectItemNum(String item_name);
+	String selectItemImage(int item_num);
 	
 }

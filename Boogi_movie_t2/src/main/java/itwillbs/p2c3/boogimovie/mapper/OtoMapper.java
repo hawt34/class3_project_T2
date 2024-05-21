@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 
 @Mapper
@@ -40,4 +41,7 @@ public interface OtoMapper {
 	
 	//1대1 문의 파일 삭제
 	int deleteOtoFile(OTOVO oto);
+	
+	//1대1 문의에 대한 답변 가져오기
+	OTOReplyVO selectOtoReply(int oto_num);
 }

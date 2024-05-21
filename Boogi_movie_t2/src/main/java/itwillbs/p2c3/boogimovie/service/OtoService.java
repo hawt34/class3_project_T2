@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import itwillbs.p2c3.boogimovie.mapper.OtoMapper;
+import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 
 @Service
@@ -56,5 +57,10 @@ public class OtoService {
 	//1대1 문의 수정
 	public int updateOto(OTOVO oto) {
 		return mapper.updateOto(oto);
+	}
+	
+	//1대1문의에 대한 답변
+	public OTOReplyVO getOtoReply(int oto_num) {
+		return mapper.selectOtoReply(oto_num);
 	}
 }

@@ -8,13 +8,10 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-=======
 import java.util.HashMap;
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -47,12 +44,9 @@ import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
-<<<<<<< HEAD
 import itwillbs.p2c3.boogimovie.vo.PayVO;
 import itwillbs.p2c3.boogimovie.vo.PointVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
-=======
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 

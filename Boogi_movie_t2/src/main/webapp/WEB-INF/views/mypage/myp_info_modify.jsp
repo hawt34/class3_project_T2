@@ -62,9 +62,9 @@ body {
 					  	<div class="form_item w-75">
 					    	<input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd">
 						    <div class="box4">
-					    		<span id="pwdMessage" style="color: red;"></span>
+					    		<span id="pwdMessage"></span>
 							</div>
-							    <label id="msg_pwd" class="msg_pwd" ></label><br>
+<!-- 							    <label id="msg_pwd" class="msg_pwd" ></label><br> -->
 					    </div><!-- form item -->
 						
 						<div class="box5">
@@ -151,24 +151,20 @@ body {
 	        let pwd = $("#member_pwd").val();
 		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
 		    let message = document.getElementById("pwdMessage");
-		    let msgPwd = document.getElementById("msg_pwd");
-		    
+// 		    let msgPwd = document.getElementById("msg_pwd");
+
 		    // 초기화
-		    message.textContent = "";
-		    msgPwd.textContent = "";
-		    msgPwd.style.color = "";
+		    message.style.color = "red";
 		    
 		    // 패스워드 입력값 검증(복잡도 검사 포함)
-		    let msg = "";
-		    let color = "";
-		    let checkPasswdResult = false;
+// 		    let msg = "";
+// 		    let color = "";
+// 		    let checkPasswdResult = false;
 
 		    if (pwd === "") {
 		        message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
-		        color = "red";
 		    } else if (!lengthRegx.test(pwd)) {
 		        message.textContent = "!,@,#,$ 영문자와 숫자조합 8~16자리를 입력해주세요";
-		        color = "red";
 		    } else {
 		        // 패스워드 복잡도(안전도) 검사
 		        let engUpperRegex = /[A-Z]/;
@@ -176,7 +172,6 @@ body {
 		        let numRegex = /\d/; // /[0-9]/랑 동일
 		        let specRegex = /[!@#$%]/;
 
-		        // 각 규칙에 대한 부분 검사를 통해 일치하는 항목 카운팅 변수 1씩 증가시키기
 		        let count = 0;
 
 		        if (engUpperRegex.test(pwd)) count++; // 대문자 포함할 경우
@@ -188,28 +183,28 @@ body {
 		            case 4:
 		                msg = "안전";
 		                color = "Green";
-		                checkPasswdResult = true;
+// 		                checkPasswdResult = true;
 		                break;
 		            case 3:
 		                msg = "보통";
 		                color = "Orange";
-		                checkPasswdResult = true;
+// 		                checkPasswdResult = true;
 		                break;
 		            case 2:
 		                msg = "위험";
 		                color = "Red";
-		                checkPasswdResult = true;
+// 		                checkPasswdResult = true;
 		                break;
 		            case 1:
 		            case 0:
 		                msg = "!,@,#,$ 영문자와 숫자조합 8~16자리를 입력해주세요";
 		                color = "RED";
-		                checkPasswdResult = false;
+// 		                checkPasswdResult = false;
 		                break;
 		        }
 		        
-		        msgPwd.textContent = msg;
-		        msgPwd.style.color = color;
+		        message.textContent = msg;
+		        message.style.color = color;
 		    }
 
 		    checkFormValidity(); // 폼 유효성 검사 실행
@@ -219,26 +214,26 @@ body {
 	    $("#member_pwd2").on("input", function() {
 	    	let pwd = $("#member_pwd").val();
 	        let pwd2 = $("#member_pwd2").val();
-		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
+// 		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
 			let message = document.getElementById("pwd2Message");
 	        
 		    message.style.color = "";
-		    let checkPasswdResult = false;
-
+// 		    let checkPasswdResult = false;
+			let color = "";
 	        if (pwd2 != pwd) {
 	            message.textContent = "비밀번호가 일치하지 않습니다";
 	            color = "red";
 	        } else if (pwd2 == pwd) {
 	        	message.textContent = "비밀번호 일치";
 	        	color = "blue";
-                checkPasswdResult = true;
+//                 checkPasswdResult = true;
 
 	        } else if (pwd2 === "") {
 	            message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
 	            color = "red";
-	        } // else {
-// 	            message.textContent = ""; // 에러 메시지 지우기
-// 	        }
+	        } else {
+	            message.textContent = ""; // 에러 메시지 지우기
+	        }
 	        
 	        message.style.color = color;
 
@@ -334,7 +329,8 @@ body {
 	    function checkFormValidity() {
 	        let pwdIsValid = /^[A-Za-z0-9!@#$%]{8,16}$/.test($("#member_pwd").val());
 // 	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
-	        let pwd2IsValid = /^[A-Za-z0-9!@#$%]{8,16}$/.test($("#member_pwd2").val());
+// 	        let pwd2IsValid = /^[A-Za-z0-9!@#$%]{8,16}$/.test($("#member_pwd2").val());
+            let pwd2IsValid = $("#member_pwd2").val() === $("#member_pwd").val();
 	        let birthIsValid = /\d{6}$/g.test($("#member_birth").val());
 	        let addressIsValid = /^.{2,20}$/g.test($("#member_addr").val());
 	        let emailIsValid = /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g.test($("#member_email").val());

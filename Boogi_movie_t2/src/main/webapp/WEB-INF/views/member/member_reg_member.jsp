@@ -12,6 +12,7 @@
 </head>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/member_default.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <body>
 
 <header>
@@ -53,7 +54,8 @@
     <input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required maxlength="30">
     <label id="msg_email" class="msg_email"></label><br>
     <label for="member_tel"><b>전화번호</b></label>
-    <input type="text" placeholder="전화번호 입력" name="member_tel" id="member_tel" placeholder="-제외한 전화번호를 입력해주세요" required maxlength="11">
+    <input type="text" placeholder="전화번호 입력" name="member_tel" id="member_tel" placeholder="-제외한 전화번호를 입력해주세요" required maxlength="11" onclick="certificationTel()">
+    
     <label id="msg_tel" class="msg_tel"></label><br>
     		<div class="form_item">
 			<label for="member_movie_genre"><b>영화취향</b></label>

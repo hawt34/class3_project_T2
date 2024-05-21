@@ -171,11 +171,11 @@ public class CscController {
 	@PostMapping("csc_oto")
 	public String cscOtoPro(OTOVO oto, HttpSession session, Model model) {
 		String id = (String)session.getAttribute("sId");
-		
+		System.out.println(oto);
 		// 극장 번호 가져오기
-		System.out.println("idddd" + oto.getTheater_name());
 		int theater_num = otoService.getTheaterNum(oto.getTheater_name());
 		
+		//로그인 필요 확인
 		if(id == null) {
 			model.addAttribute("msg", "로그인 후 이용");
 			model.addAttribute("targetURL", "./");
@@ -183,16 +183,16 @@ public class CscController {
 		//파일저장 경로 생성
 		String uploadDir = "resources/upload";
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
-		
+		System.out.println("saveDir: " + saveDir);
 		String subDir = "";
 		
 		//경로상에 날짜별로 디렉토리 생성
 		LocalDate today = LocalDate.now();
-		String datePattern = "yyyy" + File.separator + "MM" + File.separator + "dd";
+		String datePattern = "yyyy" + "/" + "MM" + "/" + "dd";
 		//날짜 포멧 yyyy\MM\dd
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(datePattern);
 		subDir = today.format(dtf);
-		saveDir += File.separator + subDir;
+		saveDir += "/" + subDir;
 		
 		try {
 			Path path = Paths.get(saveDir);
@@ -210,13 +210,15 @@ public class CscController {
 		String fileName1 = uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename();
 		String fileName2 = uuid.substring(0, 8) + "_" + mFile1.getOriginalFilename();
 		if(!mFile1.getOriginalFilename().equals("")) {
-			oto.setOto_file1(subDir + File.separator + fileName1);
+			oto.setOto_file1(subDir + "/" + fileName1);
 		}
 		
 		if(!mFile2.getOriginalFilename().equals("")) {
-			oto.setOto_file2(subDir + File.separator + fileName2);
+			oto.setOto_file2(subDir + "/" + fileName2);
 		}
 		
+		System.out.println("oto_file1 : " + oto.getOto_file1());
+		System.out.println("oto_file2 : " + oto.getOto_file2());
 		
 		//1대1 문의 db 등록
 		int insertCount = otoService.insertOto(oto, theater_num, id);

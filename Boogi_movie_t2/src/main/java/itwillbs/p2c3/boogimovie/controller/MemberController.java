@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import itwillbs.p2c3.boogimovie.service.MailService;
 import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.vo.MailAuthInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
-import retrofit2.http.GET;
 
 @Controller
 public class MemberController {
@@ -25,6 +25,15 @@ public class MemberController {
 	@Autowired
 	private MailService mail_service;
 	
+	
+	
+	@ResponseBody
+	@PostMapping("cerTel")
+	public String celTel() {
+		
+		
+		return "false";
+	}
 	
 	@PostMapping("member_pwd_update")
 	public String memberPwdUpdate(MemberVO member, Model model) {
@@ -215,6 +224,12 @@ public class MemberController {
 		
 		MemberVO outputMember =  service.isCorrectUser(inputMember);
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		
+		if(outputMember == null) {
+			model.addAttribute("msg", "로그인 실패!");
+			return "error/fail";
+		}
+		
 		
 		if(!pwdEncoder.matches(inputMember.getMember_pwd(), outputMember.getMember_pwd())) {
 			model.addAttribute("msg", "로그인 실패!");

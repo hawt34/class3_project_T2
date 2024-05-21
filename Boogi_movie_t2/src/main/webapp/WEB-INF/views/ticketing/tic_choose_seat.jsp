@@ -8,6 +8,14 @@
 <meta charset="UTF-8">
 <title>좌석 선택</title>
 </head>
+<style>
+    .seat.disabled {
+        background-image: url("${pageContext.request.contextPath}/resources/images/tic_payed_seat.png");
+        background-size: cover; /* 이미지가 좌석 크기에 맞게 조정되도록 설정 */
+        cursor: not-allowed; /* 마우스 커서가 not-allowed로 표시되도록 설정 */
+       	background-color: transparent;
+    }
+</style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
 " rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/tic_choose_seat.css" rel="stylesheet" type="text/css">
@@ -28,6 +36,8 @@
     <input type="hidden" id="scs_start_time" name="scs_start_time" value="${start_time}">
     <input type="hidden" id="scs_end_time" name="scs_end_time" value="${end_time}">
     <input type="hidden" id="scs_date2" name="scs_date2" value="${scs_date }">
+    <input type="hidden" id="scs_num" name="scs_num" value="${scs.scs_num }">
+    
     
 <section class="choose_seat_section">
 	<div class="choose_seat_title">
@@ -36,9 +46,6 @@
 	</div>
 	<div class="row">
 	
-	<div class="col-md-2">
-		<jsp:include page="../inc/admin_aside.jsp"></jsp:include>
-	</div>
 	
 <div class="box1 col-md-10">
 <div class="choose_person">

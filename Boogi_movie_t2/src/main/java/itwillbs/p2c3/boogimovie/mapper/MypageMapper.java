@@ -25,13 +25,13 @@ public interface MypageMapper {
 	MemberVO selectMyTheater(MemberVO member);
 	
 	// 예매내역
-//	List<Map<String , Object>> selectMovieReservation(MemberVO member);
+	List<Map<String , Object>> selectMovieReservation(MemberVO member);
 //	
-//	List<Map<String, Object>> selectResvList(@Param("startRow") int startRow, @Param("listLimit") int listLimit, @Param("member_id") String member_id);
+	List<Map<String, Object>> selectResvList(@Param("startRow") int startRow, @Param("listLimit") int listLimit, @Param("member_id") String member_id);
 	
-//	int selectResvCount(MemberVO member);
+	int selectResvCount(MemberVO member);
 	// 취소내역 
-//	List<Map<String, Object>> selectCancelList(MemberVO member);
+	List<Map<String, Object>> selectCancelList(MemberVO member);
 	
 	// 회원정보
 	MemberVO selectDbMember(MemberVO member);
@@ -43,7 +43,7 @@ public interface MypageMapper {
 	List<CouponVO> selectCoupon(MemberVO member);
 	
 	// 자주가는 극장
-	MemberVO insertMyTheater(@Param("checkedValues") List<String> checkedValues, @Param("member_id")String member_id, @Param("member") MemberVO member);
+	void updateMyTheater(@Param("checkedValues") List<String> checkedValues, @Param("member_id")String member_id, @Param("member") MemberVO member);
 	
 	ReservationVO selectMovieResv(String id);
 	

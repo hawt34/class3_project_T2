@@ -1,12 +1,6 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700);
 
-.seat.disabled {
-    background-image: url('/resources/images/tic_icon_all.gif');
-    background-size: cover; /* 이미지가 좌석 크기에 맞게 조정되도록 설정 */
-    cursor: not-allowed; /* 마우스 커서가 not-allowed로 표시되도록 설정 */
-    background-color: transparent; /* 배경색 제거 */
-}
 	
 	#seat_num{
 		margin-bottom : 50px;

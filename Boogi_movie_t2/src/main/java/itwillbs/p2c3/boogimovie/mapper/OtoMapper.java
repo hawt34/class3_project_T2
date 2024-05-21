@@ -24,14 +24,20 @@ public interface OtoMapper {
 	OTOVO selectOto(int oto_num);
 
 	String selectTheaterName(int theater_num);
-
-	int updateOto(@Param("oto_num")int oto_num, 
-				  @Param("oto_content")String oto_content);
-
+	
+	//1대1 문의 수정
+	int updateOto(OTOVO oto);
+	
+	//1대1 문의 삭제
 	int deleteOto(int oto_num);
-
+	
+	//1대1 문의 '미답' -> '답변' 수정
 	int updateResponse(int oto_num);
-
+	
+	//1대1 문의 유형에 따른 갯수
 	int getOtoListCount(@Param("faqCategory")String faqCategory,
 						@Param("theaterName")String theaterName);
+	
+	//1대1 문의 파일 삭제
+	int deleteOtoFile(OTOVO oto);
 }

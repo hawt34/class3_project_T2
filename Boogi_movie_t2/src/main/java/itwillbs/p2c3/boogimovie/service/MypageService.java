@@ -43,23 +43,23 @@ public class MypageService {
 	}
 	
 	// 예매내역 
-//	public List<Map<String , Object>> getMovieReservation(MemberVO member) {
-//		System.out.println("MypageService - getMovieReservation()");
-//		return mapper.selectMovieReservation(member);
-//	}
-//	
-//	public List<Map<String, Object>> getResvList(int startRow, int listLimit, String member_id){
-//		return mapper.selectResvList(startRow, listLimit, member_id);
-//	}
-//	
-//	public int getResvCount(MemberVO member) {
-//		return mapper.selectResvCount(member);
-//	}
+	public List<Map<String , Object>> getMovieReservation(MemberVO member) {
+		System.out.println("MypageService - getMovieReservation()");
+		return mapper.selectMovieReservation(member);
+	}
+	
+	public List<Map<String, Object>> getResvList(int startRow, int listLimit, String member_id){
+		return mapper.selectResvList(startRow, listLimit, member_id);
+	}
+	
+	public int getResvCount(MemberVO member) {
+		return mapper.selectResvCount(member);
+	}
 //	// 취소내역
-//	public List<Map<String, Object>> getCancelList(MemberVO member){
-//		System.out.println("MypageService - getCancelList()");
-//		return mapper.selectCancelList(member);
-//	}
+	public List<Map<String, Object>> getCancelList(MemberVO member){
+		System.out.println("MypageService - getCancelList()");
+		return mapper.selectCancelList(member);
+	}
 	
 	// 회원정보
 	public MemberVO getDbMember(MemberVO member) {
@@ -79,10 +79,10 @@ public class MypageService {
 	
 	// 자주가는극장 
 	@Transactional
-	public MemberVO myTheater(List<String> checkedValues, String member_id, MemberVO member) {
+	public void myTheater(List<String> checkedValues, String member_id, MemberVO member) {
 	    System.out.println("Checked Values: " + checkedValues); // 디버깅 로그 추가
 
-		return mapper.insertMyTheater(checkedValues, member_id, member);
+		mapper.updateMyTheater(checkedValues, member_id, member);
 	}
 	
 	public void updateTheater(String id, String theater, int theaterNumber) {

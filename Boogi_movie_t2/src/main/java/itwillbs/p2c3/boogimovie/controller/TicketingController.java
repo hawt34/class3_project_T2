@@ -211,7 +211,7 @@ public class TicketingController {
 	@ResponseBody
 	@GetMapping(value = "api/movieAbc", produces = "application/json")
 	public List<MovieVO> movieAbc(){
-		List<MovieVO> movies = movieService.getMovieListAbc();
+		List<MovieVO> movies = movieService.getMovieList();
 		return movies; 
 	}
 	
@@ -219,6 +219,11 @@ public class TicketingController {
 	@GetMapping(value = "api/movieLike", produces = "application/json")
 	public List<MovieVO> movieLike(){
 		List<MovieVO> movies = movieService.getMovieListLike();
+		if(movies.get(0) == null) {
+			MovieVO movie = new MovieVO();
+			movie.setMovie_name("영화X");
+			movies.add(movie);
+		}
 		return movies; 
 	}
 	
@@ -250,6 +255,9 @@ public class TicketingController {
 	public List<MyTheaterVO> theaterMyTheater(@RequestParam String sId){
 		MemberVO member = memberService.selectTheatersMyTheater(sId);
 		List<MyTheaterVO> myTheaters = new ArrayList<MyTheaterVO>();
+		if(myTheaters.isEmpty()) {
+			return null;
+		}
 		myTheaters.add(new MyTheaterVO(member.getMember_my_theater1()));
 		myTheaters.add(new MyTheaterVO(member.getMember_my_theater2()));
 		myTheaters.add(new MyTheaterVO(member.getMember_my_theater3()));
@@ -356,5 +364,18 @@ public class TicketingController {
 			
 		return final_list;
 	}
+	
+	
+	
+	@ResponseBody
+	@GetMapping(value = "api/theaterEntireTheater", produces = "application/json")
+	public List<TheaterVO> theaterEntireTheater (){
+		System.out.println("전체 극장 목록 조회");
+		List<TheaterVO> theaterList = theaterService.getTheatersOrderbyName();
+		
+		return theaterList;
+	}
+	
+	
 
 }

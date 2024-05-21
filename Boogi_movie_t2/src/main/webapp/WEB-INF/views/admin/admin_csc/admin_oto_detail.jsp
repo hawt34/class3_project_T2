@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>admin_detail</title>
+<title>문의내역 답변작성</title>
 <style>
 	.container {
 		width:850px;
@@ -39,7 +41,7 @@
 	  text-align: left;
 	}
 	
-	 tr:nth-child(4) td {
+	 tr:nth-child(5) td {
 	 	text-align: center;
 	 	background-color: white;
 	 }
@@ -94,6 +96,27 @@
 						<td>작성일</td>
 						<td>${otoDate }</td>
 						<td colspan="2"></td>
+					</tr>
+					<tr>
+						<td>첨부파일</td>
+						<td colspan="3">
+							<div>
+								<c:if test="${not empty oto.oto_file1 }">
+									<c:set var="original_fileName1" value="${fn:substringAfter(oto.oto_file1, '_') }"/>
+										${original_fileName1 }
+									<%-- 다운로드 버튼 활용하여 해당 파일 다운로드(버튼에 하이퍼링크 지정) --%>
+									<a href="${pageContext.request.contextPath }/resources/upload/${oto.oto_file1}" download="${original_fileName1 }"><input type="button" value="첨부파일1">
+									</a><br>
+								</c:if>
+								<c:if test="${not empty oto.oto_file2 }">
+									<c:set var="original_fileName2" value="${fn:substringAfter(oto.oto_file2, '_') }"/>
+										${original_fileName2 }
+									<%-- 다운로드 버튼 활용하여 해당 파일 다운로드(버튼에 하이퍼링크 지정) --%>
+									<a href="${pageContext.request.contextPath }/resources/upload/${oto.oto_file1}" download="${original_fileName2 }"><input type="button" value="첨부파일2">
+									</a>
+								</c:if>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="4">

@@ -58,7 +58,15 @@
 		FROM ticket
 		WHERE ticket_pay_num = #{pay_num} 
 	</select>
-		
+	
+	
+	<select id="getScreenSession" resultType="itwillbs.p2c3.boogimovie.vo.ScreenSessionVO">
+		SELECT *
+		FROM reserve_view
+		WHERE scs_num = #{scs_num} 
+	</select>
+	
+	
 		
 
 </mapper>

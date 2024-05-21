@@ -18,7 +18,7 @@ public interface TicketingMapper {
 	Map<String, Object> feeCalc(Map<String, String> params);
 	List<FeeAgeVO> feeCalcAge();
 	List<TicketVO> selectPayedSeat(int pay_num);
-	int selectPayNum(@Param("scs_num") int scs_num,@Param("id") String id);
+	int selectPayNum(int scs_num);
 }
 	
 	

@@ -52,10 +52,7 @@
 		WHERE 
 			1=1
 		AND scs_num = #{scs_num}
-		AND member_id = #{id}
 	</select>
-		
-	
 	
 	<select id="selectPayedSeat" resultType="itwillbs.p2c3.boogimovie.vo.TicketVO">
 		SELECT *
@@ -63,10 +60,4 @@
 		WHERE ticket_pay_num = #{pay_num} 
 	</select>
 	
-	
-
-	
-	
-		
-
 </mapper>

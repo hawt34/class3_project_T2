@@ -38,8 +38,8 @@ public class TicketingService {
 	}
 	
 
-	public int selectPayNum(int scs_num, String id) {
-		return mapper.selectPayNum(scs_num, id);
+	public int selectPayNum(int scs_num) {
+		return mapper.selectPayNum(scs_num);
 	}
 
 	

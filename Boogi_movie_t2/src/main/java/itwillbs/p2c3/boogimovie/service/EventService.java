@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import itwillbs.p2c3.boogimovie.mapper.EventMapper;
+import itwillbs.p2c3.boogimovie.vo.EventTypeVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 
 @Service
@@ -23,5 +24,9 @@ public class EventService {
 	public EventVO getEvent(int event_num) {
 		
 		return mapper.selectEvent(event_num);
+	}
+	
+	public List<EventTypeVO> getEventTypeList() {
+		return mapper.getEventTypeList();
 	}
 }

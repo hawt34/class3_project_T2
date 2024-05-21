@@ -35,12 +35,12 @@ main {
 
 /* item에 hidden 처리하기. */
 .item {
-	width: 350px;
+	width: 360px;
 	aspect-ratio: 10/6;
 	position: relative;
  	overflow: hidden; 
 	border-radius: 10px;
-	margin: 10px 40px;
+	margin: 10px 30px;
 }
 
 .item:after {
@@ -170,10 +170,13 @@ main {
 		
 		
 		<div class="category-bar">
-		  <button class="category-btn active totalEvent">전체이벤트</button>
-		  <button class="category-btn movieEvent">영화이벤트</button>
-		  <button class="category-btn theaterEvent">극장이벤트</button>
-		  <button class="category-btn discountEvent">할인이벤트</button>
+		  <button class="category-btn active EventType" value="0">전체이벤트</button>
+		  <c:forEach var="eventType" items="${eventTypeList}">
+		  	<button class="category-btn EventType" value="${eventType.event_type_num}">${eventType.event_type_name}</button>
+		  </c:forEach>
+<!-- 		  <button class="category-btn movieEvent">영화이벤트</button> -->
+<!-- 		  <button class="category-btn theaterEvent">극장이벤트</button> -->
+<!-- 		  <button class="category-btn discountEvent">할인이벤트</button> -->
 		</div>
 		<div class="container eventMain">
 			<c:forEach var="eventList" items="${eventList}" >
@@ -277,15 +280,41 @@ main {
 			    }
 			);
 			
-// 			$(".movieEvent").click(function() {
-				
-// 			});
-// 			$(".theaterEvent").click(function() {
-				
-// 			});
-// 			$(".discountEvent").click(function() {
-				
-// 			});
+			$('.EventType').click(function() {
+				$.ajax({
+					type: "get",
+					url: "eventType",
+					dataType: "JSON",
+					data : {
+						eventType : $('button.active').val()
+					},
+					success: function(data) {
+						console.log(data)
+						$(".eventMain").empty();
+						var eventHtml = '<div class="container eventMain">';
+		                data.forEach(function(eventList) {
+		                    eventHtml += '<div class="item movie-event" onclick="event_detail(' + eventList.event_num + ')">' +
+		                                    '<div class="imgBox">' +
+		                                        '<img src="resources/images/' + eventList.event_thumbnail + '" alt="썸네일"/>' +
+		                                    '</div>' +
+		                                    '<div class="textBox">' +
+		                                        '<p class="textBox_name">' + eventList.event_subject + '</p>' +
+		                                        '<p class="textBox_price">' + eventList.event_start + ' ~ ' + eventList.event_end + '</p>' +
+		                                    '</div>' +
+		                                '</div>';
+		                });
+		                eventHtml += '</div>';
+		                $(".eventMain").append(eventHtml);
+						
+						
+					},
+					error: function() {
+						alert("이벤트 오류!");
+					}
+				});
+			});
+			
+			
 			
 		});
 		

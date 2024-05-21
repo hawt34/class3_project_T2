@@ -47,8 +47,8 @@ public class AdminService {
 	}
 	
 	// 예매 상세보기
-	public Map<String, String> selectReserveDetail(int reservation_num) {
-		return mapper.selectReserve(reservation_num);
+	public Map<String, String> selectReserveDetail(int ticket_pay_num) {
+		return mapper.selectReserve(ticket_pay_num);
 	}
 	
 	//--------------------------------------------------------------

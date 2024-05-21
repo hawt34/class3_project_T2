@@ -1,6 +1,7 @@
 package itwillbs.p2c3.boogimovie.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -648,8 +649,12 @@ public class AdminController {
 	
 	// 예매 상세 페이지
 	@GetMapping("admin_reserve_detail")
-	public String adminReserveDetail(@RequestParam int reservation_num, Model model) {
-		Map<String, String> reserveDetail = service.selectReserveDetail(reservation_num);
+	public String adminReserveDetail(@RequestParam int ticket_pay_num, Model model) {
+		Map<String, String> reserveDetail = service.selectReserveDetail(ticket_pay_num);
+//		String ticket_pay_date = reserveDetail.get("ticket_pay_date");
+//		ticket_pay_date = LocalDateTime.parse(ticket_pay_date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString();
+//		reserveDetail.put("ticket_pay_date", ticket_pay_date);
+		
 		model.addAttribute("reserveDetail", reserveDetail);
 		return "admin/admin_member/admin_reserve_detail";
 	}

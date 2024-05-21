@@ -33,8 +33,8 @@
 
 .header_top {
 	margin: 0px auto;
-	padding: 20px 200px;
-	width: 1600px;
+	padding: 20px 300px;
+	width: 1900px;
 }
 .header_top > a{
 	font-size: 20px;
@@ -68,7 +68,8 @@ body {
 }
 .header_low{
 	display: flex;
-	width: 1200px;
+	text-align: center;
+	width: 1400px;
 	margin: 0px auto;
 
 }
@@ -220,6 +221,12 @@ body {
 				<button class="dropdown-btn" onclick="location.href='event'">이벤트</button>
 				<div class="dropdown-submenu">
 					<a href="event">이벤트코너</a> 
+				</div>
+			</div>
+			<div class="dropdown">
+				<button class="dropdown-btn" onclick="location.href='boogi_store'">스토어</button>
+				<div class="dropdown-submenu">
+<!-- 					<a href="event">이벤트코너</a>  -->
 					<a href="boogi_store">스토어</a> 
 				</div>
 			</div>

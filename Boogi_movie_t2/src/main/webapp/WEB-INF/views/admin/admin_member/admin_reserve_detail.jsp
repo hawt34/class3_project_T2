@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,14 +91,14 @@ body {
 							<input type="text" id="pay_num" class="form-control" value="${reserveDetail.ticket_pay_num}" readonly />
 						</div>
 						<div class="col-md-6">
-							<div class="subject">예매번호</div>
-							<input type="text" id="res_code" class="form-control" value="${reserveDetail.reservation_num}" readonly />
+							<div class="subject">상영번호</div>
+							<input type="text" id="res_code" class="form-control" value="${reserveDetail.scs_num}" readonly />
 						</div>
 					</div>
 					<div class="row mb-3">
 						<div class="col-md-6">
-							<div class="subject">회원ID</div>
-							<input type="text" id="member_id" class="form-control" value="${reserveDetail.member_id}" readonly />
+							<div class="subject">2D / 3D</div>
+							<input type="text" id="member_id" class="form-control" value="${reserveDetail.screen_dimension}" readonly />
 						</div>
 						<div class="col-md-6">
 							<div class="subject">영화명</div>
@@ -111,7 +112,7 @@ body {
 						</div>
 						<div class="col-md-6">
 							<div class="subject">상영관</div>
-							<input type="text" id="booth_num" class="form-control" value="${reserveDetail.booth_num}관" readonly />
+							<input type="text" id="booth_num" class="form-control" value="${reserveDetail.screen_cinema_num}관" readonly />
 						</div>
 					</div>
 					<div class="row mb-3">
@@ -121,29 +122,41 @@ body {
 						</div>
 						<div class="col-md-6">
 							<div class="subject">상영일</div>
-							<input type="date" id="movie_date" class="form-control" value="${reserveDetail.screen_date}" readonly />
+							<input type="date" id="movie_date" class="form-control" value="${reserveDetail.scs_date}" readonly />
 						</div>
 					</div>
 					<div class="row mb-3">
 						<div class="col-md-6">
-							<div class="subject">회차정보</div>
-							<input type="text" id="screen_round" class="form-control" value="${reserveDetail.round_num}" readonly />
+							<div class="subject">상영시간</div>
+							<input type="text" id="screen_round" class="form-control" value="${reserveDetail.scs_start_time} - ${reserveDetail.scs_end_time}" readonly />
 						</div>
-						<div class="col-md-6">
-							<div class="subject">결제날짜</div>
-							<input type="date" id="pay_date" class="form-control" value="${reserveDetail.ticket_pay_date}" readonly />
-						</div>
-					</div>
-					<div class="row mb-3">
 						<div class="col-md-6">
 							<div class="subject">결제상태</div>
 							<input type="text" id="pay_status" class="form-control" value="${reserveDetail.ticket_pay_status}" readonly />
 						</div>
+					</div>
+					<div class="row mb-3">
 						<div class="col-md-6">
-							<div class="subject">결제금액</div>
-							<input type="text" id="pay_amount" class="form-control" value="${reserveDetail.ticket_pay_price}" readonly />
+							<div class="subject">결제날짜</div>
+							<input type="datetime-local" id="pay_date" class="form-control" value="${reserveDetail.ticket_pay_date}" readonly />
+						</div>
+						<div class="col-md-6">
+							<div class="subject">결제취소날짜</div>
+							<input type="datetime-local" id="pay_cancel_date" class="form-control" 
+							value="${reserveDetail.ticket_pay_cancel_date}" readonly />
 						</div>
 					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<div class="subject">결제방식</div>
+							<input type="text" id="pay_type" class="form-control" value="${reserveDetail.ticket_pay_type}" readonly />
+						</div>
+						<div class="col-md-6">
+							<div class="subject">결제금액</div>
+							<input type="text" id="pay_amount" class="form-control" value="${reserveDetail.ticket_pay_price}원" readonly />
+						</div>
+					</div>
+		
 					<div class="space"></div>
 					<hr class="mb-4">
 					<div class="mb-4" align="center">

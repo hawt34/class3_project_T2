@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import itwillbs.p2c3.boogimovie.service.EventService;
+import itwillbs.p2c3.boogimovie.vo.EventTypeVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 
 @Controller
@@ -22,10 +25,29 @@ public class EventController {
 		@GetMapping("event")
 		public String eventMain(Model model) {
 			List<EventVO> eventList = eventService.getEventList();
+			List<EventTypeVO> eventTypeList = eventService.getEventTypeList();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			
+			for(EventVO event : eventList) {
+		        event.setEvent_start(dateFormat.format(event.getEvent_start_date()));
+		        event.setEvent_end(dateFormat.format(event.getEvent_end_date()));
+		    }
+			
+			model.addAttribute("eventList", eventList);
+			model.addAttribute("eventTypeList", eventTypeList);
+			return "event/event_main";
+		}
+		
+		@ResponseBody
+		@GetMapping("eventType")
+		public List<EventVO> eventType(@RequestParam String eventType) {
+			System.out.println("eventType: " + eventType);
+			List<EventVO> eventList = eventService.getEventList();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			
 			List<EventVO> movieEventList = new ArrayList<EventVO>();
 			List<EventVO> theaterEventList = new ArrayList<EventVO>();
 			List<EventVO> discountEventList = new ArrayList<EventVO>();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			
 			for(EventVO event : eventList) {
 				String formattedStartDate = dateFormat.format(event.getEvent_start_date());
@@ -41,11 +63,20 @@ public class EventController {
 					discountEventList.add(event);
 				}
 			}
-			model.addAttribute("eventList", eventList);
-			model.addAttribute("movieEventList", movieEventList);
-			model.addAttribute("theaterEventList", theaterEventList);
-			model.addAttribute("discountEventList", discountEventList);
-			return "event/event_main";
+			
+			if(eventType.equals("0")) {
+				System.out.println("eventList로 간다 : " + eventList);
+				return eventList;
+			} else if(eventType.equals("1")) {
+				System.out.println("movieEventList로 간다 : " +movieEventList);
+				return movieEventList;
+			} else if(eventType.equals("2")) {
+				System.out.println("theaterEventList로 간다 : " + theaterEventList);
+				return theaterEventList;
+			} else {
+				System.out.println("discountEventList로 간다 : " + discountEventList);
+				return discountEventList;
+			}
 		}
 		
 	

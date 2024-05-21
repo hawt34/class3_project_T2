@@ -165,7 +165,7 @@ td:nth-child(8) {
 								<th>회원ID</th>
 								<th>영화명</th>
 								<th>상영일</th>
-								<th>회차</th>
+								<th>상영시간</th>
 								<th>극장정보</th>
 								<th>결제상태</th>
 								<th>상세보기</th>
@@ -174,15 +174,22 @@ td:nth-child(8) {
 						<tbody>
 							<c:forEach var="reserve" items="${reserveList}">
 								<tr>
-									<td>${reserve.reservation_num}</td>
+									<td>${reserve.ticket_pay_num}</td>
 									<td>${reserve.member_id}</td>
 									<td>${reserve.movie_name}</td>
-									<td>${reserve.screen_date}</td>
-									<td>${reserve.round_num}</td>
-									<td>${reserve.theater_name} / ${reserve.booth_num}관</td>
-									<td>${reserve.ticket_pay_status}</td>
+									<td>${reserve.scs_date}</td>
+									<td>${reserve.scs_start_time} - ${reserve.scs_end_time}</td>
+									<td>${reserve.theater_name} / ${reserve.screen_cinema_num}관</td>
+									<c:choose>
+										<c:when test="${reserve.ticket_pay_status eq 1}">
+											<td style="color: green;">결제완료</td>
+										</c:when>
+										<c:when test="${reserve.ticket_pay_status eq 2}">
+											<td style="color: orange;">결제취소</td>
+										</c:when>
+									</c:choose>
 									<td>
-										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_reserve_detail?reservation_num=${reserve.reservation_num}'">상세</button>
+										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_reserve_detail?ticket_pay_num=${reserve.ticket_pay_num}'">상세</button>
 									</td>
 								</tr>
 							</c:forEach>

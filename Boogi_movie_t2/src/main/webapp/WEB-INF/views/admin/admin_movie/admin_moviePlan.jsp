@@ -263,7 +263,7 @@ tbody tr:hover {
 		            dataType: 'json', // 전달 데이터 타입 json
 		            success: function(response) {
 		            	// 기존옵션 제거
-		                $('#screenSelect').val("");
+		                $('#screenSelect').empty();
 		                $('#scs_date').val("");
 		                $('#movieSelect').val("");
 		                $('#hourSelect').val("");

@@ -61,11 +61,11 @@
 						<div class="card-body">
 							<p class="card-text">* 예매 취소 시 유효기간이 지난 멤버십 포인트는 복구되지 않습니다.</p>
 							<div class="w-50 input-group mb-3">
-								<input type="text" class="form-control" placeholder="보유 포인트" id="getMemberPoint" readonly>
+								<input type="text" class="form-control pay_number" placeholder="보유 포인트" id="getMemberPoint" readonly>
 								<button class="btn btn-outline-secondary" type="button" id="getMemberPointBtn" >조회</button>
 							</div>
 							<div class="w-50 input-group mb-3">
-								<input type="text" class="form-control" placeholder="사용할 포인트를 입력하세요" id="useMemberPoint" pattern="[0-9]*">
+								<input type="text" class="form-control pay_number" placeholder="사용할 포인트를 입력하세요" id="useMemberPoint" pattern="[0-9]*">
 								<button class="btn btn-outline-secondary" type="button" id="useMemberPointBtn">적용</button>
 							</div>
 							<div id="checkPointArea"></div>
@@ -77,7 +77,7 @@
 						<div class="card-body">
 							<p class="card-text">* 예매 취소 시 유효기간이 지난 쿠폰은 복구되지 않습니다.</p>
 							<div class="w-50 input-group mb-3">
-								<input type="text" class="form-control" placeholder="내 쿠폰" id="getMemberCoupon" readonly>
+								<input type="text" class="form-control pay_number" placeholder="내 쿠폰" id="getMemberCoupon" readonly>
 								<button class="btn btn-outline-secondary" type="button" id="coupon-modal" >조회</button>
 							</div>
 						</div>
@@ -163,13 +163,13 @@
 	
 								<div class="row ">
 									<div class="col text-center">
-										<img src="${movie.movie_poster}" id="movie_poster" alt="포스터썸네일" style="width: 250px;" >
+										<img src="${scs.movie_poster}" id="movie_poster" alt="포스터썸네일" style="width: 250px;" >
 									</div>
 									<div class="col">
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item">
 												<p><!-- 영화 제목 -->
-													<span id="movie_name">${movie.movie_name}</span> | 
+													<span id="movie_name">${scs.movie_name}</span> | 
 													<span id="movie_name">${scs.screen_dimension}</span>
 												</p>
 											</li>
@@ -239,7 +239,7 @@
 									</li>
 									<li class="list-group-item">
 										<p><b>결제수단 
-											<span id="pay_way_apply" class="pay_number" style="color: red;">일반결제</span>
+											<span id="pay_way_apply" style="color: red;">일반결제</span>
 										</b></p>
 									</li>
 								</ul>
@@ -293,7 +293,7 @@
 	
 <script>
  	$(function() {
-	
+ 		
 		// 포인트 조회 버튼 눌러서 포인트 가져오기
 		$("#getMemberPointBtn").on("click", function() {
 			$("#getMemberPoint").val("${member.member_point}");
@@ -334,7 +334,6 @@
 			let discount_sum = parseInt(use_point) + parseInt(coupon_apply); 		// 결제란 적용된 비타민 + 쿠폰 항목
 			let final_amount = parseInt(total_fee) - parseInt(discount_sum); 		// 현재 최종 값 - 총 할인금액 
 			
-			
 			$.ajax({
 				type : "GET",
 			 	url : "memberPoint",
@@ -351,7 +350,6 @@
 				 			$("#point_apply").html(use_point);			// 적용할 포인트 값
 				 			$("#final_amount").html(final_amount+"원");		// 총 결제금액에  적용 값 
 				 			$("#discount_sum").html(discount_sum); 		// 총 할인 적용 값
-				 			
 			 			} else {
 			 				$("#useMemberPoint").val("");
 			 			}
@@ -389,7 +387,6 @@
 			let discount_sum = parseInt(point_apply) + parseInt(selectedCoupon); 		// 결제란 적용된 비타민 + 쿠폰 항목
 			let final_amount = parseInt(total_fee) - parseInt(discount_sum); 		// 현재 최종 값 - 총 할인금액 
 			
-			
 			if(confirm ("선택하신 쿠폰을 사용하시겠습니까?")){
 	 			$("#getMemberCoupon").val(selectedCoupon); 	// 사용한 쿠폰 인풋 박스에 출력
 	 			$("#coupon_apply").html(selectedCoupon);	// 적용할 쿠폰 값
@@ -399,6 +396,7 @@
  			} else {
  				history.back();
  			}
+			
 			
 			
 		});
@@ -448,8 +446,7 @@
 		
 	}); // $(function() {}
  	
- 	
- 	
+ 
 	// 결제 버튼 클릭 시 결제처리 요청함수
 	function goPayment() {
 		console.clear();
@@ -475,6 +472,7 @@
  		let member_email = "${member.member_email}";
  		let member_name = "${member.member_name}";
  		let member_tel = "${member.member_tel}";
+ 		let keyword = "${keyword}";
  		
 		// IMP.request_pay 결제창 호출
  	    IMP.request_pay(
@@ -486,7 +484,8 @@
  	            amount: amount,
  	            buyer_email: member_email,
  	            buyer_name: member_name,
- 	            buyer_tel: member_tel
+ 	            buyer_tel: member_tel,
+ 	            buyer_keyword : keyword
  	        },
  	        function (rsp) {
  	            console.log(rsp);

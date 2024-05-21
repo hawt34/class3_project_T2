@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.PayVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
 @Mapper
 public interface PaymentMapper {
@@ -17,5 +19,11 @@ public interface PaymentMapper {
 	void savePayInfo(PayVO pay);
 
 	PayVO getPayInfo(String merchant_uid);
+
+	ScreenSessionVO getScreenSession(int scs_num);
+
+	PayVO selectPayInfo(PayVO pay);
+
+	void saveTicketInfo(TicketVO ticket2);
 
 }

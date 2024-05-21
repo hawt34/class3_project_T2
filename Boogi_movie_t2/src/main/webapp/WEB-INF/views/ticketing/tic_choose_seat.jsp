@@ -37,6 +37,7 @@
     <input type="hidden" id="scs_end_time" name="scs_end_time" value="${end_time}">
     <input type="hidden" id="scs_date2" name="scs_date2" value="${scs_date }">
     <input type="hidden" id="scs_num" name="scs_num" value="${scs.scs_num }">
+    <input type="hidden" id="keyword" name="keyword" value="${keyword}">
     
     
 <section class="choose_seat_section">

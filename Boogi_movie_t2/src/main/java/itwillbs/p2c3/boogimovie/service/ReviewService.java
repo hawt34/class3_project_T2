@@ -23,7 +23,7 @@ public class ReviewService {
 		return mapper.selectReviewList(movie_num, startRow, listLimit);
 	}
 
-	public List<ReviewVO> getReviewId(int review_num) {
+	public ReviewVO getReviewId(int review_num) {
 
 		return mapper.selectReviewId(review_num);
 	}

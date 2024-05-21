@@ -35,6 +35,7 @@ import itwillbs.p2c3.boogimovie.service.MypageService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
+import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
 import itwillbs.p2c3.boogimovie.vo.StorePayVO;
@@ -473,6 +474,8 @@ public class MypageController {
 		int listLimit = 10;
 		int startRow = (pageNum - 1) * listLimit;
 		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, theaterName, theaterName);
+		
+		
 		int listCount = otoService.getOtoListCount(theaterName, theaterName); //총 공지사항 갯수
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
@@ -649,6 +652,38 @@ public class MypageController {
 		}
 		
 		return "redirect:/myp_oto_breakdown";
+	}
+	
+	//1대1 문의 답변
+	@GetMapping("myp_oto_reply")
+	public String mpyOtoReply(@RequestParam(defaultValue = "1")String pageNum, Model model, HttpSession session, OTOVO oto) {
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "./");
+			return "error/fail";
+		}
+		//등록된 문의
+		oto = otoService.getOto(oto.getOto_num());
+		if(oto == null) {
+			model.addAttribute("msg", "답변이 없습니다");
+			return "error/fail";
+		}
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String oto_date = oto.getOto_date().format(dtf);
+		
+		OTOReplyVO reply = new OTOReplyVO();
+		//답변 바인딩
+		reply = otoService.getOtoReply(oto.getOto_num());
+		String oto_reply_date = reply.getOto_reply_date().format(dtf);
+		
+		
+		model.addAttribute("otoDate", oto_date);
+		model.addAttribute("otoReplyDate", oto_reply_date);
+		model.addAttribute("oto", oto);
+		model.addAttribute("oto_reply", reply);
+		
+		return "mypage/myp_oto_reply";
 	}
 	
 

@@ -107,5 +107,10 @@
 		WHERE event.event_type_num = '2'
 	</select>
 	
+<!-- 	<select id="selectFeeInfo"resultType="itwillbs.p2c3.boogimovie.vo.FeeAgeVO.java"> -->
+<!-- 		SELECT * -->
+<!-- 		FROM fee -->
+<!-- 	</select> -->
+	
 	
 </mapper>

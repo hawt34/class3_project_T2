@@ -49,7 +49,7 @@ td:nth-child(1) {
 
 th:nth-child(2),
 td:nth-child(2) {
-  width: 35%;
+  width: 30%;
 }
 
 th:nth-child(3),
@@ -58,7 +58,7 @@ td:nth-child(3) {
 }
 th:nth-child(4),
 td:nth-child(4) {
-  width: 15%;
+  width: 10%;
 }
 th:nth-child(5),
 td:nth-child(5) {
@@ -72,6 +72,14 @@ th:nth-child(7),
 td:nth-child(7) { 
    width: 10%;  
 } 
+th:nth-child(8),
+td:nth-child(8) { 
+   width: 10%;  
+}
+td:nth-child(8) {
+	color: red;
+}
+
 .myp_inquiry > img {
 	width:27px;
 	height:27px;
@@ -94,6 +102,13 @@ td:nth-child(7) {
 .breakdown_pageArea > nav {
 	display: inline-block;
 }
+input[value="답변확인"] {
+	background: skyblue;
+	border-radius: 5px;
+	border: 0;
+	padding:3px;
+}
+
 </style>
 </head>
 <body>
@@ -113,142 +128,91 @@ td:nth-child(7) {
 				<h1>1 대 1 문의 내역</h1>
 			</div>
 			<hr>
-			<div class="mp_wrap">
-				<ul class="nav nav-tabs" id="myTab" role="tablist">
-					<li class="nav-item" role="presentation">
-						<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">나의 문의내역</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">문의내역 답변</button>
-					</li>
-				</ul>
-				
-				<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-					<div class="myp_inquiry">
-						<img src="${pageContext.request.contextPath }/resources/images/inquiryIcon.svg">나의 문의내역
-					</div>
-					<!--문의 내역 게시판-->
-					<div class="admin_review_body">
-					<table>
-						<thead>
+			<div class="myp_inquiry">
+				<img src="${pageContext.request.contextPath }/resources/images/inquiryIcon.svg">나의 문의내역
+			</div>
+			<!--문의 내역 게시판-->
+			<div class="admin_review_body">
+			<table>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>문의유형</th>
+						<th>문의지점</th>
+						<th>수정</th>
+						<th>삭제</th>
+						<th>답변</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:choose>
+						<c:when test="${empty otoList} ">
 							<tr>
-								<th>번호</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>문의유형</th>
-								<th>문의지점</th>
-								<th>수정</th>
-								<th>삭제</th>
+								<td colspan="7">게시판이 비어있습니다</td>
 							</tr>
-						</thead>
-						<tbody>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="oto" items="${otoList}">
+								<tr>
+									<td>${oto.oto_num}</td>
+									<td onclick="location.href='myp_oto_detail?oto_num=${oto.oto_num}'">${oto.oto_subject} </td>
+									<td>${oto.member_id} </td>
+									<td>${oto.oto_category} </td>
+									<td>${oto.theater_name }</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" 
+											onclick="location.href='myp_oto_modifyForm?oto_num=${oto.oto_num}&pageNum=${pageNum }'">수정</button>
+									</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" onclick="otoConfirm(${oto.oto_num})">삭제</button>
+									</td>
+									<td>
+										<c:choose>
+											<c:when test="${oto.oto_reply_status eq '답변' }">
+												<input type="button" value="답변확인" onclick="location.href='myp_oto_reply?pageNum=${param.pageNum}&oto_num=${oto.oto_num }'">
+											</c:when>
+											<c:when test="${oto.oto_reply_status eq '미답' }">
+												${oto.oto_reply_status }
+											</c:when>
+										</c:choose>
+									</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+					
+				</tbody>
+			</table>
+			</div>
+			<!-- 페이징 시작 -->
+			<div class="breakdown_pageArea">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
+							<a class="page-link" href="myp_oto_breakdown?pageNum=${pageNum - 1}" aria-label="Previous" >
+							<span aria-hidden="true" >&laquo;</span>
+							</a>
+						</li>
+						<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
 							<c:choose>
-								<c:when test="${empty otoList} ">
-									<tr>
-										<td colspan="7">게시판이 비어있습니다</td>
-									</tr>
+								<c:when test="${pageNum eq i }">
+									<li class="page-item active"><a class="page-link">${i}</a></li>
 								</c:when>
 								<c:otherwise>
-									<c:forEach var="oto" items="${otoList}">
-										<tr>
-											<td>${oto.oto_num}</td>
-											<td onclick="location.href='myp_oto_detail?oto_num=${oto.oto_num}'">${oto.oto_subject} </td>
-											<td>${oto.member_id} </td>
-											<td>${oto.oto_category} </td>
-											<td>${oto.theater_name }</td>
-											<td>
-												<button type="button" class="btn btn-outline-primary" 
-													onclick="location.href='myp_oto_modifyForm?oto_num=${oto.oto_num}&pageNum=${pageNum }'">수정</button>
-											</td>
-											<td>
-												<button type="button" class="btn btn-outline-primary" onclick="otoConfirm(${oto.oto_num})">삭제</button>
-											</td>
-										</tr>
-									</c:forEach>
+									<li class="page-item"><a class="page-link" href="myp_oto_breakdown?pageNum=${i}">${i}</a></li>
 								</c:otherwise>
 							</c:choose>
-							
-						</tbody>
-					</table>
-					</div>
-					<!-- 페이징 시작 -->
-					<div class="breakdown_pageArea">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
-								<a class="page-link" href="myp_oto_breakdown?pageNum=${pageNum - 1}" aria-label="Previous" >
-								<span aria-hidden="true" >&laquo;</span>
-								</a>
-							</li>
-							<c:forEach var="i" begin="${pageList.startPage }" end="${pageList.endPage }">
-								<c:choose>
-									<c:when test="${pageNum eq i }">
-										<li class="page-item active"><a class="page-link">${i}</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link" href="myp_oto_breakdown?pageNum=${i}">${i}</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-							<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
-								<a class="page-link" href="myp_oto_breakdown?pageNum=${pageNum + 1}" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
-					</div>
-					<!-- 페이징 끝 -->
-				<!-- 문의 내역확인 영역 -->
-				</div>
-				<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-					<div class="myp_inquiry">
-						<img src="${pageContext.request.contextPath }/resources/images/inquiryIcon.svg">문의내역 확인
-					</div>
-					<!-- 문의 내역 확인 -->
-					<div class="admin_review_body">
-					<table>
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>문의유형</th>
-								<th>문의지점</th>
-								<th>상태</th>
-							</tr>
-						</thead>
-						<tbody>
-<%-- 							<c:forEach var="oto" items="${otoReplyList } "> --%>
-<%-- 								<c:choose> --%>
-<%-- 									<c:when test="${empty otoReplyList} "> --%>
-<!-- 										<tr> -->
-<!-- 											<td colspan="7">게시판이 비어있습니다</td> -->
-<!-- 										</tr> -->
-<%-- 									</c:when> --%>
-<%-- 									<c:otherwise> --%>
-<!-- 										<tr> -->
-<%-- 											<td>${oto.oto_num }</td> --%>
-<%-- 											<td>${oto.oto_subject }</td> --%>
-<%-- 											<td>${oto.member_id }</td> --%>
-<%-- 											<td>${oto.oto_category }</td> --%>
-<%-- 											<td>${otoTheater }</td> --%>
-<!-- 											<td> -->
-<%-- 												${oto.oto_reply_status } --%>
-<!-- 											</td> -->
-<!-- 										</tr> -->
-<%-- 									</c:otherwise> --%>
-<%-- 								</c:choose> --%>
-<%-- 							</c:forEach> --%>
-						</tbody>
-					</table>
-					</div>
-				</div>
-				</div>
+						</c:forEach>
+						<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
+							<a class="page-link" href="myp_oto_breakdown?pageNum=${pageNum + 1}" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
 			</div>
-			
-		
 		</div>
 	</div>
 </div>

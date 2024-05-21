@@ -63,7 +63,7 @@
 					<div class="csc_search">
 						<!--공지 찾는 검색창  -->
 						<form method="post" action="">
-							<input type="text" placeholder="검색어를 입력해주세요"> 
+							<input type="text" placeholder="검색어를 입력해주세요" name="notice_keyword"> 
 								<i class="bi bi-search searchIcon"></i>
 							<div class="csc_searcher">
 								<input type="submit" value="검색">

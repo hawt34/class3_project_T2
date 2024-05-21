@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import itwillbs.p2c3.boogimovie.mapper.PaymentMapper;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.PayVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
 @Service
 public class PaymentService {
@@ -33,6 +35,20 @@ public class PaymentService {
 	public PayVO getPayInfo(String merchant_uid) {
 		return mapper.getPayInfo(merchant_uid);
 	}
+
+	
+	public ScreenSessionVO getScreenSession(int scs_num) {
+		return mapper.getScreenSession(scs_num);
+	}
+
+	public PayVO selectPayInfo(PayVO pay) {
+		return mapper.selectPayInfo(pay);
+	}
+
+	public void saveTicketInfo(TicketVO ticket2) {
+		mapper.saveTicketInfo(ticket2);
+	}
+	
 	
 	
 

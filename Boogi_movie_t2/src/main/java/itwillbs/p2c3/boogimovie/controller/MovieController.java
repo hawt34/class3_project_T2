@@ -76,17 +76,6 @@ public class MovieController {
         return "movie/movie_info"; 
     }
 	
-	@GetMapping("reviewModify")
-	public String reviewModify(int review_num, Model model) {
-		//System.out.println("여기는 리뷰모디파이"+ review_id); 확인완료주석처리
-		
-		List<ReviewVO> reviews = serviceReview.getReviewId(review_num);
-		model.addAttribute("reviews", reviews);
-		//System.out.println(reviews); 확인완료 주석처리
-		
-		
-		return "movie/review_modify";
-	}
 	
 	@GetMapping("movieFuture")// 상영예정작리스트
 	public String movieFuture(Model model) {

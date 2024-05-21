@@ -12,7 +12,7 @@ public interface ReviewMapper {
 
 	int insertReview(ReviewVO review);
 	List<ReviewVO> selectReviewList(@Param("movie_num")int movie_num,  @Param("startRow")int startRow, @Param("listLimit")int listLimit);
-	List<ReviewVO> selectReviewId(int review_num);
+	ReviewVO selectReviewId(int review_num);
 	int updateReview(ReviewVO review2);
 	int deleteReview(int review_num);
 	int countReviews(@Param("movie_num") int movie_num);

@@ -74,7 +74,7 @@ public class TicketingController {
 	
 	
 	@PostMapping("tic_choose_seat")
-	public String choose_seat(String final_list_data, Model model) {
+	public String choose_seat(String final_list_data, Model model, HttpSession session) {
 		System.out.println(final_list_data);
 		//data 쪼개서 저장
 		String movie_name  = final_list_data.split("/")[1];
@@ -82,6 +82,8 @@ public class TicketingController {
 		String end_time = final_list_data.split("/")[3];
 		String theater_name = final_list_data.split("/")[4];
 		String selected_day = final_list_data.split("/")[5];
+		String keyword = "";
+		
 		// 포스터 가져오기
 		MovieVO movie = new MovieVO();
 		movie.setMovie_name(movie_name);
@@ -127,6 +129,7 @@ public class TicketingController {
 		scs.setScs_date(date);
 		//db에서 값 가져오기
 		ScreenSessionVO dbScs = ticketingService.chooseSeatSelect(scs);
+		keyword += dbScs.getScreen_dimension();
 		//뷰에 가져갈 값 저장하기
 		dbScs.setMovie_poster(movie_poster);
 		dbScs.setMovie_name(movie_name);
@@ -145,8 +148,22 @@ public class TicketingController {
         //복도 공백
         int first_road = 3;
         int second_road = 12;
+        //주말 공휴일 걸러내기
+        String fee_day_keyword = "";
+        DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date2 = LocalDate.parse(selected_day, formatter3);
+        DayOfWeek day = date2.getDayOfWeek();
+        boolean isWeekend = (day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY);
+        
+        if (isWeekend) {
+        	fee_day_keyword = "HD";
+        	keyword += "HD";
+        }else {
+        	fee_day_keyword = "WD";
+            keyword += "WD";
+        }
 		//시간으로 조조,심야 걸러내기
-        String fee_time_keyword = "GT";
+        String fee_time_keyword = "";
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime time = LocalTime.parse(start_time, formatter2);
         
@@ -155,20 +172,15 @@ public class TicketingController {
         
         if (time.isBefore(morningLimit)) {
         	fee_time_keyword = "MT";
+        	keyword += "MT";
         } else if(time.isAfter(nightLimit)){
         	fee_time_keyword = "NT";
+        	keyword += "NT";
+        }else {
+        	fee_time_keyword = "GT";
+        	keyword += "GT";
         }
         
-        //주말 공휴일 걸러내기
-        String fee_day_keyword = "WD";
-        DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date2 = LocalDate.parse(selected_day, formatter3);
-        DayOfWeek day = date2.getDayOfWeek();
-        boolean isWeekend = (day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY);
-        
-        if (isWeekend) {
-        	fee_day_keyword = "HD";
-        }
         //2D , 3D 걸러내기
         String fee_dimension_keyword = dbScs.getScreen_dimension();
         
@@ -180,16 +192,21 @@ public class TicketingController {
         System.out.println(params);
         Map<String, Object> fee_info = ticketingService.feeCalc(params);
         
-        
+        System.out.println("ㅁㄴㅇㄻㄴㅇscs_num : " + dbScs.getScs_num());
         //pay_num 가져오기
-        int pay_num = ticketingService.selectPayNum(dbScs.getScs_num());
         
-        //결제 테이블에서 결제된 좌석값 구하기
-        List<TicketVO> payedSheets = ticketingService.selectPayedSeat(pay_num);
+        List<Integer> pay_nums = ticketingService.selectPayNum(dbScs.getScs_num());
+        
         String seats2 = "";
-        for(TicketVO ticket : payedSheets) {
-        	seats2 += "/" + ticket.getTicket_seat_info();
+
+        for(int pay_num : pay_nums) {
+        	List<TicketVO> tickets = ticketingService.selectPayedSeat(pay_num);
+            for(TicketVO ticket : tickets) {
+            	seats2 += "/" + ticket.getTicket_seat_info();
+            }
         }
+        //결제 테이블에서 결제된 좌석값 구하기
+    	
 		//model에 저장
 		model.addAttribute("scs", dbScs);
 		model.addAttribute("seats", seats);
@@ -204,6 +221,7 @@ public class TicketingController {
         model.addAttribute("end_time", end_time);
         model.addAttribute("scs_date", date);
         model.addAttribute("payedSeats", seats2);
+        model.addAttribute("keyword", keyword);
         
 		return "ticketing/tic_choose_seat";
 	}

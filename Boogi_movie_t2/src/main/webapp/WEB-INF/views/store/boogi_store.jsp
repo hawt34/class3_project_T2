@@ -9,7 +9,7 @@
 * {
 	margin: 0;
 	padding: 0;
-  	border: 1px solid skyblue;  
+/*   	border: 1px solid skyblue;   */
 }
 
 
@@ -204,7 +204,6 @@ footer {
 		</div>
 		<div class="contentPay">
 			<h4>담은 품목</h4>
-			<form action="/checkout" method="post">
         	<table id="cartTable" class="table">
         <thead>
             <tr>
@@ -230,9 +229,8 @@ footer {
     </div>
 	<div class="bottomButton">
 	<input type="button" class="btn btn-outline-primary" value="뒤로가기" onclick="history.back()"> 
-     <input type="submit" value="결제하기" class="btn btn-outline-primary">
+     <input type="button" value="결제하기" class="btn btn-outline-primary" id="submitBtn" onclick="submit()">
 	</div>
-    </form>
 		</div>				
 		</section>
 		<footer> 
@@ -269,9 +267,9 @@ footer {
 
 	    // 장바구니에 추가하는 함수
 	    function addToCart(categoryId) {
-	        let selectedItem = $(categoryId).val();
-	        let selectedItemPrice = $(categoryId).find(':selected').data('price');
-	        let selectedItemName = $(categoryId).find(':selected').data('name');
+	    	let selectedItem = $(categoryId).val();
+		    let selectedItemPrice = $(categoryId).find(':selected').data('price');
+		    let selectedItemName = $(categoryId).find(':selected').data('name');
 	        // 배열로 보내기.
 	        let cartItem = {
 	                item_info_num: selectedItem,  // 아이템 번호
@@ -291,31 +289,22 @@ footer {
 	                alert("장바구니에 추가되었습니다!");
 	                let quantity = 1;
 	                let totalPrice = selectedItemPrice * quantity;
-	                let itemHtml = "<tr class='cart-item' data-name='" + selectedItemName + "'>" +
+	                let itemHtml = "<tr class='cart-item' data-item-num='" + selectedItem + "'>" +
                     "<td  colspan='3'>" + selectedItemName + "</td>" +
                     "<td>" + selectedItemPrice + "원 </td>" +
                     "<td><input type='number' class='quantity' value='" + quantity + "' min='1'></td>" +
                     "<td class='total-price'>" + totalPrice + "원</td>" +
-                    "<input type='hidden' class='item_info_num' value='" + selectedItem + "'>" + 
                     "<td><button class='remove-item btn btn-danger'>취소</button></td>" +
                 	"</tr>";
 					$("#cartTable tbody").append(itemHtml);
-					
+					   updateTotalPrice(); // 장바구니 1차 담기 후 업데이트
 					$(".contentPay").on("change", ".quantity", function() {
 					    let newQuantity = parseInt($(this).val());
 					    let selectedItemPrice = parseFloat($(this).closest("tr").find("td:nth-child(2)").text()); // 선택된 품목의 가격
 					    let newTotalPrice = selectedItemPrice * newQuantity;
 					    $(this).closest("tr").find("td:nth-child(4)").text(newTotalPrice.toLocaleString() + "원"); // 총 가격 업데이트
-					    
-					    //한 열의 총 가격을 계산
-					    let totalSum = 0;
-					    $(".contentPay .total-price").each(function() {
-					        let totalPrice = parseInt($(this).text().replace("원", "").replace(",", "")); // 총 가격에서 숫자값만 추출하여 합산
-					        totalSum += totalPrice;
-					    });
-					    
-					    // 전체 총 가격 업데이트
-					    $(".realTotalPrice p").text("총 가격: " + totalSum.toLocaleString() + "원");
+					    updateTotalPrice(); // 수량 변경 후 전체 총 가격 업데이트
+
 					});
 	                        
 	            },
@@ -330,29 +319,41 @@ footer {
 	            }
 	        });
 	    }
-
-	    // 장바구니에서 항목 제거 버튼에 이벤트 바인딩
-	   $(".contentPay").on("click", ".remove-item", function(event) {
-    	event.preventDefault(); // 폼의 제출을 방지
-        let itemNum = $(this).closest("tr").find(".item_info_num").val();
-        removeFromCart(itemNum);
-		});
-	    // 장바구니에서 제거하는 함수
-	    function removeFromCart(itemNum) {
-	        $.ajax({
-	            type: "POST",
-	            url: "remove_from_cart",
-	            data: { item_info_num: itemNum },
-	            success: function(response) {
-	            	alert(response.message);
-	                $(".cart-item[data-item-num='" + itemNum + "']").remove();
-	                window.location.href = "boogi_store";
-	            },
-	            error: function() {
-	                alert("장바구니에서 항목을 제거하는 중 오류가 발생했습니다.");
-	            }
+		
+	    function updateTotalPrice() {
+	    	var totalSum = 0;
+	        $(".contentPay .total-price").each(function() {
+	            let totalPrice = parseInt($(this).text().replace("원", "").replace(",", ""));
+	            totalSum += totalPrice;
 	        });
+	        $(".realTotalPrice p").text("총 가격: " + totalSum.toLocaleString() + "원");
 	    }
+	    
+	    
+	    $(".contentPay").on("click", ".remove-item", function(event) {
+	        event.preventDefault(); // 폼의 제출을 방지
+	        let itemNum = $(this).closest("tr").data("item-num"); // 선택된 품목의 아이템 번호 가져오기
+	        removeFromCart(itemNum); // 항목 제거 함수 호출
+	    });
+
+	 
+		    // 장바구니에서 제거하는 함수
+		    function removeFromCart(itemNum) {
+		        $.ajax({
+		            type: "POST",
+		            url: "remove_from_cart",
+		            data: { item_info_num: itemNum },
+		            success: function(response) {
+		            	alert(response.message);
+		                $(".cart-item[data-item-num='" + itemNum + "']").remove();
+		                updateTotalPrice(); // 제거 후에 총 가격 업데이트
+		            },
+		            error: function() {
+		                alert("장바구니에서 항목을 제거하는 중 오류가 발생했습니다.");
+		            }
+		        });
+		    }
+			  	  
 	    snackButtons.forEach(function(button) {
 	        $(button.buttonId).click(function() {
 	            // 로그인 여부 확인
@@ -367,8 +368,45 @@ footer {
 	        });
 	    });
 	    
+	    $("#submitBtn").click(function() {
+	        // 장바구니 데이터를 수집
+	        let cartItems = [];
+	        $("#cartTable tbody tr.cart-item").each(function() {
+	            let itemName = $(this).find("td:nth-child(1)").text().trim();
+	            let quantity = parseInt($(this).find(".quantity").val());
+	            let totalPrice = parseInt($(this).find(".total-price").text().replace("원", "").replace(",", "").trim());
+	            
+	            cartItems.push({ itemName: itemName, quantity: quantity, totalPrice: totalPrice });
+	        });
 
-			    
+	        // 총 가격 계산
+	        let totalSum = 0;
+	        cartItems.forEach(item => {
+	            totalSum += item.totalPrice * item.quantity;
+	        });
+
+	        // 폼 생성
+	        let $form = $("<form>", {
+	            action: "payment_store",
+	            method: "post"
+	        });
+
+	        // 장바구니 항목을 숨겨진 필드로 추가
+	        cartItems.forEach(item => {
+	            $form.append($("<input>", { type: "hidden", name: "itemName", value: item.itemName }));
+	            $form.append($("<input>", { type: "hidden", name: "quantity", value: item.quantity }));
+	            $form.append($("<input>", { type: "hidden", name: "totalPrice", value: item.totalPrice }));
+	        });
+
+	        // 총 가격 필드 추가
+	        $form.append($("<input>", { type: "hidden", name: "totalSum", value: totalSum }));
+
+	        // 폼을 문서에 추가하고 제출
+	        $form.appendTo("body").submit();
+	    });
+	        
+	        
+	  		    
 	});
 	</script>
 </html>

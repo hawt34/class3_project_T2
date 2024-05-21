@@ -29,6 +29,9 @@ public class ItemInfoService {
 		
 		return mapper.selectItemListJuice(); 
 	}
+	public int getItemNum(String item_name) {
+		return mapper.selectItemNum(item_name);
+	}
 
 	
 	

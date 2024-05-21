@@ -34,6 +34,62 @@
 		count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
 		}
 	}
+	
+	function initializeModal() {
+		var myTheaters = [
+			"${member.member_my_theater1}",
+			"${member.member_my_theater2}",
+			"${member.member_my_theater3}"
+		];
+
+		$('.form-check-input').each(function() {
+			var theaterName = $(this).val();
+			if (myTheaters.includes(theaterName)) {
+				$(this).prop('checked', true);
+				count++;
+			} else {
+				$(this).prop('checked', false);
+			}
+		});
+	}
+				      
+				      
+	function sendCheckedValues(event) {
+		var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
+		var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
+					        
+		checkboxes.forEach(function(checkbox) {
+			checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
+		});
+					        
+		// checkedValues 배열의 길이가 3이 되도록 null 값 추가
+		while (checkedValues.length < 3) {
+		    checkedValues.push(null);
+		}
+					        
+		var member_id = "${member.member_id}"; // memberId를 가져옴
+		$.ajax({
+		    url: "api/myp_my_theater",
+		    type: "POST",
+		    dataType: "json",
+		    contentType: "application/json", // 서버에게 내용이 JSON임을 알려줌
+		    data: JSON.stringify({ member_id: member_id, checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
+		    success: function(response) {
+				if(response){
+					alert("마이극장 저장 완료");
+				    location.reload();	
+				}
+		        
+		    },
+		    error: function(xhr, status, error) {
+		        console.error("Error details:", xhr, status, error); // 디버깅 정보 출력
+		
+		        alert("오류 발생" + error);
+		    }
+		    
+		}); // ajax
+		
+	} // sendCheckedValues()
 </script>
 
 </head>
@@ -95,7 +151,7 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-									<button type="submit" class="btn btn-primary">저장</button>
+									<button type="button" class="btn btn-primary" onclick="sendCheckedValues(event)">저장</button>
 				      			</div>
 							</div>
 				  		</div>

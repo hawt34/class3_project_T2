@@ -5,10 +5,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,19 +31,17 @@ import itwillbs.p2c3.boogimovie.service.ItemInfoService;
 import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.service.MovieInfoService;
 import itwillbs.p2c3.boogimovie.service.PaymentService;
-import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.CartVO;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
-import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
+import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.PayVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
-import itwillbs.p2c3.boogimovie.vo.TicketInfoVO;
 import itwillbs.p2c3.boogimovie.vo.TicketVO;
-import retrofit2.http.POST;
 
 @Controller
 public class PaymentController {
@@ -181,131 +178,131 @@ public class PaymentController {
 			member.setMember_point(member.getMember_point() + apply_point);
 			service.updateMemberPoint(member);
 			couponService.useCoupon(coupon_num);
-			pay.setCoupon_num(Integer.parseInt(coupon_num));
+			
 			pay.setMember_id(member.getMember_id());
 			pay.setMerchant_uid(payment.getMerchantUid());
 			pay.setTicket_pay_price(amountInt);
 			pay.setUse_point(usePointInt);
 			pay.setScs_num(scs.getScs_num());
-			System.out.println(scs.getScs_num());
 			pay.setTicket_pay_status("결제");
 			pay.setTicket_pay_type(payment.getPgProvider());
+			pay.setCoupon_num(Integer.parseInt(coupon_num));
 			
 			service.savePayInfo(pay); // pay 테이블에 결제 정보 저장
 			System.out.println("pay  : " + pay);
 			
-			PayVO payInfo = service.getPayInfo(pay.getMerchant_uid());
-			// 티켓처리
 			
-			//person_info에서 숫자만 남기기
-			
-	        // Step 1: 쉼표(,)로 분리
-	        String[] parts = person_info.split(",\\s*");
-	        
-	        // Step 2: 숫자 값만 추출
-	        int[] numbers = new int[parts.length];
-	        for (int i = 0; i < parts.length; i++) {
-	            String part = parts[i];
-	            String numberStr = part.replaceAll("[^0-9]", ""); // 숫자만 남기기
-	            numbers[i] = Integer.parseInt(numberStr);
-	        }
-	        String[] seats = selected_seats.split(",");
-	        String seat = "";
-	        int seat_price = 0;
-	        int NP_num = 0;
-	        int YP_num = 0;
-	        int OP_num = 0;
-	        
-	        Map<String, String> fee_map = new HashMap<String, String>();
-	        fee_map.put("fee_dimension_keyword", parts[0]);
-	        fee_map.put("fee_day_keyword", parts[1]);
-	        fee_map.put("fee_time_keyword", parts[2]);
-	        
-	        // 결과 출력
-			for(int i = 0; i < numbers.length;i++) {
-				switch (i) {
-				case 0: 
-					NP_num 	= numbers[i]; 
-					seat 	= seats[i];
-					
-					Map<String, Object> dbfee_map = ticketService.feeCalc(fee_map);
-					
-					int fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100) 
-									* ((int)dbfee_map.get("fee_time_discount") / 100) 
-									* ((int)dbfee_map.get("fee_dimension_discount") / 100);
-					List<FeeAgeVO> feeAge =  ticketService.feeCalcAge();
-					for(FeeAgeVO fa : feeAge) {
-						if(fa.getFee_age_keyword().equals("NP")) {
-							fee = fee * (fa.getFee_age_discount() / 100);
-						}
-					}
-					int pay_num = payInfo.getTicket_pay_num();
-					TicketVO ticket2 = new TicketVO();
-					ticket2.setTicket_keyword(keyword + "NP");
-					ticket2.setTicket_pay_num(pay_num);
-					ticket2.setTicket_price(fee);
-					ticket2.setTicket_seat_info(seat);
-					
-					for(int j = 0; j < NP_num;j++) {
-						service.saveTicketInfo(ticket2);
-					}
-					
-					
-					break;
-				case 1: 
-					YP_num 	= numbers[i]; 
-					seat 	= seats[i];
-					
-					dbfee_map = ticketService.feeCalc(fee_map);
-					
-					fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100) 
-									* ((int)dbfee_map.get("fee_time_discount") / 100) 
-									* ((int)dbfee_map.get("fee_dimension_discount") / 100);
-					feeAge =  ticketService.feeCalcAge();
-					for(FeeAgeVO fa : feeAge) {
-						if(fa.getFee_age_keyword().equals("YP")) {
-							fee = fee * (fa.getFee_age_discount() / 100);
-						}
-					}
-					pay_num = payInfo.getTicket_pay_num();
-					TicketVO ticket3 = new TicketVO();
-					ticket3.setTicket_keyword(keyword + "YP");
-					ticket3.setTicket_pay_num(pay_num);
-					ticket3.setTicket_price(fee);
-					ticket3.setTicket_seat_info(seat);
-					
-					for(int j = 0; j < YP_num;j++) {
-						service.saveTicketInfo(ticket3);
-					}
-					break;
-				case 2: 
-					OP_num 	= numbers[i]; 
-					seat 	= seats[i];
-					
-					dbfee_map = ticketService.feeCalc(fee_map);
-					
-					fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100) 
-									* ((int)dbfee_map.get("fee_time_discount") / 100) 
-									* ((int)dbfee_map.get("fee_dimension_discount") / 100);
-					feeAge =  ticketService.feeCalcAge();
-					for(FeeAgeVO fa : feeAge) {
-						if(fa.getFee_age_keyword().equals("OP")) {
-							fee = fee * (fa.getFee_age_discount() / 100);
-						}
-					}
-					pay_num = payInfo.getTicket_pay_num();
-					TicketVO ticket4 = new TicketVO();
-					ticket4.setTicket_keyword(keyword + "OP");
-					ticket4.setTicket_pay_num(pay_num);
-					ticket4.setTicket_price(fee);
-					ticket4.setTicket_seat_info(seat);
-					
-					for(int j = 0; j < OP_num;j++) {
-						service.saveTicketInfo(ticket4);
-					}
-				}
-			}
-			
+//			PayVO payInfo = service.getPayInfo(pay.getMerchant_uid());
+//			// 티켓처리
+//			
+//			//person_info에서 숫자만 남기기
+//			
+//	        // Step 1: 쉼표(,)로 분리
+//	        String[] parts = person_info.split(",\\s*");
+//	        
+//	        // Step 2: 숫자 값만 추출
+//	        int[] numbers = new int[parts.length];
+//	        for (int i = 0; i < parts.length; i++) {
+//	            String part = parts[i];
+//	            String numberStr = part.replaceAll("[^0-9]", ""); // 숫자만 남기기
+//	            numbers[i] = Integer.parseInt(numberStr);
+//	        }
+//	        String[] seats = selected_seats.split(",");
+//	        String seat = "";
+//	        int seat_price = 0;
+//	        int NP_num = 0;
+//	        int YP_num = 0;
+//	        int OP_num = 0;
+//	        
+//	        Map<String, String> fee_map = new HashMap<String, String>();
+//	        fee_map.put("fee_dimension_keyword", parts[0]);
+//	        fee_map.put("fee_day_keyword", parts[1]);
+//	        fee_map.put("fee_time_keyword", parts[2]);
+//	        
+//	        // 결과 출력
+//			for(int i = 0; i < numbers.length;i++) {
+//				switch (i) {
+//				case 0: 
+//					NP_num 	= numbers[i]; 
+//					seat 	= seats[i];
+//					
+//					Map<String, Object> dbfee_map = ticketService.feeCalc(fee_map);
+//					
+//					int fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100) 
+//									* ((int)dbfee_map.get("fee_time_discount") / 100) 
+//									* ((int)dbfee_map.get("fee_dimension_discount") / 100);
+//					List<FeeAgeVO> feeAge =  ticketService.feeCalcAge();
+//					for(FeeAgeVO fa : feeAge) {
+//						if(fa.getFee_age_keyword().equals("NP")) {
+//							fee = fee * (fa.getFee_age_discount() / 100);
+//						}
+//					}
+//					int pay_num = payInfo.getTicket_pay_num();
+//					TicketVO ticket2 = new TicketVO();
+//					ticket2.setTicket_keyword(keyword + "NP");
+//					ticket2.setTicket_pay_num(pay_num);
+//					ticket2.setTicket_price(fee);
+//					ticket2.setTicket_seat_info(seat);
+//					
+//					for(int j = 0; j < NP_num;j++) {
+//						service.saveTicketInfo(ticket2);
+//					}
+//					
+//					
+//					break;
+//				case 1: 
+//					YP_num 	= numbers[i]; 
+//					seat 	= seats[i];
+//					
+//					dbfee_map = ticketService.feeCalc(fee_map);
+//					
+//					fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100) 
+//									* ((int)dbfee_map.get("fee_time_discount") / 100) 
+//									* ((int)dbfee_map.get("fee_dimension_discount") / 100);
+//					feeAge =  ticketService.feeCalcAge();
+//					for(FeeAgeVO fa : feeAge) {
+//						if(fa.getFee_age_keyword().equals("YP")) {
+//							fee = fee * (fa.getFee_age_discount() / 100);
+//						}
+//					}
+//					pay_num = payInfo.getTicket_pay_num();
+//					TicketVO ticket3 = new TicketVO();
+//					ticket3.setTicket_keyword(keyword + "YP");
+//					ticket3.setTicket_pay_num(pay_num);
+//					ticket3.setTicket_price(fee);
+//					ticket3.setTicket_seat_info(seat);
+//					
+//					for(int j = 0; j < YP_num;j++) {
+//						service.saveTicketInfo(ticket3);
+//					}
+//					break;
+//				case 2: 
+//					OP_num 	= numbers[i]; 
+//					seat 	= seats[i];
+//					
+//					dbfee_map = ticketService.feeCalc(fee_map);
+//					
+//					fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100) 
+//									* ((int)dbfee_map.get("fee_time_discount") / 100) 
+//									* ((int)dbfee_map.get("fee_dimension_discount") / 100);
+//					feeAge =  ticketService.feeCalcAge();
+//					for(FeeAgeVO fa : feeAge) {
+//						if(fa.getFee_age_keyword().equals("OP")) {
+//							fee = fee * (fa.getFee_age_discount() / 100);
+//						}
+//					}
+//					pay_num = payInfo.getTicket_pay_num();
+//					TicketVO ticket4 = new TicketVO();
+//					ticket4.setTicket_keyword(keyword + "OP");
+//					ticket4.setTicket_pay_num(pay_num);
+//					ticket4.setTicket_price(fee);
+//					ticket4.setTicket_seat_info(seat);
+//					
+//					for(int j = 0; j < OP_num;j++) {
+//						service.saveTicketInfo(ticket4);
+//					}
+//				}
+//			}
 			
 			
 			return true;
@@ -322,7 +319,7 @@ public class PaymentController {
 	} // payVerify()
 	
 	// ================================================================================
-	
+	// 최종 결제 완료 페이지로
 	@GetMapping("success_reserve{merchant_uid}")
 	public String successReserve(@PathVariable("merchant_uid") String merchant_uid, Model model, PayVO pay, ScreenSessionVO scs, MovieVO movie,
 			String theater_name, String screen_cinema_num, String person_info, String formattedDate, String selected_seats) {
@@ -353,12 +350,18 @@ public class PaymentController {
 		}
 		member.setMember_id(id);
 		member = memberService.isCorrectUser(member);
-				
 		
 		String[] items = itemName.split(",");
 		String[] quantities = quantity.split(",");
 		String[] totalPrices = totalPrice.split(",");
 		List<CartVO> cartList = new ArrayList<CartVO>();
+		
+		Random random = new Random();
+		int rNum = random.nextInt(9000000) + 1000000;
+		String cart_id = rNum + "_"+ id;
+		
+		int total_fee = 0;
+		
 		for(int i = 0; i < items.length;i++) {
 			CartVO cart = new CartVO();
 			int item_num = itemService.getItemNum(items[i]);
@@ -370,58 +373,122 @@ public class PaymentController {
 			cart.setItem_info_name(items[i]);
 			cart.setItem_total_price(price);
 			cart.setItem_info_image(item_image);
-			cart.setItem_price(price/items.length);
+			cart.setItem_price(price/quan);
+			cart.setMember_id(id);
+			cart.setCart_id(cart_id);
 			cartList.add(cart);
+			total_fee += price;
 		}
 		List<CouponVO> couponList = couponService.getMemberCoupon(member);
 		
 		model.addAttribute("couponList", couponList);
 		model.addAttribute("member", member);
 		model.addAttribute("cartList", cartList);
+		model.addAttribute("cart_id", cart_id);
+		model.addAttribute("total_fee", total_fee);
+		session.setAttribute("cartList", cartList);
+		
 		
 		return "payment/payment_store";
 	}
 	
 
 	//================================================================================
-	// 예매 결제 검증 및 DB 업데이트
+	// 스토어 결제 검증 및 DB 업데이트
 	@ResponseBody
 	@PostMapping("payVerifyStore{imp_uid}")
 	public boolean payVerifyStore(@PathVariable(value = "imp_uid") String imp_uid, String use_point, String coupon_num, MemberVO member, String amount, 
-			String formattedDate, MovieVO movie, String theater_name, String screen_cinema_num, ScreenSessionVO scs, String person_info, PayVO pay, 
-			String selected_seats, TicketVO ticket, String keyword) throws IamportResponseException, IOException{
+			StorePayVO storePay, String cart_id, HttpSession session) throws IamportResponseException, IOException{
+		
+		Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 검증처리
+		if(payment.getStatus().equals("paid")) {
+			System.out.println("payVerifyStore - paid ");
+			
+			int amountInt = Integer.parseInt(amount);
+			int usePointInt = Integer.parseInt(use_point);
+			double savePointDouble = amountInt * 0.1;
+			int savePoint = (int)(savePointDouble / 100) * 100;
+			int apply_point = savePoint - usePointInt;
+			System.out.println("amountInt : " + amountInt);
+			System.out.println("usePointInt : " + usePointInt);
+			System.out.println("savePoint : " + savePoint);
+			System.out.println("apply_point : " + apply_point);
+			 
+			member = service.getMember(member);
+			member.setMember_point(member.getMember_point() + apply_point);
+			service.updateMemberPoint(member);
+			couponService.useCoupon(coupon_num);
+			
+			List<CartVO> cartList = (List<CartVO>)session.getAttribute("cartList");
+			for(CartVO cart : cartList) {
+				service.insertCart(cart);
+				System.out.println("####$## cart : " + cart);
+			}
+			
+			storePay.setStore_pay_type(payment.getPgProvider());
+			storePay.setStore_pay_status("결제");
+			storePay.setMerchant_uid(payment.getMerchantUid());
+			storePay.setStore_pay_price(amountInt);
+			storePay.setCoupon_num(Integer.parseInt(coupon_num));
+			storePay.setMember_id(member.getMember_id());
+			storePay.setUse_point(usePointInt);
+			storePay.setCart_id(cart_id);
+			System.out.println("%%%%%%% storePay : " + storePay);
+			service.saveStorePayInfo(storePay);
+			
+			return true; 
+			
+		} else if(payment.getStatus().equals("failed")) {
+			System.out.println("payVerifyStore - failed ");
+			
+			return false; 
+			
+		}
+		
+		return false; 
 		
 		
 		
-//		store_pay_type
-//		store_pay_status
-//		store_pay_cancel_date
-//		store_pay_price
-//		coupon_num
-//		member_id
-//		merchant_uid
-//		use_point
-//		cart_num
-//		
 		
-		
-		
-		
-		
-		
-		return true;
-	}
-	
-	
-	
+	} // payVerifyStore()
 	
 
 	//================================================================================
-	// 뷰 확인 용
-	@GetMapping("success_store")
-	public String successStore() {
+	// 스토어 최종 결제 완료 페이지로
+	@GetMapping("success_store{merchant_uid}")
+	public String successStore(@PathVariable("merchant_uid") String merchant_uid, Model model, StorePayVO store_pay, HttpSession session, ItemInfoVO item) {
+		System.out.println("merchant_uid : " + merchant_uid);
 		
+		// 세션 확인
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "로그인 후 다시 시도해주세요.");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+
+		store_pay = service.getStorePayInfo(merchant_uid);
+		List<CartVO> cartList = service.getCartInfo(store_pay.getCart_id());
+		int total_fee = 0;
+		
+		for(CartVO cart : cartList) {
+			item = service.getItemInfo(cart.getItem_info_num());
+			cart.setItem_info_name(item.getItem_info_name());
+			cart.setItem_info_image(item.getItem_info_image());
+			total_fee += cart.getItem_price()*cart.getItem_quantity();
+		}
+		System.out.println("cartList : " + cartList);
+		model.addAttribute("store_pay", store_pay);
+		model.addAttribute("cartList", cartList);
+		model.addAttribute("total_fee", total_fee);
 		
 		return "payment/payment_success_store";
-	}
-}
+	} // successStore()
+	
+	
+
+	
+	
+	
+} // PaymentController()
+

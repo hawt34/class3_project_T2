@@ -33,7 +33,14 @@
 			 , #{ticket_pay_price}
 			 , #{member_id}
 			 , #{scs_num}
-			 , #{coupon_num}
+			 <choose>
+			 	<when test="coupon_num != null and !coupon_num.equals('') and coupon_num != 0">
+				 	, #{coupon_num}
+			 	</when>
+			 	<otherwise>
+			 		, null
+			 	</otherwise>
+			 </choose>
 			 , #{merchant_uid}
 			 , #{use_point}
 		)
@@ -64,5 +71,58 @@
 		WHERE member_id = #{member_id}
 	</select>
 	
+	<insert id="insertCart">
+		INSERT INTO cart
+		VALUES (
+			null
+			, #{cart_id}
+			, #{item_info_num}
+			, #{item_quantity}
+			, #{item_total_price}
+			, #{member_id}
+		)
+		
+	</insert>
 	
+	<insert id="saveStorePayInfo">
+		INSERT INTO store_pay
+		VALUES (
+			null
+			, #{store_pay_type}
+			, now()
+			, #{store_pay_status}
+			, null
+			, #{store_pay_price}
+			<choose>
+			 	<when test="coupon_num != null and !coupon_num.equals('') and coupon_num != 0">
+				 	, #{coupon_num}
+			 	</when>
+			 	<otherwise>
+			 		, null
+			 	</otherwise>
+			 </choose>
+			, #{member_id}
+			, #{merchant_uid}
+			, #{use_point}
+			, #{cart_id}
+		 )
+	</insert>
+	
+	<select id="getStorePayInfo" resultType="itwillbs.p2c3.boogimovie.vo.StorePayVO">
+		SELECT *
+		FROM store_pay
+		WHERE merchant_uid = #{merchant_uid}
+	</select>
+	
+	<select id="getCartInfo" resultType="itwillbs.p2c3.boogimovie.vo.CartVO">
+		SELECT *
+		FROM cart
+		WHERE cart_id = #{cart_id}
+	</select>
+	
+	<select id="getItemInfo" resultType="itwillbs.p2c3.boogimovie.vo.ItemInfoVO">
+		SELECT *
+		FROM item_info
+		WHERE item_info_num = #{item_info_num}
+	</select>
 </mapper>

@@ -11,10 +11,10 @@ public class StorePayVO {
 	private LocalTime store_pay_date;
 	private String store_pay_status;
 	private LocalTime store_pay_cancel_date;
-	private String store_pay_price;
+	private int store_pay_price;
 	private int coupon_num;
 	private String member_id;
 	private String merchant_uid;
 	private int use_point;
-	private int cart_num;
+	private String cart_id;
 }

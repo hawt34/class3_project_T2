@@ -179,7 +179,7 @@
 								</ul>
 								<div class="card-footer">
 									<p><b> 총 금액
-										<span id="total_fee" class="pay_number"></span>원<!-- ${cart.item_total_price} -->
+										<span id="total_fee" class="pay_number">${total_fee}</span>원
 									</b></p>
 								</div> <!-- card-footer -->
 							</div> <!-- payment_status_box -->
@@ -208,7 +208,7 @@
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item">
 										<p><b>최종 결제금액 
-											<span id="final_amount" class="pay_number"></span> <!-- 첫 금액은  total_fee랑 같아야 함-->
+											<span id="final_amount" class="pay_number">${total_fee}</span> <!-- 첫 금액은  total_fee랑 같아야 함-->
 										원</b></p>
 									</li>
 									<li class="list-group-item">
@@ -268,18 +268,18 @@
  	$(function() {
  		
  		// 총 결제 금액 
- 		let totalFee = 0;
- 	    $(".total_price").each(function() {
- 	        totalFee += parseInt($(this).text());
- 	    });
- 	    $("#total_fee").text(totalFee);
- 	    $("#final_amount").text(totalFee);
+//  		let totalFee = 0;
+//  	    $(".total_price").each(function() {
+//  	        totalFee += parseInt($(this).text());
+//  	    });
+//  	    $("#total_fee").text(totalFee);
+//  	    $("#final_amount").text(totalFee);
 	
 		// 포인트 조회 버튼 눌러서 포인트 가져오기
 		$("#getMemberPointBtn").on("click", function() {
 			$("#getMemberPoint").val("${member.member_point}");
 		});
-		
+		11,100
 		// 사용할 포인트 값 입력 검증
 		$("#useMemberPoint").on("keyup",function() {
 			let point = $(this).val();
@@ -384,7 +384,7 @@
 	 			
  			} 
 			
-		});
+		}); 
 		
 		// 결제 방식 선택 시 최종 결제 방식에 결제수단 표시하기
 		$('input[name="pg"]').change(function() {
@@ -495,20 +495,21 @@
 
 	// 결제검증 후 DB업데이트
 	function verifyAndSavePayInfo(imp_uid, merchant_uid) {
+		console.log('verifyAndSavePayInfo() 호출됨');
 		
 		let use_point =  document.querySelector("#point_apply").innerText;
 		let couponInput = document.querySelector('input[name=select]:checked');
 		let coupon_num = couponInput ? couponInput.id : 0;
 		let member_id = "${member.member_id}";
 		let amount = parseInt(document.querySelector("#final_amount").innerText);	
-		let cart_num = "${cart.cart_num}";
+		let cart_id = "${cart_id}";
 		
 	    const params = {
 	        "use_point": use_point,
 	        "coupon_num": coupon_num,
 	        "member_id" : member_id,
 	        "amount" : amount,
-	     	"cart_num" : cart_num
+	        "cart_id" : cart_id
 	    }
 	    
 	    

@@ -15,8 +15,8 @@ public class CartVO {
     private int item_price;
     private String member_id;
     //--------------------------
-    
     private int item_total_price;
+    
     private String item_info_image;
     private String item_info_name; //취소 기능 구현 때문에 어거지로 넣어만듬. 
     

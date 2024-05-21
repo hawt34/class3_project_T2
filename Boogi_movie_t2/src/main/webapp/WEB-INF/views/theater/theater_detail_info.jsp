@@ -11,8 +11,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <!-- 극장 theater.css  -->
 <link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
-<!-- 카카오맵 API 라이브러리 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+
  <style>
 	.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
 	.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
@@ -132,8 +131,9 @@
 		</div> <!-- theater_info_content 끝 -->
 	
 	</div> <!-- theater_info 끝  -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622&libraries=services"></script>
 	
+	<!-- 카카오맵 API 라이브러리 -->
+	<script defer type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622&libraries=services"></script>
 	<script>
 		
 		var theater_map_x = ${theater.theater_map_x};

@@ -116,7 +116,7 @@ public class PaymentController {
 		member = memberService.isCorrectUser(member);
 		List<CouponVO> couponList = couponService.getMemberCoupon(member);
 		movie = movieService.getMovieInfo(movie);
-		scs = ticketService.getScreenSession(scs.getScs_num());
+		scs = service.getScreenSession(scs.getScs_num());
 		scs.setTheater_name(theater.getTheater_name());
 		
 		

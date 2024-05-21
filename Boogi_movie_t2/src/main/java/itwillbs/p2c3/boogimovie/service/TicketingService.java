@@ -41,9 +41,6 @@ public class TicketingService {
 		return mapper.selectPayNum(scs_num);
 	}
 
-	public ScreenSessionVO getScreenSession(int scs_num) {
-		return mapper.getScreenSession(scs_num);
-	}
 	
 	
 	

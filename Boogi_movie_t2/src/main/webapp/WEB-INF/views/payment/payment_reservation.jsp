@@ -321,6 +321,7 @@
 			if($("#getMemberPoint").val() == "") {
 				$("#checkPointArea").text("보유 포인트를 먼저 조회해 주세요.");
 				$("#checkPointArea").css("color","red");
+				$("#useMemberPoint").focus();
 				
 				return;
 			}
@@ -347,9 +348,15 @@
 			 			alert("포인트를 사용할 수 없습니다.");
 			 		} else {
 			 			if(confirm ("포인트를 사용하시겠습니까?")){
-				 			$("#point_apply").html(use_point);			// 적용할 포인트 값
-				 			$("#final_amount").html(final_amount+"원");		// 총 결제금액에  적용 값 
-				 			$("#discount_sum").html(discount_sum); 		// 총 할인 적용 값
+			 				if(discount_sum < parseInt(total_fee)) {
+					 			$("#point_apply").html(use_point);			// 적용할 포인트 값
+					 			$("#final_amount").html(final_amount+"원");		// 총 결제금액에  적용 값 
+					 			$("#discount_sum").html(discount_sum); 		// 총 할인 적용 값
+			 				} else {
+			 					alert("결제 금액을 초과할 수 없습니다.");
+			 					$("#useMemberPoint").val("");
+			 					$("#useMemberPoint").focus();
+			 				}
 			 			} else {
 			 				$("#useMemberPoint").val("");
 			 			}
@@ -388,15 +395,16 @@
 			let final_amount = parseInt(total_fee) - parseInt(discount_sum); 		// 현재 최종 값 - 총 할인금액 
 			
 			if(confirm ("선택하신 쿠폰을 사용하시겠습니까?")){
-	 			$("#getMemberCoupon").val(selectedCoupon); 	// 사용한 쿠폰 인풋 박스에 출력
-	 			$("#coupon_apply").html(selectedCoupon);	// 적용할 쿠폰 값
-	 			$("#final_amount").html(final_amount+"원");		// 총 결제금액 적용 값
-	 			$("#discount_sum").html(discount_sum);		// 총 할인 적용 값
-	 			
- 			} else {
- 				history.back();
- 			}
-			
+				
+				if(discount_sum < parseInt(total_fee)) {
+		 			$("#getMemberCoupon").val(selectedCoupon); 	// 사용한 쿠폰 인풋 박스에 출력
+		 			$("#coupon_apply").html(selectedCoupon);	// 적용할 쿠폰 값
+		 			$("#final_amount").html(final_amount+"원");		// 총 결제금액 적용 값
+		 			$("#discount_sum").html(discount_sum);		// 총 할인 적용 값
+				} else {
+					alert("결제 금액을 초과할 수 없습니다.");
+				}
+ 			} 
 			
 			
 		});
@@ -510,22 +518,25 @@
 
 	// 결제검증 후 DB업데이트
 	function verifyAndSavePayInfo(imp_uid, merchant_uid) {
+		console.log('verifyAndSavePayInfo() 호출됨');
 		
 		let use_point =  document.querySelector("#point_apply").innerText;
-		let coupon_num = document.querySelector('input[name=select]:checked').id;
+		let couponInput = document.querySelector('input[name=select]:checked');
+		let coupon_num = couponInput ? couponInput.id : 0;
 		let member_id = "${member.member_id}";
 		let amount = parseInt(document.querySelector("#final_amount").innerText);	
 		
 		let movie_name = "${scs.movie_name}";
 		let theater_name = "${scs.theater_name}";
 		let screen_cinema_num = "${scs.screen_cinema_num}";
-		let formattedDate = "${formattedDate}";
 		let selected_seats = "${selected_seats}";
 		let start_time = "${scs.scs_start_time}";
 		let end_time = "${scs.scs_end_time}";
 		let person_info = "${person_info}";
 		let scs_num = "${scs.scs_num}";
-
+		
+		
+		
 	    const params = {
 	        "use_point": use_point,
 	        "coupon_num": coupon_num,
@@ -534,7 +545,6 @@
 	        "movie_name": movie_name,
 	        "theater_name" : theater_name,
 	        "screen_cinema_num" : screen_cinema_num,
-	        "formattedDate" : formattedDate,
 	        "scs_start_time" : start_time,
 	        "scs_start_time" : end_time,
 	        "person_info" : person_info,

@@ -15,4 +15,10 @@ public class FeeAgeVO {
 	private int fee_dimension_discount;
 	private String fee_day_keyword;
 	private int fee_day_discount;
+	
+	// ===============
+	private String keyword;
+	private int discount;
+	
+	
 }

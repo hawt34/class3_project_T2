@@ -1,7 +1,9 @@
 package itwillbs.p2c3.boogimovie.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -67,7 +69,7 @@ public class TheaterController {
 	}       
 	 
 	@GetMapping("theater_detail")
-	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, MemberVO member, Model model, HttpSession session, FeeAgeVO fee) {
+	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, MemberVO member, Model model, HttpSession session) {
 		
 		// 로그인한 경우
 		String sId = (String)session.getAttribute("sId");
@@ -81,15 +83,24 @@ public class TheaterController {
 		theater = service.getTheater(theater);
 		List<TheaterFacilityVO> facilityList = service.getFacility(facility);
 		List<NoticeVO> theaterNoticeList = service.getTheaterNoticeList(notice);
-//		List<FeeAgeVO> feeList = service.getFeeInfoList();
+		List<FeeAgeVO> feeInfoList = service.getFeeInfoList();
 		
-		
+		int price = 15000;
+		double discount = 0; 
+		Map<String, Object> feeInfo = new HashMap<String, Object>();
+		for(FeeAgeVO fee : feeInfoList) {
+			discount = price - (price * (fee.getDiscount() / 100.0));
+			feeInfo.put(fee.getKeyword(), discount);
+		}
+			
+		System.out.println("feeInfo : " + feeInfo);
+		System.out.println("feeInfoList : " + feeInfoList);
 		
 		model.addAttribute("theater", theater);
 		model.addAttribute("theaterList", theaterList);
 		model.addAttribute("facilityList", facilityList);
 		model.addAttribute("theaterNoticeList", theaterNoticeList);
-//		model.addAttribute("feeList", feeList);
+		model.addAttribute("feeInfo", feeInfo);
 		
 		
 		

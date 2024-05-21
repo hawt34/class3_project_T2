@@ -25,6 +25,12 @@
 		WHERE item_info_name = #{item_name}
 	</select>
 		
+		
+	<select id="selectItemImage" resultType="String">
+		SELECT item_info_image
+		FROM item_info
+		WHERE item_info_num = #{item_info_num}
+	</select>
 	
 	
 		

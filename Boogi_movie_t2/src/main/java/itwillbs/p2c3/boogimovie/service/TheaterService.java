@@ -73,10 +73,9 @@ public class TheaterService {
 		return mapper.selectTheaterEventList();
 	}
 
-//	public List<FeeAgeVO> getFeeInfoList() {
-//		return mapper.selectFeeInfo();
-//	}
-
+	public List<FeeAgeVO> getFeeInfoList() {
+		return mapper.selectFeeInfo();
+	}
 
 	
 	

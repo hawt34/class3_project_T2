@@ -62,6 +62,7 @@ public class StoreController {
 	                Map<String, String> response = new HashMap<>();
 	                response.put("msg", "이미 장바구니에 담은 품목입니다.");
 	                return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+	                
 	            }
 	        }
 	        // 장바구니에 상품을 추가합니다.
@@ -95,7 +96,7 @@ public class StoreController {
 	}
     
 
-	@GetMapping("cartCheck")
+	@GetMapping("checkout")
 	public String check(HttpServletRequest request) {
 	    Enumeration<String> parameterNames = request.getParameterNames();
 	    while (parameterNames.hasMoreElements()) {

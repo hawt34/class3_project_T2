@@ -204,7 +204,7 @@ footer {
 		</div>
 		<div class="contentPay">
 			<h4>담은 품목</h4>
-			<form action="/checkout" method="post">
+			<form action="checkout" method="get">
         	<table id="cartTable" class="table">
         <thead>
             <tr>
@@ -353,10 +353,7 @@ footer {
 		            }
 		        });
 		    }
-
-	    
-	  
-	  	  
+			  	  
 	    snackButtons.forEach(function(button) {
 	        $(button.buttonId).click(function() {
 	            // 로그인 여부 확인
@@ -370,9 +367,7 @@ footer {
 	            }
 	        });
 	    });
-	    
-
-			    
+	  		    
 	});
 	</script>
 </html>

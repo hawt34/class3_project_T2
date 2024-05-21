@@ -155,37 +155,37 @@
 			let standard = 15000; // 기본 표준 가격 = 2D/평일/낮/성인
 			
 			// 2D 평일 성인 요금 
-			let 2DWDGTNP = standard;		//	낮
-			let 2DWDMTNP = 2DWDGTNP * 0.8;	//	조조
-			let 2DWDNTNP = 2DWDGTNP * 0.9;	//	심야
+			let fee_2DWDGTNP = standard;		//	낮
+			let fee_2DWDMTNP = fee_2DWDGTNP * 0.8;	//	조조
+			let fee_2DWDNTNP = fee_2DWDGTNP * 0.9;	//	심야
 			// 2D 주말 성인 요금 
-			let 2DHDGTNP = 2DWDGTNP * 1.2;	// 낮
-			let 2DHDMTNP = 2DHDGTNP * 0.8;	// 조조
-			let 2DHDNTNP = 2DHDGTNP * 0.9;	// 심야
+			let fee_2DHDGTNP = fee_2DWDGTNP * 1.2;	// 낮
+			let fee_2DHDMTNP = fee_2DHDGTNP * 0.8;	// 조조
+			let fee_2DHDNTNP = fee_2DHDGTNP * 0.9;	// 심야
 			// 3D 평일 성인 요금 
-			let 3DWDGTNP = standard * 1.2;	// 낮
-			let 3DWDMTNP = 3DWDGTNP * 0.8;	// 조조
-			let 3DWDNTNP = 3DWDGTNP * 0.9;	// 심야
+			let fee_3DWDGTNP = fee_standard * 1.2;	// 낮
+			let fee_3DWDMTNP = fee_3DWDGTNP * 0.8;	// 조조
+			let fee_3DWDNTNP = fee_3DWDGTNP * 0.9;	// 심야
 			// 3D 주말 성인 요금
-			let 3DHDGTNP = 3DWDGTNP * 1.2;	// 낮
-			let 3DHDMTNP = 3DHDGTNP * 1.2;	// 낮
-			let 3DHDNTNP = 3DHDGTNP * 1.2;	// 낮
+			let fee_3DHDGTNP = fee_3DWDGTNP * 1.2;	// 낮
+			let fee_3DHDMTNP = fee_3DHDGTNP * 1.2;	// 낮
+			let fee_3DHDNTNP = fee_3DHDGTNP * 1.2;	// 낮
 			
-			$("#2DWDGTNP").html(2DWDGTNP);
-			$("#2DWDMTNP").html(2DWDMTNP);
-			$("#2DWDNTNP").html(2DWDNTNP);
+			$("#2DWDGTNP").html(fee_2DWDGTNP);
+			$("#2DWDMTNP").html(fee_2DWDMTNP);
+			$("#2DWDNTNP").html(fee_2DWDNTNP);
 			
-			$("#2DHDGTNP").html(2DHDGTNP);
-			$("#2DHDMTNP").html(2DHDMTNP);
-			$("#2DHDNTNP").html(2DHDNTNP);
+			$("#2DHDGTNP").html(fee_2DHDGTNP);
+			$("#2DHDMTNP").html(fee_2DHDMTNP);
+			$("#2DHDNTNP").html(fee_2DHDNTNP);
 			
-			$("#3DWDGTNP").html(3DWDGTNP);
-			$("#3DWDMTNP").html(3DWDMTNP);
-			$("#3DWDNTNP").html(3DWDNTNP);
+			$("#3DWDGTNP").html(fee_3DWDGTNP);
+			$("#3DWDMTNP").html(fee_3DWDMTNP);
+			$("#3DWDNTNP").html(fee_3DWDNTNP);
 			
-			$("#3DHDGTNP").html(3DHDGTNP);
-			$("#3DHDMTNP").html(3DHDMTNP);
-			$("#3DHDNTNP").html(3DHDNTNP);
+			$("#3DHDGTNP").html(fee_3DHDGTNP);
+			$("#3DHDMTNP").html(fee_3DHDMTNP);
+			$("#3DHDNTNP").html(fee_3DHDNTNP);
 			
 			
 			

@@ -13,6 +13,7 @@
  	 <select id="selectReviewList" resultType="itwillbs.p2c3.boogimovie.vo.ReviewVO" >
      	SELECT * FROM review
     	WHERE movie_num = #{movie_num}
+    	ORDER BY review_date DESC
     	LIMIT #{startRow}, #{listLimit}
     </select>
  	

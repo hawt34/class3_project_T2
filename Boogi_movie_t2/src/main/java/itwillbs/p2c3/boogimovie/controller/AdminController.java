@@ -79,7 +79,26 @@ public class AdminController {
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")
-	public String adminMain() {
+	public String adminMain(Model model) {
+		
+		// 회원 수
+		int memberCount = service.countMemberList();
+		model.addAttribute("memberCount", memberCount);
+		
+		// 현재 상영작 수
+		int movieCount = service.movieCount();
+		model.addAttribute("movieCount", movieCount);
+		
+		// 금일 상영 영화 수
+		int moviePlanCount = service.countMoviePlan();
+		model.addAttribute("moviePlanCount", moviePlanCount);
+		
+		// 금일 예매 수
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        String formattedDate = sdf.format(currentDate);
+		
+		
+		
 		return "admin/admin_main/admin_main";
 	}
 	

@@ -25,6 +25,21 @@ public class AdminService {
 	@Autowired
 	private AdminMapper mapper;
 	
+	// 회원수 조회
+	public int countMemberList() {
+		return mapper.countMemberList();
+	}
+	
+	// 현재상영작 수 조회
+	public int movieCount() {
+		return mapper.movieCount();
+	}
+	
+	// 금일 상영건 수 조회
+	public int countMoviePlan() {
+		return mapper.countMoviePlan();
+	}
+	
 	// 회원 리스트 조회
 	public List<Map<String, String>> getmemberList() {
 		return mapper.selectMemberList();

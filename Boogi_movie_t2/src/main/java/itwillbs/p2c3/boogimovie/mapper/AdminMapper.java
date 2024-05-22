@@ -20,6 +20,16 @@ import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 @Mapper
 public interface AdminMapper {
 
+	
+	// 회원 수 조회
+	int countMemberList();
+	
+	// 현재 상영작 수 조회
+	int movieCount();
+	
+	// 금일 상영작 수 조회
+	int countMoviePlan();
+	
 	// 회원 리스트 조회
 	List<Map<String, String>> selectMemberList();
 	

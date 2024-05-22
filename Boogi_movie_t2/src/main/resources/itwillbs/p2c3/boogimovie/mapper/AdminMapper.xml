@@ -4,6 +4,30 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="itwillbs.p2c3.boogimovie.mapper.AdminMapper">
 	
+<!-- 회원 수 조회 -->
+	<select id="countMemberList" resultType="int">
+		SELECT COUNT(*)
+		FROM member
+	</select>
+
+<!--  현재상영작 수 조회 -->
+	<select id="movieCount" resultType="int">
+		SELECT COUNT(*)
+		FROM
+			movie
+		WHERE 
+			CURRENT_DATE() BETWEEN movie_open_date AND movie_end_date
+	</select>
+	
+<!-- 금일 상영작 수 조회 -->
+	<select id="countMoviePlan">
+		SELECT COUNT(*) 
+		FROM 
+			screen_session
+		WHERE
+			scs_date = CURRENT_DATE()
+	</select>
+	
 <!-- 회원 리스트 조회 -->
 	<select id="selectMemberList" resultType="hashmap">
 		SELECT * 

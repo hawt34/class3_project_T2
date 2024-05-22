@@ -433,15 +433,15 @@ public class AdminController {
 		}
 	}
 	
-	@GetMapping("admin_moviePlan_form")
-	public String adminMoviePlanForm() {
-		return "admin/admin_movie/admin_moviePlan_form";
-	}
-	
-	@PostMapping("admin_moviePlan_pro")
-	public String adminMoviePlanPro() {
-		return "redirect:/admin_moviePlan";
-	}
+//	@GetMapping("admin_moviePlan_form")
+//	public String adminMoviePlanForm() {
+//		return "admin/admin_movie/admin_moviePlan_form";
+//	}
+//	
+//	@PostMapping("admin_moviePlan_pro")
+//	public String adminMoviePlanPro() {
+//		return "redirect:/admin_moviePlan";
+//	}
 	
 	// 상영관리 AJAX
 	@GetMapping("getScreens")

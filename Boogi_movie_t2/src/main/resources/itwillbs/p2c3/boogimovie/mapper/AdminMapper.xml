@@ -92,6 +92,7 @@
 			th.theater_num = rv.theater_num
 		WHERE 
 			t.ticket_pay_num = #{ticket_pay_num}
+		LIMIT 1
 	</select>
 	
 <!-- 영화 리스트 조회 -->

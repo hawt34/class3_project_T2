@@ -97,8 +97,8 @@ public class PaymentController {
 			return "error/fail";
 		}
 		
-		System.out.println("%%%%%%%%%%%%%%%%%%%%$---------------scs : " + scs);
-		System.out.println("%%%%%%%%%%%%%%%%%%%%$---------------movie : " + movie);
+//		System.out.println("%%%%%%%%%%%%%%%%%%%%$---------------scs : " + scs);
+//		System.out.println("%%%%%%%%%%%%%%%%%%%%$---------------movie : " + movie);
 		
 		member.setMember_id(id);
 		member = memberService.isCorrectUser(member);
@@ -109,8 +109,8 @@ public class PaymentController {
 		dbscs.setMovie_name(movie.getMovie_name());
 		dbscs.setMovie_poster(movie.getMovie_poster());
 		
-		System.out.println("&&&&&&&&&&&&&&&&&&&&&---------------movie : " + movie);
-		System.out.println("&&&&&&&&&&&&&&&&&&&&&---------------dbscs : " + dbscs);
+//		System.out.println("&&&&&&&&&&&&&&&&&&&&&---------------movie : " + movie);
+//		System.out.println("&&&&&&&&&&&&&&&&&&&&&---------------dbscs : " + dbscs);
 		
 		// 선택 날짜 String scs_date2 > Date 변환  > "yyyy.MM.dd(E)" 형식으로 재가공
 		SimpleDateFormat originalFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
@@ -164,7 +164,7 @@ public class PaymentController {
 			MovieVO movie, String theater_name, String screen_cinema_num, ScreenSessionVO scs, String person_info, PayVO pay, 
 			String selected_seats, TicketVO ticket, String keyword) throws IamportResponseException, IOException{
 		
-		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------scs : " + scs);
+//		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------scs : " + scs);
 		Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 검증처리
 		
 		if(payment.getStatus().equals("paid")) {
@@ -329,7 +329,7 @@ public class PaymentController {
 			String theater_name, String screen_cinema_num, String person_info, String formattedDate, String selected_seats) {
 		
 		pay = service.getPayInfo(merchant_uid);
-		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------pay : " + pay);
+//		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------pay : " + pay);
 		
 		model.addAttribute("pay", pay);
 		
@@ -413,10 +413,10 @@ public class PaymentController {
 			double savePointDouble = amountInt * 0.1;
 			int savePoint = (int)(savePointDouble / 100) * 100;
 			int apply_point = savePoint - usePointInt;
-			System.out.println("amountInt : " + amountInt);
-			System.out.println("usePointInt : " + usePointInt);
-			System.out.println("savePoint : " + savePoint);
-			System.out.println("apply_point : " + apply_point);
+//			System.out.println("amountInt : " + amountInt);
+//			System.out.println("usePointInt : " + usePointInt);
+//			System.out.println("savePoint : " + savePoint);
+//			System.out.println("apply_point : " + apply_point);
 			 
 			member = service.getMember(member);
 			member.setMember_point(member.getMember_point() + apply_point);

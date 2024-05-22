@@ -98,58 +98,28 @@
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
 	<!-- 카카오맵 API 라이브러리 -->
- 	<script defer type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622"></script>
+ 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-		    mapOption = { 
-		        center: new kakao.maps.LatLng(35.180355, 129.074238), // 지도의 중심좌표(부산 중심 대충)
-		        level: 9 // 지도의 확대 레벨
-		    };
+	    mapOption = { 
+	        center: new kakao.maps.LatLng(35.180355, 129.074238), // 지도의 중심좌표(부산 중심 대충)
+	        level: 9 // 지도의 확대 레벨
+	    };
 		
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		 
 		// 마커를 표시할 위치와 title 객체 배열입니다 
 		var positions = [
-		    {
-		        title: '부기무비 해운대점', 
-		        latlng: new kakao.maps.LatLng(35.1629768, 129.158492)
-		    },
-		    {
-		        title: '부기무비 센텀점', 
-		        latlng: new kakao.maps.LatLng(35.1629768, 129.158492)
-		    },
-		    {
-		        title: '부기무비 서면점', 
-		        latlng: new kakao.maps.LatLng(35.1542604, 129.0572997)
-		    },
-		    {
-		        title: '부기무비 남포점',
-		        latlng: new kakao.maps.LatLng(35.0986158, 129.0287567)
-		    },
-		    {
-		        title: '부기무비 부산대점',
-		        latlng: new kakao.maps.LatLng(35.2301093, 129.0881162)
-		    },
-		    {
-		        title: '부기무비 사직점',
-		        latlng: new kakao.maps.LatLng(35.1909044, 129.0614196)
-		    },
-		    {
-		        title: '부기무비 영도점',
-		        latlng: new kakao.maps.LatLng(35.0622864, 129.0075247)
-		    },
-		    {
-		        title: '부기무비 덕천점',
-		        latlng: new kakao.maps.LatLng(35.2111693, 129.0075247)
-		    },
-		    {
-		        title: '부기무비 정관점',
-		        latlng: new kakao.maps.LatLng(35.3194331, 129.1783546)
-		    },
-		    {
-		        title: '부기무비 사상점',
-		        latlng: new kakao.maps.LatLng(35.1633264, 128.9819712)
-		    }
+		    { title: '부기무비 해운대점', latlng: new kakao.maps.LatLng(35.1629768, 129.158492) },
+		    { title: '부기무비 센텀점', latlng: new kakao.maps.LatLng(35.1629768, 129.158492) },
+		    { title: '부기무비 서면점', latlng: new kakao.maps.LatLng(35.1542604, 129.0572997) },
+		    { title: '부기무비 남포점', latlng: new kakao.maps.LatLng(35.0986158, 129.0287567) },
+		    { title: '부기무비 부산대점', latlng: new kakao.maps.LatLng(35.2301093, 129.0881162) },
+		    { title: '부기무비 사직점', latlng: new kakao.maps.LatLng(35.1909044, 129.0614196) },
+		    { title: '부기무비 영도점', latlng: new kakao.maps.LatLng(35.0622864, 129.0075247) },
+		    { title: '부기무비 덕천점', latlng: new kakao.maps.LatLng(35.2111693, 129.0075247) },
+		    { title: '부기무비 정관점', latlng: new kakao.maps.LatLng(35.3194331, 129.1783546) },
+		    { title: '부기무비 사상점', latlng: new kakao.maps.LatLng(35.1633264, 128.9819712) }     
 		];
 		
 		// 마커 이미지의 이미지 주소입니다
@@ -171,8 +141,6 @@
 		        image : markerImage // 마커 이미지 
 		    });
 		}
-		
-		
 	</script>
  	
 </body>

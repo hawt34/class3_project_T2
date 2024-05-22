@@ -1,5 +1,6 @@
 package itwillbs.p2c3.boogimovie.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +50,12 @@ public class MypageService {
 		return mapper.selectMovieReservation(member);
 	}
 	
+//	public List<Map<String , Object>> getMovieReservation(Map<String, String> params) {
+//	    System.out.println("MypageService - getMovieReservation()");
+//	    return mapper.selectMovieReservation(params);
+//	}
+	
+	
 	// 예매내역 페이징처리
 	public List<Map<String, Object>> getResvList(int startRow, int listLimit, String member_id){
 		return mapper.selectResvList(startRow, listLimit, member_id);
@@ -58,6 +65,13 @@ public class MypageService {
 		return mapper.selectResvCount(member);
 	}
 	
+//	public List<Map<String, Object>> getResvList(Map<String, Object> params){
+//		return mapper.selectResvList(params);
+//	}
+//	
+//	public int getResvCount(String memberId) {
+//		return mapper.selectResvCount(memberId);
+//	}
 	// 스토어
 	public List<StorePayVO> getStorePay(MemberVO member){
 		return mapper.selectStorePay(member);

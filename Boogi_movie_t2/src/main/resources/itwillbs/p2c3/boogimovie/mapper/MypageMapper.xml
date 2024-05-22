@@ -43,11 +43,8 @@
 		JOIN screen_info ON screen_info.screen_num = screen_session.screen_num
 		JOIN theater ON theater.theater_num = screen_info.theater_num
     WHERE
-        member.member_id = #{member_id} 
-<!-- 		<if test="#{ticket_pay_status} == '취소'"> -->
-<!-- 		    AND pay.ticket_pay_status = '취소' -->
-<!-- 		</if> -->
-<!--         <if test="#{ticket_pay_status} == '결제'"> -->
+        member.member_id = #{member_id}
+<!--         <if test="ticket_pay_status != null"> -->
             AND pay.ticket_pay_status = '결제'
 <!--         </if> -->
     ORDER BY
@@ -77,6 +74,7 @@
 		ORDER BY
 		    screen_session.scs_date DESC
     	LIMIT #{startRow}, #{listLimit}
+    	
     </select>
     
     <!-- 예매한 영화 갯수 -->

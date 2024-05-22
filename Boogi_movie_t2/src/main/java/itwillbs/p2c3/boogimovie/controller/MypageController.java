@@ -342,6 +342,10 @@ public class MypageController {
 		model.addAttribute("member", member);
 
 		// 예매정보
+		Map<String, String> params = new HashMap<>();
+		params.put("member_id", member.getMember_id());
+		params.put("ticket_pay_status", "결제");
+		// 예매정보
 		List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
 		model.addAttribute("movieReservation", movieReservation);
 		
@@ -350,8 +354,11 @@ public class MypageController {
 		
 		String member_id = member.getMember_id();
 		
-		Map<String, String> param = new HashMap<String, String>();
-		param.put("ticket_pay_status", "취소");
+//		Map<String, String> param = new HashMap<String, String>();
+//		param.put("ticket_pay_status", "취소");
+		
+		
+		
 		
 		// 페이징
 		List<Map<String, Object>> resvList = mypageService.getResvList(startRow, listLimit, member_id);
@@ -377,6 +384,63 @@ public class MypageController {
 		
 		return "mypage/myp_reservation";
 	}
+//	@GetMapping("myp_reservation")
+//	public String mypReservation(MemberVO member, Model model, @RequestParam(defaultValue = "1") int pageNum) {
+//	    String id = (String) session.getAttribute("sId");
+//
+//	    if (id == null) { // 아이디 없을 경우 로그인 페이지 이동
+//	        model.addAttribute("msg", "로그인이 필요한 페이지입니다");
+//	        model.addAttribute("targetURL", "member_login");
+//	        return "error/fail";
+//	    }
+//	    member = mypageService.getMember(id);
+//	    model.addAttribute("member", member);
+//
+//	    // 예매정보
+//	    Map<String, String> params = new HashMap<>();
+//	    params.put("member_id", member.getMember_id());
+//	    params.put("ticket_pay_status", "결제");
+//
+//	    List<Map<String, Object>> movieReservation = mypageService.getMovieReservation(params);
+//	    model.addAttribute("movieReservation", movieReservation);
+//
+//	    int listLimit = 4;
+//	    int startRow = (pageNum - 1) * listLimit;
+//
+//	    // 페이징
+//	    Map<String, Object> pagingParams = new HashMap<>();
+//	    pagingParams.put("startRow", startRow);
+//	    pagingParams.put("listLimit", listLimit);
+//	    pagingParams.put("memberId", member.getMember_id());
+//
+//	    List<Map<String, Object>> resvList = mypageService.getResvList(pagingParams);
+//	    int listCount = mypageService.getResvCount(member.getMember_id()); // 총 예매영화 갯수
+//
+//	    int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
+//	    int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); // 카운트 한 게시물 + 1 한 페이지
+//	    int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫 번째 페이지 번호
+//	    int endPage = startPage + pageListLimit - 1; // 마지막 페이지 번호
+//	    if (endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈 때
+//	        endPage = maxPage;
+//	    }
+//
+//	    PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+//
+//	    if (pageNum < 1 || pageNum > maxPage) {
+//	        model.addAttribute("msg", "존재하지 않는 페이지입니다");
+//	        model.addAttribute("targetURL", "myp_reservation");
+//	    }
+//	    model.addAttribute("pageList", pageList);
+//	    model.addAttribute("resvList", resvList);
+//
+//	    return "mypage/myp_reservation";
+//	}
+
+	
+	
+	
+	
+	
 	
 	// ============================= 스토어 =============================
 	

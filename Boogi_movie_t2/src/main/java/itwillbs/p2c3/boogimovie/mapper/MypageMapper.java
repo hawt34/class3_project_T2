@@ -28,6 +28,10 @@ public interface MypageMapper {
 	// 예매내역
 	List<Map<String , Object>> selectMovieReservation(MemberVO member);
 
+//    List<Map<String, Object>> selectMovieReservation(Map<String, String> params);
+//    List<Map<String, Object>> selectResvList(Map<String, Object> params);
+//    int selectResvCount(String memberId);
+	
 	// 예매내역 페이징처리
 	List<Map<String, Object>> selectResvList(@Param("startRow") int startRow, @Param("listLimit") int listLimit, @Param("member_id") String member_id);
 	

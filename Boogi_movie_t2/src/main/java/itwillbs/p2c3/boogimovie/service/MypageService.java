@@ -45,15 +45,16 @@ public class MypageService {
 	}
 	
 	// 예매내역 
-	public List<Map<String , Object>> getMovieReservation(MemberVO member) {
-		System.out.println("MypageService - getMovieReservation()");
-		return mapper.selectMovieReservation(member);
-	}
-	
-//	public List<Map<String , Object>> getMovieReservation(Map<String, String> params) {
-//	    System.out.println("MypageService - getMovieReservation()");
-//	    return mapper.selectMovieReservation(params);
+//	public List<Map<String , Object>> getMovieReservation(MemberVO member) {
+//		System.out.println("MypageService - getMovieReservation()");
+//		return mapper.selectMovieReservation(member);
 //	}
+	public List<Map<String , Object>> getMovieReservation(Map<String, Object> param) {
+		System.out.println("MypageService - getMovieReservation()");
+		// 파라미터 맵에 member_id 추가
+//		param.put("member_id", member.getMember_id());
+		return mapper.selectMovieReservation(param);
+	}
 	
 	
 	// 예매내역 페이징처리
@@ -61,9 +62,12 @@ public class MypageService {
 		return mapper.selectResvList(startRow, listLimit, member_id);
 	}
 	
-	public int getResvCount(MemberVO member) {
-		return mapper.selectResvCount(member);
+	public int getResvCount(String member_id, String status) {
+		return mapper.selectResvCount(member_id, status);
 	}
+//	public List<Map<String, Object>> getResvCount(List<Map<String, Object>> param) {
+//		return mapper.selectResvCount(param);
+//	}
 	
 //	public List<Map<String, Object>> getResvList(Map<String, Object> params){
 //		return mapper.selectResvList(params);
@@ -94,11 +98,6 @@ public class MypageService {
 	public int modifyMember(MemberVO member) {
 		return mapper.updateMember(member);
 	}
-//
-//	// 쿠폰
-//	public List<CouponVO> getCoupon(MemberVO member){
-//		return mapper.selectCoupon(member);
-//	}
 	
 	// 자주가는극장 
 	@Transactional
@@ -112,15 +111,11 @@ public class MypageService {
 		mapper.updateTheater(id, theater, theaterNumber);
 	}
 	
-	
-	
-	
 	public ReservationVO getMovieResv(String id) {
 		System.out.println("MypageInfoService - getMovieResv");
 		ReservationVO infoMovieResv = mapper.selectMovieResv(id);
 		return mapper.selectMovieResv(id);
 	}
-	
 	
 	// 탈퇴처리
 	public int withdrawMember(MemberVO member) {

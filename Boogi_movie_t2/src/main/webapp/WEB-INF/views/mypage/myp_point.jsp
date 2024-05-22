@@ -88,8 +88,8 @@ body {
 							<fmt:parseDate var="parsedDate" value="${item.date}" 
 							pattern="yyyy-MM-dd'T'HH:mm:ss" type="both"/>
 							
-						  		<tr  class="table-secondary ${status.index % 2 == 0 ? 'table-secondary' : ''}">
-						  			<th scope="row">${status.index + 1}</th>
+							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+							        <th scope="row">${status.index + 1}</th>
 						  			 <td>
  						  			 	<c:choose>
 						  			 		<c:when test="${item.theater eq '스토어' }">
@@ -138,8 +138,8 @@ body {
 								    <c:if test="${item.usePoints != 0}">
 								        <fmt:parseDate var="parsedDate" value="${item.date}" pattern="yyyy-MM-dd'T'HH:mm:ss" type="both"/>
 								        
-								        <tr class="table-secondary ${status.index % 2 == 0 ? 'table-secondary' : ''}">
-								            <th scope="row">${status.index + 1}</th>
+								    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+								        <th scope="row">${status.index + 1}</th>
 								            <td>
 								                <c:choose>
 								                    <c:when test="${item.theater eq '스토어' }">
@@ -169,52 +169,6 @@ body {
 								        </tr>
 								    </c:if>
 								</c:forEach>
-
-
-<!-- 							    <tr  class="table-secondary"> -->
-<!-- 							      <th scope="row">1</th> -->
-<!-- 								      <td>매표</td> -->
-<!-- 								      <td>서면점</td> -->
-<!-- 								      <td>2024 / 04 / 24</td> -->
-<!-- 								      <td>750점</td> -->
-<!-- 							    </tr>       -->
-<!-- 							    <tr> -->
-<!-- 							      <th scope="row">2</th> -->
-<!-- 							        <td>매표</td> -->
-<!-- 							        <td>삼정타워점</td> -->
-<!-- 							        <td>2024 / 04 / 01</td> -->
-<!-- 							        <td>540점</td> -->
-<!-- 							    </tr> -->
-<!-- 							    <tr  class="table-secondary"> -->
-<!-- 							      <th scope="row">3</th> -->
-<!-- 				          			<td>매점</td> -->
-<!-- 						            <td>삼정타워점</td> -->
-<!-- 						            <td>2024 / 04 / 01</td> -->
-<!-- 						            <td>120점</td> -->
-<!-- 						         </tr> -->
-<!-- 								<tr> -->
-<!-- 							      <th scope="row">4</th> -->
-<!-- 						            <td>매표</td> -->
-<!-- 									<td>아시아드</td> -->
-<!-- 				            		<td>2024 / 02 / 18</td> -->
-<!-- 				            		<td>820점</td> -->
-<!-- 				          		</tr> -->
-				          		
-<!-- 				          		<tr  class="table-secondary"> -->
-<!-- 							      <th scope="row">5</th> -->
-<!-- 					              	<td>매표</td> -->
-<!-- 					              	<td>아시아드</td> -->
-<!-- 					              	<td>2024 / 02 / 08</td> -->
-<!-- 					              	<td>430점</td> -->
-<!-- 				         		</tr> -->
-<!-- 				          		<tr> -->
-<!-- 							      <th scope="row">6</th> -->
-<!-- 				            		<td>매점</td> -->
-<!-- 				            		<td>아시아드</td> -->
-<!-- 				            		<td>2024 / 02 / 08</td> -->
-<!-- 				            		<td>250점</td> -->
-<!-- 						          </tr> -->
-<!-- 							  </tbody> -->
 							</table>
 						</div><!-- tab-pane  -->
 					</div><!-- tab-content -->

@@ -52,8 +52,11 @@ public interface TheaterMapper {
 	// 극장 메인 > 극장 관련 이벤트 목록
 	List<EventVO> selectTheaterEventList();
 
-//	// 극장 상세 > 요금정보 
-//	List<FeeAgeVO> selectFeeInfo();
+	// 극장 상세 > 요금정보 
+	List<FeeAgeVO> selectFeeInfo();
+
+
+	List<FeeAgeVO> selectFeeList();
 
 
 

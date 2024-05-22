@@ -73,10 +73,14 @@ public class TheaterService {
 		return mapper.selectTheaterEventList();
 	}
 
-//	public List<FeeAgeVO> getFeeInfoList() {
-//		return mapper.selectFeeInfo();
-//	}
+	public List<FeeAgeVO> getFeeInfoList() {
+		return mapper.selectFeeInfo();
+	}
 
+	public List<FeeAgeVO> getFeeList() {
+		// TODO Auto-generated method stub
+		return mapper.selectFeeList();
+	}
 
 	
 	

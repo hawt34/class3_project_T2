@@ -18,7 +18,19 @@
 	<select id="selectItemListJuice" resultType="itwillbs.p2c3.boogimovie.vo.ItemInfoVO">
 		SELECT * FROM item_info WHERE item_info_category = '음료' ORDER BY item_info_price ASC
 	</select>
+	
+	<select id="selectItemNum" resultType="int">
+		SELECT item_info_num 
+		FROM item_info
+		WHERE item_info_name = #{item_name}
+	</select>
 		
+		
+	<select id="selectItemImage" resultType="String">
+		SELECT item_info_image
+		FROM item_info
+		WHERE item_info_num = #{item_info_num}
+	</select>
 	
 	
 		

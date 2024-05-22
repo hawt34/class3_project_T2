@@ -14,6 +14,7 @@ import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.ReservationVO;
+import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Service
@@ -48,6 +49,7 @@ public class MypageService {
 		return mapper.selectMovieReservation(member);
 	}
 	
+	// 예매내역 페이징처리
 	public List<Map<String, Object>> getResvList(int startRow, int listLimit, String member_id){
 		return mapper.selectResvList(startRow, listLimit, member_id);
 	}
@@ -55,6 +57,13 @@ public class MypageService {
 	public int getResvCount(MemberVO member) {
 		return mapper.selectResvCount(member);
 	}
+	
+	// 스토어
+	public List<StorePayVO> getStorePay(MemberVO member){
+		return mapper.selectStorePay(member);
+	}
+	
+	
 //	// 취소내역
 	public List<Map<String, Object>> getCancelList(MemberVO member){
 		System.out.println("MypageService - getCancelList()");
@@ -71,11 +80,11 @@ public class MypageService {
 	public int modifyMember(MemberVO member) {
 		return mapper.updateMember(member);
 	}
-
-	// 쿠폰
-	public List<CouponVO> getCoupon(MemberVO member){
-		return mapper.selectCoupon(member);
-	}
+//
+//	// 쿠폰
+//	public List<CouponVO> getCoupon(MemberVO member){
+//		return mapper.selectCoupon(member);
+//	}
 	
 	// 자주가는극장 
 	@Transactional

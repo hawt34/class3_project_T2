@@ -160,36 +160,26 @@
 						<h5 class="card-header">결제 정보</h5>
 						<div class="card-body text-center">
 							<div class="card payment_status_box">
-								
-								<!-- 결제 항목 노출 -->
 								<ul class="list-group list-group-flush">
-									<li class="list-group-item"> <!--  항목 하나 -->
-										<div class="row ">
-											<div class="col text-center">
-												<img src="${itemInfo.item_info_image}" id="item_info_image" alt="아이템 이미지" style="width: 250px;" >
-											</div>
-											<div class="col">
-												<p><span id="item_info_num">아이템 항목 이름</span></p>
-												<p>	<span id="item_quantity">항목 구매 수량</span> / <span id="item_price">항목 가격</span></p>
-											</div>	
-										</div> <!-- row -->	
-									</li><!--  여기까지 -->
-									
-									<li class="list-group-item"> <!--  항목 하나 -->
-										<div class="row ">
-											<div class="col text-center">
-												<img src="${itemInfo.item_info_image}" id="item_info_image" alt="아이템 이미지" style="width: 250px;" >
-											</div>
-											<div class="col">
-												<p><span id="item_info_num">아이템 항목 이름</span></p>
-												<p>	<span id="item_quantity">항목 구매 수량</span> / <span id="item_price">항목 가격</span></p>
-											</div>	
-										</div> <!-- row -->	
-									</li><!--  여기까지 -->
+									<!-- 결제 항목 노출 -->
+									<c:forEach var="cart" items="${cartList}">
+										<li class="list-group-item"> <!--  항목 하나 -->
+											<div class="row ">
+												<div class="col text-center">
+													<img src="${pageContext.request.contextPath}/resources/images/${cart.item_info_image}" id="item_info_image" alt="아이템 이미지" style="width:100px;" >
+												</div>
+												<div class="col">
+													<p><b>구매 항목 : <span class="pay_number">${cart.item_info_name}</span></b></p>
+													<p><b>구매 수량 : <span class="pay_number">${cart.item_quantity}</span>개 / 
+													<span class="pay_number total_price">${cart.item_total_price}</span>원</b></p>
+												</div>	
+											</div> <!-- row -->	
+										</li><!--  여기까지 -->
+									</c:forEach>
 								</ul>
 								<div class="card-footer">
 									<p><b> 총 금액
-										<span id="total_fee" class="pay_number">0</span>원<!-- ${cart.item_total_price} -->
+										<span id="total_fee" class="pay_number">${total_fee}</span>원
 									</b></p>
 								</div> <!-- card-footer -->
 							</div> <!-- payment_status_box -->
@@ -218,7 +208,7 @@
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item">
 										<p><b>최종 결제금액 
-											<span id="final_amount" class="pay_number">0</span> <!-- 첫 금액은  total_fee랑 같아야 함-->
+											<span id="final_amount" class="pay_number">${total_fee}</span> <!-- 첫 금액은  total_fee랑 같아야 함-->
 										원</b></p>
 									</li>
 									<li class="list-group-item">
@@ -276,12 +266,20 @@
 	</footer>
 <script>
  	$(function() {
+ 		
+ 		// 총 결제 금액 
+//  		let totalFee = 0;
+//  	    $(".total_price").each(function() {
+//  	        totalFee += parseInt($(this).text());
+//  	    });
+//  	    $("#total_fee").text(totalFee);
+//  	    $("#final_amount").text(totalFee);
 	
 		// 포인트 조회 버튼 눌러서 포인트 가져오기
 		$("#getMemberPointBtn").on("click", function() {
 			$("#getMemberPoint").val("${member.member_point}");
 		});
-		
+		11,100
 		// 사용할 포인트 값 입력 검증
 		$("#useMemberPoint").on("keyup",function() {
 			let point = $(this).val();
@@ -304,7 +302,7 @@
 			if($("#getMemberPoint").val() == "") {
 				$("#checkPointArea").text("보유 포인트를 먼저 조회해 주세요.");
 				$("#checkPointArea").css("color","red");
-				
+				$("#useMemberPoint").focus();
 				return;
 			}
 
@@ -331,10 +329,15 @@
 			 			alert("포인트를 사용할 수 없습니다.");
 			 		} else {
 			 			if(confirm ("포인트를 사용하시겠습니까?")){
-				 			$("#point_apply").html(use_point);			// 적용할 포인트 값
-				 			$("#final_amount").html(final_amount);		// 총 결제금액에  적용 값 
-				 			$("#discount_sum").html(discount_sum); 		// 총 할인 적용 값
-				 			
+			 				if(discount_sum < parseInt(total_fee)) {
+					 			$("#point_apply").html(use_point);			// 적용할 포인트 값
+					 			$("#final_amount").html(final_amount+"원");		// 총 결제금액에  적용 값 
+					 			$("#discount_sum").html(discount_sum); 		// 총 할인 적용 값
+			 				} else {
+			 					alert("결제 금액을 초과할 수 없습니다.");
+			 					$("#useMemberPoint").val("");
+			 					$("#useMemberPoint").focus();
+			 				}
 			 			} else {
 			 				$("#useMemberPoint").val("");
 			 			}
@@ -379,12 +382,9 @@
 	 			$("#final_amount").html(final_amount);		// 총 결제금액 적용 값
 	 			$("#discount_sum").html(discount_sum);		// 총 할인 적용 값
 	 			
- 			} else {
- 				history.back();
- 			}
+ 			} 
 			
-			
-		});
+		}); 
 		
 		// 결제 방식 선택 시 최종 결제 방식에 결제수단 표시하기
 		$('input[name="pg"]').change(function() {
@@ -495,46 +495,34 @@
 
 	// 결제검증 후 DB업데이트
 	function verifyAndSavePayInfo(imp_uid, merchant_uid) {
+		console.log('verifyAndSavePayInfo() 호출됨');
 		
 		let use_point =  document.querySelector("#point_apply").innerText;
-		let coupon_num = document.querySelector('input[name=select]:checked').id;
+		let couponInput = document.querySelector('input[name=select]:checked');
+		let coupon_num = couponInput ? couponInput.id : 0;
 		let member_id = "${member.member_id}";
 		let amount = parseInt(document.querySelector("#final_amount").innerText);	
+		let cart_id = "${cart_id}";
 		
-		let movie_name = "${scs.movie_name}";
-		let theater_name = "${scs.theater_name}";
-		let screen_cinema_num = "${scs.screen_cinema_num}";
-		let formattedDate = "${formattedDate}";
-		let selected_seats = "${selected_seats}";
-		let start_time = "${scs.scs_start_time}";
-		let end_time = "${scs.scs_end_time}";
-		let person_info = "${person_info}";
-
 	    const params = {
 	        "use_point": use_point,
 	        "coupon_num": coupon_num,
 	        "member_id" : member_id,
 	        "amount" : amount,
-	        "movie_name": movie_name,
-	        "theater_name" : theater_name,
-	        "screen_cinema_num" : screen_cinema_num,
-	        "formattedDate" : formattedDate,
-	        "scs_start_time" : start_time,
-	        "scs_start_time" : end_time,
-	        "person_info" : person_info,
-	        "selected_seats" : selected_seats
+	        "cart_id" : cart_id
 	    }
+	    
 	    
 	    $.ajax({
 
 	        type: "POST",
-	        url: "payVerify" + imp_uid,
+	        url: "payVerifyStore" + imp_uid,
 	        data: params,
-	        success: function(payVerify) {
-	            console.log(payVerify);
+	        success: function(payVerifyStore) {
+	            console.log(payVerifyStore);
 
-	            if(payVerify) {
-	                location.href = "success_reserve" + merchant_uid;
+	            if(payVerifyStore) {
+	                location.href = "success_store" + merchant_uid;
 
 	            } else {
 	                alert('처리 중 오류가 발생하였습니다. 다시 시도해 주세요');
@@ -550,10 +538,6 @@
 
 	} // savePayInfo
 	
-	
-	function paySuccess() {
-		
-	}
 
 </script>
 </body>

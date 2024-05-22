@@ -47,11 +47,6 @@ body {
 							data-bs-target="#userinfo" type="button" role="tab" aria-controls="userinfo"
 							aria-selected="true">쿠폰함</button>
 					</li>
-					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="myreview-tab" data-bs-toggle="tab"
-							data-bs-target="#myreview" type="button" role="tab"
-							aria-controls="myreview" aria-selected="false">사용내역</button>
-					</li>
 				</ul>
 				<!-- 내용 -->
 				<div class="tab-content" id="myTabContent">
@@ -77,64 +72,8 @@ body {
 						  </tbody>
 						</table>
 					</div><!-- tab-pane -->
-					<div class="tab-pane fade" id="myreview" role="tabpanel"aria-labelledby="myreview-tab">
-						<table class="table table-hover" >
-						  <thead>
-						    <tr>
-						      <th scope="col">#</th>
-						      <th scope="col">쿠폰 이름</th>
-						      <th scope="col">번호</th>
-						      <th scope="col">사용일</th>
-						      <th scope="col">사용경로</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						    <tr  class="table-secondary">
-						      <th scope="row">1</th>
-							      <td>뫄뫄쿠폰</td>
-							      <td>4568798541612</td>
-							      <td>2024 / 04 / 05</td>
-							      <td>서면점</td>
-						    </tr>      
-						    <tr>
-						      <th scope="row">2</th>
-						        <td>어쩌구쿠폰</td>
-						        <td>5984513521651</td>
-						        <td>2024 / 03 / 29</td>
-						        <td>아시아드점</td>
-						    </tr>
-						    <tr  class="table-secondary">
-						      <th scope="row">3</th>
-					            <td>저쩌구쿠폰</td>
-					            <td>7854126589561</td>
-					            <td>2024 / 03 / 05</td>
-					            <td>서면점</td>
-					         </tr>
-							<tr>
-						      <th scope="row">4</th>
-								<td>예예쿠폰</td>
-			          			<td>37482937264930</td>
-			          			<td>2024 / 02 / 04</td>
-			            		<td>삼정타워점</td>
-			          		</tr>
-			          		<tr  class="table-secondary">
-						      <th scope="row">5</th>
-						      	<td>솨솨쿠폰</td>
-				              	<td>559842654125</td>
-				              	<td>2024 / 01 / 19</td>
-								<td>아시아드점</td>
-			         		</tr>
-			          		<tr>
-						      <th scope="row">6</th>
-			          			<td>다다쿠폰</td>
-			            		<td>8852145657842</td>
-			            		<td>2023 / 12 / 25</td>
-					            <td>서면점</td>
-					          </tr>
-						  </tbody>
-						</table>	
-					</div><!-- tab-pane  -->
 				</div><!-- tab-content -->
+				
 			</div><!-- col-md-10 box1 -->
 		</div> <!-- row -->
 	</div> <!-- container2 -->

@@ -128,6 +128,11 @@ public class AdminService {
 		return mapper.getMovieTimeList( theaterSelect,  screenSelect,  scs_date);
 	}
 	
+	// 상영조회
+	public List<Map<String, String>> getMoivePlanList(int theaterNum, Date scs_date) {
+		return mapper.getMoivePlanList(theaterNum, scs_date);
+	}
+	
 	//--------------------------------------------------------------
 	// 쿠폰 타입 리스트
 	public List<Map<String, String>> getCouponTypeList() {

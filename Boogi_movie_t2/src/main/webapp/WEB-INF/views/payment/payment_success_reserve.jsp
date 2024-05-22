@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 
 	article {
 		width: 1400px;
-		margin: 0 auto;
+		margin: auto;
 	}
 	
 	.payment_all{
@@ -33,24 +34,34 @@
 			<div>
 				<h5>결제 내역</h5>
 				<p>주문 번호 : ${pay.merchant_uid}</p>
-				<p>결제일 : ${pay.ticket_pay_date}}</p>
-				<p>결제 금액 : ${pay.ticket_pay_price}</p>
+				<p>결제일 : ${pay.ticket_pay_date}</p>
 			</div>
 			<div>
 				<h5>결제 정보</h5>
-				<p>결제수단 : ${pay.ticket_pay_type}}</p>
+				<p>결제수단 : ${pay.ticket_pay_type}</p>
 				<hr>
-				<p>티켓 가격</p>
-				<p>포인트 사용</p>
-				<p>쿠폰 사용</p>
+				<p>티켓 가격 : </p>
+				<p>포인트 사용 : ${pay.use_point} 원</p>
+				<p>쿠폰 : 
+					<c:choose>
+						<c:when test="${not empty coupon.coupon_name}">
+							${coupon.coupon_name}(${coupon.coupon_value}) 
+						</c:when>
+						<c:otherwise>
+							미사용
+						</c:otherwise>
+					</c:choose>
+				</p>
 				<hr>
-				<p><b>최종 결제금액</b></p>
+				<p><b>최종 결제금액 : ${pay.ticket_pay_price}</b></p>
 			</div>
 			<div>
 				<h5>예매 정보</h5>
 				<p>영화 포스터, 제목, 극장명, 상영관명, 날짜, 시간, 좌석, 인원수</p>
 			</div>
 			<button class="btn btn-primary" type="button" onclick="location.href='myp_main'">예매 내역 확인</button>
+						<button class="btn btn-primary" type="button" onclick="location.href='./'">부기무비 메인</button>
+			
 		</div>
 	</article>
 </body>

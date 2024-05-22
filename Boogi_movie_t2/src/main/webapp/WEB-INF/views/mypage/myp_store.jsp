@@ -76,18 +76,22 @@ hr{
 							<thead>
 							    <tr>
 								    <th scope="col">#</th>
-								    <th scope="col">번호</th>
-								    <th scope="col">쿠폰 이름</th>
-							      	<th scope="col">할인율</th>
+								    <th scope="col">구매일</th>
+								    <th scope="col">결제내역</th>
+								    <th scope="col">결제금액</th>
+								    <th scope="col">결제수단</th>
 						    	</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>ddddd</td>
-									<td>ㅇㄹㄴㄹㅇㄴㅇㄹ</td>
-									<td>15612</td>
-									<td>ㅇㄴㅇㄹㄴㄹㅇㄹ</td>
-								</tr>
+								<c:forEach var="store_pay" items="${storePay}" varStatus="status" begin="0" end="4">
+								    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+								        <th scope="row">${status.index + 1}</th>
+								        <td>${store_pay.store_pay_date}</td>
+								        <td>0000</td>
+								        <td>${store_pay.store_pay_price}</td>
+								        <td>${store_pay.store_pay_type}</td>
+								    </tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -97,20 +101,27 @@ hr{
 						<thead>
 						    <tr>
 								<th scope="col">#</th>
-								<th scope="col">사용 구분</th>
-								<th scope="col">사용 극장</th>
-								<th scope="col">사용일</th>
-								<th scope="col">사용</th>
+							    <th scope="col">취소일</th>
+							    <th scope="col">구매일</th>
+							    <th scope="col">결제내역</th>
+							    <th scope="col">결제취소 금액</th>
+							    <th scope="col">결제취소 수단</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>fsdf</td>
-								<td>ㅇㅀㅀㅇ</td>
-								<td>234324234</td>
-								<td>!@#$#%#	</td>
-								<td>1235413</td>
-							</tr>
+							<c:forEach var="store_pay" items="${storePay}" varStatus="status" begin="0" end="4">
+							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+							        <th scope="row">${status.index + 1}</th>
+							        <td>${store_pay.store_pay_cancel_date}</td>
+							        <td>${store_pay.store_pay_date}</td>
+							        <td>
+<%-- 							        ${store_pay.store_pay_type} --%>
+							        0000
+							        </td>
+							        <td>${store_pay.store_pay_price}</td>
+							        <td>${store_pay.store_pay_type}</td>
+							    </tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div><!-- tab-pane fade 탭2 끝-->
@@ -118,36 +129,34 @@ hr{
 				
 				
 				
-				
-				
-					<!-- 페이징 시작 -->
-					<div class="breakdown_pageArea">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" > 
-								<a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}" aria-label="Previous" >
-								<span aria-hidden="true" >&laquo;</span>
-								</a>
-							</li>
-							<c:forEach var="i" begin="${pageList.startPage}" end="${pageList.endPage}">
-								<c:choose>
-									<c:when test="${pageNum eq i }">
-										<li class="page-item active"><a class="page-link">${i}</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}">${i}</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-							<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
-								<a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
-					</div>
-					<!-- 페이징 끝 -->
+				<!-- 페이징 시작 -->
+				<div class="breakdown_pageArea">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" > 
+							<a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}" aria-label="Previous" >
+							<span aria-hidden="true" >&laquo;</span>
+							</a>
+						</li>
+						<c:forEach var="i" begin="${pageList.startPage}" end="${pageList.endPage}">
+							<c:choose>
+								<c:when test="${pageNum eq i }">
+									<li class="page-item active"><a class="page-link">${i}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
+							<a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+				</div>
+				<!-- 페이징 끝 -->
 			</div><!-- col-md-9 box-in -->
 		</div> <!-- row -->
 	</div><!-- container2 -->

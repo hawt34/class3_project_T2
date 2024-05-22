@@ -10,6 +10,7 @@ import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.ReservationVO;
+import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Mapper
@@ -26,10 +27,15 @@ public interface MypageMapper {
 	
 	// 예매내역
 	List<Map<String , Object>> selectMovieReservation(MemberVO member);
-//	
+
+	// 예매내역 페이징처리
 	List<Map<String, Object>> selectResvList(@Param("startRow") int startRow, @Param("listLimit") int listLimit, @Param("member_id") String member_id);
 	
 	int selectResvCount(MemberVO member);
+	
+	// 스토어
+	List<StorePayVO> selectStorePay(MemberVO member);
+	
 	// 취소내역 
 	List<Map<String, Object>> selectCancelList(MemberVO member);
 	
@@ -40,7 +46,7 @@ public interface MypageMapper {
 	int updateMember(MemberVO member);
 	
 	// 쿠폰
-	List<CouponVO> selectCoupon(MemberVO member);
+//	List<CouponVO> selectCoupon(MemberVO member);
 	
 	// 자주가는 극장
 	void updateMyTheater(@Param("checkedValues") List<String> checkedValues, @Param("member_id")String member_id, @Param("member") MemberVO member);

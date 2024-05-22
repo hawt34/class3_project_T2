@@ -155,6 +155,7 @@ body {
 				</c:when>
 				<c:otherwise>
 					<a onclick="member_logout()" class="cursor-pointer"> | &nbsp; 로그아웃 &nbsp; | </a> 
+					<a onclick="location.href='myp_main'" class="cursor-pointer"> &nbsp; 마이페이지 &nbsp; | </a> 
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${empty sId}">
@@ -204,13 +205,13 @@ body {
 					<a href="tic_ticketing">빠른예매</a> <a href="#none">상영스케줄</a>
 				</div>
 			</div>
-			<div class="dropdown">
-				<button class="dropdown-btn" onclick="location.href='myp_main'">마이페이지</button>
-				<div class="dropdown-submenu">
-					<a href="myp_reservation">예매내역</a> <a href="myp_store">스토어</a> <a href="myp_cancel">취소내역</a> <a href="myp_coupon">쿠폰</a> <a href="myp_point">포인트</a> 
-					<a href="myp_oto_breakdown">문의내역</a> <a href="myp_info_modify">회원정보수정</a> <a href="myp_withdraw_info">회원탈퇴</a>
-				</div>
-			</div>
+<!-- 			<div class="dropdown"> -->
+<!-- 				<button class="dropdown-btn" onclick="location.href='myp_main'">마이페이지</button> -->
+<!-- 				<div class="dropdown-submenu"> -->
+<!-- 					<a href="myp_reservation">예매내역</a> <a href="myp_store">스토어</a> <a href="myp_cancel">취소내역</a> <a href="myp_coupon">쿠폰</a> <a href="myp_point">포인트</a>  -->
+<!-- 					<a href="myp_oto_breakdown">문의내역</a> <a href="myp_info_modify">회원정보수정</a> <a href="myp_withdraw_info">회원탈퇴</a> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div class="dropdown">
 				<button class="dropdown-btn" onclick="location.href='csc_main'">고객센터</button>
 				<div class="dropdown-submenu">
@@ -220,6 +221,7 @@ body {
 			<div class="dropdown">
 				<button class="dropdown-btn" onclick="location.href='event'">이벤트</button>
 				<div class="dropdown-submenu">
+<<<<<<< HEAD
 					<a href="event">이벤트코너</a> 
 				</div>
 			</div>
@@ -228,6 +230,17 @@ body {
 				<div class="dropdown-submenu">
 <!-- 					<a href="event">이벤트코너</a>  -->
 					<a href="boogi_store">스토어</a> 
+=======
+<!-- 					<a href="event">이벤트코너</a>  -->
+<!-- 					<a href="boogi_store">스토어</a>  -->
+				</div>
+			</div>
+			<div class="dropdown">
+				<button class="dropdown-btn" onclick="location.href='boogi_store'">스토어</button>
+				<div class="dropdown-submenu">
+<!-- 					<a href="event">이벤트코너</a>  -->
+<!-- 					<a href="boogi_store">스토어</a>  -->
+>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 				</div>
 			</div>
 		</div>

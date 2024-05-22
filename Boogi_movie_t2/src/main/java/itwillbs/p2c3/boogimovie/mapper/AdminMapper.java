@@ -85,6 +85,9 @@ public interface AdminMapper {
 	// 극장이름 가져오기
 	List<Map<String, String>> getTheaterList();
 	
+	// 상영 일정 조회
+	List<Map<String, String>> getMoivePlanList(@Param("theater_num") int theaterNum, @Param("scs_date") Date moviePlanDate);
+	
 	//========================================================
 	// 쿠폰타입 리스트 가져오기
 	List<Map<String, String>> getCouponTypeList();

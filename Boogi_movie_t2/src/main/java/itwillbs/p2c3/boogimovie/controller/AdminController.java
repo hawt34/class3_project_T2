@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,7 +51,6 @@ import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
-import retrofit2.http.GET;
 
 @Controller
 public class AdminController {
@@ -378,10 +376,24 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 상영관리 페이지
 	@GetMapping("admin_moviePlan")
-	public String adminMoviePlan(Model model) {
+	public String adminMoviePlan(Model model, @RequestParam Date scs_date, 
+			@RequestParam String theater_num) throws ParseException {
+//		SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
+//		Date scsDate = sdt.parse(scs_date);
+		int theaterNum = Integer.parseInt(theater_num);
+		
+		ScreenSessionVO scs = new ScreenSessionVO();
+		scs.setScs_date(scs_date);
+		scs.setTheater_num(theaterNum);
+		
 		List<Map<String, String>> movieList = service.getmovieList();
 		List<Map<String, String>> theaterNameList = service.getTheaterList();
 		List<Map<String, String>> moviePlanList = service.selectMoviePlanList();
+		System.out.println("scs: " + scs);
+		if(scs != null) {
+			moviePlanList = service.getMoivePlanList(scs.getTheater_num(), scs.getScs_date());
+		}
+		
 		
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("moviePlanList", moviePlanList);
@@ -390,9 +402,12 @@ public class AdminController {
 		return "admin/admin_movie/admin_moviePlan";
 	}
 	
+	// 상영일정 등록
 	@PostMapping("admin_moviePlan_reg")
 	public String adminMoviePlanReg(ScreenSessionVO screenSession, Model model) {
 //		System.out.println(screenSession);
+		
+		// 상영일정 등록시 빈자리값 계산해서 넣어주기
 		ScreenInfoVO seatInfo = service.getSeatInfo(screenSession);
 		String col = seatInfo.getScreen_seat_col();
 		String row = seatInfo.getScreen_seat_row();
@@ -419,6 +434,7 @@ public class AdminController {
 		
 	}
 	
+	// 상영일정 삭제 
 	@GetMapping("admin_moviePlan_delete")
 	public String adminMoviePlanDelete(ScreenSessionVO screenSession, Model model) {
 		int deleteCount = service.deleteMoviePlan(screenSession.getScs_num());
@@ -441,7 +457,6 @@ public class AdminController {
 	}
 	
 	// 상영관리 AJAX
-	
 	@GetMapping("getScreens")
 	@ResponseBody
 	public List<ScreenInfoVO> getScreens(@RequestParam("theater_num") String theater_num) {
@@ -450,6 +465,7 @@ public class AdminController {
 		return screen_info;
 	}
 	
+	// 끝나는 시간 계산 ajax
 	@GetMapping("movieEndTime")
 	@ResponseBody
 	public ResponseEntity<String> movieEndTime(@RequestParam String hourSelect, @RequestParam String movieSelect) {
@@ -478,6 +494,7 @@ public class AdminController {
 		return ResponseEntity.ok().body(endTime);
 	}
 	
+	// 상영일정 타임리스트 ajax
 	@GetMapping("moviePlan_time")
 	@ResponseBody
 	public List<Map<String, String>> moviePlanTime(@RequestParam int theaterSelect, @RequestParam int screenSelect, @RequestParam Date scs_date) {
@@ -488,6 +505,7 @@ public class AdminController {
 		return movieTimeList;
 	}
 	
+
 	//--------------------------------------------------------------------
 	// 영화 리스트 조회 
 	@GetMapping("admin_movie")

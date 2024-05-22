@@ -284,7 +284,7 @@ main {
 				$.ajax({
 					type: "get",
 					url: "eventType",
-					dataType: "JSON",
+// 					dataType: "JSON",
 					data : {
 						eventType : $('button.active').val()
 					},

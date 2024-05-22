@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -96,14 +97,5 @@ public class StoreController {
 	}
     
 
-	@GetMapping("checkout")
-	public String check(HttpServletRequest request) {
-	    Enumeration<String> parameterNames = request.getParameterNames();
-	    while (parameterNames.hasMoreElements()) {
-	        String paramName = parameterNames.nextElement();
-	        String paramValue = request.getParameter(paramName);
-	        System.out.println("잘 넘어오는지 확인" + paramName + " : " + paramValue);
-	    }
-	return"";
-	}
+	
 }

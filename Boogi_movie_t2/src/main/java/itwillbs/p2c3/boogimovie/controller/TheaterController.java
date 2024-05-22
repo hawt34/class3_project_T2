@@ -1,24 +1,23 @@
 package itwillbs.p2c3.boogimovie.controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import itwillbs.p2c3.boogimovie.service.EventService;
 import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.service.MypageService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
-import itwillbs.p2c3.boogimovie.vo.MyTheaterVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterFacilityVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
@@ -67,13 +66,13 @@ public class TheaterController {
 	}       
 	 
 	@GetMapping("theater_detail")
-	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, MemberVO member, Model model, HttpSession session, FeeAgeVO fee) {
+	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, MemberVO member, Model model, HttpSession session) {
 		
 		// 로그인한 경우
 		String sId = (String)session.getAttribute("sId");
 		if(sId != null) {
 			member.setMember_id(sId);
-			member = mypageService.getMyTheater(member);
+			member = mypageService.getDbMember(member);
 			model.addAttribute("member", member);
 		}
 		
@@ -81,24 +80,37 @@ public class TheaterController {
 		theater = service.getTheater(theater);
 		List<TheaterFacilityVO> facilityList = service.getFacility(facility);
 		List<NoticeVO> theaterNoticeList = service.getTheaterNoticeList(notice);
-//		List<FeeAgeVO> feeList = service.getFeeInfoList();
+		List<FeeAgeVO> feeList = service.getFeeList();
 		
-		
+		Map<String, Integer> feeMap = new HashMap<String, Integer>();
+		for(FeeAgeVO fee : feeList) {
+			int price = 15000;
+			String keyword = "";
+			keyword += fee.getFee_dimension_keyword();
+			price *= fee.getFee_dimension_discount() / 100.0;
+			keyword += fee.getFee_day_keyword();
+			price *= fee.getFee_day_discount() / 100.0;
+			keyword += fee.getFee_time_keyword();
+			price *= fee.getFee_time_discount() / 100.0;
+			keyword += fee.getFee_age_keyword();
+			price *= fee.getFee_age_discount() / 100.0;
+			// 반내림 계산
+            price = (int) (Math.floor(price / 500.0) * 500);
+			feeMap.put(keyword, price);
+			
+		}
 		
 		model.addAttribute("theater", theater);
 		model.addAttribute("theaterList", theaterList);
 		model.addAttribute("facilityList", facilityList);
 		model.addAttribute("theaterNoticeList", theaterNoticeList);
-//		model.addAttribute("feeList", feeList);
-		
+		JSONObject json = new JSONObject(feeMap);
+        model.addAttribute("feeMap", json.toString());
 		
 		
 		return "theater/theater_detail";
 	}
 	
-//	@PostMapping("")
-//	public String 
-//	
 	
 	
 	

@@ -57,7 +57,7 @@ tbody tr:hover {
 
 .admin_moviePlan_search {
 	height: 35px;
-	width: 80%;
+	width: 85%;
 	background: #black;
 	text-align: center;
 }
@@ -78,6 +78,29 @@ tbody tr:hover {
 }
 .admin_plan_body_search{
 	margin-bottom: 30px;
+	width: 1200px;
+}
+.moviePlanSearchBox{
+	width: 600px;
+	text-align: center;
+/* 	border: 5px solid skyBlue; */
+	margin: 30px auto;
+}
+.moviePlanSearchBox > select{
+	width: 200px;
+	margin-right: 10px;
+	margin-bottom: 20px;
+}
+.moviePlanSearchBox > input{
+	width: 200px;
+}
+.moviePlanSearchBox > button{
+	height: 40px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+}
+.moviePlanSearchBox > h3{
+	margin-top: 10px;
 }
 </style>
 </head>
@@ -106,17 +129,17 @@ tbody tr:hover {
 				
 				<!-- 바디 부분 여기 표 넣을거임 -->
 				<div class="admin_plan_body">
-					<form action = "admin_moviePlan_reg" method = "post">
+					<form action="admin_moviePlan_reg" method ="post">
 						<table class="admin_plan_body_search">
 							<thead>
 								<tr>
-									<th width="200px">극장</th>
+									<th width="150px">극장</th>
 									<th width="100px">상영관</th>
-									<th width="300px">영화제목</th>
+									<th width="200px">영화제목</th>
 									<th width="80px">2D/3D</th>
-									<th width="200px">상영날짜</th>
-									<th width="150px">상영시간</th>
-									<th width="150px">상영종료</th>
+									<th width="150px">상영날짜</th>
+									<th width="100px">상영시간</th>
+									<th width="100px">상영종료</th>
 									<th width="100px">상영일정등록</th>
 								</tr>
 							</thead>
@@ -124,7 +147,7 @@ tbody tr:hover {
 								<tr>
 									<td>
 										<div>
-											<select id="theaterSelect" class="admin_moviePlan_search" name="theater_num">
+											<select id="theaterSelect" class="admin_moviePlan_search" name="theater_num" required>
 												<option value="">미선택</option>
 											<c:forEach var="theaterName" items="${theaterNameList}">
 												<option value="${theaterName.theater_num}">${theaterName.theater_name}</option>
@@ -134,13 +157,12 @@ tbody tr:hover {
 									</td>
 									<td>
 										<div>
-											<select id="screenSelect" class="admin_moviePlan_search" name="screen_cinema_num">
-											</select> 
+											<select id="screenSelect" class="admin_moviePlan_search" name="screen_cinema_num" required></select> 
 										</div>
 									</td>
 									<td>
 										<div>
-											<select id="movieSelect" name="movie_num" class="admin_moviePlan_search">
+											<select id="movieSelect" name="movie_num" class="admin_moviePlan_search" required>
 												<option value="">영화선택</option>
 												<c:forEach var="movie" items="${movieList}">
 													<option value="${movie.movie_num}">${movie.movie_name}</option>
@@ -149,16 +171,16 @@ tbody tr:hover {
 										</div>
 									</td>
 									<td>
-										<select name = "screen_dimension" class="admin_moviePlan_search">
+										<select name = "screen_dimension" class="admin_moviePlan_search" required>
 											<option value="2D">2D</option>
 											<option value="3D">3D</option>
 										</select>
 									</td>
 									<td>
-										<input type="date" class="admin_moviePlan_search" id="scs_date" name="scs_date" min="yyyy-mm-dd">
+										<input type="date" class="admin_moviePlan_search" id="scs_date" name="scs_date" min="yyyy-mm-dd" required>
 									</td>
 									<td>
-										<select id="hourSelect" name="scs_start_time" class="admin_moviePlan_search">
+										<select id="hourSelect" name="scs_start_time" class="admin_moviePlan_search" required>
 											<option value="">시간선택</option>
 											<c:forEach var="hour" begin="9" end="24">
 											    <option value="${hour}:00" >${hour}:00</option>
@@ -175,8 +197,22 @@ tbody tr:hover {
 							</tbody>
 						</table>
 					</form>
-					<br>
-					<table>
+					
+					<form action="admin_moviePlan">
+						<div class="moviePlanSearchBox">
+							<h3>상영일정 조회하기</h3>
+							<select id="searchTheater" class="admin_moviePlan_search" name="theater_num">
+									<option value="0">미선택</option>
+								<c:forEach var="theaterName" items="${theaterNameList}">
+									<option value="${theaterName.theater_num}">${theaterName.theater_name}</option>
+								</c:forEach>
+							</select> 
+							<input type="date" class="admin_moviePlan_search" name="scs_date" min="yyyy-mm-dd">
+							<button type="submit" class="btn btn-outline-primary">조회하기</button>
+						</div>
+					</form>
+					
+					<table class="admin_plan_body_search">
 						<thead>
 							<tr>
 								<th>상영번호</th>
@@ -190,7 +226,7 @@ tbody tr:hover {
 								<th>상영일정삭제</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="moviePlanList">
 							<c:forEach var="moviePlan" items="${moviePlanList}">
 								<tr>
 									<td>${moviePlan.scs_num}</td>
@@ -377,6 +413,23 @@ tbody tr:hover {
 	        $('#theaterSelect, #screenSelect').change(function() {
 	            resetHourSelect(); // 시간 선택 초기화
 	        });
+		    
+		    // 상영일정 조회하기
+	        $('#searchBtn').click(function() {
+		    	if($('#searchTheater').val() == "" ){
+					alert("극장정보를 선택해주세요");
+					$('#searchTheater').focus();
+					return;
+				}
+		    	if($('#searchDate').val() == "" ){
+					alert("상영날짜를 선택해주세요");
+					$('#searchDate').focus();
+					return;
+				}
+		    	
+		    	
+		    });
+		    
 			
 	    });
 		

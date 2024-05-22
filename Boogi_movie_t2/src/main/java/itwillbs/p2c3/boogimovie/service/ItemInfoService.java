@@ -29,6 +29,13 @@ public class ItemInfoService {
 		
 		return mapper.selectItemListJuice(); 
 	}
+	public int getItemNum(String item_name) {
+		return mapper.selectItemNum(item_name);
+	}
+	public String getItemImage(int item_num) {
+		// TODO Auto-generated method stub
+		return mapper.selectItemImage(item_num);
+	}
 
 	
 	

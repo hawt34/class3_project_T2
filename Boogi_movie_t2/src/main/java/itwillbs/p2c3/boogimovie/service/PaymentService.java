@@ -1,12 +1,18 @@
 package itwillbs.p2c3.boogimovie.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import itwillbs.p2c3.boogimovie.mapper.PaymentMapper;
+import itwillbs.p2c3.boogimovie.vo.CartVO;
+import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.PayVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.StorePayVO;
+import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
 @Service
 public class PaymentService {
@@ -39,8 +45,40 @@ public class PaymentService {
 	public ScreenSessionVO getScreenSession(int scs_num) {
 		return mapper.getScreenSession(scs_num);
 	}
+
+	public List<PayVO> selectPayInfo(PayVO pay) {
+		return mapper.selectPayInfo(pay);
+	}
+
+	public void saveTicketInfo(TicketVO ticket2) {
+		mapper.saveTicketInfo(ticket2);
+	}
 	
-	
+	public List<StorePayVO> selectStorePayInfo(String member_id){
+		return mapper.selectStorePayInfo(member_id);
+	}
+
+	public void insertCart(CartVO cart) {
+		mapper.insertCart(cart);
+		
+	}
+
+	public void saveStorePayInfo(StorePayVO storePay) {
+		mapper.saveStorePayInfo(storePay);
+		
+	}
+
+	public StorePayVO getStorePayInfo(String merchant_uid) {
+		return mapper.getStorePayInfo(merchant_uid);
+	}
+
+	public List<CartVO> getCartInfo(String cart_id) {
+		return mapper.getCartInfo(cart_id);
+	}
+
+	public ItemInfoVO getItemInfo(int item_info_num) {
+		return mapper.getItemInfo(item_info_num);
+	}
 	
 
 }

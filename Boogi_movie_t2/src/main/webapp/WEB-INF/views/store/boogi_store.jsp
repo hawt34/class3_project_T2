@@ -204,7 +204,6 @@ footer {
 		</div>
 		<div class="contentPay">
 			<h4>담은 품목</h4>
-			<form action="checkout" method="get">
         	<table id="cartTable" class="table">
         <thead>
             <tr>
@@ -230,9 +229,8 @@ footer {
     </div>
 	<div class="bottomButton">
 	<input type="button" class="btn btn-outline-primary" value="뒤로가기" onclick="history.back()"> 
-     <input type="submit" value="결제하기" class="btn btn-outline-primary">
+     <input type="button" value="결제하기" class="btn btn-outline-primary" id="submitBtn" onclick="submit()">
 	</div>
-    </form>
 		</div>				
 		</section>
 		<footer> 
@@ -269,9 +267,9 @@ footer {
 
 	    // 장바구니에 추가하는 함수
 	    function addToCart(categoryId) {
-	        let selectedItem = $(categoryId).val();
-	        let selectedItemPrice = $(categoryId).find(':selected').data('price');
-	        let selectedItemName = $(categoryId).find(':selected').data('name');
+	    	let selectedItem = $(categoryId).val();
+		    let selectedItemPrice = $(categoryId).find(':selected').data('price');
+		    let selectedItemName = $(categoryId).find(':selected').data('name');
 	        // 배열로 보내기.
 	        let cartItem = {
 	                item_info_num: selectedItem,  // 아이템 번호
@@ -323,13 +321,15 @@ footer {
 	    }
 		
 	    function updateTotalPrice() {
-	        let totalSum = 0;
+	    	var totalSum = 0;
 	        $(".contentPay .total-price").each(function() {
 	            let totalPrice = parseInt($(this).text().replace("원", "").replace(",", ""));
 	            totalSum += totalPrice;
 	        });
 	        $(".realTotalPrice p").text("총 가격: " + totalSum.toLocaleString() + "원");
 	    }
+	    
+	    
 	    $(".contentPay").on("click", ".remove-item", function(event) {
 	        event.preventDefault(); // 폼의 제출을 방지
 	        let itemNum = $(this).closest("tr").data("item-num"); // 선택된 품목의 아이템 번호 가져오기
@@ -367,6 +367,45 @@ footer {
 	            }
 	        });
 	    });
+	    
+	    $("#submitBtn").click(function() {
+	        // 장바구니 데이터를 수집
+	        let cartItems = [];
+	        $("#cartTable tbody tr.cart-item").each(function() {
+	            let itemName = $(this).find("td:nth-child(1)").text().trim();
+	            let quantity = parseInt($(this).find(".quantity").val());
+	            let totalPrice = parseInt($(this).find(".total-price").text().replace("원", "").replace(",", "").trim());
+	            
+	            cartItems.push({ itemName: itemName, quantity: quantity, totalPrice: totalPrice });
+	        });
+
+	        // 총 가격 계산
+	        let totalSum = 0;
+	        cartItems.forEach(item => {
+	            totalSum += item.totalPrice * item.quantity;
+	        });
+
+	        // 폼 생성
+	        let $form = $("<form>", {
+	            action: "payment_store",
+	            method: "post"
+	        });
+
+	        // 장바구니 항목을 숨겨진 필드로 추가
+	        cartItems.forEach(item => {
+	            $form.append($("<input>", { type: "hidden", name: "itemName", value: item.itemName }));
+	            $form.append($("<input>", { type: "hidden", name: "quantity", value: item.quantity }));
+	            $form.append($("<input>", { type: "hidden", name: "totalPrice", value: item.totalPrice }));
+	        });
+
+	        // 총 가격 필드 추가
+	        $form.append($("<input>", { type: "hidden", name: "totalSum", value: totalSum }));
+
+	        // 폼을 문서에 추가하고 제출
+	        $form.appendTo("body").submit();
+	    });
+	        
+	        
 	  		    
 	});
 	</script>

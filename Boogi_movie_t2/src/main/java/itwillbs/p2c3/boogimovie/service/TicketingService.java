@@ -38,7 +38,7 @@ public class TicketingService {
 	}
 	
 
-	public int selectPayNum(int scs_num) {
+	public List<Integer> selectPayNum(int scs_num) {
 		return mapper.selectPayNum(scs_num);
 	}
 

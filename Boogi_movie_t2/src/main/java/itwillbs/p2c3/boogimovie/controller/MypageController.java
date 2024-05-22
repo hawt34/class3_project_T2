@@ -6,7 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -32,11 +37,17 @@ import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.CouponService;
 import itwillbs.p2c3.boogimovie.service.MypageService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
+import itwillbs.p2c3.boogimovie.service.PaymentService;
+import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.OTOVO;
 import itwillbs.p2c3.boogimovie.vo.PageInfo;
+import itwillbs.p2c3.boogimovie.vo.PayVO;
+import itwillbs.p2c3.boogimovie.vo.PointVO;
+import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
 
 @Controller
@@ -53,6 +64,12 @@ public class MypageController {
 	
 	@Autowired
 	private AdminService service;
+	
+	@Autowired
+	private	PaymentService paymentService;
+	
+	@Autowired
+	private TheaterService theaterService;
 	
 	@Autowired
 	private HttpSession session;
@@ -131,7 +148,7 @@ public class MypageController {
 //	    
 //	    
 //	}
-	
+	// 나의극장 업데이트
 	@ResponseBody
 	@PostMapping(value = "api/myp_my_theater", produces = "application/json")
 	public String mypMyTheater(@RequestBody Map<String, Object> check, Model model, MemberVO member){
@@ -201,7 +218,37 @@ public class MypageController {
 		member.setMember_id(id);
 		member = mypageService.getDbMember(member);
 		
+		PayVO pay = new PayVO();
+		pay.setMember_id(id);
+		List<PayVO> payList = paymentService.selectPayInfo(pay);
+		List<StorePayVO> storePayList = paymentService.selectStorePayInfo(id);
+		List<PointVO> combinedList = new ArrayList<PointVO>();
+		int scs_num = 0;
+        for (PayVO pay2 : payList) {
+        	scs_num = pay2.getScs_num();
+        	ScreenSessionVO scs = paymentService.getScreenSession(scs_num);
+        	TheaterVO theater = new TheaterVO();
+        	theater.setTheater_num(scs.getTheater_num());
+        	TheaterVO dbTheater = theaterService.getTheater(theater);
+            combinedList.add(new PointVO(pay2.getTicket_pay_price()/10, pay2.getUse_point(), pay2.getTicket_pay_date(), pay2.getTicket_pay_type(), dbTheater.getTheater_name()));
+        }
+        
+        int store_price = 0;
+        String price_str = "";
+        LocalDate currentDate = LocalDate.now();
+        LocalDateTime localDateTime = null;
+        for (StorePayVO storePay : storePayList) {
+        	price_str = storePay.getStore_pay_price().replace(",", "");
+        	store_price = Integer.parseInt(price_str);
+        	localDateTime = localDateTime.of(currentDate, storePay.getStore_pay_date());
+            combinedList.add(new PointVO(store_price/10, storePay.getUse_point(), localDateTime, storePay.getStore_pay_type(), "스토어"));
+        }
+            	
+        Collections.sort(combinedList, Comparator.comparing(PointVO::getDate));
+        
 		model.addAttribute("member", member);
+		model.addAttribute("combinedList", combinedList);
+		
 		
 		return "mypage/myp_point";
 	}
@@ -211,20 +258,12 @@ public class MypageController {
 	@GetMapping("myp_info_modify")
 	public String mypInfoModify(MemberVO member, Model model) {
 		
-		System.out.println("myp_info_modify");
-		// 세션 아이디가 없을 경우 "error/fail" 페이지 포워딩 처리
-		// => msg 속성값 : "잘못된 접근입니다!", targetURL 속성값 : "./"(메인페이지)
 		String id = (String)session.getAttribute("sId");
-		
-		
-		
-		
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다");
 			model.addAttribute("targetURL", "./");
 			return"error/fail";
 		}
-		
 		
 		member.setMember_id(id);
 		member = mypageService.getDbMember(member);
@@ -235,19 +274,14 @@ public class MypageController {
 		
 		model.addAttribute("member", member);
 		
-		
         return "mypage/myp_info_modify";
 		
 	}
 	
 	@PostMapping("myp_info_modify_pro")
 	public String mypInfoModifyPro(MemberVO member, Model model) {
-		System.out.println("mypInfoModifyPro");
 		
-//		 세션 아이디가 없을 경우 "error/fail" 페이지 포워딩 처리
-//		 => msg 속성값 : "잘못된 접근입니다!", targetURL 속성값 : "./"(메인페이지)
 		String id = (String)session.getAttribute("sId");
-		System.out.println("session Id : " + id);
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다");
 			model.addAttribute("targetURL", "./");
@@ -256,9 +290,9 @@ public class MypageController {
 
 		int updateCount = mypageService.modifyMember(member);
 		model.addAttribute("member", updateCount);
+		
 		if(updateCount > 0) { // 정보수정 성공 시
 //			model.addAttribute("member", member);
-			System.out.println("member_id : " + member.getMember_id());
 			model.addAttribute("msg", "회원정보가 수정되었습니다");
 			model.addAttribute("targetURL", "myp_info_modify");
 			return "error/fail";
@@ -286,20 +320,11 @@ public class MypageController {
 		member = mypageService.getDbMember(member);
 		model.addAttribute("member", member);
 		
-//<<<<<<< HEAD
-//		System.out.println("coupon 컨트롤러");
-		// coupon_num
-//		List<CouponVO> couponNum = mypageService.getCoupon(member);
-//		model.addAttribute("couponNum", couponNum);
-//=======
 		List<CouponVO> couponList = couponService.getCoupon(member);
 		model.addAttribute("list", couponList);
-//>>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 		
 		return "mypage/myp_coupon";
 	}
-		
-	
 	
 	// ============================= 예매 =============================
 	
@@ -315,36 +340,31 @@ public class MypageController {
 		}
 		member = mypageService.getMember(id);
 		model.addAttribute("member", member);
-//		System.out.println("member : " + member);
-//		System.out.println("member.getMember_id" + member.getMember_id());
+
 		// 예매정보
 		List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(member);
 		model.addAttribute("movieReservation", movieReservation);
 		
-		System.out.println("pageNum : " + pageNum);
 		int listLimit = 4;
 		int startRow = (pageNum - 1) * listLimit;
-		System.out.println("startRow : " + startRow);
-		System.out.println("listLimit : " + listLimit);
+		
 		String member_id = member.getMember_id();
 		
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("ticket_pay_status", "취소");
+		
+		// 페이징
 		List<Map<String, Object>> resvList = mypageService.getResvList(startRow, listLimit, member_id);
 		int listCount = mypageService.getResvCount(member); // 총 예매영화 갯수
 		
-		System.out.println("listCount : " + listCount);
 		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-		System.out.println("maxPage : " + maxPage);
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-		System.out.println("startPage : " + startPage);
 		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-		System.out.println("endPage : " + endPage);
 		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
 			endPage = maxPage;
 		}
 		
-		System.out.println("endPage : " + endPage);
-		System.out.println("maxPage : " + maxPage);
 		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
 
@@ -361,7 +381,20 @@ public class MypageController {
 	// ============================= 스토어 =============================
 	
 	@GetMapping("myp_store")
-	public String mypStore() {
+	public String mypStore(MemberVO member, Model model, StorePayVO storepay) {
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
+			model.addAttribute("targetURL", "member_login");
+			return"error/fail";
+		}
+		member = mypageService.getMember(id);
+		model.addAttribute("member", member);
+		
+		
+		List<StorePayVO> storePay = mypageService.getStorePay(member);
+		model.addAttribute("storePay", storePay);
 		
 		return "mypage/myp_store";
 	}

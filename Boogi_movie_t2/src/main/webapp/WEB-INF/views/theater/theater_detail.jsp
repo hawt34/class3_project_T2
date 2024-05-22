@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -12,6 +13,8 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <!-- 극장 theater.css  -->
 <link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
 	var maxCount = 3;								// 카운트 최대값은 3
@@ -31,6 +34,82 @@
 		count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
 		}
 	}
+	
+	function initializeModal() {
+		var myTheaters = [
+			"${member.member_my_theater1}",
+			"${member.member_my_theater2}",
+			"${member.member_my_theater3}"
+		];
+
+		$('.form-check-input').each(function() {
+			var theaterName = $(this).val();
+			if (myTheaters.includes(theaterName)) {
+				$(this).prop('checked', true);
+				count++;
+			} else {
+				$(this).prop('checked', false);
+			}
+		});
+	}
+				      
+				      
+	function sendCheckedValues(event) {
+		var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
+		var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
+					        
+		checkboxes.forEach(function(checkbox) {
+			checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
+		});
+					        
+		// checkedValues 배열의 길이가 3이 되도록 null 값 추가
+		while (checkedValues.length < 3) {
+		    checkedValues.push(null);
+		}
+					        
+		var member_id = "${member.member_id}"; // memberId를 가져옴
+		$.ajax({
+		    url: "api/myp_my_theater",
+		    type: "POST",
+		    dataType: "json",
+		    contentType: "application/json", // 서버에게 내용이 JSON임을 알려줌
+		    data: JSON.stringify({ member_id: member_id, checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
+		    success: function(response) {
+				if(response){
+					alert("마이극장 저장 완료");
+				    location.reload();	
+				}
+		        
+		    },
+		    error: function(xhr, status, error) {
+		        console.error("Error details:", xhr, status, error); // 디버깅 정보 출력
+		
+		        alert("오류 발생" + error);
+		    }
+		    
+		}); // ajax
+		
+	} // sendCheckedValues()
+	
+	function initializeModal() {
+		var myTheaters = [
+			"${member.member_my_theater1}",
+			"${member.member_my_theater2}",
+			"${member.member_my_theater3}"
+		];
+
+		$('.form-check-input').each(function() {
+			var theaterName = $(this).val();
+      		if (myTheaters.includes(theaterName)) {
+		        $(this).prop('checked', true);
+		        count++;
+	      	} else {
+      			$(this).prop('checked', false);
+			}
+	    });
+		
+	} // initializeModal()
+	
 </script>
 
 </head>
@@ -54,7 +133,7 @@
 							 	</c:when>
 							 	<c:otherwise> <!-- 로그인 상태 -->
 									<!-- 나의극장 관리 모달 버튼 -->
-									<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+									<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"  onclick="initializeModal()">
 										<img src="${pageContext.request.contextPath}/resources/images/set.svg"> MY 극장 관리</button>
 									</li>
 									<!-- 체크된 MY극장 리스트 / member.member_my_theater1~3 -->
@@ -80,7 +159,7 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<h1 class="modal-title fs-5" id="exampleModalLabel">MY 극장 관리</h1>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
 								</div>
 								<div class="modal-body">
 									<c:forEach var="theater" items="${theaterList}">
@@ -92,7 +171,7 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-									<button type="submit" class="btn btn-primary">저장</button>
+									<button type="button" class="btn btn-primary" onclick="sendCheckedValues(event)">저장</button>
 				      			</div>
 							</div>
 				  		</div>

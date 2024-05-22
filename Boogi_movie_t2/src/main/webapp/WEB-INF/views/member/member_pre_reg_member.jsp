@@ -8,6 +8,7 @@
 </head>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/member_default.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <body>
 
 <header>
@@ -57,37 +58,35 @@
 </header>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
+	function cerTel(){
+		IMP.init("imp00262041"); 
+		
+		// IMP.certification(param, callback) 호출
+		IMP.certification(
+		  {
+		    // param
+		    // 주문 번호
+		    pg: "PG사코드.{CPID}", //본인인증 설정이 2개이상 되어 있는 경우 필
+		    merchant_uid: "ORD20180131-0000011",
+		  },
+		  function (rsp) {
+		    // callback
+		    if (rsp.success) {
+		        $.ajax({
+		            url: "cerTel",
+		            method: "POST",
+		            headers: { "Content-Type": "application/json" },
+		            data: { imp_uid: rsp.imp_uid },
+		          });
+		    } else {
+		    	alert("인증에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+		    }
+		  },
+		);
+		
+	}
 	$(document).ready(function() {
-		function cerTel(){
-			IMP.init("imp00262041"); 
-			
-			// IMP.certification(param, callback) 호출
-			IMP.certification(
-			  {
-			    // param
-			    // 주문 번호
-			    pg: "PG사코드.{CPID}", //본인인증 설정이 2개이상 되어 있는 경우 필
-			    merchant_uid: "ORD20180131-0000011",
-			    // PC환경에서는 popup 파라미터가 무시되고 항상 true 로 적용됨
-			    popup: true,
-			  },
-			  function (rsp) {
-			    // callback
-			    if (rsp.success) {
-			        $.ajax({
-			            url: "cerTel",
-			            method: "POST",
-			            headers: { "Content-Type": "application/json" },
-			            data: { imp_uid: rsp.imp_uid },
-			          });
-			    } else {
-			    	alert("인증에 실패하였습니다. 에러 내용: " + rsp.error_msg);
-			    }
-			  },
-			);
-			
-		}
+
 		
 // 	    // 이름 입력값 변경 시
 // 	    $("#member_name").on("input", function() {

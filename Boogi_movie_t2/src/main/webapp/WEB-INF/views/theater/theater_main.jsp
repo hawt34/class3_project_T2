@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 
 <!DOCTYPE html>
 <html>
@@ -13,8 +14,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <!-- 극장 theater.css  -->
 <link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
-<!-- 카카오맵 API 라이브러리 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+
 
 
 </head>
@@ -81,7 +81,12 @@
 						<tr>
 							<td scope="row">${notice.theater_name}</td>
 							<td>${notice.notice_subject}</td>
-							<td>${notice.notice_date}</td>
+<%-- 							<td>${notice.notice_date}</td> --%>
+							<td>
+								<fmt:parseDate var="parseNotice_date" value="${notice.notice_date}" 
+												pattern="yyyy-MM-dd'T'HH:mm" type="both" />
+								<fmt:formatDate value="${parseNotice_date}" pattern="yyyy-MM-dd HH:mm" />
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -92,7 +97,8 @@
 	<footer>
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
- 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622"></script>
+	<!-- 카카오맵 API 라이브러리 -->
+ 	<script defer type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		    mapOption = { 

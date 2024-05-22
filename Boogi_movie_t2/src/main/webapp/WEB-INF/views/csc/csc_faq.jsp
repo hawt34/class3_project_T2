@@ -38,10 +38,9 @@
 			<div class="row">
 				<div class="csc_faq_search">
 					<div class="inner">
-						<form action="" method="get">
+						<form action="" method="get" name="search_faq">
 							<label for="csc_faq_search">빠른검색</label>
-							<input type="text" id="csc_faq_search" name="csc_faq_search"
-							placeholder="검색어 입력">
+							<input type="text" id="csc_faq_search" name="faqSearchKeyword" placeholder="검색어 입력">
 							<input type="submit" value="검색">
 						</form>
 					</div>

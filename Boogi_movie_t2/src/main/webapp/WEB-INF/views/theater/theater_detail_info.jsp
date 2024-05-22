@@ -133,9 +133,8 @@
 	</div> <!-- theater_info 끝  -->
 	
 	<!-- 카카오맵 API 라이브러리 -->
-	<script defer type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622&libraries=services"></script>
 	<script>
-		
 		var theater_map_x = ${theater.theater_map_x};
 		var theater_map_y = ${theater.theater_map_y};
 		
@@ -179,6 +178,8 @@
 		    content: content,
 		    yAnchor: 1 
 		});
+		
+    
 	</script>
 
 </body>

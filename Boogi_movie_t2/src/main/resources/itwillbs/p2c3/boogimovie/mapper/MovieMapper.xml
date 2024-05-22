@@ -7,8 +7,8 @@
 		 <![CDATA[
    			 SELECT *
     		 FROM movie
-    		 WHERE movie_num = #{movie_num}
-        	 OR movie_open_date <= CURRENT_DATE()
+    		 WHERE movie_open_date <= CURRENT_DATE()
+    		 ORDER BY movie_open_date DESC
     	]]>
 	</select>
 	
@@ -56,8 +56,8 @@
 		 <![CDATA[
    			 SELECT *
     		 FROM movie
-    		 WHERE movie_num = #{movie_num}
-        	 OR movie_open_date >= CURRENT_DATE()
+    		 WHERE movie_open_date > CURRENT_DATE()
+    		 ORDER BY movie_open_date ASC
     	]]>
 	</select>	
 	

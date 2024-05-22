@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -134,7 +136,15 @@ th:nth-child(7), td:nth-child(7) {
 </style>
 </head>
 <body>
+<%
+    // 오늘 날짜를 가져오기 위한 Java 코드
+    Date today = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String todayString = sdf.format(today);
 
+    // 오늘 날짜를 JSTL을 통해 사용하기 위해 변수에 할당
+    pageContext.setAttribute("today", todayString);
+%>
 	<header>
 		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 	</header>
@@ -177,7 +187,7 @@ th:nth-child(7), td:nth-child(7) {
 								<th>수정/삭제</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="movieTableBody">
 							<c:forEach var="movie" items="${movieList}">
 								<tr>
 									<td>${movie.movie_num}</td>
@@ -185,7 +195,17 @@ th:nth-child(7), td:nth-child(7) {
 									<td>${movie.movie_runtime}</td>
 									<td>${movie.movie_open_date}</td>
 									<td>${movie.movie_end_date}</td>
-									<td>${movie.movie_status}</td>
+									<td>
+										<c:choose>
+											<c:when test="${movie.movie_open_date <= today}">
+												개봉
+											</c:when>
+											<c:otherwise>
+												개봉예정
+											</c:otherwise>
+										</c:choose>
+									</td>
+									
 									<td>
 										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_movie_edit_form?movie_num=${movie.movie_num}'">수정</button>
 										<button type="button" class="btn btn-outline-primary" onclick="movieWithdraw(${movie.movie_num})">삭제</button>
@@ -213,6 +233,27 @@ th:nth-child(7), td:nth-child(7) {
 		function movieWithdraw(movie_num){
 			if(confirm("정말 삭제하시겠습니까?")){
 				location.href = "admin_movie_delete?movie_num=" + movie_num;
+			}
+		}
+		function movieStatus(dateString) {
+			var today = new Date(); 
+			var todayYear = today.getFullYear();
+			var todayMonth = today.getMonth() + 1; 
+			var todayDay = today.getDate();
+			var todayDate = new Date(todayYear, todayMonth - 1, todayDay); 
+			
+			// 개봉일을 파싱하여 비교하기 적합한 형태로 변환
+			var fomatYear = parseInt(dateString.substring(0, 4));
+			var formatMonth = parseInt(dateString.substring(4, 6));
+			var formatDay = parseInt(dateString.substring(6, 8));
+			var formatDate = new Date(fomatYear, formatMonth - 1, formatDay); 
+			
+			// 오늘 날짜와 API로부터 받아온 개봉일을 비교
+			if (formatDate < todayDate) {
+	           return "개봉";
+			} else {
+	            return "개봉예정";
+				
 			}
 		}
 	</script>

@@ -92,6 +92,7 @@
 			th.theater_num = rv.theater_num
 		WHERE 
 			t.ticket_pay_num = #{ticket_pay_num}
+		LIMIT 1
 	</select>
 	
 <!-- 영화 리스트 조회 -->
@@ -298,7 +299,7 @@
 		WHERE
 			scs_date = #{scs_date} AND t.theater_num = #{theater_num} 
 		ORDER BY 
-			ss.scs_date;
+			ss.scs_date
 	</select>
 	
 	

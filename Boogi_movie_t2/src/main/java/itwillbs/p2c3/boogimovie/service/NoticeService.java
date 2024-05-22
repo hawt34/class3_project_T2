@@ -31,4 +31,14 @@ public class NoticeService {
 		return mapper.selectNoticeListCountCag(category);
 	}
 	
+	//검색어를 통한 게시판 목록
+	public List<NoticeVO> getNoticeKeywordList(int listLimit, int startRow, String searchKeyword) {
+		return mapper.selectNoticeKeywordList(listLimit, startRow, searchKeyword);
+	}
+	
+	//검색어를 통한 게시판 목록 개수
+	public int getNoticeSearchKeywordCount(String searchKeyword) {
+		return mapper.selectNoticeSearchKeywordCount(searchKeyword);
+	}
+	
 }

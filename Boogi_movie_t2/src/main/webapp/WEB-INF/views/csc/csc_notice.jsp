@@ -62,8 +62,8 @@
 					
 					<div class="csc_search">
 						<!--공지 찾는 검색창  -->
-						<form method="post" action="">
-							<input type="text" placeholder="검색어를 입력해주세요" name="notice_keyword"> 
+						<form method="post" action="javascript:void(0);" id="notice_search">
+							<input type="text" placeholder="검색어를 입력해주세요" name="noticeSearchKeyword" id="noticeSearchKeyword"> 
 								<i class="bi bi-search searchIcon"></i>
 							<div class="csc_searcher">
 								<input type="submit" value="검색">
@@ -153,14 +153,15 @@
     
 	
 // 비동기 데이터 가져오기
-function getTheaterList(pageNum = 1, theaterName = '') {
+function getTheaterList(pageNum = 1, theaterName = '', noticeSearchKeyword = '') {
     $.ajax({
         type: "GET",
         url: "csc_notice.json",
         data: {
             pageNumArg: pageNum,
             theaterName: theaterName,
-            pageName: "notice"
+            pageName: "notice",
+            searchKeyword : noticeSearchKeyword
         },
         dataType: "json",
         success: function(response) {
@@ -185,6 +186,7 @@ function getTheaterList(pageNum = 1, theaterName = '') {
 			let pageList = response.pageList;
 			let pageNum = response.pageNum; // 현재 페이지 번호를 가져옴
 			
+			
 	        createPagination(pageList, pageNum, theaterName);
 			//----------------------------
 			//count 처리
@@ -192,15 +194,17 @@ function getTheaterList(pageNum = 1, theaterName = '') {
 			
 			let countDiv = $("#noticeCount");
 			countDiv.empty();
-			
 			countDiv.append("<span>전체 " + noticeCount + "건</span>");
-            createPagination(response.pageList, response.pageNum, theaterName);
+			
+			//페이징 생성
+            createPagination(response.pageList, response.pageNum, theaterName, noticeSearchKeyword);
         },
         error: function() {
             alert("요청을 보내는 중에 오류가 발생하였습니다.");
         }
     });
 }
+
 $(function() {
 
     // 페이지 로드 시 초기 데이터 가져오기
@@ -230,13 +234,24 @@ $(function() {
         let theaterName = $(this).data("theater");
         goToPage(pageNum, theaterName);
     });
+    
+    $("#notice_search").submit(function(event) {
+    	//form 제출 방지
+// 	   	event.preventDefault();
+	   	let noticeSearchKeyword = $("#noticeSearchKeyword").val(); //지역변수
+// 	   	console.log(noticeSearchKeyword);
+		getTheaterList(1, '', noticeSearchKeyword);
+    	
+    });
+    
+    
 });
 
 //페이징 ajax 처리
-function createPagination(pageList, pageNum, theaterName) {
+function createPagination(pageList, pageNum, theaterName, noticeSearchKeyword) {
 	//페이지 이동 함수
 	function goToPage(pageNum) {
-	    getTheaterList(pageNum, theaterName);
+	    getTheaterList(pageNum, theaterName, noticeSearchKeyword);
 	}
 
     let pageLinks = [];

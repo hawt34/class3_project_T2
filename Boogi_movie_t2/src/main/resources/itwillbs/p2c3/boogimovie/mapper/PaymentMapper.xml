@@ -125,4 +125,10 @@
 		FROM item_info
 		WHERE item_info_num = #{item_info_num}
 	</select>
+	
+	<insert id="saveTicketInfo">
+		INSERT ticket
+		VALUES
+		(null, #{ticket_seat_info}, #{ticket_price}, #{ticket_keyword}, #{ticket_pay_num})
+	</insert>
 </mapper>

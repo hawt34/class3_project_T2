@@ -161,166 +161,116 @@ public class PaymentController {
 	@ResponseBody
 	@PostMapping("payVerify{imp_uid}")
 	public boolean payVerify(@PathVariable(value = "imp_uid") String imp_uid, String use_point, String coupon_num, MemberVO member, String amount, 
-			MovieVO movie, String theater_name, String screen_cinema_num, ScreenSessionVO scs, String person_info, PayVO pay, 
-			String selected_seats, TicketVO ticket, String keyword) throws IamportResponseException, IOException{
-		
-		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------scs : " + scs);
-		Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 검증처리
-		
-		if(payment.getStatus().equals("paid")) {
-			// 리턴받은 payment의 status가 결제완료이면 DB조작 메소드 실행
-			System.out.println("payVerify - paid ");
-			
-			int amountInt = Integer.parseInt(amount);
-			int usePointInt = Integer.parseInt(use_point);
-			double savePointDouble = amountInt * 0.1;
-			int savePoint = (int)(savePointDouble / 100) * 100;
-			int apply_point = savePoint - usePointInt;
-			 
-			member = service.getMember(member);
-			member.setMember_point(member.getMember_point() + apply_point);
-			service.updateMemberPoint(member);
-			couponService.useCoupon(coupon_num);
-			
-			pay.setMember_id(member.getMember_id());
-			pay.setMerchant_uid(payment.getMerchantUid());
-			pay.setTicket_pay_price(amountInt);
-			pay.setUse_point(usePointInt);
-			pay.setScs_num(scs.getScs_num());
-			pay.setTicket_pay_status("결제");
-			pay.setTicket_pay_type(payment.getPgProvider());
-			pay.setCoupon_num(Integer.parseInt(coupon_num));
-			
-			service.savePayInfo(pay); // pay 테이블에 결제 정보 저장
-			System.out.println("pay  : " + pay);
-			
-			PayVO payInfo = service.getPayInfo(pay.getMerchant_uid());
-			// 티켓처리
-			String[] keywordArr = splitString(keyword, 2);
-			//person_info에서 숫자만 남기기
-			
-	        // Step 1: 쉼표(,)로 분리
-	        String[] parts = person_info.split(",\\s*");
+	        MovieVO movie, String theater_name, String screen_cinema_num, ScreenSessionVO scs, String person_info, PayVO pay, 
+	        String selected_seats, TicketVO ticket, String keyword) throws IamportResponseException, IOException {
+
+	    System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------scs : " + scs);
+	    Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 검증처리
+
+	    if(payment.getStatus().equals("paid")) {
+	        // 리턴받은 payment의 status가 결제완료이면 DB조작 메소드 실행
+	        System.out.println("payVerify - paid ");
 	        
-	        // Step 2: 숫자 값만 추출
+	        int amountInt = Integer.parseInt(amount);
+	        int usePointInt = Integer.parseInt(use_point);
+	        double savePointDouble = amountInt * 0.1;
+	        int savePoint = (int)(savePointDouble / 100) * 100;
+	        int apply_point = savePoint - usePointInt;
+	         
+	        member = service.getMember(member);
+	        member.setMember_point(member.getMember_point() + apply_point);
+	        service.updateMemberPoint(member);
+	        couponService.useCoupon(coupon_num);
+	        
+	        pay.setMember_id(member.getMember_id());
+	        pay.setMerchant_uid(payment.getMerchantUid());
+	        pay.setTicket_pay_price(amountInt);
+	        pay.setUse_point(usePointInt);
+	        pay.setScs_num(scs.getScs_num());
+	        pay.setTicket_pay_status("결제");
+	        pay.setTicket_pay_type(payment.getPgProvider());
+	        pay.setCoupon_num(Integer.parseInt(coupon_num));
+	        
+	        service.savePayInfo(pay); // pay 테이블에 결제 정보 저장
+	        System.out.println("pay  : " + pay);
+	        
+	        PayVO payInfo = service.getPayInfo(pay.getMerchant_uid());
+	        // 티켓처리
+	        String[] keywordArr = splitString(keyword, 2);
+	        
+	        // person_info에서 숫자만 남기기
+	        String[] parts = person_info.split(",\\s*");
 	        int[] numbers = new int[parts.length];
 	        for (int i = 0; i < parts.length; i++) {
 	            String part = parts[i];
 	            String numberStr = part.replaceAll("[^0-9]", ""); // 숫자만 남기기
 	            numbers[i] = Integer.parseInt(numberStr);
 	        }
+
 	        String[] seats = selected_seats.split(",");
-	        String seat = "";
-	        int seat_price = 0;
 	        int NP_num = 0;
 	        int YP_num = 0;
 	        int OP_num = 0;
-	        
-	        Map<String, String> fee_map = new HashMap<String, String>();
+
+	        Map<String, String> fee_map = new HashMap<>();
 	        fee_map.put("fee_dimension_keyword", keywordArr[0]);
 	        fee_map.put("fee_day_keyword", keywordArr[1]);
 	        fee_map.put("fee_time_keyword", keywordArr[2]);
-	        
-	        // 결과 출력
-			for(int i = 0; i < numbers.length;i++) {
-				switch (i) {
-				case 0: 
-					NP_num 	= numbers[i]; 
-					double fee = 15000;
-					Map<String, Object> dbfee_map = ticketService.feeCalc(fee_map);
-					fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100.0) 
-									* ((int)dbfee_map.get("fee_time_discount") / 100.0) 
-									* ((int)dbfee_map.get("fee_dimension_discount") / 100.0);
-					List<FeeAgeVO> feeAge =  ticketService.feeCalcAge();
-					
-					for(FeeAgeVO fa : feeAge) {
-						if(fa.getFee_age_keyword().equals("NP")) {
-							fee = fee * (fa.getFee_age_discount() / 100.0);
-						}
-					}
-					fee = Math.floor(fee / 500) * 500;
-					int pay_num = payInfo.getTicket_pay_num();
-					TicketVO ticket2 = new TicketVO();
-					ticket2.setTicket_keyword(keyword + "NP");
-					ticket2.setTicket_pay_num(pay_num);
-					ticket2.setTicket_price((int)fee);
-					
-					ticket2.setTicket_seat_info(seat);
-					
-					for(int j = 0; j < NP_num;j++) {
-						ticket2.setTicket_seat_info(seats[j]);
-						service.saveTicketInfo(ticket2);
-					}
-					
-					break;
-				case 1: 
-					YP_num 	= numbers[i]; 
-					seat 	= seats[i];
-					
-					dbfee_map = ticketService.feeCalc(fee_map);
-					
-					fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100.0) 
-									* ((int)dbfee_map.get("fee_time_discount") / 100.0) 
-									* ((int)dbfee_map.get("fee_dimension_discount") / 100.0);
-					feeAge =  ticketService.feeCalcAge();
-					for(FeeAgeVO fa : feeAge) {
-						if(fa.getFee_age_keyword().equals("YP")) {
-							fee = fee * (fa.getFee_age_discount() / 100.0);
-						}
-					}
-					fee = Math.floor(fee / 500) * 500;
-					pay_num = payInfo.getTicket_pay_num();
-					TicketVO ticket3 = new TicketVO();
-					ticket3.setTicket_keyword(keyword + "YP");
-					ticket3.setTicket_pay_num(pay_num);
-					ticket3.setTicket_price((int)fee);
-					ticket3.setTicket_seat_info(seat);
-					
-					for(int j = 0; j < YP_num;j++) {
-						 ticket3.setTicket_seat_info(seats[NP_num + j]);
-						service.saveTicketInfo(ticket3);
-					}
-					break;
-				case 2: 
-					OP_num 	= numbers[i]; 
-					seat 	= seats[i];
-					
-					dbfee_map = ticketService.feeCalc(fee_map);
-					
-					fee = 15000 * ((int)dbfee_map.get("fee_day_discount") / 100.0) 
-									* ((int)dbfee_map.get("fee_time_discount") / 100.0) 
-									* ((int)dbfee_map.get("fee_dimension_discount") / 100.0);
-					feeAge =  ticketService.feeCalcAge();
-					for(FeeAgeVO fa : feeAge) {
-						if(fa.getFee_age_keyword().equals("OP")) {
-							fee = fee * (fa.getFee_age_discount() / 100.0);
-						}
-					}
-				    fee = Math.floor(fee / 500) * 500;
-					pay_num = payInfo.getTicket_pay_num();
-					TicketVO ticket4 = new TicketVO();
-					ticket4.setTicket_keyword(keyword + "OP");
-					ticket4.setTicket_pay_num(pay_num);
-					ticket4.setTicket_price((int)fee);
-					ticket4.setTicket_seat_info(seat);
-					
-					for(int j = 0; j < OP_num;j++) {
-						ticket4.setTicket_seat_info(seats[NP_num + YP_num + j]);
-						service.saveTicketInfo(ticket4);
-					}
-				}
-			}
-			
-			return true;
-			
-		} else if(payment.getStatus().equals("failed")) {
-			System.out.println("payVerify - failed ");
-			return false; 
-			
-		}
-		return false; 
-		
-	} // payVerify()
+
+	        for(int i = 0; i < numbers.length; i++) {
+	            double fee = 15000;
+	            Map<String, Object> dbfee_map = ticketService.feeCalc(fee_map);
+	            fee = fee * ((int)dbfee_map.get("fee_day_discount") / 100.0) 
+	                        * ((int)dbfee_map.get("fee_time_discount") / 100.0) 
+	                        * ((int)dbfee_map.get("fee_dimension_discount") / 100.0);
+	            
+	            List<FeeAgeVO> feeAge = ticketService.feeCalcAge();
+	            String ageCategory = "";
+	            switch (i) {
+	                case 0:
+	                    NP_num = numbers[i];
+	                    ageCategory = "NP";
+	                    break;
+	                case 1:
+	                    YP_num = numbers[i];
+	                    ageCategory = "YP";
+	                    break;
+	                case 2:
+	                    OP_num = numbers[i];
+	                    ageCategory = "OP";
+	                    break;
+	            }
+	            for(FeeAgeVO fa : feeAge) {
+	                if(fa.getFee_age_keyword().equals(ageCategory)) {
+	                    fee = fee * (fa.getFee_age_discount() / 100.0);
+	                }
+	            }
+	            fee = Math.floor(fee / 500) * 500;
+	            int pay_num = payInfo.getTicket_pay_num();
+
+	            ticket.setTicket_keyword(keyword + ageCategory);
+	            ticket.setTicket_pay_num(pay_num);
+	            ticket.setTicket_price((int)fee);
+
+	            int seatStartIndex = (i == 0) ? 0 : (i == 1) ? NP_num : NP_num + YP_num;
+	            int seatCount = (i == 0) ? NP_num : (i == 1) ? YP_num : OP_num;
+	            for (int j = 0; j < seatCount; j++) {
+	                if (seatStartIndex + j < seats.length) {
+	                    ticket.setTicket_seat_info(seats[seatStartIndex + j]);
+	                    service.saveTicketInfo(ticket);
+	                } else {
+	                    System.out.println("Warning: Not enough seats provided for the ticket count.");
+	                }
+	            }
+	        }
+	        return true;
+	    } else if(payment.getStatus().equals("failed")) {
+	        System.out.println("payVerify - failed ");
+	        return false; 
+	    }
+	    return false; 
+	}
+
 	
 	// ================================================================================
 	// 최종 결제 완료 페이지로

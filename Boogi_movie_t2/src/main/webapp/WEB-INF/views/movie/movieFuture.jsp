@@ -46,7 +46,7 @@ section {
 	margin-top: 20px;
 	margin-left: 20px; /* 좌우 간격 조절 */
     margin-right: 20px; /* 좌우 간격 조절 */
-	font-size: 30px;
+	font-size: 25px;
 	white-space: nowrap;
 }
 .end-message {
@@ -68,6 +68,13 @@ section {
 	width: 280px;
 	height: 400px;
 	display: flex;
+}
+
+.more {
+	text-align: center;
+}
+.more .btn {
+	font-size: 25px;
 }
 
 footer {
@@ -100,7 +107,6 @@ footer {
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movie'">현재 상영작</button>
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFuture'">상영예정작</button>
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href=''">박스오피스 순위</button>
-				<button id="moreMoviesBtn" type="button" class="btn btn-outline-primary">상영 예정 중인 영화 더보기</button>
 			</div>
 			<div class="list">
 				<c:forEach var="movieFuture" items="${movieFuture}" varStatus="loop" begin="0">
@@ -112,6 +118,9 @@ footer {
     		</div>
 			</c:forEach>
 			</div><br>
+			<div class="more">
+				<button id="moreMoviesBtn" type="button" class="btn btn-outline-primary">상영 예정 중인 영화 더보기</button>
+			</div>	
 			 <h2 class="end-message">모든 상영예정 영화가 다 출력되었습니다.</h2>
 		</section>
 		<footer>

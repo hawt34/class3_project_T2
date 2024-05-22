@@ -69,7 +69,7 @@ body {
 .header_low{
 	display: flex;
 	text-align: center;
-	width: 1400px;
+	width: 1200px;
 	margin: 0px auto;
 
 }
@@ -221,7 +221,6 @@ body {
 			<div class="dropdown">
 				<button class="dropdown-btn" onclick="location.href='event'">이벤트</button>
 				<div class="dropdown-submenu">
-<<<<<<< HEAD
 					<a href="event">이벤트코너</a> 
 				</div>
 			</div>
@@ -230,19 +229,17 @@ body {
 				<div class="dropdown-submenu">
 <!-- 					<a href="event">이벤트코너</a>  -->
 					<a href="boogi_store">스토어</a> 
-=======
 <!-- 					<a href="event">이벤트코너</a>  -->
 <!-- 					<a href="boogi_store">스토어</a>  -->
 				</div>
 			</div>
-			<div class="dropdown">
-				<button class="dropdown-btn" onclick="location.href='boogi_store'">스토어</button>
-				<div class="dropdown-submenu">
-<!-- 					<a href="event">이벤트코너</a>  -->
-<!-- 					<a href="boogi_store">스토어</a>  -->
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
-				</div>
-			</div>
+<!-- 			<div class="dropdown"> -->
+<!-- 				<button class="dropdown-btn" onclick="location.href='boogi_store'">스토어</button> -->
+<!-- 				<div class="dropdown-submenu"> -->
+<!-- <!-- 					<a href="event">이벤트코너</a>  --> 
+<!-- <!-- 					<a href="boogi_store">스토어</a>  --> 
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 	</div>
 

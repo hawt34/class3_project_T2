@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,6 +85,9 @@ body {
 						  </thead>
 						  <tbody>
 						  	<c:forEach items="${combinedList }" var="item" varStatus="status">
+							<fmt:parseDate var="parsedDate" value="${item.date}" 
+							pattern="yyyy-MM-dd'T'HH:mm:ss" type="both"/>
+							
 						  		<tr  class="table-secondary ${status.index % 2 == 0 ? 'table-secondary' : ''}">
 						  			<th scope="row">${status.index + 1}</th>
 						  			 <td>
@@ -106,7 +111,7 @@ body {
 						  			 	</c:choose>
 						  			 </td>
 						  			 <td>
-										${item.date}
+										<fmt:formatDate value="${parsedDate }" pattern="yyyy-MM-dd HH:mm"/>
 						  			 </td>
 						  			 <td>
 						  			 	${item.points }
@@ -114,48 +119,6 @@ body {
 						  		</tr>
 						  	</c:forEach>
 						  
-<!-- 						    <tr  class="table-secondary"> -->
-<!-- 						      <th scope="row">1</th> -->
-<!-- 							      <td>매표</td> -->
-<!-- 							      <td>서면점</td> -->
-<!-- 							      <td>2024 / 04 / 24</td> -->
-<!-- 							      <td>750점</td> -->
-<!-- 						    </tr>       -->
-<!-- 						    <tr> -->
-<!-- 						      <th scope="row">2</th> -->
-<!-- 						        <td>매표</td> -->
-<!-- 						        <td>삼정타워점</td> -->
-<!-- 						        <td>2024 / 04 / 01</td> -->
-<!-- 						        <td>540점</td> -->
-<!-- 						    </tr> -->
-<!-- 						    <tr  class="table-secondary"> -->
-<!-- 						      <th scope="row">3</th> -->
-<!-- 			          			<td>매점</td> -->
-<!-- 					            <td>삼정타워점</td> -->
-<!-- 					            <td>2024 / 04 / 01</td> -->
-<!-- 					            <td>120점</td> -->
-<!-- 					         </tr> -->
-<!-- 							<tr> -->
-<!-- 						      <th scope="row">4</th> -->
-<!-- 					            <td>매표</td> -->
-<!-- 								<td>아시아드</td> -->
-<!-- 			            		<td>2024 / 02 / 18</td> -->
-<!-- 			            		<td>820점</td> -->
-<!-- 			          		</tr> -->
-<!-- 			          		<tr  class="table-secondary"> -->
-<!-- 						      <th scope="row">5</th> -->
-<!-- 				              	<td>매표</td> -->
-<!-- 				              	<td>아시아드</td> -->
-<!-- 				              	<td>2024 / 02 / 08</td> -->
-<!-- 				              	<td>430점</td> -->
-<!-- 			         		</tr> -->
-<!-- 			          		<tr> -->
-<!-- 						      <th scope="row">6</th> -->
-<!-- 			            		<td>매점</td> -->
-<!-- 			            		<td>아시아드</td> -->
-<!-- 			            		<td>2024 / 02 / 08</td> -->
-<!-- 			            		<td>250점</td> -->
-<!-- 					          </tr> -->
 						  </tbody>
 						</table>
 						</div><!-- tab-pane -->
@@ -171,50 +134,87 @@ body {
 							    </tr>
 							  </thead>
 							  <tbody>
-							    <tr  class="table-secondary">
-							      <th scope="row">1</th>
-								      <td>매표</td>
-								      <td>서면점</td>
-								      <td>2024 / 04 / 24</td>
-								      <td>750점</td>
-							    </tr>      
-							    <tr>
-							      <th scope="row">2</th>
-							        <td>매표</td>
-							        <td>삼정타워점</td>
-							        <td>2024 / 04 / 01</td>
-							        <td>540점</td>
-							    </tr>
-							    <tr  class="table-secondary">
-							      <th scope="row">3</th>
-				          			<td>매점</td>
-						            <td>삼정타워점</td>
-						            <td>2024 / 04 / 01</td>
-						            <td>120점</td>
-						         </tr>
-								<tr>
-							      <th scope="row">4</th>
-						            <td>매표</td>
-									<td>아시아드</td>
-				            		<td>2024 / 02 / 18</td>
-				            		<td>820점</td>
-				          		</tr>
+								<c:forEach items="${combinedList }" var="item" varStatus="status">
+								    <c:if test="${item.usePoints != 0}">
+								        <fmt:parseDate var="parsedDate" value="${item.date}" pattern="yyyy-MM-dd'T'HH:mm:ss" type="both"/>
+								        
+								        <tr class="table-secondary ${status.index % 2 == 0 ? 'table-secondary' : ''}">
+								            <th scope="row">${status.index + 1}</th>
+								            <td>
+								                <c:choose>
+								                    <c:when test="${item.theater eq '스토어' }">
+								                        스토어
+								                    </c:when>
+								                    <c:otherwise>
+								                        예매
+								                    </c:otherwise>
+								                </c:choose>
+								            </td>
+								            <td>
+								                <c:choose>
+								                    <c:when test="${item.theater eq '스토어' }">
+								                        스토어
+								                    </c:when>
+								                    <c:otherwise>
+								                        ${item.theater}
+								                    </c:otherwise>
+								                </c:choose>
+								            </td>
+								            <td>
+								                <fmt:formatDate value="${parsedDate }" pattern="yyyy-MM-dd HH:mm"/>
+								            </td>
+								            <td>
+								                ${item.usePoints }
+								            </td> 
+								        </tr>
+								    </c:if>
+								</c:forEach>
+
+
+<!-- 							    <tr  class="table-secondary"> -->
+<!-- 							      <th scope="row">1</th> -->
+<!-- 								      <td>매표</td> -->
+<!-- 								      <td>서면점</td> -->
+<!-- 								      <td>2024 / 04 / 24</td> -->
+<!-- 								      <td>750점</td> -->
+<!-- 							    </tr>       -->
+<!-- 							    <tr> -->
+<!-- 							      <th scope="row">2</th> -->
+<!-- 							        <td>매표</td> -->
+<!-- 							        <td>삼정타워점</td> -->
+<!-- 							        <td>2024 / 04 / 01</td> -->
+<!-- 							        <td>540점</td> -->
+<!-- 							    </tr> -->
+<!-- 							    <tr  class="table-secondary"> -->
+<!-- 							      <th scope="row">3</th> -->
+<!-- 				          			<td>매점</td> -->
+<!-- 						            <td>삼정타워점</td> -->
+<!-- 						            <td>2024 / 04 / 01</td> -->
+<!-- 						            <td>120점</td> -->
+<!-- 						         </tr> -->
+<!-- 								<tr> -->
+<!-- 							      <th scope="row">4</th> -->
+<!-- 						            <td>매표</td> -->
+<!-- 									<td>아시아드</td> -->
+<!-- 				            		<td>2024 / 02 / 18</td> -->
+<!-- 				            		<td>820점</td> -->
+<!-- 				          		</tr> -->
 				          		
-				          		<tr  class="table-secondary">
-							      <th scope="row">5</th>
-					              	<td>매표</td>
-					              	<td>아시아드</td>
-					              	<td>2024 / 02 / 08</td>
-					              	<td>430점</td>
-				         		</tr>
-				          		<tr>
-							      <th scope="row">6</th>
-				            		<td>매점</td>
-				            		<td>아시아드</td>
-				            		<td>2024 / 02 / 08</td>
-				            		<td>250점</td>
-						          </tr>
-							  </tbody>
+<!-- 				          		<tr  class="table-secondary"> -->
+<!-- 							      <th scope="row">5</th> -->
+<!-- 					              	<td>매표</td> -->
+<!-- 					              	<td>아시아드</td> -->
+<!-- 					              	<td>2024 / 02 / 08</td> -->
+<!-- 					              	<td>430점</td> -->
+<!-- 				         		</tr> -->
+<!-- 				          		<tr> -->
+<!-- 							      <th scope="row">6</th> -->
+<!-- 				            		<td>매점</td> -->
+<!-- 				            		<td>아시아드</td> -->
+<!-- 				            		<td>2024 / 02 / 08</td> -->
+<!-- 				            		<td>250점</td> -->
+<!-- 						          </tr> -->
+<!-- 							  </tbody> -->
 							</table>
 						</div><!-- tab-pane  -->
 					</div><!-- tab-content -->

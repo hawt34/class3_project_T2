@@ -224,6 +224,7 @@ public class MypageController {
 		List<StorePayVO> storePayList = paymentService.selectStorePayInfo(id);
 		List<PointVO> combinedList = new ArrayList<PointVO>();
 		int scs_num = 0;
+		
         for (PayVO pay2 : payList) {
         	scs_num = pay2.getScs_num();
         	ScreenSessionVO scs = paymentService.getScreenSession(scs_num);
@@ -233,15 +234,11 @@ public class MypageController {
             combinedList.add(new PointVO(pay2.getTicket_pay_price()/10, pay2.getUse_point(), pay2.getTicket_pay_date(), pay2.getTicket_pay_type(), dbTheater.getTheater_name()));
         }
         
-        int store_price = 0;
-        String price_str = "";
         LocalDate currentDate = LocalDate.now();
         LocalDateTime localDateTime = null;
         for (StorePayVO storePay : storePayList) {
-        	price_str = storePay.getStore_pay_price().replace(",", "");
-        	store_price = Integer.parseInt(price_str);
         	localDateTime = localDateTime.of(currentDate, storePay.getStore_pay_date());
-            combinedList.add(new PointVO(store_price/10, storePay.getUse_point(), localDateTime, storePay.getStore_pay_type(), "스토어"));
+            combinedList.add(new PointVO(storePay.getStore_pay_price()/10, storePay.getUse_point(), localDateTime, storePay.getStore_pay_type(), "스토어"));
         }
             	
         Collections.sort(combinedList, Comparator.comparing(PointVO::getDate));

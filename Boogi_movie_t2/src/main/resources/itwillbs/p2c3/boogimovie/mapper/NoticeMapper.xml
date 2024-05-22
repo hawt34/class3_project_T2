@@ -41,5 +41,40 @@
 		ON n.theater_num = t.theater_num
 		WHERE theater_name = #{category}
 	</select>
+	
+	<!-- 검색어를 통한 게시판 목록 -->
+	<select id="selectNoticeKeywordList" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
+		SELECT n.notice_num,
+			   n.notice_subject,
+			   n.notice_content,
+			   t.theater_name,
+			   n.notice_category,
+			   n.notice_date
+		FROM notice n
+		JOIN theater t
+		ON n.theater_num = t.theater_num
+		<if test="!searchKeyword.equals('') and searchKeyword != null">
+			WHERE n.notice_subject LIKE CONCAT('%', #{searchKeyword}, '%') 
+			OR n.notice_content LIKE CONCAT('%', #{searchKeyword}, '%')
+			OR t.theater_name LIKE CONCAT('%', #{searchKeyword}, '%')
+			OR n.notice_category LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		ORDER BY notice_num DESC
+		limit #{startRow}, #{listLimit};
+	</select>
+	<!-- 검색어를 통한 게시판 목록 -->
+	<select id="selectNoticeSearchKeywordCount" resultType="int">
+		SELECT COUNT(n.notice_num)
+		FROM notice n
+		JOIN theater t
+		ON n.theater_num = t.theater_num
+		<if test="!searchKeyword.equals('') and searchKeyword != null">
+			WHERE n.notice_subject LIKE CONCAT('%', #{searchKeyword}, '%') 
+			OR n.notice_content LIKE CONCAT('%', #{searchKeyword}, '%')
+			OR t.theater_name LIKE CONCAT('%', #{searchKeyword}, '%')
+			OR n.notice_category LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+	</select>
+	
 
 </mapper>

@@ -83,7 +83,7 @@ public class CscController {
 	public List<FAQVO> cscFaqJson(@RequestParam String parsedPageNum,
 								  @RequestParam String faqCategory,
 								  FAQVO faq) {
-		System.out.println("@KWKL@@@" + faqCategory);
+//		System.out.println("@KWKL@@@" + faqCategory);
 		int pageNum = Integer.parseInt(parsedPageNum);
 		System.out.println("PAGENUM!!" +  pageNum);
 		int listLimit = 7;
@@ -117,23 +117,35 @@ public class CscController {
 	@GetMapping(value="csc_notice.json")
 	public Map<String, Object> noticeCategory(@RequestParam(defaultValue = "1")String pageNumArg,
 											  @RequestParam String theaterName,
-											  @RequestParam String pageName) {
-		System.out.println("COLSLWKM" + pageNumArg);
-		System.out.println("COLSLWKM" + theaterName);
-		System.out.println("COLSLWKM" + pageName);
+											  @RequestParam String pageName,
+											  @RequestParam String searchKeyword) {
+		System.out.println("COLSLWKM: " + pageNumArg);
+		System.out.println("COLSLWKM: " + theaterName);
+		System.out.println("COLSLWKM: " + pageName);
+		System.out.println("COLSLWKM: " + searchKeyword);
 		//----------------------------------------------------
 		
 		int pageNum = Integer.parseInt(pageNumArg);
 		
 		int listLimit = 10; // 페이지당 보여줄 게시물 갯수
 		int startRow = (pageNum - 1) * listLimit; // 게시물의 시작점
-		List<NoticeVO> noticeList = noticeService.getNoticeList(listLimit, startRow, theaterName);
+		
+		List<NoticeVO> noticeList = null;
+		if(!searchKeyword.equals("")) {
+			noticeList = noticeService.getNoticeKeywordList(listLimit, startRow, searchKeyword);
+//			System.out.println(noticeList);
+			
+		} else {
+			noticeList = noticeService.getNoticeList(listLimit, startRow, theaterName);
+		}
+		
 		//LocalDateTIme format
 		for(NoticeVO noticed : noticeList) {
 			noticed.setNotice_fdt(noticed.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 		}
 		
-		PageInfo pageInfo = pageInfo(pageNum, listLimit, startRow, theaterName, pageName);	
+		PageInfo pageInfo = pageInfo(pageNum, listLimit, startRow, theaterName, pageName, searchKeyword);
+		System.out.println(pageInfo.getListCount());
 		//두개의 객체전달을 위한 HashMap()
 		Map<String, Object> noticeObj = new HashMap<String, Object>();
 		noticeObj.put("noticeList", noticeList);
@@ -247,7 +259,12 @@ public class CscController {
 	
 	//------------------------------------------------------------------
 	//paging 처리
-	public PageInfo pageInfo(@RequestParam(defaultValue = "1")int pageNum, int listLimit, int startRow, String category, String pageName) {
+	public PageInfo pageInfo(@RequestParam(defaultValue = "1")int pageNum,
+							 int listLimit,
+							 int startRow,
+							 String category,
+							 String pageName,
+							 String searchKeyword) {
 		//전체1 notice 게시판 번호
 		int listCount = 0;
 		int pageListLimit = 5;
@@ -260,14 +277,15 @@ public class CscController {
 				case "" : listCount = adminService.getNoticeListCount(); break; 
 				default : listCount = noticeService.getNoticeListCountCag(category); break; 
 			}
+			if(!searchKeyword.equals("")) {
+				listCount = noticeService.getNoticeSearchKeywordCount(searchKeyword);
+			}
 		} else if(pageName.equals("faq")) {
 //			switch (category) {
 //				case "" : listCount = faqService.getFaqListCount(); break; 
 //				default : listCount = faqService.getfaqListCountCag(category); break; 
 //			}
-			
 		}
-//		pageListLimit = 5; //뷰에 표시할 페이지갯수
 		maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
 		endPage = startPage + pageListLimit - 1; //마지막 페이지 번호

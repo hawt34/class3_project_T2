@@ -129,8 +129,8 @@ public class AdminService {
 	}
 	
 	// 상영조회
-	public List<Map<String, String>> getMoivePlanList(int theaterNum, Date scs_date) {
-		return mapper.getMoivePlanList(theaterNum, scs_date);
+	public List<ScreenSessionVO> getMoivePlanList(int theater_num, Date scs_date) {
+		return mapper.getMoivePlanList(theater_num, scs_date);
 	}
 	
 	//--------------------------------------------------------------

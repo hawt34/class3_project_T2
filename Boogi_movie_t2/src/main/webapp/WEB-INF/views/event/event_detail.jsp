@@ -73,7 +73,9 @@ td > img{
 			</tr>
 		</table>
 
-
+		<div align="center">
+			<button type="submit" class="btn btn-outline-primary" id="searchBtn" onclick="goEventMain()">목록으로</button>
+		</div>
 
 	</main>
 
@@ -86,6 +88,12 @@ td > img{
 			location.href = "giveCoupon?event_num=" + event_num;
 			alert("쿠폰이 발급되었습니다!");
 		}
+		
+		function goEventMain() {
+			location.href="event";
+		}
+		
+		
 	</script>
 
 

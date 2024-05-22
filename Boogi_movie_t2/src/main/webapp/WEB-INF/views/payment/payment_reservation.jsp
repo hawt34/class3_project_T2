@@ -480,7 +480,7 @@
  		let member_email = "${member.member_email}";
  		let member_name = "${member.member_name}";
  		let member_tel = "${member.member_tel}";
- 		let keyword = "${keyword}";
+ 		
  		
 		// IMP.request_pay 결제창 호출
  	    IMP.request_pay(
@@ -492,8 +492,7 @@
  	            amount: amount,
  	            buyer_email: member_email,
  	            buyer_name: member_name,
- 	            buyer_tel: member_tel,
- 	            buyer_keyword : keyword
+ 	            buyer_tel: member_tel
  	        },
  	        function (rsp) {
  	            console.log(rsp);
@@ -534,7 +533,7 @@
 		let end_time = "${scs.scs_end_time}";
 		let person_info = "${person_info}";
 		let scs_num = "${scs.scs_num}";
-		
+		let keyword = "${keyword}";
 		
 		
 	    const params = {
@@ -549,7 +548,8 @@
 	        "scs_start_time" : end_time,
 	        "person_info" : person_info,
 	        "selected_seats" : selected_seats,
-	        "scs_num" : scs_num
+	        "scs_num" : scs_num,
+	        "keyword" : keyword
 	    }
 	    
 	    $.ajax({

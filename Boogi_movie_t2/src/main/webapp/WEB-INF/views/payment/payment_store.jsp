@@ -424,7 +424,9 @@
 		$("#discount_reset").click(function() {
 			$("#final_amount").html("${total_fee}");		// 총 결제금액 적용 값
  			$("#discount_sum").html(0);		// 총 할인 적용 값
-			
+ 			$("#point_apply").html(0);		// 총 할인 적용 값
+ 			$("#coupon_apply").html(0);		// 총 할인 적용 값
+ 			
 		});
 		
 		

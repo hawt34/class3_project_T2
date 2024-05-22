@@ -364,6 +364,7 @@ footer {
 	            event.preventDefault(); // 폼 제출 중단
 	            return;
 	        }
+	      	        
 	    });
 	});
 	

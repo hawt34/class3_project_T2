@@ -4,16 +4,22 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import itwillbs.p2c3.boogimovie.service.MailService;
 import itwillbs.p2c3.boogimovie.service.MemberService;
@@ -33,13 +39,61 @@ public class MemberController {
 
 	
 	
-	@ResponseBody
-	@PostMapping("cerTel")
-	public String celTel() {
-		
-		
-		return "false";
-	}
+    @ResponseBody
+    @PostMapping("/cerTel")
+    public String cerTel(@RequestBody Map<String, String> requestBody) {
+    	System.out.println("asdfasdfasdfasdfsdafasdfsadf");
+        String impUid = requestBody.get("imp_uid");
+
+        // 포트원 서버로부터 인증 결과를 조회
+        String url = "https://api.iamport.kr/certifications/" + impUid;
+
+        // 인증을 위해 액세스 토큰을 발급받아야 함
+        String token = getIamportToken();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", token);
+
+        HttpEntity<String> entity = new HttpEntity<>("", headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+
+        JSONObject jsonResponse = new JSONObject(response.getBody());
+
+        if (jsonResponse.getBoolean("success")) {
+            // 인증 성공 처리
+            return "true";
+        } else {
+            // 인증 실패 처리
+            return "false";
+        }
+    }
+
+    private String getIamportToken() {
+        // 포트원 서버로부터 액세스 토큰을 발급받기 위한 코드
+        // 이는 예시이므로 실제 포트원 API 문서를 참고하여 구현해야 함
+
+        String url = "https://api.iamport.kr/users/getToken";
+        String impKey = "your_imp_key";
+        String impSecret = "your_imp_secret";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+
+        JSONObject body = new JSONObject();
+        body.put("imp_key", impKey);
+        body.put("imp_secret", impSecret);
+
+        HttpEntity<String> entity = new HttpEntity<>(body.toString(), headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+        JSONObject jsonResponse = new JSONObject(response.getBody());
+
+        return jsonResponse.getJSONObject("response").getString("access_token");
+    }
 	
 	@PostMapping("member_pwd_update")
 	public String memberPwdUpdate(MemberVO member, Model model) {

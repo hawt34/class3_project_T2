@@ -24,9 +24,7 @@
                 $("#" + keyword).html(formattedPrice + "원");
             }
         }
-		
 	});
-
 </script>
 </head>
 <body>

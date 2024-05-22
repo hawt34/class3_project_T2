@@ -376,24 +376,11 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 상영관리 페이지
 	@GetMapping("admin_moviePlan")
-	public String adminMoviePlan(Model model, @RequestParam Date scs_date, 
-			@RequestParam String theater_num) throws ParseException {
-//		SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
-//		Date scsDate = sdt.parse(scs_date);
-		int theaterNum = Integer.parseInt(theater_num);
-		
-		ScreenSessionVO scs = new ScreenSessionVO();
-		scs.setScs_date(scs_date);
-		scs.setTheater_num(theaterNum);
+	public String adminMoviePlan(Model model) {
 		
 		List<Map<String, String>> movieList = service.getmovieList();
 		List<Map<String, String>> theaterNameList = service.getTheaterList();
 		List<Map<String, String>> moviePlanList = service.selectMoviePlanList();
-		System.out.println("scs: " + scs);
-		if(scs != null) {
-			moviePlanList = service.getMoivePlanList(scs.getTheater_num(), scs.getScs_date());
-		}
-		
 		
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("moviePlanList", moviePlanList);
@@ -503,6 +490,15 @@ public class AdminController {
 //		for(Map<String, String> movieTime: movieTimeList) {
 //		}
 		return movieTimeList;
+	}
+	
+	// 상영일정 조회하기 ajax
+	@GetMapping("searchMoviePlanList")
+	@ResponseBody
+	public List<ScreenSessionVO> searchMoviePlanList(@RequestParam int searchTheater, @RequestParam Date searchDate) {
+		List<ScreenSessionVO> searchMovieList = service.getMoivePlanList(searchTheater, searchDate);
+		
+		return searchMovieList;
 	}
 	
 

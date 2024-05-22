@@ -298,7 +298,7 @@
 		WHERE
 			scs_date = #{scs_date} AND t.theater_num = #{theater_num} 
 		ORDER BY 
-			ss.scs_date;
+			ss.scs_date
 	</select>
 	
 	

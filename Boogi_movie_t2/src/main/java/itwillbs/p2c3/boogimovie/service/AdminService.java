@@ -51,6 +51,11 @@ public class AdminService {
 		return mapper.selectReserve(ticket_pay_num);
 	}
 	
+	// 좌석정보 가져오기
+	public List<Map<String, String>> selectSeatInfo(int ticket_pay_num) {
+		return mapper.selectSeatInfo(ticket_pay_num);
+	}
+	
 	//--------------------------------------------------------------
 	// 리뷰 리스트 조회
 	public List<ReviewVO> getReviewList() {

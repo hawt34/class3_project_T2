@@ -174,7 +174,7 @@ td:nth-child(8) {
 						<tbody>
 							<c:forEach var="reserve" items="${reserveList}">
 								<tr>
-									<td>${reserve.ticket_pay_num}</td>
+									<td>${reserve.ticket_num}</td>
 									<td>${reserve.member_id}</td>
 									<td>${reserve.movie_name}</td>
 									<td>${reserve.scs_date}</td>
@@ -189,7 +189,7 @@ td:nth-child(8) {
 										</c:when>
 									</c:choose>
 									<td>
-										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_reserve_detail?ticket_pay_num=${reserve.ticket_pay_num}'">상세</button>
+										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_reserve_detail?ticket_pay_num=${reserve.ticket_pay_num}&ticket_num=${reserve.ticket_num}'">상세</button>
 									</td>
 								</tr>
 							</c:forEach>

@@ -118,7 +118,7 @@ body {
 					<div class="row mb-3">
 						<div class="col-md-6">
 							<div class="subject">예매좌석</div>
-							<input type="text" id="res_seat" class="form-control" value="${reserveDetail.ticket_seat_info}" readonly />
+							<input type="text" id="res_seat" class="form-control" value="${seatInfo}" readonly />
 						</div>
 						<div class="col-md-6">
 							<div class="subject">상영일</div>

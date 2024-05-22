@@ -91,9 +91,24 @@
 		ON
 			th.theater_num = rv.theater_num
 		WHERE 
-			t.ticket_pay_num = #{ticket_pay_num}
+			ticket_num = #{ticket_num}
 		LIMIT 1
 	</select>
+	
+<!-- 좌석정보 가져오기 -->
+	<select id="selectSeatInfo" resultType="hashmap">
+		SELECT 
+			t.ticket_seat_info
+		FROM 
+			ticket t
+		JOIN 
+			pay p 
+		ON 
+			t.ticket_pay_num = p.ticket_pay_num
+		WHERE 
+			t.ticket_pay_num = #{ticket_pay_num};
+	</select>
+	
 	
 <!-- 영화 리스트 조회 -->
 	<select id="selectMovieList" resultType="hashmap">

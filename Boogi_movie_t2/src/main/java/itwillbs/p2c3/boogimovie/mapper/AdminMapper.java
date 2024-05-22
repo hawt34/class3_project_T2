@@ -43,6 +43,9 @@ public interface AdminMapper {
 	// 예매 상세
 	Map<String, String> selectReserve(int ticket_pay_num);
 	
+	// 좌석 정보
+	List<Map<String, String>> selectSeatInfo(int ticket_pay_num);
+	
 	//========================================================
 	// 영화 리스트 조회
 	List<Map<String, String>> selectMovieList();

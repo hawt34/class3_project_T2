@@ -51,6 +51,7 @@ import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
+import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
 @Controller
 public class AdminController {
@@ -755,13 +756,25 @@ public class AdminController {
 	
 	// 예매 상세 페이지
 	@GetMapping("admin_reserve_detail")
-	public String adminReserveDetail(@RequestParam int ticket_pay_num, Model model) {
-		Map<String, String> reserveDetail = service.selectReserveDetail(ticket_pay_num);
-//		String ticket_pay_date = reserveDetail.get("ticket_pay_date");
-//		ticket_pay_date = LocalDateTime.parse(ticket_pay_date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString();
-//		reserveDetail.put("ticket_pay_date", ticket_pay_date);
+	public String adminReserveDetail(@RequestParam int ticket_num, @RequestParam int ticket_pay_num, Model model) {
+		// 예매정보 가져오기
+		Map<String, String> reserveDetail = service.selectReserveDetail(ticket_num);
+		// 좌석 정보 가져오기
+		List<Map<String, String>> seatArr = service.selectSeatInfo(ticket_pay_num);
+		System.out.println(seatArr);
+		// 좌석정보 통합
+		String seatInfo = "";
+		for(Map<String,String> seat : seatArr) {
+			seatInfo += seat.get("ticket_seat_info") + "/";
+        }
+		// / 제거
+		if (seatInfo.endsWith("/")) {
+			seatInfo = seatInfo.substring(0, seatInfo.length() - 1);
+        }
+		System.out.println(seatInfo);
 		
 		model.addAttribute("reserveDetail", reserveDetail);
+		model.addAttribute("seatInfo", seatInfo);
 		return "admin/admin_member/admin_reserve_detail";
 	}
 	

@@ -20,7 +20,8 @@ public interface OtoMapper {
 	List<OTOVO> selectOtoList(@Param("startRow")int startRow, 
 							  @Param("listLimit")int listLimit,
 							  @Param("faqCategory")String faqCategory,
-							  @Param("theaterName")String theaterName);
+							  @Param("theaterName")String theaterName,
+							  @Param("id")String id);
 
 	OTOVO selectOto(int oto_num);
 
@@ -37,7 +38,8 @@ public interface OtoMapper {
 	
 	//1대1 문의 유형에 따른 갯수
 	int getOtoListCount(@Param("faqCategory")String faqCategory,
-						@Param("theaterName")String theaterName);
+						@Param("theaterName")String theaterName,
+						@Param("id")String id);
 	
 	//1대1 문의 파일 삭제
 	int deleteOtoFile(OTOVO oto);

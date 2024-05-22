@@ -49,6 +49,9 @@
    		<if test="theaterName != null and theaterName != ''">
    			WHERE theater_name = #{theaterName}
    		</if>
+   		<if test="id != null and id != ''">
+	   		WHERE o.member_id = #{id}
+   		</if>
 		ORDER BY oto_num DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
@@ -93,11 +96,14 @@
 		FROM oto o
 		JOIN theater t
    		on o.theater_num = t.theater_num
+   		<if test="id != null and id != ''">
+	   		WHERE o.member_id = #{id}
+   		</if>
 		<if test="faqCategory != null and faqCategory != ''">
-   			WHERE oto_category = #{faqCategory}
+   			AND oto_category = #{faqCategory}
    		</if>
    		<if test="theaterName != null and theaterName != ''">
-   			WHERE theater_name = #{theaterName}
+   			AND theater_name = #{theaterName}
    		</if>
 	</select>
 	

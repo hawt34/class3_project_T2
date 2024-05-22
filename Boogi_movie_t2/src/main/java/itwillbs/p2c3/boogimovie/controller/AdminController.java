@@ -254,13 +254,14 @@ public class AdminController {
 	public String adminOto(@RequestParam(defaultValue = "1")int pageNum,
 						   Model model,
 						   String faqCategory,
-						   String theaterName) {
+						   String theaterName,
+						   @RequestParam(required = false)String id) {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
 		System.out.println("$$@#@#" + theaterName);
 		System.out.println("$$@#@#" + faqCategory);
 		
-		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, faqCategory, theaterName);
+		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, faqCategory, theaterName, id);
 		
 
 		model.addAttribute("faqCategory", faqCategory);
@@ -268,7 +269,7 @@ public class AdminController {
 		if(theaterName != null && !theaterName.equals("")) {model.addAttribute("theaterName", theaterName);} 
 			
 
-		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory, theaterName); //faq 페이지네이션
+		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory, theaterName, id); //faq 페이지네이션
 		
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("otoList", otoList);
@@ -276,9 +277,9 @@ public class AdminController {
 	}
 
 	// 페이징
-	public PageInfo pageInfoCategory(int pageNum, int listLimit, int startRow,  String faqCategory, String theaterName) {
+	public PageInfo pageInfoCategory(int pageNum, int listLimit, int startRow,  String faqCategory, String theaterName, String id) {
 		
-		int listCount = otoService.getOtoListCount(faqCategory, theaterName); //총 공지사항 갯수
+		int listCount = otoService.getOtoListCount(faqCategory, theaterName, id); //총 공지사항 갯수
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호

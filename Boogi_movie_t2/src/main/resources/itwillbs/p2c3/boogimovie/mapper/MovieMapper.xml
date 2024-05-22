@@ -57,7 +57,7 @@
    			 SELECT *
     		 FROM movie
     		 WHERE movie_num = #{movie_num}
-        	 OR movie_open_date >= CURRENT_DATE()
+        	 OR movie_open_date > CURRENT_DATE()
     	]]>
 	</select>	
 	

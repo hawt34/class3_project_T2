@@ -27,9 +27,12 @@ public class MovieController {
 	private ReviewService serviceReview;
 	
 	@GetMapping("movie")
-	public String home(Model model , HttpSession session,MemberVO member) {
-		System.out.println("현재 아이디" + member.getMember_id());
+	public String home(Model model , HttpSession session,MemberVO member, MovieVO movieTrail) {
+		//System.out.println("현재 아이디" + member.getMember_id());
 		List<MovieVO> movieInfo = movieService.getMovieList();
+		movieTrail = movieService.getMovieTrail();
+		//System.out.println("무비트레일러"+movieTrail);
+		model.addAttribute("movieTrail", movieTrail);
 		model.addAttribute("movieInfo", movieInfo);
 		String member_id = (String) session.getAttribute("sId");
 		//System.out.println("현재로그인한 " +member_id);
@@ -78,12 +81,19 @@ public class MovieController {
 	
 	
 	@GetMapping("movieFuture")// 상영예정작리스트
-	public String movieFuture(Model model) {
-		
+	public String movieFuture(Model model,MovieVO futureMovieTrail) {
+		futureMovieTrail = movieService.getMovieFutureTrail();
+		//System.out.println("무비트레일러"+movieTrail);
+		model.addAttribute("futureMovieTrail", futureMovieTrail);
 		List<MovieVO> movieFuture = movieService.getMovieFuture();
 		model.addAttribute("movieFuture", movieFuture);
 		//System.out.println("여기는 무비퓨처" + movieFuture);확인완료
 	    return "movie/movieFuture";
+	}
+	@GetMapping("boxoffice")
+	public String boxoffice() {
+		
+		return"movie/boxoffice";
 	}
 	
 

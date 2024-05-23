@@ -113,29 +113,33 @@ table {
  
 /* ========================================= */
 /* theater_detail_timetable */
-.theater-info{
-	margin: auto;
-	width: 1400px;
+
+.time_schedule {
+	text-align: center;
 }
 
-	
-.time_schedule{
-	margin: auto;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
+.day_list {
 	display: flex;
-	
+	height: 70px;
+	justify-content: center;
 }
 
-.time_schedule_day{
-	margin: 12px auto;
-	
-	
+.day_list_move {
+	display: flex;
+	height: 70px;
+	justify-content: center;
 }
 
+.day_list_move img {
+	width: 20px;
+}
 
-
-
-
-
+#timetable_info {
+	margin: 30px;
+	padding: 20px;
+	width: auto;
+	height:auto;
+	border: 1px solid gray;
+	
+}
 

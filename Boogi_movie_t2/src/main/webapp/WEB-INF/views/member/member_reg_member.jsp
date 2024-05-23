@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>부기무비</title>
 </head>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/member_default.css" rel="stylesheet" type="text/css">
@@ -55,7 +55,6 @@
     <label id="msg_email" class="msg_email"></label><br>
     <label for="member_tel"><b>전화번호</b></label>
     <input type="text" placeholder="전화번호 입력" name="member_tel" id="member_tel" placeholder="-제외한 전화번호를 입력해주세요" required maxlength="11" onclick="certificationTel()">
-    
     <label id="msg_tel" class="msg_tel"></label><br>
     		<div class="form_item">
 			<label for="member_movie_genre"><b>영화취향</b></label>
@@ -100,50 +99,53 @@
 	            $("#member_id").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	            $("#msg_id").empty();
 	        }
-	
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
 	    
 	    // 비밀번호 입력값 변경 시
-	    $("#member_pwd").on("input", function() {
-	    	let pwd = $("#member_pwd").val();
+		$("#member_pwd").on("input", function() {
+		    let pwd = $("#member_pwd").val();
 		    let msg = "";
 		    let color = "";
 		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
-	        
-		    if(lengthRegx.exec(pwd)) {
-// 		    	$("#checkPasswdResult").text("사용 가능한 패스워드");
-// 				$("#checkPasswdResult").css("color", "BLUE");
-		    	let engUpperRegex = /[A-Z]/;
-		    	let engLowerRegex = /[a-z]/;
-		    	let numRegex = /\d/;
-		    	let specRegex = /[!@#$%]/;
-		    	let count = 0;
-		    	
-		    	if(engUpperRegex.exec(pwd)) count++;
-		    	
-		    	if(engLowerRegex.exec(pwd)) count++;
-		    	
-		    	if(numRegex.exec(pwd)) count++;
-		    	
-		    	if(specRegex.exec(pwd)) count++;
-		    	
-
+		
+		    if (!lengthRegx.exec(pwd)) {
+		        msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
+		        color = "RED";
+		    } else {
+		        let engUpperRegex = /[A-Z]/;
+		        let engLowerRegex = /[a-z]/;
+		        let numRegex = /\d/;
+		        let specRegex = /[!@#$%]/;
+		        let count = 0;
+		
+		        if (engUpperRegex.exec(pwd)) count++;
+		        if (engLowerRegex.exec(pwd)) count++;
+		        if (numRegex.exec(pwd)) count++;
+		        if (specRegex.exec(pwd)) count++;
+		
 		        switch (count) {
-		            case 4: msg = "안전"; color="Green"; checkPasswdResult = true; break;
-		            case 3: msg = "보통"; color="Orange"; checkPasswdResult = true; break;
-		            case 2: msg = "위험"; color="RED"; checkPasswdResult = true; break;
-		            case 1: 
-		            case 0: msg = "!,@,#,$ 영문자와 숫자조합 8~16자리를 입력해주세요"; color="RED"; checkPasswdResult = false;  
+		            case 4:
+		                msg = "안전";
+		                color = "Green";
+		                break;
+		            case 3:
+		                msg = "보통";
+		                color = "Orange";
+		                break;
+		            case 2:
+		                msg = "위험";
+		                color = "RED";
+		                break;
+		            default:
+		                msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
+		                color = "RED";
 		        }
-			
-		    } 
-		    	$("#msg_pwd").text(msg);
-				$("#msg_pwd").css("color", color);
-
-	
-	        checkFormValidity(); // 폼 유효성 검사 실행
-	    });
+		    }
+		    $("#msg_pwd").text(msg);
+		    $("#msg_pwd").css("color", color);
+		    checkFormValidity(); // 폼 유효성 검사 실행
+		});
 	    
 	    
 	    // 비밀번호2 입력값 변경 시
@@ -158,7 +160,6 @@
 	            $("#member_pwd2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	            $("#msg_pwd2").empty();
 	        }
-	
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
 	    
@@ -175,7 +176,6 @@
 	            $("#member_address2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	            $("#msg_addr").empty();
 	        }
-		
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
 	    
@@ -189,9 +189,8 @@
 	            $("#msg_email").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
 	        } else {
 	            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-	            $("msg_email").empty();
+	            $("#msg_email").empty();
 	        }
-		
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
 	    
@@ -231,7 +230,6 @@
 	});
 	
 </script>
-	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	
@@ -247,30 +245,24 @@
 	                // 1) 우편번호(= 국가기초구역번호 = zonecode 속성값) 가져와서 
 	                //    우편번호 입력란(postCode)에 출력
 	                document.fr.post_code.value = data.zonecode;
-	        		
 	        		// 2) 기본주소(address 속성값) 가져와서 기본주소 항목(address1)에 출력
 // 	        		document.fr.address1.value = data.address; // 기본주소
 // 	        		document.fr.address1.value = data.roadAddress; // 도로명주소
-	        		
 	        		// 만약, 해당 주소에 대한 건물명(buildingName 속성값)이 존재할 경우(널스트링 아닐 때)
 	        		// 기본주소 뒤에 건물명을 결합하여 출력
 	        		// ex) 기본주소 : 부산 부산진구 동천로 109
 	        		//     건물명 : 삼한골든게이트
 	        		//     => 부산 부산진구 동천로 109 (삼한골든게이트)
 	        		let address = data.address; // 기본주소 변수에 저장
-	        		
 	        		// 건물명이 존재할 경우(buildingName 속성값이 널스트링이 아닐 경우)
 	        		// 기본주소 뒤에 건물명 결합
 	        		if(data.buildingName != "") {
 	        			address += " (" + data.buildingName + ")";
 	        		}
-	        		
 	        		// 기본주소 출력
 	        		document.fr.address1.value = address;
-	        		
 	        		// 상세주소 입력 항목에 커서 요청
 	        		document.fr.address2.focus();
-	        		
 	            }
 	        }).open();
 	    }

@@ -44,7 +44,9 @@
 		FROM member
 		WHERE member_name = #{member_name} 
 		AND member_birth = #{member_birth}
-		AND member_email = #{member_email}
+		<if test="member_email != null and !member_email.equals('')">
+			AND member_email = #{member_email}
+		</if>
 	</select>
 
 	<select id="isCorrectMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">

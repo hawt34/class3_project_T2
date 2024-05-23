@@ -1,6 +1,5 @@
 package itwillbs.p2c3.boogimovie.vo;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -20,6 +19,10 @@ public class NoticeVO {
 	private String theater_name;
 	private String disable;
 	private String notice_fdt;
+	
+	private int row_num;
+	private int prev;
+	private int next;
 	
 	
 }

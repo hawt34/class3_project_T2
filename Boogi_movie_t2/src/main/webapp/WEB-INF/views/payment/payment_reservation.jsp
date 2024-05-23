@@ -39,7 +39,9 @@
 		color: #0054FF;
 	}
 </style>
-
+<script>
+	console.log("${keyword}");
+</script>
 </head>
 <body>
 	<header>
@@ -536,6 +538,7 @@
 		let person_info = "${person_info}";
 		let scs_num = "${scs.scs_num}";
 		let keyword = "${keyword}";
+		
 		
 		
 	    const params = {

@@ -3,6 +3,7 @@ package itwillbs.p2c3.boogimovie.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import itwillbs.p2c3.boogimovie.vo.CartVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
@@ -41,7 +42,7 @@ public interface PaymentMapper {
 
 	List<CartVO> getCartInfo(String cart_id);
 
-	ItemInfoVO getItemInfo(int item_info_num); 
-	
+	ItemInfoVO getItemInfo(int item_info_num);
 
+	int updateEmptySeat(@Param("scs_num") int scs_num,@Param("totalPeople") int totalPeople); 
 }

@@ -26,6 +26,10 @@ public interface NoticeMapper {
 										   @Param("startRow")int startRow,
 										   @Param("searchKeyword")String searchKeyword);
 	//검색어를 통한 게시판목록 갯수
-	int selectNoticeSearchKeywordCount(String searchKeyword); 
+	int selectNoticeSearchKeywordCount(String searchKeyword);
+	
+	
+	//극장의 번호 선택
+	int selectTheaterNum(String theater_name); 
 	
 }

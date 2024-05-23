@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 등록폼</title>
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<!-- 썸머노트 cdn -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -20,7 +23,12 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<style>
+	/* Summernote 라인 높이 조정 */
+	.note-editable {
+	    line-height: 0.5; /* 원하는 라인 높이로 설정 */
+	}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -54,7 +62,7 @@
 					</div>
 					<div class="mb-3">
 						<label for="movie_story">내용</label> 
-						<textarea id="summernote" class="form-control" rows="10" required name="notice_content"></textarea>
+						<textarea id="summernote" class="form-control" rows="10" cols="100" required name="notice_content"></textarea>
 						<div class="invalid-feedback">내용을 입력해주세요.</div>
 					</div>
 					
@@ -74,11 +82,21 @@
 	</div>
 <script>
 $(function () {
+	
+	if ($("#notice_category").val() == "전체") {
+        $("#theater_name").prop("disabled", true);
+    } else {
+        $("#theater_name").prop("disabled", false);
+    }
+	
 	$("#notice_category").change(function() {
 		if ($(this).val() == "전체") {
-		    $("#theater_name").val(" ");
+		    $("#theater_name").val("");
+		    $("#theater_name").prop("disabled", true);
 		} else if ($(this).val() == "극장") {
 		    $("#theater_name").val("해운대점");
+		    $("#theater_name").prop("disabled", false);
+		    $("#theater_name option:eq(0)").prop("disabled", true);
 		}
 	});
 });

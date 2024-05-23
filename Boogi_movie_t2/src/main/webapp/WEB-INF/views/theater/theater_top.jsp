@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
 <!-- 제이쿼리 -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
+
 <script type="text/javascript">
 	var maxCount = 3;								// 카운트 최대값은 3
 	var count = 0;   								// 카운트, 0으로 초기화 설정
@@ -29,7 +31,7 @@
 		field.checked = false;						// (마지막 onclick한)field 객체의 checked를 false(checked가 아닌 상태)로 만든다.
 		count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
 		}
-	} // CountChecked()
+	}
 	
 	function initializeModal() {
 		var myTheaters = [
@@ -69,10 +71,7 @@
 		    type: "POST",
 		    dataType: "json",
 		    contentType: "application/json", // 서버에게 내용이 JSON임을 알려줌
-		    data: JSON.stringify({ 
-		    	member_id: member_id, 
-		    	checkedValues: checkedValues 
-		    }), // JSON 문자열로 변환하여 전송
+		    data: JSON.stringify({ member_id: member_id, checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
 		    success: function(response) {
 				if(response){
 					alert("마이극장 저장 완료");
@@ -90,9 +89,27 @@
 		
 	} // sendCheckedValues()
 	
+	function initializeModal() {
+		var myTheaters = [
+			"${member.member_my_theater1}",
+			"${member.member_my_theater2}",
+			"${member.member_my_theater3}"
+		];
 
+		$('.form-check-input').each(function() {
+			var theaterName = $(this).val();
+      		if (myTheaters.includes(theaterName)) {
+		        $(this).prop('checked', true);
+		        count++;
+	      	} else {
+      			$(this).prop('checked', false);
+			}
+	    });
+		
+	} // initializeModal()
 	
 </script>
+
 </head>
 <body>
 	<div class="theater_top">

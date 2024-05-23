@@ -41,4 +41,9 @@ public class NoticeService {
 		return mapper.selectNoticeSearchKeywordCount(searchKeyword);
 	}
 	
+	//극장번호 가져오기
+	public int getTheaterNum(String theater_name) {
+		return mapper.selectTheaterNum(theater_name);
+	}
+	
 }

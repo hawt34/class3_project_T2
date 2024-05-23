@@ -195,6 +195,7 @@ public class PaymentController {
 	        System.out.println("pay  : " + pay);
 	        
 	        PayVO payInfo = service.getPayInfo(pay.getMerchant_uid());
+	        System.out.println("kkkkkkkkkkkkkkkeeeeeeeeeeeyyyyyyyyyword : " + keyword);
 	        // 티켓처리
 	        String[] keywordArr = splitString(keyword, 2);
 	        
@@ -261,8 +262,21 @@ public class PaymentController {
 	                } else {
 	                    System.out.println("Warning: Not enough seats provided for the ticket count.");
 	                }
-	            }
+	            }//ticket업데이트 종료
+	            
+	            
+
 	        }
+            //empty_seat 업데이트
+            int totalPeople = NP_num + YP_num + OP_num;
+            int scs_num = scs.getScs_num();
+            
+            int updateCount = service.updateEmptySeat(scs_num, totalPeople);
+            if(updateCount < 1) {
+            	System.out.println("emptyseat 업데이트 실패");
+            	return false;
+            }
+	        
 	        return true;
 	    } else if(payment.getStatus().equals("failed")) {
 	        System.out.println("payVerify - failed ");

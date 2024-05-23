@@ -573,10 +573,17 @@
 <!-- 		</selectKey> -->
 		
 	INSERT INTO notice (notice_num, notice_subject, notice_content, notice_date, notice_category, theater_num )
-	VALUES (null, #{notice.notice_subject}, #{notice.notice_content}, now(), #{notice.notice_category}, #{theater_num})
+	VALUES (
+			null,
+			#{notice.notice_subject},
+			#{notice.notice_content},
+			now(),
+			#{notice.notice_category},
+			CASE WHEN #{theater_num} = 0 then null ELSE #{theater_num} END
+			)
 		
 	</insert>
-	
+	<!-- 공지 목록 가져오기 -->
 	<select id="selectNoticeList" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
 		SELECT n.notice_num
 			  ,n.notice_subject
@@ -584,7 +591,8 @@
 			  ,t.theater_name
 			  ,n.notice_date
 			  ,n.notice_category
-		FROM notice n JOIN theater t 
+		FROM notice n
+		LEFT OUTER JOIN theater t 
 		ON n.theater_num = t.theater_num
 		ORDER BY notice_num DESC
 		LIMIT #{startRow}, #{listLimit}
@@ -605,22 +613,16 @@
 	<select id="getNoticeListCount" resultType="int">
 		SELECT COUNT(notice_num) FROM notice
 	</select>
+	
 	<select id="selectNotice">
-		WITH TMP AS (
-			SELECT MIN(notice_num) as min
-			    , MAX(notice_num) as max
-		     FROM notice
-		)
 		SELECT n.notice_num
 			 , n.notice_subject
 			 , n.notice_content
 			 , n.notice_date
 			 , n.notice_category
 			 , t.theater_name
-		     , CASE WHEN notice_num = (SELECT min FROM TMP) || notice_num = (SELECT max FROM TMP) THEN 'return false' 
-																								  ELSE '' END AS disable
 		  FROM notice n
-		  JOIN theater t
+		  LEFT OUTER JOIN theater t
 		  ON n.theater_num = t.theater_num
 		  WHERE notice_num = #{notice_num}
 

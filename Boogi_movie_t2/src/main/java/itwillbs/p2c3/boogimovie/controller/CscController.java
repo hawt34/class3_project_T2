@@ -116,14 +116,14 @@ public class CscController {
 				System.out.println("쿠키값: " + cookie.getValue());
 				if(!cookie.getValue().contains(faqNum)) {
 					cookie.setValue(cookie.getValue() + "_" + faqNum);
-					cookie.setMaxAge(60);
+					cookie.setMaxAge(60 * 10);
 					response.addCookie(cookie);
 					faqService.updateViewCount(faq);
 				}
 			}
 		} else {
 			Cookie newCookie = new Cookie("visit_cookie", faqNum);
-			newCookie.setMaxAge(60);
+			newCookie.setMaxAge(60 * 10);
 			response.addCookie(newCookie);
 			faqService.updateViewCount(faq);
 		}
@@ -160,10 +160,11 @@ public class CscController {
 		List<NoticeVO> noticeList = null;
 		if(!searchKeyword.equals("")) {
 			noticeList = noticeService.getNoticeKeywordList(listLimit, startRow, searchKeyword);
-//			System.out.println(noticeList);
 			
 		} else {
 			noticeList = noticeService.getNoticeList(listLimit, startRow, theaterName);
+			System.out.println("로우넘버: " + noticeList.get(0));
+			System.out.println("로우넘버: " + noticeList.get(1));
 		}
 		
 		//LocalDateTIme format
@@ -184,6 +185,7 @@ public class CscController {
 	@GetMapping("csc_notice_detail")
 	public String cscNoiceDetail(int notice_num, Model model) {
 		NoticeVO notice = noticeService.getNotice(notice_num);
+		System.out.println(notice);
 		notice.setNotice_fdt(notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 		int maxNotice = adminService.getMaxNotice(notice);
 		int minNotice = adminService.getMinNotice(notice);

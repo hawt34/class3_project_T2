@@ -14,9 +14,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,6 @@ import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
-import itwillbs.p2c3.boogimovie.vo.MovieGenreVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.MyTheaterVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
@@ -75,7 +75,7 @@ public class TicketingController {
 	
 	@PostMapping("tic_choose_seat")
 	public String choose_seat(String final_list_data, Model model) {
-		System.out.println(final_list_data);
+		String keyword = "";
 		//data 쪼개서 저장
 		String movie_name  = final_list_data.split("/")[1];
 		String start_time = final_list_data.split("/")[2];
@@ -180,7 +180,7 @@ public class TicketingController {
         System.out.println(params);
         Map<String, Object> fee_info = ticketingService.feeCalc(params);
         
-        
+        keyword = fee_dimension_keyword + fee_day_keyword + fee_time_keyword;
        List<Integer> pay_nums = ticketingService.selectPayNum(dbScs.getScs_num());
         
         String seats2 = "";
@@ -193,6 +193,7 @@ public class TicketingController {
         
         
 		//model에 저장
+        model.addAttribute("keyword", keyword);
 		model.addAttribute("scs", dbScs);
 		model.addAttribute("seats", seats);
         model.addAttribute("firstRoad", first_road);
@@ -377,6 +378,14 @@ public class TicketingController {
 		return theaterList;
 	}
 	
-	
+	@ResponseBody
+	@PostMapping("movieSearch")
+	public String movieSearch(@RequestParam(defaultValue = "1") int movie_num){
+		List<Map<String, Integer>> list = ticketingService.selectTheaterByMovie(movie_num);
+		JSONArray  ja = new JSONArray(list);
+		
+		
+		return ja.toString();
+	}
 
 }

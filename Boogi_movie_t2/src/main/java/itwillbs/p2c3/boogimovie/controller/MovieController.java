@@ -74,6 +74,8 @@ public class MovieController {
 				json.addProperty("movie_genre", vo.getMovie_genre());
 				json.addProperty("movie_name", vo.getMovie_name());
 				json.addProperty("movie_director", vo.getMovie_director());
+				json.addProperty("movie_num", vo.getMovie_num());
+				
 				list.add(json);
 			}
 			model.addAttribute("genreMovieList", list);

@@ -189,12 +189,16 @@ footer {
 		// 데이터가 있는지 확인
 		if (genreMovieList && genreMovieList.length > 0) {
 			popupContent += "<table border='1'><tr><th>영화 이름</th><th>장르</th><th>감독</th></tr>";
-			for (let i = 0; i < genreMovieList.length; i++) {
-				let movie = genreMovieList[i];
-				popupContent += "<tr><td>" + movie.movie_name + "</td><td>"
-						+ movie.movie_genre + "</td><td>"
-						+ movie.movie_director + "</td></tr>";
-			}
+			 for (let i = 0; i < genreMovieList.length; i++) {
+		            let movie = genreMovieList[i];
+		            let movieNum = movie.movie_num; 
+		            let movieInfoUrl = 'movieInfo?movie_num=' + movieNum;
+		            console.log(movie.movie_num);
+		            popupContent += "<tr><td>" + movie.movie_name + "</td><td>" 
+	                  + movie.movie_genre + "</td><td>" 
+	                  + movie.movie_director + "</td><td><input type='button' value='상세정보' onclick='window.location.href=\"" + movieInfoUrl + "\"'></td></tr>";	
+		        }
+			
 			popupContent += "</table>";
 		} else {
 			// 데이터가 없을 때의 메시지

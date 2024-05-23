@@ -131,4 +131,10 @@
 		VALUES
 		(null, #{ticket_seat_info}, #{ticket_price}, #{ticket_keyword}, #{ticket_pay_num})
 	</insert>
+	
+	<update id="updateEmptySeat" >
+		UPDATE screen_session 
+		SET	scs_empty_seat = scs_empty_seat - #{totalPeople}
+		WHERE scs_num = #{scs_num}
+	</update>
 </mapper>

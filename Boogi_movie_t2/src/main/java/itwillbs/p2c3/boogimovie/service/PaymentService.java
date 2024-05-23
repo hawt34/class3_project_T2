@@ -79,6 +79,11 @@ public class PaymentService {
 	public ItemInfoVO getItemInfo(int item_info_num) {
 		return mapper.getItemInfo(item_info_num);
 	}
+
+	public int updateEmptySeat(int scs_num, int totalPeople) {
+		
+		return mapper.updateEmptySeat(scs_num, totalPeople);
+	}
 	
 
 }

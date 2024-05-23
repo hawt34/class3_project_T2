@@ -16,6 +16,9 @@
        	background-color: transparent;
     }
 </style>
+<script>
+	console.log("${keyword}");
+</script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
 " rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/tic_choose_seat.css" rel="stylesheet" type="text/css">

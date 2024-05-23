@@ -195,6 +195,7 @@ public class PaymentController {
 	        System.out.println("pay  : " + pay);
 	        
 	        PayVO payInfo = service.getPayInfo(pay.getMerchant_uid());
+	        System.out.println("kkkkkkkkkkkkkkkeeeeeeeeeeeyyyyyyyyyword : " + keyword);
 	        // 티켓처리
 	        String[] keywordArr = splitString(keyword, 2);
 	        

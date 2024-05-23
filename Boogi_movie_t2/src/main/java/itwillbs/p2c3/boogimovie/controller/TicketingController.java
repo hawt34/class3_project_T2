@@ -75,7 +75,7 @@ public class TicketingController {
 	
 	@PostMapping("tic_choose_seat")
 	public String choose_seat(String final_list_data, Model model) {
-		System.out.println(final_list_data);
+		String keyword = "";
 		//data 쪼개서 저장
 		String movie_name  = final_list_data.split("/")[1];
 		String start_time = final_list_data.split("/")[2];
@@ -180,7 +180,7 @@ public class TicketingController {
         System.out.println(params);
         Map<String, Object> fee_info = ticketingService.feeCalc(params);
         
-        
+        keyword = fee_dimension_keyword + fee_day_keyword + fee_time_keyword;
        List<Integer> pay_nums = ticketingService.selectPayNum(dbScs.getScs_num());
         
         String seats2 = "";
@@ -193,6 +193,7 @@ public class TicketingController {
         
         
 		//model에 저장
+        model.addAttribute("keyword", keyword);
 		model.addAttribute("scs", dbScs);
 		model.addAttribute("seats", seats);
         model.addAttribute("firstRoad", first_road);

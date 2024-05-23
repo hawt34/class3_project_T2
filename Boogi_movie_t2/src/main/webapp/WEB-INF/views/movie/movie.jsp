@@ -18,19 +18,7 @@
 	width: 1400px;
 	margin: 0 auto;
 }
-/* article { */
-/*     position: relative; */
-/*     width: 100%; */
-/*     max-width: 1400px; */
-/*     height: 600px; /* 아티클 영역의 높이를 400px로 고정 */ */
-/*     /* background-color: #ffd54f; */ */
-/* } */
 
-/* article video { */
-/*   	width: 1400px; */
-/*     height: 100%; /* 비디오의 높이를 아티클 영역과 동일하게 설정하여 비율을 유지함 */ */
-/*     display: block; /* 인라인 요소를 블록 요소로 변경하여 가로폭을 채우도록 함 */ */
-/* } */
 article {
 	margin-top: 40px;
  	width: 1400px;
@@ -133,7 +121,8 @@ footer {
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movie'">현재 상영작</button>
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFuture'">상영예정작</button>
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='boxoffice'">박스오피스 순위</button>
-			</div>
+ 				<button type="button" class="btn btn-outline-primary" id = "recommendMovie" onclick="openPopup()">추천상영영화</button> 
+ 			</div>
 			<div class="list">
 			<c:forEach var="movie" items="${movieInfo}" varStatus="loop" begin="0">
     		<div class="movie">
@@ -161,47 +150,92 @@ footer {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
-    $(document).ready(function() {
-    	$(".list").on("click", ".detail_button", function() {
-    	    let movie_num = $(this).siblings(".movie_num").val();
-    	    window.location.href = 'movieInfo?movie_num=' + movie_num; // 영화 상세 정보 페이지로 이동
-    	});
-        $(".list").on("click", ".movieTicket", function() {
-            let sId = "${sessionScope.sId}";
-            let movie_num = $(this).siblings(".movie_num").val();
-            
-            if (!sId) {
-                if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
-                    window.location.href = 'member_login';
-                }
-            } else {
-                if ($(this).hasClass("movieTicket")) {
-                    window.location.href = 'tic_ticketing'; // 예매 페이지로 이동
-                } 
-            }
-        });
-       
-        
-        // 초기에는 8편의 영화만 표시하도록 설정
-        let numShown = 8;
-        $(".movie:gt(" + (numShown - 1) + ")").hide();
-        
-        // "더보기" 버튼 클릭 이벤트 처리
-        $("#moreMoviesBtn").click(function() {
-            numShown += 4; // 4개씩 추가로 보여주기
-            $(".movie:lt(" + numShown + ")").show();
-         	
-            // 섹션의 높이를 300px씩 추가
-            let newHeight = $("section").height() + 500;
-            $("section").height(newHeight);
-            
-            // 모든 영화를 보여주었을 경우 더보기 버튼 숨기기
-            if (numShown >= $(".movie").length) {
-                $("#moreMoviesBtn").hide();
-                $(".end-message").show();
-            }
-        });
-    });
-</script>
+		
+		$(document).ready(function() {
+			let sId = "${sessionScope.sId}"; //생각보다 많이 써서 빼놓음.
+			$("#recommendMovie").on("click", function() {
+				if (!sId) {
+					if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
+						window.location.href = 'member_login';
+					}
+				} 
+			});
+
+			$(".list").on("click", ".detail_button", function() {
+				let movie_num = $(this).siblings(".movie_num").val();
+				window.location.href = 'movieInfo?movie_num=' + movie_num; // 영화 상세 정보 페이지로 이동
+			});
+			$(".list").on("click", ".movieTicket", function() {
+				let movie_num = $(this).siblings(".movie_num").val();
+
+				if (!sId) {
+					if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
+						window.location.href = 'member_login';
+					}
+				} else {
+					if ($(this).hasClass("movieTicket")) {
+						window.location.href = 'tic_ticketing'; // 예매 페이지로 이동
+					}
+				}
+			});
+
+			// 초기에는 8편의 영화만 표시하도록 설정
+			let numShown = 8;
+			$(".movie:gt(" + (numShown - 1) + ")").hide();
+
+			// "더보기" 버튼 클릭 이벤트 처리
+			$("#moreMoviesBtn").click(function() {
+				numShown += 4; // 4개씩 추가로 보여주기
+				$(".movie:lt(" + numShown + ")").show();
+
+				// 섹션의 높이를 300px씩 추가
+				let newHeight = $("section").height() + 500;
+				$("section").height(newHeight);
+
+				// 모든 영화를 보여주었을 경우 더보기 버튼 숨기기
+				if (numShown >= $(".movie").length) {
+					$("#moreMoviesBtn").hide();
+					$(".end-message").show();
+				}
+			});
+		});
+
+		function openPopup() {
+			let sId = "${sessionScope.sId}";
+			let memberCode = '${memberCode}';
+			let genreMovieList = JSON.parse('${genreMovieList}');
+
+			let popupWindow = window.open("", "popupWindow", "width=600,height=400");
+			let popupContent = "<h3>추천 상영 영화 목록</h3>";
+			popupContent += "<h3> " + sId + "님의 장르는  " + memberCode+ "입니다</h2>";
+			// 데이터가 있는지 확인
+			if (genreMovieList && genreMovieList.length > 0) {
+				popupContent += "<table border='1'><tr><th>영화 이름</th><th>장르</th><th>감독</th></tr>";
+		        for (let i = 0; i < genreMovieList.length; i++) {
+		            let movie = genreMovieList[i];
+		            let movieNum = movie.movie_num; 
+		            let movieInfoUrl = 'movieInfo?movie_num=' + movieNum;
+		            console.log(movie.movie_num);
+		            popupContent += "<tr><td>" + movie.movie_name + "</td><td>" 
+	                  + movie.movie_genre + "</td><td>" 
+	                  + movie.movie_director + "</td><td><input type='button' value='상세정보' onclick='window.location.href=\"" + movieInfoUrl + "\"'></td></tr>";	
+		        }
+		        popupContent += "</table>";
+		    } else {
+		        // 데이터가 없을 때의 메시지
+		        popupContent += "<p>추천 상영 영화 목록이 없습니다. 죄송합니다.</p>";
+		    }
+		    // 팝업 내용을 팝업 창에 쓰기
+			popupContent += "<button id='confirmButton'>확인</button>";
+		    popupWindow.document.write(popupContent);
+		    $(popupWindow.document).on('click', '#confirmButton', function() {
+		        popupWindow.close();
+		    });
+		   
+		}
+		
+		
+		
+		</script>
 </body>
 </html>

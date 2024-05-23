@@ -107,6 +107,7 @@ footer {
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movie'">현재 상영작</button>
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFuture'">상영예정작</button>
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href=''">박스오피스 순위</button>
+				<button type="button" class="btn btn-outline-primary" id = "recommendMovie" onclick="openPopup()">추천상영영화</button> 
 			</div>
 			<div class="list">
 				<c:forEach var="movieFuture" items="${movieFuture}" varStatus="loop" begin="0">
@@ -141,32 +142,71 @@ footer {
 		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
 </body>
-	<script type="text/javascript">
+<script type="text/javascript">
 	$(document).ready(function() {
-	    // 처음에는 4편의 영화만 보여주기
-	    let numShown = 4;
-	    $(".movie:gt(" + (numShown - 1) + ")").hide();
-	    
-	    // "더보기" 버튼 클릭 이벤트 처리
-	    $("#moreMoviesBtn").click(function() {
-	        numShown += 4; // 4개씩 추가로 보여주기
-	        $(".movie:lt(" + numShown + ")").show();
-	        
-	        let newHeight = $("section").height() + 400;
-	        $("section").height(newHeight);
-	        // 모든 영화를 보여주었을 경우 더보기 버튼 숨기기
-	        // 상영 예정작은 영화 수가 작아서 일단 주석처리
-	        if (numShown >= $(".movie").length) {
-	            $("#moreMoviesBtn").hide();
-	            $(".end-message").show();
-	        }
-	    });
-	    
-	    // 상세보기 버튼 클릭 이벤트 처리
-	    $(".list").on("click", ".future_detail_button", function() {
-	        let movie_num = $(this).siblings(".movie_num").val();
-	        window.location.href = "movieFutureInfo?movie_num=" + movie_num;
-	    });
+		let sId = "${sessionScope.sId}"; //생각보다 많이 써서 빼놓음.
+		// 처음에는 4편의 영화만 보여주기
+		let numShown = 4;
+		$(".movie:gt(" + (numShown - 1) + ")").hide();
+
+		// "더보기" 버튼 클릭 이벤트 처리
+		$("#moreMoviesBtn").click(function() {
+			numShown += 4; // 4개씩 추가로 보여주기
+			$(".movie:lt(" + numShown + ")").show();
+
+			let newHeight = $("section").height() + 400;
+			$("section").height(newHeight);
+			// 모든 영화를 보여주었을 경우 더보기 버튼 숨기기
+			// 상영 예정작은 영화 수가 작아서 일단 주석처리
+			if (numShown >= $(".movie").length) {
+				$("#moreMoviesBtn").hide();
+				$(".end-message").show();
+			}
+		});
+		$("#recommendMovie").on("click", function() {
+			if (!sId) {
+				if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
+					window.location.href = 'member_login';
+				}
+			}
+		});
+		// 상세보기 버튼 클릭 이벤트 처리
+		$(".list").on("click", ".future_detail_button", function() {
+			let movie_num = $(this).siblings(".movie_num").val();
+			window.location.href = "movieFutureInfo?movie_num=" + movie_num;
+		});
 	});
+
+	function openPopup() {
+		let sId = "${sessionScope.sId}";
+		let memberCode = '${memberCode}';
+		let genreMovieList = JSON.parse('${genreMovieList}');
+
+		let popupWindow = window
+				.open("", "popupWindow", "width=600,height=400");
+		let popupContent = "<h3>추천 상영 영화 목록</h3>";
+		popupContent += "<h3> " + sId + "님의 장르는  " + memberCode + "입니다</h2>";
+		// 데이터가 있는지 확인
+		if (genreMovieList && genreMovieList.length > 0) {
+			popupContent += "<table border='1'><tr><th>영화 이름</th><th>장르</th><th>감독</th></tr>";
+			for (let i = 0; i < genreMovieList.length; i++) {
+				let movie = genreMovieList[i];
+				popupContent += "<tr><td>" + movie.movie_name + "</td><td>"
+						+ movie.movie_genre + "</td><td>"
+						+ movie.movie_director + "</td></tr>";
+			}
+			popupContent += "</table>";
+		} else {
+			// 데이터가 없을 때의 메시지
+			popupContent += "<p>추천 상영 영화 목록이 없습니다. 죄송합니다.</p>";
+   		}
+		// 팝업 내용을 팝업 창에 쓰기
+		popupContent += "<button id='confirmButton'>확인</button>";
+		popupWindow.document.write(popupContent);
+		$(popupWindow.document).on('click', '#confirmButton', function() {
+			popupWindow.close();
+		});
+
+	}
 </script>
 </html>

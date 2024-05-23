@@ -14,9 +14,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,6 @@ import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
-import itwillbs.p2c3.boogimovie.vo.MovieGenreVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.MyTheaterVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
@@ -378,6 +378,14 @@ public class TicketingController {
 		return theaterList;
 	}
 	
-	
+	@ResponseBody
+	@PostMapping("movieSearch")
+	public String movieSearch(@RequestParam(defaultValue = "1") int movie_num){
+		List<Map<String, Integer>> list = ticketingService.selectTheaterByMovie(movie_num);
+		JSONArray  ja = new JSONArray(list);
+		
+		
+		return ja.toString();
+	}
 
 }

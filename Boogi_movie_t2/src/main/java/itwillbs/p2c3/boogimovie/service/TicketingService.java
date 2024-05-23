@@ -43,7 +43,9 @@ public class TicketingService {
 	}
 
 	
-	
+	public List<Map<String, Integer>> selectTheaterByMovie(int movie_num){
+		return mapper.selectTheaterByMovie(movie_num);
+	}
 	
 	
 	

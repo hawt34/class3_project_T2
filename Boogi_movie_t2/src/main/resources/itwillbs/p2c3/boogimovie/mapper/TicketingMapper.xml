@@ -71,4 +71,16 @@
 		)
 	</insert>
 	
+	<select id="selectTheaterByMovie" resultType="map">
+		SELECT t.theater_name, count(*) movie_count 
+		FROM screen_info si 
+		JOIN theater t
+		ON t.theater_num = si.theater_num 
+		JOIN screen_session ss 
+		ON ss.screen_num = si.screen_num 
+		WHERE ss.movie_num = #{movie_num}
+		GROUP
+		BY  t.theater_name;
+	</select>
+	
 </mapper>

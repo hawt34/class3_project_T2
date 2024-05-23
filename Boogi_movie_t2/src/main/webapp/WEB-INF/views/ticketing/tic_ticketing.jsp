@@ -319,6 +319,38 @@
         // 선택된 영화의 배경색 변경
         $("#movielist .movie-link").removeClass("selected");
         $("#movie_" + movie_num + " .movie-link").addClass("selected");
+        
+        $.ajax({
+        	type : "POST",
+        	url : "movieSearch",
+        	data : {
+        		"movie_num" : movie_num
+        	},
+        	dataType : "json",
+        	success : function(response) {
+        		appendMovieCountToTheaters(response); 
+        	},
+        	error : function(){
+        		console.log("error");
+        	}
+			        		
+        });
+    }
+    
+    function appendMovieCountToTheaters(data) {
+        // 기존 영화 개수 정보를 초기화
+        $(".theater-movie-count").remove();
+
+        data.forEach(function(item) {
+            var theaterName = item.theater_name;
+            var movieCount = item.movie_count;
+            var theaterElement = $("a.theater-link:contains('" + theaterName + "')");
+            if (theaterElement.length > 0) {
+                // 영화 개수를 표시하는 새로운 span 요소를 생성하여 추가
+                var movieCountSpan = $("<span class='theater-movie-count'> (" + movieCount + ")</span>");
+                theaterElement.parent().append(movieCountSpan);
+            }
+        });
     }
 
     function theaterClick(theater_name, element) {

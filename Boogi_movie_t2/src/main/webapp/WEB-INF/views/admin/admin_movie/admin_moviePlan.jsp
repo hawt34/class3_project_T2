@@ -458,8 +458,6 @@ tbody tr:hover {
 	            resetHourSelect(); // 시간 선택 초기화
 	        });
 		    
-		    var currentPage = 1;
-		    
 		    // 상영일정 조회하기
 	        $('#searchBtn').click(function() {
 		    	if($('#searchTheater').val() == 0){
@@ -480,14 +478,15 @@ tbody tr:hover {
 		    		data: {
 		    			searchTheater: $('#searchTheater').val(),
 		    			searchDate: $('#searchDate').val(),
-		    			pageNum: currentPage 
+// 		    			pageNum: currentPage 
 		    		},
 		    		success: function(data) {
 // 						debugger;
 		    			$("#moviePlanList").empty();
 						var searchHtml = '';
-		                data.searchMovieList.forEach(function(searchMovieList) {
-		                	var scs_date = new Date(searchMovieList.scs_date).toLocaleDateString();
+		                data.forEach(function(searchMovieList) {
+		                	var scs_date = new Date(searchMovieList.scs_date).toLocaleDateString().replaceAll(".", "-").substring(0, 11);
+		                	debugger;
 		                	searchHtml += '<tr>'
 									  +	 '<td>' + searchMovieList.scs_num + '</td>'
 									  +		'<td>' + searchMovieList.theater_name + '</td>'
@@ -501,7 +500,7 @@ tbody tr:hover {
 									  +		'</td></tr>'
 		                });
 		                $("#moviePlanList").append(searchHtml);
-		                updatePagination(data.pageInfo);
+// 		                updatePagination(data.pageInfo);
 
 					},
 					error: function(data) {
@@ -514,49 +513,49 @@ tbody tr:hover {
 		    	
 		    }); // 상영 일정 조회 끝
 		    
-		    function updatePagination(pageInfo) {
-		        $('#pageList').empty(); // 기존 내용을 비웁니다.
+// 		    function updatePagination(pageInfo) {
+// 		        $('#pageList').empty(); // 기존 내용을 비웁니다.
 
-		        // 이전 버튼 생성
-		        var prevButton = $('<button>', {
-		            type: 'button',
-		            class: 'btn btn-outline-primary',
-		            text: '이전',
-		            click: function() { if (currentPage > 1) loadPage(currentPage - 1); }
-		        }).prop('disabled', currentPage <= 1);
-		        $('#pageList').append(prevButton);
+// 		        // 이전 버튼 생성
+// 		        var prevButton = $('<button>', {
+// 		            type: 'button',
+// 		            class: 'btn btn-outline-primary',
+// 		            text: '이전',
+// 		            click: function() { if (currentPage > 1) loadPage(currentPage - 1); }
+// 		        }).prop('disabled', currentPage <= 1);
+// 		        $('#pageList').append(prevButton);
 
-		        // 페이지 번호 생성
-		        for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
-		            if (i === currentPage) {
-		                $('#pageList').append($('<b>').text(i));
-		            } else {
-		                var pageLink = $('<a>', {
-		                    href: '#',
-		                    text: i,
-		                    click: (function(pageNum) {
-		                        return function(event) {
-		                            event.preventDefault();
-		                            loadPage(pageNum);
-		                        };
-		                    })(i)
-		                });
-		                $('#pageList').append(pageLink);
-		            }
-		        }
+// 		        // 페이지 번호 생성
+// 		        for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+// 		            if (i === currentPage) {
+// 		                $('#pageList').append($('<b>').text(i));
+// 		            } else {
+// 		                var pageLink = $('<a>', {
+// 		                    href: '#',
+// 		                    text: i,
+// 		                    click: (function(pageNum) {
+// 		                        return function(event) {
+// 		                            event.preventDefault();
+// 		                            loadPage(pageNum);
+// 		                        };
+// 		                    })(i)
+// 		                });
+// 		                $('#pageList').append(pageLink);
+// 		            }
+// 		        }
 
-		        // 다음 버튼 생성
-		        var nextButton = $('<button>', {
-		            type: 'button',
-		            class: 'btn btn-outline-primary',
-		            text: '다음',
-		            click: function() { if (currentPage < pageInfo.maxPage) loadPage(currentPage + 1); }
-		        }).prop('disabled', currentPage >= pageInfo.maxPage);
-		        $('#pageList').append(nextButton);
+// 		        // 다음 버튼 생성
+// 		        var nextButton = $('<button>', {
+// 		            type: 'button',
+// 		            class: 'btn btn-outline-primary',
+// 		            text: '다음',
+// 		            click: function() { if (currentPage < pageInfo.maxPage) loadPage(currentPage + 1); }
+// 		        }).prop('disabled', currentPage >= pageInfo.maxPage);
+// 		        $('#pageList').append(nextButton);
 
-		        // 현재 페이지 번호 업데이트
-		        currentPage = pageInfo.currentPage;
-		    }
+// 		        // 현재 페이지 번호 업데이트
+// 		        currentPage = pageInfo.currentPage;
+// 		    }
 		    
 			
 	    }); // document.ready 끝

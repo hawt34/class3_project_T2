@@ -180,15 +180,19 @@ public class AdminService {
 		return mapper.getMovieTimeList( theaterSelect,  screenSelect,  scs_date);
 	}
 	
+//	// 상영조회
+//	public List<ScreenSessionVO> getMoivePlanList(int theater_num, Date scs_date, int startRow, int listLimit) {
+//		return mapper.getMoivePlanList(theater_num, scs_date, startRow, listLimit);
+//	}
 	// 상영조회
-	public List<ScreenSessionVO> getMoivePlanList(int theater_num, Date scs_date, int startRow, int listLimit) {
-		return mapper.getMoivePlanList(theater_num, scs_date, startRow, listLimit);
+	public List<ScreenSessionVO> getMoivePlanList(int theater_num, Date scs_date) {
+		return mapper.getMoivePlanList(theater_num, scs_date);
 	}
 
-	// 상영조회 수
-	public int getMoivePlanListCount(int theater_num, Date scs_date, int startRow, int listLimit) {
-		return mapper.getMoivePlanListCount(theater_num, scs_date, startRow, listLimit);
-	}
+//	// 상영조회 수
+//	public int getMoivePlanListCount(int theater_num, Date scs_date, int startRow, int listLimit) {
+//		return mapper.getMoivePlanListCount(theater_num, scs_date, startRow, listLimit);
+//	}
 	
 	//--------------------------------------------------------------
 	// 쿠폰 타입 리스트

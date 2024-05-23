@@ -34,7 +34,7 @@
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">이벤트등록</h4>
-				<form class="validation-form" novalidate action="admin_event_pro"  method="post" onsubmit="return confirm('이벤트를 등록하시겠습니까?');">
+				<form class="validation-form" novalidate action="admin_event_pro" enctype="multipart/form-data" method="post" onsubmit="return confirm('이벤트를 등록하시겠습니까?');">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="event_type_num">이벤트타입</label> 

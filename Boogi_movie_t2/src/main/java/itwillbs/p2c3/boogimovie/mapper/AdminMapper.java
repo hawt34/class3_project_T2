@@ -132,17 +132,21 @@ public interface AdminMapper {
 	// 극장이름 가져오기
 	List<Map<String, String>> getTheaterList();
 	
+//	// 상영 일정 조회
+//	List<ScreenSessionVO> getMoivePlanList(@Param("theater_num") int theater_num, 
+//										   @Param("scs_date") Date scs_date,
+//										   @Param("startRow") int startRow, 
+//										   @Param("listLimit") int listLimit);
+	
 	// 상영 일정 조회
 	List<ScreenSessionVO> getMoivePlanList(@Param("theater_num") int theater_num, 
-										   @Param("scs_date") Date scs_date,
-										   @Param("startRow") int startRow, 
-										   @Param("listLimit") int listLimit);
+										   @Param("scs_date") Date scs_date);
 
-	// 상영 일정 조회
-	int getMoivePlanListCount(@Param("theater_num") int theater_num, 
-							  @Param("scs_date") Date scs_date,
-							  @Param("startRow") int startRow, 
-							  @Param("listLimit") int listLimit);
+//	// 상영 일정 조회 수
+//	int getMoivePlanListCount(@Param("theater_num") int theater_num, 
+//							  @Param("scs_date") Date scs_date,
+//							  @Param("startRow") int startRow, 
+//							  @Param("listLimit") int listLimit);
 	
 	//========================================================
 	// 쿠폰타입 리스트 가져오기

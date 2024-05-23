@@ -578,33 +578,35 @@ public class AdminController {
 	// 상영일정 조회하기 ajax
 	@GetMapping("searchMoviePlanList")
 	@ResponseBody
-	public String searchMoviePlanList(@RequestParam int searchTheater, @RequestParam Date searchDate, @RequestParam(defaultValue = "1") int pageNum) {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+	public List<ScreenSessionVO> searchMoviePlanList(@RequestParam int searchTheater, @RequestParam Date searchDate, @RequestParam(defaultValue = "1") int pageNum) {
+//		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		// 한 페이지에 표시할 갯수
-		int listLimit = 10;
+//		int listLimit = 10;
 		// 조회 시작 행 번호
-		int startRow = (pageNum - 1) * listLimit;
+//		int startRow = (pageNum - 1) * listLimit;
 		
-		List<ScreenSessionVO> searchMovieList = service.getMoivePlanList(searchTheater, searchDate, startRow, listLimit);
+//		List<ScreenSessionVO> searchMovieList = service.getMoivePlanList(searchTheater, searchDate, startRow, listLimit);
+		List<ScreenSessionVO> searchMovieList = service.getMoivePlanList(searchTheater, searchDate);
 		
-		int listCount = service.getMoivePlanListCount(searchTheater, searchDate, startRow, listLimit);
+//		int listCount = service.getMoivePlanListCount(searchTheater, searchDate, startRow, listLimit);
+//		
+//		// 페이징 숫자 갯수
+//		int pageListLimit = 3;
+//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+//		int endPage = startPage + pageListLimit - 1;
+//		if(endPage > maxPage) {
+//			endPage = maxPage;
+//		}
+//		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
-		// 페이징 숫자 갯수
-		int pageListLimit = 3;
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-		int endPage = startPage + pageListLimit - 1;
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-		
-		resultMap.put("searchMovieList", searchMovieList);
-		resultMap.put("pageInfo", pageInfo);
+//		resultMap.put("searchMovieList", searchMovieList);
+//		resultMap.put("pageInfo", pageInfo);
 		
 		
-		return new JSONObject(resultMap).toString();
+//		return new JSONObject(resultMap).toString();
+		return searchMovieList;
 	}
 	
 
@@ -732,48 +734,47 @@ public class AdminController {
 	@PostMapping("admin_event_pro")
 	public String adminEventPro(HttpServletRequest request, HttpSession session, EventVO event, Model model) {
 		
-//		String uploadDir = "/resources/images";
-//		String saveDir = session.getServletContext().getRealPath(uploadDir);
-//		System.out.println("실제 업로드 경로(session): " + saveDir);
+		String uploadDir = "/resources/upload";
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		System.out.println("실제 업로드 경로(session): " + saveDir);
 		// 실제 업로드 경로
-		// D:\Spring\workspace_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Boogi_movie_t2\resources\ upload\2024/05/21
 		
-//		String subDir = "";
-//		LocalDate today = LocalDate.now();
-//		String datePattern = "yyyy/MM/dd";
-//		
-//		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(datePattern);
-//		System.out.println(today.format(dtf));
-//		subDir = today.format(dtf);
-//		
-//		saveDir += "/" + subDir;
-//		System.out.println(saveDir);
-//		
-//		Path path = Paths.get(saveDir);
+		String subDir = "";
+		LocalDate today = LocalDate.now();
+		String datePattern = "yyyy/MM/dd";
 		
-//		try {
-//			// Files 클래스의 createDirectories() 메서드 호출하여 실제 경로 생성
-//			Files.createDirectories(path);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(datePattern);
+		System.out.println(today.format(dtf));
+		subDir = today.format(dtf);
 		
-//		MultipartFile mfile1 = event.getEvent_thumbFile();
-//		MultipartFile mfile2 = event.getEvent_imageFile();
-//		String uuid = UUID.randomUUID().toString();
+		saveDir += "/" + subDir;
+		System.out.println(saveDir);
 		
-//		event.setEvent_thumbnail("");
-//		event.setEvent_image("");
+		Path path = Paths.get(saveDir);
 		
-//		String fileName1 = UUID.randomUUID().toString().substring(0, 8) + "_" + mfile1.getOriginalFilename();
-//		String fileName2 = UUID.randomUUID().toString().substring(0, 8) + "_" + mfile2.getOriginalFilename();
+		try {
+			// Files 클래스의 createDirectories() 메서드 호출하여 실제 경로 생성
+			Files.createDirectories(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-//		if(!mfile1.getOriginalFilename().equals("")) {
-//			event.setEvent_thumbnail(subDir + "/" + fileName1);      
-//		}
-//		if(!mfile2.getOriginalFilename().equals("")) {
-//			event.setEvent_image(subDir + "/" + fileName2);      
-//		}
+		MultipartFile mfile1 = event.getEvent_thumbFile();
+		MultipartFile mfile2 = event.getEvent_imageFile();
+		String uuid = UUID.randomUUID().toString();
+		
+		event.setEvent_thumbnail("");
+		event.setEvent_image("");
+		
+		String fileName1 = UUID.randomUUID().toString().substring(0, 8) + "_" + mfile1.getOriginalFilename();
+		String fileName2 = UUID.randomUUID().toString().substring(0, 8) + "_" + mfile2.getOriginalFilename();
+		
+		if(!mfile1.getOriginalFilename().equals("")) {
+			event.setEvent_thumbnail(subDir + "/" + fileName1);      
+		}
+		if(!mfile2.getOriginalFilename().equals("")) {
+			event.setEvent_image(subDir + "/" + fileName2);      
+		}
 		
 //		System.out.println("업로드 파일명: " + event.getEvent_thumbnail());
 //		System.out.println("업로드 파일명: " + event.getEvent_image());
@@ -781,18 +782,18 @@ public class AdminController {
 		int insertCount = service.InsertEvent(event);
 		
 		if(insertCount > 0) {
-//			try {
-//				if(!mfile1.getOriginalFilename().equals("")) {
-//					mfile1.transferTo(new File(saveDir, fileName1));
-//				}
-//				if(!mfile2.getOriginalFilename().equals("")) {
-//					mfile2.transferTo(new File(saveDir, fileName2));
-//				}
-//			} catch (IllegalStateException e) {
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+			try {
+				if(!mfile1.getOriginalFilename().equals("")) {
+					mfile1.transferTo(new File(saveDir, fileName1));
+				}
+				if(!mfile2.getOriginalFilename().equals("")) {
+					mfile2.transferTo(new File(saveDir, fileName2));
+				}
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 			return "redirect:/admin_event";
 		} else {
@@ -833,24 +834,24 @@ public class AdminController {
 		
 		int deleteCount = service.deleteEvent(event);
 		if(deleteCount > 0) {
-//			String uploadDir = "/resources/upload";
-//			String saveDir = session.getServletContext().getRealPath(uploadDir);
+			String uploadDir = "/resources/upload";
+			String saveDir = session.getServletContext().getRealPath(uploadDir);
 			
-//			String[] arrFileNames = {
-//				dbEvent.getEvent_thumbnail(),
-//				dbEvent.getEvent_image()
-//			};
+			String[] arrFileNames = {
+				dbEvent.getEvent_thumbnail(),
+				dbEvent.getEvent_image()
+			};
 			
-//			for(String fileName : arrFileNames) {
-//				if(!fileName.equals("")) {
-//					Path path = Paths.get(saveDir + "/" + fileName);
-//					try {
-//						Files.deleteIfExists(path);
-//					} catch (IOException e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}
+			for(String fileName : arrFileNames) {
+				if(!fileName.equals("")) {
+					Path path = Paths.get(saveDir + "/" + fileName);
+					try {
+						Files.deleteIfExists(path);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 			
 			return "redirect:/admin_event";
 		} else {

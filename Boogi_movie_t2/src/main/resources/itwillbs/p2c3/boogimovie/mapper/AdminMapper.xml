@@ -423,32 +423,32 @@
 			scs_date = #{scs_date} AND t.theater_num = #{theater_num} 
 		ORDER BY 
 			ss.scs_date
-		LIMIT 
-			#{startRow}
-			, #{listLimit}
+<!-- 		LIMIT  -->
+<!-- 			#{startRow} -->
+<!-- 			, #{listLimit} -->
 	</select>
 
 <!-- 상영일정 수 조회하기 -->
-	<select id="getMoivePlanListCount" resultType="int">
-		SELECT 
-			count(*)
-		From 
-			screen_session ss
-		Join 
-			screen_info si
-		ON 
-			ss.screen_num =si.screen_num
-		JOIN 
-			movie mv 
-		ON 
-			mv.movie_num = ss.movie_num
-		JOIN 
-			theater t
-		ON 
-			t.theater_num = si.theater_num
-		WHERE
-			scs_date = #{scs_date} AND t.theater_num = #{theater_num} 
-	</select>
+<!-- 	<select id="getMoivePlanListCount" resultType="int"> -->
+<!-- 		SELECT  -->
+<!-- 			count(*) -->
+<!-- 		From  -->
+<!-- 			screen_session ss -->
+<!-- 		Join  -->
+<!-- 			screen_info si -->
+<!-- 		ON  -->
+<!-- 			ss.screen_num =si.screen_num -->
+<!-- 		JOIN  -->
+<!-- 			movie mv  -->
+<!-- 		ON  -->
+<!-- 			mv.movie_num = ss.movie_num -->
+<!-- 		JOIN  -->
+<!-- 			theater t -->
+<!-- 		ON  -->
+<!-- 			t.theater_num = si.theater_num -->
+<!-- 		WHERE -->
+<!-- 			scs_date = #{scs_date} AND t.theater_num = #{theater_num}  -->
+<!-- 	</select> -->
 	
 	
 <!-- 쿠폰타입리스트 -->

@@ -95,7 +95,4 @@ public class StoreController {
 	    response.put("message", "장바구니에서 해당 상품을 찾을 수 없습니다.");
 	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 	}
-    
-
-	
 }

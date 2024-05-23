@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 - 결제관리</title>
+<title>관리자페이지 - 스토어결제관리</title>
 <!-- <link href="../admin_main/admin_main.css" rel="stylesheet"> -->
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
@@ -174,33 +175,28 @@ td:nth-child(7) {
 								<th>결제날짜</th>
 								<th>결제금액</th>
 								<th>결제상태</th>
-								<th>결제취소</th>
+								<th>상세보기</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1231221</td>
-								<td>홍길동</td>
-								<td>스낵</td>
-								<td>2024-05-12 20:00</td>
-								<td>12,000원</td>
-								<td>결제완료</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="pay_cancel()">취소</button>
-								</td>
-							</tr>
-							<tr>
-								<td>1231221</td>
-								<td>admin</td>
-								<td>예매</td>
-								<td>2024-04-12 20:00</td>
-								<td>32,000원</td>
-								<td>결제완료</td>
-								<td>
-									<button type="button" class="btn btn-outline-primary" onclick="pay_cancel()">취소</button>
-								</td>
-							</tr>
-							
+							<c:forEach items="${store_pay_list }" var="store_pay">
+								<tr>
+									<td>${store_pay.store_pay_num}</td>
+									<td>${store_pay.member_id}</td>
+									<td>스낵</td>
+									<td>
+									 	<fmt:parseDate value="${store_pay.store_pay_date}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate" />
+                						<fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm" />
+									</td>
+									<td>
+									 	<fmt:formatNumber value="${store_pay.store_pay_price}" type="currency" currencySymbol="" groupingUsed="true" />원
+									</td>
+									<td>${store_pay.store_pay_status}</td>
+									<td>
+										<button type="button" class="btn btn-outline-primary" onclick="pay_detail(${store_pay.store_pay_num})">상세보기</button>
+									</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -240,10 +236,8 @@ td:nth-child(7) {
 	</footer>
 
 	<script type="text/javascript">
-		function pay_cancel() {
-			if(confirm("정말 취소하시겠습니까?")){
-				location.href = "admin_pay_cancel";
-			}
+		function pay_detail(store_pay_num) {
+			location.href = "StorePayDetail?store_pay_num=" + store_pay_num;
 		}
 	
 	

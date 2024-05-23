@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import itwillbs.p2c3.boogimovie.vo.CartVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
@@ -16,6 +17,7 @@ import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 
 @Mapper
 public interface AdminMapper {
@@ -202,4 +204,10 @@ public interface AdminMapper {
 	int insertItem(ItemInfoVO item);
 	int deleteItem(String item_info_name);
 	int updateItem(ItemInfoVO item);
+
+	List<StorePayVO> selectStorePay(StorePayVO store_pay);
+
+	StorePayVO selectStorePayDetail(int store_pay_num);
+
+	List<CartVO> selectCart(int store_pay_num);
 }

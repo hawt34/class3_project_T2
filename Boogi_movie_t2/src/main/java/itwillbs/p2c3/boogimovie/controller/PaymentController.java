@@ -441,6 +441,9 @@ public class PaymentController {
 	} // successStore()
 	
 	
+	
+	// ======================================================================
+	
     public static String[] splitString(String input, int size) {
         int arraySize = (int) Math.ceil((double) input.length() / size);
         String[] result = new String[arraySize];

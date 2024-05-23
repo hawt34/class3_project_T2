@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +10,7 @@
 * {
 	margin: 0;
 	padding: 0;
-/*    	border: 1px solid skyblue; */
-   	
+	/*    	border: 1px solid skyblue; */
 }
 
 #wrap {
@@ -21,62 +20,64 @@
 
 article {
 	margin-top: 40px;
- 	width: 1400px;
+	width: 1400px;
 	height: 600px;
 	display: flex;
-    justify-content: center;
-  	align-items: center;
+	justify-content: center;
+	align-items: center;
 }
+
 .movieTrail {
-  /* 내부의 movieTrail을 가운데 정렬합니다. */
- 	width: 900px;
- 	max-width: 100%; /* 부모 요소의 너비에 맞게 설정합니다. */
- 	margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬합니다. */
+	/* 내부의 movieTrail을 가운데 정렬합니다. */
+	width: 900px;
+	max-width: 100%; /* 부모 요소의 너비에 맞게 설정합니다. */
+	margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬합니다. */
 }
 
 .end-message {
 	display: none;
 }
+
 section {
 	width: 100%;
-	height:1100px; 
-/* 	background-color : #ffca28; */
+	height: 1100px;
+	/* 	background-color : #ffca28; */
 }
- 
- section h1 {
- 	position: relative;
-    text-align: center; /* 가운데 정렬 */
-    font-size: 32px; /* 폰트 크기 수정 */
-    width: 100%; /* 너비 조정 */
-/*     height: 40px; */
-	white-space: nowrap; 
+
+section h1 {
+	position: relative;
+	text-align: center; /* 가운데 정렬 */
+	font-size: 32px; /* 폰트 크기 수정 */
+	width: 100%; /* 너비 조정 */
+	/*     height: 40px; */
+	white-space: nowrap;
 }
 
 .nowMovie {
 	width: 100%;
 	height: 100px;
 	display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; 
+	justify-content: center; /* 수평 가운데 정렬 */
+	align-items: center;
 }
-.nowMovie .btn{
+
+.nowMovie .btn {
 	margin-top: 20px;
 	margin-left: 20px; /* 좌우 간격 조절 */
-    margin-right: 20px; /* 좌우 간격 조절 */
+	margin-right: 20px; /* 좌우 간격 조절 */
 	font-size: 25px;
 	white-space: nowrap;
 }
 
 .list {
-	width:1350px;
-	margin-left:20px;
+	width: 1350px;
+	margin-left: 20px;
 	margin-top: 10px;
 	text-align: center;
 	display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 	overflow: hidden;
 }
-
 
 .movie img {
 	padding: 30px;
@@ -84,9 +85,11 @@ section {
 	height: 400px;
 	display: flex;
 }
+
 .more {
 	text-align: center;
 }
+
 .more .btn {
 	font-size: 25px;
 }
@@ -94,17 +97,20 @@ section {
 footer {
 	width: 1400px;
 	height: 100px;
-/* 	background-color: #ffb300; */
+	/* 	background-color: #ffb300; */
 }
-
-
-
 </style>
 
 <%-- <link href="${pageContext.request.contextPath}/resources/css/movie.css"	rel="stylesheet" type="text/css"> --%>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 	<header>
@@ -113,29 +119,44 @@ footer {
 	<div id="wrap">
 		<article>
 			<div class="movieTrail">
-            	<iframe width="100%" height="600px" src="${movieTrail.movie_trailler}"></iframe>
-            </div>		
+				<iframe width="100%" height="600px"
+					src="${movieTrail.movie_trailler}"></iframe>
+			</div>
 		</article>
 		<section>
 			<div class="nowMovie">
-				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movie'">현재 상영작</button>
-				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFuture'">상영예정작</button>
-				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='boxoffice'">박스오피스 순위</button>
- 				<button type="button" class="btn btn-outline-primary" id = "recommendMovie" onclick="openPopup()">추천상영영화</button> 
- 			</div>
+				<button type="button" class="btn btn-outline-primary"
+					onclick="window.location.href='movie'">현재 상영작</button>
+				<button type="button" class="btn btn-outline-primary"
+					onclick="window.location.href='movieFuture'">상영예정작</button>
+				<button type="button" class="btn btn-outline-primary"
+					onclick="window.location.href='boxoffice'">박스오피스 순위</button>
+				<button type="button" class="btn btn-outline-primary"
+					id="recommendMovie" onclick="window.location.href='recommand'">추천상영영화</button>
+				<form action="searchMovie">
+					<input type="text" name="searchKeyword" placeholder="영화제목 입력"
+						value="${param.searchKeyword}"> <input type="submit"
+						class="btn btn-dark" value="검색">
+				</form>
+			</div>
 			<div class="list">
-			<c:forEach var="movie" items="${movieInfo}" varStatus="loop" begin="0">
-    		<div class="movie">
-            <img src="${movie.movie_poster}">
-            <p>${movie.movie_name}</p>
-            <input type="hidden" class="movie_num" name="movie_num" value="${movie.movie_num}">
-            <button type="button" class="btn btn-outline-primary movieTicket">예매하기</button>
-            <button type="button" class="btn btn-outline-primary detail_button">상세보기</button>
-    		</div>
-			</c:forEach>
-			</div><br>
+				<c:forEach var="movie" items="${movieInfo}" varStatus="loop"
+					begin="0">
+					<div class="movie">
+						<img src="${movie.movie_poster}">
+						<p>${movie.movie_name}</p>
+						<input type="hidden" class="movie_num" name="movie_num"
+							value="${movie.movie_num}">
+						<button type="button" class="btn btn-outline-primary movieTicket">예매하기</button>
+						<button type="button"
+							class="btn btn-outline-primary detail_button">상세보기</button>
+					</div>
+				</c:forEach>
+			</div>
+			<br>
 			<div class="more">
-				<button id="moreMoviesBtn" type="button" class="btn btn-outline-primary">상영 중인 영화 더보기</button>
+				<button id="moreMoviesBtn" type="button"
+					class="btn btn-outline-primary">상영 중인 영화 더보기</button>
 			</div>
 			<h2 class="end-message">모든 상영 영화가 다 출력되었습니다.</h2>
 		</section>
@@ -143,14 +164,19 @@ footer {
 			<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 		</footer>
 	</div>
-<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
 		crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
-		
 		$(document).ready(function() {
 			let sId = "${sessionScope.sId}"; //생각보다 많이 써서 빼놓음.
 			$("#recommendMovie").on("click", function() {
@@ -158,7 +184,11 @@ footer {
 					if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
 						window.location.href = 'member_login';
 					}
-				} 
+				} else {
+					if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
+						window.location.href = 'recommand'; // 예매 페이지로 이동
+					}
+				}
 			});
 
 			$(".list").on("click", ".detail_button", function() {
@@ -173,7 +203,7 @@ footer {
 						window.location.href = 'member_login';
 					}
 				} else {
-					if ($(this).hasClass("movieTicket")) {
+					if (confirm("예매 페이지로 이동하시겠습니까?")) {
 						window.location.href = 'tic_ticketing'; // 예매 페이지로 이동
 					}
 				}
@@ -199,43 +229,6 @@ footer {
 				}
 			});
 		});
-
-		function openPopup() {
-			let sId = "${sessionScope.sId}";
-			let memberCode = '${memberCode}';
-			let genreMovieList = JSON.parse('${genreMovieList}');
-
-			let popupWindow = window.open("", "popupWindow", "width=600,height=400");
-			let popupContent = "<h3>추천 상영 영화 목록</h3>";
-			popupContent += "<h3> " + sId + "님의 장르는  " + memberCode+ "입니다</h2>";
-			// 데이터가 있는지 확인
-			if (genreMovieList && genreMovieList.length > 0) {
-				popupContent += "<table border='1'><tr><th>영화 이름</th><th>장르</th><th>감독</th></tr>";
-		        for (let i = 0; i < genreMovieList.length; i++) {
-		            let movie = genreMovieList[i];
-		            let movieNum = movie.movie_num; 
-		            let movieInfoUrl = 'movieInfo?movie_num=' + movieNum;
-		            console.log(movie.movie_num);
-		            popupContent += "<tr><td>" + movie.movie_name + "</td><td>" 
-	                  + movie.movie_genre + "</td><td>" 
-	                  + movie.movie_director + "</td><td><input type='button' value='상세정보' onclick='window.location.href=\"" + movieInfoUrl + "\"'></td></tr>";	
-		        }
-		        popupContent += "</table>";
-		    } else {
-		        // 데이터가 없을 때의 메시지
-		        popupContent += "<p>추천 상영 영화 목록이 없습니다. 죄송합니다.</p>";
-		    }
-		    // 팝업 내용을 팝업 창에 쓰기
-			popupContent += "<button id='confirmButton'>확인</button>";
-		    popupWindow.document.write(popupContent);
-		    $(popupWindow.document).on('click', '#confirmButton', function() {
-		        popupWindow.close();
-		    });
-		   
-		}
-		
-		
-		
-		</script>
+	</script>
 </body>
 </html>

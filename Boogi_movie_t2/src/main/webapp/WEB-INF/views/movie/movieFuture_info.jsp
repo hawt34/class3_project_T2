@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,26 +12,28 @@
 * {
 	margin: 0;
 	padding: 0;
-/*   	border: 1px solid skyblue;   */
+	/*   	border: 1px solid skyblue;   */
 }
 
 #wrap {
 	width: 1400px;
 	margin: 0 auto;
 }
+
 article {
-  margin-top: 40px;
+	margin-top: 40px;
 	width: 1400px;
 	height: 600px;
 	display: flex;
-  justify-content: center;
-  align-items: center;
+	justify-content: center;
+	align-items: center;
 }
+
 .movieTrail {
-  /* 내부의 movieTrail을 가운데 정렬합니다. */
-  width: 900px;
-  max-width: 100%; /* 부모 요소의 너비에 맞게 설정합니다. */
-  margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬합니다. */
+	/* 내부의 movieTrail을 가운데 정렬합니다. */
+	width: 900px;
+	max-width: 100%; /* 부모 요소의 너비에 맞게 설정합니다. */
+	margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬합니다. */
 }
 
 section {
@@ -41,6 +43,7 @@ section {
 	overflow: hidden;
 	flex-wrap: wrap;
 }
+
 section h1 {
 	position: relative;
 	text-align: center; /* 가운데 정렬 */
@@ -74,20 +77,24 @@ section h1 {
 }
 
 .movieInfo ul li {
-    font-size: 24px; /* 텍스트 크기 조정 */
+	font-size: 24px; /* 텍스트 크기 조정 */
 }
+
 .movieInfo input[type="button"] {
 	position: absolute;
 	margin-left: 20px;
 	bottom: 30px;
 }
-.backButton{
+
+.backButton {
 	margin-top: 20px;
 }
+
 .movieInfo img {
-  width: 200px;
-  height: 100px;
+	width: 200px;
+	height: 100px;
 }
+
 footer {
 	width: 100%;
 	height: 100%
@@ -101,7 +108,8 @@ footer {
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 	<header>
@@ -110,17 +118,18 @@ footer {
 	<div id="wrap">
 		<article>
 			<div class="movieTrail">
-			<c:choose>
-        		<c:when test="${not empty movieFutureInfo.movie_trailler}">
-            		<iframe width="100%" height="600px" src="${movieFutureInfo.movie_trailler}"></iframe>
-        		</c:when>
-        		<c:otherwise>
-            		<h1>죄송합니다. 이 영화의 트레일러가 준비되지 않았습니다.</h1>
-        		</c:otherwise>
-    		</c:choose>
-    	</div>
+				<c:choose>
+					<c:when test="${not empty movieFutureInfo.movie_trailler}">
+						<iframe width="100%" height="600px"
+							src="${movieFutureInfo.movie_trailler}"></iframe>
+					</c:when>
+					<c:otherwise>
+						<h1>죄송합니다. 이 영화의 트레일러가 준비되지 않았습니다.</h1>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</article>
-		<section >
+		<section>
 			<div class="content">
 				<h1>상영 예정 영화 상세페이지</h1>
 				<div class="list">
@@ -129,27 +138,28 @@ footer {
 					</div>
 					<div class="movieInfo">
 						<ul>
-							<li><span>제목 : ${movieFutureInfo.movie_name}  </span></li>
-							<li><span>개봉 : ${movieFutureInfo.movie_open_date} 	</span></li>
+							<li><span>제목 : ${movieFutureInfo.movie_name} </span></li>
+							<li><span>개봉 : ${movieFutureInfo.movie_open_date} </span></li>
 							<li><span>감독 : ${movieFutureInfo.movie_director} </span></li>
-							<li><span>등급 : ${movieFutureInfo.movie_grade}  </span></li>
+							<li><span>등급 : ${movieFutureInfo.movie_grade} </span></li>
 							<li><span>장르 : ${movieFutureInfo.movie_genre }</span></li>
 							<li><span>상영시간 : ${movieFutureInfo.movie_runtime }</span></li>
 							<li><span>줄거리 : ${movieFutureInfo.movie_summary}</span></li>
 						</ul>
-						<img src="${movieFutureInfo.movie_stillCut}">
-						<img src="${movieFutureInfo.movie_stillCut2}">
-						<img src="${movieFutureInfo.movie_stillCut3}">
-						<div class="backButton">		
-						<button type="button" class="btn btn-outline-primary" onclick="window.history.back()">뒤로가기</button>
+						<img src="${movieFutureInfo.movie_stillCut}"> <img
+							src="${movieFutureInfo.movie_stillCut2}"> <img
+							src="${movieFutureInfo.movie_stillCut3}">
+						<div class="backButton">
+							<button type="button" class="btn btn-outline-primary"
+								onclick="window.history.back()">뒤로가기</button>
 						</div>
-					</div>	
+					</div>
 				</div>
 			</div>
-						
+
 		</section>
-		<footer> 
-		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
+		<footer>
+			<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 		</footer>
 	</div>
 </body>

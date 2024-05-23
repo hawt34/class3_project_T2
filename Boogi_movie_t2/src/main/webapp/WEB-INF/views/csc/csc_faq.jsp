@@ -118,13 +118,18 @@ function getScroll(newFaqCategory = "", isEmpty) {
 			//반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달
 			let imgPath = "${pageContext.request.contextPath}/resources/images/cscBulb.png";
             $.each(faqList, function(index, faq) {
+            	let faqNum = faq.faq_num; //faq_num 변수에 저장
                 let accordion = $(".csc_accordion");
                 let checkbox = $("<input>", {
                     type: "checkbox",
                     id: "answer" + (index + 1)
                 });
                 let label = $("<label>", {
-                    for: "answer" + (index + 1)
+                    for: "answer" + (index + 1),
+                    "data-faqNum" : faqNum,
+                    click: function() {
+                    	updateView(faqNum);
+                    }
                 }).append(
                     $("<span>", {
                         class: "faq_category",
@@ -157,6 +162,22 @@ function getScroll(newFaqCategory = "", isEmpty) {
     });
 }
 
+function updateView(faqNum) {
+	$.ajax({
+		type: "GET",
+		url: "faqViewCount",
+		data: {
+			faq_num: faqNum
+		},
+		dataType: "json",
+		success: function(response) {
+		},
+		error: function() {
+			alert("호출 실패!");
+		}
+	});
+}
+
 
 $(function() {
 	//초기 로딩
@@ -182,6 +203,9 @@ $(function() {
 			getScroll(faqCategory, false); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
         }
     });
+    
+    
+    
 });
 
 </script>

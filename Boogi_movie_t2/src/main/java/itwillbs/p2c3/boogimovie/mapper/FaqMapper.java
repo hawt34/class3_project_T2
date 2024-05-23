@@ -32,5 +32,8 @@ public interface FaqMapper {
 	
 	//카테고리에 따른 게시물 갯수
 	int selectFaqListCountCag();
+	
+	//faq 게시물 조회수 증가
+	int updateViewCount(FAQVO faq);
 
 }

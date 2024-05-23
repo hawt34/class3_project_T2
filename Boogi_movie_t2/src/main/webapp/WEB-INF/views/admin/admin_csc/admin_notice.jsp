@@ -40,10 +40,13 @@
 				<div class="admin_movie_head">
 					<div class="admin_movie_title">공지사항관리</div>
 					<div class="admin_movie_search">
-						<select>
-							<option>필요할까</option>
-							<option>상영상태</option>
-						</select> 
+						<form>
+							<select>
+								<option value="전체">필요할까</option>
+								<option>상영상태</option>
+							</select>
+							<input type="text" name="searchKeywordNotice">
+						</form>
 					</div>
 				</div>
 

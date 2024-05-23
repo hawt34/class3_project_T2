@@ -19,8 +19,8 @@ public class OtoService {
 		return mapper.insertOto(oto, theater_name, id);
 	}
 
-	public List<OTOVO> getOtoList(int startRow, int listLimit, String faqCategory, String theaterName) {
-		return mapper.selectOtoList(startRow, listLimit, faqCategory, theaterName);
+	public List<OTOVO> getOtoList(int startRow, int listLimit, String faqCategory, String theaterName, String id) {
+		return mapper.selectOtoList(startRow, listLimit, faqCategory, theaterName, id);
 	}
 
 	public OTOVO getOto(int oto_num) {
@@ -46,8 +46,8 @@ public class OtoService {
 	}
 	
 	// 1대1 문의 게시물 갯수
-	public int getOtoListCount(String faqCategory, String theaterName) {
-		return mapper.getOtoListCount(faqCategory, theaterName);
+	public int getOtoListCount(String faqCategory, String theaterName, String id) {
+		return mapper.getOtoListCount(faqCategory, theaterName, id);
 	}
 	
 	// 1대1 문의 첨부파일 삭제

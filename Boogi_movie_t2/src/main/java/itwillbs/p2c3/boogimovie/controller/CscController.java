@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,29 +55,18 @@ public class CscController {
 	@Autowired
 	private FaqService faqService;
 	
-	// csc 연결
+	// csc 연결 
+	// csc main 페이지
 	@GetMapping("csc_main")
 	public String cscMain() {
+//		OTOVO oto = otoService.getOtoList(0, 0, null, null, null);
+		
+		
 		return "csc/csc_main";
 	}
 	//csc 페이지 faqList 가져오기
 	@GetMapping("csc_faq")
 	public String cscFaq(@RequestParam(defaultValue = "1")int pageNum, FAQVO faq, @RequestParam(required = false)String faqCategory) {
-//		//ajax를 호출하지 않은 paging을 처리하기 위한 변수
-//		int listLimit = 7;
-//		int startRow = (pageNum - 1) * listLimit;
-////		int listCount = faqService.getFaqListCount(faqCategory); //총 공지사항 갯수
-////		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-////		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-////		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-////		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-////		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-////			endPage = maxPage;
-////		}
-////		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);		
-//		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow, faqCategory);
-//		model.addAttribute("pageList", pageList);
-//		model.addAttribute("faqList", faqList);
 		return "csc/csc_faq";
 	}
 	
@@ -102,6 +94,41 @@ public class CscController {
 		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow, faqCategory);
 		
 		return faqList;
+	}
+	
+	@ResponseBody
+	@GetMapping("faqViewCount")
+	public String cscFaqViewCount(FAQVO faq, Model model, HttpServletRequest request, HttpServletResponse response) {
+		System.out.println(faq);
+		faq = faqService.getFaq(faq);
+		
+		if(faq == null) {
+			model.addAttribute("msg", "등록된 자주 묻는 질문이 없습니다");
+			model.addAttribute("targetURL", "./");
+			return "error/fail";
+		}
+		//--------------------------------
+		//쿠키 responseHead에 담기
+		String faqNum = Integer.toString(faq.getFaq_num());
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				System.out.println("쿠키값: " + cookie.getValue());
+				if(!cookie.getValue().contains(faqNum)) {
+					cookie.setValue(cookie.getValue() + "_" + faqNum);
+					cookie.setMaxAge(60);
+					response.addCookie(cookie);
+					faqService.updateViewCount(faq);
+				}
+			}
+		} else {
+			Cookie newCookie = new Cookie("visit_cookie", faqNum);
+			newCookie.setMaxAge(60);
+			response.addCookie(newCookie);
+			faqService.updateViewCount(faq);
+		}
+		
+		return "false";
 	}
 	
 	

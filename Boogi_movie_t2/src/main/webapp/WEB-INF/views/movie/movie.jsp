@@ -18,19 +18,34 @@
 	width: 1400px;
 	margin: 0 auto;
 }
+/* article { */
+/*     position: relative; */
+/*     width: 100%; */
+/*     max-width: 1400px; */
+/*     height: 600px; /* 아티클 영역의 높이를 400px로 고정 */ */
+/*     /* background-color: #ffd54f; */ */
+/* } */
+
+/* article video { */
+/*   	width: 1400px; */
+/*     height: 100%; /* 비디오의 높이를 아티클 영역과 동일하게 설정하여 비율을 유지함 */ */
+/*     display: block; /* 인라인 요소를 블록 요소로 변경하여 가로폭을 채우도록 함 */ */
+/* } */
 article {
-    position: relative;
-    width: 100%;
-    max-width: 1400px;
-    height: 600px; /* 아티클 영역의 높이를 400px로 고정 */
-    /* background-color: #ffd54f; */
+	margin-top: 40px;
+ 	width: 1400px;
+	height: 600px;
+	display: flex;
+    justify-content: center;
+  	align-items: center;
+}
+.movieTrail {
+  /* 내부의 movieTrail을 가운데 정렬합니다. */
+ 	width: 900px;
+ 	max-width: 100%; /* 부모 요소의 너비에 맞게 설정합니다. */
+ 	margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬합니다. */
 }
 
-article video {
-  	width: 1400px;
-    height: 100%; /* 비디오의 높이를 아티클 영역과 동일하게 설정하여 비율을 유지함 */
-    display: block; /* 인라인 요소를 블록 요소로 변경하여 가로폭을 채우도록 함 */
-}
 .end-message {
 	display: none;
 }
@@ -109,15 +124,15 @@ footer {
 	</header>
 	<div id="wrap">
 		<article>
-			<video src="${pageContext.request.contextPath}/resources/home.mp4"
-				autoplay muted>
-			</video>
+			<div class="movieTrail">
+            	<iframe width="100%" height="600px" src="${movieTrail.movie_trailler}"></iframe>
+            </div>		
 		</article>
 		<section>
 			<div class="nowMovie">
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movie'">현재 상영작</button>
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFuture'">상영예정작</button>
-				<button type="button" class="btn btn-outline-primary" onclick="window.location.href=''">박스오피스 순위</button>
+				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='boxoffice'">박스오피스 순위</button>
 			</div>
 			<div class="list">
 			<c:forEach var="movie" items="${movieInfo}" varStatus="loop" begin="0">
@@ -165,6 +180,7 @@ footer {
                 } 
             }
         });
+       
         
         // 초기에는 8편의 영화만 표시하도록 설정
         let numShown = 8;

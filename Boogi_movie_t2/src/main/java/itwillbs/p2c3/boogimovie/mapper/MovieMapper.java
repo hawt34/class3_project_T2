@@ -17,4 +17,6 @@ public interface MovieMapper {
 	List<MovieVO> selectMovieInfoGenre(Map<String, Object> genreList);
 	List<MovieVO> selectMovieFuture();//상영예정작 리스트
 	MovieVO selectFutureMovieInfo(MovieVO futureMovie);//상영예정작 상세보기
+	MovieVO selectMovieTrail();
+	MovieVO selectMovieFutureTrail();
 }

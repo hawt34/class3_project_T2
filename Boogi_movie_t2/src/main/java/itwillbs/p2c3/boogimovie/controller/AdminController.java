@@ -209,7 +209,7 @@ public class AdminController {
 		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
 		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
-		System.out.println("극장이름: " + noticeList.get(0));
+//		System.out.println("극장이름: " + noticeList.get(0));
 		
 		
 		//LocalDateTIme format

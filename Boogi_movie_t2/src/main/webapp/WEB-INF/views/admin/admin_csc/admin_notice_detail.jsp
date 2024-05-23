@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,7 @@
 			<hr>
 			<div>
 				<p><span>[부기무비]</span> ${notice.notice_subject} </p>
-				<p><span>문의 지점</span> | ${notice.theater_name } &nbsp;&nbsp;&nbsp; <span>작성일</span> | ${notice.notice_fdt }
+				<p><span>문의 지점</span> | <c:if test="${not empty notice.theater_name }">${notice.theater_name }</c:if> &nbsp;&nbsp;&nbsp; <span>작성일</span> | ${notice.notice_fdt }
 			</div>
 			<hr>
 			<div>

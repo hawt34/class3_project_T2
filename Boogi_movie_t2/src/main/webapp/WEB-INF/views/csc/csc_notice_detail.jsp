@@ -50,8 +50,8 @@
 			<!-- 이전, 다음 페이징 -->
 			<div>
 				
-				<span class="csc_paging"><a id="prevLink1" href="csc_notice_detail?notice_num=${notice.notice_num - 1 }" >&laquo;이전</a></span>
-				<span class="csc_paging"><a id="nextLink1" href="csc_notice_detail?notice_num=${notice.notice_num + 1 }" >다음&raquo;</a></span>
+				<span class="csc_paging"><a id="prevLink1" href="csc_notice_detail?notice_num=${notice.prev }" >&laquo;이전</a></span>
+				<span class="csc_paging"><a id="nextLink1" href="csc_notice_detail?notice_num=${notice.next }" >다음&raquo;</a></span>
 			</div>	
 			<!-- 목록 버튼 -->
 			<div class="csc_detail_button">

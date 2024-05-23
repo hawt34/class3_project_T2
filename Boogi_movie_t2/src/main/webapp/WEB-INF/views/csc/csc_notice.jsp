@@ -173,10 +173,10 @@ function getTheaterList(pageNum = 1, theaterName = '', noticeSearchKeyword = '')
 			$.each(noticeList, function(index, notice) {
 				let tr = $("<tr>");
 				
-				tr.append("<td>" + notice.notice_num + "</td>");
+				tr.append("<td>" + notice.row_num + "</td>");
 	            tr.append("<td>" + notice.notice_category + "</td>");
 	            tr.append("<td>" + notice.theater_name + "</td>");
-	            tr.append("<td onclick='location.href=\"csc_notice_detail?notice_num=" + notice.notice_num + "\"'>" + notice.notice_subject + "</td>");
+	            tr.append("<td onclick='location.href=\"csc_notice_detail?notice_num=" + notice.notice_num + "&row_num=" + notice.row_num + "\"'>" + notice.notice_subject + "</td>");
         		tr.append("<td>" + notice.notice_fdt + "</td>");
 
 	            tbody.append(tr);

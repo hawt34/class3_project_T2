@@ -16,7 +16,6 @@
     	FROM theater
     </select>
     
-    
     <!-- My극장 자주가는 영화관 -->
     <select id="selectMyTheater" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
     	SELECT member_my_theater1, member_my_theater2, member_my_theater3
@@ -43,41 +42,27 @@
 		JOIN screen_info ON screen_info.screen_num = screen_session.screen_num
 		JOIN theater ON theater.theater_num = screen_info.theater_num
     WHERE
-        member.member_id = #{member_id} 
-<!-- 		<if test="#{ticket_pay_status} == '취소'"> -->
-<!-- 		    AND pay.ticket_pay_status = '취소' -->
-<!-- 		</if> -->
-<!--         <if test="#{ticket_pay_status} == '결제'"> -->
-            AND pay.ticket_pay_status = '결제'
-<!--         </if> -->
-    ORDER BY
-        screen_session.scs_date DESC
+        member.member_id = #{member_id}
+        <choose>
+	        <when test="status.equals('결제') and startRow == null and listLimit == null">
+	            AND pay.ticket_pay_status = '결제'
+	        	ORDER BY
+	        	screen_session.scs_date DESC
+	        </when>
+	        <when test="status.equals('취소')">
+	            AND pay.ticket_pay_status = '취소'
+	            ORDER BY
+	        	screen_session.scs_date DESC
+	            LIMIT #{startRow}, #{listLimit}
+	        </when>
+        	<otherwise>
+	            AND pay.ticket_pay_status = '결제'
+	        	ORDER BY
+	        	screen_session.scs_date DESC
+	          	LIMIT #{startRow}, #{listLimit}
+        	</otherwise>
+        </choose>
 	</select>
-    
-    <!-- 예매내역 페이징처리 -->
-    <select id="selectResvList" resultType="map">
-	    SELECT DISTINCT
-		    movie.movie_poster,
-		    movie.movie_name,
-		    screen_session.scs_date,
-		   	CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time,
-		   	CONCAT(theater.theater_name, ' ', screen_info.screen_cinema_num, '관') AS theater_info,
-		    ticket.ticket_seat_info,
-		    ticket.ticket_price
-		FROM
-		    pay
-		JOIN member ON member.member_id = pay.member_id 
-		JOIN screen_session ON screen_session.scs_num = pay.scs_num
-		JOIN movie ON movie.movie_num = screen_session.movie_num 
-		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num
-		JOIN screen_info ON screen_info.screen_num = screen_session.screen_num
-		JOIN theater ON theater.theater_num = screen_info.theater_num
-		WHERE
-		    member.member_id = #{member_id} AND pay.ticket_pay_status = '결제'
-		ORDER BY
-		    screen_session.scs_date DESC
-    	LIMIT #{startRow}, #{listLimit}
-    </select>
     
     <!-- 예매한 영화 갯수 -->
     <select id="selectResvCount" resultType="int">
@@ -90,53 +75,30 @@
 		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num
 		JOIN screen_info ON screen_info.screen_num = screen_session.screen_num
 		JOIN theater ON theater.theater_num = screen_info.theater_num
-		WHERE
-		    member.member_id = #{member_id} AND pay.ticket_pay_status = '결제'
+<!-- 		WHERE -->
+<!-- 		    member.member_id = #{member_id} AND pay.ticket_pay_status = '결제' -->
+       	WHERE
+        member.member_id = #{member_id}
+        <if test="status.equals('결제')">
+            AND pay.ticket_pay_status = '결제'
+        </if>
+        <if test="status.equals('취소')">
+            AND pay.ticket_pay_status = '취소'
+        </if>
     </select>
     
-    <!-- 취소내역 -->
-    <select id="selectCancelList" resultType="map">
-	    SELECT DISTINCT
-		    movie.movie_poster,
-		    movie.movie_name,
-		    screen_session.scs_date,
-		   	CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time,
-		   	CONCAT(theater.theater_name, ' ', screen_info.screen_cinema_num, '관') AS theater_info,
-		    ticket.ticket_seat_info,
-		    ticket.ticket_price
-		FROM
-		    pay
-		JOIN member ON member.member_id = pay.member_id 
-		JOIN screen_session ON screen_session.scs_num = pay.scs_num
-		JOIN movie ON movie.movie_num = screen_session.movie_num 
-		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num
-		JOIN screen_info ON screen_info.screen_num = screen_session.screen_num
-		JOIN theater ON theater.theater_num = screen_info.theater_num
-		WHERE
-		    member.member_id = #{member_id} AND pay.ticket_pay_status = '취소'
-		ORDER BY
-		    screen_session.scs_date DESC
-    </select>
     
     <select id="selectStorePay" resultType="itwillbs.p2c3.boogimovie.vo.StorePayVO">
-<!--     	<choose> -->
-<!--     		<when test="#{store_pay_status} = '1'"> -->
-    		
-<!--     		</when> -->
-<!--     		<otherwise> -->
-<!--     		</otherwise> -->
-<!--     	</choose> -->
-    		
-		 	    SELECT 
-				    store_pay_cancel_date,
-				    store_pay_date,
-				    store_pay_price,
-				    store_pay_type,
-				    store_pay_status
-		    	FROM 
-		    		store_pay
-		   		WHERE 
-		    		member_id = #{member_id} AND store_pay_status = 1
+ 	    SELECT 
+		    store_pay_cancel_date,
+		    store_pay_date,
+		    store_pay_price,
+		    store_pay_type,
+		    store_pay_status
+    	FROM 
+    		store_pay
+   		WHERE 
+    		member_id = #{member_id} AND store_pay_status = 1
     </select>
     
     
@@ -166,17 +128,6 @@
 			member_id = #{member_id}
     
     </update>
-    
-    <!-- 쿠폰 -->
-<!--     <select id="selectCoupon" resultType="itwillbs.p2c3.boogimovie.vo.CouponVO"> -->
-<!-- 		SELECT coupon.coupon_num -->
-<!-- 		FROM coupon JOIN pay  -->
-<!-- 		ON coupon.coupon_num = pay.coupon_num  -->
-<!-- 		JOIN member -->
-<!-- 		ON member.member_id = pay.member_id -->
-<!-- 		WHERE member.member_id = #{member_id} -->
-<!--     </select> -->
-    
 
 		<update id="updateMyTheater">
 		    UPDATE member
@@ -203,7 +154,6 @@
 <!-- 			SET member_my_theater = CASE WHEN member_my_theater = #{checkedValues[0]} THEN checkedValues[0] ELSE NULL, -->
 		    WHERE member_id = #{member_id}
 		</update>
-
 
     <!-- 탈퇴처리 -->
    	<!-- member 테이블의 member_status 컬럼값을 3(탈퇴)로 변경 탈퇴일자(withdraw_date) 를 now() 함수 -->

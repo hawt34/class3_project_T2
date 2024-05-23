@@ -122,10 +122,10 @@
 			<div class="theater_top">
 				<nav class="nav justify-content-center theater_name">	
 					<c:forEach var="theater" items="${theaterList}">
-						<a class="nav-link" href="theater_detail?theater_num=${theater.theater_num}">${theater.theater_name}</a>
+						<a class="nav-link top_theater_name" href="theater_detail?theater_num=${theater.theater_num}">${theater.theater_name}</a>
 					</c:forEach>
 					 <div class="dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" >MY 극장</a>
+						<a class="nav-link top_theater_name dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" >MY 극장</a>
 						<ul class="dropdown-menu">
 							 <c:choose>
 							 	<c:when test="${empty sId}"> <!-- 비로그인 상태 -->

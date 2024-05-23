@@ -23,7 +23,6 @@ import org.springframework.web.client.RestTemplate;
 
 import itwillbs.p2c3.boogimovie.service.MailService;
 import itwillbs.p2c3.boogimovie.service.MemberService;
-import itwillbs.p2c3.boogimovie.service.PhoneAuthService;
 import itwillbs.p2c3.boogimovie.vo.MailAuthInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 
@@ -34,15 +33,11 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private MailService mail_service;
-    @Autowired
-    private PhoneAuthService phoneAuthService;
-
-	
 	
     @ResponseBody
     @PostMapping("/cerTel")
     public String cerTel(@RequestBody Map<String, String> requestBody) {
-    	System.out.println("asdfasdfasdfasdfsdafasdfsadf");
+        System.out.println("Received certification request");
         String impUid = requestBody.get("imp_uid");
 
         // 포트원 서버로부터 인증 결과를 조회
@@ -50,6 +45,10 @@ public class MemberController {
 
         // 인증을 위해 액세스 토큰을 발급받아야 함
         String token = getIamportToken();
+
+        if (token == null) {
+            return "false";
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", token);
@@ -71,28 +70,36 @@ public class MemberController {
     }
 
     private String getIamportToken() {
-        // 포트원 서버로부터 액세스 토큰을 발급받기 위한 코드
-        // 이는 예시이므로 실제 포트원 API 문서를 참고하여 구현해야 함
+        try {
+            // 포트원 서버로부터 액세스 토큰을 발급받기 위한 코드
+            String url = "https://api.iamport.kr/users/getToken";
+            String impKey = "imp00262041"; // 실제 발급받은 키로 대체
+            String impSecret = "ue5UeHzRddcp4PozEatgw9W9SD1To4172hH0vQZebn5ZqW95F8WDgrZ3mD7EIyhoKuaEIHZ1HiYMz1TJ"; // 실제 발급받은 시크릿으로 대체
 
-        String url = "https://api.iamport.kr/users/getToken";
-        String impKey = "your_imp_key";
-        String impSecret = "your_imp_secret";
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "application/json");
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "application/json");
+            JSONObject body = new JSONObject();
+            body.put("imp_key", impKey);
+            body.put("imp_secret", impSecret);
 
-        JSONObject body = new JSONObject();
-        body.put("imp_key", impKey);
-        body.put("imp_secret", impSecret);
+            HttpEntity<String> entity = new HttpEntity<>(body.toString(), headers);
 
-        HttpEntity<String> entity = new HttpEntity<>(body.toString(), headers);
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
 
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+            JSONObject jsonResponse = new JSONObject(response.getBody());
 
-        JSONObject jsonResponse = new JSONObject(response.getBody());
-
-        return jsonResponse.getJSONObject("response").getString("access_token");
+            if (jsonResponse.getInt("code") == 0) {
+                return jsonResponse.getJSONObject("response").getString("access_token");
+            } else {
+                System.out.println("Failed to get token: " + jsonResponse.getString("message"));
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 	
 	@PostMapping("member_pwd_update")

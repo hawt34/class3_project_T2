@@ -24,12 +24,12 @@
     <div class="form_item">
     	<label for="member_name"><b>이름</b></label>
     	<input type="text"  name="member_name" id="member_name" required maxlength="20">
-    	<span></span>
+    	<span id="msg_name"></span>
     </div>
     <div class="form_item">
     	<label for="member_birth"><b>생년월일</b></label>
     	<input type="text"  name="member_birth" id="member_birth" required maxlength="6">
-    	<span></span>
+    	<span id="msg_birth"></span>
     </div>
 	
 	<div class="regist_final">
@@ -43,12 +43,8 @@
 <footer>
 	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
-
-
 	<script>
-	
 	$(document).ready(function() {
-		
 	    // 아이디 입력값 변경 시
 	    $("#member_name").on("input", function() {
 	        let name = $("#member_name").val();
@@ -56,8 +52,10 @@
 	        
 	        if (!regex.test(name)) {
 	            $("#member_name").css("background-color", "red");
+	            $("#msg_name").text("올바른 이름을 입력해주세요");
 	        } else {
 	            $("#member_name").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_name").empty();
 	        }
 	
 	        checkFormValidity(); // 폼 유효성 검사 실행
@@ -67,11 +65,12 @@
 	    $("#member_birth").on("input", function() {
 	        let birth = $("#member_birth").val();
 	        let regex = /^\d{6}$/g;
-	        
 	        if (!regex.test(birth)) {
 	            $("#member_birth").css("background-color", "red");
+	            $("#msg_birth").text("\"-\"제외 생년월일 6자리를 입력해주세요");
 	        } else {
 	            $("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_birth").empty();
 	        }
 	
 	        checkFormValidity(); // 폼 유효성 검사 실행
@@ -80,9 +79,9 @@
 	    // 폼 유효성 검사 함수
 	    function checkFormValidity() {
         let nameIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_name").val());
-        let birthIsValid = /^.{8,16}$/.test($("#member_birth").val());
+        let birthIsValid = /^\d{6}$/.test($("#member_birth").val());
 
-        if (idIsValid && pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid) {
+        if (nameIsValid && birthIsValid) {
             $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
         } else {
             $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화

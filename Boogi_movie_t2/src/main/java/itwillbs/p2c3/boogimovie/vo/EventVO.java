@@ -27,7 +27,6 @@ public class EventVO {
 	private String event_end;
 	
 	
-	
 	// 조인용 컬럼
 	private String event_type_name;
 	private String coupon_name;

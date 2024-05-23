@@ -142,17 +142,21 @@ td:nth-child(8) {
 			
 			<div class="col-md-9">
 				<!--  메인 중앙 영역  -->
-					<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
+				
+				<!-- 파라미터 없을 시 기본값 1 저장 -->
+				<c:set var="pageNum" value="1"/>
+				<c:if test="${not empty param.pageNum}">
+					<c:set var="pageNum" value="${param.pageNum}"/>
+				</c:if>
+				
+				<!-- 헤드 부분 검색 기능 -->
 				<div class="admin_reserve_head">
 					<div class="admin_reserve_title">예매관리</div>
 					<div class="admin_reserve_search">
-						<select>
-							<option>이름</option>
-							<option>아이디</option>
-							<option>영화</option>
-						</select>
-						<input type="text" placeholder="검색어 입력">
-						<button>검색</button>
+						<form action="admin_reserve">
+							<input type="text" name="searchKeyword" placeholder="이름 또는 아이디 입력" value="${param.searchKeyword}">
+							<input type="submit" value="검색">
+						</form>
 					</div>
 				</div>
 				
@@ -174,7 +178,7 @@ td:nth-child(8) {
 						<tbody>
 							<c:forEach var="reserve" items="${reserveList}">
 								<tr>
-									<td>${reserve.ticket_pay_num}</td>
+									<td>${reserve.ticket_num}</td>
 									<td>${reserve.member_id}</td>
 									<td>${reserve.movie_name}</td>
 									<td>${reserve.scs_date}</td>
@@ -189,7 +193,7 @@ td:nth-child(8) {
 										</c:when>
 									</c:choose>
 									<td>
-										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_reserve_detail?ticket_pay_num=${reserve.ticket_pay_num}'">상세</button>
+										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_reserve_detail?ticket_pay_num=${reserve.ticket_pay_num}&ticket_num=${reserve.ticket_num}'">상세</button>
 									</td>
 								</tr>
 							</c:forEach>

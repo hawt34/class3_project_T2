@@ -81,10 +81,8 @@ body {
 			   				<label for="member_birth">생년월일</label>
 						</div>
 					  	<div class="form_item w-75">
-					    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.member_birth}">
-		<!-- 		    	   	<div class="box4"> -->
-				    	    	<span id="birthMessage" style="color: red;"></span>
-		<!-- 		    	    </div> -->
+					    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" readonly required value="${member.member_birth}">
+			    	    	<span id="birthMessage" style="color: red;"></span>
 					    </div><!-- form item -->
 					    
 						<div class="box5">
@@ -117,15 +115,20 @@ body {
 							</div>
 					    </div><!-- form item -->
 					    
-		<!-- 	    		<div class="row"> -->
-		<!-- 					<label for="movie_genre"><b>영화취향</b></label> -->
-		<!-- 						<div class="col-md-8 box3"> -->
-		<!-- 				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="공포" name="member_movie_genre">공포</div> -->
-		<!-- 				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="코믹" name="member_movie_genre">코믹</div> -->
-		<!-- 				  			<div class="col-md-2"><input type="checkbox" class="form-check-input" value="시사" name="member_movie_genre">시사</div> -->
-		<!-- 									<div class="col-md-2"><input type="checkbox" id="cb_all">전체선택</div> -->
-		<!-- 						</div> -->
-		<!-- 			    </div> -->
+			    		<div class="row">
+							<label for="movie_genre">영화취향</label>
+								<div class="col-md-6 box3">
+						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="공포" name="member_movie_genre">공포</label></div>
+						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="코믹" name="member_movie_genre">코믹</label></div>
+						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="액션" name="member_movie_genre">액션</label></div>
+						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="범죄" name="member_movie_genre">범죄</label></div>
+						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="SF" name="member_movie_genre">SF</label></div>
+						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="코미디" name="member_movie_genre">코미디</label></div>
+						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="스릴러" name="member_movie_genre">스릴러</label></div>
+						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="전쟁" name="member_movie_genre">전쟁</label></div>
+						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="스포츠" name="member_movie_genre">스포츠</label></div>
+								</div>
+					    </div>
 					</div><!-- box1 -->
 					<div class="d-grid gap-2 col-3 box2">
 						  <button class="btn btn-outline-primary btn-lg" type="submit" onclick="myp_info_modify_pro">수정완료</button>
@@ -240,28 +243,6 @@ body {
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
 	    
-	    // 생년월일 입력값 변경 시 
-	    $("#member_birth").on("input", function() {
-	        let birth = $("#member_birth").val();
-//         	let regex = /^[0-9]{8}$/;
-	        let regex = /\d{6}$/g; // \d는 숫자 [0-9]를 나타내는 메타 문자
-			let message = document.getElementById("birthMessage");
-	        
-	        if (birth.length != 6) { // member_birth의 길이가 6일때
-        		message.textContent = "생년월일을 6글자로 입력하세요";
-	        	
-	        } else {
-	            message.textContent = ""; // 에러 메시지 지우기
-       		}
-	        	
-	        if (birth === "") {
-	            message.textContent = "생년월일을 입력하세요"; // 메시지 설정
-	        }
-		
-            checkFormValidity(); // 폼 유효성 검사 실행
-			
-		});
-	    
 	    // 상세주소 입력값 변경 시
 	    $("#member_addr").on("input", function() {
 	        let address = $("#member_addr").val();
@@ -331,12 +312,11 @@ body {
 // 	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
 // 	        let pwd2IsValid = /^[A-Za-z0-9!@#$%]{8,16}$/.test($("#member_pwd2").val());
             let pwd2IsValid = $("#member_pwd2").val() === $("#member_pwd").val();
-	        let birthIsValid = /\d{6}$/g.test($("#member_birth").val());
 	        let addressIsValid = /^.{2,20}$/g.test($("#member_addr").val());
 	        let emailIsValid = /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g.test($("#member_email").val());
 	        let telIsValid = /^010\d{8}$/g.test($("#member_tel").val());
 	
-	        if (pwdIsValid && pwd2IsValid && birthIsValid && addressIsValid && emailIsValid && telIsValid) {
+	        if (pwdIsValid && pwd2IsValid && addressIsValid && emailIsValid && telIsValid) {
 	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
 	        } else {
 	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화

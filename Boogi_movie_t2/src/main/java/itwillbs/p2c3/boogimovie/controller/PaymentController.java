@@ -195,6 +195,7 @@ public class PaymentController {
 	        System.out.println("pay  : " + pay);
 	        
 	        PayVO payInfo = service.getPayInfo(pay.getMerchant_uid());
+	        System.out.println("kkkkkkkkkkkkkkkeeeeeeeeeeeyyyyyyyyyword : " + keyword);
 	        // 티켓처리
 	        String[] keywordArr = splitString(keyword, 2);
 	        
@@ -292,7 +293,7 @@ public class PaymentController {
 	
 	
 	// ================================================================================
-	
+	// 스토어 결제 화면으로
 	
 	@PostMapping("payment_store")
 	public String paymentStore(String itemName, String quantity, String totalPrice, Model model,  HttpSession session, MemberVO member) {
@@ -440,6 +441,9 @@ public class PaymentController {
 		return "payment/payment_success_store";
 	} // successStore()
 	
+	
+	
+	// ======================================================================
 	
     public static String[] splitString(String input, int size) {
         int arraySize = (int) Math.ceil((double) input.length() / size);

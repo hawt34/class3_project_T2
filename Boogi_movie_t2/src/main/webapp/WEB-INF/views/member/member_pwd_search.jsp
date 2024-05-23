@@ -24,22 +24,14 @@
 
     <div class="form_item">
     	<label for="id"><b>아이디</b></label>
-    	<input type="text"  name="member_id" id="member_id" required 
-    	<c:choose>
-			<c:when test="${not empty member_id }">
-				value="${member_id }"
-			</c:when>
-			<c:otherwise>
-				placeholder="아이디를 입력해주세요"
-			</c:otherwise>
-		</c:choose>>
-    	<span></span>
+    	<input type="text"  name="member_id" id="member_id" required>
+    	<span id="msg_id"></span>
     </div>
     
     <div class="form_item">
     	<label for="email"><b>이메일</b></label>
     	<input type="text"  name="member_email" id="member_email" required>
-    	<span></span>
+    	<span id="msg_email"></span>
     </div>
 </div>
 <div class="regist_final">
@@ -51,6 +43,56 @@
 <footer>
 	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
+	<script>
+	
+	$(document).ready(function() {
+	    // 아이디 입력값 변경 시
+	    $("#member_id").on("input", function() {
+	        let id = $("#member_id").val();
+	        let regex = /^[a-zA-Z0-9]{2,10}$/g;
+	        
+	        if (!regex.test(id)) {
+	            $("#member_id").css("background-color", "red");
+	            $("#msg_id").text("특수문자, 한글 제외 2~10글자를 입력해주세요");
+	        } else {
+	            $("#member_id").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_id").empty();
+	        }
+	
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
+	    
+	    // 이메일 입력값 변경 시
+	    $("#member_email").on("input", function() {
+	        let email = $("#member_email").val();
+	        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
+	        
+	        if (!regex.test(email)) {
+	            $("#member_email").css("background-color", "red");
+	            $("#msg_email").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
+	        } else {
+	            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_email").empty();
+	        }
+		
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+
+		    // 폼 유효성 검사 함수
+		    function checkFormValidity() {
+		        let idIsValid = /^[a-zA-Z가-힣0-9]{2,10}$/.test($("#member_id").val());
+		        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
+			
+		        if (idIsValid && emailIsValid) {
+		            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
+		        } else {
+		        	$("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
+		        }
+			}
+	});
+	
+</script>
 </body>
 </html>
 

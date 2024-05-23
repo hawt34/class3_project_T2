@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -17,6 +18,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +54,7 @@ import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
+import itwillbs.p2c3.boogimovie.vo.TicketVO;
 
 @Controller
 public class AdminController {
@@ -82,7 +85,25 @@ public class AdminController {
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")
-	public String adminMain() {
+	public String adminMain(Model model) {
+		
+		// 회원 수
+		int memberCount = service.countMemberList();
+		model.addAttribute("memberCount", memberCount);
+		
+		// 현재 상영작 수
+		int movieCount = service.movieCount();
+		model.addAttribute("movieCount", movieCount);
+		
+		// 금일 상영 영화 수
+		int moviePlanCount = service.countMoviePlan();
+		model.addAttribute("moviePlanCount", moviePlanCount);
+		
+		// 금일 예매 수
+		int reserveCount = service.countReserve();
+		model.addAttribute("reserveCount", reserveCount);
+		
+		
 		return "admin/admin_main/admin_main";
 	}
 	
@@ -333,13 +354,33 @@ public class AdminController {
 	}
 	//관리자 고객센터 controller 끝 =========================================================
 
+	
 	// 관리자 회원 페이지
 
 	// 2) 리뷰 페이지
 	@GetMapping("admin_review")
-	public String adminReview(Model model) {
-		List<ReviewVO> reviewList = service.getReviewList();
+	public String adminReview(@RequestParam(defaultValue = "1") int pageNum, 
+			  				  @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+		
+		// 한 페이지에 표시할 갯수
+		int listLimit = 10;
+		// 조회 시작 행 번호
+		int startRow = (pageNum - 1) * listLimit;
+		// 리뷰목록 조회
+		List<ReviewVO> reviewList = service.getReviewList(searchKeyword, startRow, listLimit);
+		int listCount = service.getReviewListCount(searchKeyword, startRow, listLimit);
+		
+		int pageListLimit = 3;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("pageInfo", pageInfo);
 		return "admin/admin_member/admin_review";
 	}
 	
@@ -357,9 +398,29 @@ public class AdminController {
 	
 	// 3) 회원페이지
 	@GetMapping("admin_member")
-	public String adminMember(Model model) {
-		List<Map<String, String>> memberList = service.getmemberList();
+	public String adminMember(@RequestParam(defaultValue = "1") int pageNum, 
+							  @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+		// 한 페이지에 표시할 갯수
+		int listLimit = 10;
+		// 조회 시작 행 번호
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 회원목록 조회
+		List<MemberVO> memberList = service.getMemberList(searchKeyword, startRow, listLimit);
+		
+		int listCount = service.getMemberListCount(searchKeyword, startRow, listLimit);
+		// 페이징 숫자 갯수
+		int pageListLimit = 3;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("pageInfo", pageInfo);
 		
 		return "admin/admin_member/admin_member";
 	}
@@ -390,12 +451,31 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 상영관리 페이지
 	@GetMapping("admin_moviePlan")
-	public String adminMoviePlan(Model model) {
+	public String adminMoviePlan(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
 		List<Map<String, String>> movieList = service.getmovieList();
 		List<Map<String, String>> theaterNameList = service.getTheaterList();
-		List<Map<String, String>> moviePlanList = service.selectMoviePlanList();
 		
+		// 한 페이지에 표시할 갯수
+		int listLimit = 10;
+		// 조회 시작 행 번호
+		int startRow = (pageNum - 1) * listLimit;
+		
+		List<Map<String, String>> moviePlanList = service.selectMoviePlanList(startRow, listLimit);
+		
+		int listCount = service.selectMoviePlanListCount(startRow, listLimit);
+		
+		// 페이징 숫자 갯수
+		int pageListLimit = 3;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("moviePlanList", moviePlanList);
 		model.addAttribute("theaterNameList", theaterNameList);
@@ -501,17 +581,40 @@ public class AdminController {
 	public List<Map<String, String>> moviePlanTime(@RequestParam int theaterSelect, @RequestParam int screenSelect, @RequestParam Date scs_date) {
 		List<Map<String, String>> movieTimeList = service.getMovieTimeList(theaterSelect, screenSelect, scs_date);
 		System.out.println("movieTimeList: " + movieTimeList);
-//		for(Map<String, String> movieTime: movieTimeList) {
-//		}
 		return movieTimeList;
 	}
 	
 	// 상영일정 조회하기 ajax
 	@GetMapping("searchMoviePlanList")
 	@ResponseBody
-	public List<ScreenSessionVO> searchMoviePlanList(@RequestParam int searchTheater, @RequestParam Date searchDate) {
+	public List<ScreenSessionVO> searchMoviePlanList(@RequestParam int searchTheater, @RequestParam Date searchDate, @RequestParam(defaultValue = "1") int pageNum) {
+//		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		// 한 페이지에 표시할 갯수
+//		int listLimit = 10;
+		// 조회 시작 행 번호
+//		int startRow = (pageNum - 1) * listLimit;
+		
+//		List<ScreenSessionVO> searchMovieList = service.getMoivePlanList(searchTheater, searchDate, startRow, listLimit);
 		List<ScreenSessionVO> searchMovieList = service.getMoivePlanList(searchTheater, searchDate);
 		
+//		int listCount = service.getMoivePlanListCount(searchTheater, searchDate, startRow, listLimit);
+//		
+//		// 페이징 숫자 갯수
+//		int pageListLimit = 3;
+//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+//		int endPage = startPage + pageListLimit - 1;
+//		if(endPage > maxPage) {
+//			endPage = maxPage;
+//		}
+//		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+//		resultMap.put("searchMovieList", searchMovieList);
+//		resultMap.put("pageInfo", pageInfo);
+		
+		
+//		return new JSONObject(resultMap).toString();
 		return searchMovieList;
 	}
 	
@@ -519,9 +622,30 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 영화 리스트 조회 
 	@GetMapping("admin_movie")
-	public String adminMovie(Model model) {
-		List<Map<String, String>> movieList = service.getmovieList();
+	public String adminMovie(@RequestParam(defaultValue = "1") int pageNum, 
+						 	 @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+		
+		// 한 페이지에 표시할 갯수
+		int listLimit = 10;
+		// 조회 시작 행 번호
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 영화목록 조회
+		List<MovieVO> movieList = service.searchMovieList(searchKeyword, startRow, listLimit);
+		
+		int listCount = service.getMovieListCount(searchKeyword, startRow, listLimit);
+		// 페이징 숫자 갯수
+		int pageListLimit = 3;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
 		model.addAttribute("movieList", movieList);
+		model.addAttribute("pageInfo", pageInfo);
 		
 		return "admin/admin_movie/admin_movie";
 	}
@@ -569,7 +693,6 @@ public class AdminController {
 	// 영화 수정 폼
 	@GetMapping("admin_movie_edit_form")
 	public String adminMovieEditForm(MovieVO movie, Model model) {
-//		System.out.println("movie_num: " + movie.getMovie_num());
 		movie = service.SelectMovie(movie.getMovie_num());
 		model.addAttribute("movie", movie);
 		
@@ -624,7 +747,6 @@ public class AdminController {
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
 		System.out.println("실제 업로드 경로(session): " + saveDir);
 		// 실제 업로드 경로
-		// D:\Spring\workspace_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Boogi_movie_t2\resources\ upload\2024/05/21
 		
 		String subDir = "";
 		LocalDate today = LocalDate.now();
@@ -648,7 +770,7 @@ public class AdminController {
 		
 		MultipartFile mfile1 = event.getEvent_thumbFile();
 		MultipartFile mfile2 = event.getEvent_imageFile();
-//		String uuid = UUID.randomUUID().toString();
+		String uuid = UUID.randomUUID().toString();
 		
 		event.setEvent_thumbnail("");
 		event.setEvent_image("");
@@ -663,8 +785,8 @@ public class AdminController {
 			event.setEvent_image(subDir + "/" + fileName2);      
 		}
 		
-		System.out.println("업로드 파일명: " + event.getEvent_thumbnail());
-		System.out.println("업로드 파일명: " + event.getEvent_image());
+//		System.out.println("업로드 파일명: " + event.getEvent_thumbnail());
+//		System.out.println("업로드 파일명: " + event.getEvent_image());
 		
 		int insertCount = service.InsertEvent(event);
 		
@@ -769,13 +891,25 @@ public class AdminController {
 	
 	// 예매 상세 페이지
 	@GetMapping("admin_reserve_detail")
-	public String adminReserveDetail(@RequestParam int ticket_pay_num, Model model) {
-		Map<String, String> reserveDetail = service.selectReserveDetail(ticket_pay_num);
-//		String ticket_pay_date = reserveDetail.get("ticket_pay_date");
-//		ticket_pay_date = LocalDateTime.parse(ticket_pay_date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString();
-//		reserveDetail.put("ticket_pay_date", ticket_pay_date);
+	public String adminReserveDetail(@RequestParam int ticket_num, @RequestParam int ticket_pay_num, Model model) {
+		// 예매정보 가져오기
+		Map<String, String> reserveDetail = service.selectReserveDetail(ticket_num);
+		// 좌석 정보 가져오기
+		List<Map<String, String>> seatArr = service.selectSeatInfo(ticket_pay_num);
+		System.out.println(seatArr);
+		// 좌석정보 통합
+		String seatInfo = "";
+		for(Map<String,String> seat : seatArr) {
+			seatInfo += seat.get("ticket_seat_info") + "/";
+        }
+		// / 제거
+		if (seatInfo.endsWith("/")) {
+			seatInfo = seatInfo.substring(0, seatInfo.length() - 1);
+        }
+		System.out.println(seatInfo);
 		
 		model.addAttribute("reserveDetail", reserveDetail);
+		model.addAttribute("seatInfo", seatInfo);
 		return "admin/admin_member/admin_reserve_detail";
 	}
 	

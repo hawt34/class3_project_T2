@@ -24,7 +24,7 @@ public class NaverLoginController {
     public String naverLoginCallback(@RequestParam(required = false) String code, @RequestParam(required = false) String state, HttpSession session, Model model) {
         String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id="
                         + clientId + "&client_secret=" + clientSecret + "&code=" + code + "&state=" + state;
-
+        
         String accessToken = "";
         String refreshToken = "";
 

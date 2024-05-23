@@ -91,25 +91,25 @@ body {
 							<div class="admin_main_center_card" onclick="location.href='admin_reserve'">
 								<div class="admin_main_card" align="left">◇금일 예매 현황</div>
 								<div align="right" class="card_num">
-									<a href="#">0건</a>
+									<a href="#">${reserveCount}건</a>
 								</div>
 							</div>
 							<div class="admin_main_center_card" onclick="location.href='admin_moviePlan'">
 								<div class="admin_main_card" align="left">◇금일 상영 영화</div>
 								<div align="right" class="card_num">
-									<a href="#">0건</a>
+									<a href="#">${moviePlanCount}건</a>
 								</div>
 							</div>
 							<div class="admin_main_center_card" onclick="location.href='admin_movie'">
 								<div class="admin_main_card" align="left">◇현재 상영작</div>
 								<div align="right" class="card_num">
-									<a href="#">0건</a>
+									<a href="#">${movieCount}편</a>
 								</div>
 							</div>
 							<div class="admin_main_center_card" onclick="location.href='admin_member'">
 								<div class="admin_main_card" align="left">◇총 회원 수</div>
 								<div align="right" class="card_num">
-									<a href="#">20명</a>
+									<a href="#">${memberCount}명</a>
 								</div>
 							</div>
 						</div>

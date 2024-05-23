@@ -25,9 +25,36 @@ public class AdminService {
 	@Autowired
 	private AdminMapper mapper;
 	
+	// 회원수 조회
+	public int countMemberList() {
+		return mapper.countMemberList();
+	}
+	
+	// 현재상영작 수 조회
+	public int movieCount() {
+		return mapper.movieCount();
+	}
+	
+	// 금일 상영건 수 조회
+	public int countMoviePlan() {
+		return mapper.countMoviePlan();
+	}
+	
+	// 금일 예매 수 조회
+	public int countReserve() {
+		return mapper.countReserve();
+	}
+	
+	//------------------------------------------------------------
+	
 	// 회원 리스트 조회
-	public List<Map<String, String>> getmemberList() {
-		return mapper.selectMemberList();
+	public List<MemberVO> getMemberList(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectMemberList(searchKeyword, startRow, listLimit);
+	}
+
+	// 회원 리스트 수 조회
+	public int getMemberListCount(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectMemberListCount(searchKeyword, startRow, listLimit);
 	}
 	
 	// 회원 상세보기
@@ -51,10 +78,20 @@ public class AdminService {
 		return mapper.selectReserve(ticket_pay_num);
 	}
 	
+	// 좌석정보 가져오기
+	public List<Map<String, String>> selectSeatInfo(int ticket_pay_num) {
+		return mapper.selectSeatInfo(ticket_pay_num);
+	}
+	
 	//--------------------------------------------------------------
 	// 리뷰 리스트 조회
-	public List<ReviewVO> getReviewList() {
-		return mapper.selectReviewList();
+	public List<ReviewVO> getReviewList(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectReviewList(searchKeyword, startRow, listLimit);
+	}
+	
+	// 리뷰 리스트 수 조회
+	public int getReviewListCount(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectReviewListCount(searchKeyword, startRow, listLimit);
 	}
 	
 	// 리뷰 삭제
@@ -71,6 +108,16 @@ public class AdminService {
 	// 영화 리스트 조회
 	public List<Map<String, String>> getmovieList() {
 		return mapper.selectMovieList();
+	}
+	
+	// 검색어로 영화 리스트 조회
+	public List<MovieVO> searchMovieList(String searchKeyword, int startRow, int listLimit) {
+		return mapper.searchMovieList(searchKeyword, startRow, listLimit);
+	}
+
+	// 영화 리스트 수 조회
+	public int getMovieListCount(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectMovieListCount(searchKeyword, startRow, listLimit);
 	}
 	
 	// 영화 상세보기
@@ -119,8 +166,13 @@ public class AdminService {
 	}
 	
 	// 상영관 일정 가져오기
-	public List<Map<String, String>> selectMoviePlanList() {
-		return mapper.selectMoviePlanList();
+	public List<Map<String, String>> selectMoviePlanList(int startRow, int listLimit) {
+		return mapper.selectMoviePlanList(startRow, listLimit);
+	}
+
+	// 상영관 일정 수 가져오기
+	public int selectMoviePlanListCount(int startRow, int listLimit) {
+		return mapper.selectMoviePlanListCount(startRow, listLimit);
 	}
 	
 	// 시작, 종료시간 가져오기
@@ -128,10 +180,19 @@ public class AdminService {
 		return mapper.getMovieTimeList( theaterSelect,  screenSelect,  scs_date);
 	}
 	
+//	// 상영조회
+//	public List<ScreenSessionVO> getMoivePlanList(int theater_num, Date scs_date, int startRow, int listLimit) {
+//		return mapper.getMoivePlanList(theater_num, scs_date, startRow, listLimit);
+//	}
 	// 상영조회
 	public List<ScreenSessionVO> getMoivePlanList(int theater_num, Date scs_date) {
 		return mapper.getMoivePlanList(theater_num, scs_date);
 	}
+
+//	// 상영조회 수
+//	public int getMoivePlanListCount(int theater_num, Date scs_date, int startRow, int listLimit) {
+//		return mapper.getMoivePlanListCount(theater_num, scs_date, startRow, listLimit);
+//	}
 	
 	//--------------------------------------------------------------
 	// 쿠폰 타입 리스트

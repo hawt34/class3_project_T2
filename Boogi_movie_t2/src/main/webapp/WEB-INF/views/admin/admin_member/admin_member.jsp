@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지 - 회원관리</title>
-<link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -61,11 +60,11 @@ th:nth-child(3), td:nth-child(3) {
 }
 
 th:nth-child(4), td:nth-child(4) {
-	width: 20%;
+	width: 15%;
 }
 
 th:nth-child(5), td:nth-child(5) {
-	width: 10%;
+	width: 15%;
 }
 
 th:nth-child(6), td:nth-child(6) {
@@ -84,7 +83,7 @@ th:nth-child(8), td:nth-child(8) {
 }
 
 .admin_member_body {
-	margin-bottom: 100px;
+	margin-bottom: 30px;
 	clear: right;
 }
 
@@ -94,38 +93,47 @@ th:nth-child(8), td:nth-child(8) {
 	background: #black;
 	float: right;
 	margin-right: 100px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
-.admin_member_search>input[type=text] {
+.admin_member_search>form>input[type=text] {
 	font-size: 18px;
-	height: 46px;
-	width: 150px;
+	height: 40px;
+	width: 250px;
 	padding: 5px;
 	outline: none;
+	vertical-align: middle;
 }
 
-.admin_member_search>select {
-	font-size: 18px;
-	height: 46px;
-	width: 100px;
-	outline: none;
-	padding-left: 10px;
-}
-
-.admin_member_search>button {
+.admin_member_search>form>input[type=submit] {
 	width: 90px;
-	height: 46px;
+	height: 40px;
 	background: black;
 	outline: none;
 	color: white;
 	font-weight: bold;
+	vertical-align: middle;
 }
 
 .admin_member_title {
 	float: left;
 	font-size: 30px;
 	margin-left: 100px;
+}
+#pageList{
+	text-align: center;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+#pageList > a{
+	text-decoration: none;
+	color: lightgray;
+	margin: 0 10px;
+}
+#pageList > b{
+	margin: 0 10px;
+	color: #1b1b1b;
 }
 </style>
 </head>
@@ -144,20 +152,23 @@ th:nth-child(8), td:nth-child(8) {
 			</div>
 
 			<div class="col-md-9">
+			<!-- 파라미터 없을 시 기본값 1 저장 -->
+			<c:set var="pageNum" value="1"/>
+			<c:if test="${not empty param.pageNum}">
+				<c:set var="pageNum" value="${param.pageNum}"/>
+			</c:if>
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_member_head">
 					<div class="admin_member_title">회원정보관리</div>
 					<div class="admin_member_search">
-						<select>
-							<option>이름</option>
-							<option>아이디</option>
-						</select> <input type="text" placeholder="검색어 입력">
-						<button>검색</button>
+						<form action="admin_moviePlan">
+							<input type="text" name="searchKeyword" placeholder="이름 또는 아이디 입력" value="${param.searchKeyword}">
+							<input type="submit" value="검색">
+						</form>
 					</div>
 				</div>
 
-				<!-- 바디 부분 여기 표 넣을거임 -->
 				<div class="admin_member_body">
 					<table>
 						<thead>
@@ -190,6 +201,29 @@ th:nth-child(8), td:nth-child(8) {
 						</tbody>
 					</table>
 				</div>
+				
+				<section id="pageList">
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_member?pageNum=${pageNum - 1}'"
+						<c:if test="${pageNum le 1}">disabled</c:if>>
+						이전
+					</button>
+					
+					<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1" >
+							<c:choose>
+								<c:when test="${pageNum eq i}">
+									<b>${i}</b>
+								</c:when>				
+								<c:otherwise>
+									<a href="admin_member?pageNum=${i}&searchKeyword=${param.searchKeyword}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+					</c:forEach>
+					
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_member?pageNum=${pageNum + 1}'"
+						<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
+						다음
+					</button>
+				</section>
 
 			</div>
 

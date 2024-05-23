@@ -122,6 +122,10 @@ footer {
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='movieFuture'">상영예정작</button>
 				<button type="button" class="btn btn-outline-primary" onclick="window.location.href='boxoffice'">박스오피스 순위</button>
  				<button type="button" class="btn btn-outline-primary" id = "recommendMovie" onclick="openPopup()">추천상영영화</button> 
+				<form action="searchMovie">
+					<input type="text" name="searchKeyword" placeholder="영화제목 입력" value="${param.searchKeyword}">
+					<input type="submit" class="btn btn-dark" value="검색">
+				</form>
  			</div>
 			<div class="list">
 			<c:forEach var="movie" items="${movieInfo}" varStatus="loop" begin="0">

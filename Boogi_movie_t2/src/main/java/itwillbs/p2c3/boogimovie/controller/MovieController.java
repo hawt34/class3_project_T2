@@ -113,7 +113,7 @@ public class MovieController {
             Model model, MovieVO movie) {
         //System.out.println(movie_num); 확인완료 주석처리
 		//System.out.println("여기는 무비인포 현재로그인한 " +member_id); 확인완료 주석처리.
-        System.out.println("여기는 영화 상세페이지 " + pageNum);
+       // System.out.println("여기는 영화 상세페이지 " + pageNum);
         int listLimit = 5;
 		
 		int startRow = (pageNum - 1) * listLimit;
@@ -190,5 +190,28 @@ public class MovieController {
 		return"movie/boxoffice";
 	}
 	
+	@GetMapping("searchMovie")
+	public String searchMovie(@RequestParam(defaultValue = "") String searchKeyword, Model model) {
+		
+		List<MovieVO> movieList = movieService.searchMovie(searchKeyword);
+		 
+		if (!movieList.isEmpty()) {
+	        // 결과가 1개일 때는 바로 상세 페이지로 이동
+	        if (movieList.size() == 1) {
+	            int movieNum = movieList.get(0).getMovie_num();
+	            return "redirect:/movieInfo?movie_num=" + movieNum;
+	        } else {
+	            // 결과가 2개 이상일 때는 resultMovie 페이지로 이동
+	            model.addAttribute("movieList", movieList);
+	            model.addAttribute("movieResult", movieList.size());
+	            return "movie/resultMovie";
+	        }
+	    } else {
+	        model.addAttribute("msg", "죄송합니다 검색결과 없습니다.");
+	        model.addAttribute("targetURL", "movie");
+	        return "error/fail";
+	    }
+		
+	}
 
 }

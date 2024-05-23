@@ -63,11 +63,12 @@ public class TheaterController {
 		
 		
 		JsonArray jsonList = new JsonArray();
+		
 		for(TheaterVO theater1  : theaterList) {
 			JsonObject json = new JsonObject();
 			json.addProperty("theater_name", theater1.getTheater_name());
-			json.addProperty("map_x", theater1.getTheater_name());
-			json.addProperty("theater_name", theater1.getTheater_name());
+			json.addProperty("map_x", theater1.getTheater_map_x());
+			json.addProperty("map_y", theater1.getTheater_map_y());
 			jsonList.add(json);
 			System.out.println(json);
 		}

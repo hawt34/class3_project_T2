@@ -615,8 +615,6 @@
 			, item_info_image = #{item_info_image}
 		WHERE
 			item_info_name = #{item_info_name}	
-		
 	</update>
-	
 	
 </mapper>

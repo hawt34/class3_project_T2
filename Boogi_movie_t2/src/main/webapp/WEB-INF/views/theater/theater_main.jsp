@@ -195,32 +195,18 @@
 			
 			// 서버에서 전달된 mapTheater 객체를 JSON.parse를 통해 자바스크립트 객체로 변환
 			let mapTheater = JSON.parse('${mapTheater}');
-			
+// 			console.log("mapTheater : " + JSON.stringify(mapTheater));
 			var positions = [];
+			
 			for (var i = 0; i < mapTheater.length; i++) {
 			    var theater = mapTheater[i];
 			    positions.push({
 			    	title: '부기무비 ' + theater.theater_name,
 			        latlng: new kakao.maps.LatLng(theater.map_x, theater.map_y)
 			    });
-// 			    console.log("title : " + theater.theater_name);
-// 			    console.log("latlng : " + theater.map_x, theater.map_y);
+			    console.log("title : " + theater.theater_name);
+			    console.log("latlng : " + theater.map_x, theater.map_y);
 			}
-			
-			console.log("positions : " + positions);
-			console.log("mapTheater : "+ mapTheater);
-// 			var positions = [
-// 			    { title: '부기무비 해운대점', latlng: new kakao.maps.LatLng(35.1629768, 129.158492) },
-// 			    { title: '부기무비 센텀점', latlng: new kakao.maps.LatLng(35.1629768, 129.158492) },
-// 			    { title: '부기무비 서면점', latlng: new kakao.maps.LatLng(35.1542604, 129.0572997) },
-// 			    { title: '부기무비 남포점', latlng: new kakao.maps.LatLng(35.0986158, 129.0287567) },
-// 			    { title: '부기무비 부산대점', latlng: new kakao.maps.LatLng(35.2301093, 129.0881162) },
-// 			    { title: '부기무비 사직점', latlng: new kakao.maps.LatLng(35.1909044, 129.0614196) },
-// 			    { title: '부기무비 영도점', latlng: new kakao.maps.LatLng(35.0622864, 129.0075247) },
-// 			    { title: '부기무비 덕천점', latlng: new kakao.maps.LatLng(35.2111693, 129.0075247) },
-// 			    { title: '부기무비 정관점', latlng: new kakao.maps.LatLng(35.3194331, 129.1783546) },
-// 			    { title: '부기무비 사상점', latlng: new kakao.maps.LatLng(35.1633264, 128.9819712) }     
-// 			];
 			
 			// 마커 이미지의 이미지 주소입니다
 			var imageSrc = "${pageContext.request.contextPath}/resources/images/boogi_mark.png"; 

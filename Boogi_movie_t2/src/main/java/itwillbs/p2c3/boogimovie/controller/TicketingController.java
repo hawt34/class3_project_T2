@@ -181,15 +181,17 @@ public class TicketingController {
         Map<String, Object> fee_info = ticketingService.feeCalc(params);
         
         
-        //pay_num 가져오기
-        int pay_num = ticketingService.selectPayNum(dbScs.getScs_num());
+       List<Integer> pay_nums = ticketingService.selectPayNum(dbScs.getScs_num());
         
-        //결제 테이블에서 결제된 좌석값 구하기
-        List<TicketVO> payedSheets = ticketingService.selectPayedSeat(pay_num);
         String seats2 = "";
-        for(TicketVO ticket : payedSheets) {
-        	seats2 += "/" + ticket.getTicket_seat_info();
+        for(int pay_num : pay_nums) {
+        	List<TicketVO> tickets = ticketingService.selectPayedSeat(pay_num);
+            for(TicketVO ticket : tickets) {
+            	seats2 += "/" + ticket.getTicket_seat_info();
+            }
         }
+        
+        
 		//model에 저장
 		model.addAttribute("scs", dbScs);
 		model.addAttribute("seats", seats);

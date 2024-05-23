@@ -15,7 +15,6 @@
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 
-
 <section class="member_section">
 	<div class="member_title">
 	    <h3>가입 확인하기</h3>
@@ -58,6 +57,7 @@
 </header>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
 // 	function cerTel(){
 // 		IMP.init("imp00262041"); 
 		
@@ -88,8 +88,9 @@
 // 		        } else {
 // 		            alert("인증에 실패하였습니다. 에러 내용: " + rsp.error_msg);
 // 		        }
-// 		    });
+// 		    });	
 // 		}
+
 	$(document).ready(function() {
 
 		
@@ -153,13 +154,6 @@
 	        }
 	    }
 	});
-
-		
-		
-		
-	
 </script>
 </body>
 </html>
-
-

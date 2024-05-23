@@ -424,6 +424,7 @@
 		FROM notice
 	</select>
 	
+	<!-- ============================================= -->
 	<!-- 스토어 사항 입력 -->
 	<select id="selectItemListFull" resultType="itwillbs.p2c3.boogimovie.vo.ItemInfoVO">
 		SELECT *

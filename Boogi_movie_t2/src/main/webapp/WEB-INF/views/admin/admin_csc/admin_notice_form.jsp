@@ -39,7 +39,7 @@
 							<option value="극장" >극장</option>
 						</select>
 						<select name="theater_name" id="theater_name">
-							<option value=" ">없음</option>
+							<option value="">없음</option>
 							<option value="해운대점">해운대점</option>
 							<option value="센텀점">센텀점</option>
 							<option value="서면점">서면점</option>

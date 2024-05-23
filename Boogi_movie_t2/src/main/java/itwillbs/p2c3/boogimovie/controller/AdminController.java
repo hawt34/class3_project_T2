@@ -34,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.EventService;
 import itwillbs.p2c3.boogimovie.service.FaqService;
+import itwillbs.p2c3.boogimovie.service.NoticeService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.ScreenService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
@@ -75,6 +76,9 @@ public class AdminController {
 	
 	@Autowired
 	private FaqService faqService;
+	
+	@Autowired
+	private NoticeService noticeService;
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")

@@ -70,7 +70,7 @@ tbody tr:hover {
 	text-align: center;
 	margin-top: 30px;
 	margin-bottom: 20px;
-	margin-right: 1000px;
+	width: 200px;
 }
 .admin_plan_body_search{
 	margin-bottom: 30px;
@@ -258,26 +258,33 @@ tbody tr:hover {
 				</div>
 				
 				<section id="pageList">
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_moviePlan?pageNum=${pageNum - 1}'"
-						<c:if test="${pageNum le 1}">disabled</c:if>>
-						이전
-					</button>
-					
-					<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1" >
-							<c:choose>
-								<c:when test="${pageNum eq i}">
-									<b>${i}</b>
-								</c:when>				
-								<c:otherwise>
-									<a href="admin_moviePlan?pageNum=${i}">${i}</a>
-								</c:otherwise>
-							</c:choose>
-					</c:forEach>
-					
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_moviePlan?pageNum=${pageNum + 1}'"
-						<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
-						다음
-					</button>
+					<c:choose>
+						<c:when test="not empty ${theaterName.theater}">
+						
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_moviePlan?pageNum=${pageNum - 1}'"
+								<c:if test="${pageNum le 1}">disabled</c:if>>
+								이전
+							</button>
+							
+							<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1" >
+									<c:choose>
+										<c:when test="${pageNum eq i}">
+											<b>${i}</b>
+										</c:when>				
+										<c:otherwise>
+											<a href="admin_moviePlan?pageNum=${i}">${i}</a>
+										</c:otherwise>
+									</c:choose>
+							</c:forEach>
+							
+							<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_moviePlan?pageNum=${pageNum + 1}'"
+								<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
+								다음
+							</button>
+						</c:otherwise>
+					</c:choose>
 				</section>
 
 			</div>
@@ -485,7 +492,7 @@ tbody tr:hover {
 		    			$("#moviePlanList").empty();
 						var searchHtml = '';
 		                data.forEach(function(searchMovieList) {
-		                	var scs_date = new Date(searchMovieList.scs_date).toLocaleDateString().replaceAll(".", "-").substring(0, 11);
+		                	var scs_date = new Date(searchMovieList.scs_date).toLocaleDateString().replaceAll(".", "-").slice(0, -1);
 		                	debugger;
 		                	searchHtml += '<tr>'
 									  +	 '<td>' + searchMovieList.scs_num + '</td>'

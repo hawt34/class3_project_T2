@@ -288,7 +288,7 @@ public class MypageController {
 	
 	// 예매내역
 	@GetMapping("myp_reservation")
-	public String mypReservation(MemberVO member, Model model, @RequestParam(defaultValue = "1")int pageNum, @RequestParam(required = false)String status) {
+	public String mypReservation(MemberVO member, Model model, @RequestParam(defaultValue = "1")int pageNum, @RequestParam(defaultValue = "결제")String status) {
 		String id = (String)session.getAttribute("sId");
 		
 		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
@@ -299,24 +299,30 @@ public class MypageController {
 		member = mypageService.getMember(id);
 		model.addAttribute("member", member);
 		
-		
-		Map<String, Object> param = new HashMap<String, Object>();
+	    // 세션에서 상태 확인
+//	    String status = (String) session.getAttribute("status");
+//	    if (status == null) {
+//	        status = "결제"; // 기본 상태를 결제로 설정
+//	    }
+	    
+//		Map<String, Object> param = new HashMap<String, Object>();
 		PayVO pay = new PayVO();
-		param.put("status", "결제");
-		
-		if(param.get("status").equals("결제")) {
-			pay.setTicket_pay_status("결제"); // 예시로 설정
-//			String status = pay.getTicket_pay_status();
-			System.out.println("결제 param status : " + param.get("status"));
-			System.out.println("결제 status : " + status);
-			
-		} else if (!param.get("status").equals("결제") && param.get("status").equals("") && param.get("status") != null){
-			param.put("status", "취소");
-			pay.setTicket_pay_status("취소"); // 예시로 설정
-//			String status = pay.getTicket_pay_status();
-			System.out.println("취소 param status : " + param.get("status"));
-			System.out.println("취소 status : " + status);
-		}
+		Map<String, Object> param = new HashMap<>();
+//		param.put("status", status);
+		param.put("status", false);
+//		if(param.get("status").equals(false)) {
+//			pay.setTicket_pay_status("결제"); // 예시로 설정
+////			String status = pay.getTicket_pay_status();
+//			System.out.println("결제 param status : " + param.get("status"));
+//			System.out.println("결제 status : " + status);
+//			
+//		} else if (!param.get("status").equals(false) && param.get("status").equals("") && param.get("status") != null){
+//			param.put("status", "취소");
+//			pay.setTicket_pay_status("취소"); // 예시로 설정
+////			String status = pay.getTicket_pay_status();
+//			System.out.println("취소 param status : " + param.get("status"));
+//			System.out.println("취소 status : " + status);
+//		}
 		
 		int listLimit = 4;
 		int startRow = (pageNum - 1) * listLimit;
@@ -333,9 +339,12 @@ public class MypageController {
 		
 //		System.out.println("결제 statussssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" + status);
 		
-		int listCount = mypageService.getResvCount(member_id, status); // 총 예매영화 수
+//		int listCount = mypageService.getResvCount(member_id, status); // 총 예매영화 수
 //		List<Map<String, Object>> listCount = mypageService.getResvCount(param);
-		
+		// -----------------------------------------------------------------------------------------
+	    int listCount = mypageService.getResvCount(member_id,status);
+	    // -----------------------------------------------------------------------------------------
+
 		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
@@ -351,12 +360,18 @@ public class MypageController {
 		}
 		model.addAttribute("movieReservation", movieReservation);
 		model.addAttribute("pageList", pageList);
+//	    model.addAttribute("status", status); 
 	    model.addAttribute("status", status); 
 
 		
 		return "mypage/myp_reservation";
 	}
 	
+//	@GetMapping("set_status")
+//	@ResponseBody
+//	public void setStatus(@RequestParam String status, HttpSession session) {
+//	    session.setAttribute("status", status);
+//	}
 	// ============================= 스토어 =============================
 	
 	@GetMapping("myp_store")

@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
 body { 
@@ -64,16 +65,19 @@ h3{
 <!-- 							<button class="nav-link active" id="reservation-tab" data-bs-toggle="tab" -->
 <!-- 								data-bs-target="#reservation" type="button" role="tab" aria-controls="reservation" -->
 <!-- 								aria-selected="true">예매내역</button> -->
-								<a class="nav-link" id="cancel-tab" data-bs-toggle="tab" data-bs-target="#cancel" 
-   href="myp_reservation?status=false" role="tab" aria-controls="cancel" aria-selected="false">취소내역</a>
+<!-- 								<a class="nav-link" id="reservation-tab" data-bs-toggle="tab" data-bs-target="#reservation"  -->
+<!--    href="myp_reservation?status=false" role="tab" aria-controls="reservation" aria-selected="true">예매내역</a> -->
+				            <a class="nav-link <c:if test='${status == "결제"}'>active</c:if>' id="reservation-tab" href="myp_reservation?status=결제" role="tab" aria-controls="reservation" aria-selected="${status == '결제'}">예매내역</a>
 								
 						</li>
 						<li class="nav-item" role="presentation">
 <!-- 							<button class="nav-link" id="cancel-tab" data-bs-toggle="tab" -->
 <!-- 								data-bs-target="#cancel" type="button" role="tab" -->
 <!-- 								aria-controls="cancel" aria-selected="false">취소내역</button> -->
-								<a class="nav-link" id="cancel-tab" data-bs-toggle="tab" data-bs-target="#cancel" 
-   href="myp_reservation?status=true" role="tab" aria-controls="cancel" aria-selected="false">취소내역</a>
+<!-- 								<a class="nav-link" id="cancel-tab" data-bs-toggle="tab" data-bs-target="#cancel"  -->
+<!--    href="myp_reservation?status=true" role="tab" aria-controls="cancel" aria-selected="false">취소내역</a> -->
+            <a class="nav-link <c:if test='${status == "취소"}'>active</c:if>' id="cancel-tab" href="myp_reservation?status=취소" role="tab" aria-controls="cancel" aria-selected="${status == '취소'}">취소내역</a>
+
 						</li>
 					</ul>
 				</div><!-- 탭 -->
@@ -81,6 +85,7 @@ h3{
 				<!-- 내용 -->
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show active" id="reservation" role="tabpanel"aria-labelledby="reservation-tab">
+					    <div class="tab-pane fade <c:if test='${status == "결제"}'>show active</c:if>'" id="reservation" role="tabpanel" aria-labelledby="reservation-tab">
 						<!-- 예매내역 시작 -->
 						<c:choose>
 							<c:when test="${empty movieReservation}"> <!-- 예매내역 존재하지 않을때 -->
@@ -121,7 +126,9 @@ h3{
 									<nav aria-label="Page navigation example">
 										<ul class="pagination">
 											<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" > 
-												<a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}" aria-label="Previous" >
+				                                <a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}&status=${status}" aria-label="Previous">
+											
+<%-- 												<a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}" aria-label="Previous" > --%>
 												<span aria-hidden="true" >&laquo;</span>
 												</a>
 											</li>
@@ -131,12 +138,14 @@ h3{
 														<li class="page-item active"><a class="page-link">${i}</a></li>
 													</c:when>
 													<c:otherwise>
-														<li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}">${i}</a></li>
+<%-- 														<li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}">${i}</a></li> --%>
+				                                        <li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}&status=${status}">${i}</a></li>
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
 											<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
-												<a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}" aria-label="Next">
+<%-- 												<a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}" aria-label="Next"> --%>
+				                                <a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}&status=${status}" aria-label="Next">
 												<span aria-hidden="true">&raquo;</span>
 												</a>
 											</li>
@@ -146,49 +155,50 @@ h3{
 							</c:otherwise>
 						</c:choose>
 						<!-- 예매내역 끝 -->
+						</div>
 					</div> <!-- tab-pane fade show active -->
 				</div><!-- 탭내용1 div끝 -->
 				
 				<!-- 취소 탭 -->
 				<div class="tab-content" id="myTabContent">
-					<div class="tab-pane fade show" id="cancel" role="tabpanel"aria-labelledby="cancel-tab">
+<!-- 					<div class="tab-pane fade show" id="cancel" role="tabpanel"aria-labelledby="cancel-tab"> -->
+					    <div class="tab-pane fade <c:if test='${status == "취소"}'>show active</c:if>" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
 			  			<c:choose> 
 			  				<c:when test="${empty movieReservation}">
-			  					<tr>
-			  						<td colspan="5">취소내역이 존재하지않습니다</td>
-			  					</tr>
+			  						<h3>취소내역이 존재하지않습니다</h3>
 			  				</c:when>
 			  				<c:otherwise> 
 								<table class="table2 table table-hover" >
-					  			<thead>
-								    <tr>
-								      <th scope="col">#</th>
-								      <th scope="col">구매 구분</th>
-								      <th scope="col">구매 극장</th>
-								      <th scope="col">적립일</th>
-								      <th scope="col">적립</th>
-								    </tr>
-						  		</thead>
-						  		<tbody>
-									<c:forEach var="map" items="${movieReservation}" varStatus="status" begin="0" end="4">
-									    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
-									        <th scope="row">${status.index + 1}</th>
-									        <td>${map.movie_name}</td>
-									        <td>${map.scs_date}</td>
-									        <td>${map.theater_info}</td>
-									        <td>${map.session_time}</td>
-									        <td>${map.ticket_seat_info}</td>
-									        <td>${map.ticket_price}</td>
+						  			<thead>
+									    <tr>
+									      <th scope="col">#</th>
+									      <th scope="col">구매 구분</th>
+									      <th scope="col">구매 극장</th>
+									      <th scope="col">적립일</th>
+									      <th scope="col">적립</th>
 									    </tr>
-									</c:forEach>
-						  		</tbody>
-						  	</table>
+							  		</thead>
+							  		<tbody>
+										<c:forEach var="map" items="${movieReservation}" varStatus="status" begin="0" end="4">
+										    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+										        <th scope="row">${status.index + 1}</th>
+										        <td>${map.movie_name}</td>
+										        <td>${map.scs_date}</td>
+										        <td>${map.theater_info}</td>
+										        <td>${map.session_time}</td>
+										        <td>${map.ticket_seat_info}</td>
+										        <td>${map.ticket_price}</td>
+										    </tr>
+										</c:forEach>
+							  		</tbody>
+						  		</table>
 							<!-- 페이징 시작 -->
 							<div class="reservation_pageArea">
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
 										<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" > 
-											<a class="page-link"  href="myp_reservation?status=취소&pageNum=${pageNum - 1}"aria-label="Previous" >
+<%-- 											<a class="page-link"  href="myp_reservation?pageNum=${pageNum - 1}"aria-label="Previous" > --%>
+			                                <a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}&status=${status}" aria-label="Previous">
 											<span aria-hidden="true" >&laquo;</span>
 											</a>
 										</li>
@@ -198,12 +208,14 @@ h3{
 													<li class="page-item active"><a class="page-link">${i}</a></li>
 												</c:when>
 												<c:otherwise>
-													<li class="page-item"><a class="page-link" href="myp_reservation?status=취소&pageNum=${i}">${i}</a></li>
+			                                        <li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}&status=${status}">${i}</a></li>
+<%-- 													<li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}">${i}</a></li> --%>
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
 										<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
-											<a class="page-link" href="myp_reservation?status=취소&pageNum=${pageNum + 1}" aria-label="Next">
+<%-- 											<a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}" aria-label="Next"> --%>
+			                                <a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}&status=${status}" aria-label="Next">
 											<span aria-hidden="true">&raquo;</span>
 											</a>
 										</li>
@@ -213,6 +225,8 @@ h3{
 							<!-- 페이징 끝 -->
 			  				</c:otherwise>
 			  			</c:choose>
+			  			</div>
+			  			
 		  			<!-- 취소내역 -->
 						<div class="row">
 <!-- 			<!-- 				<div class="col-md-2"> </div>  -->
@@ -301,14 +315,13 @@ h3{
 										</textarea>		
 									</div> <!-- tab-pane  -->
 								</div><!-- tab-content -->
-							</div><!-- col-md-9 -->
+							</div><!-- col-md-12 -->
 						</div><!-- row 두번째 줄 -->
-				  	</div>
-				</div> <!-- 취소 탭 내용 끝 -->
-			</div><!-- col-md-9 box-in -->
-		</div> <!-- row -->
+				  	</div> <!-- tab-content 취소 탭 내용 끝-->
+				</div> <!-- col-md-9 box-in -->
+			</div><!-- row -->
+		</div> <!-- container2 -->
 	</div><!-- container2 -->
-</div><!-- container -->
 <footer>
 	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
 </footer>

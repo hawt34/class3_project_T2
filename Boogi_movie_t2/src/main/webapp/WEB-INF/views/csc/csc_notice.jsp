@@ -170,7 +170,13 @@ function getTheaterList(pageNum = 1, theaterName = '', noticeSearchKeyword = '')
 			let tbody = $(".noticeTheaterList");
 			tbody.empty();
 			
+			//테이블 tr 반복문
 			$.each(noticeList, function(index, notice) {
+				//null 처리
+				if(notice.theater_name == null) {
+					notice.theater_name = '';
+				}
+				
 				let tr = $("<tr>");
 				
 				tr.append("<td>" + notice.row_num + "</td>");

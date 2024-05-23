@@ -20,7 +20,7 @@
 		<h4>상영시간표</h4>
 		<div class="time_schedule">
 			<nav aria-label="time_schedule_day">
-				<ul class="pagination pagination-lg">
+				<ul class="pagination">
 					<li class="page-item" id="previous_btn">
 						<a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
 					</li>
@@ -63,9 +63,20 @@
 				</ul>
 			</nav> <!-- time_schedule_day 네브바 -->
 		</div> <!-- time_schedule 끝 -->
-		
+<ul class="nav nav-underline">
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="#">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+
+</ul>		
 		 
-		 
+
 		
 		<div class="timetable">
 			<div class= ></div>

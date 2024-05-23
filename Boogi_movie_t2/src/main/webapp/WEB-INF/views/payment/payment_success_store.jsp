@@ -81,6 +81,12 @@
 			<button class="btn btn-primary" type="button" onclick="location.href='./'">부기무비 메인</button>
 		</div>
 	</article>
+<script type="text/javascript">
+	window.history.pushState(null, null, location.href);
+	window.onpopstate = function () {
+	    history.go(1);
+	};
 
+</script>
 </body>
 </html>

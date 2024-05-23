@@ -134,7 +134,7 @@ hr{
 				<nav aria-label="Page navigation example">
 					<ul class="pagination">
 						<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" > 
-							<a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}" aria-label="Previous" >
+							<a class="page-link" href="myp_storereturn "result_process/fail";${pageNum - 1}" aria-label="Previous" >
 							<span aria-hidden="true" >&laquo;</span>
 							</a>
 						</li>
@@ -144,12 +144,12 @@ hr{
 									<li class="page-item active"><a class="page-link">${i}</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}">${i}</a></li>
+									<li class="page-item"><a class="page-link" href="myp_storereturn "result_process/fail";${i}">${i}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 						<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
-							<a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}" aria-label="Next">
+							<a class="page-link" href="myp_storereturn "result_process/fail";${pageNum + 1}" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 							</a>
 						</li>

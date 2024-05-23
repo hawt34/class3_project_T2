@@ -292,7 +292,7 @@ public class PaymentController {
 	
 	
 	// ================================================================================
-	
+	// 스토어 결제 화면으로
 	
 	@PostMapping("payment_store")
 	public String paymentStore(String itemName, String quantity, String totalPrice, Model model,  HttpSession session, MemberVO member) {

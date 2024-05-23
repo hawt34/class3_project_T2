@@ -42,6 +42,7 @@
 							<option value="극장" ${notice.notice_category == '극장' ? 'selected' : ''}>극장</option>
 						</select>
 						<select name="theater_name">
+							<option value="">없음</option>
 							<option value="해운대점" ${notice.theater_name eq '해운대점' ? 'selected' : '' }>해운대점</option>
 							<option value="센텀점" ${notice.theater_name eq '센텀점' ? 'selected' : '' }>센텀점</option>
 							<option value="서면점" ${notice.theater_name eq '서면점' ? 'selected' : '' }>서면점</option>
@@ -108,26 +109,25 @@
       });
     </script>
     <script>
-    // 첫 번째 선택란의 변경을 감지하여 두 번째 선택란의 옵션을 변경하는 함수
-    document.getElemenByName('notice_category').addEventListener('change', function() {
-        var firstValue = this.value; // 첫 번째 선택란의 값을 가져옴
-        var secondSelect = document.getElementByName('theater_name');
-
-        // 첫 번째 선택란의 값에 따라 두 번째 선택란의 옵션을 변경
-        switch (notice_category) {
-            case '1':
-                secondSelect.value = 'A';
-                break;
-            case '2':
-                secondSelect.value = 'B';
-                break;
-            case '3':
-                secondSelect.value = 'C';
-                break;
-            default:
-                secondSelect.value = ''; // 디폴트 값 설정
-        }
-    });
+    $(function () {
+	
+		if ($("#notice_category").val() == "전체") {
+	        $("#theater_name").prop("disabled", true);
+	    } else {
+	        $("#theater_name").prop("disabled", false);
+	    }
+		
+		$("#notice_category").change(function() {
+			if ($(this).val() == "전체") {
+			    $("#theater_name").val("");
+			    $("#theater_name").prop("disabled", true);
+			} else if ($(this).val() == "극장") {
+			    $("#theater_name").val("해운대점");
+			    $("#theater_name").prop("disabled", false);
+			    $("#theater_name option:eq(0)").prop("disabled", true);
+			}
+		});
+	});
 </script>
 </body>
 </html>

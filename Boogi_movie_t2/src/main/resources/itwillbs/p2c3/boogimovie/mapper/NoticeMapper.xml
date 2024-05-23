@@ -10,27 +10,40 @@
 			   n.notice_content,
 			   t.theater_name,
 			   n.notice_category,
-			   n.notice_date
+			   n.notice_date,
+			   ROW_NUMBER() OVER (ORDER BY notice_num ) AS row_num
 		FROM notice n
-		JOIN theater t
+		LEFT OUTER JOIN theater t
 		ON n.theater_num = t.theater_num
 		<if test="!theaterName.equals('') and theaterName != null">
 			WHERE t.theater_name = #{theaterName}
 		</if>
-		ORDER BY notice_num DESC
+		ORDER BY row_num DESC
 		limit #{startRow}, #{listLimit};
 	</select>
 	
 	<select id="selectNotice" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
-		SELECT n.notice_num,
-			   n.notice_subject,
-			   n.notice_content,
-			   t.theater_name,
-			   n.notice_date
-		FROM notice n
-		JOIN theater t
-		ON n.theater_num = t.theater_num
-		WHERE notice_num = #{notice_num}
+		<![CDATA[
+		SELECT n.notice_num
+			 , n.notice_subject
+			 , n.notice_content
+			 , t.theater_name
+			 , n.notice_date
+			 , (SELECT notice_num 
+				  FROM notice
+				 WHERE notice_num < n.notice_num
+				 ORDER BY notice_date DESC
+				 LIMIT 1) AS prev
+			 , (SELECT notice_num
+				  FROM notice
+				 WHERE notice_num > n.notice_num
+				 ORDER BY notice_date 
+				 LIMIT 1) AS next	 
+		  FROM notice n
+		  LEFT OUTER JOIN theater t
+			ON n.theater_num = t.theater_num
+	 	 WHERE notice_num = #{notice_num}
+	 	 ]]>
 	</select>
 	
 	<!-- 극장명이 동일한 게시판글 갯수 -->
@@ -51,7 +64,7 @@
 			   n.notice_category,
 			   n.notice_date
 		FROM notice n
-		JOIN theater t
+		LEFT OUTER JOIN theater t
 		ON n.theater_num = t.theater_num
 		<if test="!searchKeyword.equals('') and searchKeyword != null">
 			WHERE n.notice_subject LIKE CONCAT('%', #{searchKeyword}, '%') 
@@ -66,13 +79,23 @@
 	<select id="selectNoticeSearchKeywordCount" resultType="int">
 		SELECT COUNT(n.notice_num)
 		FROM notice n
-		JOIN theater t
+		LEFT OUTER JOIN theater t
 		ON n.theater_num = t.theater_num
 		<if test="!searchKeyword.equals('') and searchKeyword != null">
 			WHERE n.notice_subject LIKE CONCAT('%', #{searchKeyword}, '%') 
 			OR n.notice_content LIKE CONCAT('%', #{searchKeyword}, '%')
 			OR t.theater_name LIKE CONCAT('%', #{searchKeyword}, '%')
 			OR n.notice_category LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+	</select>
+	
+	<select id="selectTheaterNum" resultType="int">
+		SELECT t.theater_num
+		FROM notice n
+		JOIN theater t
+		ON n.theater_num = t.theater_num
+		<if test="theater_name != '' and theater_name != null">
+			WHERE t.theater_name = #{theater_name}
 		</if>
 	</select>
 	

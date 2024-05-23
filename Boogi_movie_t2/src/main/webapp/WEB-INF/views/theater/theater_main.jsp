@@ -16,87 +16,6 @@
 <link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
 <!-- 제이쿼리 -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
-<script type="text/javascript">
-	var maxCount = 3;								// 카운트 최대값은 3
-	var count = 0;   								// 카운트, 0으로 초기화 설정
-	
-	function CountChecked(field){ 					// field객체를 인자로 하는 CountChecked 함수 정의
-		if (field.checked) {						// 만약 field의 속성이 checked 라면(사용자가 클릭해서 체크상태가 된다면)
-			count += 1;								// count 1 증가
-		}
-		else {										// 아니라면 (field의 속성이 checked가 아니라면)
-			count -= 1;								// count 1 감소
-		}
-		
-		if (count > maxCount) {						// 만약 count 값이 maxCount 값보다 큰 경우라면
-			alert("최대 3개까지만 선택가능합니다!");	// alert 창을 띄움
-		field.checked = false;						// (마지막 onclick한)field 객체의 checked를 false(checked가 아닌 상태)로 만든다.
-		count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
-		}
-	} // CountChecked()
-	
-	function initializeModal() {
-		var myTheaters = [
-			"${member.member_my_theater1}",
-			"${member.member_my_theater2}",
-			"${member.member_my_theater3}"
-		];
-
-		$('.form-check-input').each(function() {
-			var theaterName = $(this).val();
-			if (myTheaters.includes(theaterName)) {
-				$(this).prop('checked', true);
-				count++;
-			} else {
-				$(this).prop('checked', false);
-			}
-		});
-	}
-				      
-				      
-	function sendCheckedValues(event) {
-		var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
-		var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
-					        
-		checkboxes.forEach(function(checkbox) {
-			checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
-		});
-					        
-		// checkedValues 배열의 길이가 3이 되도록 null 값 추가
-		while (checkedValues.length < 3) {
-		    checkedValues.push(null);
-		}
-					        
-		var member_id = "${member.member_id}"; // memberId를 가져옴
-		$.ajax({
-		    url: "api/myp_my_theater",
-		    type: "POST",
-		    dataType: "json",
-		    contentType: "application/json", // 서버에게 내용이 JSON임을 알려줌
-		    data: JSON.stringify({ 
-		    	member_id: member_id, 
-		    	checkedValues: checkedValues 
-		    }), // JSON 문자열로 변환하여 전송
-		    success: function(response) {
-				if(response){
-					alert("마이극장 저장 완료");
-				    location.reload();	
-				}
-		        
-		    },
-		    error: function(xhr, status, error) {
-		        console.error("Error details:", xhr, status, error); // 디버깅 정보 출력
-		
-		        alert("오류 발생" + error);
-		    }
-		    
-		}); // ajax
-		
-	} // sendCheckedValues()
-	
-
-	
-</script>
 
 
 </head>
@@ -175,9 +94,9 @@
 			</table>
 			</div>
 		</div>	
+		<jsp:include page="theater_detail_timetable.jsp"></jsp:include>
 	</article>
 	<footer>
-		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
 	<!-- 카카오맵 API 라이브러리 -->
  	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622"></script>

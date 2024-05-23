@@ -116,8 +116,8 @@ function getScroll(newFaqCategory = "", isEmpty) {
 // 				pageNum = 2;
             }
 			//반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달
-			let imgPath = "${pageContext.request.contextPath}/resources/images/cscBulb.png";
             $.each(faqList, function(index, faq) {
+				let imgPath = "${pageContext.request.contextPath}/resources/images/cscBulb.png";
             	let faqNum = faq.faq_num; //faq_num 변수에 저장
                 let accordion = $(".csc_accordion");
                 let checkbox = $("<input>", {
@@ -142,13 +142,17 @@ function getScroll(newFaqCategory = "", isEmpty) {
                 );
                 let answerDiv = $("<div>").append(
                     $("<span>").append(
-                    	$("<em>")
-                    ).text("ANSWER"),
+                    	$("<em>", {
+                    		class: "faq_blub"
+                    	}),
+                    	"ANSWER"
+                    ),
                     $("<br>"),
                     $("<p>", {
                         text: faq.faq_content
                     })
                 );
+                
                 accordion.append(checkbox, label, answerDiv);
             });
 			
@@ -186,6 +190,8 @@ $(function() {
     $("#faq_category").change(function() {
         let newFaqCategory = $(this).val();
         faqCategory = newFaqCategory || ''; // faqCategory 업데이트
+        console.log(newFaqCategory);
+        console.log(faqCategory);
         pageNum = 1;
         getScroll(newFaqCategory, true);
     });

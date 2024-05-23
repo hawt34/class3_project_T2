@@ -209,6 +209,8 @@ public class AdminController {
 		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
 		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
+//		System.out.println("극장이름: " + noticeList.get(0));
+		
 		
 		//LocalDateTIme format
 		for(NoticeVO notice : noticeList) {
@@ -227,15 +229,22 @@ public class AdminController {
 	
 	@PostMapping("admin_notice_pro")
 	public String adminNoticePro(NoticeVO notice, Model model, String theater_name) {
-		int theater_num = theaterService.getTheaterName(theater_name);
-		
+		int theater_num = 0;
+		if(!theater_name.equals("")) {
+			theater_num = noticeService.getTheaterNum(theater_name);
+			System.out.println("극장번호: " + theater_num);
+		} else {
+			notice.setNotice_num(0);
+		}
 		
 		int noticeCount = service.InsertNotice(notice,theater_num);
+		
 		if(noticeCount == 0) {
 			model.addAttribute("msg", "입력 실패!");
-		
+			
 			return "error/fail";
 		}
+		
 		
 		return "redirect:admin_notice";
 	}

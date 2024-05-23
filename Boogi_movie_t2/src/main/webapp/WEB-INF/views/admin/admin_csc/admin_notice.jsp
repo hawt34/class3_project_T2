@@ -79,7 +79,15 @@
 											<td onclick="location.href='admin_notice_detail?notice_num=${notice.notice_num}'">${notice.notice_subject }</td>
 											<td>${notice.notice_fdt }</td>
 											<td>${notice.notice_category }</td>
-											<td>${notice.theater_name }</td>
+											<td>
+												<c:choose>
+													<c:when test="${notice.notice_category eq '전체' }">
+													</c:when>
+													<c:otherwise>
+														${notice.theater_name }
+													</c:otherwise>
+												</c:choose>
+											</td>
 											<td>
 												<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_notice_modify?notice_num=${notice.notice_num}'">수정</button>
 											</td>

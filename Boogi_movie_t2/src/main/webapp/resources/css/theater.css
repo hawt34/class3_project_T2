@@ -32,13 +32,13 @@ h1 {
 	padding: 20px;
 }
 
-.nav-link {
+.top_theater_name {
 	width: 100px;
 	border: 1px solid #0d6efd;
 	margin: 5px;
 	color:#0d6efd;
 }
-.nav-link:hover {
+.top_theater_name:hover {
 	background-color: #0d6efd;
 	color: white;
 }

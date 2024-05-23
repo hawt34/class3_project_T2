@@ -62,7 +62,7 @@ body {
 						    </tr>
 						  </thead>
 						  <tbody>
-							  <c:forEach var="map" items="${cancelList}" varStatus="status" begin="0" end="6">
+							  <c:forEach var="map" items="${movieReservation}" varStatus="status" begin="0" end="6">
 							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
 							        <th scope="row">${status.index + 1}</th>
 							        <td>${map.movie_name}</td>

@@ -198,19 +198,17 @@ tbody tr:hover {
 						</table>
 					</form>
 					
-					<form action="admin_moviePlan">
-						<div class="moviePlanSearchBox">
-							<h3>상영일정 조회하기</h3>
-							<select id="searchTheater" class="admin_moviePlan_search" name="theater_num">
-									<option value="0">미선택</option>
-								<c:forEach var="theaterName" items="${theaterNameList}">
-									<option value="${theaterName.theater_num}">${theaterName.theater_name}</option>
-								</c:forEach>
-							</select> 
-							<input type="date" class="admin_moviePlan_search" name="scs_date" min="yyyy-mm-dd">
-							<button type="submit" class="btn btn-outline-primary">조회하기</button>
-						</div>
-					</form>
+					<div class="moviePlanSearchBox">
+						<h3>상영일정 조회하기</h3>
+						<select id="searchTheater" class="admin_moviePlan_search" name="theater_num">
+								<option value="0">미선택</option>
+							<c:forEach var="theaterName" items="${theaterNameList}">
+								<option value="${theaterName.theater_num}">${theaterName.theater_name}</option>
+							</c:forEach>
+						</select> 
+						<input type="date" class="admin_moviePlan_search" name="scs_date" id="searchDate">
+						<button type="submit" class="btn btn-outline-primary" id="searchBtn">조회하기</button>
+					</div>
 					
 					<table class="admin_plan_body_search">
 						<thead>
@@ -416,7 +414,7 @@ tbody tr:hover {
 		    
 		    // 상영일정 조회하기
 	        $('#searchBtn').click(function() {
-		    	if($('#searchTheater').val() == "" ){
+		    	if($('#searchTheater').val() == 0){
 					alert("극장정보를 선택해주세요");
 					$('#searchTheater').focus();
 					return;
@@ -427,11 +425,47 @@ tbody tr:hover {
 					return;
 				}
 		    	
+		    	$.ajax({
+		    		type: "GET",
+		    		url: "searchMoviePlanList",
+// 		    		dataType: "JSON",
+		    		data: {
+		    			searchTheater: $('#searchTheater').val(),
+		    			searchDate: $('#searchDate').val()
+		    		},
+		    		success: function(data) {
+// 						debugger;
+		    			$("#moviePlanList").empty();
+						var searchHtml = '';
+		                data.forEach(function(searchMovieList) {
+		                	var scs_date = new Date(searchMovieList.scs_date).toISOString().split('T')[0];
+		                	searchHtml += '<tr>'
+									  +	 '<td>' + searchMovieList.scs_num + '</td>'
+									  +		'<td>' + searchMovieList.theater_name + '</td>'
+									  +		'<td>' + searchMovieList.screen_cinema_num + '</td>'
+									  +		'<td>' + searchMovieList.movie_name + '</td>'
+									  +		'<td>' + searchMovieList.screen_dimension + '</td>'
+									  +		'<td>' + scs_date + '</td>'
+									  +		'<td>' + searchMovieList.scs_start_time + '</td>'
+									  +		'<td>' + searchMovieList.scs_end_time + '</td>'
+									  +		'<td><button type="button" class="btn btn-outline-primary" onclick="moviePlanWithdraw(' + searchMovieList.scs_num + ')">삭제</button>'
+									  +		'</td></tr>'
+		                });
+		                $("#moviePlanList").append(searchHtml);
+
+					},
+					error: function(data) {
+						
+					}
+		    		
+		    	});
 		    	
-		    });
+		    	
+		    	
+		    }); // 상영 일정 조회 끝
 		    
 			
-	    });
+	    }); // document.ready 끝
 		
 	
 	</script>

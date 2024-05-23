@@ -240,7 +240,6 @@ public class TicketingController {
 		for(String genres : movieGenres) {
 			genreList.add(genres);
 		}
-//		System.out.println(genreList);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("genreList", genreList);

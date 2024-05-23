@@ -34,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.EventService;
 import itwillbs.p2c3.boogimovie.service.FaqService;
+import itwillbs.p2c3.boogimovie.service.NoticeService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.ScreenService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
@@ -75,6 +76,9 @@ public class AdminController {
 	
 	@Autowired
 	private FaqService faqService;
+	
+	@Autowired
+	private NoticeService noticeService;
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")
@@ -254,13 +258,14 @@ public class AdminController {
 	public String adminOto(@RequestParam(defaultValue = "1")int pageNum,
 						   Model model,
 						   String faqCategory,
-						   String theaterName) {
+						   String theaterName,
+						   @RequestParam(required = false)String id) {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
 		System.out.println("$$@#@#" + theaterName);
 		System.out.println("$$@#@#" + faqCategory);
 		
-		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, faqCategory, theaterName);
+		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, faqCategory, theaterName, id);
 		
 
 		model.addAttribute("faqCategory", faqCategory);
@@ -268,7 +273,7 @@ public class AdminController {
 		if(theaterName != null && !theaterName.equals("")) {model.addAttribute("theaterName", theaterName);} 
 			
 
-		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory, theaterName); //faq 페이지네이션
+		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory, theaterName, id); //faq 페이지네이션
 		
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("otoList", otoList);
@@ -276,9 +281,9 @@ public class AdminController {
 	}
 
 	// 페이징
-	public PageInfo pageInfoCategory(int pageNum, int listLimit, int startRow,  String faqCategory, String theaterName) {
+	public PageInfo pageInfoCategory(int pageNum, int listLimit, int startRow,  String faqCategory, String theaterName, String id) {
 		
-		int listCount = otoService.getOtoListCount(faqCategory, theaterName); //총 공지사항 갯수
+		int listCount = otoService.getOtoListCount(faqCategory, theaterName, id); //총 공지사항 갯수
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
@@ -376,24 +381,11 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 상영관리 페이지
 	@GetMapping("admin_moviePlan")
-	public String adminMoviePlan(Model model, @RequestParam Date scs_date, 
-			@RequestParam String theater_num) throws ParseException {
-//		SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
-//		Date scsDate = sdt.parse(scs_date);
-		int theaterNum = Integer.parseInt(theater_num);
-		
-		ScreenSessionVO scs = new ScreenSessionVO();
-		scs.setScs_date(scs_date);
-		scs.setTheater_num(theaterNum);
+	public String adminMoviePlan(Model model) {
 		
 		List<Map<String, String>> movieList = service.getmovieList();
 		List<Map<String, String>> theaterNameList = service.getTheaterList();
 		List<Map<String, String>> moviePlanList = service.selectMoviePlanList();
-		System.out.println("scs: " + scs);
-		if(scs != null) {
-			moviePlanList = service.getMoivePlanList(scs.getTheater_num(), scs.getScs_date());
-		}
-		
 		
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("moviePlanList", moviePlanList);
@@ -446,15 +438,15 @@ public class AdminController {
 		}
 	}
 	
-	@GetMapping("admin_moviePlan_form")
-	public String adminMoviePlanForm() {
-		return "admin/admin_movie/admin_moviePlan_form";
-	}
-	
-	@PostMapping("admin_moviePlan_pro")
-	public String adminMoviePlanPro() {
-		return "redirect:/admin_moviePlan";
-	}
+//	@GetMapping("admin_moviePlan_form")
+//	public String adminMoviePlanForm() {
+//		return "admin/admin_movie/admin_moviePlan_form";
+//	}
+//	
+//	@PostMapping("admin_moviePlan_pro")
+//	public String adminMoviePlanPro() {
+//		return "redirect:/admin_moviePlan";
+//	}
 	
 	// 상영관리 AJAX
 	@GetMapping("getScreens")
@@ -503,6 +495,15 @@ public class AdminController {
 //		for(Map<String, String> movieTime: movieTimeList) {
 //		}
 		return movieTimeList;
+	}
+	
+	// 상영일정 조회하기 ajax
+	@GetMapping("searchMoviePlanList")
+	@ResponseBody
+	public List<ScreenSessionVO> searchMoviePlanList(@RequestParam int searchTheater, @RequestParam Date searchDate) {
+		List<ScreenSessionVO> searchMovieList = service.getMoivePlanList(searchTheater, searchDate);
+		
+		return searchMovieList;
 	}
 	
 

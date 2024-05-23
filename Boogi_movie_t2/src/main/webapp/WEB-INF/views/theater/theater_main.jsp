@@ -14,7 +14,89 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <!-- 극장 theater.css  -->
 <link href="${pageContext.request.contextPath}/resources/css/theater.css" rel="stylesheet" type="text/css">
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
+<script type="text/javascript">
+	var maxCount = 3;								// 카운트 최대값은 3
+	var count = 0;   								// 카운트, 0으로 초기화 설정
+	
+	function CountChecked(field){ 					// field객체를 인자로 하는 CountChecked 함수 정의
+		if (field.checked) {						// 만약 field의 속성이 checked 라면(사용자가 클릭해서 체크상태가 된다면)
+			count += 1;								// count 1 증가
+		}
+		else {										// 아니라면 (field의 속성이 checked가 아니라면)
+			count -= 1;								// count 1 감소
+		}
+		
+		if (count > maxCount) {						// 만약 count 값이 maxCount 값보다 큰 경우라면
+			alert("최대 3개까지만 선택가능합니다!");	// alert 창을 띄움
+		field.checked = false;						// (마지막 onclick한)field 객체의 checked를 false(checked가 아닌 상태)로 만든다.
+		count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
+		}
+	} // CountChecked()
+	
+	function initializeModal() {
+		var myTheaters = [
+			"${member.member_my_theater1}",
+			"${member.member_my_theater2}",
+			"${member.member_my_theater3}"
+		];
 
+		$('.form-check-input').each(function() {
+			var theaterName = $(this).val();
+			if (myTheaters.includes(theaterName)) {
+				$(this).prop('checked', true);
+				count++;
+			} else {
+				$(this).prop('checked', false);
+			}
+		});
+	}
+				      
+				      
+	function sendCheckedValues(event) {
+		var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열
+		var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴
+					        
+		checkboxes.forEach(function(checkbox) {
+			checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가
+		});
+					        
+		// checkedValues 배열의 길이가 3이 되도록 null 값 추가
+		while (checkedValues.length < 3) {
+		    checkedValues.push(null);
+		}
+					        
+		var member_id = "${member.member_id}"; // memberId를 가져옴
+		$.ajax({
+		    url: "api/myp_my_theater",
+		    type: "POST",
+		    dataType: "json",
+		    contentType: "application/json", // 서버에게 내용이 JSON임을 알려줌
+		    data: JSON.stringify({ 
+		    	member_id: member_id, 
+		    	checkedValues: checkedValues 
+		    }), // JSON 문자열로 변환하여 전송
+		    success: function(response) {
+				if(response){
+					alert("마이극장 저장 완료");
+				    location.reload();	
+				}
+		        
+		    },
+		    error: function(xhr, status, error) {
+		        console.error("Error details:", xhr, status, error); // 디버깅 정보 출력
+		
+		        alert("오류 발생" + error);
+		    }
+		    
+		}); // ajax
+		
+	} // sendCheckedValues()
+	
+
+	
+</script>
 
 
 </head>
@@ -98,81 +180,69 @@
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
 	<!-- 카카오맵 API 라이브러리 -->
- 	<script defer type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622"></script>
+ 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b60a9d61c7090ce24f1b5bfa7ab26622"></script>
 	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+		$(function() {
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		    mapOption = { 
 		        center: new kakao.maps.LatLng(35.180355, 129.074238), // 지도의 중심좌표(부산 중심 대충)
 		        level: 9 // 지도의 확대 레벨
 		    };
-		
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-		 
-		// 마커를 표시할 위치와 title 객체 배열입니다 
-		var positions = [
-		    {
-		        title: '부기무비 해운대점', 
-		        latlng: new kakao.maps.LatLng(35.1629768, 129.158492)
-		    },
-		    {
-		        title: '부기무비 센텀점', 
-		        latlng: new kakao.maps.LatLng(35.1629768, 129.158492)
-		    },
-		    {
-		        title: '부기무비 서면점', 
-		        latlng: new kakao.maps.LatLng(35.1542604, 129.0572997)
-		    },
-		    {
-		        title: '부기무비 남포점',
-		        latlng: new kakao.maps.LatLng(35.0986158, 129.0287567)
-		    },
-		    {
-		        title: '부기무비 부산대점',
-		        latlng: new kakao.maps.LatLng(35.2301093, 129.0881162)
-		    },
-		    {
-		        title: '부기무비 사직점',
-		        latlng: new kakao.maps.LatLng(35.1909044, 129.0614196)
-		    },
-		    {
-		        title: '부기무비 영도점',
-		        latlng: new kakao.maps.LatLng(35.0622864, 129.0075247)
-		    },
-		    {
-		        title: '부기무비 덕천점',
-		        latlng: new kakao.maps.LatLng(35.2111693, 129.0075247)
-		    },
-		    {
-		        title: '부기무비 정관점',
-		        latlng: new kakao.maps.LatLng(35.3194331, 129.1783546)
-		    },
-		    {
-		        title: '부기무비 사상점',
-		        latlng: new kakao.maps.LatLng(35.1633264, 128.9819712)
-		    }
-		];
-		
-		// 마커 이미지의 이미지 주소입니다
-		var imageSrc = "${pageContext.request.contextPath}/resources/images/boogi_mark.png"; 
-		    
-		for (var i = 0; i < positions.length; i ++) {
-		    
-		    // 마커 이미지의 이미지 크기 입니다
-		    var imageSize = new kakao.maps.Size(52, 69); 
-		    
-		    // 마커 이미지를 생성합니다    
-		    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-		    
-		    // 마커를 생성합니다
-		    var marker = new kakao.maps.Marker({
-		        map: map, // 마커를 표시할 지도
-		        position: positions[i].latlng, // 마커를 표시할 위치
-		        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-		        image : markerImage // 마커 이미지 
-		    });
-		}
-		
-		
+			
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			 
+			// 마커를 표시할 위치와 title 객체 배열입니다 
+			
+			// 서버에서 전달된 mapTheater 객체를 JSON.parse를 통해 자바스크립트 객체로 변환
+			let mapTheater = JSON.parse('${mapTheater}');
+			
+			var positions = [];
+			for (var i = 0; i < mapTheater.length; i++) {
+			    var theater = mapTheater[i];
+			    positions.push({
+			    	title: '부기무비 ' + theater.theater_name,
+			        latlng: new kakao.maps.LatLng(theater.map_x, theater.map_y)
+			    });
+// 			    console.log("title : " + theater.theater_name);
+// 			    console.log("latlng : " + theater.map_x, theater.map_y);
+			}
+			
+			console.log("positions : " + positions);
+			console.log("mapTheater : "+ mapTheater);
+// 			var positions = [
+// 			    { title: '부기무비 해운대점', latlng: new kakao.maps.LatLng(35.1629768, 129.158492) },
+// 			    { title: '부기무비 센텀점', latlng: new kakao.maps.LatLng(35.1629768, 129.158492) },
+// 			    { title: '부기무비 서면점', latlng: new kakao.maps.LatLng(35.1542604, 129.0572997) },
+// 			    { title: '부기무비 남포점', latlng: new kakao.maps.LatLng(35.0986158, 129.0287567) },
+// 			    { title: '부기무비 부산대점', latlng: new kakao.maps.LatLng(35.2301093, 129.0881162) },
+// 			    { title: '부기무비 사직점', latlng: new kakao.maps.LatLng(35.1909044, 129.0614196) },
+// 			    { title: '부기무비 영도점', latlng: new kakao.maps.LatLng(35.0622864, 129.0075247) },
+// 			    { title: '부기무비 덕천점', latlng: new kakao.maps.LatLng(35.2111693, 129.0075247) },
+// 			    { title: '부기무비 정관점', latlng: new kakao.maps.LatLng(35.3194331, 129.1783546) },
+// 			    { title: '부기무비 사상점', latlng: new kakao.maps.LatLng(35.1633264, 128.9819712) }     
+// 			];
+			
+			// 마커 이미지의 이미지 주소입니다
+			var imageSrc = "${pageContext.request.contextPath}/resources/images/boogi_mark.png"; 
+			    
+			for (var i = 0; i < positions.length; i ++) {
+			    
+			    // 마커 이미지의 이미지 크기 입니다
+			    var imageSize = new kakao.maps.Size(52, 69); 
+			    
+			    // 마커 이미지를 생성합니다    
+			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+			    
+			    // 마커를 생성합니다
+			    var marker = new kakao.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: positions[i].latlng, // 마커를 표시할 위치
+			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+			        image : markerImage // 마커 이미지 
+			    });
+			}
+			
+		});
 	</script>
  	
 </body>

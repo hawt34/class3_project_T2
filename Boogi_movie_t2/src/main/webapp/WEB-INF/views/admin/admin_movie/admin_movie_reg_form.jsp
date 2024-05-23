@@ -88,6 +88,11 @@ body {
 						<input type="text" class="form-control" id="movie_runtime" name="movie_runtime" required/>
 					</div>
 					<div class="mb-3">
+						<label for="movie_status">상영상태</label> 
+						<input type="text" name="movie_status" id="movie_status" class="form-control" required/>
+						<div class="invalid-feedback">상영상태를 입력해주세요.</div>
+					</div>
+					<div class="mb-3">
 						<label for="movie_open_date">개봉일</label> 
 						<input type="date" name="movie_open_date" id="movie_open_date" class="form-control" required/>
 						<div class="invalid-feedback">개봉일을 선택해주세요.</div>
@@ -190,14 +195,14 @@ body {
 	                    // 종영일
 	               		// movie_open_date에 저장된 날짜를 Date 객체로 변환
 	                    let openDate = new Date(year, month, day);
-	                    // 3개월을 더한 날짜 계산
-	                    let endDate = new Date(openDate.getFullYear(), openDate.getMonth() + 3, openDate.getDate());
+	                    // 1년을 더한 날짜 계산
+	                    let endDate = new Date(openDate.getFullYear() + 1, openDate.getMonth(), openDate.getDate());
 	                    // 년, 월, 일을 문자열로 변환하여 YYYY-MM-DD 형식으로 조합
 	                    let endYear = endDate.getFullYear();
 	                    let endMonth = endDate.getMonth() < 10 ? '0' + endDate.getMonth() : endDate.getMonth(); // 한자리수일 경우 앞에 0 추가
 	                    let endDay = endDate.getDate() < 10 ? '0' + endDate.getDate() : endDate.getDate();
 	                    let formattedEndDate = endYear + '-' + endMonth + '-' + endDay;
-	                    // movie_end_date에 3개월을 더한 날짜 설정
+	                    // movie_end_date에 1년을 더한 날짜 설정
 	                    $('#movie_end_date').val(formattedEndDate);
 	                    
 	                    // 개봉상태

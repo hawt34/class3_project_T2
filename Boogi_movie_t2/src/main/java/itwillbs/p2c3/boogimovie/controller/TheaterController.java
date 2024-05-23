@@ -1,5 +1,6 @@
 package itwillbs.p2c3.boogimovie.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import itwillbs.p2c3.boogimovie.service.MemberService;
 import itwillbs.p2c3.boogimovie.service.MypageService;
@@ -58,9 +62,23 @@ public class TheaterController {
 		List<EventVO> eventList = service.getTheaterEventList();
 		
 		
+		JsonArray jsonList = new JsonArray();
+		for(TheaterVO theater1  : theaterList) {
+			JsonObject json = new JsonObject();
+			json.addProperty("theater_name", theater1.getTheater_name());
+			json.addProperty("map_x", theater1.getTheater_name());
+			json.addProperty("theater_name", theater1.getTheater_name());
+			jsonList.add(json);
+			System.out.println(json);
+		}
+		
+		
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("theaterList", theaterList);
 		model.addAttribute("eventList", eventList);
+		model.addAttribute("mapTheater", jsonList.toString());
+		
+		
 				
 		return "theater/theater_main";
 	}       
@@ -111,6 +129,12 @@ public class TheaterController {
 		return "theater/theater_detail";
 	}
 	
+	
+	
+	@GetMapping("theater_test")
+	public String theaterTest() {
+		return "theater/theater_test";
+	}
 	
 	
 	

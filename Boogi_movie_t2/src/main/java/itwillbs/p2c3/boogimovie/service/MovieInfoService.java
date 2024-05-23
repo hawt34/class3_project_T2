@@ -59,5 +59,15 @@ public class MovieInfoService {
 		return mapper.selectFutureMovieInfo(futureMovie);
 	}
 	
+	//영화 트레일러 담는 곳
+	public MovieVO getMovieTrail() {
+		
+		return mapper.selectMovieTrail();
+	}
+	
+	public MovieVO getMovieFutureTrail() {
+		
+		return mapper.selectMovieFutureTrail();
+	}
 
 }

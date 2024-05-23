@@ -28,9 +28,12 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
-	public String home(Model model , HttpSession session,MemberVO member) {
+	public String home(Model model , HttpSession session,MemberVO member, MovieVO movieTrail) {
 		System.out.println("현재 아이디" + member.getMember_id());
 		List<MovieVO> movieInfo = movieService.getMovieList();
+		movieTrail = movieService.getMovieTrail();
+		//System.out.println("무비트레일러"+movieTrail);
+		model.addAttribute("movieTrail", movieTrail);
 		model.addAttribute("movieInfo", movieInfo);
 		String member_id = (String) session.getAttribute("sId");
 		//System.out.println("현재로그인한 " +member_id);

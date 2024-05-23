@@ -1,6 +1,7 @@
 package itwillbs.p2c3.boogimovie.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.MovieInfoService;
 import itwillbs.p2c3.boogimovie.service.ReviewService;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
@@ -24,17 +26,63 @@ public class MovieController {
 	private MovieInfoService movieService;
 	
 	@Autowired
+	AdminService adminService;
+	
+	
+	@Autowired
 	private ReviewService serviceReview;
 	
 	@GetMapping("movie")
-	public String home(Model model , HttpSession session,MemberVO member) {
-		System.out.println("현재 아이디" + member.getMember_id());
+	public String home(Model model , HttpSession session,MemberVO member, MovieVO movieTrail,Map<String, Object> map) {
 		List<MovieVO> movieInfo = movieService.getMovieList();
+		movieTrail = movieService.getMovieTrail();
+		//System.out.println("무비트레일러"+movieTrail);
+		model.addAttribute("movieTrail", movieTrail);
 		model.addAttribute("movieInfo", movieInfo);
 		String member_id = (String) session.getAttribute("sId");
-		//System.out.println("현재로그인한 " +member_id);
+		member = adminService.SelectMember(member_id);
+		model.addAttribute("member", member);
+		System.out.println("여기 영화인데 멤버 상세정보가 필요해"+member.getMember_movie_genre());
+	
+		
+		 String member_movie_genre = member.getMember_movie_genre();
+		    System.out.println("사용자의 선호 장르: " + member_movie_genre);
+		    
+		    // 테스트 목적으로 map에 선호 장르 데이터 넣기
+		    
+		    // 테스트 데이터 넣기
+		    map.put(member_movie_genre, member_movie_genre);
+		    
+		    // map 출력하여 데이터 확인
+		    System.out.println("맵의 내용: " + map);
+		    
+		    // 사용자의 선호 장르를 기반으로 영화 리스트 가져오기
+		    List<MovieVO> genreBasedMovieList = movieService.getMovieListGenre(map);
+		    
+		    // genreBasedMovieList 출력하여 데이터 확인
+		    System.out.println("선호 장르 기반 영화 리스트: " + genreBasedMovieList);
+		    
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		movieService.getMovieListGenre(null);
+		
+		
+		
+		
+		
 		model.addAttribute("member_id", member_id);
 		//System.out.println(movieInfo);
+		
+		
 		return "movie/movie";
 	}
 	
@@ -78,12 +126,19 @@ public class MovieController {
 	
 	
 	@GetMapping("movieFuture")// 상영예정작리스트
-	public String movieFuture(Model model) {
-		
+	public String movieFuture(Model model,MovieVO futureMovieTrail) {
+		futureMovieTrail = movieService.getMovieFutureTrail();
+		//System.out.println("무비트레일러"+movieTrail);
+		model.addAttribute("futureMovieTrail", futureMovieTrail);
 		List<MovieVO> movieFuture = movieService.getMovieFuture();
 		model.addAttribute("movieFuture", movieFuture);
 		//System.out.println("여기는 무비퓨처" + movieFuture);확인완료
 	    return "movie/movieFuture";
+	}
+	@GetMapping("boxoffice")
+	public String boxoffice() {
+		
+		return"movie/boxoffice";
 	}
 	
 

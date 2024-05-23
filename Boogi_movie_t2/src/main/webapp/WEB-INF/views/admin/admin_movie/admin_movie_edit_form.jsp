@@ -121,7 +121,7 @@ body {
 			
 					<div class="mb-3">
 						<label for="movie_trailer">트레일러</label> 
-						<input type="text" name="movie_trailler" id="movie_trailer" class="form-control" required value="${movie.movie_trailler}" />
+						<input type="text" name="movie_trailler" id="movie_trailer" class="form-control" value="${movie.movie_trailler}" />
 						<div class="invalid-feedback">트레일러를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">

@@ -7,8 +7,8 @@
 		 <![CDATA[
    			 SELECT *
     		 FROM movie
-    		 WHERE movie_num = #{movie_num}
-        	 OR movie_open_date <= CURRENT_DATE()
+    		 WHERE movie_open_date <= CURRENT_DATE()
+    		 ORDER BY movie_open_date DESC
     	]]>
 	</select>
 	
@@ -56,8 +56,8 @@
 		 <![CDATA[
    			 SELECT *
     		 FROM movie
-    		 WHERE movie_num = #{movie_num}
-        	 OR movie_open_date >= CURRENT_DATE()
+    		 WHERE movie_open_date > CURRENT_DATE()
+    		 ORDER BY movie_open_date ASC
     	]]>
 	</select>	
 	
@@ -66,7 +66,30 @@
 		FROM movie
 		WHERE movie_num = #{movie_num}
 	</select>
-		
+	
+	<select id="selectMovieTrail" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">	
+		 <![CDATA[
+		SELECT movie_trailler
+		FROM movie
+		WHERE movie_trailler != '' 
+    	AND movie_open_date <= CURRENT_DATE()
+		ORDER BY RAND()
+		LIMIT 1
+		]]>
+	</select>	
+	
+	<select id="selectMovieFutureTrail" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">	
+		 <![CDATA[
+		SELECT movie_trailler
+		FROM movie
+		WHERE movie_trailler != '' 
+    	AND movie_open_date > CURRENT_DATE()
+		ORDER BY RAND()
+		LIMIT 1
+		]]>
+	</select>	
+	
+	
 		
 		
 </mapper>

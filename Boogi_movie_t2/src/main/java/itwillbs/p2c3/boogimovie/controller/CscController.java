@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,29 +55,18 @@ public class CscController {
 	@Autowired
 	private FaqService faqService;
 	
-	// csc 연결
+	// csc 연결 
+	// csc main 페이지
 	@GetMapping("csc_main")
 	public String cscMain() {
+//		OTOVO oto = otoService.getOtoList(0, 0, null, null, null);
+		
+		
 		return "csc/csc_main";
 	}
 	//csc 페이지 faqList 가져오기
 	@GetMapping("csc_faq")
 	public String cscFaq(@RequestParam(defaultValue = "1")int pageNum, FAQVO faq, @RequestParam(required = false)String faqCategory) {
-//		//ajax를 호출하지 않은 paging을 처리하기 위한 변수
-//		int listLimit = 7;
-//		int startRow = (pageNum - 1) * listLimit;
-////		int listCount = faqService.getFaqListCount(faqCategory); //총 공지사항 갯수
-////		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-////		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-////		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-////		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-////		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-////			endPage = maxPage;
-////		}
-////		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);		
-//		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow, faqCategory);
-//		model.addAttribute("pageList", pageList);
-//		model.addAttribute("faqList", faqList);
 		return "csc/csc_faq";
 	}
 	
@@ -83,7 +75,7 @@ public class CscController {
 	public List<FAQVO> cscFaqJson(@RequestParam String parsedPageNum,
 								  @RequestParam String faqCategory,
 								  FAQVO faq) {
-		System.out.println("@KWKL@@@" + faqCategory);
+//		System.out.println("@KWKL@@@" + faqCategory);
 		int pageNum = Integer.parseInt(parsedPageNum);
 		System.out.println("PAGENUM!!" +  pageNum);
 		int listLimit = 7;
@@ -104,6 +96,41 @@ public class CscController {
 		return faqList;
 	}
 	
+	@ResponseBody
+	@GetMapping("faqViewCount")
+	public String cscFaqViewCount(FAQVO faq, Model model, HttpServletRequest request, HttpServletResponse response) {
+		System.out.println(faq);
+		faq = faqService.getFaq(faq);
+		
+		if(faq == null) {
+			model.addAttribute("msg", "등록된 자주 묻는 질문이 없습니다");
+			model.addAttribute("targetURL", "./");
+			return "error/fail";
+		}
+		//--------------------------------
+		//쿠키 responseHead에 담기
+		String faqNum = Integer.toString(faq.getFaq_num());
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				System.out.println("쿠키값: " + cookie.getValue());
+				if(!cookie.getValue().contains(faqNum)) {
+					cookie.setValue(cookie.getValue() + "_" + faqNum);
+					cookie.setMaxAge(60);
+					response.addCookie(cookie);
+					faqService.updateViewCount(faq);
+				}
+			}
+		} else {
+			Cookie newCookie = new Cookie("visit_cookie", faqNum);
+			newCookie.setMaxAge(60);
+			response.addCookie(newCookie);
+			faqService.updateViewCount(faq);
+		}
+		
+		return "false";
+	}
+	
 	
 	//=======================================
 	//공지사항 servlet
@@ -117,23 +144,35 @@ public class CscController {
 	@GetMapping(value="csc_notice.json")
 	public Map<String, Object> noticeCategory(@RequestParam(defaultValue = "1")String pageNumArg,
 											  @RequestParam String theaterName,
-											  @RequestParam String pageName) {
-		System.out.println("COLSLWKM" + pageNumArg);
-		System.out.println("COLSLWKM" + theaterName);
-		System.out.println("COLSLWKM" + pageName);
+											  @RequestParam String pageName,
+											  @RequestParam String searchKeyword) {
+		System.out.println("COLSLWKM: " + pageNumArg);
+		System.out.println("COLSLWKM: " + theaterName);
+		System.out.println("COLSLWKM: " + pageName);
+		System.out.println("COLSLWKM: " + searchKeyword);
 		//----------------------------------------------------
 		
 		int pageNum = Integer.parseInt(pageNumArg);
 		
 		int listLimit = 10; // 페이지당 보여줄 게시물 갯수
 		int startRow = (pageNum - 1) * listLimit; // 게시물의 시작점
-		List<NoticeVO> noticeList = noticeService.getNoticeList(listLimit, startRow, theaterName);
+		
+		List<NoticeVO> noticeList = null;
+		if(!searchKeyword.equals("")) {
+			noticeList = noticeService.getNoticeKeywordList(listLimit, startRow, searchKeyword);
+//			System.out.println(noticeList);
+			
+		} else {
+			noticeList = noticeService.getNoticeList(listLimit, startRow, theaterName);
+		}
+		
 		//LocalDateTIme format
 		for(NoticeVO noticed : noticeList) {
 			noticed.setNotice_fdt(noticed.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 		}
 		
-		PageInfo pageInfo = pageInfo(pageNum, listLimit, startRow, theaterName, pageName);	
+		PageInfo pageInfo = pageInfo(pageNum, listLimit, startRow, theaterName, pageName, searchKeyword);
+		System.out.println(pageInfo.getListCount());
 		//두개의 객체전달을 위한 HashMap()
 		Map<String, Object> noticeObj = new HashMap<String, Object>();
 		noticeObj.put("noticeList", noticeList);
@@ -247,7 +286,12 @@ public class CscController {
 	
 	//------------------------------------------------------------------
 	//paging 처리
-	public PageInfo pageInfo(@RequestParam(defaultValue = "1")int pageNum, int listLimit, int startRow, String category, String pageName) {
+	public PageInfo pageInfo(@RequestParam(defaultValue = "1")int pageNum,
+							 int listLimit,
+							 int startRow,
+							 String category,
+							 String pageName,
+							 String searchKeyword) {
 		//전체1 notice 게시판 번호
 		int listCount = 0;
 		int pageListLimit = 5;
@@ -260,14 +304,15 @@ public class CscController {
 				case "" : listCount = adminService.getNoticeListCount(); break; 
 				default : listCount = noticeService.getNoticeListCountCag(category); break; 
 			}
+			if(!searchKeyword.equals("")) {
+				listCount = noticeService.getNoticeSearchKeywordCount(searchKeyword);
+			}
 		} else if(pageName.equals("faq")) {
 //			switch (category) {
 //				case "" : listCount = faqService.getFaqListCount(); break; 
 //				default : listCount = faqService.getfaqListCountCag(category); break; 
 //			}
-			
 		}
-//		pageListLimit = 5; //뷰에 표시할 페이지갯수
 		maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
 		endPage = startPage + pageListLimit - 1; //마지막 페이지 번호

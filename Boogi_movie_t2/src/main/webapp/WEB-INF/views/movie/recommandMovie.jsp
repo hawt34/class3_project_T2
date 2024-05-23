@@ -129,8 +129,8 @@ footer {
 	</header>
 	<div id="wrap">
 		<article>
-			<h1>검색하신 영화 검색어는 "${param.searchKeyword}" 이고 검색결과는
-				${movieResult}개 입니다.</h1>
+			<h1>"${sessionScope.sId}" 의 취향은 ${memberCode} 이고 추천 결과는
+				${genreSize}개 입니다.</h1>
 		</article>
 		<section>
 			<div class="nowMovie">
@@ -141,7 +141,7 @@ footer {
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.location.href='boxoffice'">박스오피스 순위</button>
 				<button type="button" class="btn btn-outline-primary"
-					id="recommendMovie" onclick="openPopup()">추천상영영화</button>
+					id="recommendMovie" onclick="window.location.href='recommand'">추천상영영화</button>
 				<form action="searchMovie">
 					<input type="text" name="searchKeyword" placeholder="영화제목 입력"
 						value="${param.searchKeyword}"> <input type="submit"
@@ -149,11 +149,12 @@ footer {
 				</form>
 			</div>
 			<div class="list">
-				<c:forEach var="movie" items="${movieList}" varStatus="loop"
+				<c:forEach var="movie" items="${genreMovieList}" varStatus="loop"
 					begin="0">
 					<div class="movie">
 						<img src="${movie.movie_poster}">
 						<p>${movie.movie_name}</p>
+						<p>${movie.movie_genre}</p>
 						<input type="hidden" class="movie_num" name="movie_num"
 							value="${movie.movie_num}">
 						<c:choose>
@@ -163,9 +164,6 @@ footer {
 							</c:when>
 							<c:otherwise>
 								<p>개봉예정작</p>
-								<button type="button"
-									class="btn btn-outline-primary movieTicket"
-									style="display: none;">예매하기</button>
 							</c:otherwise>
 						</c:choose>
 						<button type="button"
@@ -176,9 +174,9 @@ footer {
 			<br>
 			<div class="more">
 				<button id="moreMoviesBtn" type="button"
-					class="btn btn-outline-primary">검색결과 더보기</button>
+					class="btn btn-outline-primary">추천 영화 더보기</button>
 			</div>
-			<h2 class="end-message">모든 검색 영화가 다 출력되었습니다.</h2>
+			<h2 class="end-message">추천 영화가 다 출력되었습니다.</h2>
 		</section>
 		<footer>
 			<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
@@ -204,6 +202,10 @@ footer {
 					if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
 						window.location.href = 'member_login';
 					}
+				} else {
+					if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
+						window.location.href = 'recommand'; // 예매 페이지로 이동
+					}
 				}
 			});
 
@@ -219,7 +221,7 @@ footer {
 						window.location.href = 'member_login';
 					}
 				} else {
-					if ($(this).hasClass("movieTicket")) {
+					if (confirm("예매 페이지로 이동하시겠습니까?")) {
 						window.location.href = 'tic_ticketing'; // 예매 페이지로 이동
 					}
 				}
@@ -245,46 +247,6 @@ footer {
 				}
 			});
 		});
-
-		function openPopup() {
-			let sId = "${sessionScope.sId}";
-			let memberCode = '${memberCode}';
-			let genreMovieList = JSON.parse('${genreMovieList}');
-
-			let popupWindow = window.open("", "popupWindow",
-					"width=600,height=400");
-			let popupContent = "<h3>추천 상영 영화 목록</h3>";
-			popupContent += "<h3> " + sId + "님의 장르는  " + memberCode
-					+ "입니다</h2>";
-			// 데이터가 있는지 확인
-			if (genreMovieList && genreMovieList.length > 0) {
-				popupContent += "<table border='1'><tr><th>영화 이름</th><th>장르</th><th>감독</th></tr>";
-				for (let i = 0; i < genreMovieList.length; i++) {
-					let movie = genreMovieList[i];
-					let movieNum = movie.movie_num;
-					let movieInfoUrl = 'movieInfo?movie_num=' + movieNum;
-					console.log(movie.movie_num);
-					popupContent += "<tr><td>"
-							+ movie.movie_name
-							+ "</td><td>"
-							+ movie.movie_genre
-							+ "</td><td>"
-							+ movie.movie_director
-							+ "</td><td><input type='button' value='상세정보' onclick='window.location.href=\"" + movieInfoUrl + "\"'></td></tr>";
-				}
-				popupContent += "</table>";
-			} else {
-				// 데이터가 없을 때의 메시지
-				popupContent += "<p>추천 상영 영화 목록이 없습니다. 죄송합니다.</p>";
-			}
-			// 팝업 내용을 팝업 창에 쓰기
-			popupContent += "<button id='confirmButton'>확인</button>";
-			popupWindow.document.write(popupContent);
-			$(popupWindow.document).on('click', '#confirmButton', function() {
-				popupWindow.close();
-			});
-
-		}
 	</script>
 </body>
 </html>

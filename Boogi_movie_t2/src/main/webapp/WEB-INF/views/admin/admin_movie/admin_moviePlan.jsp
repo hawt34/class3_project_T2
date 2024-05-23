@@ -46,13 +46,8 @@ tbody tr:hover {
 	cursor: pointer;
 }
 
-.admin_plan_head {
-	margin: 50px 0;
-}
-
 .admin_plan_body {
-	margin-bottom: 100px;
-	margin-top: 100px;
+	margin-bottom: 50px;
 }
 
 .admin_moviePlan_search {
@@ -71,10 +66,11 @@ tbody tr:hover {
 }
 
 .admin_plan_title {
-	float: left;
 	font-size: 30px;
-	margin-left: 100px;
-	margin-bottom: 30px;
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	margin-right: 1000px;
 }
 .admin_plan_body_search{
 	margin-bottom: 30px;
@@ -83,7 +79,6 @@ tbody tr:hover {
 .moviePlanSearchBox{
 	width: 600px;
 	text-align: center;
-/* 	border: 5px solid skyBlue; */
 	margin: 30px auto;
 }
 .moviePlanSearchBox > select{
@@ -101,6 +96,21 @@ tbody tr:hover {
 }
 .moviePlanSearchBox > h3{
 	margin-top: 10px;
+}
+#pageList{
+	text-align: center;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+#pageList > a{
+	text-decoration: none;
+	color: lightgray;
+	margin: 0 10px;
+}
+#pageList > b{
+	margin: 0 10px;
+	color: #1b1b1b;
 }
 </style>
 </head>
@@ -121,13 +131,15 @@ tbody tr:hover {
 
 			<div class="col-md-9">
 				<!--  메인 중앙 영역  -->
-				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
-				<div class="admin_plan_head">
-					<div class="admin_plan_title">상영일정관리</div>
-					
-				</div>
 				
-				<!-- 바디 부분 여기 표 넣을거임 -->
+				<!-- 파라미터 없을 시 기본값 1 저장 -->
+				<c:set var="pageNum" value="1"/>
+				<c:if test="${not empty param.pageNum}">
+					<c:set var="pageNum" value="${param.pageNum}"/>
+				</c:if>
+				
+				<div class="admin_plan_title">상영일정관리</div>
+				
 				<div class="admin_plan_body">
 					<form action="admin_moviePlan_reg" method ="post">
 						<table class="admin_plan_body_search">
@@ -244,6 +256,29 @@ tbody tr:hover {
 						</tbody>
 					</table>
 				</div>
+				
+				<section id="pageList">
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_moviePlan?pageNum=${pageNum - 1}'"
+						<c:if test="${pageNum le 1}">disabled</c:if>>
+						이전
+					</button>
+					
+					<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1" >
+							<c:choose>
+								<c:when test="${pageNum eq i}">
+									<b>${i}</b>
+								</c:when>				
+								<c:otherwise>
+									<a href="admin_moviePlan?pageNum=${i}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+					</c:forEach>
+					
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_moviePlan?pageNum=${pageNum + 1}'"
+						<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
+						다음
+					</button>
+				</section>
 
 			</div>
 
@@ -313,7 +348,7 @@ tbody tr:hover {
 		    });
 			
 			// 날짜 정보가 변할떄 코드 시작
-			$('#scs_date').change(function(){
+			$('#scs_date, #screenSelect').change(function(){
 				let theaterSelect = $('#theaterSelect').val();
 				let screenSelect = $('#screenSelect').val();
 				let movieSelect = $('#movieSelect').val();
@@ -354,10 +389,21 @@ tbody tr:hover {
 						$('#hourSelect').val("");
 						// 이미 일정이 있는 시간 disabled
 		 				for(movieTime of data){
-		 					for(let time = movieTime.scs_start_time; time < movieTime.scs_end_time; time++ ){
-		 						$("#hourSelect option[value*='"+time+":00']").prop('disabled',true).css({"background": "lightgray", "color" : "white"});
+		 					var time = movieTime.scs_start_time;
+		 					// 9시 이전 시간이 넘어올때는 startTime을 9시로 설정
+		 					if(time < 9){
+			 					for(let i = 9; i < movieTime.scs_end_time; i++){
+			 						$("#hourSelect option[value*='"+i+":00']").prop('disabled',true).css({"background": "lightgray", "color" : "white"});
+			 						console.log("i: " + i);
+			 					}
+		 					} else {
+			 					for(let i = movieTime.scs_start_time; i < movieTime.scs_end_time; i++){
+			 						$("#hourSelect option[value*='"+i+":00']").prop('disabled',true).css({"background": "lightgray", "color" : "white"});
+			 						console.log("i: " + i);
+			 					}
 		 					}
 	 					}						
+// 			 					debugger;
 					},
 					error : function() {
 // 						alert("상영시간 선택 오류발생!");
@@ -412,6 +458,8 @@ tbody tr:hover {
 	            resetHourSelect(); // 시간 선택 초기화
 	        });
 		    
+		    var currentPage = 1;
+		    
 		    // 상영일정 조회하기
 	        $('#searchBtn').click(function() {
 		    	if($('#searchTheater').val() == 0){
@@ -428,17 +476,18 @@ tbody tr:hover {
 		    	$.ajax({
 		    		type: "GET",
 		    		url: "searchMoviePlanList",
-// 		    		dataType: "JSON",
+		    		dataType: "JSON",
 		    		data: {
 		    			searchTheater: $('#searchTheater').val(),
-		    			searchDate: $('#searchDate').val()
+		    			searchDate: $('#searchDate').val(),
+		    			pageNum: currentPage 
 		    		},
 		    		success: function(data) {
 // 						debugger;
 		    			$("#moviePlanList").empty();
 						var searchHtml = '';
-		                data.forEach(function(searchMovieList) {
-		                	var scs_date = new Date(searchMovieList.scs_date).toISOString().split('T')[0];
+		                data.searchMovieList.forEach(function(searchMovieList) {
+		                	var scs_date = new Date(searchMovieList.scs_date).toLocaleDateString();
 		                	searchHtml += '<tr>'
 									  +	 '<td>' + searchMovieList.scs_num + '</td>'
 									  +		'<td>' + searchMovieList.theater_name + '</td>'
@@ -452,6 +501,7 @@ tbody tr:hover {
 									  +		'</td></tr>'
 		                });
 		                $("#moviePlanList").append(searchHtml);
+		                updatePagination(data.pageInfo);
 
 					},
 					error: function(data) {
@@ -463,6 +513,50 @@ tbody tr:hover {
 		    	
 		    	
 		    }); // 상영 일정 조회 끝
+		    
+		    function updatePagination(pageInfo) {
+		        $('#pageList').empty(); // 기존 내용을 비웁니다.
+
+		        // 이전 버튼 생성
+		        var prevButton = $('<button>', {
+		            type: 'button',
+		            class: 'btn btn-outline-primary',
+		            text: '이전',
+		            click: function() { if (currentPage > 1) loadPage(currentPage - 1); }
+		        }).prop('disabled', currentPage <= 1);
+		        $('#pageList').append(prevButton);
+
+		        // 페이지 번호 생성
+		        for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+		            if (i === currentPage) {
+		                $('#pageList').append($('<b>').text(i));
+		            } else {
+		                var pageLink = $('<a>', {
+		                    href: '#',
+		                    text: i,
+		                    click: (function(pageNum) {
+		                        return function(event) {
+		                            event.preventDefault();
+		                            loadPage(pageNum);
+		                        };
+		                    })(i)
+		                });
+		                $('#pageList').append(pageLink);
+		            }
+		        }
+
+		        // 다음 버튼 생성
+		        var nextButton = $('<button>', {
+		            type: 'button',
+		            class: 'btn btn-outline-primary',
+		            text: '다음',
+		            click: function() { if (currentPage < pageInfo.maxPage) loadPage(currentPage + 1); }
+		        }).prop('disabled', currentPage >= pageInfo.maxPage);
+		        $('#pageList').append(nextButton);
+
+		        // 현재 페이지 번호 업데이트
+		        currentPage = pageInfo.currentPage;
+		    }
 		    
 			
 	    }); // document.ready 끝

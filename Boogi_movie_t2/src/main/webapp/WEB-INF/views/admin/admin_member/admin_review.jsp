@@ -81,7 +81,7 @@ td:nth-child(7) {
 	text-align: right;
 }
 .admin_review_body{
-	margin-bottom: 100px;
+	margin-bottom: 50px;
 	clear:right;
 }
 .admin_review_search{
@@ -92,32 +92,45 @@ td:nth-child(7) {
 	margin-right: 100px;
 	margin-bottom: 20px;
 }
-.admin_review_search > input[type=text]{
-	font-size: 18px;
-	height: 46px;
-	width: 150px;
-	padding: 5px;
- 	outline: none; 
-}
-.admin_review_search > select{
-	font-size: 18px;
-	height: 46px;
-	width: 100px;
- 	outline: none;
- 	padding-left: 10px;
-}
-.admin_review_search > button{
-	width: 90px;
-	height: 46px;
-	background: black;
-	outline: none; 
-	color: white;
-	font-weight: bold;
-}
+
 .admin_review_title{
 	float: left;
 	font-size: 30px;
 	margin-left: 100px;
+}
+
+.admin_review_search>form>input[type=text] {
+	font-size: 18px;
+	height: 40px;
+	width: 250px;
+	padding: 5px;
+	outline: none;
+	vertical-align: middle;
+}
+
+.admin_review_search>form>input[type=submit] {
+	width: 90px;
+	height: 40px;
+	background: black;
+	outline: none;
+	color: white;
+	font-weight: bold;
+	vertical-align: middle;
+}
+#pageList{
+	text-align: center;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+#pageList > a{
+	text-decoration: none;
+	color: lightgray;
+	margin: 0 10px;
+}
+#pageList > b{
+	margin: 0 10px;
+	color: #1b1b1b;
 }
 
 </style>
@@ -137,17 +150,22 @@ td:nth-child(7) {
 			</div>
 			
 			<div class="col-md-9">
+				
 				<!--  메인 중앙 영역  -->
-					<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
+				
+				<!-- 파라미터 없을 시 기본값 1 저장 -->
+				<c:set var="pageNum" value="1"/>
+				<c:if test="${not empty param.pageNum}">
+					<c:set var="pageNum" value="${param.pageNum}"/>
+				</c:if>
+				
 				<div class="admin_review_head">
 					<div class="admin_review_title">리뷰관리</div>
 					<div class="admin_review_search">
-						<select>
-							<option>이름</option>
-							<option>아이디</option>
-						</select>
-						<input type="text" placeholder="검색어 입력">
-						<button>검색</button>
+						<form action="admin_review">
+							<input type="text" name="searchKeyword" placeholder="아이디 입력" value="${param.searchKeyword}">
+							<input type="submit" value="검색">
+						</form>
 					</div>
 				</div>
 				
@@ -186,10 +204,34 @@ td:nth-child(7) {
 					</table>
 				</div>
 				
+				<section id="pageList">
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_review?pageNum=${pageNum - 1}'"
+						<c:if test="${pageNum le 1}">disabled</c:if>>
+						이전
+					</button>
+					
+					<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1" >
+							<c:choose>
+								<c:when test="${pageNum eq i}">
+									<b>${i}</b>
+								</c:when>				
+								<c:otherwise>
+									<a href="admin_review?pageNum=${i}&searchKeyword=${param.searchKeyword}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+					</c:forEach>
+					
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_review?pageNum=${pageNum + 1}'"
+						<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
+						다음
+					</button>
+				</section>
+				
 			</div>
 			
 		</div>
 	</main>
+	
 
 	<footer>
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>

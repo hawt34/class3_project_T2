@@ -91,7 +91,7 @@ body {
 							<div class="admin_main_center_card" onclick="location.href='admin_reserve'">
 								<div class="admin_main_card" align="left">◇금일 예매 현황</div>
 								<div align="right" class="card_num">
-									<a href="#">0건</a>
+									<a href="#">${reserveCount}건</a>
 								</div>
 							</div>
 							<div class="admin_main_center_card" onclick="location.href='admin_moviePlan'">

@@ -78,60 +78,66 @@ th:nth-child(7), td:nth-child(7) {
 
 .admin_movie_head {
 	margin: 50px 0;
-	text-align: right;
-}
-
-.admin_movie_body {
-	clear: right;
 }
 
 .admin_movie_search {
 	height: 50px;
-	width: 360px;
 	background: #black;
-	float: right;
 	margin-right: 100px;
 	margin-bottom: 20px;
-}
-
-.admin_movie_search>input[type=text] {
-	font-size: 18px;
-	height: 46px;
-	width: 150px;
-	padding: 5px;
-	outline: none;
-}
-
-.admin_movie_search>select {
-	font-size: 18px;
-	height: 46px;
-	width: 100px;
-	outline: none;
-	padding-left: 10px;
-}
-
-.admin_movie_search > button {
-	width: 90px;
-	height: 46px;
-	background: black;
-	outline: none;
-	color: white;
-	font-weight: bold;
-}
-.admin_movie_footer > button {
-	width: 90px;
-	height: 46px;
-	background: black;
-	outline: none;
-	color: white;
-	font-weight: bold;
-	margin: 20px auto;
+	display: flex;
+	float: right;
 }
 
 .admin_movie_title {
 	float: left;
 	font-size: 30px;
 	margin-left: 100px;
+}
+.admin_movie_search>form>input[type=text] {
+	font-size: 18px;
+	height: 40px;
+	width: 250px;
+	padding: 5px;
+	outline: none;
+	vertical-align: middle;
+}
+
+.admin_movie_search>form>input[type=submit] {
+	width: 90px;
+	height: 40px;
+	background: black;
+	outline: none;
+	color: white;
+	font-weight: bold;
+	vertical-align: middle;
+}
+.admin_movie_search>button {
+	width: 90px;
+	height: 40px;
+	background: black;
+	outline: none;
+	color: white;
+	font-weight: bold;
+	vertical-align: middle;
+	margin-left: 30px;
+}
+
+#pageList{
+	text-align: center;
+	font-size: 20px;
+	margin-bottom: 20px;
+	margin-top: 30px;
+}
+
+#pageList > a{
+	text-decoration: none;
+	color: lightgray;
+	margin: 0 10px;
+}
+#pageList > b{
+	margin: 0 10px;
+	color: #1b1b1b;
 }
 </style>
 </head>
@@ -160,16 +166,24 @@ th:nth-child(7), td:nth-child(7) {
 
 			<div class="col-md-9">
 				<!--  메인 중앙 영역  -->
-				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
-				<div class="admin_movie_head">
-					<div class="admin_movie_title">영화관리</div>
+				
+				<!-- 파라미터 없을 시 기본값 1 저장 -->
+				<c:set var="pageNum" value="1"/>
+				<c:if test="${not empty param.pageNum}">
+					<c:set var="pageNum" value="${param.pageNum}"/>
+				</c:if>
+				
+				<!-- 검색기능 -->
+				<div class="admin_movie_head" >
+					<div class="admin_movie_title">
+						영화관리
+					</div>
 					<div class="admin_movie_search">
-						<select>
-							<option>영화명</option>
-							<option>상영상태</option>
-						</select> 
-						<input type="text" placeholder="검색어 입력">
-						<button>검색</button>
+						<form action="admin_movie">
+							<input type="text" name="searchKeyword" placeholder="영화제목 입력" value="${param.searchKeyword}">
+							<input type="submit" value="검색">
+						</form>
+						<button onclick="location.href = 'admin_movie_reg_form'">영화등록</button>
 					</div>
 				</div>
 
@@ -217,7 +231,30 @@ th:nth-child(7), td:nth-child(7) {
 				</div>
 				
 				<div class="admin_movie_footer" align="center">
-					<button onclick="location.href = 'admin_movie_reg_form'">영화등록</button>
+				
+					<section id="pageList">
+						<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_movie?pageNum=${pageNum - 1}'"
+							<c:if test="${pageNum le 1}">disabled</c:if>>
+							이전
+						</button>
+						
+						<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1" >
+								<c:choose>
+									<c:when test="${pageNum eq i}">
+										<b>${i}</b>
+									</c:when>				
+									<c:otherwise>
+										<a href="admin_movie?pageNum=${i}&searchKeyword=${param.searchKeyword}">${i}</a>
+									</c:otherwise>
+								</c:choose>
+						</c:forEach>
+						
+						<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_movie?pageNum=${pageNum + 1}'"
+							<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
+							다음
+						</button>
+					</section>
+					
 				</div>
 
 			</div>
@@ -235,27 +272,27 @@ th:nth-child(7), td:nth-child(7) {
 				location.href = "admin_movie_delete?movie_num=" + movie_num;
 			}
 		}
-		function movieStatus(dateString) {
-			var today = new Date(); 
-			var todayYear = today.getFullYear();
-			var todayMonth = today.getMonth() + 1; 
-			var todayDay = today.getDate();
-			var todayDate = new Date(todayYear, todayMonth - 1, todayDay); 
+// 		function movieStatus(dateString) {
+// 			var today = new Date(); 
+// 			var todayYear = today.getFullYear();
+// 			var todayMonth = today.getMonth() + 1; 
+// 			var todayDay = today.getDate();
+// 			var todayDate = new Date(todayYear, todayMonth - 1, todayDay); 
 			
-			// 개봉일을 파싱하여 비교하기 적합한 형태로 변환
-			var fomatYear = parseInt(dateString.substring(0, 4));
-			var formatMonth = parseInt(dateString.substring(4, 6));
-			var formatDay = parseInt(dateString.substring(6, 8));
-			var formatDate = new Date(fomatYear, formatMonth - 1, formatDay); 
+// 			// 개봉일을 파싱하여 비교하기 적합한 형태로 변환
+// 			var fomatYear = parseInt(dateString.substring(0, 4));
+// 			var formatMonth = parseInt(dateString.substring(4, 6));
+// 			var formatDay = parseInt(dateString.substring(6, 8));
+// 			var formatDate = new Date(fomatYear, formatMonth - 1, formatDay); 
 			
-			// 오늘 날짜와 API로부터 받아온 개봉일을 비교
-			if (formatDate < todayDate) {
-	           return "개봉";
-			} else {
-	            return "개봉예정";
+// 			// 오늘 날짜와 API로부터 받아온 개봉일을 비교
+// 			if (formatDate < todayDate) {
+// 	           return "개봉";
+// 			} else {
+// 	            return "개봉예정";
 				
-			}
-		}
+// 			}
+// 		}
 	</script>
 </body>
 </html>

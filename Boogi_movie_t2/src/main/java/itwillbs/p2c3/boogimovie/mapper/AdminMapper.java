@@ -30,8 +30,20 @@ public interface AdminMapper {
 	// 금일 상영작 수 조회
 	int countMoviePlan();
 	
+	// 금일 예매 수 조회
+	int countReserve();
+	
+	//======================================================
+	
 	// 회원 리스트 조회
-	List<Map<String, String>> selectMemberList();
+	List<MemberVO> selectMemberList(@Param("searchKeyword") String searchKeyword, 
+												@Param("startRow") int startRow, 
+												@Param("listLimit") int listLimit);
+	
+	// 회원 리스트 수 조회
+	int selectMemberListCount(@Param("searchKeyword") String searchKeyword, 
+								@Param("startRow") int startRow, 
+								@Param("listLimit") int listLimit);
 	
 	// 회원삭제
 	int deleteMember(String id);
@@ -41,7 +53,14 @@ public interface AdminMapper {
 
 	//========================================================
 	// 리뷰 리스트 조회
-	List<ReviewVO> selectReviewList();
+	List<ReviewVO> selectReviewList(@Param("searchKeyword") String searchKeyword, 
+									@Param("startRow") int startRow, 
+									@Param("listLimit") int listLimit);
+
+	// 리뷰 리스트 수 조회
+	int selectReviewListCount(@Param("searchKeyword") String searchKeyword, 
+								 @Param("startRow") int startRow, 
+								 @Param("listLimit") int listLimit);
 
 	// 리뷰 삭제
 	int deleteReview(String review_num);
@@ -59,6 +78,16 @@ public interface AdminMapper {
 	//========================================================
 	// 영화 리스트 조회
 	List<Map<String, String>> selectMovieList();
+
+	// 영화 리스트 검색어로 조회
+	List<MovieVO> searchMovieList(@Param("searchKeyword") String searchKeyword, 
+											@Param("startRow") int startRow, 
+											@Param("listLimit") int listLimit);
+
+	// 영화 리스트 수 조회
+	int selectMovieListCount(@Param("searchKeyword") String searchKeyword, 
+							@Param("startRow") int startRow, 
+							@Param("listLimit") int listLimit);
 	
 	// 영화 상세보기
 	MovieVO selectMovie(int movie_num);
@@ -88,7 +117,12 @@ public interface AdminMapper {
 	int deleteMoviePlan(int scs_num);
 	
 	// 상영일정 리스트
-	List<Map<String, String>> selectMoviePlanList();
+	List<Map<String, String>> selectMoviePlanList(@Param("startRow") int startRow, 
+												  @Param("listLimit") int listLimit);
+
+	// 상영일정 리스트 수
+	int selectMoviePlanListCount(@Param("startRow") int startRow, 
+			  				     @Param("listLimit") int listLimit);
 	
 	// 상영 시작, 종료시간 가져오기
 	List<Map<String, String>> getMovieTimeList(@Param("theaterSelect") int theaterSelect,
@@ -99,7 +133,16 @@ public interface AdminMapper {
 	List<Map<String, String>> getTheaterList();
 	
 	// 상영 일정 조회
-	List<ScreenSessionVO> getMoivePlanList(@Param("theater_num") int theater_num, @Param("scs_date") Date scs_date);
+	List<ScreenSessionVO> getMoivePlanList(@Param("theater_num") int theater_num, 
+										   @Param("scs_date") Date scs_date,
+										   @Param("startRow") int startRow, 
+										   @Param("listLimit") int listLimit);
+
+	// 상영 일정 조회
+	int getMoivePlanListCount(@Param("theater_num") int theater_num, 
+							  @Param("scs_date") Date scs_date,
+							  @Param("startRow") int startRow, 
+							  @Param("listLimit") int listLimit);
 	
 	//========================================================
 	// 쿠폰타입 리스트 가져오기

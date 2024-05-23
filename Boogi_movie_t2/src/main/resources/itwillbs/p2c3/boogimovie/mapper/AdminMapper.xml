@@ -20,7 +20,7 @@
 	</select>
 	
 <!-- 금일 상영작 수 조회 -->
-	<select id="countMoviePlan">
+	<select id="countMoviePlan" resultType="int">
 		SELECT COUNT(*) 
 		FROM 
 			screen_session
@@ -28,10 +28,39 @@
 			scs_date = CURRENT_DATE()
 	</select>
 	
+<!-- 금일 예매 수 조회 -->
+	<select id="countReserve" resultType="int">
+		SELECT COUNT(*) 
+		FROM pay
+		WHERE 
+			DATE_FORMAT(ticket_pay_date, '%Y-%m-%d') = CURRENT_DATE()
+		AND 
+			ticket_pay_cancel_date IS NULL
+	</select>
+	
 <!-- 회원 리스트 조회 -->
-	<select id="selectMemberList" resultType="hashmap">
+	<select id="selectMemberList" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
 		SELECT * 
 		FROM member
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				member_id LIKE CONCAT('%', #{searchKeyword}, '%')
+				OR member_name LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		LIMIT 
+			#{startRow}
+			, #{listLimit}
+	</select>
+
+<!-- 회원 리스트 수 조회 -->
+	<select id="selectMemberListCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM member
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				member_id LIKE CONCAT('%', #{searchKeyword}, '%')
+				OR member_name LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
 	</select>
 
 <!-- 회원 상세보기 -->
@@ -51,6 +80,23 @@
 	<select id="selectReviewList" resultType="itwillbs.p2c3.boogimovie.vo.ReviewVO">
 		SELECT * 
 		FROM review
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				member_id LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		LIMIT 
+			#{startRow}
+			, #{listLimit}
+	</select>
+
+<!-- 리뷰 리스트 수 조회 -->
+	<select id="selectReviewListCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM review 
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				member_id LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
 	</select>
 	
 <!-- 리뷰 삭제 -->
@@ -133,6 +179,29 @@
 			t.ticket_pay_num = #{ticket_pay_num};
 	</select>
 	
+<!-- 영화 검색어로 리스트 조회 -->
+	<select id="searchMovieList" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO"> 
+		SELECT * 
+		FROM movie
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				movie_name LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+			LIMIT 
+			#{startRow}
+			, #{listLimit}
+	</select>
+
+<!-- 영화 리스트 수 조회 -->
+	<select id="selectMovieListCount" resultType="int"> 
+		SELECT count(*) 
+		FROM movie
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				movie_name LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+
+	</select>
 	
 <!-- 영화 리스트 조회 -->
 	<select id="selectMovieList" resultType="hashmap">
@@ -275,7 +344,7 @@
 	</delete>
 	
 <!-- 상영일정 리스트 -->
-	<select id="selectMoviePlanList">
+	<select id="selectMoviePlanList" resultType="map">
 		SELECT 
 			ss.*, si.screen_cinema_num, t.theater_name, mv.movie_name 
 		From 
@@ -292,15 +361,30 @@
 			theater t
 		ON 
 			t.theater_num = si.theater_num
+		WHERE 
+			ss.scs_date >= CURRENT_DATE()
 		ORDER BY 
-			ss.scs_date;
+			ss.scs_date
+		LIMIT 
+			#{startRow}
+			, #{listLimit}
+	</select>
+
+<!-- 상영일정 리스트 수 -->
+	<select id="selectMoviePlanListCount" resultType="int">
+		SELECT 
+			COUNT(*)
+		From 
+			screen_session
+		WHERE 
+			scs_date >= CURRENT_DATE()
 	</select>
 	
 <!-- 상영 시작, 종료시간 가져오기 -->
 	<select id="getMovieTimeList">
 		SELECT 
-			cast((ss.scs_start_time - 1) as char) as scs_start_time
-		  , cast((ss.scs_end_time + 1) as char) as scs_end_time  
+			cast((ss.scs_start_time - 2) as char) as scs_start_time
+		  , cast((ss.scs_end_time + 2) as char) as scs_end_time  
 		FROM 
 			screen_session ss
 		JOIN 
@@ -318,7 +402,7 @@
 	</select>
 	
 <!-- 상영일정 조회하기 -->
-	<select id="getMoivePlanList" resultType="map">
+	<select id="getMoivePlanList" resultType="itwillbs.p2c3.boogimovie.vo.ScreenSessionVO">
 		SELECT 
 			ss.*, si.screen_cinema_num, t.theater_name, mv.movie_name 
 		From 
@@ -339,6 +423,31 @@
 			scs_date = #{scs_date} AND t.theater_num = #{theater_num} 
 		ORDER BY 
 			ss.scs_date
+		LIMIT 
+			#{startRow}
+			, #{listLimit}
+	</select>
+
+<!-- 상영일정 수 조회하기 -->
+	<select id="getMoivePlanListCount" resultType="int">
+		SELECT 
+			count(*)
+		From 
+			screen_session ss
+		Join 
+			screen_info si
+		ON 
+			ss.screen_num =si.screen_num
+		JOIN 
+			movie mv 
+		ON 
+			mv.movie_num = ss.movie_num
+		JOIN 
+			theater t
+		ON 
+			t.theater_num = si.theater_num
+		WHERE
+			scs_date = #{scs_date} AND t.theater_num = #{theater_num} 
 	</select>
 	
 	

@@ -103,6 +103,13 @@ public class AdminController {
 		int reserveCount = service.countReserve();
 		model.addAttribute("reserveCount", reserveCount);
 		
+		// 극장 리스트 이름 가져오기
+		List<Map<String, String>> theaterList = service.getTheaterList();
+		model.addAttribute("theaterList", theaterList);
+		
+		// 월간 매출 가져오기
+		List<Map<String, String>> MonthSalesList = service.getMonthSales();
+		model.addAttribute("MonthSalesList", MonthSalesList);
 		
 		return "admin/admin_main/admin_main";
 	}
@@ -361,7 +368,7 @@ public class AdminController {
 		List<ReviewVO> reviewList = service.getReviewList(searchKeyword, startRow, listLimit);
 		int listCount = service.getReviewListCount(searchKeyword, startRow, listLimit);
 		
-		int pageListLimit = 3;
+		int pageListLimit = 5;
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		int endPage = startPage + pageListLimit - 1;
@@ -401,7 +408,7 @@ public class AdminController {
 		
 		int listCount = service.getMemberListCount(searchKeyword, startRow, listLimit);
 		// 페이징 숫자 갯수
-		int pageListLimit = 3;
+		int pageListLimit = 5;
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		int endPage = startPage + pageListLimit - 1;
@@ -457,7 +464,7 @@ public class AdminController {
 		int listCount = service.selectMoviePlanListCount(startRow, listLimit);
 		
 		// 페이징 숫자 갯수
-		int pageListLimit = 3;
+		int pageListLimit = 5;
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		int endPage = startPage + pageListLimit - 1;
@@ -626,7 +633,7 @@ public class AdminController {
 		
 		int listCount = service.getMovieListCount(searchKeyword, startRow, listLimit);
 		// 페이징 숫자 갯수
-		int pageListLimit = 3;
+		int pageListLimit = 5;
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		int endPage = startPage + pageListLimit - 1;
@@ -716,11 +723,33 @@ public class AdminController {
 	
 	// 관리자 이벤트 
 	@GetMapping("admin_event")
-	public String adminEvent(Model model) {
-		List<EventVO> eventList = eventService.getEventList();
+	public String adminEvent(@RequestParam(defaultValue = "1") int pageNum, 
+		 	 				 @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+		
+		// 한 페이지에 표시할 갯수
+		int listLimit = 10;
+		// 조회 시작 행 번호
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 영화목록 조회
+		List<EventVO> eventList = eventService.getEventListSearch(searchKeyword, startRow, listLimit);
+		
+		int listCount = eventService.getEventListCount(searchKeyword, startRow, listLimit);
+		// 페이징 숫자 갯수
+		int pageListLimit = 5;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+		endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("eventList",eventList);
 		return "admin/admin_event/admin_event";
 	}
+	
 	// 이벤트 등록 폼
 	@GetMapping("admin_event_form")
 	public String adminEventForm(Model model) {
@@ -863,7 +892,30 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 결제 페이지
 	@GetMapping("admin_pay")
-	public String adminPay() {
+	public String adminPay(@RequestParam(defaultValue = "1") int pageNum, 
+						   @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+		
+		// 한 페이지에 표시할 갯수
+		int listLimit = 10;
+		// 조회 시작 행 번호
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 이거 주석 처리 해놓은거 풀고 쓰시면 됩니다
+//		List<Map<String, String>> payList = service.getPayList(searchKeyword, startRow, listLimit);
+//		
+//		int listCount = service.getPayListCount(searchKeyword, startRow, listLimit);
+//		// 페이징 숫자 갯수
+//		int pageListLimit = 5;
+//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+//		int endPage = startPage + pageListLimit - 1;
+//		if(endPage > maxPage) {
+//		endPage = maxPage;
+//		}
+//		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+//		model.addAttribute("payList", payList);
+//		model.addAttribute("pageInfo", pageInfo);
+		
 		return "admin/admin_pay/admin_pay";
 	}
 	@GetMapping("admin_pay_cancel")
@@ -871,12 +923,32 @@ public class AdminController {
 		return "redirect:/admin_pay";
 	}
 	
+	//----------------------------------------------------------------------
 	//	예매관리 페이지
 	@GetMapping("admin_reserve")
-	public String adminReserve(Model model) {
-		List<Map<String, String>> reserveList = service.getReserveList();
-		System.out.println(reserveList);
+	public String adminReserve(@RequestParam(defaultValue = "1") int pageNum, 
+							   @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+		
+		// 한 페이지에 표시할 갯수
+		int listLimit = 10;
+		// 조회 시작 행 번호
+		int startRow = (pageNum - 1) * listLimit;
+		
+		List<Map<String, String>> reserveList = service.getReserveList(searchKeyword, startRow, listLimit);
+		
+		int listCount = service.getReserveListCount(searchKeyword, startRow, listLimit);
+		// 페이징 숫자 갯수
+		int pageListLimit = 5;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+		endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		model.addAttribute("reserveList", reserveList);
+		model.addAttribute("pageInfo", pageInfo);
+		
 		return "admin/admin_member/admin_reserve";
 	}
 	

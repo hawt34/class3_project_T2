@@ -38,6 +38,30 @@
 			ticket_pay_cancel_date IS NULL
 	</select>
 	
+<!-- 월간 매출 조회 -->
+	<select id="getMonthSales" resultType="map">
+		SELECT 
+			t.theater_name , SUM(p.ticket_pay_price) AS 'Sales'
+		FROM 
+			screen_info si
+		JOIN 
+			screen_session ss 
+		ON 
+			si.screen_num = ss.scs_num 
+		JOIN 
+			pay p 
+		ON 
+			ss.scs_num = p.scs_num 
+		JOIN 
+			theater t 
+		ON 
+			t.theater_num =si.theater_num 
+		WHERE 
+			p.ticket_pay_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+		GROUP BY 
+			t.theater_name
+	</select>
+	
 <!-- 회원 리스트 조회 -->
 	<select id="selectMemberList" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
 		SELECT * 
@@ -131,6 +155,44 @@
 			theater th
 		ON
 			th.theater_num = rv.theater_num
+		<if test="!searchKeyword.equals('')">
+		WHERE
+			member_id LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		ORDER BY 
+			p.ticket_pay_date
+		LIMIT 
+			#{startRow}
+			, #{listLimit}
+		
+	</select>
+	
+<!-- 예매 리스트 수 조회 -->
+	<select id="selectReserveListCount" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			reserve_view rv 
+		JOIN 
+			pay p 
+		ON 
+			p.scs_num = rv.scs_num
+		JOIN 
+			ticket t 
+		ON 
+			t.ticket_pay_num = p.ticket_pay_num
+		JOIN 
+			movie mv
+		ON 
+			mv.movie_num = rv.movie_num
+		JOIN 
+			theater th
+		ON
+			th.theater_num = rv.theater_num
+		<if test="!searchKeyword.equals('')">
+		WHERE
+			member_id LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
 		
 	</select>
 

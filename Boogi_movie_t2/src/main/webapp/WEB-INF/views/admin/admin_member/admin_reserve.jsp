@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지 - 예매관리</title>
-<link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -85,8 +84,7 @@ td:nth-child(8) {
 	text-align: right;
 }
 .admin_reserve_body{
-	margin-bottom: 100px;
-	clear:right;
+	margin-bottom: 30px;
 }
 .admin_reserve_search{
 	height: 50px;
@@ -94,36 +92,49 @@ td:nth-child(8) {
 	background: #black;
 	float: right;
 	margin-right: 100px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
-.admin_reserve_search > input[type=text]{
-	font-size: 18px;
-	height: 46px;
-	width: 150px;
-	padding: 5px;
- 	outline: none; 
-}
-.admin_reserve_search > select{
-	font-size: 18px;
-	height: 46px;
-	width: 100px;
- 	outline: none;
- 	padding-left: 10px;
-}
-.admin_reserve_search > button{
-	width: 90px;
-	height: 46px;
-	background: black;
-	outline: none; 
-	color: white;
-	font-weight: bold;
-}
+
 .admin_reserve_title{
 	float: left;
 	font-size: 30px;
 	margin-left: 100px;
 }
 
+.admin_reserve_search>form>input[type=text] {
+	font-size: 18px;
+	height: 40px;
+	width: 150px;
+	padding: 5px;
+	outline: none;
+	vertical-align: middle;
+}
+
+.admin_reserve_search>form>input[type=submit] {
+	width: 90px;
+	height: 40px;
+	background: black;
+	outline: none;
+	color: white;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+#pageList{
+	text-align: center;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+#pageList > a{
+	text-decoration: none;
+	color: lightgray;
+	margin: 0 10px;
+}
+#pageList > b{
+	margin: 0 10px;
+	color: #1b1b1b;
+}
 </style>
 </head>
 <body>
@@ -154,7 +165,7 @@ td:nth-child(8) {
 					<div class="admin_reserve_title">예매관리</div>
 					<div class="admin_reserve_search">
 						<form action="admin_reserve">
-							<input type="text" name="searchKeyword" placeholder="이름 또는 아이디 입력" value="${param.searchKeyword}">
+							<input type="text" name="searchKeyword" placeholder="아이디 입력" value="${param.searchKeyword}">
 							<input type="submit" value="검색">
 						</form>
 					</div>
@@ -201,6 +212,29 @@ td:nth-child(8) {
 						</tbody>
 					</table>
 				</div>
+				
+				<section id="pageList">
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_reserve?pageNum=${pageNum - 1}&searchKeyword=${param.searchKeyword}'"
+						<c:if test="${pageNum le 1}">disabled</c:if>>
+						이전
+					</button>
+					
+					<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1" >
+							<c:choose>
+								<c:when test="${pageNum eq i}">
+									<b>${i}</b>
+								</c:when>				
+								<c:otherwise>
+									<a href="admin_reserve?pageNum=${i}&searchKeyword=${param.searchKeyword}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+					</c:forEach>
+					
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_reserve?pageNum=${pageNum + 1}&searchKeyword=${param.searchKeyword}'"
+						<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
+						다음
+					</button>
+				</section>
 				
 			</div>
 			

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,7 +133,6 @@ body {
 	<footer>
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
-
 	<script type="text/javascript">
 		var ctx = document.getElementById("myChart").getContext('2d');
 		/*
@@ -139,41 +140,55 @@ body {
 		- ctx를 첫번째 argument로 넘겨주고, 
 		- 두번째 argument로 그림을 그릴때 필요한 요소들을 모두 넘겨줍니다. 
 		 */
+		
+		 // 극장 이름 가져오기
+		 var TheaterList = [
+			 <c:forEach var="theater" items="${theaterList}">
+	         	"${theater.theater_name}" ,
+	         </c:forEach>
+		 ];
+		 var MonthSales = [
+	            <c:forEach var="MonthSales" items="${MonthSalesList}">
+	            	"${MonthSales.Sales}" ,
+	            </c:forEach>
+	     ];
+		
+		// 랜덤색상 생성 
+		function getRandomColor() {
+			const rColor = Math.floor(Math.random() * 128 + 128);
+		    const gColor = Math.floor(Math.random() * 128 + 128);
+		    const bColor = Math.floor(Math.random() * 128 + 128);
+		    return 'rgba(' + rColor + ',' + gColor + ',' + bColor + ', 0.5)';
+		}
+
+		var chartColors = function() {
+		    return getRandomColor();
+		};
+		 
 		var myChart = new Chart(ctx,
-				{
-					type : 'bar',
-					data : {
-						labels : [ "해운대점", "서면점", "화명점", "광안점", "남포점", "사상점" ],
-						datasets : [ {
-							label : '일일 매출 데이터',
-							data : [ 1200000, 1900000, 300000, 500000, 200000,
-									300000 ],
-							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-									'rgba(54, 162, 235, 0.2)',
-									'rgba(255, 206, 86, 0.2)',
-									'rgba(75, 192, 192, 0.2)',
-									'rgba(153, 102, 255, 0.2)',
-									'rgba(255, 159, 64, 0.2)' ],
-							borderColor : [ 'rgba(255,99,132,1)',
-									'rgba(54, 162, 235, 1)',
-									'rgba(255, 206, 86, 1)',
-									'rgba(75, 192, 192, 1)',
-									'rgba(153, 102, 255, 1)',
-									'rgba(255, 159, 64, 1)' ],
-							borderWidth : 1
+			{
+				type : 'bar',
+				data : {
+					labels : TheaterList,
+					datasets : [ {
+						label : '월간 매출 데이터',
+						data : MonthSales,
+						backgroundColor : chartColors,
+						borderColor : chartColors,
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					maintainAspectRatio : true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+					scales : {
+						y : [ {
+							ticks : {
+								beginAtZero : true
+							}
 						} ]
-					},
-					options : {
-						maintainAspectRatio : true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-						scales : {
-							yAxes : [ {
-								ticks : {
-									beginAtZero : true
-								}
-							} ]
-						}
 					}
-				});
+				}
+			});
 	</script>
 </body>
 </html>

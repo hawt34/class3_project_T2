@@ -45,6 +45,11 @@ public class AdminService {
 		return mapper.countReserve();
 	}
 	
+	// 월간 매출 가져오기
+	public List<Map<String, String>> getMonthSales(){
+		return mapper.getMonthSales();
+	}
+	
 	//------------------------------------------------------------
 	
 	// 회원 리스트 조회
@@ -69,8 +74,12 @@ public class AdminService {
 	
 	//--------------------------------------------------------------
 	// 예매리스트
-	public List<Map<String, String>> getReserveList() {
-		return mapper.selectReserveList();
+	public List<Map<String, String>> getReserveList(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectReserveList(searchKeyword, startRow, listLimit);
+	}
+	// 예매리스트 수
+	public int getReserveListCount(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectReserveListCount(searchKeyword, startRow, listLimit);
 	}
 	
 	// 예매 상세보기

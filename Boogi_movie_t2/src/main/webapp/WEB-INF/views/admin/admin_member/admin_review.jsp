@@ -81,8 +81,7 @@ td:nth-child(7) {
 	text-align: right;
 }
 .admin_review_body{
-	margin-bottom: 50px;
-	clear:right;
+	margin-bottom: 30px;
 }
 .admin_review_search{
 	height: 50px;
@@ -90,7 +89,7 @@ td:nth-child(7) {
 	background: #black;
 	float: right;
 	margin-right: 100px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .admin_review_title{
@@ -102,7 +101,7 @@ td:nth-child(7) {
 .admin_review_search>form>input[type=text] {
 	font-size: 18px;
 	height: 40px;
-	width: 250px;
+	width: 150px;
 	padding: 5px;
 	outline: none;
 	vertical-align: middle;
@@ -111,10 +110,9 @@ td:nth-child(7) {
 .admin_review_search>form>input[type=submit] {
 	width: 90px;
 	height: 40px;
-	background: black;
 	outline: none;
-	color: white;
 	font-weight: bold;
+	margin-left: 5px;
 	vertical-align: middle;
 }
 #pageList{
@@ -164,7 +162,7 @@ td:nth-child(7) {
 					<div class="admin_review_search">
 						<form action="admin_review">
 							<input type="text" name="searchKeyword" placeholder="아이디 입력" value="${param.searchKeyword}">
-							<input type="submit" value="검색">
+							<input type="submit" class="btn btn-dark" value="검색">
 						</form>
 					</div>
 				</div>
@@ -205,7 +203,7 @@ td:nth-child(7) {
 				</div>
 				
 				<section id="pageList">
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_review?pageNum=${pageNum - 1}'"
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_review?pageNum=${pageNum - 1}&searchKeyword=${param.searchKeyword}'"
 						<c:if test="${pageNum le 1}">disabled</c:if>>
 						이전
 					</button>
@@ -221,7 +219,7 @@ td:nth-child(7) {
 							</c:choose>
 					</c:forEach>
 					
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_review?pageNum=${pageNum + 1}'"
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_review?pageNum=${pageNum + 1}&searchKeyword=${param.searchKeyword}'"
 						<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
 						다음
 					</button>

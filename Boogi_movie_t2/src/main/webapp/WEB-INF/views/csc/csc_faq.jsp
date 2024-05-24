@@ -93,6 +93,7 @@ let isLoading = false;
 let isEmpty = false;
 let faqCategory = '';
 let pageNum = 1;
+let index = 0;
 
 
 function getScroll(newFaqCategory = "", isEmpty) {
@@ -116,7 +117,7 @@ function getScroll(newFaqCategory = "", isEmpty) {
 // 				pageNum = 2;
             }
 			//반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달
-            $.each(faqList, function(index, faq) {
+            $.each(faqList, function(i, faq) {
 				let imgPath = "${pageContext.request.contextPath}/resources/images/cscBulb.png";
             	let faqNum = faq.faq_num; //faq_num 변수에 저장
                 let accordion = $(".csc_accordion");
@@ -158,6 +159,7 @@ function getScroll(newFaqCategory = "", isEmpty) {
 			
 			isLoading = false; // 데이터 요청 완료 후 플래그 해제
 			pageNum++;
+			index += 7;
         },
         
         error: function() {

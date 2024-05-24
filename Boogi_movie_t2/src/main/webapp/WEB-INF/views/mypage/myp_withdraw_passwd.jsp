@@ -79,7 +79,7 @@ input[type=text]:focus, input[type=password]:focus {
 	<div class="container2">
 		<div class="row">
 			<div class="col-md-2">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div><!-- col-md-2  -->
 			
 			<div class="col-md-9">
@@ -103,7 +103,7 @@ input[type=text]:focus, input[type=password]:focus {
 	</div><!-- container2 -->
 </div><!-- container1 -->
 <footer>
-	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
 <script type="text/javascript">
 

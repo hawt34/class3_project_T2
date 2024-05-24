@@ -25,7 +25,7 @@ body {
 
 .btn-group:hover .dropdown-menu {
 	display: block;
-	margin-left: 110px;
+	margin-left: 135px;
 }
 
 .btn-group:hover .btn {
@@ -76,7 +76,6 @@ a{
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="myp_reservation">예매내역</a> 
 					<a class="dropdown-item" href="myp_store">스토어</a> 
-					<a class="dropdown-item" href="myp_cancel">취소내역</a>
 				</div>
 			</div>
 			<div class="btn-group">

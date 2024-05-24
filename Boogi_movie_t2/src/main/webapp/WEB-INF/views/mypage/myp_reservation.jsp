@@ -48,7 +48,7 @@ h3{
         <c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
         <div class="row">
             <div class="col-md-2 box1">
-                <jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
             </div><!-- sidebar1 -->
 
             <div class="col-md-9 box-in">
@@ -102,7 +102,7 @@ h3{
                                             <div class="col-md-4 d-grid gap-5">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.ticket_seat_info}">
-                                                <input type="text" readonly class="form-control-plaintext" value="${map.ticket_price}">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.total_ticket_price}">
                                             </div>
                                         </div>
                                     </div>
@@ -164,7 +164,7 @@ h3{
                                                 <td>${map.theater_info}</td>
                                                 <td>${map.session_time}</td>
                                                 <td>${map.ticket_seat_info}</td>
-                                                <td>${map.ticket_price}</td>
+                                                <td>${map.total_ticket_price}</td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -292,7 +292,7 @@ h3{
 </div><!-- container1 -->
 
 <footer>
-	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
 

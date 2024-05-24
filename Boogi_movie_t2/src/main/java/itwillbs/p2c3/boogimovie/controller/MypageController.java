@@ -297,7 +297,6 @@ public class MypageController {
 		}
 		member = mypageService.getMember(id);
 		model.addAttribute("member", member);
-		
 	    
 		PayVO pay = new PayVO();
 		Map<String, Object> param = new HashMap<>();

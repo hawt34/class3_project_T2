@@ -33,7 +33,7 @@ body {
 	<div class="container2">
 		<div class="row">
 			<div class="col-md-2">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div>	<!-- col-md-2 사이드바  -->
 			<div class="col-md-9">
 				<h2>회원정보수정</h2>
@@ -142,7 +142,7 @@ body {
 	</div><!-- container2 -->
 </div><!-- container1  -->	
 	<footer>
-		<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
 	
 <!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->

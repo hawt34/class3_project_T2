@@ -56,7 +56,7 @@ body {
 	<div class="container2">
 		<div class="row box1">
 			<div class="col-md-2">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div>	
 			<div class="col-md-9">
 				<h2>마이페이지</h2>
@@ -266,7 +266,7 @@ body {
 </div><!-- container -->
 
 <footer>
-	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
 

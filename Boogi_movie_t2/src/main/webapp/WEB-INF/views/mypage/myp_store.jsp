@@ -44,7 +44,7 @@ hr{
 		<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
 		<div class="row">
 			<div class="col-md-2 box1">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div><!-- sidebar1 -->
 				<!-- 탭 메뉴 -->
 				<!-- 내용 -->
@@ -162,7 +162,7 @@ hr{
 	</div><!-- container2 -->
 </div><!-- container -->
 <footer>
-	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
 

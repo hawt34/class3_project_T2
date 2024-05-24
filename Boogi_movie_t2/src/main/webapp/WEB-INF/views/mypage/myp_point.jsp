@@ -48,7 +48,7 @@ body {
 	<div class="container2">
 		<div class="row box1">
 			<div class="col-md-2">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div>	<!-- col-md-2 사이드바  -->
 			<div class="col-md-9">
 				<h2>포인트</h2>
@@ -207,7 +207,7 @@ body {
 	</div><!-- container2 -->
 </div><!-- container1 -->
 <footer>
-	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
 

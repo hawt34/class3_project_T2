@@ -750,7 +750,7 @@ a {
 
         finalList();
     }
-
+	
     function getGradeIcon(grade) {
         var contextPath = "${pageContext.request.contextPath}";
         switch (grade) {

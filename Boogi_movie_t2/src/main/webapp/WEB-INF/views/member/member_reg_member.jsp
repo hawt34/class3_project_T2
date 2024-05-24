@@ -34,7 +34,7 @@
 	    </div>
 	
 	<label for="member_id"><b>아이디</b></label>
-    <input type="text" placeholder="아이디 입력" name="member_id" id="member_id" required autocapitalize="off" maxlength="10">
+    <input type="text" placeholder="아이디 입력" name="member_id" id="member_id" required autocapitalize="off" maxlength="20">
     <label id="msg_id" class="msg_id"></label><br>
     <label for="pwd"><b>비밀번호</b></label>
     <input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd" required maxlength="16">
@@ -46,12 +46,12 @@
     <input type="text" placeholder="생년월일" name="member_birth" id="member_birth" required value="${member.member_birth }" readonly="readonly">
     <label id="msg_birth" class="msg_birth"></label><br>	
     <label for="postCode"><b>주소</b></label>
-    <input type="text" id="post_code" name="post_code" size="6" readonly onclick="search_address()" placeholder="클릭 시 주소검색">
-	<input type="text" id="address1" name="address1" placeholder="기본주소" size="25" readonly onclick="search_address()"><br>
-	<input type="text" id="address2" name="address2" placeholder="상세주소" size="25" pattern="^.{2,20}$" maxlength="20">
+    <input type="text" id="post_code" name="member_post_code" size="6" readonly onclick="search_address()" placeholder="클릭 시 주소검색">
+	<input type="text" id="address1" name="member_address1" placeholder="기본주소" size="25" readonly onclick="search_address()"><br>
+	<input type="text" id="address2" name="member_address2" placeholder="상세주소" size="25" pattern="^.{2,20}$" maxlength="20">
 	<label id="msg_addr" class="msg_addr"></label><br>
     <label for="member_email"><b>Email</b></label>
-    <input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required maxlength="30">
+    <input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required maxlength="30" value="${member.member_email }" readonly="readonly">
     <label id="msg_email" class="msg_email"></label><br>
     <label for="member_tel"><b>전화번호</b></label>
     <input type="text" placeholder="전화번호 입력" name="member_tel" id="member_tel" placeholder="-제외한 전화번호를 입력해주세요" required maxlength="11" onclick="certificationTel()">

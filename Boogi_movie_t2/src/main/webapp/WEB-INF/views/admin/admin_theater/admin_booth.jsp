@@ -12,7 +12,44 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_list.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
+<style>
+/* 테이블 비율 */
+th:nth-child(1), td:nth-child(1) {
+	width: 10%;
+}
 
+th:nth-child(2), td:nth-child(2) {
+	width: 15%;
+}
+
+th:nth-child(3), td:nth-child(3) {
+	width: 15%;
+}
+
+th:nth-child(4), td:nth-child(4) {
+	width: 20%;
+}
+
+th:nth-child(5), td:nth-child(5) {
+	width: 15%;
+}
+
+th:nth-child(6), td:nth-child(6) {
+	width: 10%;
+}
+
+.admin_movie_search {
+	height: 50px;
+	width: 400px;
+	float: right;
+	margin-right: 0;
+	margin-bottom: 20px;
+}
+.admin_movie_search >select{
+	width: 200px;
+}
+
+</style>
 
 </head>
 <body>

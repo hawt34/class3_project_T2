@@ -86,7 +86,7 @@ body {
 					<div class="admin_main_center">
 
 						<div class="admin_main_title">
-							<h1>⊙ 관리자페이지 Home (o゜▽゜)o☆</h1>
+							<h1>⊙ 관리자페이지</h1>
 						</div>
 					
 						<div class="admin_dashboard">

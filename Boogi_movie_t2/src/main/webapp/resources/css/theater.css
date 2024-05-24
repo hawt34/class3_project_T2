@@ -108,7 +108,10 @@ table {
  }
  
  .theater_public_img {
- 	width: 100px;
+ 	max-height: 100px;
+ 	max-width: 100px;
+ 	width: auto;
+ 	height: auto;
  	margin: 20px;
  }
  
@@ -150,12 +153,53 @@ table {
 	
 }
 
+
 .timetable_movie_area{
 	background-color : #f0f0f0;
-	height: 50px;
+	height: 60px;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.timetable_movie_area .row {
+    margin-top: auto; /* 위쪽 여백을 자동으로 설정 */
+    margin-bottom: auto; /* 아래쪽 여백을 자동으로 설정 */
+}
+
+.timetable_booth_area{
+	
+	height: 150px;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.timetable_booth_area .row {
+	margin-top: auto; /* 위쪽 여백을 자동으로 설정 */
+    margin-bottom: auto; /* 아래쪽 여백을 자동으로 설정 */
+}
+
+/* .timetable_booth_area. row{ */
+/* 	margin-top: auto; 위쪽 여백을 자동으로 설정 */
+/*     margin-bottom: auto; 아래쪽 여백을 자동으로 설정 */
+/* } */
+
+.timetable_dimension{
+	height:80px;
+	width:130px;
+	background-color : #f0f0f0;
+	display: flex;
 	justify-content: center;
 }
 
-.timetable {
-	margin: 30px;
+.timetable_time_seat {
+	height:80px;
+	width:130px;
+	display: flex;
+	justify-content: center;
 }
+
+

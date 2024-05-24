@@ -19,7 +19,7 @@ main {
 .event_title {
 	text-align: left;
 	margin: 30px 60px 0px;
-	border-bottom: 3px solid lightgray;
+	border-bottom: 1px solid lightgray;
 }
 
 * {
@@ -165,7 +165,7 @@ main {
 
 	<main>
 		<div class="event_title">
-			<h3>이벤트페이지</h3>
+			<h2>이벤트페이지</h2>
 		</div>
 		
 		

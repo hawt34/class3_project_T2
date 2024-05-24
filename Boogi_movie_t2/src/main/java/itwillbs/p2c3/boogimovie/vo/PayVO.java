@@ -19,6 +19,7 @@ public class PayVO {
 	private int coupon_num; 
 	private String merchant_uid;
 	private int use_point; 
+	private int save_point; 
 	
 	
 	

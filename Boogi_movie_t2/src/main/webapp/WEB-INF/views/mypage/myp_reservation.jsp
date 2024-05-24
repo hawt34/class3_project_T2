@@ -37,6 +37,32 @@ h3{
 	text-align : center;
 }
 </style>
+
+
+<script type="text/javascript">
+
+	function cancelMovie(member_id) {
+		
+		$.ajax({
+			url : "myp_cancel_movie",
+			type : "post",
+			data : {
+				"member_id" : member_id
+			},
+			dataType : "json",
+			success : function(result) {
+				console.log("ajax 성공 result : " + result);
+			},
+			error : function() {
+				console.log("ajax 실패 ");
+				
+			}
+		});
+	} // cancelMovie
+
+
+</script>
+
 </head>
 <body>
 
@@ -79,11 +105,11 @@ h3{
                             </c:when>
                             <c:otherwise>
                                 <c:forEach items="${movieReservation}" var="map">
-                                    <div class="row">
+                                    <div class="row" >
                                         <div class="col-md-3">
                                             <img src="${map.movie_poster}" style="margin-left: 30px" width="200px" height="250px">
                                         </div>
-                                        <div class="paybox1 col-md-6">
+                                        <div class="paybox1 col-md-6 position-relative">
                                             <div class="col-md-4 d-grid gap-5">
                                                 <input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example" disabled readonly>
                                                 <input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example" disabled readonly>
@@ -99,11 +125,14 @@ h3{
                                                 <input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example" disabled readonly>
                                                 <input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example" disabled readonly>
                                             </div>
-                                            <div class="col-md-4 d-grid gap-5">
+                                            <div class="col-md-3 d-grid gap-5">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.ticket_seat_info}">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.total_ticket_price}">
                                             </div>
+                                            <div class="col-md-1 d-grid gap-5">
+                                                <input type="button" class="btn btn-outline-secondary position-absolute bottom-75 w-25 box4" id="cancelMovie" onclick="cancelMovie('${map.member_id}')" type="text" value="취소" aria-label="Disabled input example" readonly>
+                                             </div>
                                         </div>
                                     </div>
                                     <hr>

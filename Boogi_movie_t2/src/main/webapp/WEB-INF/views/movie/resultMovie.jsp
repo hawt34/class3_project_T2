@@ -141,7 +141,7 @@ footer {
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.location.href='boxoffice'">박스오피스 순위</button>
 				<button type="button" class="btn btn-outline-primary"
-					id="recommendMovie" onclick="window.location.href='recommand'">추천상영영화</button>
+					id="recommendMovie" >추천상영영화</button>
 				<form action="searchMovie">
 					<input type="text" name="searchKeyword" placeholder="영화제목 입력"
 						value="${param.searchKeyword}"> <input type="submit"
@@ -205,9 +205,10 @@ footer {
 						window.location.href = 'member_login';
 					}
 				} else {
-					if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
-						window.location.href = 'recommand'; // 예매 페이지로 이동
-					}
+	                if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
+	                    window.location.href = 'recommand'; // 추천 영화 페이지로 이동
+	                }
+	            			
 				}
 			});
 

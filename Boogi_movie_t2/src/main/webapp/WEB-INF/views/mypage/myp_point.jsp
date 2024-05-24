@@ -22,18 +22,18 @@ body {
 	font-style: normal;
 }
 .container1{
-	height : 900px;
+	height : auto;
 	width: 1400px; /* 해상도 1200*/
 	margin : auto;
 }
 
 .container2{
-/* 	margin-left: auto; */
 	margin-top: 20px;
+	height : auto;
 }
 
 .box1{
-	height: 400px;
+	height: auto;
 	
 }
 
@@ -71,6 +71,7 @@ body {
 					</div>
 				</div>
 					<!-- 내용 -->
+					<!-- ----------------------------- -->
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="userinfo" role="tabpanel"aria-labelledby="userinfo-tab">
 						<table class="table2 table table-hover" >
@@ -84,7 +85,7 @@ body {
 						    </tr>
 						  </thead>
 						  <tbody>
-						  	<c:forEach items="${combinedList }" var="item" varStatus="status">
+						  	<c:forEach items="${combinedList}" var="item" varStatus="status">
 							<fmt:parseDate var="parsedDate" value="${item.date}" 
 							pattern="yyyy-MM-dd'T'HH:mm:ss" type="both"/>
 							
@@ -172,8 +173,12 @@ body {
 							</table>
 						</div><!-- tab-pane  -->
 					</div><!-- tab-content -->
+					<!-- ----------------------------- -->
+					
 			</div><!-- col-md-10 -->
 		</div><!-- row 첫줄-->
+		
+		
 			<div class="row ">
 				<div class="col-md-2"> </div>
 					<!-- 탭 메뉴 -->
@@ -204,6 +209,8 @@ body {
 					</div><!-- tab-content -->
 				</div><!-- col-md-10 -->
 			</div><!-- row 두번째 줄 -->
+			
+			
 	</div><!-- container2 -->
 </div><!-- container1 -->
 <footer>

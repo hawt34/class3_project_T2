@@ -1,7 +1,7 @@
 @charset "EUC-KR";
 
 .container1{
-	height : 1300px;
+	height : auto;
 	width: 1400px; /* ÇØ»óµµ 1200*/
 	margin: auto;
 }

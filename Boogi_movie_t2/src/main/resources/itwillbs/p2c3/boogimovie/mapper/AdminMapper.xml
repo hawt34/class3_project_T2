@@ -71,6 +71,8 @@
 				member_id LIKE CONCAT('%', #{searchKeyword}, '%')
 				OR member_name LIKE CONCAT('%', #{searchKeyword}, '%')
 		</if>
+		ORDER BY
+			member_reg_date desc
 		LIMIT 
 			#{startRow}
 			, #{listLimit}
@@ -108,6 +110,8 @@
 			WHERE
 				member_id LIKE CONCAT('%', #{searchKeyword}, '%')
 		</if>
+		ORDER BY
+			review_date desc
 		LIMIT 
 			#{startRow}
 			, #{listLimit}
@@ -160,7 +164,7 @@
 			member_id LIKE CONCAT('%', #{searchKeyword}, '%')
 		</if>
 		ORDER BY 
-			p.ticket_pay_date
+			p.ticket_pay_date desc
 		LIMIT 
 			#{startRow}
 			, #{listLimit}
@@ -249,7 +253,9 @@
 			WHERE
 				movie_name LIKE CONCAT('%', #{searchKeyword}, '%')
 		</if>
-			LIMIT 
+		ORDER BY
+			movie_open_date desc
+		LIMIT 
 			#{startRow}
 			, #{listLimit}
 	</select>
@@ -262,13 +268,14 @@
 			WHERE
 				movie_name LIKE CONCAT('%', #{searchKeyword}, '%')
 		</if>
-
 	</select>
 	
 <!-- 영화 리스트 조회 -->
+	
 	<select id="selectMovieList" resultType="hashmap">
-		SELECT * 
-		FROM movie
+		select *
+		from movie
+		where  Current_Date() > movie_open_date 
 	</select>
 
 <!-- 영화 상세보기 -->
@@ -426,7 +433,7 @@
 		WHERE 
 			ss.scs_date >= CURRENT_DATE()
 		ORDER BY 
-			ss.scs_date
+			ss.scs_date desc
 		LIMIT 
 			#{startRow}
 			, #{listLimit}
@@ -689,6 +696,8 @@
 		ON  c.coupon_num = s.coupon_num 
 		JOIN coupon_type ct 
 		ON c.coupon_type_num = ct.coupon_type_num
+		ORDER BY
+			store_pay_date desc
  	</select>
  	
  	<select id="selectStorePayDetail" resultType="itwillbs.p2c3.boogimovie.vo.StorePayVO">
@@ -710,4 +719,32 @@
 		ON sp.cart_id  = c.cart_id 
 		WHERE store_pay_num = #{store_pay_num}
 	</select>
+	
+	<!-- 상영관 리스트 조회 -->
+	<select id="selectScreenInfo" resultType="itwillbs.p2c3.boogimovie.vo.ScreenInfoVO">
+		SELECT *, theater_name
+		FROM   screen_info
+		JOIN   theater
+		ON     screen_info.theater_num = theater.theater_num
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				theater_name LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+			LIMIT 
+			#{startRow}
+			, #{listLimit}
+	 </select>
+	 
+	<!-- 상영관 리스트 수 -->
+	<select id="selectScreenInfoCount" resultType="int">
+		SELECT count(*)
+		FROM   screen_info
+		JOIN   theater
+		ON     screen_info.theater_num = theater.theater_num
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				theater_name LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+	 </select>
+	
 </mapper>

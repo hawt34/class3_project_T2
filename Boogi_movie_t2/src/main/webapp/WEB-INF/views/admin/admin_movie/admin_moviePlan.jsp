@@ -152,7 +152,7 @@ tbody tr:hover {
 									<th width="150px">상영날짜</th>
 									<th width="100px">상영시간</th>
 									<th width="100px">상영종료</th>
-									<th width="100px">상영일정등록</th>
+									<th width="100px">상영등록</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -390,19 +390,34 @@ tbody tr:hover {
 						$('#hourSelect').val("");
 						// 이미 일정이 있는 시간 disabled
 		 				for(movieTime of data){
+		 					debugger;
 		 					var time = movieTime.scs_start_time;
+		 					
 		 					// 9시 이전 시간이 넘어올때는 startTime을 9시로 설정
-		 					if(time < 9){
-			 					for(let i = 9; i < movieTime.scs_end_time; i++){
-			 						$("#hourSelect option[value*='"+i+":00']").prop('disabled',true).css({"background": "lightgray", "color" : "white"});
-			 						console.log("i: " + i);
-			 					}
+		 					if (time < 9){
+		 						time = 9;
 		 					} else {
-			 					for(let i = movieTime.scs_start_time; i < movieTime.scs_end_time; i++){
-			 						$("#hourSelect option[value*='"+i+":00']").prop('disabled',true).css({"background": "lightgray", "color" : "white"});
-			 						console.log("i: " + i);
-			 					}
+		 						time = movieTime.scs_start_time;
 		 					}
+		 					
+		 					
+		 					for(let i = time; i < movieTime.scs_end_time; i++){
+		 						$("#hourSelect option[value='"+i+":00']").prop('disabled',true).css({"background": "lightgray", "color" : "white"});
+		 						console.log("i: " + i);
+		 					}
+		 					
+// 		 					if(time < 9){
+// 			 					for(let i = 9; i < movieTime.scs_end_time; i++){
+// 			 						$("#hourSelect option[value='"+i+":00']").prop('disabled',true).css({"background": "lightgray", "color" : "white"});
+// 			 						console.log("i: " + i);
+// 			 					}
+// 		 					} else {
+// 			 					for(let i = movieTime.scs_start_time; i < movieTime.scs_end_time; i++){
+// 			 						$("#hourSelect option[value='"+i+":00']").prop('disabled',true).css({"background": "lightgray", "color" : "white"});
+// 			 						console.log("i: " + i);
+// 			 					}
+// 		 					}
+		 					
 	 					}						
 // 			 					debugger;
 					},

@@ -17,6 +17,7 @@ public class StorePayVO {
 	private String merchant_uid;
 	private int use_point;
 	private String cart_id;
+	private int save_point;
 	
 	//select용
 	private int coupon_value;

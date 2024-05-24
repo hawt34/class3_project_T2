@@ -2,181 +2,510 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>예매 사이트</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/tic_ticketing.css" rel="stylesheet" type="text/css" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css" />
+<%-- <link href="${pageContext.request.contextPath}/resources/css/tic_ticketing.css" rel="stylesheet" type="text/css" /> --%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-    .selected {
-        background-color: #FFD700; /* 선택된 항목의 배경색을 설정합니다. */
-    }
+.selected {
+	background-color: #FFD700; /* 선택된 항목의 배경색을 설정합니다. */
+}
+
+.final_list {
+	width: 100%;
+	margin-left: 5px;
+	margin-top: 5px;
+	padding-top: 20px;
+}
+
+body {
+	font-family: "Nanum Gothic Coding", monospace;
+	font-weight: 400;
+	font-style: normal;
+	margin: 0px;
+}
+
+/* 스크롤바 설정*/
+.scroll::-webkit-scrollbar {
+	width: 18px;
+	height: 18px;
+}
+
+/* 스크롤바 막대 설정*/
+.scroll::-webkit-scrollbar-thumb {
+	background-color: rgba(255, 255, 255, 1);
+	/* 스크롤바 둥글게 설정    */
+	border-radius: 10px;
+	border: 7px solid rgba(0, 0, 0, 0.8);
+}
+
+/* 스크롤바 뒷 배경 설정*/
+.scroll::-webkit-scrollbar-track {
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.tic {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+}
+
+.tic_movie {
+	background-color: white;
+	height: 800px;
+	border-left: solid 3px black;
+	border-top: solid 3px black;
+	border-bottom: solid 3px black;
+	margin-right: 0;
+}
+
+.tic_theater {
+	background-color: white;
+	height: 800px;
+	padding: 0px;
+	margin: 0px;
+	border: solid 3px black;
+}
+
+.tic_final {
+	background-color: white;
+	height: 800px;
+	padding: inherit;
+	border-right: solid 3px black;
+	border-top: solid 3px black;
+	border-bottom: solid 3px black;
+}
+
+.explain {
+	height: 10%;
+	border-bottom: solid 3px black;
+	padding: 20px;
+}
+
+.list {
+	height: calc(90% - 20px); /* 내부 padding과 border 높이를 고려한 계산 */
+	padding: 5px;
+}
+
+li {
+	list-style-type: none;
+}
+
+ul {
+	padding-left: 5px !important;
+}
+
+.daylist {
+	height: 10%;
+	border-bottom: solid 3px black;
+	display: flex; /* Flexbox 설정 */
+	align-items: center; /* 버튼을 수직으로 가운데 정렬 */
+}
+
+.scroll_button {
+	cursor: pointer;
+	padding: 5px;
+	border: none;
+	width: 50px;
+	height: 50px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.scroll-button.left {
+	left: 0;
+}
+
+.scroll-button.right {
+	right: 0;
+}
+
+button img {
+	height: 100%;
+	width: 100%;
+}
+
+.daylist button {
+	margin: 0 5px; /* 버튼들 사이의 간격 조절 */
+}
+
+.movielist {
+	height: calc(95% - 80px);
+	padding-left: 20px;
+	overflow-y: scroll;
+	white-space: nowrap;
+}
+
+.select_container {
+	margin-top: -15px;
+	position: relative;
+	height: 10%;
+	margin-left: 140px;
+	width: 200px;
+}
+
+.movie_atrbt {
+	height: 80px;
+}
+
+.theaterlist {
+	overflow-y: scroll; /* 세로 스크롤이 필요할 때만 스크롤을 표시합니다. */
+	max-height: 100%; /* 부모 요소의 높이에 맞게 조절합니다. */
+	white-space: nowrap;
+	padding-left: 10px;
+}
+
+.daylist {
+	white-space: nowrap; /* 일자 목록이 가로로 나열되도록 설정합니다. */
+	overflow-x: scroll; /* 가로 스크롤을 표시합니다. */
+}
+
+.finallist {
+	height: 95%;
+	padding: inherit;
+}
+
+.finalmovielist {
+	height: calc(90% - 50px);
+	padding-left: 10px;
+	overflow-y: scroll;
+	white-space: nowrap;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+:root { -
+	-select-border: #777; -
+	-select-focus: blue; -
+	-select-arrow: var(- -select-border);
+}
+
+select {
+	appearance: none;
+	background-color: transparent;
+	border: none;
+	padding: 0 1em 0 0;
+	margin: 0;
+	width: 100%;
+	font-family: inherit;
+	font-size: 80%;
+	cursor: inherit;
+	line-height: inherit;
+	z-index: 1;
+	&::
+	-ms-expand
+	{
+	display
+	:
+	none;
+}
+
+outline
+:
+ 
+none
+;
+
+
+}
+.select {
+	display: grid;
+	grid-template-areas: "select";
+	align-items: center;
+	position: relative;
+	select
+	,
+	&
+	:
+	:
+	after
+	{
+	
+    
+	grid-area
+	:
+	 
+	select;
+}
+
+min-width: 15ch ;
+  max-width: 30ch ;
+
+  border: 1px solid var(--select-border) ;
+  border-radius: 0.25em ;
+  padding: 0.25em 0.5em ;
+
+  font-size: 1.25rem ;
+  cursor: pointer ;
+  line-height: 1.1 ;
+
+  background-color: #fff ;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33 %) ;
+
+
+
+select:focus+.focus {
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	right: -1px;
+	bottom: -1px;
+	border: 2px solid var(- -select-focus);
+	border-radius: inherit;
+}
+
+select[multiple] {
+	padding-right: 0;
+	/*
+   * Safari will not reveal an option
+   * unless the select height has room to 
+   * show all of it
+   * Firefox and Chrome allow showing 
+   * a partial option
+   */
+	height: 6rem; option { white-space : normal;
+	outline-color: var(- -select-focus);
+}
+
+/* 
+   * Experimental - styling of selected options
+   * in the multiselect
+   * Not supported crossbrowser
+   */
+&
+:not(:disabled) option {
+	border-radius: 12px;
+	transition: 120ms all ease-in; &: checked { background :
+	linear-gradient( hsl( 242, 61%, 76%), hsl( 242, 61%, 71%));
+	padding-left: 0.5em;
+	color: black !important;
+}
+
+}
+}
+.select--disabled {
+	cursor: not-allowed;
+	background-color: #eee;
+	background-image: linear-gradient(to top, #ddd, #eee 33%);
+}
+
+}
+.side_var {
+	margin-right: 50px;
+}
+
+.tic_main {
+	width: 1500px;
+	margin: 0 auto;
+}
+
+.tic_title {
+	margin: 30px auto;
+}
+
+.tic_row {
+	margin-bottom: 100px;
+	margin-left: 300px;
+}
+
+.tic_button {
+	text-align: right;
+	width: 20%;
+	height: 20%;
+	margin-bottom: 100px;
+}
+
+a {
+	text-decoration: none !important;
+	color: black !important;
+}
+
+*.selected {
+	background-color: yellow;
+}
 </style>
 </head>
 
 <!-- 예매 메인 -->
 <body>
-<!-- 현재날짜와 이번달 최대일수를 계산하여 출력 -->
-<%
-    LocalDate currentDate = LocalDate.now();
-    String startDate = currentDate.toString();
-    int maxDay = currentDate.lengthOfMonth();
-    int nowDay = currentDate.getDayOfMonth();
-    int inputDay = nowDay + 10;
-    pageContext.setAttribute("nowDay", nowDay);
-    pageContext.setAttribute("day", inputDay > maxDay ? maxDay : inputDay);
-    pageContext.setAttribute("currentDate", currentDate);
-    pageContext.setAttribute("maxDay", maxDay);
-%>
+	<!-- 현재날짜와 이번달 최대일수를 계산하여 출력 -->
+	<%
+	LocalDate currentDate = LocalDate.now();
+	String startDate = currentDate.toString();
+	int maxDay = currentDate.lengthOfMonth();
+	int nowDay = currentDate.getDayOfMonth();
+	int inputDay = nowDay + 10;
+	pageContext.setAttribute("nowDay", nowDay);
+	pageContext.setAttribute("day", inputDay > maxDay ? maxDay : inputDay);
+	pageContext.setAttribute("currentDate", currentDate);
+	pageContext.setAttribute("maxDay", maxDay);
+	%>
 
-<header>
-    <jsp:include page="../inc/admin_header.jsp"></jsp:include>
-</header>
+	<header>
+		<jsp:include page="../inc/admin_header.jsp"></jsp:include>
+	</header>
 
-<form action="tic_choose_seat" method="post" id="fr">
-<section class="tic_main">
-    <div class="tic_title">
-        <h3>영화 예매</h3>
-            <hr>
-    </div>
-    <div class="row asdf">
-        <!-- 본문 시작 -->
-        <div class="col-md-12">
-            <div class="row tic_row">
-            <!-- tic_movie영역 시작 -->
-                <div class="col-md-3 tic" style="padding-left: 20px; padding-right: 20px;">
-                    <div class="tic_movie">
-                    <!-- 설명영역 -->
-                        <div class="explain" id="movieSelected">
-                            영화를 선택해주세요
-                        </div>
-                    <!-- select박스 -->
-                    <div class="row">
-                        <div class="col-md-4">
-                            <input type="checkbox" id="like_movie" name="like_movie" value="나의취향" class="col-md-3">내취향
-                        </div>
-                    </div>
-                    <!-- 영화정보 -->
-                    <div class="movielist scroll" id="movielist">
-                        <c:forEach items="${movieList }" var="movie">
-                            <div class="movie_atrbt">
-                                <c:choose>
-                                    <c:when test="${movie.movie_grade eq '전체관람가' }">
-                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_all.gif" style="width: 48px; height: 48px;">
-                                    </c:when>
-                                    <c:when test="${movie.movie_grade eq '12세관람가' }">
-                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_over12.gif" style="width: 48px; height: 48px;">
-                                    </c:when>
-                                    <c:when test="${movie.movie_grade eq '15세관람가' }">
-                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_over15.gif" style="width: 48px; height: 48px;">
-                                    </c:when>
-                                    <c:when test="${movie.movie_grade eq '18세관람가(청소년관람불가)' }">
-                                        <img src="${pageContext.request.contextPath}/resources/images/tic_icon_over18.gif" style="width: 48px; height: 48px;">
-                                    </c:when>
-                                </c:choose>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span id="movie_${movie.movie_num}">
-                                        <a class="movie-link" onclick="movieClick('${movie.movie_name}', '${movie.movie_num}')">
-                                            ${movie.movie_name}
-                                        </a>
-                                    </span>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </div>
-            <!-- tic_movie종료 -->
+	<form action="tic_choose_seat" method="post" id="fr">
+		<section class="tic_main">
+			<div class="tic_title">
+				<h3>영화 예매</h3>
+				<hr>
+			</div>
+			<div class="row asdf">
+				<!-- 본문 시작 -->
+				<div class="col-md-12">
+					<div class="row tic_row">
+						<!-- tic_movie영역 시작 -->
+						<div class="col-md-4 tic"
+							style="padding-left: 20px; padding-right: 20px;">
+							<div class="tic_movie">
+								<!-- 설명영역 -->
+								<div class="explain" id="movieSelected">영화를 선택해주세요</div>
+								<!-- select박스 -->
+								<div class="row">
+									<div class="col-md-4">
+										<input type="checkbox" id="like_movie" name="like_movie"
+											value="나의취향" class="col-md-3">내취향
+									</div>
+								</div>
+								<!-- 영화정보 -->
+								<div class="movielist scroll" id="movielist">
+									<c:forEach items="${movieList }" var="movie">
+										<div class="movie_atrbt">
+											<c:choose>
+												<c:when test="${movie.movie_grade eq '전체관람가' }">
+													<img
+														src="${pageContext.request.contextPath}/resources/images/tic_icon_all.gif"
+														style="width: 48px; height: 48px;">
+												</c:when>
+												<c:when test="${movie.movie_grade eq '12세관람가' }">
+													<img
+														src="${pageContext.request.contextPath}/resources/images/tic_icon_over12.gif"
+														style="width: 48px; height: 48px;">
+												</c:when>
+												<c:when test="${movie.movie_grade eq '15세관람가' }">
+													<img
+														src="${pageContext.request.contextPath}/resources/images/tic_icon_over15.gif"
+														style="width: 48px; height: 48px;">
+												</c:when>
+												<c:when test="${movie.movie_grade eq '18세관람가(청소년관람불가)' }">
+													<img
+														src="${pageContext.request.contextPath}/resources/images/tic_icon_over18.gif"
+														style="width: 48px; height: 48px;">
+												</c:when>
+											</c:choose>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+												id="movie_${movie.movie_num}"> <a class="movie-link"
+												onclick="movieClick('${movie.movie_name}', '${movie.movie_num}')">
+													${movie.movie_name} </a>
+											</span>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+						<!-- tic_movie종료 -->
 
-                <!-- tic_theater 시작 -->
-                <div class="col-md-3 tic" style="padding-left: 20px; padding-right: 20px;">
-                    <div class="tic_theater">
-                        <!-- 설명영역 -->
-                        <div class="explain" id="theaterSelected">
-                            상영관을 선택해주세요
-                        </div>
-                        <div class="row list">
-                            <!-- theater 리스트1 -->
-                            <div class="col-sm-6" style="border-right: solid 3px black; text-align: left;">
-                                <ul>
-                                    <li><a class="theater-link" id="entireTheaterLink" onclick="theaterType('EntireTheater', 'entire', this)">전체극장</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a class="theater-link" id="myTheaterLink" onclick="theaterType('MyTheater','${sessionScope.sId}', this)">MY영화관</a></li>
-                                </ul>
-                            </div>
-                            <!-- theater 리스트2 -->
-                            <div class="col-sm-6 theaterlist scroll" id="theaterlist">
-                                <c:forEach items="${theaterList }" var="theater">
-                                    <ul>
-                                        <li><a class="theater-link" onclick="theaterClick('${theater.theater_name}', this)">${theater.theater_name }</a> </li>
-                                    </ul>
-                                </c:forEach>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- tic_theater 종료 -->
-                <!-- tic_final 시작 -->
-                <div class="col-md-6 tic" style="padding-left: 20px; padding-right: 20px;">
-                    <div class="tic_final">
-                        <!-- 설명영역 -->
-                        <div class="explain" id="daySelected">
-                            ${currentDate }
-                        </div>
-                            <div class="finallist">
-                                <div class="daylist scroll">
-                                    <div>
-                                        <c:forEach begin="1" end="10" var="i">
-                                            <c:choose>
-                                                <c:when test="${nowDay <= maxDay}">
-                                                    <input type="button" onclick="javascript:dayClick('${currentDate }', ${nowDay }, this)" value="${nowDay }일">&nbsp;
+						<!-- tic_theater 시작 -->
+						<div class="col-md-3 tic"
+							style="padding-left: 20px; padding-right: 20px;">
+							<div class="tic_theater">
+								<!-- 설명영역 -->
+								<div class="explain" id="theaterSelected">상영관을 선택해주세요</div>
+								<div class="row list">
+									<!-- theater 리스트1 -->
+									<div class="col-sm-6"
+										style="border-right: solid 3px black; text-align: left;">
+										<ul>
+											<li><a class="theater-link" id="entireTheaterLink"
+												onclick="theaterType('EntireTheater', 'entire', this)">전체극장</a></li>
+										</ul>
+										<ul>
+											<li><a class="theater-link" id="myTheaterLink"
+												onclick="theaterType('MyTheater','${sessionScope.sId}', this)">MY영화관</a></li>
+										</ul>
+									</div>
+									<!-- theater 리스트2 -->
+									<div class="col-sm-6 theaterlist scroll" id="theaterlist">
+										<c:forEach items="${theaterList }" var="theater">
+											<ul>
+												<li><a class="theater-link"
+													onclick="theaterClick('${theater.theater_name}', this)">${theater.theater_name }</a>
+												</li>
+											</ul>
+										</c:forEach>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- tic_theater 종료 -->
+						<!-- tic_final 시작 -->
+						<div class="col-md-5 tic"
+							style="padding-left: 20px; padding-right: 20px;">
+							<div class="tic_final">
+								<!-- 설명영역 -->
+								<div class="explain" id="daySelected">${currentDate }</div>
+								<div class="finallist">
+									<div class="daylist scroll">
+										<div>
+											<c:forEach begin="1" end="10" var="i">
+												<c:choose>
+													<c:when test="${nowDay <= maxDay}">
+														<input type="button"
+															onclick="javascript:dayClick('${currentDate }', ${nowDay }, this)"
+															value="${nowDay }일">&nbsp;
                                                     <%
-                                                        nowDay++;
+                                                    nowDay++;
                                                     pageContext.setAttribute("nowDay", nowDay);
                                                     %>
-                                                </c:when>
-                                                <c:otherwise>
+													</c:when>
+													<c:otherwise>
                                                     //
                                                     <%
-                                                        nowDay = 1;
-                                                    pageContext.setAttribute("nowDay", nowDay);
-                                                    %>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:forEach>
-                                    </div>
-                                </div>
-                                <div class="finalmovielist scroll" id="finalmovielist">
-                                    <div style="height: 300px">
-                                        <br>
-                                        <div align="center">영화 와 상영관 을 선택해주세요</div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                    <!-- tic_final 종료 -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- tic_row 종료 -->
-    <div class="tic_button">
-        <button type="submit" class="btn btn-outline-primary">좌석 선택</button>
-    </div>
-</section>
-</form>
+													nowDay = 1;
+													pageContext.setAttribute("nowDay", nowDay);
+													%>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</div>
+									</div>
+									<div class="finalmovielist scroll" id="finalmovielist">
+										<div style="height: 300px">
+											<br>
+											<div align="center">영화 와 상영관 을 선택해주세요</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- tic_final 종료 -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- tic_row 종료 -->
+			<div class="tic_button">
+				<button type="submit" class="btn btn-outline-primary">좌석 선택</button>
+			</div>
+		</section>
+	</form>
 
-<footer>
-    <jsp:include page="../inc/admin_footer.jsp"></jsp:include>
-</footer>
+	<footer>
+		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
+	</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
     let selectedMovie = "";
     let selectedTheater = "";
     let selectedDay = "";
@@ -442,7 +771,7 @@
     }
 
     $(document).ready(function () {
-        var sId = '<%= session.getAttribute("sId") %>';
+        var sId = '<%=session.getAttribute("sId")%>';
 
         // 페이지 로드 시 전체극장이 선택되도록 설정
         $("#entireTheaterLink").addClass("selected");

@@ -62,7 +62,6 @@ section h1 {
 }
 
 .nowMovie .btn {
-	margin-top: 20px;
 	margin-left: 20px; /* 좌우 간격 조절 */
 	margin-right: 20px; /* 좌우 간격 조절 */
 	font-size: 25px;
@@ -98,6 +97,24 @@ footer {
 	width: 1400px;
 	height: 100px;
 	/* 	background-color: #ffb300; */
+}
+.nowMovie>form>input[type=text] {
+	font-size: 18px;
+	height: 40px;
+	width: 150px;
+	outline: none;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.nowMovie>form>input[type=submit] {
+	width: 90px;
+	height: 40px;
+	outline: none;
+	font-weight: bold;
+	margin-left: 5px;
+	vertical-align: middle;
+	padding: 0px;
 }
 </style>
 

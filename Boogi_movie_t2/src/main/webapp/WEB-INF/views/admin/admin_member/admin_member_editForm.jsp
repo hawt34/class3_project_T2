@@ -102,7 +102,7 @@ body {
 					<hr class="mb-4">
 					
 					<div class="mb-4" align="center">
-						<input type="button" value="회원삭제" class="btn btn-primary btn-lg btn-block" onclick="if (confirm('정말로 삭제하시겠습니까?')) location.href='admin_member_withdraw?member_id=${member.member_id}';">
+						<input type="button" value="회원삭제" class="btn btn-danger btn-lg btn-block" onclick="if (confirm('정말로 삭제하시겠습니까?')) location.href='admin_member_withdraw?member_id=${member.member_id}';">
 						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
 			</div>

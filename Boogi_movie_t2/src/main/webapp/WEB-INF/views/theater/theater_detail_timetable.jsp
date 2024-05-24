@@ -35,8 +35,32 @@
 	        // 클릭된 링크의 id 가져오기
 	        let scs_date = $(this).attr('id');
 	        console.log('클릭된 링크의 id:', scs_date);
+	        console.log('theater_num : ', ${param.theater_num});
 	        
-	        
+	        $.ajax({
+	        	url : "timetable",
+	        	type : "POST",
+	        	data : {
+	        		theater_num : "${param.theater_num}",
+	        		scs_date : scs_date
+	        	},
+	        	dataType : "json",
+	        	success : function(result) {
+	        		
+						
+		        	alert("result.json : "  + result);
+		        		
+		        		
+		        		
+		        		
+		        		
+	        		
+				},
+				error : function() {
+					alert("AJAX 에러 발생!");
+				}
+	        	
+	        }); // ajax
 	        
 	        
 	        
@@ -119,18 +143,27 @@
 				<div class="timetable_movie">
 					<div class="timetable_movie_area">
 					<div class="row">
-						<div class="col">
-						  (등급 이미지), 영화제목
+						<div class="col-10">
+						  등급, 영화제목
 						</div>
 						<div class="col">
-						   상영시간  (러닝타임) 분
+						   상영시간 (러닝타임) 분
 						</div>
 					</div>
 					</div>
 					<div class="timetable_booth_area">
-						<div class="timetable_cinema">상영관 이름/남은 좌석 총 N 석</div>
-						<div class="timetable_dimension">2D/3D</div>
-						<div class="timetable_scs">시작시간, 남은 좌석</div>
+						<div class="row">
+							<div class="col">
+								<div class="timetable_cinema">
+									<span class="screen_cinema_num">상영관 이름</span>
+									총<span class="scs_empty_seat"> 총 N 석</span>
+								</div>
+							</div>
+							<div class="col">
+								<div class="timetable_dimension">2D/3D</div>
+								<div class="timetable_scs">시작시간, 남은 좌석</div>
+							</div>	
+						</div>
 					</div>
 				</div><!-- timetable_movie -->
 				

@@ -54,6 +54,11 @@ section h1 {
 	width: 1400px;
 }
 
+.movieTitle{
+	border-bottom: 2px solid lightgray;
+	margin: 30px 60px 0px;
+}
+
 .movie {
 	padding-top: 30px;
 	width: 350px;
@@ -62,9 +67,14 @@ section h1 {
 	text-align: center;
 }
 
+.movie > button {
+	margin-top: 10px; 
+}
+
 .movie img {
 	width: 300px;
 	height: 500px;
+	border-radius: 10px;
 }
 
 .movie input[type="button"] {
@@ -76,10 +86,14 @@ section h1 {
 	float: right;
 	width: 1000px;
 	height: 600px;
+	margin-bottom: 50px;
 }
 
 .movieInfo ul li {
 	font-size: 24px; /* 텍스트 크기 조정 */
+	text-align: justify;
+	word-break: keep-all;
+	line-height: 1.5em;
 }
 
 .movieInfo input[type="button"] {
@@ -90,22 +104,22 @@ section h1 {
 
 .reviewContents {
 	width: 1400px;
-	margin-top: 10px;
-	height: 200px;
+	height: 100px;
 	/* 	border: 1px solid black;   */
 	font-size: 30px;
+	margin-top: 200px;
 }
-
-.submitButton {
-	width: 400px;
+.submitButton > button{
+	width: 250px;
+	padding: 10px;
+	margin-top: 10px;
 	margin-left: 10px;
 }
 
 .star-rating {
 	padding-left: 10px;
 	padding-top: 10px;
-	float: left;
-	width: 320px;
+	width: 300px;
 	height: 150px;
 }
 
@@ -116,8 +130,7 @@ section h1 {
 
 .review textarea.form-control {
 	margin-left: 20px;
-	width: 500px;
-	height: 100px; /* 높이를 원하는 크기로 조절하세요 */
+	height: 50px; /* 높이를 원하는 크기로 조절하세요 */
 	/* 	border: 2px solid black; */
 	resize: none;
 }
@@ -128,6 +141,8 @@ section h1 {
 	margin-left: 20px;
 	width: 1300px;
 	height: 200px;
+	padding-left: 0px;
+	margin-top: 20px;
 }
 
 .reviewCover {
@@ -140,7 +155,8 @@ section h1 {
 .review {
 	padding-top: 10px;
 	width: 900px;
-	margin-bottom: 200px;
+	margin-bottom: 0px;
+	margin-top: 10px;
 	/* 	border: 1px solid red;   */
 	float: right;
 }
@@ -172,7 +188,7 @@ section h1 {
 
 .movieInfo img {
 	width: 200px;
-	height: 100px;
+	border-radius: 5px;
 }
 
 #pageList {
@@ -218,6 +234,9 @@ footer {
 		<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 	</header>
 	<div id="wrap">
+		<div class="movieTitle">
+			<h3>영화 상세페이지</h3>
+		</div>
 		<article>
 			<div class="movieTrail">
 				<c:choose>
@@ -232,7 +251,6 @@ footer {
 		</article>
 		<section>
 			<div class="content">
-				<h1>영화 상세페이지</h1>
 				<div class="list">
 					<div class="movie">
 						<img src="${movie.movie_poster}">
@@ -249,9 +267,9 @@ footer {
 							<li><span>상영시간 : ${movie.movie_runtime }</span></li>
 							<li><span>줄거리 : ${movie.movie_summary}</span></li>
 						</ul>
-						<img src="${movie.movie_stillCut}"> <img
-							src="${movie.movie_stillCut2}"> <img
-							src="${movie.movie_stillCut3}">
+						<img src="${movie.movie_stillCut}"> 
+						<img src="${movie.movie_stillCut2}"> 
+						<img src="${movie.movie_stillCut3}">
 						<div class="backButton">
 							<button type="button" class="btn btn-outline-primary"
 								onclick="window.history.back()">뒤로가기</button>
@@ -261,39 +279,43 @@ footer {
 			</div>
 			<div class="reviewContents">
 				<form action="reviewPro" method="post">
-					<div class="star-rating">
-
-						<p>별점</p>
-						<select id="review_rating" name="review_rating"
-							class="form-select">
-							<option value="0" selected>별점 선택(미선택시 0점 ☆)</option>
-							<option value="1">★ 1점</option>
-							<option value="2">★★ 2점</option>
-							<option value="3">★★★ 3점</option>
-							<option value="4">★★★★ 4점</option>
-							<option value="5">★★★★★ 5점</option>
-						</select>
+					<p>별점 & 관람평</p>
+					<div class="row">
+						<div class="star-rating col-3">
+							<select id="review_rating" name="review_rating"
+								class="form-select">
+								<option value="0" selected>별점 선택(미선택시 0점 ☆)</option>
+								<option value="1">★ 1점</option>
+								<option value="2">★★ 2점</option>
+								<option value="3">★★★ 3점</option>
+								<option value="4">★★★★ 4점</option>
+								<option value="5">★★★★★ 5점</option>
+							</select>
+						</div>
+						
+						<div class="review col-5">
+							<c:set var="pageNum"
+								value="${empty param.pageNum ? 1 : param.pageNum}" />
+	<!-- 						<p>관람평</p> -->
+							<c:choose>
+								<c:when test="${not empty sessionScope.sId}">
+									<textarea id="reviewText" name="review_text"
+										class="form-control" rows="3" cols="5" maxlength="50"
+										placeholder="50자 이내로 부탁드리겠습니다."></textarea>
+								</c:when>
+								<c:otherwise>
+									<textarea id="reviewText" class="form-control" rows="3" cols="5"
+										maxlength="50" placeholder="사랑하는 고객님 로그인먼저 부탁드리겠습니다."></textarea>
+								</c:otherwise>
+							</c:choose>
+						</div>
+						
+						<div class="submitButton col-3">
+							<button type="submit" class="btn btn-outline-primary"
+								id="submitReviewBtn">별점주기 & 관람평 남기기</button>
+						</div>
 					</div>
-					<div class="review">
-						<c:set var="pageNum"
-							value="${empty param.pageNum ? 1 : param.pageNum}" />
-						<p>관람평</p>
-						<c:choose>
-							<c:when test="${not empty sessionScope.sId}">
-								<textarea id="reviewText" name="review_text"
-									class="form-control" rows="3" cols="5" maxlength="50"
-									placeholder="50자 이내로 부탁드리겠습니다."></textarea>
-							</c:when>
-							<c:otherwise>
-								<textarea id="reviewText" class="form-control" rows="3" cols="5"
-									maxlength="50" placeholder="사랑하는 고객님 로그인먼저 부탁드리겠습니다."></textarea>
-							</c:otherwise>
-						</c:choose>
-					</div>
-					<div class="submitButton">
-						<button type="submit" class="btn btn-outline-primary"
-							id="submitReviewBtn">별점주기 & 관람평 남기기</button>
-					</div>
+					
 					<!-- hidden input으로 값을 추가 -->
 					<input type="hidden" id="movie_num" name="movie_num"
 						value="${movie.movie_num}"> <input type="hidden"
@@ -301,6 +323,7 @@ footer {
 
 				</form>
 			</div>
+			
 			<div class="showReview">
 				<c:forEach var="review" items="${reviews}">
 					<div class="reviewCover">

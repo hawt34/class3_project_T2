@@ -199,37 +199,41 @@ public class AdminController {
 	//공지사항 관리 controller
 	//listLimit으로 목록 10개 가져오기
 	@GetMapping("admin_notice")
-	public String adminNotice(@RequestParam(defaultValue = "1")int pageNum, Model model) {
+	public String adminNotice(@RequestParam(defaultValue = "1")int pageNum, Model model, String theater_name) {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
+		System.out.println("극장명: " + theater_name);
 		
-		int listCount = service.getNoticeListCount(); //총 공지사항 갯수
+//		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
+		List<NoticeVO> noticeList = noticeService.getNoticeList(listLimit, startRow, theater_name);
+		
+//		int listCount = service.getNoticeListCount();
+		int listCount = noticeService.getNoticeListCountCag(theater_name);
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
 		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-		System.out.println("maxPage: " + maxPage);
+//		System.out.println("maxPage: " + maxPage);
 		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
 			endPage = maxPage;
 		}
 		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
-		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
-//		System.out.println("극장이름: " + noticeList.get(0));
 		
 		
 		//LocalDateTIme format
 		for(NoticeVO notice : noticeList) {
 			notice.setNotice_fdt(notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 		}
+		model.addAttribute("theater_name", theater_name);
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pageList", pageList);
 		
 		return "admin/admin_csc/admin_notice";
 	}
+	
 	@GetMapping("admin_notice_form")
 	public String adminNoticeForm() {
-		
 		return "admin/admin_csc/admin_notice_form";
 	}
 	

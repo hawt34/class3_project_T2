@@ -47,4 +47,9 @@ public class FaqService {
 	public int updateViewCount(FAQVO faq) {
 		return mapper.updateViewCount(faq);
 	}
+	
+	//ViewCount가 가장 많은 다섯개 가져오기
+	public List<FAQVO> getFaqViewCountList() {
+		return mapper.selectFaqViewCountList();
+	}
 }

@@ -19,7 +19,7 @@ main {
 .event_title {
 	text-align: left;
 	margin: 30px 60px 0px;
-	border-bottom: 3px solid lightgray;
+	border-bottom: 1px solid lightgray;
 }
 
 * {

@@ -87,72 +87,93 @@
 	<script>
 	
 	$(document).ready(function() {
-	    // 아이디 입력값 변경 시
-	    $("#member_id").on("input", function() {
-	        let id = $("#member_id").val();
-	        let regex = /^[a-zA-Z0-9]{2,10}$/g;
-	        
-	        if (!regex.test(id)) {
-	            $("#member_id").css("background-color", "red");
-	            $("#msg_id").text("특수문자, 한글 제외 2~10글자를 입력해주세요");
-	        } else {
-	            $("#member_id").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-	            $("#msg_id").empty();
-	        }
+	    let riskCount = 0;
+
+	    // 비밀번호 입력값 변경 시
+	    $("#member_pwd").on("input", function() {
+	        validatePassword();
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-	    
-	    // 비밀번호 입력값 변경 시
-		$("#member_pwd").on("input", function() {
-		    let pwd = $("#member_pwd").val();
-		    let msg = "";
-		    let color = "";
-		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
-		
-		    if (!lengthRegx.exec(pwd)) {
-		        msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
-		        color = "RED";
-		    } else {
-		        let engUpperRegex = /[A-Z]/;
-		        let engLowerRegex = /[a-z]/;
-		        let numRegex = /\d/;
-		        let specRegex = /[!@#$%]/;
-		        let count = 0;
-		
-		        if (engUpperRegex.exec(pwd)) count++;
-		        if (engLowerRegex.exec(pwd)) count++;
-		        if (numRegex.exec(pwd)) count++;
-		        if (specRegex.exec(pwd)) count++;
-		
-		        switch (count) {
-		            case 4:
-		                msg = "안전";
-		                color = "Green";
-		                break;
-		            case 3:
-		                msg = "보통";
-		                color = "Orange";
-		                break;
-		            case 2:
-		                msg = "위험";
-		                color = "RED";
-		                break;
-		            default:
-		                msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
-		                color = "RED";
-		        }
-		    }
-		    $("#msg_pwd").text(msg);
-		    $("#msg_pwd").css("color", color);
-		    checkFormValidity(); // 폼 유효성 검사 실행
-		});
-	    
-	    
+
 	    // 비밀번호2 입력값 변경 시
 	    $("#member_pwd2").on("input", function() {
-	    	let pwd = $("#member_pwd").val();
+	        validatePasswordConfirmation();
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+
+	    // 상세주소 입력값 변경 시
+	    $("#member_address2").on("input", function() {
+	        validateAddress2();
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+
+	    // 이메일 입력값 변경 시
+	    $("#member_email").on("input", function() {
+	        validateEmail();
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+
+	    // 전화번호 입력값 변경 시
+	    $("#member_tel").on("input", function() {
+	        validateTel();
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+
+	    // 초기 폼 유효성 검사
+	    checkFormValidity();
+
+	    function validatePassword() {
+	        let pwd = $("#member_pwd").val();
+	        let msg = "";
+	        let color = "";
+	        let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
+
+	        if (!lengthRegx.exec(pwd)) {
+	            msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
+	            color = "RED";
+	            riskCount = 0;
+	        } else {
+	            let engUpperRegex = /[A-Z]/;
+	            let engLowerRegex = /[a-z]/;
+	            let numRegex = /\d/;
+	            let specRegex = /[!@#$%]/;
+	            let count = 0;
+
+	            if (engUpperRegex.exec(pwd)) count++;
+	            if (engLowerRegex.exec(pwd)) count++;
+	            if (numRegex.exec(pwd)) count++;
+	            if (specRegex.exec(pwd)) count++;
+
+	            switch (count) {
+	                case 4:
+	                    msg = "안전";
+	                    color = "Green";
+	                    riskCount = 4;
+	                    break;
+	                case 3:
+	                    msg = "보통";
+	                    color = "Orange";
+	                    riskCount = 3;
+	                    break;
+	                case 2:
+	                    msg = "위험";
+	                    color = "RED";
+	                    riskCount = 2;
+	                    break;
+	                default:
+	                    msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
+	                    color = "RED";
+	                    riskCount = 0;
+	            }
+	        }
+	        $("#msg_pwd").text(msg);
+	        $("#msg_pwd").css("color", color);
+	    }
+
+	    function validatePasswordConfirmation() {
+	        let pwd = $("#member_pwd").val();
 	        let pwd2 = $("#member_pwd2").val();
-	        
+
 	        if (pwd2 != pwd) {
 	            $("#member_pwd2").css("background-color", "red");
 	            $("#msg_pwd2").text("비밀번호가 일치하지 않습니다");
@@ -160,15 +181,12 @@
 	            $("#member_pwd2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	            $("#msg_pwd2").empty();
 	        }
-	        checkFormValidity(); // 폼 유효성 검사 실행
-	    });
-	    
-	    
-	    // 상세주소 입력값 변경 시
-	    $("#member_address2").on("input", function() {
+	    }
+
+	    function validateAddress2() {
 	        let address2 = $("#member_address2").val();
 	        let regex = /^.{2,20}$/g;
-	        
+
 	        if (!regex.test(address2)) {
 	            $("#member_address2").css("background-color", "red");
 	            $("#msg_addr").text("모든 문자 2~20 글자를 입력해주세요");
@@ -176,14 +194,12 @@
 	            $("#member_address2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	            $("#msg_addr").empty();
 	        }
-	        checkFormValidity(); // 폼 유효성 검사 실행
-	    });
-	    
-	    // 이메일 입력값 변경 시
-	    $("#member_email").on("input", function() {
+	    }
+
+	    function validateEmail() {
 	        let email = $("#member_email").val();
 	        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
-	        
+
 	        if (!regex.test(email)) {
 	            $("#member_email").css("background-color", "red");
 	            $("#msg_email").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
@@ -191,15 +207,12 @@
 	            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	            $("#msg_email").empty();
 	        }
-	        checkFormValidity(); // 폼 유효성 검사 실행
-	    });
-	    
-	    
-	    // 전화번호 입력값 변경 시
-	    $("#member_tel").on("input", function() {
+	    }
+
+	    function validateTel() {
 	        let tel = $("#member_tel").val();
 	        let regex = /^010\d{8}$/g;
-	        
+
 	        if (!regex.test(tel)) {
 	            $("#member_tel").css("background-color", "red");
 	            $("#msg_tel").text("전화번호 형식이 맞지 않습니다(예: 01000000000)");
@@ -207,26 +220,26 @@
 	            $("#member_tel").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	            $("#msg_tel").empty();
 	        }
-		
-	        checkFormValidity(); // 폼 유효성 검사 실행
-	    });
-	    
+	    }
 
-		    // 폼 유효성 검사 함수
-		    function checkFormValidity() {
-		        let idIsValid = /^[a-zA-Z가-힣0-9]{2,10}$/.test($("#member_id").val());
-		        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
-		        let pwd2IsValid = /^.{8,16}$/.test($("#member_pwd2").val());
-		        let address2IsValid = /^.{2,20}$/.test($("#member_address2").val());
-		        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
-		        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
-			
-		        if (idIsValid && pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid) {
-		            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
-		        } else {
-		        	$("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
-		        }
-			}
+	    // 폼 유효성 검사 함수
+	    function checkFormValidity() {
+	        let pwdIsValid = $("#member_pwd").val() === "" || /^.{8,16}$/.test($("#member_pwd").val());
+	        let pwd2IsValid = $("#member_pwd2").val() === "" || $("#member_pwd2").val() === $("#member_pwd").val();
+	        let address2IsValid = /^.{2,20}$/.test($("#member_address2").val());
+	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
+	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
+	        let isPasswordStrong = $("#member_pwd").val() === "" || riskCount > 1;
+
+	        if (pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid && isPasswordStrong) {
+	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
+	        } else {
+	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
+	        }
+	    }
+
+	    // 초기 폼 유효성 검사
+	    checkFormValidity();
 	});
 	
 </script>

@@ -137,9 +137,10 @@
 				member_pwd = #{member_pwd},
 			</if>
 			member_birth = #{member_birth}
-			, member_addr = CONCAT(#{post_code), '/', #{address1}, #{address2})
+			, member_addr = #{member_addr}
 			, member_email = #{member_email}
 			, member_tel = #{member_tel}
+			, member_movie_genre = #{member_movie_genre}
 		WHERE
 			member_id = #{member_id}
     

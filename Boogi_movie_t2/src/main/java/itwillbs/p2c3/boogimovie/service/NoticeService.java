@@ -22,9 +22,6 @@ public class NoticeService {
 		return mapper.selectNotice(notice_num);
 	}
 
-//	public List<NoticeVO> getNoticeCagList(int listLimit, int startRow, String theaterName) {
-//		return mapper.selectNoticeCagList(listLimit, startRow, theaterName);
-//	}
 	
 	//극장명과 동일한 게시판글 갯수
 	public int getNoticeListCountCag(String category) {

@@ -30,7 +30,9 @@
 	  		WHERE faq_category = #{faqCategory}
   		</if>
   		ORDER BY faq_num DESC
-  		LIMIT #{startRow}, #{listLimit}
+  		<if test="startRow != null and listLimit != null">
+	  		LIMIT #{startRow}, #{listLimit}
+  		</if>
   	</select>
   	
   	<select id="selectFaq" resultType="itwillbs.p2c3.boogimovie.vo.FAQVO">
@@ -40,6 +42,14 @@
   			   faq_category
   		FROM faq
   		WHERE faq_num = #{faq_num}
+  	</select>
+  	
+  	<!-- viewCOunt가 가장 높은 다섯개 -->
+  	<select id="selectFaqViewCountList" resultType="itwillbs.p2c3.boogimovie.vo.FAQVO">
+  		SELECT faq_subject, faq_category, faq_read_count
+		FROM faq
+		ORDER BY faq_read_count DESC
+		LIMIT 5;
   	</select>
   	
   	<delete id="deleteFaq">

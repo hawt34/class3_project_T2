@@ -21,7 +21,202 @@
 </script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
 " rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/tic_choose_seat.css" rel="stylesheet" type="text/css">
+<%-- <link href="${pageContext.request.contextPath}/resources/css/tic_choose_seat.css" rel="stylesheet" type="text/css"> --%>
+<style>
+	#seat_num{
+		margin-bottom : 50px;
+		position : relative;
+	}
+	
+	.choose_seat_section{
+		width : 1400px;
+		margin: 0 auto;
+	}
+	.opacity {
+		opacity : 0.6;
+		pointer : none;
+		
+	}
+	
+	div{
+		diplay : block;
+		unicode-bidi: isolate;
+		
+	}
+	
+	#wrapper {
+    	user-select: none;
+	}
+	
+	.center {
+	    text-align: center;
+	}
+	
+	section {
+	    display: block;
+	    unicode-bidi: isolate;
+	}
+	.seat {
+	    width: 25px;
+	    height: 25px;
+	    background-color: #a6a6a6;
+	    margin: 1px;
+	    display: inline-block;
+	    cursor: pointer;
+	    align-items: center;
+	    line-height: 30px;
+	    color: white;
+	    font-size: 0.8em;
+	    border-radius : 5px;
+	}
+	
+	.seat.selected {
+	    background-color: #B2FFFF; /* 선택된 좌석 색상 변경 */
+	    color: black;
+	}
+
+	
+	.asdf label {
+	    display: inline-block; /* 각 라벨을 가로로 정렬 */
+	}
+	
+	.asdf > div {
+    	display: inline-block;
+    	padding-right: 0; /* 라벨과 셀렉트 박스 사이의 간격을 조정합니다. */
+	}
+	
+	.asdf {
+	    display: flex;
+	    flex-direction: row;
+	    align-items: center;
+	    width:100%;
+	    justify-content: center; /* 요소를 가운데 정렬합니다. */
+	    text-align: center;
+		margin-top: 50px; /* 위쪽 여백 설정 */
+		margin-bottom: 40px;
+		margin-left: auto; /* 왼쪽 여백을 자동으로 설정 */
+		margin-right: auto; /* 오른쪽 여백을 자동으로 설정 */
+	}
+	
+	.person_info{
+		text-align : center;
+		margin-bottom : 40px;		
+	}
+	
+	
+	.asdf label, .asdf select {
+	    margin-bottom: 5px;
+	}
+	
+	.asdf > div {
+	    display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	    margin-right: 0px;
+    	width: 100px;
+	}
+	
+	.asdf > div:last-child {
+    	margin-right: 0; /* 마지막 요소의 우측 여백 제거 */
+	}
+	
+    
+    
+	.final_pay{
+		width : 800px;
+		height: 300px;
+		background-color : white;
+		height:20%;
+		padding-top: 50px;
+		text-align: center;
+	} 
+	
+
+	
+	.choose_seat_title{
+		margin: 50px 350px;
+	}
+	
+	.pay_movie_img{
+		border-right: solid 2px black;
+		border-left: solid 2px black;
+		paading-top : 30px;
+	}
+	
+	.pay_theater{
+		border-right: solid 2px black;
+	}
+	
+	.pay_seat{
+		border-right: solid 2px black;
+	}
+	
+	.pay_fee{
+		border-right: solid 2px black;
+	}
+	
+	.box1{
+		height: 900px;
+		margin : auto;
+	}
+	
+	.choose_person{
+		width: 70%;
+		height : 65%;
+		margin: 20px auto;
+	}
+	
+	img{
+		padding-top : 20px;
+	}
+	
+	.movie_ex{
+		font-size : 15px;
+		font-color : white;
+		font-weight : bold;
+		word-break: keep-all;
+	}
+	
+	.theater_ex{
+		font-size : 20px;
+ 		padding-top: 70px;
+ 		font-color : white;
+ 		font-weight : bold; 
+	}
+	
+	.seat_ex{
+		font-size : 20px;
+ 		padding-top: 70px ;
+		font-color : white;
+		font-weight : bold;
+	}
+	
+	.fee_ex{
+		font-size : 20px;
+ 		padding-top: 70px;
+ 		font-color : white; 
+ 		font-weight : bold;
+	}
+	
+	.pay_button{
+		padding-top: 180px;
+		text-align: center;
+	}
+	.pay_button > button{
+		padding : 10px 30px;
+		margin-right: 30px;
+	}
+	
+	
+	
+	
+.btn-gradient.small, 
+.btn-effect.small {
+  padding: 8px 18px;  
+  font-size: 14px;
+}
+
+</style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
 
@@ -43,87 +238,86 @@
     <input type="hidden" id="keyword" name="keyword" value="${keyword}">
     
     
+<div class="choose_seat_title">
+	<h3>좌석 선택</h3>
+	<hr>
+</div>
 <section class="choose_seat_section">
-	<div class="choose_seat_title">
-		<h3>좌석 선택</h3>
-		<hr>
-	</div>
 	<div class="row">
 	
 	
 <div class="box1 col-md-10">
-<div class="choose_person">
-	<div class="asdf">
-		<label class="person_option">일반</label>
-		
-		<div class="custom-select">
-	  	<select onchange="updateSeatSelection(this.value, 'NP')">
-		    <option>0명</option>
-		    <option value="1">1명</option>
-		    <option value="2">2명</option>
-	  	</select>
-		</div>     
-		
-		<label class="person_option">청소년</label>
-		<div class="custom-select">
-		  	<select onchange="updateSeatSelection(this.value, 'YP')">
+	<div class="choose_person">
+		<div class="asdf">
+			<label class="person_option">일반</label>
+			
+			<div class="custom-select">
+		  	<select onchange="updateSeatSelection(this.value, 'NP')">
 			    <option>0명</option>
 			    <option value="1">1명</option>
 			    <option value="2">2명</option>
 		  	</select>
+			</div>     
+			
+			<label class="person_option">청소년</label>
+			<div class="custom-select">
+			  	<select onchange="updateSeatSelection(this.value, 'YP')">
+				    <option>0명</option>
+				    <option value="1">1명</option>
+				    <option value="2">2명</option>
+			  	</select>
+			</div>
+			
+			<label class="person_option">우대</label>
+			<div class="custom-select">
+			  	<select onchange="updateSeatSelection(this.value, 'OP')">
+				    <option>0명</option>
+				    <option value="1">1명</option>
+				    <option value="2">2명</option>
+			  	</select>
+			</div>
 		</div>
+		<div class="person_info">
+			<h3>인원을 선택해주세요</h3>
+		</div>    
 		
-		<label class="person_option">우대</label>
-		<div class="custom-select">
-		  	<select onchange="updateSeatSelection(this.value, 'OP')">
-			    <option>0명</option>
-			    <option value="1">1명</option>
-			    <option value="2">2명</option>
-		  	</select>
+		<div class="center">
+			<c:forEach var="seat" items="${seats}" varStatus="status">
+				<div class="seat" onclick="toggleSeat(this)" value="${seat}">${seat}</div>
+					<c:if test="${status.index % firstRoad eq firstRoad - 1 || status.index % secondRoad eq secondRoad - 1}">
+						<span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;</span> <!-- 복도에 공백 삽입 -->
+					</c:if>
+					<c:if test="${(status.index + 1) % endCol eq 0}">
+						<br/> <!-- 각 행의 끝에서 줄바꿈 -->
+					</c:if>
+			</c:forEach>   	
 		</div>
-	</div>
-	<div class="person_info">
-		<h3>인원을 선택해주세요</h3>
-	</div>    
-	
-	<div class="center">
-		<c:forEach var="seat" items="${seats}" varStatus="status">
-			<div class="seat" onclick="toggleSeat(this)" value="${seat}">${seat}</div>
-				<c:if test="${status.index % firstRoad eq firstRoad - 1 || status.index % secondRoad eq secondRoad - 1}">
-					<span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;</span> <!-- 복도에 공백 삽입 -->
-				</c:if>
-				<c:if test="${(status.index + 1) % endCol eq 0}">
-					<br/> <!-- 각 행의 끝에서 줄바꿈 -->
-				</c:if>
-		</c:forEach>   	
-	</div>
-			<div class="final_pay row" style="margin-top: 50px; margin-left: 100px;">
-	
-		<div class="col-md-3 pay_movie_img">
-			<img src="${scs.movie_poster}" width="100" height="150">
-			<label class="movie_ex">${scs.movie_name }</label>
-		</div>
+		<div class="final_pay row">
 		
-		<div class="col-md-3 pay_theater">
-			<div class="theater_ex">${scs.theater_name} ${scs.screen_cinema_num }관<br>${start_time } ~<br>${end_time}</div>
+			<div class="col-md-3 pay_movie_img">
+				<img src="${scs.movie_poster}" width="100" height="150">
+				<label class="movie_ex">${scs.movie_name }</label>
+			</div>
+			
+			<div class="col-md-3 pay_theater">
+				<div class="theater_ex">${scs.theater_name} ${scs.screen_cinema_num }관<br>${start_time} ~ ${end_time}</div>
+			</div>
+				
+			
+			<div class="col-md-3 pay_seat">
+				<div class="seat_ex" id="seat_ex">선택된 좌석<br>없음</div>
+			</div>
+				
+				
+			<div class="col-md-3 pay_fee">
+				<div class="fee_ex" id="fee_ex"></div>
+			</div>
+				
 		</div>
-			
-		
-		<div class="col-md-2 pay_seat">
-			<div class="seat_ex" id="seat_ex">선택된 좌석: 없음</div>
-		</div>
-			
-			
-		<div class="col-md-2 pay_fee">
-			<div class="fee_ex" id="fee_ex"></div>
-		</div>
-			
-		<div class="col-md-2 pay_button">
+		<div class="pay_button">
 			<button type="submit" class="btn btn-outline-primary">결제</button>
 		</div>
-			
 	</div>
-</div>
 </div>
 
 
@@ -243,9 +437,9 @@ document.getElementById('fr').onsubmit = function (event) {
     function updateSeatDisplay() {
         var displayElement = document.querySelector('.seat_ex');
         if (selectedSeatNumbers.length > 0) {
-            displayElement.textContent = "선택된 좌석: " + selectedSeatNumbers.join(", ");
+            displayElement.innerHTML = "선택된 좌석<br>" + selectedSeatNumbers.join(", ");
         } else {
-            displayElement.textContent = "선택된 좌석: 없음";
+            displayElement.innerHTML = "선택된 좌석<br>없음";
         }
     }
  // 인원 정보를 화면에 표시하는 함수

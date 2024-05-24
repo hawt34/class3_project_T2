@@ -86,6 +86,7 @@ section h1 {
 	float: right;
 	width: 1000px;
 	height: 600px;
+	margin-bottom: 50px;
 }
 
 .movieInfo ul li {
@@ -106,7 +107,7 @@ section h1 {
 	height: 100px;
 	/* 	border: 1px solid black;   */
 	font-size: 30px;
-	margin-top: 150px;
+	margin-top: 200px;
 }
 .submitButton > button{
 	width: 250px;
@@ -186,7 +187,7 @@ section h1 {
 }
 
 .movieInfo img {
-	width: 325px;
+	width: 200px;
 	border-radius: 5px;
 }
 
@@ -266,9 +267,9 @@ footer {
 							<li><span>상영시간 : ${movie.movie_runtime }</span></li>
 							<li><span>줄거리 : ${movie.movie_summary}</span></li>
 						</ul>
-						<img src="${movie.movie_stillCut}"> <img
-							src="${movie.movie_stillCut2}"> <img
-							src="${movie.movie_stillCut3}">
+						<img src="${movie.movie_stillCut}"> 
+						<img src="${movie.movie_stillCut2}"> 
+						<img src="${movie.movie_stillCut3}">
 						<div class="backButton">
 							<button type="button" class="btn btn-outline-primary"
 								onclick="window.history.back()">뒤로가기</button>

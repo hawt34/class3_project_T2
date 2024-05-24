@@ -70,7 +70,6 @@ body {
 	background-color: white;
 	height: 800px;
 	padding: 0px;
-	margin: 0px;
 	border: solid 3px black;
 }
 
@@ -80,6 +79,7 @@ body {
 	padding: inherit;
 	border-right: solid 3px black;
 	border-top: solid 3px black;
+	border-right: solid 3px black;
 	border-bottom: solid 3px black;
 }
 
@@ -87,6 +87,8 @@ body {
 	height: 10%;
 	border-bottom: solid 3px black;
 	padding: 20px;
+	text-align:center;
+	font-size: 22px;
 }
 
 .list {
@@ -318,10 +320,9 @@ select[multiple] {
 }
 
 .tic_button {
-	text-align: right;
-	width: 20%;
-	height: 20%;
+	margin: 0 auto;
 	margin-bottom: 100px;
+	width: 150px;
 }
 
 a {
@@ -329,8 +330,44 @@ a {
 	color: black !important;
 }
 
+.col-sm-6> ul{
+	margin-top: 20px;
+	margin-left: 5px;
+}
+.daylistBtn > input[type=button]{
+	padding: 10px 20px;
+	border: none;
+	background: white;
+}
+.daylistBtn > input[type=button].selected{
+	background: #c7cdff;
+	transition-duration: .1s;
+}
+.daylistBtn{
+	margin: 0 15px;
+}
 *.selected {
-	background-color: yellow;
+	background-color: #c7cdff;
+	padding: 10px 10px;
+	transition-duration: .1s;
+}
+* {
+	font-size: 20px;
+}
+.finalmovielist{
+	padding: 0px;
+}
+.final_list{
+	border: 1px solid #c7cdff;
+	background: #c7cdff;
+	color: black;
+	padding: 10px 20px;
+}
+.final_list.selected{
+	border: 1px solid #c7cdff;
+	background: #181934;
+	color: #c7cdff;
+	padding: 20px 20px;
 }
 </style>
 </head>
@@ -372,7 +409,7 @@ a {
 								<div class="explain" id="movieSelected">영화를 선택해주세요</div>
 								<!-- select박스 -->
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-4 mb-3">
 										<input type="checkbox" id="like_movie" name="like_movie"
 											value="나의취향" class="col-md-3">내취향
 									</div>
@@ -403,7 +440,7 @@ a {
 														style="width: 48px; height: 48px;">
 												</c:when>
 											</c:choose>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+											&nbsp;&nbsp;&nbsp; <span
 												id="movie_${movie.movie_num}"> <a class="movie-link"
 												onclick="movieClick('${movie.movie_name}', '${movie.movie_num}')">
 													${movie.movie_name} </a>
@@ -456,7 +493,7 @@ a {
 								<div class="explain" id="daySelected">${currentDate }</div>
 								<div class="finallist">
 									<div class="daylist scroll">
-										<div>
+										<div class="daylistBtn">
 											<c:forEach begin="1" end="10" var="i">
 												<c:choose>
 													<c:when test="${nowDay <= maxDay}">
@@ -559,7 +596,7 @@ a {
                         + "<div>" + finalList.movie_name + "</div>"
                         + "<div class='row box1' style='width: 600px'>"
                         + "<div class='col-md-3'>"
-                        + finalList.scs_start_time + "<br>~" + finalList.scs_end_time
+                        + finalList.scs_start_time + " ~ " + finalList.scs_end_time
                         + "</div>"
                         + "<div class='col-md-5'>"
                         + finalList.screen_dimension + " || "

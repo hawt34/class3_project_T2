@@ -190,7 +190,7 @@ public class TicketingController {
             	seats2 += "/" + ticket.getTicket_seat_info();
             }
         }
-        
+        System.out.println(seats2);
         
 		//model에 저장
         model.addAttribute("keyword", keyword);

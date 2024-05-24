@@ -342,6 +342,7 @@ a {
 .daylistBtn > input[type=button].selected{
 	background: #c7cdff;
 	transition-duration: .1s;
+	padding: 10px 30px;
 }
 .daylistBtn{
 	margin: 0 15px;
@@ -506,7 +507,7 @@ a {
                                                     %>
 													</c:when>
 													<c:otherwise>
-                                                    //
+                                                    ||
                                                     <%
 													nowDay = 1;
 													pageContext.setAttribute("nowDay", nowDay);

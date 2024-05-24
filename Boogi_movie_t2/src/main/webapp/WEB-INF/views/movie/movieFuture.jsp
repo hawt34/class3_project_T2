@@ -94,10 +94,10 @@ footer {
 .nowMovie>form>input[type=text] {
 	font-size: 18px;
 	height: 40px;
-	width: 150px;
+	width: 200px;
 	outline: none;
 	vertical-align: middle;
-	margin-left: 10px;
+	margin-left: 150px;
 }
 
 .nowMovie>form>input[type=submit] {
@@ -145,7 +145,7 @@ footer {
 				<button type="button" class="btn btn-outline-primary"
 					id="recommendMovie">추천상영영화</button>
 				<form action="searchMovie">
-					<input type="text" name="searchKeyword" placeholder="영화제목 입력"
+					<input type="text" name="searchKeyword" placeholder="제목을 입력해주세요"
 						value="${param.searchKeyword}"> <input type="submit"
 						class="btn btn-dark" value="검색">
 				</form>

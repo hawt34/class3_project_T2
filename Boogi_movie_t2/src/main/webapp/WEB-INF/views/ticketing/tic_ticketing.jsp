@@ -13,7 +13,6 @@
 <link href="${pageContext.request.contextPath}/resources/css/tic_ticketing.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-
     .selected {
         background-color: #FFD700; /* 선택된 항목의 배경색을 설정합니다. */
     }
@@ -479,7 +478,7 @@ a {
                     <div class="tic_final">
                         <!-- 설명영역 -->
                         <div class="explain" id="daySelected">
-                            ${currentDate }
+                            ${currentDate}
                         </div>
                             <div class="finallist">
                                 <div class="daylist scroll">
@@ -720,13 +719,27 @@ a {
             alert("영화와 상영관을 선택해주세요.");
             return;
         }
-
+        
+        console.log("date ======================= " + date);
+        console.log("nowDay =======================" + nowDay);
         var baseDate = new Date(date);
+        console.log("baseDate ==================== " + baseDate);
+
+        var currentDay = baseDate.getDate();
+        console.log("currentDay =======================" + currentDay);
+
+        // nowDay가 현재 날짜의 일(day) 값보다 낮으면 한 달을 더해줌
+        if (nowDay < currentDay) {
+            baseDate.setMonth(baseDate.getMonth() + 1);
+        }
+
         baseDate.setDate(nowDay);
+        console.log("updated baseDate ==================== " + baseDate);
         var formattedDate = baseDate.toISOString().split('T')[0];
+        console.log("formattedDate =========================" + formattedDate);
         selectedDay = formattedDate;
         var result = $("#daySelected");
-
+        
         // 선택된 날짜의 배경색 변경
         $(".daylist input").removeClass("selected");
         $(element).addClass("selected");

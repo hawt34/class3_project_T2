@@ -25,7 +25,7 @@
     
     <!-- 예매내역 -->
 	<select id="selectMovieReservation" resultType="map">
-	    SELECT DISTINCT
+	    SELECT
 		    movie.movie_poster,
 		    movie.movie_name,
 		    screen_session.scs_date,
@@ -45,20 +45,21 @@
         member.member_id = #{member_id}
         <choose>
 	        <when test="status.equals('결제') and startRow == null and listLimit == null">
-	            AND pay.ticket_pay_status = '결제'
+<!-- 	        <when test="status.equals('결제')"> -->
+	            AND pay.ticket_pay_status = '결제' 
 	        	ORDER BY
-	        	screen_session.scs_date DESC
+	        	screen_session.scs_date ASC ,screen_session.scs_start_time ASC, screen_session.scs_num ASC
 	        </when>
 	        <when test="status.equals('취소')">
 	            AND pay.ticket_pay_status = '취소'
 	            ORDER BY
-	        	screen_session.scs_date DESC
+	        	screen_session.scs_date ASC ,screen_session.scs_start_time ASC, screen_session.scs_num ASC
 	            LIMIT #{startRow}, #{listLimit}
 	        </when>
         	<otherwise>
 	            AND pay.ticket_pay_status = '결제'
 	        	ORDER BY
-	        	screen_session.scs_date DESC
+	        	screen_session.scs_date ASC ,screen_session.scs_start_time ASC, screen_session.scs_num ASC
 	          	LIMIT #{startRow}, #{listLimit}
         	</otherwise>
         </choose>
@@ -66,7 +67,7 @@
     
     <!-- 예매한 영화 갯수 -->
     <select id="selectResvCount" resultType="int">
-	   SELECT COUNT(DISTINCT screen_session.scs_num)
+	   SELECT COUNT(screen_session.scs_num)
 		FROM
 		    pay
 		JOIN member ON member.member_id = pay.member_id 
@@ -75,8 +76,6 @@
 		JOIN ticket ON ticket.ticket_pay_num = pay.ticket_pay_num
 		JOIN screen_info ON screen_info.screen_num = screen_session.screen_num
 		JOIN theater ON theater.theater_num = screen_info.theater_num
-<!-- 		WHERE -->
-<!-- 		    member.member_id = #{member_id} AND pay.ticket_pay_status = '결제' -->
        	WHERE
         member.member_id = #{member_id}
         <if test="status.equals('결제')">
@@ -121,7 +120,7 @@
 				member_pwd = #{member_pwd},
 			</if>
 			member_birth = #{member_birth}
-			, member_addr = #{member_addr}
+			, member_addr = CONCAT(#{post_code), '/', #{address1}, #{address2})
 			, member_email = #{member_email}
 			, member_tel = #{member_tel}
 		WHERE

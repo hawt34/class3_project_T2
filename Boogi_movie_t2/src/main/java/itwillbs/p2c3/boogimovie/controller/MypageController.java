@@ -299,31 +299,16 @@ public class MypageController {
 		member = mypageService.getMember(id);
 		model.addAttribute("member", member);
 		
-	    // 세션에서 상태 확인
-//	    String status = (String) session.getAttribute("status");
-//	    if (status == null) {
-//	        status = "결제"; // 기본 상태를 결제로 설정
-//	    }
 	    
-//		Map<String, Object> param = new HashMap<String, Object>();
 		PayVO pay = new PayVO();
 		Map<String, Object> param = new HashMap<>();
-//		param.put("status", status);
-		param.put("status", false);
-//		if(param.get("status").equals(false)) {
-//			pay.setTicket_pay_status("결제"); // 예시로 설정
-////			String status = pay.getTicket_pay_status();
-//			System.out.println("결제 param status : " + param.get("status"));
-//			System.out.println("결제 status : " + status);
-//			
-//		} else if (!param.get("status").equals(false) && param.get("status").equals("") && param.get("status") != null){
-//			param.put("status", "취소");
-//			pay.setTicket_pay_status("취소"); // 예시로 설정
-////			String status = pay.getTicket_pay_status();
-//			System.out.println("취소 param status : " + param.get("status"));
-//			System.out.println("취소 status : " + status);
-//		}
-		
+		pay.setTicket_pay_status("결제");
+		param.put("status", "결제");
+		if ("취소".equals(status)) {
+	        pay.setTicket_pay_status("취소");
+	        param.put("status", "취소");
+	    } 
+	    
 		int listLimit = 4;
 		int startRow = (pageNum - 1) * listLimit;
 		String member_id = member.getMember_id();
@@ -333,19 +318,12 @@ public class MypageController {
 		param.put("member_id", member_id);
 		
 		// 페이징
-//		List<Map<String, Object>> resvList = mypageService.getResvList(startRow, listLimit, member_id);
 		List<Map<String, Object>> movieReservation = mypageService.getMovieReservation(param);
-//		String status = pay.getTicket_pay_status();
-		
-//		System.out.println("결제 statussssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" + status);
-		
-//		int listCount = mypageService.getResvCount(member_id, status); // 총 예매영화 수
-//		List<Map<String, Object>> listCount = mypageService.getResvCount(param);
 		// -----------------------------------------------------------------------------------------
 	    int listCount = mypageService.getResvCount(member_id,status);
 	    // -----------------------------------------------------------------------------------------
 
-		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
+		int pageListLimit = 5; // 뷰에 표시할 페이지 갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
 		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
@@ -360,18 +338,12 @@ public class MypageController {
 		}
 		model.addAttribute("movieReservation", movieReservation);
 		model.addAttribute("pageList", pageList);
-//	    model.addAttribute("status", status); 
 	    model.addAttribute("status", status); 
 
 		
 		return "mypage/myp_reservation";
 	}
 	
-//	@GetMapping("set_status")
-//	@ResponseBody
-//	public void setStatus(@RequestParam String status, HttpSession session) {
-//	    session.setAttribute("status", status);
-//	}
 	// ============================= 스토어 =============================
 	
 	@GetMapping("myp_store")
@@ -391,67 +363,6 @@ public class MypageController {
 		model.addAttribute("storePay", storePay);
 		
 		return "mypage/myp_store";
-	}
-	// ============================= 취소 =============================
-	
-	// 취소 영화 목록
-	@GetMapping("myp_cancel")
-	public String mypCancel(Model model, MemberVO member, @RequestParam(defaultValue = "1") int pageNum) {
-		String id = (String)session.getAttribute("sId");
-		
-		if(id == null) { // 아이디 없을 경우 로그인 페이지 이동 
-			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
-			model.addAttribute("targetURL", "member_login");
-			return"error/fail";
-		}
-		
-		member = mypageService.getMember(id);
-		model.addAttribute("member", member);
-		
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("status", "취소");
-		// 예매정보
-		int listLimit = 4;
-		int startRow = (pageNum - 1) * listLimit;
-
-		String member_id = member.getMember_id();
-		
-		param.put("startRow", startRow);
-		param.put("listLimit", listLimit);
-		param.put("member_id", member_id);
-
-		PayVO pay = new PayVO();
-		pay.setTicket_pay_status("취소"); // 예시로 설정
-		String status = pay.getTicket_pay_status();
-		System.out.println("취소 statussssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" + status);
-		// 페이징
-		List<Map<String, Object>> movieReservation = mypageService.getMovieReservation(param);
-		
-		model.addAttribute("movieReservation", movieReservation);
-		
-		int listCount = mypageService.getResvCount(member_id, status); // 총 예매영화 갯수
-//		int listCount = mypageService.getResvCount(member); // 총 예매영화 갯수
-		
-		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-		System.out.println("취소 startRow : " + startRow + ",  listLimit : " + listLimit + ", pageListLimit : " + pageListLimit + ", maxPage : " + maxPage + ", startPage : " + startPage);
-		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-			endPage = maxPage;
-		}
-		
-		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-
-		if(pageNum < 1 || pageNum > maxPage){
-			model.addAttribute("msg", "존재하지 않는 페이지입니다");
-			model.addAttribute("targetURL", "myp_reservation");
-		}
-		model.addAttribute("pageList", pageList);
-		
-		
-		
-		return "redirect:/myp_reservation";
 	}
 	
 	// ============================= 탈퇴 =============================

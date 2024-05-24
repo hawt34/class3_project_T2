@@ -152,7 +152,8 @@ table {
 
 .timetable_movie_area{
 	background-color : #f0f0f0;
-	
+	height: 50px;
+	justify-content: center;
 }
 
 .timetable {

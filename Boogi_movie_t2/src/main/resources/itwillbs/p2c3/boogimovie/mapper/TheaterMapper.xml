@@ -119,7 +119,7 @@
 	</select>
 	
 	<select id="getTheaterScsList" resultType="map">
-		SELECT *, movie_name, movie_runtime, screen_cinema_num, movie_grade
+		SELECT *, movie_name, movie_runtime,  movie_grade, screen_cinema_num, screen_seat_row, screen_seat_col
 		FROM screen_session ss JOIN movie m 
 		ON ss.movie_num = m.movie_num 
 		JOIN screen_info si ON ss.screen_num = si.screen_num 

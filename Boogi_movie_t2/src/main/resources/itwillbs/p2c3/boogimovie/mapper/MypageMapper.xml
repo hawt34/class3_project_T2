@@ -176,7 +176,7 @@
    	<!-- member 테이블의 member_status 컬럼값을 3(탈퇴)로 변경 탈퇴일자(withdraw_date) 를 now() 함수 -->
     <update id="updateMemberForWithdraw">
    		UPDATE member
-		SET member_status = 3,
+		SET member_status = '탈퇴',
 			member_withdraw_date = now()
 		WHERE
 			member_id = #{member_id}

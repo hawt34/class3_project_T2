@@ -227,8 +227,10 @@ public class MypageController {
 		
 	}
 	
+	// ---------------------------------------------------------------------
+	
 	@PostMapping("myp_info_modify_pro")
-	public String mypInfoModifyPro(MemberVO member, Model model) {
+	public String mypInfoModifyPro(MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
 		
 		String id = (String)session.getAttribute("sId");
 		if(id == null) {
@@ -239,11 +241,15 @@ public class MypageController {
 		//postcode,address1,address2 문자열결합 후 addr에 저장
 		String aadr= member.getMember_post_code() + "/" + member.getMember_address1() + "/" + member.getMember_address2();
 		member.setMember_addr(aadr);
+		
+		if(!member.getMember_pwd().equals("")) {
+			member.setMember_pwd(passwordEncoder.encode(member.getMember_pwd()));
+		}
 		//비밀번호 인코딩
-		BCryptPasswordEncoder pwdEnoder = new BCryptPasswordEncoder();
-		String pwd = member.getMember_pwd();
-		String encodedPwd = pwdEnoder.encode(pwd);
-		member.setMember_pwd(encodedPwd);
+//		BCryptPasswordEncoder pwdEnoder = new BCryptPasswordEncoder();
+//		String pwd = member.getMember_pwd();
+//		String encodedPwd = pwdEnoder.encode(pwd);
+//		member.setMember_pwd(encodedPwd);
 		
 		int updateCount = mypageService.modifyMember(member);
 		model.addAttribute("member", updateCount);
@@ -252,7 +258,7 @@ public class MypageController {
 //			model.addAttribute("member", member);
 			model.addAttribute("msg", "회원정보가 수정되었습니다");
 			model.addAttribute("targetURL", "myp_info_modify");
-			return "error/fail";
+			return "redirect:/myp_info_modify";
 		} else { // 정보수정 실패 시
 			model.addAttribute("msg", "회원정보 수정에 실패했습니다");
 			model.addAttribute("targetURL", "myp_info_modify");
@@ -410,7 +416,7 @@ public class MypageController {
 	@GetMapping("myp_withdraw_info")
 	public String mypWithdrawInfo(Model model) {
 		String id = (String)session.getAttribute("sId");
-		
+		System.out.println("myp_withdraw_info");
 		if(id == null) { // 실패
 			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
 			model.addAttribute("targetURL", "member_login");
@@ -422,7 +428,7 @@ public class MypageController {
 	// 탈퇴 비밀번호 재입력 페이지 (탈퇴2)
 	@GetMapping("myp_withdraw_passwd")
 	public String mypWithdrawPasswd(Model model) {
-//		System.out.println("myp_withdraw_passwd()");
+		System.out.println("myp_withdraw_passwd()");
 		String id = (String)session.getAttribute("sId");
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다");
@@ -434,11 +440,11 @@ public class MypageController {
 	
 	// 탈퇴처리
 	@PostMapping("myp_withdraw_finish_pro")
-	public String mypWithdrawFinishPro(@RequestParam("password")String password, MemberVO member, Model model) {
+	public String mypWithdrawFinishPro(@RequestParam("password")String password, MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
 		// 세션 아이디 존재 여부 판별
 		// 회원 정보 조회 후 아이디 일치 여부와 패스워드 일치 여부 확인
 		String id = (String)session.getAttribute("sId");
-//		System.out.println("myp_withdraw_finish_pro");
+		System.out.println("myp_withdraw_finish_pro");
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다");
 			model.addAttribute("targetURL", "./");
@@ -447,25 +453,19 @@ public class MypageController {
 		
 		member.setMember_id(id);
 		MemberVO dbMember = mypageService.getDbMember(member);
-		
-		if(dbMember != null && password.equals(dbMember.getMember_pwd())) { // 비번이 같을 때 
+		if(dbMember != null && passwordEncoder.matches(password, dbMember.getMember_pwd())) { // 비번이 같을 때 
 			int updateCount = mypageService.withdrawMember(member);
-			System.out.println(dbMember.getMember_pwd());
 		// 로그인 정보 제거하기 위해 세션 초기화 후 메인페이지로 리다이렉트
 			if(updateCount > 0) { // 탈퇴 성공 시
-//				System.out.println("탈퇴성공");
 				
-				// 로그인 정보 제거하기 위해 세션 초기화 후 myp_withdraw_finish 리다이렉트
 				session.invalidate();
 				return "redirect:/myp_withdraw_finish";
 			} else { // 실패시
-//				System.out.println("탈퇴실패");
 				model.addAttribute("msg", "탈퇴에 실패했습니다");
-				model.addAttribute("targetURL", "myp_withdraw_info");
+				model.addAttribute("targetURL", "myp_withdraw_info"); 
 				return"error/fail";
 			}
 		} else { // 비번이 일치하지 않을 경우
-//			System.out.println("비번 틀림");
 			model.addAttribute("msg", "비밀번호가 일치하지 않습니다");
 			model.addAttribute("targetURL", "myp_withdraw_passwd");
 			return"error/fail";
@@ -475,7 +475,7 @@ public class MypageController {
 	// 탈퇴 후 보여지는 페이지
 	@GetMapping("myp_withdraw_finish")
 	public String mypWithdrawFinish(MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
-//		System.out.println("myp_withdraw_finish()");
+		System.out.println("myp_withdraw_finish()");
 		return "mypage/myp_withdraw_finish";
 	}
 	

@@ -191,7 +191,7 @@ th:nth-child(7), td:nth-child(7) {
 								<th>상영일</th>
 								<th>종영일</th>
 								<th>상영상태</th>
-								<th>수정/삭제</th>
+								<th>수정하기</th>
 							</tr>
 						</thead>
 						<tbody id="movieTableBody">
@@ -215,7 +215,6 @@ th:nth-child(7), td:nth-child(7) {
 									
 									<td>
 										<button type="button" class="btn btn-outline-primary" onclick="location.href = 'admin_movie_edit_form?movie_num=${movie.movie_num}'">수정</button>
-										<button type="button" class="btn btn-outline-primary" onclick="movieWithdraw(${movie.movie_num})">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>

@@ -160,6 +160,17 @@ public interface AdminMapper {
 //							  @Param("startRow") int startRow, 
 //							  @Param("listLimit") int listLimit);
 	
+	//=======================================================
+	// 상영관 리스트 조회
+	List<ScreenInfoVO> selectScreenInfo(@Param("searchKeyword") String searchKeyword, 
+									@Param("startRow") int startRow, 
+									@Param("listLimit") int listLimit);
+
+	// 상영관 리스트 수 조회
+	int selectScreenInfoCount(@Param("searchKeyword") String searchKeyword, 
+										@Param("startRow") int startRow, 
+										@Param("listLimit") int listLimit);
+	
 	//========================================================
 	// 쿠폰타입 리스트 가져오기
 	List<Map<String, String>> getCouponTypeList();

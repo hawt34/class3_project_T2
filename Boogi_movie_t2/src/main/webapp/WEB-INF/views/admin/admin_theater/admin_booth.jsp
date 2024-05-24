@@ -48,6 +48,21 @@ th:nth-child(6), td:nth-child(6) {
 .admin_movie_search >select{
 	width: 200px;
 }
+#pageList{
+	text-align: center;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+#pageList > a{
+	text-decoration: none;
+	color: lightgray;
+	margin: 0 10px;
+}
+#pageList > b{
+	margin: 0 10px;
+	color: #1b1b1b;
+}
 
 </style>
 
@@ -68,15 +83,20 @@ th:nth-child(6), td:nth-child(6) {
 			</div>
 
 			<div class="col-md-9">
+				<!-- 파라미터 없을 시 기본값 1 저장 -->
+				<c:set var="pageNum" value="1"/>
+				<c:if test="${not empty param.pageNum}">
+					<c:set var="pageNum" value="${param.pageNum}"/>
+				</c:if>
+				
 				<!--  메인 중앙 영역  -->
-				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_movie_head">
 					<div class="admin_movie_title">상영관관리</div>
 					<div class="admin_movie_search">
-						<select class="form-select" name="adminTheaterName" id="adminTheaterName"style="width: 300px;">
+						<select class="form-select" name="searchKeyword" id="adminTheaterName"style="width: 300px;">
 							<option value="">전체</option>
 							<c:forEach var="theater" items="${theaterList}">
-								<option value="${theater.theater_name}" >${theater.theater_name}</option>
+								<option value="${theater.theater_name}" <c:if test="${theater.theater_name eq param.searchKeyword}">selected</c:if>>${theater.theater_name}</option>
 							</c:forEach>
 						</select> 
 					</div>
@@ -122,6 +142,30 @@ th:nth-child(6), td:nth-child(6) {
 					</table>
 				</div>
 				
+				<section id="pageList">
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_booth?pageNum=${pageNum - 1}&searchKeyword=${param.searchKeyword}'"
+						<c:if test="${pageNum le 1}">disabled</c:if>>
+						이전
+					</button>
+					
+					<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1" >
+							<c:choose>
+								<c:when test="${pageNum eq i}">
+									<b>${i}</b>
+								</c:when>				
+								<c:otherwise>
+									<a href="admin_booth?pageNum=${i}&searchKeyword=${param.searchKeyword}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+					</c:forEach>
+					
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_booth?pageNum=${pageNum + 1}&searchKeyword=${param.searchKeyword}'"
+						<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
+						다음
+					</button>
+				</section>
+				
+				
 				<div class="admin_movie_footer" align="center">
 					<button onclick="boothForm()">상영관 등록</button>
 				</div>
@@ -143,6 +187,14 @@ th:nth-child(6), td:nth-child(6) {
 		function boothForm() {
 			window.open("admin_booth_form", "_self");
 		}
+		
+		$(function() {
+			$("#adminTheaterName").change(function() {
+				location.href = "admin_booth?pageInfo=" + ${pageNum} + "&searchKeyword=" + $("#adminTheaterName").val();
+				
+			});
+			
+		});
 		
 		
 	

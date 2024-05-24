@@ -128,6 +128,7 @@ table {
 	margin: 10px;
 }
 
+
 .day_list {
 	display: flex;
 	height: 70px;
@@ -202,4 +203,9 @@ table {
 	justify-content: center;
 }
 
+.none_scs {
+	margin: auto;
+	text-align: center;
+	height: 200px;
+}
 

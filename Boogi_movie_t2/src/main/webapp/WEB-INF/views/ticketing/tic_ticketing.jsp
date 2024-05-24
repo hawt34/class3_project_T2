@@ -87,6 +87,7 @@ body {
 	padding: 20px;
 	text-align:center;
 	font-size: 22px;
+	word-break: keep-all;
 }
 
 .list {
@@ -431,7 +432,7 @@ a {
                                         <img src="${pageContext.request.contextPath}/resources/images/tic_icon_over18.gif" style="width: 48px; height: 48px;">
                                     </c:when>
                                 </c:choose>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;
                                     <span id="movie_${movie.movie_num}">
                                         <a class="movie-link" onclick="movieClick('${movie.movie_name}', '${movie.movie_num}')">
                                             ${movie.movie_name}
@@ -482,7 +483,7 @@ a {
                         </div>
                             <div class="finallist">
                                 <div class="daylist scroll">
-                                    <div>
+                                    <div class="daylistBtn">
                                         <c:forEach begin="1" end="10" var="i">
                                             <c:choose>
                                                 <c:when test="${nowDay <= maxDay}">

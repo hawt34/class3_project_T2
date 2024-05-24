@@ -1150,15 +1150,34 @@ public class AdminController {
 	
 	// 상영관 관리 > 상영관 리스트
 	@GetMapping("admin_booth")
-	public String adminBooth(TheaterVO theater, Model model, ScreenInfoVO screenInfo) {
+	public String adminBooth(@RequestParam(defaultValue = "1") int pageNum, 
+							@RequestParam(defaultValue = "") String searchKeyword, Model model) {
+		
+		// 한 페이지에 표시할 갯수
+		int listLimit = 10;
+		// 조회 시작 행 번호
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 상영관 리스트 조회
+		List<ScreenInfoVO> screenInfoList = service.getScreenInfo(searchKeyword, startRow, listLimit);
+				
+		int listCount = service.getScreenInfoCount(searchKeyword, startRow, listLimit);
+		// 페이징 숫자 갯수
+		int pageListLimit = 5;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+		endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("pageInfo", pageInfo);
 		
 		// 극장 리스트 조회
 		List<TheaterVO> theaterList = theaterService.getTheater();
-		
-		// 상영관 리스트 조회
-		List<ScreenInfoVO> screenInfoList = screenService.getScreenInfo();
-		
 		model.addAttribute("theaterList", theaterList);
+		
 		model.addAttribute("screenInfoList", screenInfoList);
 		
 		

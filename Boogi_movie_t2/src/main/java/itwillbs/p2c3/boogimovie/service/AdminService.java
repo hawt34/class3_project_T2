@@ -204,6 +204,17 @@ public class AdminService {
 //	public int getMoivePlanListCount(int theater_num, Date scs_date, int startRow, int listLimit) {
 //		return mapper.getMoivePlanListCount(theater_num, scs_date, startRow, listLimit);
 //	}
+	//------------------------------------------------------------
+	// 상영관 조회하기
+	public List<ScreenInfoVO> getScreenInfo(String searchKeyword, int startRow, int listLimit){
+		return mapper.selectScreenInfo(searchKeyword, startRow, listLimit);
+	}
+
+	// 상영관 수 조회하기
+	public int getScreenInfoCount(String searchKeyword, int startRow, int listLimit){
+		return mapper.selectScreenInfoCount(searchKeyword, startRow, listLimit);
+	}
+	
 	
 	//--------------------------------------------------------------
 	// 쿠폰 타입 리스트

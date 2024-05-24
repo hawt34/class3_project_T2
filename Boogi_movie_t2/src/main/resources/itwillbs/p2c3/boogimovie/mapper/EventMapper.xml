@@ -9,6 +9,7 @@
 	SELECT e.*, et.event_type_name
 		FROM event e 
 		JOIN event_type et ON e.event_type_num = et.event_type_num
+		ORDER BY event_reg_date desc;
 	</select>
 
 <!-- 관리자 이벤트 리스트 조회 -->

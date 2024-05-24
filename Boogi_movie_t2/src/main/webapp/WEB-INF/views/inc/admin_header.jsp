@@ -142,6 +142,10 @@ body {
 	display: flex;
 	flex-direction: row;
 }
+ .clickable {
+            cursor: pointer;
+            user-select: none; /* 이 부분은 선택한 텍스트를 드래그하는 것을 방지합니다. */
+        }
 </style>
 </head>
 <body>
@@ -179,7 +183,7 @@ body {
 					<img src="${pageContext.request.contextPath}/resources/images/boogi_title.png" onclick="location.href='./'">
 				</div>
 				<div class="col-md-2" align="center">
-					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png">
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png" class="clickable" id="target">
 				</div>
 				<div class="col-md-1"></div>
 			</div>
@@ -228,19 +232,9 @@ body {
 			<div class="dropdown">
 				<button class="dropdown-btn" onclick="location.href='boogi_store'">스토어</button>
 				<div class="dropdown-submenu">
-<!-- 					<a href="event">이벤트코너</a>  -->
 					<a href="boogi_store">스토어</a> 
-<!-- 					<a href="event">이벤트코너</a>  -->
-<!-- 					<a href="boogi_store">스토어</a>  -->
 				</div>
 			</div>
-<!-- 			<div class="dropdown"> -->
-<!-- 				<button class="dropdown-btn" onclick="location.href='boogi_store'">스토어</button> -->
-<!-- 				<div class="dropdown-submenu"> -->
-<!-- <!-- 					<a href="event">이벤트코너</a>  --> 
-<!-- <!-- 					<a href="boogi_store">스토어</a>  --> 
-<!-- 				</div> -->
-<!-- 			</div> -->
 		</div>
 	</div>
 
@@ -251,6 +245,86 @@ body {
 			location.href="member_logout_pro";
 		}
 	}
+	
+	 // 클릭 횟수를 저장할 변수
+    let clickCount = 0;
+
+    // 대상 요소를 가져옵니다.
+    const target = document.getElementById('target');
+
+    // 대상 요소에 클릭 이벤트 리스너를 추가합니다.
+    target.addEventListener('click', function() {
+        // 클릭 횟수를 증가시킵니다.
+        clickCount++;
+
+        if (clickCount === 3) {
+            alert("(\\_(\\ \n(=' :')\n(,(\")(\")\n\n와우! 3번 클릭했군요!");
+	           	
+        }
+        else if (clickCount === 6) {
+            alert("⊂_ヽ\n" +
+                    "　 ＼＼ Λ＿Λ\n" +
+                    "　　 ＼(　ˇωˇ)\n" +
+                    "　　　 >　⌒ヽ\n" +
+                    "　　　/ 　 へ＼\n" +
+                    "　　 /　　/　＼＼\n" +
+                    "　　 ﾚ　ノ　　 ヽ_つ\n" +
+                    "　　/　/\n" +
+                    "　 /　/|\n" +
+                    "　(　(ヽ\n" +
+                    "　|　|、＼\n" +
+                    "　| 丿 ＼ ⌒)\n" +
+                    "　| |　　) /\n" +
+                    "`ノ )　　Lﾉ\n" +
+                    "(_／\n" +
+                    "와우! 6번 클릭했군요!");
+     
+        }
+        else if (clickCount === 9) {
+            alert(".             +\n" +
+                    "  　╲　　　　　　　　　　　╱\n" +
+                    "  　　　　　　　　/\n" +
+                    "  　　　╲　　　　　　　　╱\n" +
+                    "  　　╲　　    　　　　　╱\n" +
+                    "  -　-　　　　저기요　　　-　-\n" +
+                    "  　　╱　   　　　　　　╲\n" +
+                    "  　╱　　/             .\n" +
+                    "  　　╱　　　　　　　　╲\n" +
+                    "  　　　　　/　|　　　\n" +
+                    "  　　　　　　　.");
+        }
+        else if (clickCount === 10) {
+            alert(".           +\n" +
+                    "　╲　　　　　　　　　　　╱\n" +
+                    "　　　　　　　　　/\n" +
+                    "　　　╲　　　　　　　　╱\n" +
+                    "　　╲　　    설마...　　　╱\n" +
+                    "-　-　　　제 목소리가　　-　-　-\n" +
+                    "　　╱　   들리시나요?　　╲\n" +
+                    "　╱　　/               .\n" +
+                    "　　╱　　　　　　　　╲\n" +
+                    "　　　　　/　|　　　\n" +
+                    "　　　　　　　.");
+        }
+        else if (clickCount === 12) {
+            alert("＼　　ヽ　　　　i　　|　　　　 /　　　/　\n" +
+                    "　　　＼\n" +
+                    "치킨 사주세요!\n" +
+                    "　　　　　　　　　　　　　　;' ':;,　　 　　　 ,;'':;,\n" +
+                    "　　　　　　　　　　　　　;'　　 ':;,.,..,,,;'　　　';,\n" +
+                    "　　ー　　　　　　　　 ,:'　　　　　　　　 　　　　::::::::､\n" +
+                    "　_＿　　　　　　　　,:' ／ 　 　　　　＼ 　　　　　::::::::',\n" +
+                    "　　　　　二　　　　:'　 ●　　　　　 ●　 　　　　　　::::::::i.\n" +
+                    "　　￣　　　　　　　i　'''　(_人__)　　''''　　 ::::::::::i\n" +
+                    "　　　　-‐　　　　　 :　 　　　　　　　　　 　　　　　::::::::i\n" +
+                    "　　　　　　　　　　　`:,､ 　　　　　 　 　　　 :::::::::: /\n" +
+                    "　　　　／　　　　　　 ,:'　　　　　　　 : ::::::::::::｀:､\n" +
+                    "　　　　　　　　　　　 ,:'　　　　　　　　 : : ::::::::::｀:､");
+        }
+//         clickCount = 0;
+        // 클릭 횟수를 다시 0으로 초기화합니다.
+      	
+    });
 
 </script>
 </body>

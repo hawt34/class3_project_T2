@@ -69,5 +69,9 @@ public class MovieInfoService {
 		
 		return mapper.selectMovieFutureTrail();
 	}
-
+	//상영영화 검색기
+	public List<MovieVO> searchMovie(String searchKeyword) {
+		return mapper.searchMovie(searchKeyword);
+	}
+	
 }

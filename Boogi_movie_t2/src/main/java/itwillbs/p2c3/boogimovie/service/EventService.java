@@ -15,10 +15,18 @@ public class EventService {
 
 	@Autowired
 	private EventMapper mapper;
-	
+	// 관리자 리스트 조회
+	public List<EventVO> getEventListSearch(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectEventListSearch(searchKeyword, startRow, listLimit);
+	}
+
+	// 이벤트 페이지 리스트 조회
 	public List<EventVO> getEventList() {
-		
 		return mapper.selectEventList();
+	}
+
+	public int getEventListCount(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectEventListCount(searchKeyword, startRow, listLimit);
 	}
 	
 	public EventVO getEvent(int event_num) {

@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지 - 영화관리</title>
-<link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 링크 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -83,8 +82,8 @@ th:nth-child(7), td:nth-child(7) {
 .admin_movie_search {
 	height: 50px;
 	background: #black;
-	margin-right: 100px;
-	margin-bottom: 20px;
+	margin-right: 70px;
+	margin-bottom: 10px;
 	display: flex;
 	float: right;
 }
@@ -106,21 +105,10 @@ th:nth-child(7), td:nth-child(7) {
 .admin_movie_search>form>input[type=submit] {
 	width: 90px;
 	height: 40px;
-	background: black;
 	outline: none;
-	color: white;
 	font-weight: bold;
+	margin-left: 5px;
 	vertical-align: middle;
-}
-.admin_movie_search>button {
-	width: 90px;
-	height: 40px;
-	background: black;
-	outline: none;
-	color: white;
-	font-weight: bold;
-	vertical-align: middle;
-	margin-left: 30px;
 }
 
 #pageList{
@@ -138,6 +126,11 @@ th:nth-child(7), td:nth-child(7) {
 #pageList > b{
 	margin: 0 10px;
 	color: #1b1b1b;
+}
+#movieRegBtn{
+	margin-left: 10px;
+	padding: 0 20px;
+	margin-bottom: 10px;
 }
 </style>
 </head>
@@ -181,9 +174,9 @@ th:nth-child(7), td:nth-child(7) {
 					<div class="admin_movie_search">
 						<form action="admin_movie">
 							<input type="text" name="searchKeyword" placeholder="영화제목 입력" value="${param.searchKeyword}">
-							<input type="submit" value="검색">
+							<input type="submit" class="btn btn-dark" value="검색">
 						</form>
-						<button onclick="location.href = 'admin_movie_reg_form'">영화등록</button>
+							<button class="btn btn-dark" id="movieRegBtn" onclick="location.href = 'admin_movie_reg_form'">영화등록</button>
 					</div>
 				</div>
 
@@ -256,6 +249,7 @@ th:nth-child(7), td:nth-child(7) {
 					</section>
 					
 				</div>
+				
 
 			</div>
 
@@ -272,27 +266,6 @@ th:nth-child(7), td:nth-child(7) {
 				location.href = "admin_movie_delete?movie_num=" + movie_num;
 			}
 		}
-// 		function movieStatus(dateString) {
-// 			var today = new Date(); 
-// 			var todayYear = today.getFullYear();
-// 			var todayMonth = today.getMonth() + 1; 
-// 			var todayDay = today.getDate();
-// 			var todayDate = new Date(todayYear, todayMonth - 1, todayDay); 
-			
-// 			// 개봉일을 파싱하여 비교하기 적합한 형태로 변환
-// 			var fomatYear = parseInt(dateString.substring(0, 4));
-// 			var formatMonth = parseInt(dateString.substring(4, 6));
-// 			var formatDay = parseInt(dateString.substring(6, 8));
-// 			var formatDate = new Date(fomatYear, formatMonth - 1, formatDay); 
-			
-// 			// 오늘 날짜와 API로부터 받아온 개봉일을 비교
-// 			if (formatDate < todayDate) {
-// 	           return "개봉";
-// 			} else {
-// 	            return "개봉예정";
-				
-// 			}
-// 		}
 	</script>
 </body>
 </html>

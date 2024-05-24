@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.mapper.AdminMapper;
+import itwillbs.p2c3.boogimovie.vo.CartVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
@@ -18,6 +19,7 @@ import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 
 @Service
 public class AdminService {
@@ -45,6 +47,11 @@ public class AdminService {
 		return mapper.countReserve();
 	}
 	
+	// 월간 매출 가져오기
+	public List<Map<String, String>> getMonthSales(){
+		return mapper.getMonthSales();
+	}
+	
 	//------------------------------------------------------------
 	
 	// 회원 리스트 조회
@@ -69,8 +76,12 @@ public class AdminService {
 	
 	//--------------------------------------------------------------
 	// 예매리스트
-	public List<Map<String, String>> getReserveList() {
-		return mapper.selectReserveList();
+	public List<Map<String, String>> getReserveList(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectReserveList(searchKeyword, startRow, listLimit);
+	}
+	// 예매리스트 수
+	public int getReserveListCount(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectReserveListCount(searchKeyword, startRow, listLimit);
 	}
 	
 	// 예매 상세보기
@@ -275,6 +286,18 @@ public class AdminService {
 	// 스토어 업데이트 아이템
 	public int updateItem(ItemInfoVO item) {
 		return mapper.updateItem(item);
+	}
+
+	public List<StorePayVO> selectStorePay(StorePayVO store_pay) {
+		return mapper.selectStorePay(store_pay);
+	}
+
+	public StorePayVO selectStorePayDetail(int store_pay_num) {
+		return mapper.selectStorePayDetail(store_pay_num);
+	}
+
+	public List<CartVO> selectCart(int store_pay_num) {
+		return mapper.selectCart(store_pay_num);
 	}
 	
 }

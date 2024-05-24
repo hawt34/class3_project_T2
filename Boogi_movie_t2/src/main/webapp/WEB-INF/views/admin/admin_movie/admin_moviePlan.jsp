@@ -21,7 +21,7 @@
 
 table {
 	border-collapse: collapse;
-	width: 1600px;
+	width: 1400px;
 	margin: 0rem auto;
 	box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
 	background-color: white;
@@ -67,9 +67,9 @@ tbody tr:hover {
 
 .admin_plan_title {
 	font-size: 30px;
-	text-align: center;
 	margin-top: 30px;
 	margin-bottom: 20px;
+	margin-left: 150px;
 	width: 200px;
 }
 .admin_plan_body_search{
@@ -77,7 +77,7 @@ tbody tr:hover {
 	width: 1200px;
 }
 .moviePlanSearchBox{
-	width: 600px;
+	width: 800px;
 	text-align: center;
 	margin: 30px auto;
 }
@@ -138,7 +138,7 @@ tbody tr:hover {
 					<c:set var="pageNum" value="${param.pageNum}"/>
 				</c:if>
 				
-				<div class="admin_plan_title">상영일정관리</div>
+				<div class="admin_plan_title" align="left">상영일정관리</div>
 				
 				<div class="admin_plan_body">
 					<form action="admin_moviePlan_reg" method ="post">
@@ -220,6 +220,7 @@ tbody tr:hover {
 						</select> 
 						<input type="date" class="admin_moviePlan_search" name="scs_date" id="searchDate">
 						<button type="submit" class="btn btn-outline-primary" id="searchBtn">조회하기</button>
+						<button type="submit" class="btn btn-outline-primary" id="searchBtn" onclick="location.href='admin_moviePlan'">목록으로</button>
 					</div>
 					
 					<table class="admin_plan_body_search">
@@ -258,33 +259,26 @@ tbody tr:hover {
 				</div>
 				
 				<section id="pageList">
-					<c:choose>
-						<c:when test="not empty ${theaterName.theater}">
-						
-						</c:when>
-						<c:otherwise>
-							<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_moviePlan?pageNum=${pageNum - 1}'"
-								<c:if test="${pageNum le 1}">disabled</c:if>>
-								이전
-							</button>
-							
-							<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1" >
-									<c:choose>
-										<c:when test="${pageNum eq i}">
-											<b>${i}</b>
-										</c:when>				
-										<c:otherwise>
-											<a href="admin_moviePlan?pageNum=${i}">${i}</a>
-										</c:otherwise>
-									</c:choose>
-							</c:forEach>
-							
-							<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_moviePlan?pageNum=${pageNum + 1}'"
-								<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
-								다음
-							</button>
-						</c:otherwise>
-					</c:choose>
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_moviePlan?pageNum=${pageNum - 1}'"
+						<c:if test="${pageNum le 1}">disabled</c:if>>
+						이전
+					</button>
+					
+					<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1" >
+							<c:choose>
+								<c:when test="${pageNum eq i}">
+									<b>${i}</b>
+								</c:when>				
+								<c:otherwise>
+									<a href="admin_moviePlan?pageNum=${i}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+					</c:forEach>
+					
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_moviePlan?pageNum=${pageNum + 1}'"
+						<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
+						다음
+					</button>
 				</section>
 
 			</div>
@@ -492,7 +486,7 @@ tbody tr:hover {
 		    			$("#moviePlanList").empty();
 						var searchHtml = '';
 		                data.forEach(function(searchMovieList) {
-		                	var scs_date = new Date(searchMovieList.scs_date).toLocaleDateString().replaceAll(".", "-").slice(0, -1);
+		                	var scs_date = new Date(searchMovieList.scs_date).toLocaleDateString().replace(/\s/g, "").replaceAll(".", "-").slice(0, -1);
 		                	debugger;
 		                	searchHtml += '<tr>'
 									  +	 '<td>' + searchMovieList.scs_num + '</td>'
@@ -508,6 +502,7 @@ tbody tr:hover {
 		                });
 		                $("#moviePlanList").append(searchHtml);
 // 		                updatePagination(data.pageInfo);
+						$("#pageList").empty();
 
 					},
 					error: function(data) {

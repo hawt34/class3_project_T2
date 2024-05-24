@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <style>
 * {
 	margin: 0;
 	padding: 0;
-/*    	border: 1px solid skyblue;    */
+	/*    	border: 1px solid skyblue;    */
 }
-
 
 #wrap {
 	width: 1400px;
@@ -20,18 +19,20 @@
 
 article {
 	margin-top: 40px;
- 	width: 1400px;
+	width: 1400px;
 	height: 600px;
 	display: flex;
-    justify-content: center;
-  	align-items: center;
+	justify-content: center;
+	align-items: center;
 }
+
 .movieTrail {
-  /* 내부의 movieTrail을 가운데 정렬합니다. */
- 	width: 900px;
- 	max-width: 100%; /* 부모 요소의 너비에 맞게 설정합니다. */
- 	margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬합니다. */
+	/* 내부의 movieTrail을 가운데 정렬합니다. */
+	width: 900px;
+	max-width: 100%; /* 부모 요소의 너비에 맞게 설정합니다. */
+	margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬합니다. */
 }
+
 section {
 	overflow: hidden;
 	width: 1400px;
@@ -91,26 +92,25 @@ section h1 {
 	width: 1400px;
 	margin-top: 10px;
 	height: 200px;
-/* 	border: 1px solid black;   */
+	/* 	border: 1px solid black;   */
 	font-size: 30px;
 }
 
-.submitButton{
+.submitButton {
 	width: 400px;
 	margin-left: 10px;
-	
 }
 
-.star-rating{
+.star-rating {
 	padding-left: 10px;
 	padding-top: 10px;
 	float: left;
 	width: 320px;
 	height: 150px;
 }
-#review_rating,
-#review_rating option:checked {
-    color: gold; /* 셀렉트 박스와 선택된 옵션의 텍스트 색상을 골드로 설정 */
+
+#review_rating, #review_rating option:checked {
+	color: gold; /* 셀렉트 박스와 선택된 옵션의 텍스트 색상을 골드로 설정 */
 	font-size: 20px;
 }
 
@@ -118,14 +118,14 @@ section h1 {
 	margin-left: 20px;
 	width: 500px;
 	height: 100px; /* 높이를 원하는 크기로 조절하세요 */
-/* 	border: 2px solid black; */
+	/* 	border: 2px solid black; */
 	resize: none;
 }
 
 .showReview {
 	margin-bottom: 250px;
 	font-size: 24px;
-	margin-left:20px;
+	margin-left: 20px;
 	width: 1300px;
 	height: 200px;
 }
@@ -140,35 +140,41 @@ section h1 {
 .review {
 	padding-top: 10px;
 	width: 900px;
-	margin-bottom:200px;
-/* 	border: 1px solid red;   */
-	float: right; 
+	margin-bottom: 200px;
+	/* 	border: 1px solid red;   */
+	float: right;
 }
+
 .reviewCover span:before {
 	content: '★';
 	color: gold;
 }
+
 .reviewCover span.empty::before {
-    content: '☆'; /* 빈 별의 모양 */
-    color: gold;
-}
-.reviewCover span.filled::before {
-    content: '★'; /* 별이 채워진 상태 */
+	content: '☆'; /* 빈 별의 모양 */
 	color: gold;
 }
-.reviewTexts{
+
+.reviewCover span.filled::before {
+	content: '★'; /* 별이 채워진 상태 */
+	color: gold;
+}
+
+.reviewTexts {
 	float: right;
 	width: 1000px;
 	height: 80px;
 }
+
 .reviewTexts span {
-        margin-right: 10px; /* 원하는 만큼의 간격을 조절하세요 */
- }
+	margin-right: 10px; /* 원하는 만큼의 간격을 조절하세요 */
+}
 
 .movieInfo img {
-  width: 200px;
-  height: 100px;
+	width: 200px;
+	height: 100px;
 }
+
 #pageList {
 	margin-top: 30px;
 	height: 100px;
@@ -176,6 +182,7 @@ section h1 {
 	width: 1024px;
 	text-align: center;
 }
+
 .backButton {
 	margin-top: 20px;
 }
@@ -183,15 +190,22 @@ section h1 {
 footer {
 	width: 100%;
 	height: 100px;
-	/* 	background-color: #ffb300; */
+}
+/* 	background-color: #ffb300; */
 </style>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <%-- <link href="${pageContext.request.contextPath}/resources/css/movie_info.css" rel="stylesheet" type="text/css"> --%>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"	crossorigin="anonymous">
-<link rel="stylesheet" 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <script>
 	function refreshParent() {
@@ -204,16 +218,16 @@ footer {
 		<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 	</header>
 	<div id="wrap">
-        <article>
-        	<div class="movieTrail">
+		<article>
+			<div class="movieTrail">
 				<c:choose>
-            		<c:when test="${not empty movie.movie_trailler}">
-                		<iframe width="100%" height="600px" src="${movie.movie_trailler}"></iframe>
-            		</c:when>
-           			<c:otherwise>
-                	<h1>죄송합니다. 이 영화의 트레일러가 준비되지 않았습니다.</h1>
-            		</c:otherwise>
-        		</c:choose>		
+					<c:when test="${not empty movie.movie_trailler}">
+						<iframe width="100%" height="600px" src="${movie.movie_trailler}"></iframe>
+					</c:when>
+					<c:otherwise>
+						<h1>죄송합니다. 이 영화의 트레일러가 준비되지 않았습니다.</h1>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</article>
 		<section>
@@ -222,107 +236,121 @@ footer {
 				<div class="list">
 					<div class="movie">
 						<img src="${movie.movie_poster}">
-						<button type="button" class="btn btn-outline-primary" id="movieTicket">예매하기</button>
+						<button type="button" class="btn btn-outline-primary"
+							id="movieTicket">예매하기</button>
 					</div>
 					<div class="movieInfo">
 						<ul>
-							<li><span>제목 : ${movie.movie_name}  </span></li>
-							<li><span>개봉 : ${movie.movie_open_date} 	</span></li>
+							<li><span>제목 : ${movie.movie_name} </span></li>
+							<li><span>개봉 : ${movie.movie_open_date} </span></li>
 							<li><span>감독 : ${movie.movie_director} </span></li>
-							<li><span>등급 : ${movie.movie_grade}  </span></li>
+							<li><span>등급 : ${movie.movie_grade} </span></li>
 							<li><span>장르 : ${movie.movie_genre }</span></li>
 							<li><span>상영시간 : ${movie.movie_runtime }</span></li>
 							<li><span>줄거리 : ${movie.movie_summary}</span></li>
 						</ul>
-							<img src="${movie.movie_stillCut}">
-							<img src="${movie.movie_stillCut2}">
-							<img src="${movie.movie_stillCut3}">
-						<div class="backButton">	
-						<button type="button" class="btn btn-outline-primary" onclick="window.history.back()">뒤로가기</button>
+						<img src="${movie.movie_stillCut}"> <img
+							src="${movie.movie_stillCut2}"> <img
+							src="${movie.movie_stillCut3}">
+						<div class="backButton">
+							<button type="button" class="btn btn-outline-primary"
+								onclick="window.history.back()">뒤로가기</button>
 						</div>
-					</div>	
+					</div>
 				</div>
 			</div>
 			<div class="reviewContents">
-			<form action="reviewPro" method="post">	
-				<div class="star-rating">
+				<form action="reviewPro" method="post">
+					<div class="star-rating">
 
-					<p>별점 </p>
-				<select id="review_rating" name= "review_rating" class="form-select" >
-    				<option value="0" selected>별점 선택(미선택시 0점 ☆)</option>
-    				<option value="1">★ 1점</option>
-    				<option value="2">★★ 2점</option>
-    				<option value="3">★★★ 3점</option>
-    				<option value="4">★★★★ 4점</option>
-    				<option value="5">★★★★★ 5점</option>
-				</select>
-				</div>
-				<div class="review">
-				<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
-  				<p>관람평</p>
-  				<c:choose>
-    				<c:when test="${not empty sessionScope.sId}">
-        				<textarea id="reviewText" name="review_text" class="form-control" rows="3" cols="5" maxlength="50" placeholder="50자 이내로 부탁드리겠습니다."></textarea>
-    				</c:when>
-    				<c:otherwise>
-        				<textarea id="reviewText" class="form-control" rows="3" cols="5" maxlength="50" placeholder="사랑하는 고객님 로그인먼저 부탁드리겠습니다."></textarea>
-    				</c:otherwise>
-				</c:choose>
-  				</div>
-  				<div class="submitButton">	
-				<button type="submit" class="btn btn-outline-primary"  id="submitReviewBtn">별점주기 & 관람평 남기기</button>
-				 </div>
-				 <!-- hidden input으로 값을 추가 -->
-   				<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
-   				<input type="hidden" id="member_id" name="member_id" value="${sessionScope.sId}">
-   				
-			</form>
+						<p>별점</p>
+						<select id="review_rating" name="review_rating"
+							class="form-select">
+							<option value="0" selected>별점 선택(미선택시 0점 ☆)</option>
+							<option value="1">★ 1점</option>
+							<option value="2">★★ 2점</option>
+							<option value="3">★★★ 3점</option>
+							<option value="4">★★★★ 4점</option>
+							<option value="5">★★★★★ 5점</option>
+						</select>
+					</div>
+					<div class="review">
+						<c:set var="pageNum"
+							value="${empty param.pageNum ? 1 : param.pageNum}" />
+						<p>관람평</p>
+						<c:choose>
+							<c:when test="${not empty sessionScope.sId}">
+								<textarea id="reviewText" name="review_text"
+									class="form-control" rows="3" cols="5" maxlength="50"
+									placeholder="50자 이내로 부탁드리겠습니다."></textarea>
+							</c:when>
+							<c:otherwise>
+								<textarea id="reviewText" class="form-control" rows="3" cols="5"
+									maxlength="50" placeholder="사랑하는 고객님 로그인먼저 부탁드리겠습니다."></textarea>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<div class="submitButton">
+						<button type="submit" class="btn btn-outline-primary"
+							id="submitReviewBtn">별점주기 & 관람평 남기기</button>
+					</div>
+					<!-- hidden input으로 값을 추가 -->
+					<input type="hidden" id="movie_num" name="movie_num"
+						value="${movie.movie_num}"> <input type="hidden"
+						id="member_id" name="member_id" value="${sessionScope.sId}">
+
+				</form>
 			</div>
 			<div class="showReview">
 				<c:forEach var="review" items="${reviews}">
-    			<div class="reviewCover">
-        			<c:choose>
-            		<c:when test="${review.review_rating eq 0}">
-                	<span class="empty"></span>
-            		</c:when>
-            		<c:otherwise>
-                		<c:forEach begin="1" end="${review.review_rating}">
-                    	<span class="filled"></span>
-                		</c:forEach>
-            		</c:otherwise>
-        			</c:choose>
-    			</div>
-				        		
-        		<div class="reviewTexts">
-        			<span class="review-text">${review.review_text}</span>
-        			<span class="member-id">${review.member_id}</span>
-        			<span class="review-date"><fmt:formatDate value="${review.review_date}" pattern="yyyy-MM-dd" /></span>
-    				<c:if test="${review.member_id eq sessionScope.sId}">
-                	<button onclick="openReviewModify(${review.review_num})" class="btn btn-outline-primary" >수정</button> 
-                 	<button onclick="confirmDelete(${review.review_num})" class="btn btn-outline-primary">삭제</button>
-            		</c:if>
-    			</div>
-    			</c:forEach>
+					<div class="reviewCover">
+						<c:choose>
+							<c:when test="${review.review_rating eq 0}">
+								<span class="empty"></span>
+							</c:when>
+							<c:otherwise>
+								<c:forEach begin="1" end="${review.review_rating}">
+									<span class="filled"></span>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</div>
+
+					<div class="reviewTexts">
+						<span class="review-text">${review.review_text}</span> <span
+							class="member-id">${review.member_id}</span> <span
+							class="review-date"><fmt:formatDate
+								value="${review.review_date}" pattern="yyyy-MM-dd" /></span>
+						<c:if test="${review.member_id eq sessionScope.sId}">
+							<button onclick="openReviewModify(${review.review_num})"
+								class="btn btn-outline-primary">수정</button>
+							<button onclick="confirmDelete(${review.review_num})"
+								class="btn btn-outline-primary">삭제</button>
+						</c:if>
+					</div>
+				</c:forEach>
 			</div>
 			<div id="pageList">
-			<input type="button" value="이전" onclick="location.href='movieInfo?movie_num=${movie.movie_num}&pageNum=${pageNum - 1}'"
-               <c:if test="${pageNum == 1}">disabled</c:if> />
-        		<c:forEach var="i" begin="1" end="${maxPage}">
-            		<c:choose>
-                		<c:when test="${pageNum == i}">
-                    		<b>${i}</b>
-                		</c:when>
-                	<c:otherwise>
-                    	<a href="movieInfo?movie_num=${movie.movie_num}&pageNum=${i}">${i}</a>
-                	</c:otherwise>
-            		</c:choose>
-        		</c:forEach>
-         <input type="button" value="다음" onclick="location.href='movieInfo?movie_num=${movie.movie_num}&pageNum=${pageNum + 1}'"
-               <c:if test="${pageNum == maxPage or maxPage == 0}">disabled</c:if> />
-    	</div>
-		</section>		    
-		<footer> 
-		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
+				<input type="button" value="이전"
+					onclick="location.href='movieInfo?movie_num=${movie.movie_num}&pageNum=${pageNum - 1}'"
+					<c:if test="${pageNum == 1}">disabled</c:if> />
+				<c:forEach var="i" begin="1" end="${maxPage}">
+					<c:choose>
+						<c:when test="${pageNum == i}">
+							<b>${i}</b>
+						</c:when>
+						<c:otherwise>
+							<a href="movieInfo?movie_num=${movie.movie_num}&pageNum=${i}">${i}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<input type="button" value="다음"
+					onclick="location.href='movieInfo?movie_num=${movie.movie_num}&pageNum=${pageNum + 1}'"
+					<c:if test="${pageNum == maxPage or maxPage == 0}">disabled</c:if> />
+			</div>
+		</section>
+		<footer>
+			<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 		</footer>
 	</div>
 </body>

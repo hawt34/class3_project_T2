@@ -89,7 +89,15 @@
 		]]>
 	</select>	
 	
-	
+	<select id="searchMovie" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO"> 
+		SELECT * 
+		FROM movie
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				movie_name LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		
+	</select>
 		
 		
 </mapper>

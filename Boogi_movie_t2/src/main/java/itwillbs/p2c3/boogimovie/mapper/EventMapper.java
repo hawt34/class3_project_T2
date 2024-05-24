@@ -12,8 +12,18 @@ import itwillbs.p2c3.boogimovie.vo.EventVO;
 @Mapper
 public interface EventMapper {
 
+	// 관리자 이벤트 리스트 가져오기
+	List<EventVO> selectEventListSearch(@Param("searchKeyword") String searchKeyword, 
+										@Param("startRow") int startRow, 
+										@Param("listLimit") int listLimit);
+	
 	// 이벤트 리스트 가져오기
 	List<EventVO> selectEventList();
+	
+	// 이벤트 리스트 수 가져오기
+	int selectEventListCount(@Param("searchKeyword") String searchKeyword, 
+			@Param("startRow") int startRow, 
+			@Param("listLimit") int listLimit);
 	
 	// 이벤트 가져오기
 	EventVO selectEvent(int event_num);

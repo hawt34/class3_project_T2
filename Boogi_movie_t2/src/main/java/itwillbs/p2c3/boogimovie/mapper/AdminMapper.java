@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import itwillbs.p2c3.boogimovie.vo.CartVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
@@ -16,6 +17,7 @@ import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
 import itwillbs.p2c3.boogimovie.vo.ReviewVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenInfoVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
+import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 
 @Mapper
 public interface AdminMapper {
@@ -32,6 +34,9 @@ public interface AdminMapper {
 	
 	// 금일 예매 수 조회
 	int countReserve();
+	
+	// 월간 매출 조회
+	List<Map<String, String>> getMonthSales();
 	
 	//======================================================
 	
@@ -67,7 +72,14 @@ public interface AdminMapper {
 
 	//========================================================
 	// 예매리스트
-	List<Map<String, String>> selectReserveList();
+	List<Map<String, String>> selectReserveList(@Param("searchKeyword") String searchKeyword, 
+												@Param("startRow") int startRow, 
+												@Param("listLimit") int listLimit);
+
+	// 예매리스트
+	int selectReserveListCount(@Param("searchKeyword") String searchKeyword, 
+			@Param("startRow") int startRow, 
+			@Param("listLimit") int listLimit);
 	
 	// 예매 상세
 	Map<String, String> selectReserve(int ticket_pay_num);
@@ -81,8 +93,8 @@ public interface AdminMapper {
 
 	// 영화 리스트 검색어로 조회
 	List<MovieVO> searchMovieList(@Param("searchKeyword") String searchKeyword, 
-											@Param("startRow") int startRow, 
-											@Param("listLimit") int listLimit);
+							     @Param("startRow") int startRow, 
+								 @Param("listLimit") int listLimit);
 
 	// 영화 리스트 수 조회
 	int selectMovieListCount(@Param("searchKeyword") String searchKeyword, 
@@ -192,4 +204,10 @@ public interface AdminMapper {
 	int insertItem(ItemInfoVO item);
 	int deleteItem(String item_info_name);
 	int updateItem(ItemInfoVO item);
+
+	List<StorePayVO> selectStorePay(StorePayVO store_pay);
+
+	StorePayVO selectStorePayDetail(int store_pay_num);
+
+	List<CartVO> selectCart(int store_pay_num);
 }

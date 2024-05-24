@@ -99,7 +99,7 @@ th:nth-child(8), td:nth-child(8) {
 .admin_member_search>form>input[type=text] {
 	font-size: 18px;
 	height: 40px;
-	width: 250px;
+	width: 200px;
 	padding: 5px;
 	outline: none;
 	vertical-align: middle;
@@ -108,10 +108,9 @@ th:nth-child(8), td:nth-child(8) {
 .admin_member_search>form>input[type=submit] {
 	width: 90px;
 	height: 40px;
-	background: black;
 	outline: none;
-	color: white;
 	font-weight: bold;
+	margin-left: 5px;
 	vertical-align: middle;
 }
 
@@ -162,9 +161,9 @@ th:nth-child(8), td:nth-child(8) {
 				<div class="admin_member_head">
 					<div class="admin_member_title">회원정보관리</div>
 					<div class="admin_member_search">
-						<form action="admin_moviePlan">
+						<form action="admin_member">
 							<input type="text" name="searchKeyword" placeholder="이름 또는 아이디 입력" value="${param.searchKeyword}">
-							<input type="submit" value="검색">
+							<input type="submit" class="btn btn-dark" value="검색">
 						</form>
 					</div>
 				</div>
@@ -203,7 +202,7 @@ th:nth-child(8), td:nth-child(8) {
 				</div>
 				
 				<section id="pageList">
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_member?pageNum=${pageNum - 1}'"
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_member?pageNum=${pageNum - 1}&searchKeyword=${param.searchKeyword}'"
 						<c:if test="${pageNum le 1}">disabled</c:if>>
 						이전
 					</button>
@@ -219,7 +218,7 @@ th:nth-child(8), td:nth-child(8) {
 							</c:choose>
 					</c:forEach>
 					
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_member?pageNum=${pageNum + 1}'"
+					<button type="button" class="btn btn-outline-primary" onclick="location.href='admin_member?pageNum=${pageNum + 1}&searchKeyword=${param.searchKeyword}'"
 						<c:if test="${pageNum ge pageInfo.maxPage}">disabled</c:if>>
 						다음
 					</button>

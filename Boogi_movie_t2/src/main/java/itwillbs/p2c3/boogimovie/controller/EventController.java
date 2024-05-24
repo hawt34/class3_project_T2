@@ -68,16 +68,16 @@ public class EventController {
 			}
 			
 			if(eventType.equals("0")) {
-				System.out.println("eventList로 간다 : " + eventList);
+//				System.out.println("eventList로 간다 : " + eventList);
 				return eventList;
 			} else if(eventType.equals("1")) {
-				System.out.println("movieEventList로 간다 : " +movieEventList);
+//				System.out.println("movieEventList로 간다 : " +movieEventList);
 				return movieEventList;
 			} else if(eventType.equals("2")) {
-				System.out.println("theaterEventList로 간다 : " + theaterEventList);
+//				System.out.println("theaterEventList로 간다 : " + theaterEventList);
 				return theaterEventList;
 			} else {
-				System.out.println("discountEventList로 간다 : " + discountEventList);
+//				System.out.println("discountEventList로 간다 : " + discountEventList);
 				return discountEventList;
 			}
 		}

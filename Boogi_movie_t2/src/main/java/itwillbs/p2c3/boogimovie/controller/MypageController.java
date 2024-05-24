@@ -199,8 +199,7 @@ public class MypageController {
         LocalDate currentDate = LocalDate.now();
         LocalDateTime localDateTime = null;
         for (StorePayVO storePay : storePayList) {
-        	localDateTime = localDateTime.of(currentDate, storePay.getStore_pay_date());
-            combinedList.add(new PointVO(storePay.getStore_pay_price()/10, storePay.getUse_point(), localDateTime, storePay.getStore_pay_type(), "스토어"));
+            combinedList.add(new PointVO(storePay.getStore_pay_price()/10, storePay.getUse_point(), storePay.getStore_pay_date(), storePay.getStore_pay_type(), "스토어"));
         }
             	
         Collections.sort(combinedList, Comparator.comparing(PointVO::getDate));

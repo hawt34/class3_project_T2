@@ -99,18 +99,13 @@
 	                     
 	                    // 현재 영화 이름이 이전 인덱스의 영화 이름과 같은지 확인
                         if  (scs.movie_name === prevMovieName) {
-                            // 현재 영화 이름이 이전 영화 이름과 같은 경우 추가 작업 수행
-                            // 여기에 추가 작업을 넣으세요.
-			                $(boothHtml+dimensionHtml+time_seatHtml).appendTo('.timetable');
-                            
+				            $(boothHtml+dimensionHtml+time_seatHtml).appendTo('.timetable');
+                        } else {
+			                $(movieHtml+boothHtml+dimensionHtml+time_seatHtml).appendTo('.timetable');
                         }
-                        
-	                    
-		                $(movieHtml+boothHtml+dimensionHtml+time_seatHtml).appendTo('.timetable');
                         
                         // 이전 영화 이름 업데이트
                         prevMovieName = scs.movie_name;
-	                    
 	                }
 	        		
 				},

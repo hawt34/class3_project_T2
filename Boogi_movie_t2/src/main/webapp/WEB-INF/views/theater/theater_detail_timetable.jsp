@@ -20,13 +20,28 @@
 	    let tabs = document.querySelectorAll('.time_schedule_day');
 	    tabs.forEach(function(tab) {
 	        tab.addEventListener('click', function() {
-	            // 이전에 선택된 탭의 배경색 제거
+	            // 이전에 선택된 탭의 라인, 배경색 효과 제거
 	            tabs.forEach(function(tab) {
-	                tab.style.backgroundColor = ''; // 기본 배경색으로 초기화
+	                tab.style.backgroundColor = '';
+	                tab.style.borderBottom = 'none'; 
 	            });
 
-	            // 현재 클릭된 탭에 배경색 적용
-	            this.style.backgroundColor = '#f0f0f0'; // 선택된 탭의 배경색
+	            // 현재 클릭된 탭에 라인, 배경색 효과 적용
+	            this.style.backgroundColor = '#f0f0f0'; 
+	            this.style.borderBottom = '2px solid black'; 
+	        });
+	        
+	        // hover 효과
+	        tab.addEventListener('mouseover', function() {
+	            if (!this.style.backgroundColor) {
+	                this.style.borderBottom = '2px solid black';
+	            }
+	        });
+
+	        tab.addEventListener('mouseout', function() {
+	            if (!this.style.backgroundColor) {
+	                this.style.borderBottom = 'none';
+	            }
 	        });
 	    });
 		
@@ -34,7 +49,6 @@
 	    $('.day_list').on('click', function() {
 	    	
 	    	
-	    	$(".timetable").html("");
 	    	
 	        // 클릭된 링크의 id 가져오기
 	        let scs_date = $(this).attr('id');
@@ -51,62 +65,70 @@
 	        	dataType : "json",
 	        	success : function(result) {
 	        		
-	        		let prevMovieName = ""; // 이전 영화 이름을 저장할 변수
-
-	        		for (let i = 0; i < result.length; i++) {
+	        		if(result != null && result != "") {
 	        			
-	                    let scs = result[i];
-	                    
-	                    let movieHtml = 
-	                        '<div class="timetable_movie">'
-	                        +    '<div class="timetable_movie_area">'
-	                        +    '    <div class="row">'
-	                        +    '        <div class="col-10">'
-	                        +    '          <span class="movie_grade">'+ scs.movie_grade +'</span> / '
-	                        +    '          <b><span class="movie_name">'+ scs.movie_name +'</span></b>'
-	                        +    '        </div>'
-	                        +    '        <div class="col">'
-	                        +    '           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상영시간 <span class="movie_runtime">'+ scs.movie_runtime +'</span>분'
-	                        +    '        </div>'
-	                        +    '    </div>'
-	                        +    '</div>';
+				    	$(".timetable").html("");
+		        		let prevMovieName = ""; // 이전 영화 이름을 저장할 변수
+	
+		        		for (let i = 0; i < result.length; i++) {
+		        			
+		                    let scs = result[i];
+		                    
+		                    let movieHtml = 
+		                        '<div class="timetable_movie">'
+		                        +    '<div class="timetable_movie_area">'
+		                        +    '    <div class="row">'
+		                        +    '        <div class="col-10">'
+		                        +    '          <span class="movie_grade">'+ scs.movie_grade +'</span> / '
+		                        +    '          <b><span class="movie_name">'+ scs.movie_name +'</span></b>'
+		                        +    '        </div>'
+		                        +    '        <div class="col">'
+		                        +    '           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상영시간 <span class="movie_runtime">'+ scs.movie_runtime +'</span>분'
+		                        +    '        </div>'
+		                        +    '    </div>'
+		                        +    '</div>';
+		                        
+							let boothHtml =
+		                             '<div class="timetable_booth_area">'
+		                        +    '    <div class="row">'
+		                        +    '        <div class="col-2">'
+		                        +    '            <div class="timetable_cinema">'
+		                        +    '                <h5><b><span class="screen_cinema_num">'+ scs.screen_cinema_num +'</span>관</b></h5>'
+		                        +    '                총<span class="scs_empty_seat"> '+ scs.seat_size +' 석</span>'
+		                        +    '            </div>'
+		                        +    '        </div>';
+		                        
+							let dimensionHtml = 
+		                             '        <div class="col d-flex flex-row mb-3">'
+		                        +    '   		  <div class="timetable_dimension p-2">'
+		                        +	 '				  <span calss="timetable_dimension">'+ scs.screen_dimension +'</span>'
+		                        +	 '			  </div>';
+		                        
+		                    let time_seatHtml = 
+		                             '            <div class="timetable_time_seat p-2">'
+		                        +	 '				  <span calss="scs_start_time">'+ scs.scs_start_time +'</span>/' 
+		                        +    '                <span calss="scs_empty_seat">'+ scs.scs_empty_seat +'석 </span>'
+		                        +	 '			  </div>'
+		                        +    '        </div>'
+		                        +    '    </div>'
+		                        +    '</div>'
+		                        +    '</div><!-- timetable_movie -->';
+		                     
+		                    // 현재 영화 이름이 이전 인덱스의 영화 이름과 같은지 확인
+	                        if  (scs.movie_name === prevMovieName) {
+					            $(boothHtml+dimensionHtml+time_seatHtml).appendTo('.timetable');
+	                        } else {
+				                $(movieHtml+boothHtml+dimensionHtml+time_seatHtml).appendTo('.timetable');
+	                        }
 	                        
-						let boothHtml =
-	                             '<div class="timetable_booth_area">'
-	                        +    '    <div class="row">'
-	                        +    '        <div class="col-2">'
-	                        +    '            <div class="timetable_cinema">'
-	                        +    '                <h5><b><span class="screen_cinema_num">'+ scs.screen_cinema_num +'</span>관</b></h5>'
-	                        +    '                총<span class="scs_empty_seat"> '+ scs.seat_size +' 석</span>'
-	                        +    '            </div>'
-	                        +    '        </div>';
-	                        
-						let dimensionHtml = 
-	                             '        <div class="col d-flex flex-row mb-3">'
-	                        +    '   		  <div class="timetable_dimension p-2">'
-	                        +	 '				  <span calss="timetable_dimension">'+ scs.screen_dimension +'</span>'
-	                        +	 '			  </div>';
-	                        
-	                    let time_seatHtml = 
-	                             '            <div class="timetable_time_seat p-2">'
-	                        +	 '				  <span calss="scs_start_time">'+ scs.scs_start_time +'</span>/' 
-	                        +    '                <span calss="scs_empty_seat">'+ scs.scs_empty_seat +'석 </span>'
-	                        +	 '			  </div>'
-	                        +    '        </div>'
-	                        +    '    </div>'
-	                        +    '</div>'
-	                        +    '</div><!-- timetable_movie -->';
-	                     
-	                    // 현재 영화 이름이 이전 인덱스의 영화 이름과 같은지 확인
-                        if  (scs.movie_name === prevMovieName) {
-				            $(boothHtml+dimensionHtml+time_seatHtml).appendTo('.timetable');
-                        } else {
-			                $(movieHtml+boothHtml+dimensionHtml+time_seatHtml).appendTo('.timetable');
-                        }
-                        
-                        // 이전 영화 이름 업데이트
-                        prevMovieName = scs.movie_name;
+	                        // 이전 영화 이름 업데이트
+	                        prevMovieName = scs.movie_name;
+	        			} // for
+	        			
+	                } else {
+	                	$(".timetable").html('<div class="none_scs"><br><br><br><h4>상영 일정이 없습니다.</h4></div>');
 	                }
+	                
 	        		
 				},
 				error : function() {
@@ -135,7 +157,7 @@
 		<div class="theater_timetable_all" >
 			<h4>상영시간표</h4>
 			<div class="time_schedule">
-				<ul class="nav nav-underline nav-pills nav-fill">
+				<ul class="nav nav-pills nav-fill">
 					<li class="nav-item time_schedule_day">
 						<a class="nav-link day_list_move text-black" href="#"><img src="${pageContext.request.contextPath}/resources/images/chevron-left.svg"></a>
 					</li>
@@ -190,35 +212,8 @@
 				</ul>
 			</div> <!-- time_schedule 끝 -->
 			<br id="timetableStart">
-			
+				<!-- AJAX로 상영타임테이블 출력 -->
 			<div class="timetable">
-<!-- 				<div class="timetable_movie"> -->
-<!-- 					<div class="timetable_movie_area"> -->
-<!-- 						<div class="row"> -->
-<!-- 							<div class="col-10"> -->
-<!-- 							  <span class="movie_grade">등급</span>,  -->
-<!-- 							  <span class="movie_name">영화제목</span> -->
-<!-- 							</div> -->
-<!-- 							<div class="col"> -->
-<!-- 							   상영시간 <span class="movie_runtime">런타임</span>분 -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="timetable_booth_area"> -->
-<!-- 						<div class="row"> -->
-<!-- 							<div class="col"> -->
-<!-- 								<div class="timetable_cinema"> -->
-<!-- 									<span class="screen_cinema_num">상영관 이름</span> -->
-<!-- 									총<span class="scs_empty_seat"> 총 N 석</span> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col"> -->
-<!-- 								<div class="timetable_dimension">2D/3D</div> -->
-<!-- 								<div class="timetable_scs">시작시간, 남은 좌석</div> -->
-<!-- 							</div>	 -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div>timetable_movie -->
 			</div> <!-- timetable -->
 			<div>
 				<fieldset id="timetable_info" >
@@ -229,7 +224,7 @@
 				</fieldset>
 			</div>
 			
-		</div>
+		</div> <!-- theater_timetable_all -->
 	</article>	
 	
 	

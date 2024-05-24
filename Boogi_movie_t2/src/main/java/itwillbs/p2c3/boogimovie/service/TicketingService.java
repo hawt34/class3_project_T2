@@ -37,17 +37,11 @@ public class TicketingService {
 		return mapper.selectPayedSeat(pay_num);
 	}
 	
-
 	public List<Integer> selectPayNum(int scs_num) {
 		return mapper.selectPayNum(scs_num);
 	}
-
 	
 	public List<Map<String, Integer>> selectTheaterByMovie(int movie_num){
 		return mapper.selectTheaterByMovie(movie_num);
 	}
-	
-	
-	
-	
 }	

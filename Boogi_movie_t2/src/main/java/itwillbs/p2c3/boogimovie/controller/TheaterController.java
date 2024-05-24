@@ -153,6 +153,7 @@ public class TheaterController {
 		
 		
 		List<Map<String, Object>> theaterScsList = service.getTheaterScsList(theater_num, scs_date);
+		
 		JsonArray jsonScsList = new JsonArray();
 		
 		for(Map<String, Object> maplist : theaterScsList) {

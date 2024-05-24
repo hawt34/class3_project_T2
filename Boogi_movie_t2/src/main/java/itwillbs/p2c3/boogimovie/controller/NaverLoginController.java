@@ -78,7 +78,7 @@ public class NaverLoginController {
                 String email = responseObj.getString("email");
                 String name = responseObj.getString("name");
                 String profile_image = responseObj.getString("profile_image");
-
+                	
                 // 세션에 사용자 정보 저장
                 session.setAttribute("email", email);
                 session.setAttribute("name", name);
@@ -91,7 +91,6 @@ public class NaverLoginController {
             }
         }
         session.setAttribute("sId", "김아무개");
-//        model.addAttribute("msg", "네이버 로그인 실패");
         return "redirect://";
     }
 }

@@ -190,6 +190,7 @@ public class PaymentController {
 	        pay.setTicket_pay_status("결제");
 	        pay.setTicket_pay_type(payment.getPgProvider());
 	        pay.setCoupon_num(Integer.parseInt(coupon_num));
+	        pay.setSave_point(savePoint);
 	        
 	        service.savePayInfo(pay); // pay 테이블에 결제 정보 저장
 	        System.out.println("pay  : " + pay);
@@ -376,10 +377,6 @@ public class PaymentController {
 			double savePointDouble = amountInt * 0.1;
 			int savePoint = (int)(savePointDouble / 100) * 100;
 			int apply_point = savePoint - usePointInt;
-//			System.out.println("amountInt : " + amountInt);
-//			System.out.println("usePointInt : " + usePointInt);
-//			System.out.println("savePoint : " + savePoint);
-//			System.out.println("apply_point : " + apply_point);
 			 
 			member = service.getMember(member);
 			member.setMember_point(member.getMember_point() + apply_point);
@@ -400,6 +397,7 @@ public class PaymentController {
 			storePay.setMember_id(member.getMember_id());
 			storePay.setUse_point(usePointInt);
 			storePay.setCart_id(cart_id);
+			storePay.setSave_point(savePoint);
 			System.out.println("%%%%%%% storePay : " + storePay);
 			service.saveStorePayInfo(storePay);
 			

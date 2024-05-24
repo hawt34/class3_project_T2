@@ -88,7 +88,13 @@
 	
 	$(document).ready(function() {
 	    let riskCount = 0;
-
+	    
+	    // 아이디 입력값 변경 시
+	    $("#member_id").on("input", function() {
+	        validateId();
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
+	    
 	    // 비밀번호 입력값 변경 시
 	    $("#member_pwd").on("input", function() {
 	        validatePassword();
@@ -121,6 +127,24 @@
 
 	    // 초기 폼 유효성 검사
 	    checkFormValidity();
+	    
+	    function validateId() {
+	        let id = $("#member_id").val();
+	        let msg = "";
+	        let color = "";
+	        let idRegx = /^[a-zA-Z가-힣0-9]{8,20}$/;
+
+	        if (!idRegx.test(id)) {
+	            msg = "아이디는 특수문자,한글을 제외한 8~20자리의 영어, 숫자만 입력 가능합니다.";
+	            color = "RED";
+	        } else {
+	            msg = "사용 가능한 아이디입니다.";
+	            color = "Green";
+	        }
+
+	        $("#msg_id").text(msg);
+	        $("#msg_id").css("color", color);
+	    }
 
 	    function validatePassword() {
 	        let pwd = $("#member_pwd").val();
@@ -224,6 +248,7 @@
 
 	    // 폼 유효성 검사 함수
 	    function checkFormValidity() {
+			let idIsValid = /^[a-zA-Z가-힣0-9]{8,20}$/.test($("#member_id").val());
 	        let pwdIsValid = $("#member_pwd").val() === "" || /^.{8,16}$/.test($("#member_pwd").val());
 	        let pwd2IsValid = $("#member_pwd2").val() === "" || $("#member_pwd2").val() === $("#member_pwd").val();
 	        let address2IsValid = /^.{2,20}$/.test($("#member_address2").val());
@@ -231,7 +256,7 @@
 	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
 	        let isPasswordStrong = $("#member_pwd").val() === "" || riskCount > 1;
 
-	        if (pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid && isPasswordStrong) {
+	        if (idIsValid && pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid && isPasswordStrong) {
 	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
 	        } else {
 	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화

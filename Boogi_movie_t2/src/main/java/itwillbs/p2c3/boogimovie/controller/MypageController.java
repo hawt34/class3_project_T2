@@ -50,6 +50,7 @@ import itwillbs.p2c3.boogimovie.vo.PointVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
+import retrofit2.http.POST;
 
 @Controller
 public class MypageController {
@@ -339,6 +340,34 @@ public class MypageController {
 		
 		return "mypage/myp_reservation";
 	}
+	
+	// ============================= 예매취소 =============================
+	
+	@ResponseBody
+	@PostMapping("myp_cancel_movie")
+	public String mypCancelMovie(Map<String, Object> map, Model model, MemberVO member) {
+		System.out.println("myp_cancel_movie controller");
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("targetURL", "./");
+			return "result_process/fail";
+		}
+		
+		member.setMember_id(id);
+		MemberVO dbMember = mypageService.getDbMember(member);
+		int removeMovie = mypageService.removeMovie(map);
+		
+		if(removeMovie > 0) { // 성공 시  
+			
+		} else { // 실패 시
+			
+		}
+		return "true";
+		
+	}
+	
 	
 	// ============================= 스토어 =============================
 	

@@ -62,6 +62,7 @@ hr{
 							<button class="nav-link active" id="storePay-tab" data-bs-toggle="tab"
 								data-bs-target="#storePay" type="button" role="tab" aria-controls="storePay"
 								aria-selected="true">결제내역</button>
+								
 						</li>
 						<li class="nav-item" role="presentation">
 							<button class="nav-link" id="storeCancel-tab" data-bs-toggle="tab"
@@ -72,6 +73,7 @@ hr{
 				</div><!-- box2 -->
 				
 				<div class="tab-content" id="myTabContent">
+					<!-- 결제 탭 -->
 					<div class="tab-pane fade show active" id="storePay" role="tabpanel"aria-labelledby="storePay-tab">
 						<table class="table table-hover" >
 							<thead>
@@ -81,93 +83,71 @@ hr{
 								    <th scope="col">결제내역</th>
 								    <th scope="col">결제금액</th>
 								    <th scope="col">결제수단</th>
+								    <th scope="col">취소</th>
 						    	</tr>
 							</thead>
 							<tbody>
 
-								<c:forEach var="store_pay" items="${storePay}" varStatus="status">
-								    <c:if test="${store_pay.store_pay_status == '결제'}">
+								<c:forEach var="storePay" items="${storePay}" varStatus="status">
+								    <c:if test="${storePay.store_pay_status == '결제'}">
 								        <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
 								            <th scope="row">${status.index + 1}</th>
 								            <td>
-								                <fmt:parseDate value="${store_pay.store_pay_date}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate" />
+								                <fmt:parseDate value="${storePay.store_pay_date}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate" />
 								                <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm" />
 								            </td>
-								            <td>${store_pay.store_pay_detail}</td>
+								            <td>${storePay.store_pay_detail}</td>
 								            <td>
-								                <fmt:formatNumber value="${store_pay.store_pay_price}" type="number" groupingUsed="true" />원
+								                <fmt:formatNumber value="${storePay.store_pay_price}" type="number" groupingUsed="true" />원
 								            </td>
-								            <td>${store_pay.store_pay_type}</td>
+								            <td>${storePay.store_pay_type}</td>
 								        </tr>
 								    </c:if>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
-				</div><!-- tab-content 탭1 끝 -->
+					<!-- 결제 탭 -->
+				
+				
+				<!-- 취소 탭 -->
+<%--                 <div class="tab-pane fade ${status == '취소' ? 'show active' : ''}" id="storeCancel" role="tabpanel" aria-labelledby="storeCancel-tab"> --%>
 				<div class="tab-pane fade" id="storeCancel" role="tabpanel"aria-labelledby="storeCancel-tab">
 					<table class="table table-hover" >
 						<thead>
 						    <tr>
 								<th scope="col">#</th>
 							    <th scope="col">취소일</th>
-							    <th scope="col">결제내역</th>
+							    <th scope="col">취소내역</th>
 							    <th scope="col">결제취소 금액</th>
 							    <th scope="col">결제취소 수단</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="store_pay" items="${storePay}" varStatus="status">
-							    <c:if test="${store_pay.store_pay_status == '취소'}">
+							<c:forEach var="storePay" items="${storePay}" varStatus="status">
+							    <c:if test="${storePay.store_pay_status == '취소'}">
 							        <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
 							            <th scope="row">${status.index + 1}</th>
 							            <td>
-							                <fmt:parseDate value="${store_pay.store_pay_cancel_date}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate2" />
+							                <fmt:parseDate value="${storePay.store_pay_cancel_date}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate2" />
 							                <fmt:formatDate value="${parsedDate2}" pattern="yyyy-MM-dd HH:mm" />
 							            </td>
-							            <td>${store_pay.store_pay_detail}</td>
+							            <td>${storePay.store_pay_detail}</td>
 							            <td>
-							                <fmt:formatNumber value="${store_pay.store_pay_price}" type="number" groupingUsed="true" />원
+							                <fmt:formatNumber value="${storePay.store_pay_price}" type="number" groupingUsed="true" />원
 							            </td>
-							            <td>${store_pay.store_pay_type}</td>
+							            <td>${storePay.store_pay_type}</td>
 							        </tr>
 							    </c:if>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div><!-- tab-pane fade 탭2 끝-->
+				<!-- 취소탭 -->
+				
+				</div><!-- tab-content 탭1 끝 -->
 				
 				
-				
-				
-				<!-- 페이징 시작 -->
-				<div class="breakdown_pageArea">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination">
-						<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" > 
-							<a class="page-link" href="myp_storereturn "result_process/fail";${pageNum - 1}" aria-label="Previous" >
-							<span aria-hidden="true" >&laquo;</span>
-							</a>
-						</li>
-						<c:forEach var="i" begin="${pageList.startPage}" end="${pageList.endPage}">
-							<c:choose>
-								<c:when test="${pageNum eq i }">
-									<li class="page-item active"><a class="page-link">${i}</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="myp_storereturn "result_process/fail";${i}">${i}</a></li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
-							<a class="page-link" href="myp_storereturn "result_process/fail";${pageNum + 1}" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
-				</div>
-				<!-- 페이징 끝 -->
 			</div><!-- col-md-9 box-in -->
 		</div> <!-- row -->
 	</div><!-- container2 -->

@@ -95,7 +95,8 @@ $(function () {
 		    $("#theater_name").prop("disabled", true);
 		} else if ($(this).val() == "극장") {
 			
-		    let theaterName = $("#theater_name").val("해운대점");
+		    $("#theater_name").val("해운대점");
+		    $("#notice_name").val("[해운대점]");
 		    $("#theater_name").prop("disabled", false);
 		    $("#theater_name option:eq(0)").prop("disabled", true);
 		}

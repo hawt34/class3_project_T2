@@ -43,6 +43,7 @@
 			 </choose>
 			 , #{merchant_uid}
 			 , #{use_point}
+			 , #{save_point}
 		)
 	</insert>
 	
@@ -105,6 +106,7 @@
 			, #{merchant_uid}
 			, #{use_point}
 			, #{cart_id}
+			, #{save_point}
 		 )
 	</insert>
 	

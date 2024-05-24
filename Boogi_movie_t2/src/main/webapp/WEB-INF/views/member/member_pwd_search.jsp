@@ -49,11 +49,11 @@
 	    // 아이디 입력값 변경 시
 	    $("#member_id").on("input", function() {
 	        let id = $("#member_id").val();
-	        let regex = /^[a-zA-Z0-9]{2,10}$/g;
+	        let regex = /^[a-zA-Z0-9]{8,20}$/g;
 	        
 	        if (!regex.test(id)) {
 	            $("#member_id").css("background-color", "red");
-	            $("#msg_id").text("특수문자, 한글 제외 2~10글자를 입력해주세요");
+	            $("#msg_id").text("특수문자, 한글 제외 8~20글자를 입력해주세요");
 	        } else {
 	            $("#member_id").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	            $("#msg_id").empty();

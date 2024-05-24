@@ -208,6 +208,7 @@ footer {
 					if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
 						window.location.href = 'recommand'; // 예매 페이지로 이동
 					}
+				}
 			});
 
 			$(".list").on("click", ".detail_button", function() {
@@ -248,8 +249,6 @@ footer {
 				}
 			});
 		});
-
-	
 	</script>
 </body>
 </html>

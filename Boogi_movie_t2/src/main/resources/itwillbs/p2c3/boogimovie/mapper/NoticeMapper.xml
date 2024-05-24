@@ -93,8 +93,8 @@
 	
 	<select id="selectTheaterNum" resultType="int">
 		SELECT t.theater_num
-		FROM notice n
-		JOIN theater t
+		FROM theater t
+		LEFT OUTER JOIN notice n
 		ON n.theater_num = t.theater_num
 		<if test="theater_name != '' and theater_name != null">
 			WHERE t.theater_name = #{theater_name}

@@ -143,9 +143,12 @@ body {
 	flex-direction: row;
 }
  .clickable {
-            cursor: pointer;
-            user-select: none; /* 이 부분은 선택한 텍스트를 드래그하는 것을 방지합니다. */
-        }
+   cursor: pointer;
+   user-select: none; /* 이 부분은 선택한 텍스트를 드래그하는 것을 방지합니다. */
+}
+.no-pointer {
+    cursor: default;
+}
 </style>
 </head>
 <body>
@@ -183,7 +186,7 @@ body {
 					<img src="${pageContext.request.contextPath}/resources/images/boogi_title.png" onclick="location.href='./'">
 				</div>
 				<div class="col-md-2" align="center">
-					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png" class="clickable" id="target">
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png" class="clickable no-pointer" id="target">
 				</div>
 				<div class="col-md-1"></div>
 			</div>
@@ -300,10 +303,10 @@ body {
                     "치킨 사주세요!\n" +
                     "　　　　　　　　　　　　　　;' ':;,　　 　　　 ,;'':;,\n" +
                     "　　　　　　　　　　　　　;'　　 ':;,.,..,,,;'　　　';,\n" +
-                    "　　ー　　　　　　　　 ,:'　　　　　　　　 　　　　::::::::､\n" +
+                    "　　ー　　　　　　　　 ,:'　　　　　　　　 　　　　::::::､\n" +
                     "　_＿　　　　　　　　,:' ／ 　 　　　　＼ 　　　　　::::::::',\n" +
                     "　　　　　二　　　　:'　 ●　　　　　 ●　 　　　　　　::::::::i.\n" +
-                    "　　￣　　　　　　　i　'''　(_人__)　　''''　　 ::::::::::i\n" +
+                    "　　￣　　　　　　　i　'''　(_人__)　　''''　　    ::::::::i\n" +
                     "　　　　-‐　　　　　 :　 　　　　　　　　　 　　　　　::::::::i\n" +
                     "　　　　　　　　　　　`:,､ 　　　　　 　 　　　 :::::::::: /\n" +
                     "　　　　／　　　　　　 ,:'　　　　　　　 : ::::::::::::｀:､\n" +
@@ -312,25 +315,17 @@ body {
         else if (clickCount === 13) {
             alert("이제 끝");
         }
+       
         else if (clickCount === 15) {
-            alert("진짜 끝임");
-        }
-        else if (clickCount === 17) {
-            alert("아니 끝이라니까");
-        }
-        else if (clickCount === 19) {
             alert("여기 아무것도 없음");
         }
-        else if (clickCount === 20) {
+        else if (clickCount === 17) {
             alert("잘못된 접근입니다");
         }
-        else if (clickCount === 21) {
-            alert("아니 진짜 아무것도 없다니까");
-        }
-        else if (clickCount === 23) {
+        else if (clickCount === 19) {
             alert(".....");
         }
-        else if (clickCount === 25) {
+        else if (clickCount === 21) {
             alert(".             +\n" +
                     "  　╲　　　　　　　　　　　╱\n" +
                     "  　　　　　　　　/\n" +
@@ -343,7 +338,7 @@ body {
                     "  　　　　　/　|　　　\n" +
                     "  　　　　　　　.");
         }
-        else if (clickCount === 27) {
+        else if (clickCount === 23) {
             alert(".           +\n" +
                     "　╲　　　　　　　　　　　╱\n" +
                     "　　　　　　　　　/\n" +
@@ -356,7 +351,7 @@ body {
                     "　　　　　/　|　　　\n" +
                     "　　　　　　　.");
         }
-        else if (clickCount === 30) {
+        else if (clickCount === 25) {
             alert(".           +\n" +
                     "　╲　　　　　　　　　　　╱\n" +
                     "　　　　　　　　　/\n" +
@@ -368,8 +363,21 @@ body {
                     "　　╱　　　　　　　　╲\n" +
                     "　　　　　/　|　　　\n" +
                     "　　　　　　　.");
-	        clickCount = 0;
         }
+        else if (clickCount === 30) {
+        	$(".header_middle_title > .col-md-2").empty();
+        	$(".header_middle_title > .col-md-2").append(
+        			 '<img src="${pageContext.request.contextPath}/resources/images/pubao.png" class="clickable" id="target">'		
+        	);
+        	$(".header_middle_title > .col-md-5").empty();
+        	$(".header_middle_title > .col-md-5").append(
+        			 '<img src="${pageContext.request.contextPath}/resources/images/pubaoMovie.png" class="clickable" id="target" onclick="location.href="./">'		
+        	);
+        }
+        else if(clickCount === 33){
+        	clickCount = 0;
+        }
+      
         
         
         // 클릭 횟수를 다시 0으로 초기화합니다.

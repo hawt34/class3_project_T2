@@ -129,7 +129,7 @@ footer {
 	</header>
 	<div id="wrap">
 		<article>
-			<h1>"${sessionScope.sId}" 의 취향은 ${memberCode} 이고 추천 결과는
+			<h1>"${sessionScope.sId}" 님의 취향은 ${memberCode} 이고 추천 결과는
 				${genreSize}개 입니다.</h1>
 		</article>
 		<section>
@@ -141,7 +141,7 @@ footer {
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.location.href='boxoffice'">박스오피스 순위</button>
 				<button type="button" class="btn btn-outline-primary"
-					id="recommendMovie" onclick="window.location.href='recommand'">추천상영영화</button>
+					id="recommendMovie" >추천상영영화</button>
 				<form action="searchMovie">
 					<input type="text" name="searchKeyword" placeholder="영화제목 입력"
 						value="${param.searchKeyword}"> <input type="submit"

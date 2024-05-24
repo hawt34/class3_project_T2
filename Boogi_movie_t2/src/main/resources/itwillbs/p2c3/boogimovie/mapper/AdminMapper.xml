@@ -41,23 +41,23 @@
 <!-- 월간 매출 조회 -->
 	<select id="getMonthSales" resultType="map">
 		SELECT 
-			t.theater_name , SUM(p.ticket_pay_price) AS 'Sales'
+			t.theater_name , SUM(p.ticket_pay_price) AS 'Sales' 
 		FROM 
-			screen_info si
+			pay p
 		JOIN 
 			screen_session ss 
 		ON 
-			si.screen_num = ss.scs_num 
-		JOIN 
-			pay p 
-		ON 
 			ss.scs_num = p.scs_num 
+		JOIN 
+			screen_info si 
+		ON 
+			ss.screen_num = si.screen_num 
 		JOIN 
 			theater t 
 		ON 
-			t.theater_num =si.theater_num 
+			t.theater_num = si.theater_num
 		WHERE 
-			p.ticket_pay_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+			p.ticket_pay_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) 
 		GROUP BY 
 			t.theater_name
 	</select>

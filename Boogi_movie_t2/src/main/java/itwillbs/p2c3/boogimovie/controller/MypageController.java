@@ -64,9 +64,6 @@ public class MypageController {
 	private CouponService couponService;
 	
 	@Autowired
-	private AdminService service;
-	
-	@Autowired
 	private	PaymentService paymentService;
 	
 	@Autowired
@@ -74,6 +71,9 @@ public class MypageController {
 	
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private AdminService service;
 	
 	//중복되는 코드 - 파일 가상 저장 path
 	String uploadDir = "/resources/upload";
@@ -94,7 +94,6 @@ public class MypageController {
 			member = mypageService.getMember(id);
 			model.addAttribute("member", member);
 			
-			
 			// My극장 극장 전체리스트
 			List<TheaterVO> infoTheater = mypageService.getTheater();
 			model.addAttribute("theater", infoTheater);
@@ -111,11 +110,6 @@ public class MypageController {
 			List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(param);
 			model.addAttribute("movieReservation", movieReservation);
 			
-//			List<Object> combinedList = new ArrayList<>();
-//			combinedList.addAll(movieReservation);
-//			combinedList.addAll(dateReservation);
-//			model.addAttribute("combinedList", combinedList);
-			
 			return"mypage/myp_main";
 		}
 		
@@ -125,8 +119,6 @@ public class MypageController {
 	@PostMapping("MyTheaterList") // 마이페이지 My극장 모달폼 극장 전체 리스트
 	public String handleFormSubmit(@RequestParam(name = "theaterIds", required = false, defaultValue = "") List<String> theaterIds, HttpSession session, TheaterVO theater) {
 		
-		
-//	    System.out.println(" 나의 극장 : " + theaterIds);
 	        return "redirect:/myp_main";
     }
 	
@@ -687,8 +679,4 @@ public class MypageController {
 		
 		return "mypage/myp_oto_reply";
 	}
-	
-
-
-	
 }

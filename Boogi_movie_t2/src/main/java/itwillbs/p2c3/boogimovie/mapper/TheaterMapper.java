@@ -1,8 +1,10 @@
 package itwillbs.p2c3.boogimovie.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
@@ -57,6 +59,9 @@ public interface TheaterMapper {
 
 
 	List<FeeAgeVO> selectFeeList();
+
+
+	List<Map<String, Object>> getTheaterScsList(@Param("theater_num") int theater_num, @Param("scs_date") String scs_date);
 
 
 

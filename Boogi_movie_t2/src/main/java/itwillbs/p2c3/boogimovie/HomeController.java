@@ -29,7 +29,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String home(Model model , HttpSession session,MemberVO member, MovieVO movieTrail) {
-		System.out.println("현재 아이디" + member.getMember_id());
+		//System.out.println("현재 아이디" + member.getMember_id());
 		List<MovieVO> movieInfo = movieService.getMovieList();
 		movieTrail = movieService.getMovieTrail();
 		session.setAttribute("sId", "admin33");

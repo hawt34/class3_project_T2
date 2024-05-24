@@ -165,7 +165,7 @@ main {
 
 	<main>
 		<div class="event_title">
-			<h2>이벤트페이지</h2>
+			<h3>이벤트페이지</h3>
 		</div>
 		
 		

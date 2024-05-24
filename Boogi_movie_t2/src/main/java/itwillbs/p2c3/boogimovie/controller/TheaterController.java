@@ -1,6 +1,7 @@
 package itwillbs.p2c3.boogimovie.controller;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -82,7 +86,8 @@ public class TheaterController {
 		
 				
 		return "theater/theater_main";
-	}       
+		
+	} // theater()
 	 
 	@GetMapping("theater_detail")
 	public String theaterDetail(TheaterVO theater, TheaterFacilityVO facility, NoticeVO notice, MemberVO member, Model model, HttpSession session) {
@@ -128,7 +133,8 @@ public class TheaterController {
 		
 		
 		return "theater/theater_detail";
-	}
+		
+	} // theaterDetail()
 	
 	
 	
@@ -137,9 +143,62 @@ public class TheaterController {
 		return "theater/theater_test";
 	}
 	
+	@ResponseBody
+	@PostMapping("timetable")
+	public String timetable(@RequestParam(defaultValue = "1")int theater_num, String scs_date) {
+		
+		
+		System.out.println("theater_num : " + theater_num);
+		System.out.println("scs_date : " + scs_date);
+		
+		
+		List<Map<String, Object>> theaterScsList = service.getTheaterScsList(theater_num, scs_date);
+		JsonArray jsonScsList = new JsonArray();
+		
+		for(Map<String, Object> maplist : theaterScsList) {
+			
+			JsonObject json = new JsonObject();
+			json.addProperty("scs_num", (int)maplist.get("scs_num"));
+			json.addProperty("scs_empty_seat", (int)maplist.get("scs_empty_seat"));
+			json.addProperty("screen_dimension", (String)maplist.get("screen_dimension"));
+			String scs_date1 = (Date)maplist.get("scs_date")+"";
+			json.addProperty("scs_date", scs_date1);
+			json.addProperty("scs_start_time", (String)maplist.get("scs_start_time"));
+			json.addProperty("scs_end_time", (String)maplist.get("scs_end_time"));
+			json.addProperty("movie_grade", (String)maplist.get("movie_grade"));
+			json.addProperty("movie_name", (String)maplist.get("movie_name"));
+			json.addProperty("movie_runtime", (String)maplist.get("movie_runtime"));
+			json.addProperty("screen_cinema_num", (int)maplist.get("screen_cinema_num"));
+			
+			String screen_seat_col = (String) maplist.get("screen_seat_col");
+			String screen_seat_row = (String) maplist.get("screen_seat_row");
+
+	        // 알파벳을 숫자로 변환하여 seat_size를 계산합니다.
+	        int seat_size = getSeatSize(screen_seat_col, screen_seat_row);
+	        json.addProperty("seat_size", seat_size);
+
+			jsonScsList.add(json);
+			System.out.println("###############" + json);
+			
+		}
+		
+		
+		return jsonScsList.toString();
+		
+	} // timetable()
+	
+	// 알파벳을 숫자로 변환하는 함수 (timetable 에서 사용)
+	private int getSeatSize(String alphabet, String screen_seat_row) {
+	    alphabet = alphabet.toUpperCase();
+	    int colToNumber = alphabet.charAt(0) - 'A' + 1;
+	    int seat_size = colToNumber * Integer.parseInt(screen_seat_row);
+	    
+	    return seat_size;
+	}
 	
 	
 	
-}
+	
+} // TheaterController
 
 

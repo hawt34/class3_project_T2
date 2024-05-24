@@ -62,7 +62,6 @@ section h1 {
 }
 
 .nowMovie .btn {
-	margin-top: 20px;
 	margin-left: 20px; /* 좌우 간격 조절 */
 	margin-right: 20px; /* 좌우 간격 조절 */
 	font-size: 25px;
@@ -99,6 +98,24 @@ footer {
 	height: 100px;
 	/* 	background-color: #ffb300; */
 }
+.nowMovie>form>input[type=text] {
+	font-size: 18px;
+	height: 40px;
+	width: 150px;
+	outline: none;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.nowMovie>form>input[type=submit] {
+	width: 90px;
+	height: 40px;
+	outline: none;
+	font-weight: bold;
+	margin-left: 5px;
+	vertical-align: middle;
+	padding: 0px;
+}
 </style>
 
 <%-- <link href="${pageContext.request.contextPath}/resources/css/movie.css"	rel="stylesheet" type="text/css"> --%>
@@ -132,7 +149,7 @@ footer {
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.location.href='boxoffice'">박스오피스 순위</button>
 				<button type="button" class="btn btn-outline-primary"
-					id="recommendMovie" onclick="window.location.href='recommand'">추천상영영화</button>
+					id="recommendMovie" >추천상영영화</button>
 				<form action="searchMovie">
 					<input type="text" name="searchKeyword" placeholder="영화제목 입력"
 						value="${param.searchKeyword}"> <input type="submit"
@@ -184,10 +201,11 @@ footer {
 					if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
 						window.location.href = 'member_login';
 					}
-				} else {
-					if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
-						window.location.href = 'recommand'; // 예매 페이지로 이동
-					}
+				}  else {
+	                if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
+	                    window.location.href = 'recommand'; // 추천 영화 페이지로 이동
+	                }
+	            				
 				}
 			});
 

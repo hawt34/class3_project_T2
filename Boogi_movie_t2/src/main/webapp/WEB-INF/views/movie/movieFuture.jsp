@@ -49,7 +49,6 @@ section {
 }
 
 .nowMovie .btn {
-	margin-top: 20px;
 	margin-left: 20px; /* 좌우 간격 조절 */
 	margin-right: 20px; /* 좌우 간격 조절 */
 	font-size: 25px;
@@ -92,6 +91,24 @@ footer {
 	height: 100%;
 	/* 	background-color: #ffb300; */
 }
+.nowMovie>form>input[type=text] {
+	font-size: 18px;
+	height: 40px;
+	width: 150px;
+	outline: none;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.nowMovie>form>input[type=submit] {
+	width: 90px;
+	height: 40px;
+	outline: none;
+	font-weight: bold;
+	margin-left: 5px;
+	vertical-align: middle;
+	padding: 0px;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -126,7 +143,7 @@ footer {
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.location.href=''">박스오피스 순위</button>
 				<button type="button" class="btn btn-outline-primary"
-					id="recommendMovie" onclick="openPopup()">추천상영영화</button>
+					id="recommendMovie">추천상영영화</button>
 				<form action="searchMovie">
 					<input type="text" name="searchKeyword" placeholder="영화제목 입력"
 						value="${param.searchKeyword}"> <input type="submit"
@@ -174,6 +191,18 @@ footer {
 <script type="text/javascript">
 	$(document).ready(function() {
 		let sId = "${sessionScope.sId}"; //생각보다 많이 써서 빼놓음.
+		$("#recommendMovie").on("click", function() {
+			if (!sId) {
+				if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
+					window.location.href = 'member_login';
+				}
+			} else {
+				if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
+					window.location.href = 'recommand'; // 예매 페이지로 이동
+				}
+			}
+		});
+				
 		// 처음에는 4편의 영화만 보여주기
 		let numShown = 4;
 		$(".movie:gt(" + (numShown - 1) + ")").hide();
@@ -192,17 +221,7 @@ footer {
 				$(".end-message").show();
 			}
 		});
-		$("#recommendMovie").on("click", function() {
-			if (!sId) {
-				if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
-					window.location.href = 'member_login';
-				}
-			} else {
-				if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
-					window.location.href = 'recommand'; // 예매 페이지로 이동
-				}
-			}
-		});
+		
 		// 상세보기 버튼 클릭 이벤트 처리
 		$(".list").on("click", ".future_detail_button", function() {
 			let movie_num = $(this).siblings(".movie_num").val();

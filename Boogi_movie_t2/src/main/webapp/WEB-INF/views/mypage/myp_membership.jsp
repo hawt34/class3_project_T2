@@ -32,7 +32,7 @@ body {
 		<div class="row">
 		
 			<div class="col-md-2">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div>	<!-- col-md-2 사이드바  -->
 			
 			<div class="col-md-10 box1 w-75">

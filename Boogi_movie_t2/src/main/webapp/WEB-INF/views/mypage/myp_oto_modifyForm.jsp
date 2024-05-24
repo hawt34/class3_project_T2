@@ -122,7 +122,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-2">
-				<jsp:include page="/WEB-INF/views/mypage/inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div>
 			<div class="col-10">
 				<form action="myp_oto_modifyPro" method="post" enctype="multipart/form-data">

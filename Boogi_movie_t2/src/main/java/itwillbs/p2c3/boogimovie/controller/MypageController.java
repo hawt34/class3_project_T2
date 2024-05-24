@@ -41,6 +41,7 @@ import itwillbs.p2c3.boogimovie.service.MypageService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.PaymentService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
+import itwillbs.p2c3.boogimovie.vo.CartVO;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
@@ -63,9 +64,6 @@ public class MypageController {
 
 	@Autowired
 	private CouponService couponService;
-	
-	@Autowired
-	private AdminService service;
 	
 	@Autowired
 	private	PaymentService paymentService;
@@ -95,7 +93,6 @@ public class MypageController {
 			member = mypageService.getMember(id);
 			model.addAttribute("member", member);
 			
-			
 			// My극장 극장 전체리스트
 			List<TheaterVO> infoTheater = mypageService.getTheater();
 			model.addAttribute("theater", infoTheater);
@@ -112,11 +109,6 @@ public class MypageController {
 			List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(param);
 			model.addAttribute("movieReservation", movieReservation);
 			
-//			List<Object> combinedList = new ArrayList<>();
-//			combinedList.addAll(movieReservation);
-//			combinedList.addAll(dateReservation);
-//			model.addAttribute("combinedList", combinedList);
-			
 			return"mypage/myp_main";
 		}
 		
@@ -126,8 +118,6 @@ public class MypageController {
 	@PostMapping("MyTheaterList") // 마이페이지 My극장 모달폼 극장 전체 리스트
 	public String handleFormSubmit(@RequestParam(name = "theaterIds", required = false, defaultValue = "") List<String> theaterIds, HttpSession session, TheaterVO theater) {
 		
-		
-//	    System.out.println(" 나의 극장 : " + theaterIds);
 	        return "redirect:/myp_main";
     }
 	
@@ -297,7 +287,6 @@ public class MypageController {
 		}
 		member = mypageService.getMember(id);
 		model.addAttribute("member", member);
-		
 	    
 		PayVO pay = new PayVO();
 		Map<String, Object> param = new HashMap<>();
@@ -359,6 +348,19 @@ public class MypageController {
 		
 		
 		List<StorePayVO> storePay = mypageService.getStorePay(member);
+		for(StorePayVO store : storePay) {
+			List<CartVO> carts = service.selectCart(store.getStore_pay_num());
+			StringBuilder resultStr = new StringBuilder();
+			for (CartVO cart : carts) {
+			    resultStr.append(cart.getItem_info_name())
+			             .append(" : ")
+			             .append(cart.getItem_quantity())
+			             .append("개   ");
+			}
+			String result = resultStr.toString();
+			store.setStore_pay_detail(result);
+		}
+		
 		model.addAttribute("storePay", storePay);
 		
 		return "mypage/myp_store";

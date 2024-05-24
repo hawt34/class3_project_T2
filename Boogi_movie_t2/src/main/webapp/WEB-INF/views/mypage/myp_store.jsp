@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,7 @@ hr{
 		<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
 		<div class="row">
 			<div class="col-md-2 box1">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div><!-- sidebar1 -->
 				<!-- 탭 메뉴 -->
 				<!-- 내용 -->
@@ -83,14 +84,22 @@ hr{
 						    	</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="store_pay" items="${storePay}" varStatus="status" begin="0" end="4">
-								    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
-								        <th scope="row">${status.index + 1}</th>
-								        <td>${store_pay.store_pay_date}</td>
-								        <td>0000</td>
-								        <td>${store_pay.store_pay_price}</td>
-								        <td>${store_pay.store_pay_type}</td>
-								    </tr>
+
+								<c:forEach var="store_pay" items="${storePay}" varStatus="status">
+								    <c:if test="${store_pay.store_pay_status == '결제'}">
+								        <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+								            <th scope="row">${status.index + 1}</th>
+								            <td>
+								                <fmt:parseDate value="${store_pay.store_pay_date}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate" />
+								                <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm" />
+								            </td>
+								            <td>${store_pay.store_pay_detail}</td>
+								            <td>
+								                <fmt:formatNumber value="${store_pay.store_pay_price}" type="number" groupingUsed="true" />원
+								            </td>
+								            <td>${store_pay.store_pay_type}</td>
+								        </tr>
+								    </c:if>
 								</c:forEach>
 							</tbody>
 						</table>
@@ -102,25 +111,27 @@ hr{
 						    <tr>
 								<th scope="col">#</th>
 							    <th scope="col">취소일</th>
-							    <th scope="col">구매일</th>
 							    <th scope="col">결제내역</th>
 							    <th scope="col">결제취소 금액</th>
 							    <th scope="col">결제취소 수단</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="store_pay" items="${storePay}" varStatus="status" begin="0" end="4">
-							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
-							        <th scope="row">${status.index + 1}</th>
-							        <td>${store_pay.store_pay_cancel_date}</td>
-							        <td>${store_pay.store_pay_date}</td>
-							        <td>
-<%-- 							        ${store_pay.store_pay_type} --%>
-							        0000
-							        </td>
-							        <td>${store_pay.store_pay_price}</td>
-							        <td>${store_pay.store_pay_type}</td>
-							    </tr>
+							<c:forEach var="store_pay" items="${storePay}" varStatus="status">
+							    <c:if test="${store_pay.store_pay_status == '취소'}">
+							        <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+							            <th scope="row">${status.index + 1}</th>
+							            <td>
+							                <fmt:parseDate value="${store_pay.store_pay_cancel_date}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate2" />
+							                <fmt:formatDate value="${parsedDate2}" pattern="yyyy-MM-dd HH:mm" />
+							            </td>
+							            <td>${store_pay.store_pay_detail}</td>
+							            <td>
+							                <fmt:formatNumber value="${store_pay.store_pay_price}" type="number" groupingUsed="true" />원
+							            </td>
+							            <td>${store_pay.store_pay_type}</td>
+							        </tr>
+							    </c:if>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -162,7 +173,7 @@ hr{
 	</div><!-- container2 -->
 </div><!-- container -->
 <footer>
-	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
 

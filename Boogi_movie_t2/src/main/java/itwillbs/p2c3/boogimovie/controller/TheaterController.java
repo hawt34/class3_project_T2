@@ -11,7 +11,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -137,7 +141,23 @@ public class TheaterController {
 		return "theater/theater_test";
 	}
 	
-	
+	@ResponseBody
+	@PostMapping("timetable")
+	public String timetable(@RequestParam(defaultValue = "1")int theater_num, String scs_date) {
+		
+		
+		System.out.println("theater_num : " + theater_num);
+		System.out.println("scs_date : " + scs_date);
+		
+		
+		List<Map<String, Object>> theaterScsList = service.getTheaterScsList(theater_num, scs_date);
+		for(Map<String, Object> list : theaterScsList) {
+			System.out.println("###############" + list);
+		}
+		
+		
+		return "true";
+	}
 	
 	
 }

@@ -264,8 +264,6 @@ public class PaymentController {
 	                }
 	            }//ticket업데이트 종료
 	            
-	            
-
 	        }
             //empty_seat 업데이트
             int totalPeople = NP_num + YP_num + OP_num;

@@ -42,10 +42,12 @@
 	</select>
 	
 	<select id="selectMovieInfoGenre" parameterType="map" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
-        SELECT *
-        FROM movie
-        WHERE 1=1 
-        <if test="genreList != null and genreList.size() > 0">
+		 <![CDATA[
+		    SELECT *
+		    FROM movie
+		    WHERE movie_open_date <= CURRENT_DATE()
+		    ]]>
+   			 <if test="genreList != null and genreList.size() > 0">
 	        <foreach item="genre" collection="genreList" open="AND (" separator=" OR " close=")">
 	         movie_genre LIKE CONCAT('%', #{genre}, '%')
 	        </foreach>

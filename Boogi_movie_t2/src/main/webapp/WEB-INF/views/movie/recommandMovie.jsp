@@ -129,7 +129,7 @@ footer {
 	</header>
 	<div id="wrap">
 		<article>
-			<h1>"${sessionScope.sId}" 의 취향은 ${memberCode} 이고 추천 결과는
+			<h1>"${sessionScope.sId}" 님의 취향은 ${memberCode} 이고 추천 결과는
 				${genreSize}개 입니다.</h1>
 		</article>
 		<section>

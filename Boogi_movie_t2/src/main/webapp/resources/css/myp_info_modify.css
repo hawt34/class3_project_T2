@@ -2,7 +2,7 @@
 * {box-sizing: border-box}
 
 .container1{
-	height : 1300px;
+	height : auto;
 	width: 1400px; /* ÇØ»óµµ 1200*/
 	margin-top: 20px;
 	margin : auto;

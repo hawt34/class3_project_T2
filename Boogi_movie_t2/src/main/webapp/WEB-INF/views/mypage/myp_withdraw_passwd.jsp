@@ -112,10 +112,8 @@ input[type=text]:focus, input[type=password]:focus {
         // 폼의 기본 동작인 서버로의 제출을 막습니다.
         event.preventDefault();
 
-        // 사용자가 입력한 비밀번호를 가져옵니다.
         var passwordValue = document.getElementById('passwordInput').value;
 
-        // 만약 비밀번호가 입력되지 않았다면 알림 메시지를 표시합니다.
         if (!passwordValue) {
             alert("비밀번호를 입력하세요");
             return;

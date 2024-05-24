@@ -159,7 +159,7 @@ public class MypageController {
 	// ============================= 포인트 =============================
 	
 	@GetMapping("myp_point")
-	public String mypPoint(Model model, MemberVO member) {
+	public String mypPoint(Model model, MemberVO member, @RequestParam(defaultValue = "1") int pageNum) {
 		System.out.println("myp_point");
 		
 		String id = (String)session.getAttribute("sId");
@@ -178,7 +178,6 @@ public class MypageController {
 		List<StorePayVO> storePayList = paymentService.selectStorePayInfo(id);
 		List<PointVO> combinedList = new ArrayList<PointVO>();
 		int scs_num = 0;
-		
         for (PayVO pay2 : payList) {
         	scs_num = pay2.getScs_num();
         	ScreenSessionVO scs = paymentService.getScreenSession(scs_num);
@@ -190,9 +189,11 @@ public class MypageController {
         
         LocalDate currentDate = LocalDate.now();
         LocalDateTime localDateTime = null;
+        
         for (StorePayVO storePay : storePayList) {
-            combinedList.add(new PointVO(storePay.getStore_pay_price()/10, storePay.getUse_point(), storePay.getStore_pay_date(), storePay.getStore_pay_type(), "스토어"));
+        	combinedList.add(new PointVO(storePay.getStore_pay_price()/10, storePay.getUse_point(), storePay.getStore_pay_date(), storePay.getStore_pay_type(), "스토어"));
         }
+        
             	
         Collections.sort(combinedList, Comparator.comparing(PointVO::getDate));
         
@@ -320,7 +321,7 @@ public class MypageController {
 	    int listCount = mypageService.getResvCount(member_id,status);
 	    // -----------------------------------------------------------------------------------------
 
-		int pageListLimit = 5; // 뷰에 표시할 페이지 갯수
+		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
 		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호

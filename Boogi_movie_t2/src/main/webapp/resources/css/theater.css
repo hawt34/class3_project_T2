@@ -67,10 +67,6 @@ table {
 	margin: auto;
 }
 
-.theater_name_aera{
-	
-	
-}
 
 .theater_top{
 	margin: auto;
@@ -86,10 +82,16 @@ table {
 	
 }
 
+.theater_price_all{
+	margin: 30px;
+}
+
   
 /* ========================================= */
 /* theater_detail_info.jsp */
-
+.theater_info_content {
+	margin: 20px;
+}
  
 .theater_facility_info_img {
 	width: 100px; 
@@ -113,9 +115,14 @@ table {
  
 /* ========================================= */
 /* theater_detail_timetable */
+.theater_timetable_all {
+	margin: 30px;
+/* 	padding: 15px; */
+}
 
 .time_schedule {
 	text-align: center;
+	margin: 10px;
 }
 
 .day_list {
@@ -143,3 +150,11 @@ table {
 	
 }
 
+.timetable_movie_area{
+	background-color : #f0f0f0;
+	
+}
+
+.timetable {
+	margin: 30px;
+}

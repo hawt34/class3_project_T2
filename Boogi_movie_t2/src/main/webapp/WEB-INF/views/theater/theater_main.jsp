@@ -94,7 +94,6 @@
 			</table>
 			</div>
 		</div>	
-		<jsp:include page="theater_detail_timetable.jsp"></jsp:include>
 	</article>
 	<footer>
 	</footer>

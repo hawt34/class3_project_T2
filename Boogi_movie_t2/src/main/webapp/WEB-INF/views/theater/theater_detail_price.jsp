@@ -28,7 +28,7 @@
 </script>
 </head>
 <body>
-	<div class="theater_info">
+	<div class="theater_price_all">
 		<h4 class="text-primary">관람료</h4>
 			<div class="row gx-5">
 		    	<div class="col">

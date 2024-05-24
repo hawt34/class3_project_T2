@@ -1,6 +1,7 @@
 package itwillbs.p2c3.boogimovie.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +81,10 @@ public class TheaterService {
 	public List<FeeAgeVO> getFeeList() {
 		// TODO Auto-generated method stub
 		return mapper.selectFeeList();
+	}
+
+	public List<Map<String, Object>> getTheaterScsList(int theater_num, String scs_date) {
+		return mapper.getTheaterScsList(theater_num, scs_date);
 	}
 
 	

@@ -229,7 +229,7 @@ public class MemberController {
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
 		String pwd = member.getMember_pwd();
 		member.setMember_pwd(pwdEncoder.encode(pwd));
-		String addr = member.getPost_code() + "/" + member.getAddress1() + "/" + member.getAddress2();
+		String addr = member.getMember_post_code() + "/" + member.getMember_address1() + "/" + member.getMember_address2();
 		member.setMember_addr(addr);
 		int insertCount = service.regMember(member);
 		

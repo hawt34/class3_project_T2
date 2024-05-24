@@ -33,8 +33,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.siot.IamportRestClient.response.PagedDataList;
-
 import itwillbs.p2c3.boogimovie.service.AdminService;
 import itwillbs.p2c3.boogimovie.service.CouponService;
 import itwillbs.p2c3.boogimovie.service.MypageService;
@@ -225,11 +223,10 @@ public class MypageController {
 		
 		member.setMember_id(id);
 		member = mypageService.getDbMember(member);
-		
-		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
-		String pwd = member.getMember_pwd();
-		member.setMember_pwd(pwdEncoder.encode(pwd));
-		
+		String[] addrArr = member.getMember_addr().split("/");
+		member.setMember_post_code(addrArr[0]);
+		member.setMember_address1(addrArr[1]);
+		member.setMember_address2(addrArr[2]);
 		model.addAttribute("member", member);
 		
         return "mypage/myp_info_modify";
@@ -245,7 +242,15 @@ public class MypageController {
 			model.addAttribute("targetURL", "./");
 			return "error/fail";
 		}
-
+		//postcode,address1,address2 문자열결합 후 addr에 저장
+		String aadr= member.getMember_post_code() + "/" + member.getMember_address1() + "/" + member.getMember_address2();
+		member.setMember_addr(aadr);
+		//비밀번호 인코딩
+		BCryptPasswordEncoder pwdEnoder = new BCryptPasswordEncoder();
+		String pwd = member.getMember_pwd();
+		String encodedPwd = pwdEnoder.encode(pwd);
+		member.setMember_pwd(encodedPwd);
+		
 		int updateCount = mypageService.modifyMember(member);
 		model.addAttribute("member", updateCount);
 		

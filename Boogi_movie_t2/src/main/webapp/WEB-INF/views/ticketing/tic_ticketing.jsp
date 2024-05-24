@@ -143,7 +143,7 @@
                                                 <c:otherwise>
                                                     //
                                                     <%
-                                                        nowDay = 1;
+                                                    	nowDay = 1;
                                                     pageContext.setAttribute("nowDay", nowDay);
                                                     %>
                                                 </c:otherwise>

@@ -62,7 +62,7 @@ body {
 					  	<div class="form_item w-75">
 					    	<input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd">
 						    <div class="box4">
-					    		<span id="pwdMessage"></span>
+					    		<span id="msg_pwd1"></span>
 							</div>
 <!-- 							    <label id="msg_pwd" class="msg_pwd" ></label><br> -->
 					    </div><!-- form item -->
@@ -73,7 +73,7 @@ body {
 					  	<div class="form_item w-75 ">
 					    	<input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2">
 		    			    <div class="box4">
-				    	   		<span id="pwd2Message" style="color: red;"></span>
+				    	   		<span id="msg_pwd2" style="color: red;"></span>
 				    	    </div>
 					    </div><!-- form item -->
 						
@@ -82,7 +82,7 @@ body {
 						</div>
 					  	<div class="form_item w-75">
 					    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" readonly required value="${member.member_birth}">
-			    	    	<span id="birthMessage" style="color: red;"></span>
+			    	    	<span id="msg_birth"></span>
 					    </div><!-- form item -->
 					    
 						<div class="box5">
@@ -90,12 +90,12 @@ body {
 			   			</div>
 					  	<div class="form_item w-75">
 <%-- 					    	<input type="text" id="member_addr" name="member_addr" size="6" onclick="search_address()" required value="${member.member_addr}" placeholder="클릭 시 주소검색"> --%>
-							    <input type="text" id="post_code" name="post_code" size="6" readonly onclick="search_address()" value="${fn:substring(member.member_addr, 0, 5)}"  required placeholder="클릭 시 주소검색">
-								<input type="text" id="address1" name="address1" placeholder="기본주소" size="25" required value="${fn:substring(member.member_addr, 6, 25)}"  readonly onclick="search_address()"><br>
-								<input type="text" id="address2" name="address2" placeholder="상세주소" size="25" required pattern="^.{2,20}$" maxlength="20">
-		<!-- 			    	<div class="box4"> -->
-					    		<span id="addrMessage" style="color: red;"></span>
-		<!-- 			    	</div> -->
+							    <input type="text" id="post_code" name="member_post_code" size="6" readonly onclick="search_address()" value="${member.member_post_code }"  required placeholder="클릭 시 주소검색">
+								<input type="text" id="address1" name="member_address1" placeholder="기본주소" size="25" required value="${member.member_address1 }"  readonly onclick="search_address()"><br>
+								<input type="text" id="address2" name="member_address2" placeholder="상세주소" size="25" required pattern="^.{2,20}$" maxlength="20" value="${member.member_address2 }">
+					    	<div class="box4">
+					    		<span id="msg_addr"></span>	
+					    	</div>
 					    </div><!-- form item -->
 					
 						<div class="box5">
@@ -104,7 +104,7 @@ body {
 					  	<div class="form_item w-75">
 					    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required value="${member.member_email}">
 							<div class="box4">
-		 				    	<span id="emailMessage" style="color: red;"></span>
+		 				    	<span id="msg_email"></span>
 		 				    </div>
 					    </div><!-- form item -->
 					
@@ -114,23 +114,24 @@ body {
 					  	<div class="form_item w-75">
 					    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" required id="member_tel" value="${member.member_tel}">
 							<div class="box4">
-								<span id="telMessage" style="color: red;"></span>
+								<span id="msg_tel"></span>
 							</div>
 					    </div><!-- form item -->
 					    
 			    		<div class="row">
 							<label for="movie_genre">영화취향</label>
-								<div class="col-md-6 box3">
-						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="공포" name="member_movie_genre">공포</label></div>
-						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="코믹" name="member_movie_genre">코믹</label></div>
-						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="액션" name="member_movie_genre">액션</label></div>
-						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="범죄" name="member_movie_genre">범죄</label></div>
-						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="SF" name="member_movie_genre">SF</label></div>
-						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="코미디" name="member_movie_genre">코미디</label></div>
-						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="스릴러" name="member_movie_genre">스릴러</label></div>
-						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="전쟁" name="member_movie_genre">전쟁</label></div>
-						  			<div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="스포츠" name="member_movie_genre">스포츠</label></div>
-								</div>
+							<div class="col-md-6 box3">
+							    <c:set var="genres" value="${fn:split(member.member_movie_genre, '/')}"/>
+							    <div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="공포" name="member_movie_genre" <c:if test="${fn:contains(member.member_movie_genre, '공포')}">checked</c:if>>공포</label></div>
+							    <div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="코믹" name="member_movie_genre" <c:if test="${fn:contains(member.member_movie_genre, '코믹')}">checked</c:if>>코믹</label></div>
+							    <div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="액션" name="member_movie_genre" <c:if test="${fn:contains(member.member_movie_genre, '액션')}">checked</c:if>>액션</label></div>
+							    <div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="범죄" name="member_movie_genre" <c:if test="${fn:contains(member.member_movie_genre, '범죄')}">checked</c:if>>범죄</label></div>
+							    <div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="SF" name="member_movie_genre" <c:if test="${fn:contains(member.member_movie_genre, 'SF')}">checked</c:if>>SF</label></div>
+							    <div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="코미디" name="member_movie_genre" <c:if test="${fn:contains(member.member_movie_genre, '코미디')}">checked</c:if>>코미디</label></div>
+							    <div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="스릴러" name="member_movie_genre" <c:if test="${fn:contains(member.member_movie_genre, '스릴러')}">checked</c:if>>스릴러</label></div>
+							    <div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="전쟁" name="member_movie_genre" <c:if test="${fn:contains(member.member_movie_genre, '전쟁')}">checked</c:if>>전쟁</label></div>
+							    <div class="col-md-2"><label><input type="checkbox" class="form-check-input" value="스포츠" name="member_movie_genre" <c:if test="${fn:contains(member.member_movie_genre, '스포츠')}">checked</c:if>>스포츠</label></div>
+							</div>
 					    </div>
 					</div><!-- box1 -->
 					<div class="d-grid gap-2 col-3 box2">
@@ -150,182 +151,162 @@ body {
 	<script>
 
 	$(document).ready(function() {
+	    let riskCount = 0;
 
-		
 	    // 비밀번호 입력값 변경 시
-	    $("#member_pwd").on("input", function(){
-	        let pwd = $("#member_pwd").val();
-		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
-		    let message = document.getElementById("pwdMessage");
-// 		    let msgPwd = document.getElementById("msg_pwd");
+	    $("#member_pwd").on("input", function() {
+	        validatePassword();
+	        checkFormValidity(); // 폼 유효성 검사 실행
+	    });
 
-		    // 초기화
-		    message.style.color = "red";
-		    
-		    // 패스워드 입력값 검증(복잡도 검사 포함)
-// 		    let msg = "";
-// 		    let color = "";
-// 		    let checkPasswdResult = false;
-
-		    if (pwd === "") {
-		        message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
-		    } else if (!lengthRegx.test(pwd)) {
-		        message.textContent = "!,@,#,$ 영문자와 숫자조합 8~16자리를 입력해주세요";
-		    } else {
-		        // 패스워드 복잡도(안전도) 검사
-		        let engUpperRegex = /[A-Z]/;
-		        let engLowerRegex = /[a-z]/;
-		        let numRegex = /\d/; // /[0-9]/랑 동일
-		        let specRegex = /[!@#$%]/;
-
-		        let count = 0;
-
-		        if (engUpperRegex.test(pwd)) count++; // 대문자 포함할 경우
-		        if (engLowerRegex.test(pwd)) count++; // 소문자 포함할 경우
-		        if (numRegex.test(pwd)) count++;     // 숫자 포함할 경우
-		        if (specRegex.test(pwd)) count++;    // 특수문자 포함할 경우
-
-		        switch (count) {
-		            case 4:
-		                msg = "안전";
-		                color = "Green";
-// 		                checkPasswdResult = true;
-		                break;
-		            case 3:
-		                msg = "보통";
-		                color = "Orange";
-// 		                checkPasswdResult = true;
-		                break;
-		            case 2:
-		                msg = "위험";
-		                color = "Red";
-// 		                checkPasswdResult = true;
-		                break;
-		            case 1:
-		            case 0:
-		                msg = "!,@,#,$ 영문자와 숫자조합 8~16자리를 입력해주세요";
-		                color = "RED";
-// 		                checkPasswdResult = false;
-		                break;
-		        }
-		        
-		        message.textContent = msg;
-		        message.style.color = color;
-		    }
-
-		    checkFormValidity(); // 폼 유효성 검사 실행
-		});
-	    
 	    // 비밀번호2 입력값 변경 시
 	    $("#member_pwd2").on("input", function() {
-	    	let pwd = $("#member_pwd").val();
-	        let pwd2 = $("#member_pwd2").val();
-// 		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
-			let message = document.getElementById("pwd2Message");
-	        
-		    message.style.color = "";
-// 		    let checkPasswdResult = false;
-			let color = "";
-	        if (pwd2 != pwd) {
-	            message.textContent = "비밀번호가 일치하지 않습니다";
-	            color = "red";
-	        } else if (pwd2 == pwd) {
-	        	message.textContent = "비밀번호 일치";
-	        	color = "blue";
-//                 checkPasswdResult = true;
-
-	        } else if (pwd2 === "") {
-	            message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
-	            color = "red";
-	        } else {
-	            message.textContent = ""; // 에러 메시지 지우기
-	        }
-	        
-	        message.style.color = color;
-
+	        validatePasswordConfirmation();
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-	    
+
 	    // 상세주소 입력값 변경 시
-	    $("#address2").on("input", function() {
-	        let address = $("#address2").val();
-	        let regex = /^.{2,20}$/g;
-			let message = document.getElementById("addrMessage");
-	        
-	        if (!regex.test(address)) {
-	            message.textContent = "주소를 20 글자 이내로 입력해주세요";
-	        } else {
-	            message.textContent = ""; // 에러 메시지 지우기
-	        }
-
-	        if (address === "") {
-	            message.textContent = "주소를 입력하세요"; // 메시지 설정
-	        }
-		
+	    $("#member_address2").on("input", function() {
+	        validateAddress2();
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-	    
+
 	    // 이메일 입력값 변경 시
 	    $("#member_email").on("input", function() {
-	        let email = $("#member_email").val();
-	        let regex = /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
-			let message = document.getElementById("emailMessage");
-	        
-	        if (!regex.test(email)) {
-	            message.textContent = "이메일 형식을 맞춰 입력해주세요 (example@example.exam)";
-	        } else {
-	            message.textContent = ""; // 에러 메시지 지우기
-	        }
-
-	        if (email === "") {
-	            message.textContent = "이메일을 입력하세요"; // 메시지 설정
-	        }
-	        if (!/^[a-zA-Z0-9._%+-]{4,}/.test(email)) {
-	            message.textContent = "이메일의 사용자명 부분을 4자리 이상 입력하세요";
-	        } 
+	        validateEmail();
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-	    
-	    
+
 	    // 전화번호 입력값 변경 시
 	    $("#member_tel").on("input", function() {
-	        let tel = $("#member_tel").val();
-	        let regex = /^010\d{8}$/g;
-			let message = document.getElementById("telMessage");
-			
-	        if (tel.includes("-")) {
-	            message.textContent = "'-'를 제외한 전화번호를 입력해주세요";
-	        } else if (!regex.test(tel)) {
-	            message.textContent = "유효한 전화번호 형식이 아닙니다.";
-	        } else {
-	            message.textContent = ""; // 에러 메시지 지우기
-	        }
-
-	        
-	        if (tel === "") {
-	            message.textContent = "전화번호를 입력하세요"; // 메시지 설정
-	        }
-
+	        validateTel();
 	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-	    
-		    // 폼 유효성 검사 함수
+
+	    // 초기 폼 유효성 검사
+	    checkFormValidity();
+
+	    function validatePassword() {
+	        let pwd = $("#member_pwd").val();
+	        let msg = "";
+	        let color = "";
+	        let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
+
+	        if (!lengthRegx.exec(pwd)) {
+	            msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
+	            color = "RED";
+	            riskCount = 0;
+	        } else {
+	            let engUpperRegex = /[A-Z]/;
+	            let engLowerRegex = /[a-z]/;
+	            let numRegex = /\d/;
+	            let specRegex = /[!@#$%]/;
+	            let count = 0;
+
+	            if (engUpperRegex.exec(pwd)) count++;
+	            if (engLowerRegex.exec(pwd)) count++;
+	            if (numRegex.exec(pwd)) count++;
+	            if (specRegex.exec(pwd)) count++;
+
+	            switch (count) {
+	                case 4:
+	                    msg = "안전";
+	                    color = "Green";
+	                    riskCount = 4;
+	                    break;
+	                case 3:
+	                    msg = "보통";
+	                    color = "Orange";
+	                    riskCount = 3;
+	                    break;
+	                case 2:
+	                    msg = "위험";
+	                    color = "RED";
+	                    riskCount = 2;
+	                    break;
+	                default:
+	                    msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
+	                    color = "RED";
+	                    riskCount = 0;
+	            }
+	        }
+	        $("#msg_pwd").text(msg);
+	        $("#msg_pwd").css("color", color);
+	    }
+
+	    function validatePasswordConfirmation() {
+	        let pwd = $("#member_pwd").val();
+	        let pwd2 = $("#member_pwd2").val();
+
+	        if (pwd2 != pwd) {
+	            $("#member_pwd2").css("background-color", "red");
+	            $("#msg_pwd2").text("비밀번호가 일치하지 않습니다");
+	        } else {
+	            $("#member_pwd2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_pwd2").empty();
+	        }
+	    }
+
+	    function validateAddress2() {
+	        let address2 = $("#member_address2").val();
+	        let regex = /^.{2,20}$/g;
+
+	        if (!regex.test(address2)) {
+	            $("#member_address2").css("background-color", "red");
+	            $("#msg_addr").text("모든 문자 2~20 글자를 입력해주세요");
+	        } else {
+	            $("#member_address2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_addr").empty();
+	        }
+	    }
+
+	    function validateEmail() {
+	        let email = $("#member_email").val();
+	        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
+
+	        if (!regex.test(email)) {
+	            $("#member_email").css("background-color", "red");
+	            $("#msg_email").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
+	        } else {
+	            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_email").empty();
+	        }
+	    }
+
+	    function validateTel() {
+	        let tel = $("#member_tel").val();
+	        let regex = /^010\d{8}$/g;
+
+	        if (!regex.test(tel)) {
+	            $("#member_tel").css("background-color", "red");
+	            $("#msg_tel").text("전화번호 형식이 맞지 않습니다(예: 01000000000)");
+	        } else {
+	            $("#member_tel").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+	            $("#msg_tel").empty();
+	        }
+	    }
+
+	    // 폼 유효성 검사 함수
 	    function checkFormValidity() {
-	        let pwdIsValid = /^[A-Za-z0-9!@#$%]{8,16}$/.test($("#member_pwd").val());
-// 	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
-// 	        let pwd2IsValid = /^[A-Za-z0-9!@#$%]{8,16}$/.test($("#member_pwd2").val());
-            let pwd2IsValid = $("#member_pwd2").val() === $("#member_pwd").val();
-	        let addressIsValid = /^.{2,20}$/g.test($("#address2").val());
-	        let emailIsValid = /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g.test($("#member_email").val());
-	        let telIsValid = /^010\d{8}$/g.test($("#member_tel").val());
-	
-	        if (pwdIsValid && pwd2IsValid && addressIsValid && emailIsValid && telIsValid) {
+	        let pwdIsValid = $("#member_pwd").val() === "" || /^.{8,16}$/.test($("#member_pwd").val());
+	        let pwd2IsValid = $("#member_pwd2").val() === "" || $("#member_pwd2").val() === $("#member_pwd").val();
+	        let address2IsValid = /^.{2,20}$/.test($("#member_address2").val());
+	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
+	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
+	        let isPasswordStrong = $("#member_pwd").val() === "" || riskCount > 1;
+			
+	        if (pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid && isPasswordStrong) {
 	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
 	        } else {
 	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
 	        }
 	    }
+
+	    // 초기 폼 유효성 검사
+	    checkFormValidity();
 	});
+	
+	
 	</script>
 
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

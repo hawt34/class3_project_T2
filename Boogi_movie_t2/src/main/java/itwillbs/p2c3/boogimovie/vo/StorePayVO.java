@@ -20,4 +20,7 @@ public class StorePayVO {
 	
 	//select용
 	private int coupon_value;
+	
+	//결제내역 저장용
+	private String store_pay_detail;
 }

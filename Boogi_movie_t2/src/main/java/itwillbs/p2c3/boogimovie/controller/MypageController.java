@@ -41,6 +41,7 @@ import itwillbs.p2c3.boogimovie.service.MypageService;
 import itwillbs.p2c3.boogimovie.service.OtoService;
 import itwillbs.p2c3.boogimovie.service.PaymentService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
+import itwillbs.p2c3.boogimovie.vo.CartVO;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.OTOReplyVO;
@@ -347,6 +348,19 @@ public class MypageController {
 		
 		
 		List<StorePayVO> storePay = mypageService.getStorePay(member);
+		for(StorePayVO store : storePay) {
+			List<CartVO> carts = service.selectCart(store.getStore_pay_num());
+			StringBuilder resultStr = new StringBuilder();
+			for (CartVO cart : carts) {
+			    resultStr.append(cart.getItem_info_name())
+			             .append(" : ")
+			             .append(cart.getItem_quantity())
+			             .append("개   ");
+			}
+			String result = resultStr.toString();
+			store.setStore_pay_detail(result);
+		}
+		
 		model.addAttribute("storePay", storePay);
 		
 		return "mypage/myp_store";

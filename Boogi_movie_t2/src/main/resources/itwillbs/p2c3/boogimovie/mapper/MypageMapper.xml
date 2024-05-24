@@ -104,11 +104,12 @@
 		    store_pay_date,
 		    store_pay_price,
 		    store_pay_type,
-		    store_pay_status
+		    store_pay_status,
+		    store_pay_num
     	FROM 
     		store_pay
    		WHERE 
-    		member_id = #{member_id} AND store_pay_status = 1
+    		member_id = #{member_id}
     </select>
     
     

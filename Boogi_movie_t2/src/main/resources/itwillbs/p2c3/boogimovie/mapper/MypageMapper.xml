@@ -109,9 +109,14 @@
     	FROM 
     		store_pay
    		WHERE 
-    		member_id = #{member_id}
+    		member_id = #{member_id} 
     </select>
     
+    <select id="selectStorePayCount" resultType="int">
+    	SELECT COUNT(store_pay_num)
+    	FROM store_pay
+    	WHERE member_id = #{member_id}
+    </select>
     
     <!-- 회원정보 -->
     <select id="selectDbMember" resultType="itwillbs.p2c3.boogimovie.vo.MemberVO">
@@ -175,5 +180,13 @@
 		WHERE
 			member_id = #{member_id}
     </update>
+    
+    <!-- 예매취소  -->
+<!--     <update id="updateMovieStatus"> -->
+<!--     	UPDATE -->
+<!--     	SET -->
+<!--     	WHERE -->
+<!--     		member_id = #{member_id} -->
+<!--     </update> -->
     
 </mapper>

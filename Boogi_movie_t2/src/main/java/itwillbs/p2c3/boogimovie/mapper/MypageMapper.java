@@ -41,6 +41,9 @@ public interface MypageMapper {
 	// 스토어
 	List<StorePayVO> selectStorePay(MemberVO member);
 	
+	// 스토어 페이 카운트
+	int selectStorePayCount(String member_id);
+	
 	// 취소내역 
 	List<Map<String, Object>> selectCancelList(MemberVO member);
 	
@@ -59,5 +62,8 @@ public interface MypageMapper {
 	
 	// 탈퇴처리
 	int updateMemberForWithdraw(MemberVO member);
+	
+	// 예매취소
+	int updateMovieStatus(Map<String, Object> map);
 	
 }

@@ -81,6 +81,10 @@ public class MypageService {
 		return mapper.selectStorePay(member);
 	}
 	
+	// 스토어페이 카운트
+	public int getStorePayCount(String member_id) {
+		return mapper.selectStorePayCount(member_id);
+	}
 	
 //	// 취소내역
 	public List<Map<String, Object>> getCancelList(MemberVO member){
@@ -123,5 +127,10 @@ public class MypageService {
 		return mapper.updateMemberForWithdraw(member);
 	}
 	
+	// 예매취소
+	public int removeMovie(Map<String, Object> map) {
+		System.out.println("mypService - updateMovieStatus");
+		return mapper.updateMovieStatus(map);
+	}
 	
 }

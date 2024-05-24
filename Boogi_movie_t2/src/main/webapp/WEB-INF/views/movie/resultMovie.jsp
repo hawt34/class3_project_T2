@@ -141,7 +141,7 @@ footer {
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.location.href='boxoffice'">박스오피스 순위</button>
 				<button type="button" class="btn btn-outline-primary"
-					id="recommendMovie" onclick="openPopup()">추천상영영화</button>
+					id="recommendMovie" onclick="window.location.href='recommand'">추천상영영화</button>
 				<form action="searchMovie">
 					<input type="text" name="searchKeyword" placeholder="영화제목 입력"
 						value="${param.searchKeyword}"> <input type="submit"
@@ -204,7 +204,10 @@ footer {
 					if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")) {
 						window.location.href = 'member_login';
 					}
-				}
+				} else {
+					if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
+						window.location.href = 'recommand'; // 예매 페이지로 이동
+					}
 			});
 
 			$(".list").on("click", ".detail_button", function() {
@@ -246,45 +249,7 @@ footer {
 			});
 		});
 
-		function openPopup() {
-			let sId = "${sessionScope.sId}";
-			let memberCode = '${memberCode}';
-			let genreMovieList = JSON.parse('${genreMovieList}');
-
-			let popupWindow = window.open("", "popupWindow",
-					"width=600,height=400");
-			let popupContent = "<h3>추천 상영 영화 목록</h3>";
-			popupContent += "<h3> " + sId + "님의 장르는  " + memberCode
-					+ "입니다</h2>";
-			// 데이터가 있는지 확인
-			if (genreMovieList && genreMovieList.length > 0) {
-				popupContent += "<table border='1'><tr><th>영화 이름</th><th>장르</th><th>감독</th></tr>";
-				for (let i = 0; i < genreMovieList.length; i++) {
-					let movie = genreMovieList[i];
-					let movieNum = movie.movie_num;
-					let movieInfoUrl = 'movieInfo?movie_num=' + movieNum;
-					console.log(movie.movie_num);
-					popupContent += "<tr><td>"
-							+ movie.movie_name
-							+ "</td><td>"
-							+ movie.movie_genre
-							+ "</td><td>"
-							+ movie.movie_director
-							+ "</td><td><input type='button' value='상세정보' onclick='window.location.href=\"" + movieInfoUrl + "\"'></td></tr>";
-				}
-				popupContent += "</table>";
-			} else {
-				// 데이터가 없을 때의 메시지
-				popupContent += "<p>추천 상영 영화 목록이 없습니다. 죄송합니다.</p>";
-			}
-			// 팝업 내용을 팝업 창에 쓰기
-			popupContent += "<button id='confirmButton'>확인</button>";
-			popupWindow.document.write(popupContent);
-			$(popupWindow.document).on('click', '#confirmButton', function() {
-				popupWindow.close();
-			});
-
-		}
+	
 	</script>
 </body>
 </html>

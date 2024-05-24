@@ -8,7 +8,7 @@
 	<select id="selectCoupon" resultType="itwillbs.p2c3.boogimovie.vo.CouponVO">
 	  	SELECT *
 	  	FROM coupon_view
-	  	WHERE member_id = #{member_id}
+	  	WHERE member_id = #{member_id} AND coupon_status = 1
 	</select>
   
   
@@ -17,7 +17,7 @@
 		FROM coupon c 
 		JOIN coupon_type ct 
 		ON c.coupon_type_num = ct.coupon_type_num 
-		WHERE member_id = #{member_id} AND coupon_status = 1;
+		WHERE member_id = #{member_id} AND coupon_status = 1
 	</select>
   
   

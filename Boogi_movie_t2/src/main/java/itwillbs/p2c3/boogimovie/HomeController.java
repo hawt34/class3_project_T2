@@ -32,7 +32,6 @@ public class HomeController {
 		//System.out.println("현재 아이디" + member.getMember_id());
 		List<MovieVO> movieInfo = movieService.getMovieList();
 		movieTrail = movieService.getMovieTrail();
-		session.setAttribute("sId", "admin33");
 		//System.out.println("무비트레일러"+movieTrail);
 		model.addAttribute("movieTrail", movieTrail);
 		model.addAttribute("movieInfo", movieInfo);

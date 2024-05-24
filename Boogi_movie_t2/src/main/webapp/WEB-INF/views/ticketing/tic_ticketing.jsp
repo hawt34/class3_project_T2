@@ -2,8 +2,8 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -230,7 +230,7 @@
                         + "<div>" + finalList.movie_name + "</div>"
                         + "<div class='row box1' style='width: 600px'>"
                         + "<div class='col-md-3'>"
-                        + finalList.scs_start_time + "<br>~" + finalList.scs_end_time
+                        + finalList.scs_start_time + " ~ " + finalList.scs_end_time
                         + "</div>"
                         + "<div class='col-md-5'>"
                         + finalList.screen_dimension + " || "

@@ -20,6 +20,7 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_list.css" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 </head>
 <body>
 	<header>
@@ -40,13 +41,20 @@
 				<div class="admin_movie_head">
 					<div class="admin_movie_title">공지사항관리</div>
 					<div class="admin_movie_search">
-						<form>
-							<select>
-								<option value="전체">필요할까</option>
-								<option>상영상태</option>
-							</select>
-							<input type="text" name="searchKeywordNotice">
-						</form>
+						<select id="theater_name" >
+							<option value="" disabled>극장명선택</option>
+							<option value="해운대점">해운대점</option>
+							<option value="센텀점">센텀점</option>
+							<option value="서면점">서면점</option>
+							<option value="남포점">남포점</option>
+							<option value="부산대점">부산대점</option>
+							<option value="사직점">사직점</option>
+							<option value="영도점">영도점</option>
+							<option value="덕천점">덕천점</option>
+							<option value="정관점">정관점</option>
+							<option value="사상점">사상점</option>
+							<option value="">전체</option>
+						</select>
 					</div>
 				</div>
 
@@ -106,7 +114,7 @@
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
 							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
-								<a class="page-link" href="admin_notice?pageNum=${pageNum - 1}" aria-label="Previous" >
+								<a class="page-link" href="admin_notice?pageNum=${param.pageNum - 1}&theater_name=${theater_name}" aria-label="Previous" >
 								<span aria-hidden="true" >&laquo;</span>
 								</a>
 							</li>
@@ -116,12 +124,12 @@
 										<li class="page-item active"><a class="page-link">${i}</a></li>
 									</c:when>
 									<c:otherwise>
-										<li class="page-item"><a class="page-link" href="admin_notice?pageNum=${i}">${i}</a></li>
+										<li class="page-item"><a class="page-link" href="admin_notice?pageNum=${i}&theater_name=${theater_name}">${i}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 							<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
-								<a class="page-link" href="admin_notice?pageNum=${pageNum + 1}" aria-label="Next">
+								<a class="page-link" href="admin_notice?pageNum=${param.pageNum + 1}&theater_name=${theater_name}" aria-label="Next">
 								<span aria-hidden="true">&raquo;</span>
 								</a>
 							</li>
@@ -142,16 +150,24 @@
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
-	<script type="text/javascript">
-		function admin_notice_withdraw(num) {
-			if(confirm("정말 삭제하시겠습니까?")){
-				location.href="admin_notice_delete?notice_num=" + num;
-			}
-		}
-		function admin_notice() {
-			location.href="admin_notice_form";
-		}
-	</script>
+<script type="text/javascript">
+function admin_notice_withdraw(num) {
+	if(confirm("정말 삭제하시겠습니까?")){
+		location.href="admin_notice_delete?notice_num=" + num;
+	}
+}
+function admin_notice() {
+	location.href="admin_notice_form";
+}
+
+$(function() {
+	$("#theater_name").change(function() {
+		let theaterName = $(this).val();
+// 		let pageNum = "${param.pageNum}"
+		location.href="admin_notice?theater_name=" + theaterName;
+	});	
+});
+</script>
 	
 	
 </body>

@@ -38,7 +38,7 @@
 				<form class="validation-form" novalidate action="admin_notice_pro" method="post" onsubmit="return confirm('공지를 등록하시겠습니까?');">
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 
-						<input type="text"  id="movie_name" class="form-control" required name="notice_subject" required />
+						<input type="text"  id="notice_name" class="form-control" required name="notice_subject" required />
 						<div class="invalid-feedback">글제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
@@ -94,11 +94,20 @@ $(function () {
 		    $("#theater_name").val("");
 		    $("#theater_name").prop("disabled", true);
 		} else if ($(this).val() == "극장") {
-		    $("#theater_name").val("해운대점");
+			
+		    let theaterName = $("#theater_name").val("해운대점");
 		    $("#theater_name").prop("disabled", false);
 		    $("#theater_name option:eq(0)").prop("disabled", true);
 		}
 	});
+	$("#theater_name").change(function () {
+		let theaterName = $("#theater_name").val();
+		$("#notice_name").val("[" + theaterName + "]");
+		
+	});
+	
+	
+	
 });
 </script>
 <script>

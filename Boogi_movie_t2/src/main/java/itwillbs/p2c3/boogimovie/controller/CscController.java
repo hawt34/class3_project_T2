@@ -58,10 +58,14 @@ public class CscController {
 	// csc 연결 
 	// csc main 페이지
 	@GetMapping("csc_main")
-	public String cscMain() {
-//		OTOVO oto = otoService.getOtoList(0, 0, null, null, null);
+	public String cscMain(Model model) {
+		//faq 목록 다섯개 가져오기
+		List<FAQVO> faqList = faqService.getFaqViewCountList();
+		List<NoticeVO> noticeList = noticeService.getNoticeList(5, 0, null);
 		
 		
+		model.addAttribute("faqList", faqList);
+		model.addAttribute("noticeList", noticeList);
 		return "csc/csc_main";
 	}
 	//csc 페이지 faqList 가져오기
@@ -146,10 +150,10 @@ public class CscController {
 											  @RequestParam String theaterName,
 											  @RequestParam String pageName,
 											  @RequestParam String searchKeyword) {
-		System.out.println("COLSLWKM: " + pageNumArg);
-		System.out.println("COLSLWKM: " + theaterName);
-		System.out.println("COLSLWKM: " + pageName);
-		System.out.println("COLSLWKM: " + searchKeyword);
+//		System.out.println("COLSLWKM: " + pageNumArg);
+//		System.out.println("COLSLWKM: " + theaterName);
+//		System.out.println("COLSLWKM: " + pageName);
+//		System.out.println("COLSLWKM: " + searchKeyword);
 		//----------------------------------------------------
 		
 		int pageNum = Integer.parseInt(pageNumArg);
@@ -306,15 +310,12 @@ public class CscController {
 				case "" : listCount = adminService.getNoticeListCount(); break; 
 				default : listCount = noticeService.getNoticeListCountCag(category); break; 
 			}
+			
 			if(!searchKeyword.equals("")) {
 				listCount = noticeService.getNoticeSearchKeywordCount(searchKeyword);
 			}
-		} else if(pageName.equals("faq")) {
-//			switch (category) {
-//				case "" : listCount = faqService.getFaqListCount(); break; 
-//				default : listCount = faqService.getfaqListCountCag(category); break; 
-//			}
 		}
+		
 		maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
 		endPage = startPage + pageListLimit - 1; //마지막 페이지 번호

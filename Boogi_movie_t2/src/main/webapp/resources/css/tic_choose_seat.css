@@ -1,7 +1,3 @@
-@charset "UTF-8";
-@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700);
-
-	
 	#seat_num{
 		margin-bottom : 50px;
 		position : relative;
@@ -9,7 +5,7 @@
 	
 	.choose_seat_section{
 		width : 1400px;
-		margin-left : 100px;
+		margin: 0 auto;
 	}
 	.opacity {
 		opacity : 0.6;
@@ -49,7 +45,7 @@
 	    border-radius : 5px;
 	}
 	
-		.seat.selected {
+	.seat.selected {
 	    background-color: #B2FFFF; /* 선택된 좌석 색상 변경 */
 	    color: black;
 	}
@@ -111,9 +107,7 @@
 
 	
 	.choose_seat_title{
-		margin-left : 350px;	
-		margin-top : 100px;
-		margin-bottom : 100px;
+		margin: 50px 350px;
 	}
 	
 	.pay_movie_img{
@@ -143,9 +137,7 @@
 	.choose_person{
 		width: 70%;
 		height : 65%;
-		margin-top: 20px; /* 위쪽 여백을 조정합니다. */
-		margin-bottom: 20px; /* 아래쪽 여백을 조정합니다. */
-		margin-left : 100px;
+		margin: 20px auto;
 	}
 	
 	img{
@@ -159,8 +151,8 @@
 	}
 	
 	.theater_ex{
-		font-size : 10px;
- 		padding-top: 70px;
+		font-size : 17px;
+ 		padding-top: 50px;
  		font-color : white;
  		font-weight : bold; 
 	}
@@ -191,7 +183,3 @@
   padding: 8px 18px;  
   font-size: 14px;
 }
-
-
-	
-	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -67,11 +68,9 @@
 					</div>
 					<div class="csc_shortBox_border">
 						<ul class="csc_main_InquiryUl">
-							<li>자기sdbbh자알~~sdsdsa~~</li>
-							<li>ㄱ긴ㅇ른이릔ㅇ</li>
-							<li>ㄴ르듸ㅣㅁㅁㄴ민ㄹ</li>
-							<li>ㅣㅁ닝ㅁ늬임느이</li>
-							<li>능ㄹㅈ배ㅐ;ㅣ;ㅣ;;;</li>
+							<c:forEach var="faq" items="${faqList }">
+								<li>[${faq.faq_category}]${faq.faq_subject }</li>
+							</c:forEach>
 						</ul>
 					</div> 
 				</div>
@@ -84,11 +83,9 @@
 					</div>
 					<div class="csc_shortBox_border">
 						<ul class="csc_main_noticeUl">
-							<li>자기자알~~~~</li>
-							<li>ㄱ긴ㅇ른이릔ㅇ</li>
-							<li>ㄴ르듸ㅣㅁㅁㄴ민ㄹ</li>
-							<li>ㅣㅁ닝ㅁ늬임느이</li>
-							<li>능ㄹㅈ배ㅐ;ㅣ;ㅣ;;;</li>
+							<c:forEach var="notice" begin="0" end="5" items="${noticeList }">
+								<li>[${notice.notice_category}]${notice.notice_subject}</li>
+							</c:forEach>
 						</ul>
 					</div> 
 				</div>
@@ -101,6 +98,5 @@
 <footer>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </footer>
-<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

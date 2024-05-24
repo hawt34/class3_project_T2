@@ -123,10 +123,12 @@
     
     
 	.final_pay{
-		width : 70%;
+		width : 800px;
 		height: 300px;
 		background-color : white;
 		height:20%;
+		padding-top: 50px;
+		text-align: center;
 	} 
 	
 
@@ -136,23 +138,22 @@
 	}
 	
 	.pay_movie_img{
-		border-right: solid 3px black;
+		border-right: solid 2px black;
+		border-left: solid 2px black;
 		paading-top : 30px;
 	}
 	
 	.pay_theater{
-		border-right: solid 3px black;
+		border-right: solid 2px black;
 	}
 	
 	.pay_seat{
-		border-right: solid 3px black;
+		border-right: solid 2px black;
 	}
 	
 	.pay_fee{
-		border-right: solid 3px black;
+		border-right: solid 2px black;
 	}
-	
-	
 	
 	.box1{
 		height: 900px;
@@ -173,31 +174,37 @@
 		font-size : 15px;
 		font-color : white;
 		font-weight : bold;
+		word-break: keep-all;
 	}
 	
 	.theater_ex{
-		font-size : 17px;
- 		padding-top: 50px;
+		font-size : 20px;
+ 		padding-top: 70px;
  		font-color : white;
  		font-weight : bold; 
 	}
 	
 	.seat_ex{
+		font-size : 20px;
  		padding-top: 70px ;
-		font-size : 15px;
 		font-color : white;
 		font-weight : bold;
 	}
 	
 	.fee_ex{
-		font-size : 10px;
+		font-size : 20px;
  		padding-top: 70px;
  		font-color : white; 
  		font-weight : bold;
 	}
 	
 	.pay_button{
-		padding-top: 50px;
+		padding-top: 180px;
+		text-align: center;
+	}
+	.pay_button > button{
+		padding : 10px 30px;
+		margin-right: 30px;
 	}
 	
 	
@@ -285,7 +292,7 @@
 					</c:if>
 			</c:forEach>   	
 		</div>
-				<div class="final_pay row" style="margin-top: 50px; margin-left: 100px;">
+		<div class="final_pay row">
 		
 			<div class="col-md-3 pay_movie_img">
 				<img src="${scs.movie_poster}" width="100" height="150">
@@ -297,19 +304,18 @@
 			</div>
 				
 			
-			<div class="col-md-2 pay_seat">
-				<div class="seat_ex" id="seat_ex">선택된 좌석: 없음</div>
+			<div class="col-md-3 pay_seat">
+				<div class="seat_ex" id="seat_ex">선택된 좌석<br>없음</div>
 			</div>
 				
 				
-			<div class="col-md-2 pay_fee">
+			<div class="col-md-3 pay_fee">
 				<div class="fee_ex" id="fee_ex"></div>
 			</div>
 				
-			<div class="col-md-2 pay_button">
-				<button type="submit" class="btn btn-outline-primary">결제</button>
-			</div>
-				
+		</div>
+		<div class="pay_button">
+			<button type="submit" class="btn btn-outline-primary">결제</button>
 		</div>
 	</div>
 </div>
@@ -431,9 +437,9 @@ document.getElementById('fr').onsubmit = function (event) {
     function updateSeatDisplay() {
         var displayElement = document.querySelector('.seat_ex');
         if (selectedSeatNumbers.length > 0) {
-            displayElement.textContent = "선택된 좌석: " + selectedSeatNumbers.join(", ");
+            displayElement.innerHTML = "선택된 좌석<br>" + selectedSeatNumbers.join(", ");
         } else {
-            displayElement.textContent = "선택된 좌석: 없음";
+            displayElement.innerHTML = "선택된 좌석<br>없음";
         }
     }
  // 인원 정보를 화면에 표시하는 함수

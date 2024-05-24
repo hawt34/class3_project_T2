@@ -35,5 +35,8 @@ public interface FaqMapper {
 	
 	//faq 게시물 조회수 증가
 	int updateViewCount(FAQVO faq);
+	
+	//ViewCount가 가장 높은 다섯개 
+	List<FAQVO> selectFaqViewCountList();
 
 }

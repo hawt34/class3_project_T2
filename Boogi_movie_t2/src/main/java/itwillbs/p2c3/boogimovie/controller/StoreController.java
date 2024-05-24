@@ -26,8 +26,12 @@ import itwillbs.p2c3.boogimovie.vo.CartVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 
 
-@Controller
-public class StoreController {
+	@Controller
+	public class StoreController {
+	@Autowired
+    private HttpServletRequest request;
+
+	
 	@Autowired
 	private ItemInfoService service;
 	@GetMapping("boogi_store")
@@ -52,47 +56,55 @@ public class StoreController {
 	}
 	//스토어 장바구니 ajax관련해서 처리할꺼임. 
 	
-	private List<CartVO> cart = new ArrayList<>();
-	
 	@PostMapping("add_to_cart")
-	@ResponseBody
+    @ResponseBody
 	public ResponseEntity<?> addToCart(@RequestBody List<CartVO> cartItems) {
-	    for (CartVO newItem : cartItems) {
-	        for (CartVO existingItem : cart) {
-	            if (existingItem.getItem_info_num() == newItem.getItem_info_num()) {
-	                Map<String, String> response = new HashMap<>();
-	                response.put("msg", "이미 장바구니에 담은 품목입니다.");
-	                return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
-	                
-	            }
-	        }
-	        // 장바구니에 상품을 추가합니다.
-	        cart.add(newItem);
-	    }
-	    // 정상적으로 장바구니에 추가되었음을 응답합니다.
-	    return ResponseEntity.ok().body(cartItems);
-	}
+        HttpSession session = request.getSession();
+        List<CartVO> cart = (List<CartVO>) session.getAttribute("cart");
 
+        if (cart == null) {
+            cart = new ArrayList<>();
+            session.setAttribute("cart", cart);
+        }
 
-	
-	@PostMapping("remove_from_cart")
-	@ResponseBody
-	public ResponseEntity<?> removeFromCart(@RequestParam int item_info_num) {
-	    // 아이템의 고유 식별자로 해당 아이템을 찾아서 제거
-	    Iterator<CartVO> iterator = cart.iterator();
-	    while (iterator.hasNext()) {
-	        CartVO item = iterator.next();
-	        if (item.getItem_info_num() == item_info_num) {
-	            iterator.remove(); // 아이템 제거
-	            Map<String, String> response = new HashMap<>();
-	            response.put("message", "장바구니에서 상품이 제거되었습니다.");
-	            return ResponseEntity.ok().body(response);
-	        }
-	    }
-	    
-	    // 아이템이 없는 경우
-	    Map<String, String> response = new HashMap<>();
-	    response.put("message", "장바구니에서 해당 상품을 찾을 수 없습니다.");
-	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-	}
+        for (CartVO newItem : cartItems) {
+            for (CartVO existingItem : cart) {
+                if (existingItem.getItem_info_num() == newItem.getItem_info_num()) {
+                    Map<String, String> response = new HashMap<>();
+                    response.put("msg", "이미 장바구니에 담은 품목입니다.");
+                    return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+                }
+            }
+            // 장바구니에 상품을 추가합니다.
+            cart.add(newItem);
+        }
+        // 정상적으로 장바구니에 추가되었음을 응답합니다.
+        return ResponseEntity.ok().body(cartItems);
+    }
+
+    // 장바구니에서 상품 제거
+    @PostMapping("remove_from_cart")
+    @ResponseBody
+    public ResponseEntity<?> removeFromCart(@RequestParam int item_info_num) {
+        HttpSession session = request.getSession();
+        List<CartVO> cart = (List<CartVO>) session.getAttribute("cart");
+
+        if (cart != null) {
+            Iterator<CartVO> iterator = cart.iterator();
+            while (iterator.hasNext()) {
+                CartVO item = iterator.next();
+                if (item.getItem_info_num() == item_info_num) {
+                    iterator.remove(); // 아이템 제거
+                    Map<String, String> response = new HashMap<>();
+                    response.put("message", "장바구니에서 상품이 제거되었습니다.");
+                    return ResponseEntity.ok().body(response);
+                }
+            }
+        }
+        
+        // 아이템이 없는 경우
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "장바구니에서 해당 상품을 찾을 수 없습니다.");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
 }

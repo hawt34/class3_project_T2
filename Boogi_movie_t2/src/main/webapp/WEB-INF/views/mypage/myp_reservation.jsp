@@ -44,212 +44,180 @@ h3{
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
 <div class="container1">
-	<div class="container2">
-		<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
-		<div class="row">
-			<div class="col-md-2 box1">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
-			</div><!-- sidebar1 -->
-				<!-- 탭 메뉴 -->
-				<!-- 내용 -->
-			<div class="col-md-9 box-in">
-				<div class="row">
-					<div class="col-10">
-						<h2>예매내역</h2>
-					</div> <!-- col-10 -->
-					<hr>
-				</div><!--  하위 row -->
-				<div class="box2">
-					<ul class="nav nav-tabs" id="myTab" role="tablist">
-						<li class="nav-item" role="presentation">
-<!-- 							<button class="nav-link active" id="reservation-tab" data-bs-toggle="tab" -->
-<!-- 								data-bs-target="#reservation" type="button" role="tab" aria-controls="reservation" -->
-<!-- 								aria-selected="true">예매내역</button> -->
-<!-- 								<a class="nav-link" id="reservation-tab" data-bs-toggle="tab" data-bs-target="#reservation"  -->
-<!--    href="myp_reservation?status=false" role="tab" aria-controls="reservation" aria-selected="true">예매내역</a> -->
-				            <a class="nav-link <c:if test='${status == "결제"}'>active</c:if>' id="reservation-tab" href="myp_reservation?status=결제" role="tab" aria-controls="reservation" aria-selected="${status == '결제'}">예매내역</a>
-								
-						</li>
-						<li class="nav-item" role="presentation">
-<!-- 							<button class="nav-link" id="cancel-tab" data-bs-toggle="tab" -->
-<!-- 								data-bs-target="#cancel" type="button" role="tab" -->
-<!-- 								aria-controls="cancel" aria-selected="false">취소내역</button> -->
-<!-- 								<a class="nav-link" id="cancel-tab" data-bs-toggle="tab" data-bs-target="#cancel"  -->
-<!--    href="myp_reservation?status=true" role="tab" aria-controls="cancel" aria-selected="false">취소내역</a> -->
-            <a class="nav-link <c:if test='${status == "취소"}'>active</c:if>' id="cancel-tab" href="myp_reservation?status=취소" role="tab" aria-controls="cancel" aria-selected="${status == '취소'}">취소내역</a>
+    <div class="container2">
+        <c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum}" />
+        <div class="row">
+            <div class="col-md-2 box1">
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
+            </div><!-- sidebar1 -->
 
-						</li>
-					</ul>
-				</div><!-- 탭 -->
-				
-				<!-- 내용 -->
-				<div class="tab-content" id="myTabContent">
-					<div class="tab-pane fade show active" id="reservation" role="tabpanel"aria-labelledby="reservation-tab">
-					    <div class="tab-pane fade <c:if test='${status == "결제"}'>show active</c:if>'" id="reservation" role="tabpanel" aria-labelledby="reservation-tab">
-						<!-- 예매내역 시작 -->
-						<c:choose>
-							<c:when test="${empty movieReservation}"> <!-- 예매내역 존재하지 않을때 -->
-								<h3>예매내역이 존재하지 않습니다</h3>
-							</c:when>
-							<c:otherwise> <!-- 예매내역 존재시 -->
-								<c:forEach items="${movieReservation}" var="map"> <!-- 예매내역 시작 -->
-								    <div class="row">
-								        <div class="col-md-3">
-								        	<img src="${map.movie_poster}" style="margin-left: 30px" width="200px" height="250px">
-								        </div>
-								        <div class="paybox1 col-md-6">
-								            <div class="col-md-4 d-grid gap-5">
-								                <input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example" disabled readonly>
-								                <input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example" disabled readonly>
-								                <input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example" disabled readonly>
-								            </div>
-								            <div class="col-md-4 d-grid gap-5">
-								                <input type="text" readonly class="form-control-plaintext" value="${map.movie_name}">
-								                <input type="text" readonly class="form-control-plaintext" value="${map.scs_date}">
-								                <input type="text" readonly class="form-control-plaintext" value="${map.theater_info}">
-								            </div>
-								            <div class="col-md-4 d-grid gap-5">
-								                <input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example" disabled readonly>
-								                <input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example" disabled readonly>
-								                <input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example" disabled readonly>
-								            </div>
-								            <div class="col-md-4 d-grid gap-5">
-								                <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
-								                <input type="text" readonly class="form-control-plaintext" value="${map.ticket_seat_info}">
-								                <input type="text" readonly class="form-control-plaintext" value="${map.ticket_price}">
-								            </div>
-								        </div>
-								    </div>
-								    <hr>
-								</c:forEach> <!-- 예매내역 끝 -->
-								<div class="reservation_pageArea"> <!-- 페이징 시작 -->
-									<nav aria-label="Page navigation example">
-										<ul class="pagination">
-											<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" > 
-				                                <a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}&status=${status}" aria-label="Previous">
-											
-<%-- 												<a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}" aria-label="Previous" > --%>
-												<span aria-hidden="true" >&laquo;</span>
-												</a>
-											</li>
-											<c:forEach var="i" begin="${pageList.startPage}" end="${pageList.endPage}">
-												<c:choose>
-													<c:when test="${pageNum eq i }">
-														<li class="page-item active"><a class="page-link">${i}</a></li>
-													</c:when>
-													<c:otherwise>
-<%-- 														<li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}">${i}</a></li> --%>
-				                                        <li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}&status=${status}">${i}</a></li>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-											<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
-<%-- 												<a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}" aria-label="Next"> --%>
-				                                <a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}&status=${status}" aria-label="Next">
-												<span aria-hidden="true">&raquo;</span>
-												</a>
-											</li>
-										</ul>
-									</nav>
-								</div> <!-- 페이징 끝 -->
-							</c:otherwise>
-						</c:choose>
-						<!-- 예매내역 끝 -->
-						</div>
-					</div> <!-- tab-pane fade show active -->
-				</div><!-- 탭내용1 div끝 -->
-				
-				<!-- 취소 탭 -->
-				<div class="tab-content" id="myTabContent">
-<!-- 					<div class="tab-pane fade show" id="cancel" role="tabpanel"aria-labelledby="cancel-tab"> -->
-					    <div class="tab-pane fade <c:if test='${status == "취소"}'>show active</c:if>" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
-			  			<c:choose> 
-			  				<c:when test="${empty movieReservation}">
-			  						<h3>취소내역이 존재하지않습니다</h3>
-			  				</c:when>
-			  				<c:otherwise> 
-								<table class="table2 table table-hover" >
-						  			<thead>
-									    <tr>
-									      <th scope="col">#</th>
-									      <th scope="col">구매 구분</th>
-									      <th scope="col">구매 극장</th>
-									      <th scope="col">적립일</th>
-									      <th scope="col">적립</th>
-									    </tr>
-							  		</thead>
-							  		<tbody>
-										<c:forEach var="map" items="${movieReservation}" varStatus="status" begin="0" end="4">
-										    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
-										        <th scope="row">${status.index + 1}</th>
-										        <td>${map.movie_name}</td>
-										        <td>${map.scs_date}</td>
-										        <td>${map.theater_info}</td>
-										        <td>${map.session_time}</td>
-										        <td>${map.ticket_seat_info}</td>
-										        <td>${map.ticket_price}</td>
-										    </tr>
-										</c:forEach>
-							  		</tbody>
-						  		</table>
-							<!-- 페이징 시작 -->
-							<div class="reservation_pageArea">
-								<nav aria-label="Page navigation example">
-									<ul class="pagination">
-										<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" > 
-<%-- 											<a class="page-link"  href="myp_reservation?pageNum=${pageNum - 1}"aria-label="Previous" > --%>
-			                                <a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}&status=${status}" aria-label="Previous">
-											<span aria-hidden="true" >&laquo;</span>
-											</a>
-										</li>
-										<c:forEach var="i" begin="${pageList.startPage}" end="${pageList.endPage}">
-											<c:choose>
-												<c:when test="${pageNum eq i }">
-													<li class="page-item active"><a class="page-link">${i}</a></li>
-												</c:when>
-												<c:otherwise>
-			                                        <li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}&status=${status}">${i}</a></li>
-<%-- 													<li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}">${i}</a></li> --%>
-												</c:otherwise>
-											</c:choose>
-										</c:forEach>
-										<li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
-<%-- 											<a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}" aria-label="Next"> --%>
-			                                <a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}&status=${status}" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-											</a>
-										</li>
-									</ul>
-								</nav>
-							</div>
-							<!-- 페이징 끝 -->
-			  				</c:otherwise>
-			  			</c:choose>
-			  			</div>
-			  			
-		  			<!-- 취소내역 -->
-						<div class="row">
-<!-- 			<!-- 				<div class="col-md-2"> </div>  -->
-							<!-- 탭 메뉴 -->
-							<div class="col-md-12">
-							<hr>
-								<ul class="nav nav-tabs" id="cancel" role="tablist">
-									<li class="nav-item" role="presentation">
-										<button class="nav-link active" id="cancel-tab" data-bs-toggle="tab"
-											data-bs-target="#cancel-tab-pane" type="button" role="tab" aria-controls="cancel-tab-pane"
-											aria-selected="true">예매 취소 안내</button>
-									</li>
-									<li class="nav-item" role="presentation">
-										<button class="nav-link" id="cancel2-tab" data-bs-toggle="tab"
-											data-bs-target="#cancel2-tab-pane" type="button" role="tab"
-											aria-controls="cancel2-tab-pane" aria-selected="false">환불 규정 안내</button>
-									</li>
-								</ul>
-							
-								<!-- 내용 -->
-								<div class="tab-content" id="cancelContent">
-									<div class="tab-pane fade show active" id="cancel-tab-pane" role="tabpanel"aria-labelledby="cancel-tab">
-										<textarea class="textarea1" rows="13" cols="110" style="width: 100%" readonly>
+            <div class="col-md-9 box-in">
+                <div class="row">
+                    <div class="col-10">
+                        <h2>예매내역</h2>
+                    </div> <!-- col-10 -->
+                    <hr>
+                </div><!-- 하위 row -->
+
+                <div class="box2">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link ${status == '결제' ? 'active' : ''}" id="reservation-tab" href="myp_reservation?status=결제" role="tab" aria-controls="reservation" aria-selected="${status == '결제'}">예매내역</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link ${status == '취소' ? 'active' : ''}" id="cancel-tab" href="myp_reservation?status=취소" role="tab" aria-controls="cancel" aria-selected="${status == '취소'}">취소내역</a>
+                        </li>
+                    </ul>
+                </div><!-- 탭 -->
+
+                <div class="tab-content" id="myTabContent">
+                    <!-- 예매내역 탭 내용 -->
+                    <div class="tab-pane fade ${status == '결제' ? 'show active' : ''}" id="reservation" role="tabpanel" aria-labelledby="reservation-tab">
+                        <c:choose>
+                            <c:when test="${empty movieReservation}">
+                                <h3>예매내역이 존재하지 않습니다</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach items="${movieReservation}" var="map">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <img src="${map.movie_poster}" style="margin-left: 30px" width="200px" height="250px">
+                                        </div>
+                                        <div class="paybox1 col-md-6">
+                                            <div class="col-md-4 d-grid gap-5">
+                                                <input class="form-control box3 w-75" type="text" value="영화" aria-label="Disabled input example" disabled readonly>
+                                                <input class="form-control box3 w-75" type="text" value="관람날짜" aria-label="Disabled input example" disabled readonly>
+                                                <input class="form-control box3 w-75" type="text" value="상영시간" aria-label="Disabled input example" disabled readonly>
+                                            </div>
+                                            <div class="col-md-4 d-grid gap-5">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.movie_name}">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.scs_date}">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.theater_info}">
+                                            </div>
+                                            <div class="col-md-4 d-grid gap-5">
+                                                <input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example" disabled readonly>
+                                                <input class="form-control box3 w-75" type="text" value="관람좌석" aria-label="Disabled input example" disabled readonly>
+                                                <input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example" disabled readonly>
+                                            </div>
+                                            <div class="col-md-4 d-grid gap-5">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.ticket_seat_info}">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.total_ticket_price}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </c:forEach>
+                                <div class="reservation_pageArea">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>">
+                                                <a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}&status=${status}" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <c:forEach var="i" begin="${pageList.startPage}" end="${pageList.endPage}">
+                                                <c:choose>
+                                                    <c:when test="${pageNum eq i }">
+                                                        <li class="page-item active"><a class="page-link">${i}</a></li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}&status=${status}">${i}</a></li>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                            <li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
+                                                <a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}&status=${status}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </div> <!-- 예매내역 탭 내용 끝 -->
+
+                    <!-- 취소내역 탭 내용 -->
+                    <div class="tab-pane fade ${status == '취소' ? 'show active' : ''}" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
+                        <c:choose>
+                            <c:when test="${empty movieReservation}">
+                                <h3>취소내역이 존재하지 않습니다</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <table class="table2 table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">구매 구분</th>
+                                            <th scope="col">구매 극장</th>
+                                            <th scope="col">적립일</th>
+                                            <th scope="col">적립</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="map" items="${movieReservation}" varStatus="status" begin="0" end="4">
+                                            <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+                                                <th scope="row">${status.index + 1}</th>
+                                                <td>${map.movie_name}</td>
+                                                <td>${map.scs_date}</td>
+                                                <td>${map.theater_info}</td>
+                                                <td>${map.session_time}</td>
+                                                <td>${map.ticket_seat_info}</td>
+                                                <td>${map.total_ticket_price}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                                <div class="reservation_pageArea">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>">
+                                                <a class="page-link" href="myp_reservation?pageNum=${pageNum - 1}&status=${status}" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <c:forEach var="i" begin="${pageList.startPage}" end="${pageList.endPage}">
+                                                <c:choose>
+                                                    <c:when test="${pageNum eq i }">
+                                                        <li class="page-item active"><a class="page-link">${i}</a></li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li class="page-item"><a class="page-link" href="myp_reservation?pageNum=${i}&status=${status}">${i}</a></li>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                            <li class="page-item <c:if test="${pageNum eq pageList.maxPage }">disabled</c:if>">
+                                                <a class="page-link" href="myp_reservation?pageNum=${pageNum + 1}&status=${status}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                        
+                       <!-- 탭 메뉴 -->
+						<div class="col-md-12">
+						<hr>
+							<ul class="nav nav-tabs" id="cancel" role="tablist">
+								<li class="nav-item" role="presentation">
+									<button class="nav-link active" id="cancel-tab" data-bs-toggle="tab"
+										data-bs-target="#cancel-tab-pane" type="button" role="tab" aria-controls="cancel-tab-pane"
+										aria-selected="true">예매 취소 안내</button>
+								</li>
+								<li class="nav-item" role="presentation">
+									<button class="nav-link" id="cancel2-tab" data-bs-toggle="tab"
+										data-bs-target="#cancel2-tab-pane" type="button" role="tab"
+										aria-controls="cancel2-tab-pane" aria-selected="false">환불 규정 안내</button>
+								</li>
+							</ul>
+						
+							<!-- 내용 -->
+							<div class="tab-content" id="cancelContent">
+								<div class="tab-pane fade show active" id="cancel-tab-pane" role="tabpanel"aria-labelledby="cancel-tab">
+									<textarea class="textarea1" rows="13" cols="110" style="width: 100%" readonly>
 					
 			신용카드
 			결제 후 3일 이내 취소 시 승인 취소 가능, 3일 이후 매입 취소시 영업일 기준 3~5일 소요
@@ -292,10 +260,10 @@ h3{
 			- 환불은 환불 요청일로부터 7일 이상 소요됨
 			
 			※ 기타 환불 관련 문의는 고객센터 1544-1122로 연락바랍니다.
-										</textarea>
-									</div><!-- tab-pane -->
-									<div class="tab-pane fade" id="cancel2-tab-pane" role="tabpanel"aria-labelledby="cancel2-tab">
-										<textarea class="textarea1" rows="13" cols="110" style="width: 100%" readonly>
+									</textarea>
+								</div><!-- tab-pane -->
+								<div class="tab-pane fade" id="cancel2-tab-pane" role="tabpanel"aria-labelledby="cancel2-tab">
+									<textarea class="textarea1" rows="13" cols="110" style="width: 100%" readonly>
 								
 			현장 취소를 하는 경우
 			상영시간 이전까지만 가능하며, 상영시간 이후 취소나 환불은 되지 않습니다.
@@ -312,18 +280,19 @@ h3{
 			
 			단, 일부 행사의 경우 행사 당일 취소, 변경 불가 합니다.
 								
-										</textarea>		
-									</div> <!-- tab-pane  -->
-								</div><!-- tab-content -->
-							</div><!-- col-md-12 -->
-						</div><!-- row 두번째 줄 -->
-				  	</div> <!-- tab-content 취소 탭 내용 끝-->
-				</div> <!-- col-md-9 box-in -->
-			</div><!-- row -->
-		</div> <!-- container2 -->
-	</div><!-- container2 -->
+									</textarea>		
+								</div> <!-- tab-pane  -->
+							</div><!-- tab-content -->
+						</div>                    
+                    </div> <!-- 취소내역 탭 내용 끝 -->
+                </div><!-- tab-content -->
+            </div><!-- col-md-9 box-in -->
+        </div><!-- row -->
+    </div><!-- container2 -->
+</div><!-- container1 -->
+
 <footer>
-	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
 

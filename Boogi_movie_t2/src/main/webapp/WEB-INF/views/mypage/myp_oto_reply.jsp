@@ -87,7 +87,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-2">
-				<jsp:include page="/WEB-INF/views/mypage/inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div>
 			<div class="col-10">
 				<input type="hidden" value="${oto.oto_num }" name="oto_num">

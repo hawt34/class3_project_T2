@@ -35,7 +35,7 @@ body {
 	<div class="container2">
 		<div class="row">
 			<div class="col-md-2">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div>
 			<div class="col-md-9">
 				<h2>쿠폰</h2>
@@ -79,7 +79,7 @@ body {
 	</div> <!-- container2 -->
 </div> <!-- contanier1 -->
 <footer>
-	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
 

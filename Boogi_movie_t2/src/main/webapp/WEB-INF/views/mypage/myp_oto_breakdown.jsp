@@ -120,7 +120,7 @@ input[value="답변확인"] {
 	<div class="row">
 		<!--사이드 바  -->
 		<div class="col-2">
-			<jsp:include page="/WEB-INF/views/mypage/inc/myp_aside.jsp"></jsp:include>
+			<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 		</div>
 		<!-- content 영역 -->
 		<div class="col-10">

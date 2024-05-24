@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +33,7 @@ body {
 	<div class="container2">
 		<div class="row">
 			<div class="col-md-2">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div>	<!-- col-md-2 사이드바  -->
 			<div class="col-md-9">
 				<h2>회원정보수정</h2>
@@ -89,7 +89,10 @@ body {
 			   				<label for="member_addr">주소</label>
 			   			</div>
 					  	<div class="form_item w-75">
-					    	<input type="text" id="member_addr" name="member_addr" size="6" onclick="search_address()" required value="${member.member_addr}" placeholder="클릭 시 주소검색">
+<%-- 					    	<input type="text" id="member_addr" name="member_addr" size="6" onclick="search_address()" required value="${member.member_addr}" placeholder="클릭 시 주소검색"> --%>
+							    <input type="text" id="post_code" name="post_code" size="6" readonly onclick="search_address()" value="${fn:substring(member.member_addr, 0, 5)}"  required placeholder="클릭 시 주소검색">
+								<input type="text" id="address1" name="address1" placeholder="기본주소" size="25" required value="${fn:substring(member.member_addr, 6, 25)}"  readonly onclick="search_address()"><br>
+								<input type="text" id="address2" name="address2" placeholder="상세주소" size="25" required pattern="^.{2,20}$" maxlength="20">
 		<!-- 			    	<div class="box4"> -->
 					    		<span id="addrMessage" style="color: red;"></span>
 		<!-- 			    	</div> -->
@@ -139,7 +142,7 @@ body {
 	</div><!-- container2 -->
 </div><!-- container1  -->	
 	<footer>
-		<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
 	
 <!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
@@ -244,8 +247,8 @@ body {
 	    });
 	    
 	    // 상세주소 입력값 변경 시
-	    $("#member_addr").on("input", function() {
-	        let address = $("#member_addr").val();
+	    $("#address2").on("input", function() {
+	        let address = $("#address2").val();
 	        let regex = /^.{2,20}$/g;
 			let message = document.getElementById("addrMessage");
 	        
@@ -312,7 +315,7 @@ body {
 // 	        let pwdIsValid = /^.{8,16}$/.test($("#member_pwd").val());
 // 	        let pwd2IsValid = /^[A-Za-z0-9!@#$%]{8,16}$/.test($("#member_pwd2").val());
             let pwd2IsValid = $("#member_pwd2").val() === $("#member_pwd").val();
-	        let addressIsValid = /^.{2,20}$/g.test($("#member_addr").val());
+	        let addressIsValid = /^.{2,20}$/g.test($("#address2").val());
 	        let emailIsValid = /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g.test($("#member_email").val());
 	        let telIsValid = /^010\d{8}$/g.test($("#member_tel").val());
 	
@@ -339,7 +342,7 @@ body {
 // 	                console.log(data);
 // 	                // 1) 우편번호(= 국가기초구역번호 = zonecode 속성값) 가져와서 
 // 	                //    우편번호 입력란(postCode)에 출력
-// 	                document.fr.member_addr.value = data.zonecode;
+// 	                document.fr.post_code.value = data.zonecode;
 	        		
 // 	        		// 2) 기본주소(address 속성값) 가져와서 기본주소 항목(address1)에 출력
 // // 	        		document.fr.address1.value = data.address; // 기본주소
@@ -375,14 +378,16 @@ body {
 					}
 					
 					// 주소 정보에서 우편번호를 가져옵니다.
-					let zonecode = data.zonecode;
+// 					let zonecode = data.zonecode;
+	                document.fr.post_code.value = data.zonecode;
 					
 					// 우편번호와 주소를 입력란에 설정합니다.
-					document.getElementById('member_addr').value = zonecode + ' ' + address;
+// 					document.getElementById('member_addr').value = zonecode + ' ' + address;
+	        		document.fr.address1.value = address;
 					
 					// 창을 닫습니다.
-					// this.modal.close();      		
-					document.fr.member_addr.focus();// 상세주소 입력 항목에 커서 요청
+// 					this.modal.close();      		
+					document.fr.address2.focus();// 상세주소 입력 항목에 커서 요청
 					
 					}
 	        }).open();

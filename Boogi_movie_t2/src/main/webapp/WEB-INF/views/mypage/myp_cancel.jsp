@@ -32,7 +32,7 @@ body {
 	<div class="container2">
 		<div class="row box1">  
 			<div class="col-md-2 sidebar1">
-				<jsp:include page="inc/myp_aside.jsp"></jsp:include>
+				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div><!-- col-md-2 sidebar1 -->
 			<div class="col-md-9">
 				<div class="col-10">
@@ -171,7 +171,7 @@ body {
 	</div><!-- contaier2 -->		
 </div> <!-- contaier1 -->
 <footer>
-	<jsp:include page="inc/myp_footer.jsp"></jsp:include>
+	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
 

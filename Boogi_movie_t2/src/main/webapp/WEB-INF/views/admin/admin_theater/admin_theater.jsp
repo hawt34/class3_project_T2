@@ -10,8 +10,46 @@
 <link href="../admin_main/admin_main.css" rel="stylesheet">
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
-<script src="${pageContext.request.contextPath}/resources/ㄴjs/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_list.css" rel="stylesheet" type="text/css">
+<style>
+/* 테이블 비율 */
+th:nth-child(1), td:nth-child(1) {
+	width: 7%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+	width: 10%;
+}
+
+th:nth-child(3), td:nth-child(3) {
+	width: 20%;
+}
+
+th:nth-child(4), td:nth-child(4) {
+	width: 10%;
+}
+
+th:nth-child(5), td:nth-child(5) {
+	width: 7%;
+}
+
+th:nth-child(6), td:nth-child(6) {
+	width: 10%;
+}
+
+.admin_movie_search {
+	height: 50px;
+	width: 300px;
+	float: right;
+	margin-right: 0;
+	margin-bottom: 20px;
+}
+.admin_movie_search >select{
+	width: 200px;
+}
+
+</style>
 </head>
 <body>
 

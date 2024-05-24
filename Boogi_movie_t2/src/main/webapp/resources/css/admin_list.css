@@ -67,7 +67,7 @@ th:nth-child(7), td:nth-child(7) {
 
 .admin_movie_search {
 	height: 50px;
-	width: 360px;
+	width: 400px;
 	float: right;
 	margin-right: 100px;
 	margin-bottom: 20px;
@@ -84,7 +84,7 @@ th:nth-child(7), td:nth-child(7) {
 .admin_movie_search>select {
 	font-size: 18px;
 	height: 46px;
-	width: 100px;
+	width: 140px;
 	outline: none;
 	padding-left: 10px;
 }

@@ -123,10 +123,10 @@ function getScroll(newFaqCategory = "", isEmpty) {
                 let accordion = $(".csc_accordion");
                 let checkbox = $("<input>", {
                     type: "checkbox",
-                    id: "answer" + (index + 1)
+                    id: "answer" + (i + 1 + index)
                 });
                 let label = $("<label>", {
-                    for: "answer" + (index + 1),
+                    for: "answer" + (i + 1 + index),
                     "data-faqNum" : faqNum,
                     click: function() {
                     	updateView(faqNum);

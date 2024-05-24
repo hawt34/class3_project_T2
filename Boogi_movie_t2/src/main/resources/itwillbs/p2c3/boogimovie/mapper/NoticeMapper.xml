@@ -15,7 +15,7 @@
 		FROM notice n
 		LEFT OUTER JOIN theater t
 		ON n.theater_num = t.theater_num
-		<if test="!theaterName.equals('') and theaterName != null">
+		<if test="theaterName != '' and theaterName != null">
 			WHERE t.theater_name = #{theaterName}
 		</if>
 		ORDER BY row_num DESC
@@ -50,9 +50,11 @@
 	<select id="selectNoticeListCountCag" resultType="int">
 		SELECT COUNT(n.notice_num)
 		FROM notice n
-		JOIN theater t
+		LEFT OUTER JOIN theater t
 		ON n.theater_num = t.theater_num
-		WHERE theater_name = #{category}
+		<if test="category != null and category != ''">
+			WHERE theater_name = #{category}
+		</if>
 	</select>
 	
 	<!-- 검색어를 통한 게시판 목록 -->

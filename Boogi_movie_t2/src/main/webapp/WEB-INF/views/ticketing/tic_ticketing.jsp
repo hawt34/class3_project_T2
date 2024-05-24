@@ -13,6 +13,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/tic_ticketing.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
+
     .selected {
         background-color: #FFD700; /* 선택된 항목의 배경색을 설정합니다. */
     }
@@ -368,7 +369,6 @@ a {
 	color: #c7cdff;
 	padding: 20px 20px;
 }
->>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git
 </style>
 </head>
 
@@ -632,31 +632,29 @@ a {
             success: function (response) {
                 var result = $("#theaterlist");
                 result.empty();
-
+                
                 if (response.length === 0) {
-                    result.append("<div>My 영화관 정보가 없습니다.</div>");
+                    result.append("<div>정보가 없습니다.</div>");
                     return;
                 }
-
-                if (response.length < 4) {
-                    response.forEach(function (theater) {
-                        var theaterDiv = "";
-                        if (theater.member_my_theater == null) {
-                            theaterDiv = "<div>My 영화관 정보가 없습니다.</div>";
-                        }
-                        theaterDiv = '<ul><li><a class="theater-link" onclick="theaterClick(\'' + theater.member_my_theater + '\', this)">' + theater.member_my_theater + '</a></li></ul>';
-                        result.append(theaterDiv);
-                    });
-                } else {
-                    response.forEach(function (theater) {
+                
+                if (type === 'EntireTheater') {
+                    // 전체 극장 10개만 노출
+                    response.slice(0, 10).forEach(function (theater) {
                         var staticHtml = '<ul><li><a class="theater-link" onclick="theaterClick(\'' + theater.theater_name + '\', this)">' + theater.theater_name + '</a></li></ul>';
                         result.append(staticHtml);
+                    });
+                } else if (type === 'MyTheater') {
+                    // My 영화관 처리
+                    response.forEach(function (theater) {
+                        var theaterDiv = '<ul><li><a class="theater-link" onclick="theaterClick(\'' + theater.member_my_theater + '\', this)">' + theater.member_my_theater + '</a></li></ul>';
+                        result.append(theaterDiv);
                     });
                 }
             },
             error: function () {
                 var result2 = $("#theaterlist");
-                var theaterDiv2 = "<div>My 영화관 <br>정보가 없습니다.</div>";
+                var theaterDiv2 = "<div>영화정보 <br>불러오기를 <br>실패했습니다.</div>";
                 result2.empty();
                 result2.append(theaterDiv2);
             }

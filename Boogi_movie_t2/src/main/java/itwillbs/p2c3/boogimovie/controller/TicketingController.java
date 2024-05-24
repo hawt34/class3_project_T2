@@ -257,13 +257,13 @@ public class TicketingController {
 	public List<MyTheaterVO> theaterMyTheater(@RequestParam String sId){
 		MemberVO member = memberService.selectTheatersMyTheater(sId);
 		List<MyTheaterVO> myTheaters = new ArrayList<MyTheaterVO>();
-		if(myTheaters.isEmpty()) {
-			return null;
-		}
+		
 		myTheaters.add(new MyTheaterVO(member.getMember_my_theater1()));
 		myTheaters.add(new MyTheaterVO(member.getMember_my_theater2()));
 		myTheaters.add(new MyTheaterVO(member.getMember_my_theater3()));
-		
+		if(myTheaters.isEmpty()) {
+			return null;
+		}
 		
 		return myTheaters;
 	}

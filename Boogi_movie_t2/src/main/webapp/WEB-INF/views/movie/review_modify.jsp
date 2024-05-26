@@ -4,6 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>리뷰 수정</title>
 <style>
 body {
 	min-height: 50vh;
@@ -84,9 +87,6 @@ body {
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<head>
-<meta charset="UTF-8">
-<title></title>
 </head>
 <body>
 

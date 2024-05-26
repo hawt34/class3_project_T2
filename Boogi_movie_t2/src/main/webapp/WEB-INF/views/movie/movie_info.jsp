@@ -5,6 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>상영영화 상세보기</title>
 <style>
 * {
 	margin: 0;
@@ -209,9 +212,6 @@ footer {
 }
 /* 	background-color: #ffb300; */
 </style>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <%-- <link href="${pageContext.request.contextPath}/resources/css/movie_info.css" rel="stylesheet" type="text/css"> --%>

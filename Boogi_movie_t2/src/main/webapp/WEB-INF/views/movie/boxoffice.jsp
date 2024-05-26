@@ -47,12 +47,7 @@ th {
 	color: #ddd;
 }
 
-/* 테이블 올렸을 때 */
-tbody tr:hover {
-	background-color: #eee;
-	opacity: 0.9;
-	cursor: pointer;
-}
+
 
 #bottom {
 	text-align: center;

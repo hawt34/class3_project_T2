@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>축하 페이지</title>
+<title>부기무비 회원가입</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
 " rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath }/css/member_reg_complete.css" rel="stylesheet">

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>좌석 선택</title>
+<title>부기무비 빠른예매</title>
 </head>
 <style>
     .seat.disabled {

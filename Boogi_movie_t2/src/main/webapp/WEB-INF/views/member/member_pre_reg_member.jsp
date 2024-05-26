@@ -139,10 +139,10 @@ $(document).ready(function() {
         
         if (!regex.test(email)) {
             $("#member_email").css("background-color", "red");
-            $("#msg_email").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
+            $("#email_span").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
         } else {
             $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-            $("#msg_email").empty();
+            $("#email_span").text("");
         }
 
         checkFormValidity(); // 폼 유효성 검사 실행
@@ -164,7 +164,8 @@ $(document).ready(function() {
     // 날짜 유효성 검사 함수
     function isValidDate(birth) {
         // 생년월일 6자리를 Date 객체로 변환
-        let year = parseInt(birth.substring(0, 2), 10) + 1900; // 2000년대 이후는 2000을 더해야 함
+        let year = parseInt(birth.substring(0, 2), 10);
+        year += (year < 50) ? 2000 : 1900; // 2000년대 이후는 2000을 더하고, 1950년 이전은 1900을 더함
         let month = parseInt(birth.substring(2, 4), 10) - 1; // 월은 0부터 시작
         let day = parseInt(birth.substring(4, 6), 10);
 

@@ -5,7 +5,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>FAQ</title>
+<title>부기무비 FAQ</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_faq.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_sidebar.css">

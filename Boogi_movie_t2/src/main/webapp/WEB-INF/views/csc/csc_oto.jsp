@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부기무비 1:1 문의</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_oto.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_sidebar.css">

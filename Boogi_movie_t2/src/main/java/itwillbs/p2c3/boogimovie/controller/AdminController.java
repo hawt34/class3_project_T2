@@ -153,13 +153,14 @@ public class AdminController {
 	
 	//faq form 이동
 	@GetMapping("admin_faq_form")
-	public String adminFAQform() {
+	public String adminFAQform(@RequestParam(defaultValue = "1")String pageNum, Model model) {
+		model.addAttribute("pageNum", pageNum);
 		return "admin/admin_csc/admin_faq_form";
 	}
 	
 	//faq 등록(pro) 
 	@PostMapping("admin_faq_pro")
-	public String adminFAQpro(FAQVO faq, Model model) {
+	public String adminFAQpro(FAQVO faq, Model model, @RequestParam(defaultValue = "1")String pageNum) {
 		if(faq.getFaq_category().equals("")) {
 			model.addAttribute("msg", "유형을 선택해 주세요");
 			return "error/fail";
@@ -171,27 +172,34 @@ public class AdminController {
 			model.addAttribute("msg", "faq 등록 실패");
 			return "error/fail";
 		}
-		
+		model.addAttribute("pageNum", pageNum);
 		return "redirect:/admin_faq";
 	}
 	
 	//faq modify form 이동
 	@GetMapping("admin_faq_modify")
-	public String adminFAQModify(FAQVO faq, Model model) {
+	public String adminFAQModify(FAQVO faq, Model model, @RequestParam(defaultValue = "1")String pageNum) {
 		faq = faqService.getFaq(faq);
 		
+		if(faq == null) {
+			model.addAttribute("msg", "조회되는 게시물이 없습니다.");
+			return "error/fail";
+		}
+		
+		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("faq", faq);
 		return "admin/admin_csc/admin_faq_modify";
 	}
 	
 	//faq update
 	@PostMapping("admin_faq_modify")
-	public String adminFAQModifyPro(FAQVO faq, Model model) {
+	public String adminFAQModifyPro(FAQVO faq, Model model, @RequestParam(defaultValue = "1")String pageNum) {
 		int updateCount = faqService.updateFaq(faq);
 		
 		if(updateCount == 0) {
 			model.addAttribute("msg", "수정을 실패하였습니다");
 		}
+		model.addAttribute("pageNum", pageNum);
 		return "redirect:/admin_faq";
 	}
 	
@@ -204,10 +212,8 @@ public class AdminController {
 		int startRow = (pageNum  - 1) * listLimit;
 		System.out.println("극장명: " + theater_name);
 		
-//		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
 		List<NoticeVO> noticeList = noticeService.getNoticeList(listLimit, startRow, theater_name);
 		
-//		int listCount = service.getNoticeListCount();
 		int listCount = noticeService.getNoticeListCountCag(theater_name);
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
@@ -281,7 +287,8 @@ public class AdminController {
 	
 	@GetMapping("admin_notice_detail")
 	public String adminNoticeDetail(NoticeVO notice, Model model) {
-		notice = service.getNotice(notice);
+//		notice = service.getNotice(notice);
+		notice = noticeService.getNotice(notice.getNotice_num());
 		notice.setNotice_fdt(notice.getNotice_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))); 
 		int maxNotice = service.getMaxNotice(notice);
 		int minNotice = service.getMinNotice(notice);

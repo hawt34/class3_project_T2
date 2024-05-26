@@ -35,8 +35,6 @@ public class TheaterController {
 	@Autowired
 	private TheaterService service;
 	
-	@Autowired
-	private MemberService memberService;
 	
 	@Autowired
 	private MypageService mypageService;

@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부기무비 1:1 문의</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_oto.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_sidebar.css">
@@ -117,8 +117,8 @@
 					<div class="row mb-2">
 						<label for="client_file" class="col-2 col-form-label" >파일첨부</label>
 						<div class="col-sm-10">
-							<input type="file" name="file1" class="form-control form-control-sm" id="client_file">
-							<input type="file" name="file2" class="form-control form-control-sm" id="client_file">
+							<input type="file" name="file1" class="form-control form-control-sm" id="client_file1">
+							<input type="file" name="file2" class="form-control form-control-sm" id="client_file2">
 						</div>
 					</div>
 					<hr>

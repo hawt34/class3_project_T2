@@ -43,17 +43,17 @@
 					<div class="admin_movie_search">
 						<select id="theater_name" >
 							<option value="" disabled>극장명선택</option>
-							<option value="해운대점">해운대점</option>
-							<option value="센텀점">센텀점</option>
-							<option value="서면점">서면점</option>
-							<option value="남포점">남포점</option>
-							<option value="부산대점">부산대점</option>
-							<option value="사직점">사직점</option>
-							<option value="영도점">영도점</option>
-							<option value="덕천점">덕천점</option>
-							<option value="정관점">정관점</option>
-							<option value="사상점">사상점</option>
-							<option value="">전체</option>
+							<option value="해운대점" ${theater_name eq '해운대점' ? 'selected' : '' }>해운대점</option>
+							<option value="센텀점" ${theater_name eq '센텀점' ? 'selected' : '' }>센텀점</option>
+							<option value="서면점" ${theater_name eq '서면점' ? 'selected' : '' }>서면점</option>
+							<option value="남포점" ${theater_name eq '남포점' ? 'selected' : '' }>남포점</option>
+							<option value="부산대점" ${theater_name eq '부산대점' ? 'selected' : '' }>부산대점</option>
+							<option value="사직점" ${theater_name eq '사직점' ? 'selected' : '' }>사직점</option>
+							<option value="영도점" ${theater_name eq '영도점' ? 'selected' : '' }>영도점</option>
+							<option value="덕천점" ${theater_name eq '덕천점' ? 'selected' : '' }>덕천점</option>
+							<option value="정관점" ${theater_name eq '정관점' ? 'selected' : '' }>정관점</option>
+							<option value="사상점" ${theater_name eq '사상점' ? 'selected' : '' }>사상점</option>
+							<option value="" ${theater_name eq '' ? 'selected' : '' }>전체</option>
 						</select>
 					</div>
 				</div>

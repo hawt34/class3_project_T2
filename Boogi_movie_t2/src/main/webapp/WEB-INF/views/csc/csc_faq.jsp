@@ -5,7 +5,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>FAQ</title>
+<title>부기무비 FAQ</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_faq.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_sidebar.css">
@@ -15,6 +15,14 @@
 	crossorigin="anonymous"></script>
 <!-- 제이쿼리 -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<style>
+	label + div p{
+		line-height: 0.7;
+	}
+	label + div > p {
+		margin-top: 3px;
+	}
+</style>
 </head>
 <body>
 <div>
@@ -149,9 +157,7 @@ function getScroll(newFaqCategory = "", isEmpty) {
                     	"ANSWER"
                     ),
                     $("<br>"),
-                    $("<p>", {
-                        text: faq.faq_content
-                    })
+                    faq.faq_content
                 );
                 
                 accordion.append(checkbox, label, answerDiv);

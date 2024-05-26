@@ -37,6 +37,7 @@ body {
 	
 }
 
+.text{text-align : center;}
 </style>
 </head>
 <body>
@@ -85,41 +86,47 @@ body {
 						    </tr>
 						  </thead>
 						  <tbody>
-						  	<c:forEach items="${combinedList}" var="item" varStatus="status">
-							<fmt:parseDate var="parsedDate" value="${item.date}" 
-							pattern="yyyy-MM-dd'T'HH:mm:ss" type="both"/>
-							
-							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
-							        <th scope="row">${status.index + 1}</th>
-						  			 <td>
- 						  			 	<c:choose>
-						  			 		<c:when test="${item.theater eq '스토어' }">
-						  			 			스토어
-						  			 		</c:when>
-						  			 		<c:otherwise>
-						  			 			예매
-						  			 		</c:otherwise>
-						  			 	</c:choose>
-						  			 </td>
-						  			 <td>
-						  			 	<c:choose>
-						  			 		<c:when test="${item.theater eq '스토어' }">
-						  			 			스토어
-						  			 		</c:when>
-						  			 		<c:otherwise>
-						  			 			${item.theater}
-						  			 		</c:otherwise>
-						  			 	</c:choose>
-						  			 </td>
-						  			 <td>
-										<fmt:formatDate value="${parsedDate }" pattern="yyyy-MM-dd HH:mm"/>
-						  			 </td>
-						  			 <td>
-						  			 	${item.points }
-						  			 </td>
-						  		</tr>
-						  	</c:forEach>
-						  
+							  <c:choose>
+							  	<c:when test="${not empty combinedList }">
+								  	<c:forEach items="${combinedList}" var="item" varStatus="status">
+									<fmt:parseDate var="parsedDate" value="${item.date}" 
+									pattern="yyyy-MM-dd'T'HH:mm:ss" type="both"/>
+									
+									    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+									        <th scope="row">${status.index + 1}</th>
+								  			 <td>
+		 						  			 	<c:choose>
+								  			 		<c:when test="${item.theater eq '스토어' }">
+								  			 			스토어
+								  			 		</c:when>
+								  			 		<c:otherwise>
+								  			 			예매
+								  			 		</c:otherwise>
+								  			 	</c:choose>
+								  			 </td>
+								  			 <td>
+								  			 	<c:choose>
+								  			 		<c:when test="${item.theater eq '스토어' }">
+								  			 			스토어
+								  			 		</c:when>
+								  			 		<c:otherwise>
+								  			 			${item.theater}
+								  			 		</c:otherwise>
+								  			 	</c:choose>
+								  			 </td>
+								  			 <td>
+												<fmt:formatDate value="${parsedDate }" pattern="yyyy-MM-dd HH:mm"/>
+								  			 </td>
+								  			 <td>
+								  			 	${item.points }
+								  			 </td>
+								  		</tr>
+								  	</c:forEach>
+						  		</c:when>
+							  	<c:otherwise>
+							  		<td colspan="5" class="text">적립한 포인트가 존재하지 않습니다.</td>
+							  	</c:otherwise>
+							  </c:choose>
 						  </tbody>
 						</table>
 						</div><!-- tab-pane -->
@@ -135,6 +142,8 @@ body {
 							    </tr>
 							  </thead>
 							  <tbody>
+							  
+							  
 								<c:forEach items="${combinedList }" var="item" varStatus="status">
 								    <c:if test="${item.usePoints != 0}">
 								        <fmt:parseDate var="parsedDate" value="${item.date}" pattern="yyyy-MM-dd'T'HH:mm:ss" type="both"/>

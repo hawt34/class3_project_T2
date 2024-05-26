@@ -99,17 +99,24 @@ body {
 					    </tr>
 					  </thead>
 					  <tbody>
-						  <c:forEach var="map" items="${movieReservation}" varStatus="status" begin="0" end="4">
-							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
-							        <th scope="row">${status.index + 1}</th>
-							        <td>${map.movie_name}</td>
-							        <td>${map.scs_date}</td>
-							        <td>${map.theater_info}</td>
-							        <td>${map.session_time}</td>
-							        <td>${map.ticket_seat_info}</td>
-							        <td>${map.ticket_price}</td>
-							    </tr>
-							</c:forEach>
+						<c:choose>
+					  		<c:when test="${not empty movieReservation}">
+								<c:forEach var="map" items="${movieReservation}" varStatus="status" begin="0" end="4">
+									    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+									        <th scope="row">${status.index + 1}</th>
+									        <td>${map.movie_name}</td>
+									        <td>${map.scs_date}</td>
+									        <td>${map.theater_info}</td>
+									        <td>${map.session_time}</td>
+									        <td>${map.ticket_seat_info}</td>
+									        <td>${map.total_ticket_price}</td>
+									    </tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<td colspan="7" class="align_center">예매내역이 존재하지 않습니다.</td>
+							</c:otherwise>
+						</c:choose>
 					  </tbody>
 					</table>
 				</div><!-- col-md-6 -->

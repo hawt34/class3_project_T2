@@ -22,11 +22,11 @@
 </style>
 </head>
 <body>
-	<c:set var="pageNum" value="${empty pageNum ? 1 : param.pageNum }" />
 	<header>
 		<jsp:include page="/WEB-INF/views/inc/admin_header.jsp"></jsp:include>
 	</header>
 	<main>
+	<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum }" />
 		<div class="row">
 			<div class="col-md-2">
 				<!-- 사이드바 영역 -->
@@ -62,10 +62,10 @@
 											<td>${faq.faq_category }</td>
 											<td>${faq.faq_subject }</td>
 											<td>
-												<button type="button" class="btn btn-outline-primary" onclick="faqModify(${faq.faq_num})">수정</button>
+												<button type="button" class="btn btn-outline-primary" onclick="faqModify(${faq.faq_num}, ${param.pageNum })">수정</button>
 											</td>
 											<td>
-												<button type="button" class="btn btn-outline-primary" onclick="faqDelete()">삭제</button>
+												<button type="button" class="btn btn-outline-primary" onclick="faqDelete(${faq.faq_num})">삭제</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -75,7 +75,7 @@
 						</tbody>
 					</table>
 				<div class="admin_movie_footer" align="center">
-					<button onclick="location.href='admin_faq_form'">FAQ 등록</button>
+					<button onclick="faqForm(${param.pageNum})">FAQ 등록</button>
 				</div>
 				<div class="notice_pageArea">
 					<nav aria-label="Page navigation example" >
@@ -114,12 +114,16 @@
 	</footer>
 
 	<script type="text/javascript">
-		function faqModify(num) {
-			location.href="admin_faq_modify?faq_num=" + num;
+		function faqForm(pageNum) {
+			location.href="admin_faq_form?pageNum=" + pageNum;
 		}
-		function faqDelete() {
-			if(comfirm("정말 삭제하시겠습니까?")) {
-				location.href="admin_faq_delete";
+		
+		function faqModify(num, pageNum) {
+			location.href="admin_faq_modify?faq_num=" + num + "&pageNum=" + pageNum;
+		}
+		function faqDelete(num) {
+			if(confirm("정말 삭제하시겠습니까?")) {
+				location.href="admin_faq_delete?faq_num=" + num;
 			}
 		}
 	

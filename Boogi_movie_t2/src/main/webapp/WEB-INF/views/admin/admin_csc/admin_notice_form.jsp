@@ -36,6 +36,7 @@
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">공지사항등록</h4>
 				<form class="validation-form" novalidate action="admin_notice_pro" method="post" onsubmit="return confirm('공지를 등록하시겠습니까?');">
+					<input type="hidden" value="${param.pageNum }" name="pageNum">
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 
 						<input type="text"  id="notice_name" class="form-control" required name="notice_subject" required />

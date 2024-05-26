@@ -278,7 +278,8 @@
 	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
 	        let isPasswordStrong = $("#member_pwd").val() === "" || riskCount > 1;
 			let isDupId = dupIdCnt > 0;
-	        if (idIsValid && pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid && isPasswordStrong && isDupId) {
+			
+	        if (idIsValid && pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid && isPasswordStrong && !isDupId) {
 	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
 	        } else {
 	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화

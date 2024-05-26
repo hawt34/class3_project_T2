@@ -117,8 +117,8 @@
 					<div class="row mb-2">
 						<label for="client_file" class="col-2 col-form-label" >파일첨부</label>
 						<div class="col-sm-10">
-							<input type="file" name="file1" class="form-control form-control-sm" id="client_file">
-							<input type="file" name="file2" class="form-control form-control-sm" id="client_file">
+							<input type="file" name="file1" class="form-control form-control-sm" id="client_file1">
+							<input type="file" name="file2" class="form-control form-control-sm" id="client_file2">
 						</div>
 					</div>
 					<hr>

@@ -212,10 +212,8 @@ public class AdminController {
 		int startRow = (pageNum  - 1) * listLimit;
 		System.out.println("극장명: " + theater_name);
 		
-//		List<NoticeVO> noticeList = service.getNoticeList(startRow, listLimit);
 		List<NoticeVO> noticeList = noticeService.getNoticeList(listLimit, startRow, theater_name);
 		
-//		int listCount = service.getNoticeListCount();
 		int listCount = noticeService.getNoticeListCountCag(theater_name);
 		int pageListLimit = 5; //뷰에 표시할 페이지갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지

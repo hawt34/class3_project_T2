@@ -1,6 +1,5 @@
 package itwillbs.p2c3.boogimovie.controller;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,8 +35,6 @@ public class TheaterController {
 	@Autowired
 	private TheaterService service;
 	
-	@Autowired
-	private MemberService memberService;
 	
 	@Autowired
 	private MypageService mypageService;

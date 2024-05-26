@@ -321,6 +321,11 @@ public class MemberController {
 	        return "error/fail";
 	    }
 	    
+	    if(outputMember.getMember_status().equals("탈퇴")) {
+	        model.addAttribute("msg", "탈퇴한 회원입니다!");
+	        return "error/fail";
+	    }
+	    
 	    session.setAttribute("sId", inputMember.getMember_id());
 	    System.out.println(session.getAttribute("sId"));
 	    return "redirect:/";

@@ -50,7 +50,6 @@ import itwillbs.p2c3.boogimovie.vo.PointVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
-import retrofit2.http.POST;
 
 @Controller
 public class MypageController {

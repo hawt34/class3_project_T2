@@ -72,16 +72,14 @@
 	</insert>
 	
 	<select id="selectTheaterByMovie" resultType="map">
-		SELECT t.theater_name, count(*) movie_count 
-		FROM screen_info si 
-		JOIN theater t
-		ON t.theater_num = si.theater_num 
-		JOIN screen_session ss 
-		ON ss.screen_num = si.screen_num 
-		WHERE ss.movie_num = #{movie_num}
-		AND ss.scs_empty_seat > 0
-		GROUP
-		BY  t.theater_name;
+	    SELECT t.theater_name, count(*) movie_count 
+	    FROM screen_info si 
+	    JOIN theater t ON t.theater_num = si.theater_num 
+	    JOIN screen_session ss ON ss.screen_num = si.screen_num 
+	    WHERE ss.movie_num = #{movie_num}
+	    AND ss.scs_empty_seat > 0
+	    AND (ss.scs_date > CURRENT_DATE OR (ss.scs_date = CURRENT_DATE AND ss.scs_start_time > CURRENT_TIME))
+	    GROUP BY t.theater_name;
 	</select>
 	
 </mapper>

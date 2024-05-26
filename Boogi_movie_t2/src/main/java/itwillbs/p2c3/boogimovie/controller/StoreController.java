@@ -1,7 +1,6 @@
 package itwillbs.p2c3.boogimovie.controller;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;

@@ -21,7 +21,7 @@ body {
 	
 }
 
-
+.text{text-align : center;}
 </style>
 </head>
 <body>
@@ -61,19 +61,25 @@ body {
 						    </tr>
 						  </thead>
 						  <tbody>
-						      <c:forEach var="coupon" items="${list }" varStatus="status">
-							    <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
-							        <th scope="row">${status.index + 1}</th>
-							        <td>${coupon.coupon_num}</td>
-							        <td>${coupon.coupon_name}</td>
-							        <td>${coupon.coupon_value}원</td>
-							    </tr>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${not empty coupon}">
+									<c:forEach var="coupon" items="${list }" varStatus="status">
+							   			<tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+							        	<th scope="row">${status.index + 1}</th>
+							        	<td>${coupon.coupon_num}</td>
+								        <td>${coupon.coupon_name}</td>
+								        <td>${coupon.coupon_value}원</td>
+							    		</tr>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<td colspan="4" class="text">보유중인 쿠폰이 존재하지 않습니다.</td>
+								</c:otherwise>
+							</c:choose>
 						  </tbody>
 						</table>
 					</div><!-- tab-pane -->
 				</div><!-- tab-content -->
-				
 			</div><!-- col-md-10 box1 -->
 		</div> <!-- row -->
 	</div> <!-- container2 -->

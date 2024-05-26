@@ -169,11 +169,6 @@ h3{
 
                     <!-- 취소내역 탭 내용 -->
                     <div class="tab-pane fade ${status == '취소' ? 'show active' : ''}" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
-                        <c:choose>
-                            <c:when test="${empty movieReservation}">
-                                <h3>취소내역이 존재하지 않습니다</h3>
-                            </c:when>
-                            <c:otherwise>
                                 <table class="table2 table table-hover">
                                     <thead>
                                         <tr>
@@ -185,6 +180,8 @@ h3{
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:choose>
+                                    <c:when test="${not empty movieReservation}">
                                         <c:forEach var="map" items="${movieReservation}" varStatus="status" begin="0" end="4">
                                             <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
                                                 <th scope="row">${status.index + 1}</th>
@@ -196,6 +193,11 @@ h3{
                                                 <td>${map.total_ticket_price}</td>
                                             </tr>
                                         </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                    	<td colspan="7" class="box3">취소내역이 존재하지않습니다.</td>
+                                    </c:otherwise>
+                                        </c:choose>
                                     </tbody>
                                 </table>
                                 <div class="reservation_pageArea">
@@ -224,8 +226,8 @@ h3{
                                         </ul>
                                     </nav>
                                 </div>
-                            </c:otherwise>
-                        </c:choose>
+<%--                             </c:otherwise> --%>
+<%--                         </c:choose> --%>
                         
                        <!-- 탭 메뉴 -->
 						<div class="col-md-12">

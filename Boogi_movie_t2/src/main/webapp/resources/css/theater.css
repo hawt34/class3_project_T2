@@ -38,10 +38,12 @@ h1 {
 	margin: 5px;
 	color:#0d6efd;
 }
+
 .top_theater_name:hover {
 	background-color: #0d6efd;
 	color: white;
 }
+
 .form-check{
 	text-align: left;
 }

@@ -49,6 +49,8 @@ import itwillbs.p2c3.boogimovie.vo.TicketVO;
 @Controller
 public class PaymentController {
 	
+	private static final Object scs_date = null;
+
 	private IamportClient api;
 	
 	@Autowired
@@ -289,13 +291,18 @@ public class PaymentController {
 	// ================================================================================
 	// 최종 결제 완료 페이지로
 	@GetMapping("success_reserve{merchant_uid}")
-	public String successReserve(@PathVariable("merchant_uid") String merchant_uid, Model model, PayVO pay, ScreenSessionVO scs, MovieVO movie,
-			String theater_name, String screen_cinema_num, String person_info, String formattedDate, String selected_seats) {
+	public String successReserve(@PathVariable("merchant_uid") String merchant_uid, Model model, PayVO pay, Map<String, Object>map) {
 		
 		pay = service.getPayInfo(merchant_uid);
-//		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------pay : " + pay);
+		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------pay : " + pay);
+		map = service.getPaymentInfoView(pay.getTicket_pay_num());
+		System.out.println("%%%%%%%%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$---------------map : " + map);
+		CouponVO coupon = service.getCoupon(pay.getCoupon_num());
 		
 		model.addAttribute("pay", pay);
+		model.addAttribute("payInfo", map);
+		model.addAttribute("coupon", coupon);
+		
 		
 		
 		return "payment/payment_success_reserve";
@@ -436,16 +443,19 @@ public class PaymentController {
 		List<CartVO> cartList = service.getCartInfo(store_pay.getCart_id());
 		int total_fee = 0;
 		
+		
 		for(CartVO cart : cartList) {
 			item = service.getItemInfo(cart.getItem_info_num());
 			cart.setItem_info_name(item.getItem_info_name());
 			cart.setItem_info_image(item.getItem_info_image());
 			total_fee += cart.getItem_price()*cart.getItem_quantity();
 		}
+		CouponVO coupon = service.getCoupon(store_pay.getCoupon_num());
 		System.out.println("cartList : " + cartList);
 		model.addAttribute("store_pay", store_pay);
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("total_fee", total_fee);
+		model.addAttribute("coupon", coupon);
 		
 		return "payment/payment_success_store";
 	} // successStore()

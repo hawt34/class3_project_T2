@@ -25,38 +25,38 @@
 	<article>
 		<div class="theater_detail_all">
 <%-- 		<jsp:include page="theater_top.jsp"></jsp:include> --%>
-<div class="theater_top">
-		<nav class="nav justify-content-center theater_name">	
-			<c:forEach var="theater" items="${theaterList}">
-				<a class="nav-link top_theater_name" href="theater_detail?theater_num=${theater.theater_num}">${theater.theater_name}</a>
-			</c:forEach>
-			 <div class="dropdown">
-				<a class="nav-link top_theater_name dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">MY 극장</a>
-				<ul class="dropdown-menu">
-					 <c:choose>
-					 	<c:when test="${empty sId}"> <!-- 비로그인 상태 -->
-							<li><input type="button" class="btn" value="로그인하기" onclick="location.href='member_login'"></li>
-					 	</c:when>
-					 	<c:otherwise> <!-- 로그인 상태 -->
-							<!-- 나의극장 관리 모달 버튼 -->
-							<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"  onclick="initializeModal()">
-								<img src="${pageContext.request.contextPath}/resources/images/set.svg"> MY 극장 관리</button>
-							</li>
-							<!-- 체크된 MY극장 리스트 / member.member_my_theater1~3 -->
-							<c:if test="${not empty member.member_my_theater1}">
-								<li><a class="dropdown-item" href="#">${member.member_my_theater1}</a></li>
-							</c:if>
-							<c:if test="${not empty member.member_my_theater2}">
-								<li><a class="dropdown-item" href="#">${member.member_my_theater2}</a></li>
-							</c:if>
-							<c:if test="${not empty member.member_my_theater3}">
-								<li><a class="dropdown-item" href="#">${member.member_my_theater3}</a></li>
-							</c:if>
-					 	</c:otherwise>
-					 </c:choose>
-				</ul>
-			</div>
-		</nav>
+		<div class="theater_top">
+			<nav class="nav justify-content-center theater_name">	
+				<c:forEach var="theater" items="${theaterList}">
+					<a class="nav-link top_theater_name" href="theater_detail?theater_num=${theater.theater_num}">${theater.theater_name}</a>
+				</c:forEach>
+				 <div class="dropdown">
+					<a class="nav-link top_theater_name dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">MY 극장</a>
+					<ul class="dropdown-menu">
+						 <c:choose>
+						 	<c:when test="${empty sId}"> <!-- 비로그인 상태 -->
+								<li><input type="button" class="btn" value="로그인하기" onclick="location.href='member_login'"></li>
+						 	</c:when>
+						 	<c:otherwise> <!-- 로그인 상태 -->
+								<!-- 나의극장 관리 모달 버튼 -->
+								<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"  onclick="initializeModal()">
+									<img src="${pageContext.request.contextPath}/resources/images/set.svg"> MY 극장 관리</button>
+								</li>
+								<!-- 체크된 MY극장 리스트 / member.member_my_theater1~3 -->
+								<c:if test="${not empty member.member_my_theater1}">
+									<li><a class="dropdown-item" href="#">${member.member_my_theater1}</a></li>
+								</c:if>
+								<c:if test="${not empty member.member_my_theater2}">
+									<li><a class="dropdown-item" href="#">${member.member_my_theater2}</a></li>
+								</c:if>
+								<c:if test="${not empty member.member_my_theater3}">
+									<li><a class="dropdown-item" href="#">${member.member_my_theater3}</a></li>
+								</c:if>
+						 	</c:otherwise>
+						 </c:choose>
+					</ul>
+				</div>
+			</nav>
 		
 		<form action="Mytheater" method="post">
 			<!-- Modal -->

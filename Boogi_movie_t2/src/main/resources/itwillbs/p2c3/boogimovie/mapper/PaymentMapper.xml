@@ -139,4 +139,18 @@
 		SET	scs_empty_seat = scs_empty_seat - #{totalPeople}
 		WHERE scs_num = #{scs_num}
 	</update>
+
+	<select id="getPaymentInfoView" resultType="map">
+		SELECT *
+		FROM payment_info
+		WHERE ticket_pay_num = #{ticket_pay_num}
+	</select>	
+	
+	<select id="getCoupon" resultType="itwillbs.p2c3.boogimovie.vo.CouponVO">
+		SELECT *
+		FROM coupon_view
+		WHERE coupon_num = #{coupon_num}
+	</select>
+	
+	
 </mapper>

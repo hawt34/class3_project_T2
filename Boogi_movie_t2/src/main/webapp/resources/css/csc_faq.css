@@ -79,10 +79,10 @@ input[id*="answer"] + label + div {
 	font-size:14px;
 }
 
-input[id*="answer"] + label + div  p {
-	display: inline-block;
-	padding:20px;
-}
+/* input[id*="answer"] + label + div  p { */
+/* 	display: inline-block; */
+/* 	padding:20px; */
+/* } */
 input[id*="answer"]:checked + label + div {
 	max-height: 900px;
 }

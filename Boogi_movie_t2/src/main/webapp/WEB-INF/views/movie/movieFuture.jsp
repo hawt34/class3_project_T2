@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>부기무비 상영예정</title>
 <style>
 * {
 	margin: 0;
@@ -110,8 +112,6 @@ footer {
 	padding: 0px;
 }
 </style>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <%-- <link href="${pageContext.request.contextPath}/resources/css/movieFuture.css"	rel="stylesheet" type="text/css"> --%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -141,7 +141,7 @@ footer {
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.location.href='movieFuture'">상영예정작</button>
 				<button type="button" class="btn btn-outline-primary"
-					onclick="window.location.href=''">박스오피스 순위</button>
+					id="boxoffice">박스오피스 순위</button>
 				<button type="button" class="btn btn-outline-primary"
 					id="recommendMovie">추천상영영화</button>
 				<form action="searchMovie">
@@ -202,7 +202,11 @@ footer {
 				}
 			}
 		});
-				
+		
+		$("#boxoffice").on("click", function() {
+	        window.open('boxoffice', '_blank'); // 박스오피스 페이지를 새 창으로 열기
+	    });
+		
 		// 처음에는 4편의 영화만 보여주기
 		let numShown = 4;
 		$(".movie:gt(" + (numShown - 1) + ")").hide();

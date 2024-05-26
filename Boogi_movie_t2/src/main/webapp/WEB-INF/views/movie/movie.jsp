@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부기무비</title>
 <style type="text/css">
 * {
 	margin: 0;
@@ -147,7 +147,7 @@ footer {
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.location.href='movieFuture'">상영예정작</button>
 				<button type="button" class="btn btn-outline-primary"
-					onclick="window.location.href='boxoffice'">박스오피스 순위</button>
+					id="boxoffice">박스오피스 순위</button>
 				<button type="button" class="btn btn-outline-primary"
 					id="recommendMovie" >추천상영영화</button>
 				<form action="searchMovie">
@@ -208,7 +208,9 @@ footer {
 	            				
 				}
 			});
-
+			$("#boxoffice").on("click", function() {
+		        window.open('boxoffice', '_blank'); // 박스오피스 페이지를 새 창으로 열기
+		    });
 			$(".list").on("click", ".detail_button", function() {
 				let movie_num = $(this).siblings(".movie_num").val();
 				window.location.href = 'movieInfo?movie_num=' + movie_num; // 영화 상세 정보 페이지로 이동

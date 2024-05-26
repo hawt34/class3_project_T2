@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>부기무비</title>
+<title>부기무비 공지사항</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_sidebar.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_notice_detail.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">

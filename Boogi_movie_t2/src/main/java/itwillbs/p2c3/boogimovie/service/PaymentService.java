@@ -1,14 +1,17 @@
 package itwillbs.p2c3.boogimovie.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import itwillbs.p2c3.boogimovie.mapper.PaymentMapper;
 import itwillbs.p2c3.boogimovie.vo.CartVO;
+import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
+import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.PayVO;
 import itwillbs.p2c3.boogimovie.vo.ScreenSessionVO;
 import itwillbs.p2c3.boogimovie.vo.StorePayVO;
@@ -84,6 +87,16 @@ public class PaymentService {
 		
 		return mapper.updateEmptySeat(scs_num, totalPeople);
 	}
+
+
+	public Map<String, Object> getPaymentInfoView(int ticket_pay_num) {
+		return mapper.getPaymentInfoView(ticket_pay_num);
+	}
+
+	public CouponVO getCoupon(int coupon_num) {
+		return mapper.getCoupon(coupon_num);
+	}
+
 	
 
 }

@@ -2,6 +2,9 @@ package itwillbs.p2c3.boogimovie.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -287,25 +290,45 @@ public class MemberController {
 	}
 	
 	@PostMapping("member_login_pro")
-	public String memberLoginPro(MemberVO inputMember, HttpSession session, Model model) {
-		
-		MemberVO outputMember =  service.isCorrectUser(inputMember);
-		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
-		
-		if(outputMember == null) {
-			model.addAttribute("msg", "로그인 실패!");
-			return "error/fail";
-		}
-		
-		
-		if(!pwdEncoder.matches(inputMember.getMember_pwd(), outputMember.getMember_pwd())) {
-			model.addAttribute("msg", "로그인 실패!");
-			return "error/fail";
-		}
-		
-		session.setAttribute("sId", inputMember.getMember_id());
-		System.out.println(session.getAttribute("sId"));
-		return "redirect:/movie";
+	public String memberLoginPro(MemberVO inputMember, HttpSession session, 
+	        Model model, HttpServletRequest request, HttpServletResponse response) {
+	    String remember_id = request.getParameter("remember_id");
+	    
+	    if (remember_id == null) {
+	        // remember_id가 null일 경우 쿠키를 삭제
+	        Cookie cookie = new Cookie("rememberId", null);
+	        cookie.setMaxAge(0); // 유효기간을 0으로 설정하여 쿠키 삭제
+	        cookie.setPath("/"); // 애플리케이션 전체에서 유효
+	        response.addCookie(cookie);
+	    } else {
+	        // remember_id가 null이 아닐 경우 쿠키를 생성
+	        Cookie cookie = new Cookie("rememberId", inputMember.getMember_id());
+	        cookie.setMaxAge(60 * 60 * 24 * 30); // 쿠키 유효기간: 30일
+	        cookie.setPath("/"); // 애플리케이션 전체에서 유효
+	        response.addCookie(cookie);
+	    }
+	    
+	    MemberVO outputMember = service.isCorrectUser(inputMember);
+	    BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+	    
+	    if (outputMember == null) {
+	        model.addAttribute("msg", "로그인 실패!");
+	        return "error/fail";
+	    }
+	    
+	    if (!pwdEncoder.matches(inputMember.getMember_pwd(), outputMember.getMember_pwd())) {
+	        model.addAttribute("msg", "로그인 실패!");
+	        return "error/fail";
+	    }
+	    
+	    if(outputMember.getMember_status().equals("탈퇴")) {
+	        model.addAttribute("msg", "탈퇴한 회원입니다!");
+	        return "error/fail";
+	    }
+	    
+	    session.setAttribute("sId", inputMember.getMember_id());
+	    System.out.println(session.getAttribute("sId"));
+	    return "redirect:/";
 	}
 	
 	@GetMapping("member_logout_pro")
@@ -351,6 +374,21 @@ public class MemberController {
 	}
 	
 	
+	@ResponseBody
+	@GetMapping("dupId")
+	public String dupId(MemberVO member) {
+		MemberVO dbMember = service.isCorrectUser(member);
+		String id = member.getMember_id();
+		if(dbMember == null) {
+			return "true";
+		}
+		System.out.println("판별ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ " + id.equals(dbMember.getMember_id()));
+		if(id.equals(dbMember.getMember_id())) {
+			return "false";
+		}
+		
+		return "true";
+	}
 	
     
     

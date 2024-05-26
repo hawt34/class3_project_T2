@@ -87,29 +87,34 @@ hr{
 						    	</tr>
 							</thead>
 							<tbody>
-
-								<c:forEach var="storePay" items="${storePay}" varStatus="status">
-								    <c:if test="${storePay.store_pay_status == '결제'}">
-								        <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
-								            <th scope="row">${status.index + 1}</th>
-								            <td>
-								                <fmt:parseDate value="${storePay.store_pay_date}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate" />
-								                <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm" />
-								            </td>
-								            <td>${storePay.store_pay_detail}</td>
-								            <td>
-								                <fmt:formatNumber value="${storePay.store_pay_price}" type="number" groupingUsed="true" />원
-								            </td>
-								            <td>${storePay.store_pay_type}</td>
-								        </tr>
-								    </c:if>
-								</c:forEach>
+								<c:choose>
+									<c:when test="${not empty storePay }">
+										<c:forEach var="storePay" items="${storePay}" varStatus="status">
+										    <c:if test="${storePay.store_pay_status == '결제'}">
+										        <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+										            <th scope="row">${status.index + 1}</th>
+										            <td>
+										                <fmt:parseDate value="${storePay.store_pay_date}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate" />
+										                <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm" />
+										            </td>
+										            <td>${storePay.store_pay_detail}</td>
+										            <td>
+										                <fmt:formatNumber value="${storePay.store_pay_price}" type="number" groupingUsed="true" />원
+										            </td>
+										            <td>${storePay.store_pay_type}</td>
+										            <td><input type="button" class="btn btn-outline-secondary" value="취소"></input></td>
+										        </tr>
+										    </c:if>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<td colspan="6" class="box3">스토어 결제내역이 존재하지 않습니다.</td>
+									</c:otherwise>
+								</c:choose>
 							</tbody>
 						</table>
 					</div>
 					<!-- 결제 탭 -->
-				
-				
 				<!-- 취소 탭 -->
 <%--                 <div class="tab-pane fade ${status == '취소' ? 'show active' : ''}" id="storeCancel" role="tabpanel" aria-labelledby="storeCancel-tab"> --%>
 				<div class="tab-pane fade" id="storeCancel" role="tabpanel"aria-labelledby="storeCancel-tab">
@@ -124,22 +129,29 @@ hr{
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="storePay" items="${storePay}" varStatus="status">
-							    <c:if test="${storePay.store_pay_status == '취소'}">
-							        <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
-							            <th scope="row">${status.index + 1}</th>
-							            <td>
-							                <fmt:parseDate value="${storePay.store_pay_cancel_date}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate2" />
-							                <fmt:formatDate value="${parsedDate2}" pattern="yyyy-MM-dd HH:mm" />
-							            </td>
-							            <td>${storePay.store_pay_detail}</td>
-							            <td>
-							                <fmt:formatNumber value="${storePay.store_pay_price}" type="number" groupingUsed="true" />원
-							            </td>
-							            <td>${storePay.store_pay_type}</td>
-							        </tr>
-							    </c:if>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${not empty storePay}">
+									<c:forEach var="storePay" items="${storePay}" varStatus="status">
+									    <c:if test="${storePay.store_pay_status == '취소'}">
+									        <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
+									            <th scope="row">${status.index + 1}</th>
+									            <td>
+									                <fmt:parseDate value="${storePay.store_pay_cancel_date}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate2" />
+									                <fmt:formatDate value="${parsedDate2}" pattern="yyyy-MM-dd HH:mm" />
+									            </td>
+									            <td>${storePay.store_pay_detail}</td>
+									            <td>
+									                <fmt:formatNumber value="${storePay.store_pay_price}" type="number" groupingUsed="true" />원
+									            </td>
+									            <td>${storePay.store_pay_type}</td>
+									        </tr>
+									    </c:if>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<td colspan="5" class="box3">스토어 취소내역이 존재하지 않습니다.</td>
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
 				</div><!-- tab-pane fade 탭2 끝-->

@@ -5,6 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>상영영화 상세보기</title>
 <style>
 * {
 	margin: 0;
@@ -209,9 +212,6 @@ footer {
 }
 /* 	background-color: #ffb300; */
 </style>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <%-- <link href="${pageContext.request.contextPath}/resources/css/movie_info.css" rel="stylesheet" type="text/css"> --%>
@@ -340,9 +340,11 @@ footer {
 					</div>
 
 					<div class="reviewTexts">
-						<span class="review-text">${review.review_text}</span> <span
-							class="member-id">${review.member_id}</span> <span
-							class="review-date"><fmt:formatDate
+						<span class="review-text">${review.review_text}</span> 
+<%-- 						<span class="member-id">${review.member_id}</span> 기존 멤버 아이디 전부 출력에서 뒤에 가리고 출력 --%> 
+						<c:set var="maskedMemberId" value="${fn:substring(review.member_id, 0, fn:length(review.member_id) - 3)}***" />
+    					<span class="member-id"><c:out value="${maskedMemberId}" /></span>
+						<span class="review-date"><fmt:formatDate
 								value="${review.review_date}" pattern="yyyy-MM-dd" /></span>
 						<c:if test="${review.member_id eq sessionScope.sId}">
 							<button onclick="openReviewModify(${review.review_num})"
@@ -354,7 +356,7 @@ footer {
 				</c:forEach>
 			</div>
 			<div id="pageList">
-				<input type="button" value="이전"
+				<input type="button" value="이전" 
 					onclick="location.href='movieInfo?movie_num=${movie.movie_num}&pageNum=${pageNum - 1}'"
 					<c:if test="${pageNum == 1}">disabled</c:if> />
 				<c:forEach var="i" begin="1" end="${maxPage}">
@@ -367,7 +369,7 @@ footer {
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-				<input type="button" value="다음"
+				<input type="button" value="다음" 
 					onclick="location.href='movieInfo?movie_num=${movie.movie_num}&pageNum=${pageNum + 1}'"
 					<c:if test="${pageNum == maxPage or maxPage == 0}">disabled</c:if> />
 			</div>

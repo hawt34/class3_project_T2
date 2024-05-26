@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>부기무비 로그인</title>
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link href="${pageContext.request.contextPath}/resources/css/member_login.css" rel="stylesheet" type="text/css">
@@ -33,7 +34,7 @@ input[type=password] {
     <div class="col input-box">
         <form action="member_login_pro" method="post" name="fr">
             <label for="member_id">아이디</label>
-            <input type="text" id="member_id" name="member_id" placeholder="아이디를 입력하세요">
+            <input type="text" id="member_id" name="member_id" placeholder="아이디를 입력하세요" value="<c:out value='${cookie.rememberId.value}'/>">
 
             <label for="member_pwd">비밀번호</label>
             <input type="password" id="member_pwd" name="member_pwd" placeholder="비밀번호를 입력하세요">
@@ -43,10 +44,15 @@ input[type=password] {
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='member_search_id'">아이디 찾기</button>
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='member_search_pwd'">비밀번호 찾기</button>
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='member_pre_reg_member'">회원가입</button>
+                
             </div>
+			<div>
+				<input type="checkbox" id="remember_id" name="remember_id"
+				<c:if test="${not empty cookie.rememberId.value}">checked</c:if>>
+				<label for="remember_id">아이디 기억하기</label>
+			</div>
         </form>
     </div>
-
     <div class="col login-box">
         <h2>소셜 로그인</h2>
         <a href="#" class="social-button" id="google-connect"> <span>구글 로그인</span></a>

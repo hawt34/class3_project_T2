@@ -121,7 +121,7 @@ footer {
 	/* 	background-color: #ffb300; */
 }
 </style>
-<title>Insert title here</title>
+<title>부기무비 스토어</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet" type="text/css" />
@@ -258,11 +258,7 @@ footer {
 </body>
 <script>
 	$(document).ready(function() {
-		document.addEventListener("DOMContentLoaded", function() {
-		    window.location.reload();
-		});
-		
-	    // 로그인 여부를 위한 배열
+		// 로그인 여부를 위한 배열
 	    const snackButtons = [
 	        { buttonId: "#snackbutton", categoryId: "#category1_snack" },
 	        { buttonId: "#snackpop", categoryId: "#category2_pop" },
@@ -299,8 +295,7 @@ footer {
 	                member_id: "${sessionScope.sId}",  // 회원 ID
 	            };
 	        
-	        
-	        
+	        	        
 	        $.ajax({
 	            type: "POST",
 	            url: "add_to_cart",
@@ -319,7 +314,8 @@ footer {
                 	"</tr>";
 					$("#cartTable tbody").append(itemHtml);
 					   updateTotalPrice(); // 장바구니 1차 담기 후 업데이트
-					$(".contentPay").on("change", ".quantity", function() {
+					
+					 $(".contentPay").on("change", ".quantity", function() {
 					    let newQuantity = parseInt($(this).val());
 					    let selectedItemPrice = parseFloat($(this).closest("tr").find("td:nth-child(2)").text()); // 선택된 품목의 가격
 					    let newTotalPrice = selectedItemPrice * newQuantity;

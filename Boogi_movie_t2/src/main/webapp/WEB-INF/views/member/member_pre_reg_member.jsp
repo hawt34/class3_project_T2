@@ -91,69 +91,101 @@
 // 		    });	
 // 		}
 
-	$(document).ready(function() {
+$(document).ready(function() {
+    // 이름 입력값 변경 시
+    $("#member_name").on("input", function() {
+        let name = $("#member_name").val();
+        let regex = /^[a-zA-Z가-힣]{2,10}$/g;
+        
+        if (!regex.test(name)) {
+            $("#member_name").css("background-color", "red");
+            $("#name_span").text("올바른 이름형식(특수문자 불가, 영어 한글 2~10글자)를 입력해주세요");
+        } else {
+            $("#member_name").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+            $("#name_span").text(""); // 텍스트를 제거합니다
+        }
 
-		
-	    // 이름 입력값 변경 시
-	    $("#member_name").on("input", function() {
-	        let name = $("#member_name").val();
-	        let regex = /^[a-zA-Z가-힣]{2,10}$/g;
-	        
-	        if (!regex.test(name)) {
-	            $("#member_name").css("background-color", "red");
-	            $("#name_span").text("올바른 이름형식(특수문자 불가, 영어 한글 2~10글자)를 입력해주세요");
-	        } else {
-	            $("#member_name").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-	            $("#name_span").text(""); // 텍스트를 제거합니다
-	        }
-	
-	        checkFormValidity(); // 폼 유효성 검사 실행
-	    });
-	    
-	    // 생일 입력값 변경 시
-	    $("#member_birth").on("input", function() {
-	        let birth = $("#member_birth").val();
-	        let regex = /^\d{6}$/g;
-	
-	        if (birth.length === 6) { // member_birth의 길이가 6일 때만 실행
-	            if (!regex.test(birth)) {
-	                $("#member_birth").css("background-color", "red");
-	                $("#birth_span").text("생년월일 6자리를 입력해주세요(예시 : 950211)");
-	            } else {
-	                $("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-	                $("#birth_span").text(""); // 텍스트를 제거합니다
-	            }
-	
-	            checkFormValidity(); // 폼 유효성 검사 실행
-	        }
-	    });
-	    $("#member_email").on("input", function() {
-	        let email = $("#member_email").val();
-	        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
-	        
-	        if (!regex.test(email)) {
-	            $("#member_email").css("background-color", "red");
-	            $("#msg_email").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
-	        } else {
-	            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
-	            $("msg_email").empty();
-	        }
-		
-	        checkFormValidity(); // 폼 유효성 검사 실행
-	    });
-	
-	    // 폼 유효성 검사 함수
-	    function checkFormValidity() {
-	        let nameIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_name").val());
-	        let birthIsValid = /^\d{6}$/.test($("#member_birth").val());
-			let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
-	        if (nameIsValid && birthIsValid && emailIsValid) {
-	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
-	        } else {
-	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
-	        }
-	    }
-	});
+        checkFormValidity(); // 폼 유효성 검사 실행
+    });
+
+    // 생일 입력값 변경 시
+    $("#member_birth").on("input", function() {
+        let birth = $("#member_birth").val();
+        let regex = /^\d{6}$/g;
+
+        if (birth.length === 6) { // member_birth의 길이가 6일 때만 실행
+            if (!regex.test(birth)) {
+                $("#member_birth").css("background-color", "red");
+                $("#birth_span").text("생년월일 6자리를 정확히 입력해주세요(예시 : 950211)");
+            } else {
+                let validationResult = isValidDate(birth);
+                if (validationResult !== true) {
+                    $("#member_birth").css("background-color", "red");
+                    $("#birth_span").text(validationResult); // 유효성 검사 결과 메시지 출력
+                } else {
+                    $("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+                    $("#birth_span").text(""); // 텍스트를 제거합니다
+                }
+            }
+
+            checkFormValidity(); // 폼 유효성 검사 실행
+        }
+    });
+
+    // 이메일 입력값 변경 시
+    $("#member_email").on("input", function() {
+        let email = $("#member_email").val();
+        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
+        
+        if (!regex.test(email)) {
+            $("#member_email").css("background-color", "red");
+            $("#msg_email").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
+        } else {
+            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
+            $("#msg_email").empty();
+        }
+
+        checkFormValidity(); // 폼 유효성 검사 실행
+    });
+
+    // 폼 유효성 검사 함수
+    function checkFormValidity() {
+        let nameIsValid = /^[a-zA-Z가-힣]{2,10}$/.test($("#member_name").val());
+        let birthIsValid = /^\d{6}$/.test($("#member_birth").val()) && isValidDate($("#member_birth").val()) === true;
+        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
+        
+        if (nameIsValid && birthIsValid && emailIsValid) {
+            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
+        } else {
+            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
+        }
+    }
+
+    // 날짜 유효성 검사 함수
+    function isValidDate(birth) {
+        // 생년월일 6자리를 Date 객체로 변환
+        let year = parseInt(birth.substring(0, 2), 10) + 1900; // 2000년대 이후는 2000을 더해야 함
+        let month = parseInt(birth.substring(2, 4), 10) - 1; // 월은 0부터 시작
+        let day = parseInt(birth.substring(4, 6), 10);
+
+        if (month < 0 || month > 11) {
+            return "존재하지 않는 달입니다."; // 유효하지 않은 월
+        }
+
+        let date = new Date(year, month, day);
+        if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
+            return "존재하지 않는 일입니다."; // 유효하지 않은 일
+        }
+
+        let today = new Date();
+        if (date > today) {
+            return "오늘 이후 날짜입니다."; // 미래 날짜
+        }
+
+        return true; // 유효한 날짜
+    }
+});
+
 </script>
 </body>
 </html>

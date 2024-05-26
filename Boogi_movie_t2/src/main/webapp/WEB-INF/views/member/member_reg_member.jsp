@@ -36,6 +36,7 @@
 	<label for="member_id"><b>아이디</b></label>
     <input type="text" placeholder="아이디 입력" name="member_id" id="member_id" required autocapitalize="off" maxlength="20">
     <label id="msg_id" class="msg_id"></label><br>
+    <label id="msg_dup_id" class="msg_dup_id"></label><br>
     <label for="pwd"><b>비밀번호</b></label>
     <input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd" required maxlength="16">
     <label id="msg_pwd" class="msg_pwd"></label><br>
@@ -88,11 +89,13 @@
 	
 	$(document).ready(function() {
 	    let riskCount = 0;
+	    let dupIdCnt = 0; 
 	    
 	    // 아이디 입력값 변경 시
 	    $("#member_id").on("input", function() {
 	        validateId();
 	        checkFormValidity(); // 폼 유효성 검사 실행
+	        dupId();
 	    });
 	    
 	    // 비밀번호 입력값 변경 시
@@ -128,6 +131,25 @@
 	    // 초기 폼 유효성 검사
 	    checkFormValidity();
 	    
+	    function dupId(){
+			let id = $("#member_id").val();
+	    	$.ajax({
+	    		type : "GET",
+	    		url : "dupId",
+	    		data : {
+	    			"member_id" : id
+	    		},
+	        	success : function(response) {
+	                if(response === "false" || response === false){
+	                    $("#msg_dup_id").text("사용불가능한아이디");
+	                    dupIdCnt = 1;
+	                } else {
+	                    $("#msg_dup_id").text("사용가능한아이디");    
+	                    dupIdCnt = 0;
+	                }
+	        	}
+	    	});
+	    }
 	    function validateId() {
 	        let id = $("#member_id").val();
 	        let msg = "";
@@ -255,8 +277,8 @@
 	        let emailIsValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($("#member_email").val());
 	        let telIsValid = /^010\d{8}$/.test($("#member_tel").val());
 	        let isPasswordStrong = $("#member_pwd").val() === "" || riskCount > 1;
-
-	        if (idIsValid && pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid && isPasswordStrong) {
+			let isDupId = dupIdCnt > 0;
+	        if (idIsValid && pwdIsValid && pwd2IsValid && address2IsValid && emailIsValid && telIsValid && isPasswordStrong && isDupId) {
 	            $("button[type='submit']").prop("disabled", false); // submit 버튼 활성화
 	        } else {
 	            $("button[type='submit']").prop("disabled", true); // submit 버튼 비활성화
@@ -307,4 +329,3 @@
 	</script>
 </body>
 </html>
-  	

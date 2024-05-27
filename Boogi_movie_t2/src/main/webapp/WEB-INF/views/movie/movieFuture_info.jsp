@@ -46,7 +46,7 @@ article {
 
 section {
 	width: 1400px;
-	height: 800px;
+	height: 900px;
 	display: flex;
 	overflow: hidden;
 	flex-wrap: wrap;
@@ -71,6 +71,7 @@ section h1 {
 .movie img {
 	width: 300px;
 	height: 500px;
+	border-radius: 10px;
 }
 
 .movie input[type="button"] {
@@ -82,10 +83,14 @@ section h1 {
 	float: right;
 	width: 1000px;
 	height: 500px;
+	margin-bottom: 50px;
 }
 
 .movieInfo ul li {
 	font-size: 24px; /* 텍스트 크기 조정 */
+	text-align: justify;
+	word-break: keep-all;
+	line-height: 1.5em;
 }
 
 .movieInfo input[type="button"] {
@@ -95,7 +100,7 @@ section h1 {
 }
 
 .backButton {
-	margin-top: 20px;
+	margin-top: 30px;
 }
 
 .movieInfo img {
@@ -166,9 +171,9 @@ footer {
 			</div>
 
 		</section>
-		<footer>
-			<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
-		</footer>
 	</div>
+	<footer>
+		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

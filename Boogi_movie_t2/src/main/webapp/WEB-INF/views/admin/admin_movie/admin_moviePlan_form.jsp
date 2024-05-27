@@ -16,6 +16,13 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 body {
 	min-height: 50vh;
 	background: -webkit-gradient(linear, left bottom, right top, from(#92b5db),

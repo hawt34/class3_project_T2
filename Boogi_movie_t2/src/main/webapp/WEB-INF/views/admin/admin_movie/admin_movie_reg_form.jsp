@@ -18,6 +18,13 @@
 	crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js" ></script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 body {
 	min-height: 50vh;
@@ -166,8 +173,9 @@ body {
 	    
 	    $(document).ready(function(){
 	    	  // 박스오피스 검색창
-			$("#boxoffice").on("click", function() {
-		        window.open('boxoffice', '_blank'); // 박스오피스 페이지를 새 창으로 열기
+			$("#boxoffice").on("click", function(e) {
+				e.preventDefault(); // 기본 이벤트(폼 전송) 막음
+		        window.open('boxoffice', '_blank',  "width=820,height=800,left=800,top=300"); // 박스오피스 페이지를 새 창으로 열기
 		    });
 	    	
 	    	  // 영화등록 ajax
@@ -183,7 +191,7 @@ body {
 	                dataType : 'json',       // 데이터 타입 (html, xml, json, text 등등)    
 	                success : function(result) { // 결과 성공 콜백함수
 	                console.log(result);
-	                    
+	                    debugger;
 	                if(result && result.Data && result.Data[0] && result.Data[0].Result && result.Data[0].Result[0]){
 	                    // 영화 데이터가 저장된 json 타입 데이터
 	                    var movieData = result.Data[0].Result[0];

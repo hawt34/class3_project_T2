@@ -392,15 +392,11 @@ public class MypageController {
 		storePay.setMember_id(id);
 		int removeCount = mypageService.removeStore(storePay);
 		if(removeCount > 0) { // 성공 시  
-			
 			return "true";
 		} else { // 실패 시
 			return "false";
 		}
-		
-
 	}
-	
 	
 	// ============================= 스토어 =============================
 	

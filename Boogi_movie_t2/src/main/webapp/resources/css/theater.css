@@ -55,7 +55,7 @@ h1 {
 }
 
 .theater_main_cont{
-	margin: 30px 0px;;
+	margin: 50px 0px;;
 }
 
 table {
@@ -65,6 +65,11 @@ table {
 .theater_map {
 	align-content: center;
 	
+}
+
+.notice_detail {
+	text-decoration: none;
+	color: black;
 }
 
 /* ========================================= */

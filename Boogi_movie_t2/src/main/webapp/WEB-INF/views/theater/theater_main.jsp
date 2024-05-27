@@ -39,7 +39,7 @@
 		<div class="theater_main_cont" id="theater-event">
 			<div class="row">
 				<div class="col-11">
-					<h3>극장 이벤트</h3>
+					<h3 class="text-primary">극장 이벤트</h3>
 				</div>
 				<div class="col">
 					<a href="event" style="text-decoration: none;">더보기 
@@ -61,7 +61,7 @@
 		<div class="theater_main_cont" id="theater-notice">
 			<div class="row">
 	    		<div class="col-11">
-	     			<h3>극장 공지사항</h3>	
+	     			<h3 class="text-primary">극장 공지사항</h3>	
 	   			</div>
 	    		<div class="col">
 	      			<a href="csc_notice" style="text-decoration: none;">더보기 
@@ -69,24 +69,24 @@
 	      			</a>
 	   			</div>
 	   		</div>
-			<table class="table table-striped">
+			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th scope="col" width="400px">극장</th>
-						<th scope="col" width="800px">제목</th>
-						<th scope="col" >등록일</th>
+						<th scope="col" width="400px"><b>극장</b></th>
+						<th scope="col" width="800px"><b>제목</b></th>
+						<th scope="col" ><b>등록일</b></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="notice" items="${noticeList}" begin="0" end="6">
 						<tr>
 							<td scope="row">${notice.theater_name}</td>
-							<td>${notice.notice_subject}</td>
+							<td><a href="csc_notice_detail?notice_num=${notice.notice_num}" class="notice_detail">${notice.notice_subject}</a></td>
 <%-- 							<td>${notice.notice_date}</td> --%>
 							<td>
 								<fmt:parseDate var="parseNotice_date" value="${notice.notice_date}" 
-												pattern="yyyy-MM-dd'T'HH:mm" type="both" />
-								<fmt:formatDate value="${parseNotice_date}" pattern="yyyy-MM-dd HH:mm" />
+												pattern="yyyy-MM-dd" type="both" />
+								<fmt:formatDate value="${parseNotice_date}" pattern="yyyy-MM-dd" />
 							</td>
 						</tr>
 					</c:forEach>

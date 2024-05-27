@@ -43,7 +43,8 @@
 		FROM notice 
 		JOIN theater 
 		ON notice.theater_num = theater.theater_num 
-		WHERE notice.theater_num = #{theater_num};
+		WHERE notice.theater_num = #{theater_num}
+		ORDER BY notice_date DESC
 	</select>
 	
 	<select id="selectNoticeList" resultType="itwillbs.p2c3.boogimovie.vo.NoticeVO">
@@ -51,7 +52,8 @@
 		FROM notice 
 		JOIN theater 
 		ON notice.theater_num = theater.theater_num 
-		WHERE notice_category = '극장';
+		WHERE notice_category = '극장'
+		ORDER BY notice_date DESC
 	</select>
 	
 	<select id="selectTheater2" resultType="itwillbs.p2c3.boogimovie.vo.TheaterVO">
@@ -105,6 +107,7 @@
 		JOIN event_type 
 		ON event.event_type_num = event.event_type_num 
 		WHERE event.event_type_num = '2'
+		ORDER BY event_num DESC
 	</select>
 	
 	<select id="selectFeeInfo" resultType="itwillbs.p2c3.boogimovie.vo.FeeAgeVO">

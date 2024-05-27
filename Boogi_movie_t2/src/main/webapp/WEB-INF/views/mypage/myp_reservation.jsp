@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부기무비 영화 예매내역</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_reservation.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">

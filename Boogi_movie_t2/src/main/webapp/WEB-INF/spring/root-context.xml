@@ -40,5 +40,7 @@
 	</bean>
 	
 	<mybatis-spring:scan base-package="itwillbs.p2c3.boogimovie"/>
+	
+	
 </beans>
 

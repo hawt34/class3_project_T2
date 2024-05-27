@@ -8,6 +8,14 @@
 <meta charset="UTF-8">
 <title>문의내역 답변</title>
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+	* {
+	  font-family: "Nanum Gothic", sans-serif;
+	  font-weight: 400;
+	  font-style: normal;
+	}
+
 	.container {
 		width:850px;
 		height:auto;

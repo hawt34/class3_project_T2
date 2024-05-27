@@ -10,7 +10,15 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link href="${pageContext.request.contextPath}/resources/css/member_login.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 input[type=password] {
     width: 100%;
     padding: 12px 20px;
@@ -60,6 +68,7 @@ input[type=password] {
     </div>
 </div>
 <script>
+
 	window.onload = function() {
 	    var naverLogin = new naver.LoginWithNaverId({
 	        clientId: "YYIJQmFYT8uB2h0xYs1o",
@@ -75,6 +84,11 @@ input[type=password] {
             naverLogin.authorize();
             return false;
         };
+        
+     // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해야 합니다.
+        Kakao.init('JAVASCRIPT_KEY');
+     	
+
 	};
 </script>
 </body>

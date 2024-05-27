@@ -61,17 +61,7 @@ public class MypageService {
 	public int getResvCount(String member_id, String status) {
 		return mapper.selectResvCount(member_id, status);
 	}
-//	public List<Map<String, Object>> getResvCount(List<Map<String, Object>> param) {
-//		return mapper.selectResvCount(param);
-//	}
 	
-//	public List<Map<String, Object>> getResvList(Map<String, Object> params){
-//		return mapper.selectResvList(params);
-//	}
-//	
-//	public int getResvCount(String memberId) {
-//		return mapper.selectResvCount(memberId);
-//	}
 	// 스토어
 	public List<StorePayVO> getStorePay(MemberVO member){
 		return mapper.selectStorePay(member);

@@ -37,7 +37,6 @@ public interface MypageMapper {
 	List<Map<String, Object>> selectResvList(@Param("startRow") int startRow, @Param("listLimit") int listLimit, @Param("member_id") String member_id);
 	
 	int selectResvCount(@Param("member_id") String member_id, @Param("status") String status);
-//	List<Map<String, Object>> selectResvCount(List<Map<String, Object>> param);
 	
 	// 스토어
 	List<StorePayVO> selectStorePay(MemberVO member);

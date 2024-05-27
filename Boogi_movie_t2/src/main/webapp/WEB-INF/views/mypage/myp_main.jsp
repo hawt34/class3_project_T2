@@ -326,8 +326,9 @@
 			},
 			error: function(xhr, status, error) {
 				console.error("Error details:", xhr, status, error); // 디버깅 정보 출력
+				console.log("영화등록 실패");
+				alert("영화 정보 등록을 실패하였습니다" + error);
 				
-				alert("에러ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ : " + error);
 			}
 		});
 	}

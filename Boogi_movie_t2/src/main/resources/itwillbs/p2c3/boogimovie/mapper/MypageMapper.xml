@@ -33,8 +33,6 @@
 		   	CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time,
 		   	CONCAT(theater.theater_name, ' ', screen_info.screen_cinema_num, '관') AS theater_info,
 	   	    GROUP_CONCAT(ticket.ticket_seat_info ORDER BY ticket.ticket_seat_info SEPARATOR ', ') AS ticket_seat_info,
-<!-- 		    ticket.ticket_seat_info, -->
-<!-- 		    ticket.ticket_price -->
 	        SUM(ticket.ticket_price) AS total_ticket_price
 		    
 		FROM
@@ -79,7 +77,7 @@
     
     <!-- 예매한 영화 갯수 -->
     <select id="selectResvCount" resultType="int">
-	   SELECT COUNT(screen_session.scs_num)
+	   	SELECT COUNT(DISTINCT pay.ticket_pay_num)
 		FROM
 		    pay
 		JOIN member ON member.member_id = pay.member_id 
@@ -147,9 +145,9 @@
     
     </update>
 
-		<update id="updateMyTheater">
-		    UPDATE member
-		    <set> <!-- 자동으로 쉼표 처리. 각 항목 뒤에 쉼표를 추가하고 조건이 충족되지 않으면 마지막 쉼표를 제거함  -->
+	<update id="updateMyTheater">
+	    UPDATE member
+	    <set> <!-- 자동으로 쉼표 처리. 각 항목 뒤에 쉼표를 추가하고 조건이 충족되지 않으면 마지막 쉼표를 제거함  -->
 	   			<if test="checkedValues[0] != null and !checkedValues[0].equals('')">
 			    	member_my_theater1 = #{checkedValues[0]},
 			     </if>
@@ -166,12 +164,12 @@
 			        member_my_theater3 = #{checkedValues[2]}
 				</if>
 				<if test="checkedValues[2] == null">
-				    member_my_theater3 = null,
+				    member_my_theater3 = null
 				</if>
 			</set>
 <!-- 			SET member_my_theater = CASE WHEN member_my_theater = #{checkedValues[0]} THEN checkedValues[0] ELSE NULL, -->
-		    WHERE member_id = #{member_id}
-		</update>
+	    WHERE member_id = #{member_id}
+	</update>
 
     <!-- 탈퇴처리 -->
    	<!-- member 테이블의 member_status 컬럼값을 3(탈퇴)로 변경 탈퇴일자(withdraw_date) 를 now() 함수 -->

@@ -325,20 +325,16 @@ public class MypageController {
 		// -----------------------------------------------------------------------------------------
 	    int listCount = mypageService.getResvCount(member_id,status);
 	    // -----------------------------------------------------------------------------------------
-
-		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
+	    System.out.println("listCount : sdkfjl@@@@@@@@@@@@@@@@" + listCount);
+		int pageListLimit = 2; // 뷰에 표시할 페이지 갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호 
 		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
 		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
 			endPage = maxPage;
 		}
 		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
-		if(pageNum < 1 || pageNum > maxPage){
-			model.addAttribute("msg", "존재하지 않는 페이지입니다");
-			model.addAttribute("targetURL", "myp_reservation");
-		}
 		model.addAttribute("movieReservation", movieReservation);
 		model.addAttribute("pageList", pageList);
 	    model.addAttribute("status", status); 

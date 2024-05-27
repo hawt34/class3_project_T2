@@ -71,13 +71,13 @@ th:nth-child(6), td:nth-child(6) {
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_movie_head">
 					<div class="admin_movie_title">극장관리</div>
-					<div class="admin_movie_search">
-						<select class="form-select">
-							<c:forEach var="theater" items="${theaterList}">
-								<option>${theater.theater_name}</option>
-							</c:forEach>
-						</select> 
-					</div>
+<!-- 					<div class="admin_movie_search"> -->
+<!-- 						<select class="form-select"> -->
+<%-- 							<c:forEach var="theater" items="${theaterList}"> --%>
+<%-- 								<option>${theater.theater_name}</option> --%>
+<%-- 							</c:forEach> --%>
+<!-- 						</select>  -->
+<!-- 					</div> -->
 				</div>
 
 				<!-- 바디 부분 여기 표 넣을거임 -->

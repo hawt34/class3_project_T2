@@ -255,6 +255,7 @@
 	        } 
 	        
 	        message.style.color = color;
+	        
 	    }
 	        
 	        

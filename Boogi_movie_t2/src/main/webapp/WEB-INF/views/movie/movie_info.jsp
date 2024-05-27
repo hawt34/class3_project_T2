@@ -264,7 +264,7 @@ footer {
 							<li><span>감독 : ${movie.movie_director} </span></li>
 							<li><span>등급 : ${movie.movie_grade} </span></li>
 							<li><span>장르 : ${movie.movie_genre }</span></li>
-							<li><span>상영시간 : ${movie.movie_runtime }</span></li>
+							<li><span>상영시간 : ${movie.movie_runtime } 분</span></li>
 							<li><span>줄거리 : ${movie.movie_summary}</span></li>
 						</ul>
 						<img src="${movie.movie_stillCut}"> 

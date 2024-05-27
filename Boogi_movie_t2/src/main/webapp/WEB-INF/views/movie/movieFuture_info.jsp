@@ -142,7 +142,7 @@ footer {
 							<li><span>개봉 : ${movieFutureInfo.movie_open_date} </span></li>
 							<li><span>감독 : ${movieFutureInfo.movie_director} </span></li>
 							<li><span>등급 : ${movieFutureInfo.movie_grade} </span></li>
-							<li><span>장르 : ${movieFutureInfo.movie_genre }</span></li>
+							<li><span>장르 : ${movieFutureInfo.movie_genre } 분</span></li>
 							<li><span>상영시간 : ${movieFutureInfo.movie_runtime }</span></li>
 							<li><span>줄거리 : ${movieFutureInfo.movie_summary}</span></li>
 						</ul>

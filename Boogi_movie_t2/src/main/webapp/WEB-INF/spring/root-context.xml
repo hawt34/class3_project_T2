@@ -47,6 +47,5 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<mybatis-spring:scan base-package="itwillbs.p2c3.boogimovie"/>
 	
-	
 </beans>
 

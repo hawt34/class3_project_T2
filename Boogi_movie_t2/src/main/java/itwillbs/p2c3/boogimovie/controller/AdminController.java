@@ -84,6 +84,12 @@ public class AdminController {
 	private NoticeService noticeService;
 	
 	
+	@GetMapping("Admin")
+	public String goToAdmin(HttpSession session) {
+		session.setAttribute("sId", "admin");
+		return "redirect:/admin_main";
+	}
+	
 	// admin 메인 연결
 	@GetMapping("admin_main")
 	public String adminMain(Model model, HttpSession session) {

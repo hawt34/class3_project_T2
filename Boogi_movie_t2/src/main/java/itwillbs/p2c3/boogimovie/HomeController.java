@@ -35,7 +35,7 @@ public class HomeController {
 		//System.out.println("臾대퉬�듃�젅�씪�윭"+movieTrail);
 		model.addAttribute("movieTrail", movieTrail);
 		model.addAttribute("movieInfo", movieInfo);
-		session.setAttribute("sId", "admin");
+//		session.setAttribute("sId", "admin");
 		String member_id = (String) session.getAttribute("sId");
 		//System.out.println("�쁽�옱濡쒓렇�씤�븳 " +member_id);
 		model.addAttribute("member_id", member_id);

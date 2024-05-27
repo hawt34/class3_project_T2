@@ -180,7 +180,7 @@ body {
 			<div class="header_middle_title">
 				<div class="col-md-1"></div>
 				<div class="col-md-2" align="center">
-					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png" width="200px">
+					<img src="${pageContext.request.contextPath}/resources/images/boogi_front.png" width="200px" class="clickable no-pointer" id="target2">
 				</div>
 				<div class="col-md-5" align="center">
 					<img src="${pageContext.request.contextPath}/resources/images/boogi_title.png" onclick="location.href='./'">
@@ -251,10 +251,20 @@ body {
 	
 	 // 클릭 횟수를 저장할 변수
     let clickCount = 0;
+	let clickAdminCount = 0;
 
     // 대상 요소를 가져옵니다.
     const target = document.getElementById('target');
+    const AdminTarget = document.getElementById('target2');
 
+    // 관리자 권한부여
+    AdminTarget.addEventListener('click', function() {
+    	clickAdminCount++;
+    	if(clickAdminCount == 8){
+	    	location.href="Admin"
+    	}
+	});
+    
     // 대상 요소에 클릭 이벤트 리스너를 추가합니다.
     target.addEventListener('click', function() {
         // 클릭 횟수를 증가시킵니다.

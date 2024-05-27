@@ -52,4 +52,8 @@ public class FaqService {
 	public List<FAQVO> getFaqViewCountList() {
 		return mapper.selectFaqViewCountList();
 	}
+	//검색어를 통한 게시판 목록
+	public List<FAQVO> getFaqKeywordList(int listLimit, int startRow, String faqSearchKeyword) {
+		return mapper.selectFaqKeywordList(listLimit, startRow, faqSearchKeyword);
+	}
 }

@@ -1167,16 +1167,29 @@ public class AdminController {
 		
 		// 상영관 리스트 조회
 		List<ScreenInfoVO> screenInfoList = service.getScreenInfo(searchKeyword, startRow, listLimit);
-				
+		
+		String screen_seat_col = "";
+		String screen_seat_row = "";
+		int seat_size = 0;
+		for(ScreenInfoVO si : screenInfoList) {
+			screen_seat_col = si.getScreen_seat_col();
+			screen_seat_row = si.getScreen_seat_row();
+			seat_size = getSeatSize(screen_seat_col, screen_seat_row);
+			si.setSeat_size(seat_size);
+		}
+		System.out.println("screenInfoList : " + screenInfoList);
+		
 		int listCount = service.getScreenInfoCount(searchKeyword, startRow, listLimit);
 		// 페이징 숫자 갯수
 		int pageListLimit = 5;
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		int endPage = startPage + pageListLimit - 1;
+		
 		if(endPage > maxPage) {
-		endPage = maxPage;
+			endPage = maxPage;
 		}
+		
 		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		
 		model.addAttribute("pageInfo", pageInfo);
@@ -1190,6 +1203,17 @@ public class AdminController {
 		
 		return "admin/admin_theater/admin_booth";
 	}
+	
+	// 알파벳을 숫자로 변환하고 row * col (adminBooth 에서 사용)
+	private int getSeatSize(String alphabet, String screen_seat_row) {
+	    alphabet = alphabet.toUpperCase();
+	    int colToNumber = alphabet.charAt(0) - 'A' + 1;
+	    int seat_size = colToNumber * Integer.parseInt(screen_seat_row);
+	    
+	    return seat_size;
+	}
+	
+	
 	
 	// 상영관 관리 > 상영관 수정 폼으로
 	@GetMapping("admin_booth_modify")
@@ -1264,6 +1288,8 @@ public class AdminController {
 		
 		return "redirect:/admin_booth";
 	}
+	
+	// ===============================================================================
 	
 	@GetMapping("StorePayDetail")
 	public String storePayDetail(int store_pay_num, Model model) {

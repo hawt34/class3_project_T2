@@ -125,7 +125,7 @@ th:nth-child(6), td:nth-child(6) {
 										<td>${screenInfo.screen_num}</td>
 										<td>${screenInfo.theater_name}</td>
 										<td>${screenInfo.screen_cinema_num}관</td>
-										<td>row : ${screenInfo.screen_seat_row} / col : ${screenInfo.screen_seat_col}</td>
+										<td>${screenInfo.seat_size}석</td>
 										<td>
 											<c:choose>
 												<c:when test="${screenInfo.screen_status == 1}">정상</c:when>

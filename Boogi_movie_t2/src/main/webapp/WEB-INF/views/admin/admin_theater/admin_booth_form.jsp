@@ -61,6 +61,7 @@
 							<div class="input-group mb-3">	
 								<span class="input-group-text">관 번호</span>
 								<input type="text" id="movie_name" name="screen_cinema_num"  class="form-control" required/> 
+								<span class="input-group-text">관</span>
 							</div>
 						<div class="invalid-feedback">상영관 이름을 입력해주세요.</div>
 					</div>

@@ -255,11 +255,15 @@ public class AdminController {
 	@PostMapping("admin_notice_pro")
 	public String adminNoticePro(NoticeVO notice, Model model, String theater_name) {
 		int theater_num = 0;
-		if(!theater_name.equals("")) {
-			theater_num = noticeService.getTheaterNum(theater_name);
-			System.out.println("극장번호: " + theater_num);
-		} else {
+//		System.out.println("극장 이름: " + theater_name);
+		
+		if(!theater_name.equals("") && theater_name != null) {
+			notice.setTheater_name(notice.getTheater_name().replace(",", ""));
+			theater_num = noticeService.getTheaterNum(notice.getTheater_name());
+//			System.out.println("극장번호: " + theater_num);
+		} else if(notice.getTheater_name().equals("none")){
 			notice.setNotice_num(0);
+//			System.out.println("셋극장 넘버: " + notice.getNotice_num());
 		}
 		
 		int noticeCount = service.InsertNotice(notice,theater_num);
@@ -271,7 +275,7 @@ public class AdminController {
 		}
 		
 		
-		return "redirect:admin_notice";
+		return "redirect:/admin_notice";
 	}
 	
 	//notice_modify 연결
@@ -282,6 +286,28 @@ public class AdminController {
 		
 		model.addAttribute("notice", notice);
 		return "admin/admin_csc/admin_notice_modify";
+	}
+	
+	//notice_modify 
+	@PostMapping("admin_notice_modify")
+	public String adminNoticeModifyPro(NoticeVO notice, Model model) {
+//		System.out.println("PRO notice: " + notice);
+//		if(!notice.getTheater_name().equals("")) {
+//			int theaterNum = noticeService.getTheaterNum(notice.getTheater_name());
+//			System.out.println("극장번호 : " + theaterNum);
+//			notice.setNotice_num(theaterNum);
+//		}
+		
+		int updateCount = noticeService.updateNotice(notice);
+		
+		if(updateCount == 0) {
+			model.addAttribute("msg", "수정 실패!");
+			return "error/fail";
+		}
+		
+		
+//		model.addAttribute("notice", notice);
+		return "redirect:/admin_notice";
 	}
 	
 	@GetMapping("admin_notice_delete")

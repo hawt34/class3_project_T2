@@ -42,5 +42,9 @@ public class NoticeService {
 	public int getTheaterNum(String theater_name) {
 		return mapper.selectTheaterNum(theater_name);
 	}
+
+	public int updateNotice(NoticeVO notice) {
+		return mapper.updateNotice(notice);
+	}
 	
 }

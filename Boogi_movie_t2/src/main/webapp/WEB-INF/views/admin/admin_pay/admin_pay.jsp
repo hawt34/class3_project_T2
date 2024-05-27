@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 - 스토어결제관리</title>
+<title>스토어 결제관리</title>
 <!-- <link href="../admin_main/admin_main.css" rel="stylesheet"> -->
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">

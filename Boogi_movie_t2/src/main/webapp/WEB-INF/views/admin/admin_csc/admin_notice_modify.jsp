@@ -26,22 +26,18 @@
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">공지사항등록</h4>
 				<form class="validation-form" novalidate action="admin_notice_modify" method="post" onsubmit="return confirm('공지를 등록하시겠습니까?');">
-<!-- 					<div class="mb-3"> -->
-<!-- 						<label for="movie_director">작성자</label>  -->
-<!-- 						<input type="text" id="movie_director" class="form-control" required /> -->
-<!-- 						<div class="invalid-feedback">작성자를 입력해주세요.</div> -->
-<!-- 					</div> -->
+					<input type="hidden" name="notice_num" value="${notice.notice_num }">
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 
-						<input type="text" value="${notice.notice_subject }" id="movie_name" class="form-control" required name="notice_subject" required />
+						<input type="text" value="${notice.notice_subject }" id="admin_notice_subject" class="form-control" required name="notice_subject" required />
 						<div class="invalid-feedback">글제목을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<select name="notice_category">
+						<select name="notice_category" disabled>
 							<option value="전체" ${notice.notice_category == '전체' ? 'selected' : ''}>전체</option>
 							<option value="극장" ${notice.notice_category == '극장' ? 'selected' : ''}>극장</option>
 						</select>
-						<select name="theater_name">
+						<select name="theater_name" disabled>
 							<option value="">없음</option>
 							<option value="해운대점" ${notice.theater_name eq '해운대점' ? 'selected' : '' }>해운대점</option>
 							<option value="센텀점" ${notice.theater_name eq '센텀점' ? 'selected' : '' }>센텀점</option>

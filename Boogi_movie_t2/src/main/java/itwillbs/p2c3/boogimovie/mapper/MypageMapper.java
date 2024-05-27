@@ -63,7 +63,13 @@ public interface MypageMapper {
 	// 탈퇴처리
 	int updateMemberForWithdraw(MemberVO member);
 	
-	// 예매취소
-	int updateMovieStatus(Map<String, Object> map);
+	// 예매취소 pay 테이블
+	int updatePayStatus(Map<String, Object> map);
+	
+	// 예매취소 coupon 테이블
+	void updateCouponStatus();
+	
+	// 예매취소 member 테이블
+	void updateMemberPoint();
 	
 }

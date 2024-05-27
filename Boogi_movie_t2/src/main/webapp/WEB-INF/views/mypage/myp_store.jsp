@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부기무비 스토어 결제내역</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_reservation.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,6 +34,30 @@ hr{
 }
 
 </style>
+
+<script type="text/javascript">
+	function cancelStore(member_id) {
+		$.ajax({
+			url : "myp_cancel_store",
+			type : "post",
+			dataType : "json",
+			data : {
+				"member_id" : member_id
+			},
+			success : function(result) {
+				console.log("ajax 성공" + result);
+			},
+			error : function() {
+				console.log("ajax 실패");
+			}
+			
+		});
+	}
+
+
+</script>
+
+
 </head>
 <body>
 
@@ -102,7 +126,7 @@ hr{
 										                <fmt:formatNumber value="${storePay.store_pay_price}" type="number" groupingUsed="true" />원
 										            </td>
 										            <td>${storePay.store_pay_type}</td>
-										            <td><input type="button" class="btn btn-outline-secondary" value="취소"></input></td>
+										            <td><input type="button" class="btn btn-outline-secondary" id="cancelStore" onclick="cancelStore('${storePay.member_id}')" value="취소"></input></td>
 										        </tr>
 										    </c:if>
 										</c:forEach>

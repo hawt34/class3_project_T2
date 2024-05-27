@@ -93,7 +93,7 @@ public class StoreController {
 				CartVO item = iterator.next();
 				if (item.getItem_info_num() == item_info_num) {
 					iterator.remove(); // 아이템 제거
-					Map<String, String> response = new HashMap<>();
+					Map<String, String> response = new HashMap<String, String>();
 					response.put("message", "장바구니에서 상품이 제거되었습니다.");
 					return ResponseEntity.ok().body(response);
 				}
@@ -101,7 +101,7 @@ public class StoreController {
 		}
 
 		// 아이템이 없는 경우
-		Map<String, String> response = new HashMap<>();
+		Map<String, String> response = new HashMap<String , String>();
 		response.put("message", "장바구니에서 해당 상품을 찾을 수 없습니다.");
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 	}

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.service.AdminService;
@@ -154,5 +155,24 @@ public class MovieController {
 
 		return "movie/recommandMovie";
 	}
-
+	//특정 영화에 대한 유저가 쓴 리뷰
+	
+	@PostMapping("member_review")
+	public String memberReview(Model model,int movie_num, @RequestParam("member_id") String member_id , MovieVO movie) {
+		//System.out.println("특정유저 아이디" + member_id+ movie_num); 값은 잘 넘어옴.
+		MovieVO movie2 = movieService.getMovieInfo(movie);
+		model.addAttribute("movie", movie2);
+		List<ReviewVO> reviews = serviceReview.getMemberReview(member_id,movie_num); 
+		System.out.println("특정유저가 적은 댓글 "+ reviews);
+		
+		model.addAttribute("reviews", reviews);
+		
+		
+		
+		return "movie/movie_info_member";
+	}
+	
+	
+	
+	
 }

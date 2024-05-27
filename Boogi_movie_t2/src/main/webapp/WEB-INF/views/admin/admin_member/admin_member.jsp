@@ -159,7 +159,7 @@ th:nth-child(8), td:nth-child(8) {
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_member_head">
-					<div class="admin_member_title">회원정보관리</div>
+					<div class="admin_member_title">🙍회원정보관리</div>
 					<div class="admin_member_search">
 						<form action="admin_member">
 							<input type="text" name="searchKeyword" placeholder="이름 또는 아이디 입력" value="${param.searchKeyword}">

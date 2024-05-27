@@ -11,15 +11,41 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
-
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <script type="text/javascript">
 	$(function() {
 		
 		$("#selectTheater").change(function() {
-			let domain = $("#selectTheater").val();
-			$("#theater_name").val(domain);
+			let theater_name = $("#selectTheater option:selected").text();
 			
-			console.log("domain : " + domain)
+			if (theater_name != "극장을 선택하세요") {
+	            $("#theater_name").val(theater_name);
+				console.log("theater_name : " + theater_name)
+	        } else {
+	        	$("#theater_name").val("");
+	        }
+			
+			
+			let theater_num = $("#selectTheater").val();
+			console.log("theater_num : " + theater_num)
+				
+			
+			$.ajax({
+				url : "new_cinema_num",
+				type : "GET",
+				data : { theater_num : theater_num },
+				dataType : "json",
+				success : function(result) {
+					$("#screen_cinema_num").val(result);
+					console.log("result : " + result);
+				},
+				error : function() {
+					alert("AJAX 에러 발생!");
+				}
+				
+				
+			}); // ajax
 			
 		});
 		
@@ -42,7 +68,7 @@
 								<select class="form-select" id="selectTheater">
 									<option>극장을 선택하세요</option>
 									<c:forEach var="theater" items="${theaterList}"> 
-										<option value="${theater.theater_name}">${theater.theater_name}</option>
+										<option value="${theater.theater_num}">${theater.theater_name}</option>
 									</c:forEach>
   								</select>
 							</div>
@@ -57,10 +83,11 @@
 <!-- 						<div class="invalid-feedback">상영관 번호 입력해주세요.</div> -->
 <!-- 					</div> -->
 					<div class="mb-3">
-						<label for="movie_name">상영관 이름</label> 
+						<label for="screen_cinema_num">상영관 이름</label> 
 							<div class="input-group mb-3">	
 								<span class="input-group-text">관 번호</span>
-								<input type="text" id="movie_name" name="screen_cinema_num"  class="form-control" required/> 
+								<input type="text" id="screen_cinema_num" name="screen_cinema_num"  class="form-control" required readonly/> 
+								<span class="input-group-text">관</span>
 							</div>
 						<div class="invalid-feedback">상영관 이름을 입력해주세요.</div>
 					</div>

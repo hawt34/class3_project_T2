@@ -16,6 +16,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,7 @@ import itwillbs.p2c3.boogimovie.service.ScreenService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.CartVO;
+import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.FAQVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
@@ -254,11 +256,15 @@ public class AdminController {
 	@PostMapping("admin_notice_pro")
 	public String adminNoticePro(NoticeVO notice, Model model, String theater_name) {
 		int theater_num = 0;
-		if(!theater_name.equals("")) {
-			theater_num = noticeService.getTheaterNum(theater_name);
-			System.out.println("극장번호: " + theater_num);
-		} else {
+//		System.out.println("극장 이름: " + theater_name);
+		
+		if(!theater_name.equals("") && theater_name != null) {
+			notice.setTheater_name(notice.getTheater_name().replace(",", ""));
+			theater_num = noticeService.getTheaterNum(notice.getTheater_name());
+//			System.out.println("극장번호: " + theater_num);
+		} else if(notice.getTheater_name().equals("none")){
 			notice.setNotice_num(0);
+//			System.out.println("셋극장 넘버: " + notice.getNotice_num());
 		}
 		
 		int noticeCount = service.InsertNotice(notice,theater_num);
@@ -270,7 +276,7 @@ public class AdminController {
 		}
 		
 		
-		return "redirect:admin_notice";
+		return "redirect:/admin_notice";
 	}
 	
 	//notice_modify 연결
@@ -281,6 +287,28 @@ public class AdminController {
 		
 		model.addAttribute("notice", notice);
 		return "admin/admin_csc/admin_notice_modify";
+	}
+	
+	//notice_modify 
+	@PostMapping("admin_notice_modify")
+	public String adminNoticeModifyPro(NoticeVO notice, Model model) {
+//		System.out.println("PRO notice: " + notice);
+//		if(!notice.getTheater_name().equals("")) {
+//			int theaterNum = noticeService.getTheaterNum(notice.getTheater_name());
+//			System.out.println("극장번호 : " + theaterNum);
+//			notice.setNotice_num(theaterNum);
+//		}
+		
+		int updateCount = noticeService.updateNotice(notice);
+		
+		if(updateCount == 0) {
+			model.addAttribute("msg", "수정 실패!");
+			return "error/fail";
+		}
+		
+		
+//		model.addAttribute("notice", notice);
+		return "redirect:/admin_notice";
 	}
 	
 	@GetMapping("admin_notice_delete")
@@ -1085,6 +1113,100 @@ public class AdminController {
 			return "error/fail";
 		}
 	}
+	
+	// 쿠폰 페이지
+	@GetMapping("admin_coupon")
+	public String adminCoupon(HttpSession session, Model model, @RequestParam(defaultValue = "1") int pageNum, 
+				 @RequestParam(defaultValue = "") String searchKeyword) {
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		// 한 페이지에 표시할 갯수
+		int listLimit = 10;
+		// 조회 시작 행 번호
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 쿠폰목록 조회
+		List<CouponVO> couponTypeList = service.getCouponTypeListSearch(searchKeyword, startRow, listLimit);
+		
+		int listCount = service.getCouponListCount(searchKeyword, startRow, listLimit);
+		// 페이징 숫자 갯수
+		int pageListLimit = 5;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+		endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("couponTypeList", couponTypeList);
+		
+		return "admin/admin_event/admin_coupon";
+	}
+	
+	
+	// 쿠폰 등록 폼
+	@GetMapping("admin_coupon_form")
+	public String adminCouponForm(Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		
+		return "admin/admin_event/admin_coupon_form";
+	}
+
+	// 쿠폰 등록 프로
+	@PostMapping("admin_coupon_pro")
+	public String adminCouponPro(Model model, HttpSession session, CouponVO coupon) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		// 쿠폰등록
+		int insertCount = service.insertCoupon(coupon);
+		if(insertCount > 0) {
+			return "redirect:/admin_coupon";
+		} else {
+			model.addAttribute("msg", "쿠폰등록에 실패했습니다");
+			return "error/fail";
+		}
+		
+	}
+	
+	@GetMapping("admin_coupon_delete")
+	public String adminCouponDelete(CouponVO coupon, HttpSession session, Model model) {
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		// 쿠폰 삭제
+		int deleteCount = service.deleteCoupon(coupon);
+		if(deleteCount > 0) {
+			return "redirect:/admin_coupon";
+		} else {
+			model.addAttribute("msg", "쿠폰삭제에 실패했습니다");
+			return "error/fail";
+		}
+		
+	}
 
 	//--------------------------------------------------------------------
 	// 관리자 결제 페이지
@@ -1486,12 +1608,25 @@ public class AdminController {
 	
 	// 상영관 관리 > 새 상영관 등록 폼으로
 	@GetMapping("admin_booth_form")
-	public String adminBoothForm(TheaterVO theater, Model model) {
+	public String adminBoothForm(TheaterVO theater, ScreenInfoVO screenInfo, Model model) {
 		// 극장 리스트 조회
 		List<TheaterVO> theaterList = theaterService.getTheater();
+		// 기존 등록된 상영관의 극장별 마지막 번호+1 값 가져오기
+		
+		
 		model.addAttribute("theaterList", theaterList);
 		
 		return "admin/admin_theater/admin_booth_form";
+	}
+	
+	// 상영관 등록 폼 ajax
+	@ResponseBody
+	@GetMapping("new_cinema_num")
+	public String newCinemaNum(@RequestParam(defaultValue = "1") int theater_num) {
+		
+		int new_cinema_num = screenService.getNewCinemaNum(theater_num);
+		
+		return String.valueOf(new_cinema_num);
 	}
 	
 	// 상영관 관리 > 새 상영관 등록 비즈니스
@@ -1510,6 +1645,8 @@ public class AdminController {
 		
 		return "redirect:/admin_booth";
 	}
+	
+
 	
 	// 상영관 관리 > 상영관 삭제
 	@GetMapping("admin_booth_delete")

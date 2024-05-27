@@ -99,7 +99,14 @@
 		<if test="theater_name != '' and theater_name != null">
 			WHERE t.theater_name = #{theater_name}
 		</if>
+		LIMIT 0, 1
 	</select>
+	<update id="updateNotice">
+		UPDATE notice
+		SET notice_subject = #{notice_subject}
+			, notice_content = #{notice_content}
+		WHERE notice_num = #{notice_num}
+	</update>
 	
 
 </mapper>

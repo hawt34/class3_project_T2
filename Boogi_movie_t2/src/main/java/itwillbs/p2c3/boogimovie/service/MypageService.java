@@ -1,19 +1,14 @@
 package itwillbs.p2c3.boogimovie.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.mapper.MypageMapper;
-import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
-import itwillbs.p2c3.boogimovie.vo.MovieVO;
 import itwillbs.p2c3.boogimovie.vo.ReservationVO;
 import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
@@ -128,9 +123,12 @@ public class MypageService {
 	}
 	
 	// 예매취소
+	@Transactional
 	public int removeMovie(Map<String, Object> map) {
 		System.out.println("mypService - updateMovieStatus");
-		return mapper.updateMovieStatus(map);
+		mapper.updateCouponStatus();
+		mapper.updateMemberPoint();
+		return mapper.updatePayStatus(map);
 	}
 	
 }

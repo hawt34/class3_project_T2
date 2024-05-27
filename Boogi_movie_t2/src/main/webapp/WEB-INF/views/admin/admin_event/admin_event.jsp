@@ -127,7 +127,7 @@ th:nth-child(7), td:nth-child(7) {
 	margin: 0 10px;
 	color: #1b1b1b;
 }
-#eventRegBtn{
+#eventRegBtn, #couponRegBtn{
 	margin-left: 10px;
 	padding: 0 20px;
 	margin-bottom: 10px;
@@ -160,13 +160,13 @@ th:nth-child(7), td:nth-child(7) {
 				
 				<!-- 헤드 부분 검색 기능 -->
 				<div class="admin_event_head">
-					<div class="admin_event_title">이벤트관리</div>
+					<div class="admin_event_title">🎉이벤트관리</div>
 					<div class="admin_event_search">
 						<form action="admin_event">
 							<input type="text" name="searchKeyword" placeholder="제목 또는 이벤트종류 입력" value="${param.searchKeyword}">
 							<input type="submit" class="btn btn-dark" class="btn btn-dark" value="검색">
 						</form>
-						<button onclick="eventForm()" id="eventRegBtn" class="btn btn-dark">이벤트 등록</button>
+						<button onclick="eventForm()" id="eventRegBtn" class="btn btn-dark">이벤트등록</button>
 					</div>
 				</div>
 
@@ -251,6 +251,9 @@ th:nth-child(7), td:nth-child(7) {
 			if(confirm("정말 삭제하시겠습니까?")){
 				location.href = "admin_event_delete?event_num=" + event_num;
 			}		 
+		}
+		function couponForm() {
+			location.href = "admin_coupon_form";
 		}
 	
 	

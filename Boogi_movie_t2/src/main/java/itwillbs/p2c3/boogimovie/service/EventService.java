@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import itwillbs.p2c3.boogimovie.mapper.EventMapper;
+import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.EventTypeVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 
@@ -38,7 +39,11 @@ public class EventService {
 		return mapper.getEventTypeList();
 	}
 	
-	public int insertCoupon(String id, EventVO event) {
-		return mapper.insertCoupon(id, event);
+	public int insertCoupon(String id, int coupon_type_num) {
+		return mapper.insertCoupon(id, coupon_type_num);
+	}
+	
+	public int isCouponExist(String id, int coupon_type_num) {
+		return mapper.isCouponExist(id, coupon_type_num);
 	}
 }

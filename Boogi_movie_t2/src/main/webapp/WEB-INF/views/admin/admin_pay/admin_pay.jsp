@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 - 스토어결제관리</title>
+<title>스토어 결제관리</title>
 <!-- <link href="../admin_main/admin_main.css" rel="stylesheet"> -->
 <!-- 부트스트랩 CSS, JS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
@@ -155,7 +155,7 @@ td:nth-child(7) {
 				
 				<!-- 헤드 부분 검색 기능 -->
 				<div class="admin_store_head">
-					<div class="admin_store_title">스토어 결제관리</div>
+					<div class="admin_store_title">💳스토어 결제관리</div>
 					<div class="admin_store_search">
 						<form action="admin_pay">
 							<input type="text" name="searchKeyword" placeholder="아이디 입력" value="${param.searchKeyword}">

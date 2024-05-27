@@ -9,6 +9,13 @@
 <title>관리자페이지 홈</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 a {
    text-decoration: none;
@@ -86,7 +93,7 @@ body {
 					<div class="admin_main_center">
 
 						<div class="admin_main_title">
-							<h1>⊙ 관리자페이지</h1>
+							<h1>📌 관리자페이지</h1>
 						</div>
 					
 						<div class="admin_dashboard">

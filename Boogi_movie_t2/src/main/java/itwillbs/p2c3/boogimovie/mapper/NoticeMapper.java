@@ -27,6 +27,9 @@ public interface NoticeMapper {
 	
 	
 	//극장의 번호 선택
-	int selectTheaterNum(String theater_name); 
+	int selectTheaterNum(String theater_name);
+	
+	//게시물 수정
+	int updateNotice(NoticeVO notice); 
 	
 }

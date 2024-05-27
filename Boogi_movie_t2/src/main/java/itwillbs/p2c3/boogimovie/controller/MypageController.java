@@ -362,15 +362,16 @@ public class MypageController {
 		}
 		
 		member.setMember_id(id);
-		MemberVO dbMember = mypageService.getDbMember(member);
+//		MemberVO dbMember = mypageService.getDbMember(member);
 		int removeMovie = mypageService.removeMovie(map);
+		
 		
 		if(removeMovie > 0) { // 성공 시  
 			
+			return "true";
 		} else { // 실패 시
-			
+			return "false";
 		}
-		return "true";
 		
 	}
 	

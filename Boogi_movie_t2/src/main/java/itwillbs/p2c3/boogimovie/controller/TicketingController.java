@@ -56,11 +56,11 @@ public class TicketingController {
 		
 //		--로그인판별--
 		
-//		if(session.getAttribute("sId") == null) {
-//			model.addAttribute("msg", "로그인 후 이용해주세요");
-//			model.addAttribute("targetURL", "member_login");
-//			return "error/fail";
-//		}
+		if(session.getAttribute("sId") == null) {
+			model.addAttribute("msg", "로그인이 필요한 서비스입니다. 로그인 하시겠습니까?");
+			model.addAttribute("targetURL", "member_login");
+			return "error/confirm";
+		}
 		
 		List<MovieVO> movieList = movieService.getMovieList();
 		List<TheaterVO> theaterList = theaterService.getTheatersOrderbyName();
@@ -143,7 +143,7 @@ public class TicketingController {
 	    }
         //복도 공백
         int first_road = 3;
-        int second_road = 12;
+        int second_road = endCol - 3;
 		//시간으로 조조,심야 걸러내기
         String fee_time_keyword = "GT";
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");

@@ -80,7 +80,7 @@
 		                        +    '    <div class="row">'
 		                        +    '        <div class="col-10">'
 		                        +    '          <span class="movie_grade">'+ scs.movie_grade +'</span> / '
-		                        +    '          <b><span class="movie_name">'+ scs.movie_name +'</span></b>'
+		                        +    '          <b>'+ scs.movie_name +'</b>'
 		                        +    '        </div>'
 		                        +    '        <div class="col">'
 		                        +    '           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상영시간 <span class="movie_runtime">'+ scs.movie_runtime +'</span>분'
@@ -93,7 +93,7 @@
 		                        +    '    <div class="row">'
 		                        +    '        <div class="col-2">'
 		                        +    '            <div class="timetable_cinema">'
-		                        +    '                <h5><b><span class="screen_cinema_num">'+ scs.screen_cinema_num +'</span>관</b></h5>'
+		                        +    '                <h5><b>'+ scs.screen_cinema_num +'관</b></h5>'
 		                        +    '                총<span class="scs_empty_seat"> '+ scs.seat_size +' 석</span>'
 		                        +    '            </div>'
 		                        +    '        </div>';
@@ -155,7 +155,7 @@
 <body>
 	<article>
 		<div class="theater_timetable_all" >
-			<h4>상영시간표</h4>
+			<h4 class="text-primary">상영시간표</h4>
 			<div class="time_schedule">
 				<ul class="nav nav-pills nav-fill">
 					<li class="nav-item time_schedule_day">

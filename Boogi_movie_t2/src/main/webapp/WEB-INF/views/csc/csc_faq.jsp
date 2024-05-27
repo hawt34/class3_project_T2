@@ -229,12 +229,9 @@ $(function() {
     
     $("#faqSearch").submit(function() {
     	faqSearchKeyword = $("#csc_faq_search").val();
-    	console.log(faqSearchKeyword);
-    	
+//     	console.log(faqSearchKeyword);
     	getScroll('', true, faqSearchKeyword);
     });
-    
-    
     
 });
 

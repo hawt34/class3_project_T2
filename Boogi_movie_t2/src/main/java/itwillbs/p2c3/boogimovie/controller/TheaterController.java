@@ -185,7 +185,7 @@ public class TheaterController {
 		
 	} // timetable()
 	
-	// 알파벳을 숫자로 변환하는 함수 (timetable 에서 사용)
+	// 알파벳을 숫자로 변환하고 row * col (timetable 에서 사용)
 	private int getSeatSize(String alphabet, String screen_seat_row) {
 	    alphabet = alphabet.toUpperCase();
 	    int colToNumber = alphabet.charAt(0) - 'A' + 1;

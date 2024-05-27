@@ -183,11 +183,11 @@
     </update>
     
     <!-- 예매취소  -->
-<!--     <update id="updateMovieStatus"> -->
-<!--     	UPDATE -->
-<!--     	SET -->
-<!--     	WHERE -->
-<!--     		member_id = #{member_id} -->
-<!--     </update> -->
+    <update id="updateMovieStatus">
+    	UPDATE pay
+    	SET ticket_pay_status = '취소', ticket_pay_cancel_date = now()
+    	WHERE
+    		member_id = #{member_id} AND ticket_pay_status = '예매'
+    </update>
     
 </mapper>

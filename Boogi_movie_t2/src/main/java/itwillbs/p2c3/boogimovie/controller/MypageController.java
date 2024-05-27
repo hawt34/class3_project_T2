@@ -409,6 +409,29 @@ public class MypageController {
 		return "mypage/myp_store";
 	}
 	
+	// ============================= 스토어 취소 =============================
+	
+	@ResponseBody
+	@PostMapping("myp_cancel_store")
+	public String cancelStore(StorePayVO storePay, Model model) {
+		System.out.println("myp_cancel_store controller");
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("targetURL", "./");
+			return "result_process/fail";
+		}
+		
+		
+		
+		return "true";
+	}
+	
+	
+	
+	
+	
 	// ============================= 탈퇴 =============================
 	
 	// 탈퇴 안내 페이지 (탈퇴1)

@@ -14,6 +14,7 @@ public class ScreenInfoVO {
 	
 	// -----------------------------
 	private String theater_name;
+	private int seat_size;	
 	
 	
 }

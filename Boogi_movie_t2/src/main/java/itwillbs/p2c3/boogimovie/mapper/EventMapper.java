@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.EventTypeVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 
@@ -32,5 +33,8 @@ public interface EventMapper {
 	List<EventTypeVO> getEventTypeList();
 	
 	// 쿠폰 삽입
-	int insertCoupon(@Param("id") String id, @Param("event") EventVO event);
+	int insertCoupon(@Param("id") String id, @Param("coupon_type_num") int coupon_type_num);
+	
+	// 쿠폰 발급여부 확인
+	int isCouponExist(@Param("id") String id, @Param("coupon_type_num") int coupon_type_num);
 }

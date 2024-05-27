@@ -130,8 +130,12 @@
 		            $('#event_end_date').attr('min', startDateValue);
 		        }
 			});
-		    $('#event_start_date').change(function() {
+			$('#event_start_date').change(function() {
 		        $('#event_end_date').attr('min', $(this).val());
+		        if($('#event_end_date').val() != '' && $('#event_start_date').val() > $('#event_end_date').val()){
+		        	alert("이벤트 종료일을 체크해주세요");
+		        	$('#event_start_date').val('');
+		        }
 		    });
 		});    
 	  

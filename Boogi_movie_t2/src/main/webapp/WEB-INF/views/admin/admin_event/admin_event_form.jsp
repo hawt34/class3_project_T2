@@ -48,6 +48,7 @@
 						<div class="col-md-6 mb-3">
 							<label for="coupon_type_num">할인쿠폰</label> 
 							<select name="coupon_type_num" id="coupon_type_num" class="form-control" required>
+								<option value="0">미선택</option>
 								<c:forEach var="couponType" items="${couponTypeList}">
 									<option value="${couponType.coupon_type_num}">${couponType.coupon_name}</option>
 								</c:forEach>

@@ -169,7 +169,7 @@ th:nth-child(7), td:nth-child(7) {
 				<!-- 검색기능 -->
 				<div class="admin_movie_head" >
 					<div class="admin_movie_title">
-						영화관리
+						🎬영화관리
 					</div>
 					<div class="admin_movie_search">
 						<form action="admin_movie">

@@ -65,7 +65,7 @@ td > img{
 					<c:if test="${not empty event.event_image}">
 						<img alt="본문이미지" src="${pageContext.request.contextPath}/resources/upload/${event.event_image}"
 							<c:if test="${event.event_type_name eq '할인이벤트'}"> 
-								onclick="giveCoupon(${event.event_num})"
+								onclick="giveCoupon(${event.coupon_type_num}, ${event.event_num})"
 							</c:if>
 						>
 					</c:if>
@@ -84,9 +84,8 @@ td > img{
 	</footer>
 	
 	<script type="text/javascript">
-		function giveCoupon(event_num) {
-			location.href = "giveCoupon?event_num=" + event_num;
-			alert("쿠폰이 발급되었습니다!");
+		function giveCoupon(coupon_type_num, event_num) {
+			location.href = "giveCoupon?coupon_type_num=" + coupon_type_num + "&event_num=" + event_num;
 		}
 		
 		function goEventMain() {

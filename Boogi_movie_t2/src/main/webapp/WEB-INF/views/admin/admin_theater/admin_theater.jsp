@@ -48,6 +48,9 @@ th:nth-child(6), td:nth-child(6) {
 .admin_movie_search >select{
 	width: 200px;
 }
+.admin_movie_title{
+	margin-bottom: 20px;
+}
 
 </style>
 </head>
@@ -70,7 +73,7 @@ th:nth-child(6), td:nth-child(6) {
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_movie_head">
-					<div class="admin_movie_title">극장관리</div>
+					<div class="admin_movie_title">🕋극장관리</div>
 <!-- 					<div class="admin_movie_search"> -->
 <!-- 						<select class="form-select"> -->
 <%-- 							<c:forEach var="theater" items="${theaterList}"> --%>

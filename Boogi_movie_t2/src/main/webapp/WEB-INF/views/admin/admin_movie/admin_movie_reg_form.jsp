@@ -45,9 +45,9 @@ body {
 .form-control{
 	border: 1px solid #bbb;
 }
-#getMovie {
+#getMovie, #boxoffice {
 	height: 40px;
-	font-size: 18px;
+	font-size: 15px;
 	flex: right;
 	margin-top: 22px;
 }
@@ -65,10 +65,11 @@ body {
 							<input type="text" name="movie_name" id="movie_name" class="form-control" required />
 							<div class="invalid-feedback">영화명을 입력해주세요.</div>
 						</div>
-						<div class="col-md-6">
-							<div>
-								<input type="submit" id="getMovie" value="영화검색하기" class="btn btn-primary btn-lg btn-block" >
-							</div>
+						<div class="col-md-2">
+							<input type="submit" id="getMovie" value="영화검색" class="btn btn-primary btn-lg btn-block" >
+						</div>
+						<div class="col-md-2">
+							<input type="submit" id="boxoffice" value="박스오피스 조회" class="btn btn-primary btn-lg btn-block" >
 						</div>
 					</div>
 					<div class="mb-3">
@@ -164,6 +165,12 @@ body {
 	    }, false);
 	    
 	    $(document).ready(function(){
+	    	  // 박스오피스 검색창
+			$("#boxoffice").on("click", function() {
+		        window.open('boxoffice', '_blank'); // 박스오피스 페이지를 새 창으로 열기
+		    });
+	    	
+	    	  // 영화등록 ajax
 	        $('#getMovie').click(function(e) {
 	            e.preventDefault(); // 기본 이벤트(폼 전송) 막음
 

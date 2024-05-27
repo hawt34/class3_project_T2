@@ -111,6 +111,9 @@ footer {
 	vertical-align: middle;
 	padding: 0px;
 }
+.future_detail_button{
+	margin-bottom: 30px;
+}
 </style>
 <%-- <link href="${pageContext.request.contextPath}/resources/css/movieFuture.css"	rel="stylesheet" type="text/css"> --%>
 <script

@@ -162,7 +162,7 @@ td:nth-child(8) {
 				
 				<!-- 헤드 부분 검색 기능 -->
 				<div class="admin_reserve_head">
-					<div class="admin_reserve_title">예매관리</div>
+					<div class="admin_reserve_title">💳예매결제관리</div>
 					<div class="admin_reserve_search">
 						<form action="admin_reserve">
 							<input type="text" name="searchKeyword" placeholder="아이디 입력" value="${param.searchKeyword}">

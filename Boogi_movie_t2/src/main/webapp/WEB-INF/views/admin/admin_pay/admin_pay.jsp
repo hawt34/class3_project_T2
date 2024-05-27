@@ -155,7 +155,7 @@ td:nth-child(7) {
 				
 				<!-- 헤드 부분 검색 기능 -->
 				<div class="admin_store_head">
-					<div class="admin_store_title">스토어 결제관리</div>
+					<div class="admin_store_title">💳스토어 결제관리</div>
 					<div class="admin_store_search">
 						<form action="admin_pay">
 							<input type="text" name="searchKeyword" placeholder="아이디 입력" value="${param.searchKeyword}">

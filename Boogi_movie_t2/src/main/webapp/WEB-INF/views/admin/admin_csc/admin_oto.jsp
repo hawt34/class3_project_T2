@@ -127,7 +127,7 @@
 	<!-- content 영역 -->
 	<div class="col-9">
 		<div class="admin_ono_head">
-			<div class="admin_ono_title">1대1 문의 관리</div>
+			<div class="admin_ono_title">🤷1대1 문의 관리</div>
 				<div class="admin_ono_search">
 					<table>
 						<tr>

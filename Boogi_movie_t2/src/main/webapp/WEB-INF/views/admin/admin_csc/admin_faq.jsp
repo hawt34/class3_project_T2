@@ -36,7 +36,7 @@
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_movie_head">
-					<div class="admin_movie_title">FAQ관리</div>
+					<div class="admin_movie_title">🤔FAQ관리</div>
 				</div>
 				<!-- 바디 부분 여기 표 넣을거임 -->
 				<div class="admin_movie_body">

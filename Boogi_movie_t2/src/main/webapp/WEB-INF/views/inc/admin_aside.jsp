@@ -22,7 +22,7 @@
 
 .btn-group:hover .dropdown-menu {
 	display: block;
-	margin-left: 130px;
+	margin-left: 160px;
 }
 
 .btn-group:hover .btn {
@@ -63,7 +63,7 @@
 			<div class="btn-group dropright">
 				<!-- 마우스 오버 전 카테고리 -->
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>회원</h5>
+					<h5>🙍회원 </h5>
 				</button>
 				<div class="dropdown-menu">
 					<!-- 마우스 오버 후 서브메뉴 -->
@@ -73,7 +73,7 @@
 			</div>
 			<div class="btn-group dropright">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>영화</h5>
+					<h5>🎬영화 </h5>
 				</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="admin_movie">영화정보관리</a> 
@@ -82,7 +82,7 @@
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>극장</h5>
+					<h5>🕋극장</h5>
 				</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="admin_theater">극장관리</a> 
@@ -91,7 +91,7 @@
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>스토어</h5>
+					<h5>🍿스토어</h5>
 				</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="admin_store">스토어관리</a> 
@@ -99,7 +99,7 @@
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>결제관리</h5>
+					<h5>💳결제</h5>
 				</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="admin_pay">스토어결제관리</a>
@@ -108,7 +108,7 @@
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>고객센터</h5>
+					<h5>📞고객센터</h5>
 				</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="admin_notice?pageNum=1">공지사항</a> 
@@ -118,10 +118,11 @@
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn" data-toggle="dropdown">
-					<h5>이벤트</h5>
+					<h5>🎉이벤트</h5>
 				</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="admin_event">이벤트관리</a>
+					<a class="dropdown-item" href="admin_coupon">쿠폰관리</a>
 				</div>
 			</div>
 		</div>

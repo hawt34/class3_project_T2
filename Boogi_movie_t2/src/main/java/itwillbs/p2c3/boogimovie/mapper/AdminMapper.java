@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import itwillbs.p2c3.boogimovie.vo.CartVO;
+import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
@@ -172,6 +173,22 @@ public interface AdminMapper {
 										@Param("listLimit") int listLimit);
 	
 	//========================================================
+	// 쿠폰페이지 쿠폰타입 리스트 가져오기
+	List<CouponVO> getCouponTypeListSearch(@Param("searchKeyword") String searchKeyword, 
+													@Param("startRow") int startRow, 
+													@Param("listLimit") int listLimit);
+
+	// 쿠폰페이지 쿠폰타입 리스트 수 가져오기
+	int getCouponListCount(@Param("searchKeyword") String searchKeyword, 
+			@Param("startRow") int startRow, 
+			@Param("listLimit") int listLimit);
+
+	// 쿠폰 등록
+	int insertCoupon(CouponVO coupon);
+
+	// 쿠폰 삭제
+	int deleteCoupon(CouponVO coupon);
+
 	// 쿠폰타입 리스트 가져오기
 	List<Map<String, String>> getCouponTypeList();
 	

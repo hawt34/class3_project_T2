@@ -56,21 +56,25 @@
 	 		event_type
 	</select>
 	
-	<insert id="insertCoupon" parameterType="map">
-	<selectKey keyProperty="coupon_type_num" resultType="int" order="BEFORE">
-		SELECT coupon_type_num
-		FROM event
-		WHERE event_num = #{event.event_num}
-	</selectKey>
+	<insert id="insertCoupon">
 		INSERT INTO 
 			coupon
 		VALUES (
 			null
 			, #{coupon_type_num}
 			, #{id}
-			, 1
+			, 1 -- coupon_status
 		)
 	</insert>
+	
+	<select id="isCouponExist" resultType="int">
+		SELECT count(*) 
+		FROM coupon
+		WHERE 
+			member_id = #{id}
+		AND 
+			coupon_type_num = #{coupon_type_num}
+	</select>
 
 
 

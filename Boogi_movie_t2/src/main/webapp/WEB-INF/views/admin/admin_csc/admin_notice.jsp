@@ -39,7 +39,7 @@
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_movie_head">
-					<div class="admin_movie_title">공지사항관리</div>
+					<div class="admin_movie_title">📢공지사항관리</div>
 					<div class="admin_movie_search">
 						<select id="theater_name" >
 							<option value="" disabled>극장명선택</option>

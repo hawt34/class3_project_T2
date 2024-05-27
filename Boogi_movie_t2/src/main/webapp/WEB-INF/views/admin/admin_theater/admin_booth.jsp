@@ -91,7 +91,7 @@ th:nth-child(6), td:nth-child(6) {
 				
 				<!--  메인 중앙 영역  -->
 				<div class="admin_movie_head">
-					<div class="admin_movie_title">상영관관리</div>
+					<div class="admin_movie_title">🎞️상영관관리</div>
 					<div class="admin_movie_search">
 						<select class="form-select" name="searchKeyword" id="adminTheaterName"style="width: 300px;">
 							<option value="">전체</option>

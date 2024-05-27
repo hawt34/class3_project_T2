@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import itwillbs.p2c3.boogimovie.mapper.AdminMapper;
 import itwillbs.p2c3.boogimovie.vo.CartVO;
+import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
@@ -217,6 +218,25 @@ public class AdminService {
 	
 	
 	//--------------------------------------------------------------
+	// 쿠폰 타입 리스트 쿠폰페이지
+	public List<CouponVO> getCouponTypeListSearch(String searchKeyword, int startRow, int listLimit) {
+		return mapper.getCouponTypeListSearch(searchKeyword, startRow, listLimit);
+	}
+
+	// 쿠폰 수 조회
+	public int getCouponListCount(String searchKeyword, int startRow, int listLimit) {
+		return mapper.getCouponListCount(searchKeyword, startRow, listLimit);
+	}
+	// 쿠폰등록
+	public int insertCoupon(CouponVO coupon) {
+		return mapper.insertCoupon(coupon);
+	}
+	
+	//쿠폰 삭제
+	public int deleteCoupon(CouponVO coupon) {
+		return mapper.deleteCoupon(coupon);
+	}
+
 	// 쿠폰 타입 리스트
 	public List<Map<String, String>> getCouponTypeList() {
 		return mapper.getCouponTypeList();

@@ -8,12 +8,114 @@
 <title>부기무비 고객센터</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_sidebar.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_main.css">
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/csc_main.css"> --%>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
+<style>
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+#csc_mainShort_title {
+	width:100%;
+	height:30px;
+	text-align: right;
+	position:relative;
+	top:25px;
+	font-size:18px;
+	color:gray;
+	
+}
+
+.csc_ffs {
+	text-align: center;
+	vertical-align:text-top;
+}
+
+
+.csc_ffs_ps {
+	width:200px;
+	height:100px;
+	display: inline-block;
+} 
+.csc_ffs_modify {
+	width:200px;
+	height:100px;
+	display: inline-block;
+} 
+.csc_ffs_ticketing {
+	width:200px;
+	height:100px;
+	display: inline-block;
+	
+} 
+.csc_ffs_faq {
+	width:200px;
+	height:100px;
+	display: inline-block;
+} 
+
+hr{
+	border:0;
+	background-color: gray;
+}
+
+/* 작은 박스-inquiry */
+.csc_main_sbt {
+	font-size:1.5em;
+}
+/* '더보기' */
+.the_plus {
+	text-decoration:none;
+/* 	margin-left: 130px; */
+	font-size:0.7em;
+	float: right;
+	color: black;
+}
+
+.csc_main_inquiry {
+	margin-top:30px;
+	margin-left:30px;
+	width:400px;
+}
+
+/* 작은 박스-notice */
+
+.csc_main_shortBox {
+	font-size:1.5em;
+}
+.csc_main_notice {
+	margin-top:30px;
+	margin-left:30px;
+	width:400px;
+}
+
+.csc_shortBox_border {
+	border-top: 1px solid black;
+	margin-top:5px;
+}
+.aTag {
+	text-decoration: none;
+	color:black;
+}
+ul li {
+	margin-bottom: 5px;
+}
+
+.csc_main_InquiryUl {
+	margin-top: 5px;
+	list-style-image: url("https://i.ibb.co/6Ng1m3P/thumb.png");
+}
+.csc_main_noticeUl {
+	margin-top: 5px;
+/* 	list-style-image: url("https://i.ibb.co/6Ng1m3P/thumb.png"); */
+}
+
+#csc_mainTitle {
+	margin-top: 20px;
+}
+</style>
 </head>
 <body>
 <header>

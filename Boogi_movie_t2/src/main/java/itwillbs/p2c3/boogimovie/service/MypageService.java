@@ -128,9 +128,12 @@ public class MypageService {
 	}
 	
 	// 예매취소
+	@Transactional
 	public int removeMovie(Map<String, Object> map) {
 		System.out.println("mypService - updateMovieStatus");
-		return mapper.updateMovieStatus(map);
+		mapper.updateCouponStatus();
+		mapper.updateMemberPoint();
+		return mapper.updatePayStatus(map);
 	}
 	
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import itwillbs.p2c3.boogimovie.service.EventService;
+import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.EventTypeVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 
@@ -94,16 +95,36 @@ public class EventController {
 		
 	// 쿠폰 발급
 		@GetMapping("giveCoupon")
-		public String giveCoupon(EventVO event, HttpSession session, Model model) {
+		public String giveCoupon(CouponVO coupon, HttpSession session, Model model, EventVO event) {
 			String id = (String)session.getAttribute("sId");
-			int insertCount = eventService.insertCoupon(id, event);
-			System.out.println("쿠폰타입: " + event.getCoupon_type_num());
 			
-			if(insertCount > 0) {
-				return "redirect:/eventDetail?event_num=" + event.getEvent_num();
-			} else {
-				model.addAttribute("msg", "쿠폰등록 오류!");
+			if(id == null) { // 실패
+				model.addAttribute("msg", "잘못된 접근입니다");
+				model.addAttribute("targetURL", "member_login");
 				return "error/fail";
+			} 
+			
+			// 쿠폰 중복검사
+			int isCouponExist = eventService.isCouponExist(id, coupon.getCoupon_type_num());
+			
+			if(isCouponExist > 0) {
+				model.addAttribute("msg", "이미 발급된 쿠폰입니다!");
+				return "error/fail";
+			} else {
+				// 이벤트 삽입
+				int insertCount = eventService.insertCoupon(id, coupon.getCoupon_type_num());
+
+				if(insertCount > 0) {
+					model.addAttribute("msg", "쿠폰이 발급되었습니다");
+					model.addAttribute("targerURL", "redirect:/eventDetail?event_num=" + event.getEvent_num());
+					return "error/fail";
+				} else {
+					model.addAttribute("msg", "쿠폰등록 오류!");
+					return "error/fail";
+				}
 			}
+			
+			
+			
 		}
 }

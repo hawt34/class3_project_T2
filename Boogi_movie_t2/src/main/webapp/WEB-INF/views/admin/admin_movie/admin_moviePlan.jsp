@@ -69,8 +69,8 @@ tbody tr:hover {
 	font-size: 30px;
 	margin-top: 30px;
 	margin-bottom: 20px;
-	margin-left: 150px;
-	width: 200px;
+	margin-left: 120px;
+	width: 230px;
 }
 .admin_plan_body_search{
 	margin-bottom: 30px;
@@ -138,7 +138,7 @@ tbody tr:hover {
 					<c:set var="pageNum" value="${param.pageNum}"/>
 				</c:if>
 				
-				<div class="admin_plan_title" align="left">상영일정관리</div>
+				<div class="admin_plan_title" align="left">🗓️상영일정관리</div>
 				
 				<div class="admin_plan_body">
 					<form action="admin_moviePlan_reg" method ="post">

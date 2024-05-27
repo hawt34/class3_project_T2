@@ -10,6 +10,13 @@
 " rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath }/css/member_reg_complete.css" rel="stylesheet">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 	.message{
 		margin-left : 500px;
 	}

@@ -7,6 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>부기무비 빠른예매</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+</style>
 </head>
 <style>
     .seat.disabled {
@@ -284,12 +293,19 @@
 		<div class="center">
 			<c:forEach var="seat" items="${seats}" varStatus="status">
 				<div class="seat" onclick="toggleSeat(this)" value="${seat}">${seat}</div>
-					<c:if test="${status.index % firstRoad eq firstRoad - 1 || status.index % secondRoad eq secondRoad - 1}">
-						<span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;</span> <!-- 복도에 공백 삽입 -->
-					</c:if>
-					<c:if test="${(status.index + 1) % endCol eq 0}">
-						<br/> <!-- 각 행의 끝에서 줄바꿈 -->
-					</c:if>
+			    <!-- 첫 번째 복도 조건 -->
+			    <c:if test="${fn:contains(seat, firstRoad)}">
+			        <span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;</span> <!-- 복도에 공백 삽입 -->
+			    </c:if>
+			    
+			    <!-- 두 번째 복도 조건 -->
+			    <c:if test="${fn:contains(seat, secondRoad)}">
+			        <span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;</span> <!-- 복도에 공백 삽입 -->
+			    </c:if>
+				    
+				<c:if test="${(status.index + 1) % endCol eq 0}">
+					<br/> <!-- 각 행의 끝에서 줄바꿈 -->
+				</c:if>
 			</c:forEach>   	
 		</div>
 		<div class="final_pay row">

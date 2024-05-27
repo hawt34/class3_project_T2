@@ -40,6 +40,7 @@ import itwillbs.p2c3.boogimovie.service.ScreenService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.CartVO;
+import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.FAQVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
@@ -1111,6 +1112,100 @@ public class AdminController {
 			model.addAttribute("msg", "이벤트 수정에 실패했습니다");
 			return "error/fail";
 		}
+	}
+	
+	// 쿠폰 페이지
+	@GetMapping("admin_coupon")
+	public String adminCoupon(HttpSession session, Model model, @RequestParam(defaultValue = "1") int pageNum, 
+				 @RequestParam(defaultValue = "") String searchKeyword) {
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		// 한 페이지에 표시할 갯수
+		int listLimit = 10;
+		// 조회 시작 행 번호
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 쿠폰목록 조회
+		List<CouponVO> couponTypeList = service.getCouponTypeListSearch(searchKeyword, startRow, listLimit);
+		
+		int listCount = service.getCouponListCount(searchKeyword, startRow, listLimit);
+		// 페이징 숫자 갯수
+		int pageListLimit = 5;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+		endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("couponTypeList", couponTypeList);
+		
+		return "admin/admin_event/admin_coupon";
+	}
+	
+	
+	// 쿠폰 등록 폼
+	@GetMapping("admin_coupon_form")
+	public String adminCouponForm(Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		
+		return "admin/admin_event/admin_coupon_form";
+	}
+
+	// 쿠폰 등록 프로
+	@PostMapping("admin_coupon_pro")
+	public String adminCouponPro(Model model, HttpSession session, CouponVO coupon) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		// 쿠폰등록
+		int insertCount = service.insertCoupon(coupon);
+		if(insertCount > 0) {
+			return "redirect:/admin_coupon";
+		} else {
+			model.addAttribute("msg", "쿠폰등록에 실패했습니다");
+			return "error/fail";
+		}
+		
+	}
+	
+	@GetMapping("admin_coupon_delete")
+	public String adminCouponDelete(CouponVO coupon, HttpSession session, Model model) {
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		// 쿠폰 삭제
+		int deleteCount = service.deleteCoupon(coupon);
+		if(deleteCount > 0) {
+			return "redirect:/admin_coupon";
+		} else {
+			model.addAttribute("msg", "쿠폰삭제에 실패했습니다");
+			return "error/fail";
+		}
+		
 	}
 
 	//--------------------------------------------------------------------

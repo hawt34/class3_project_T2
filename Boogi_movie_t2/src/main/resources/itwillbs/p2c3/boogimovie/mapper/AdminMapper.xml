@@ -520,6 +520,48 @@
 <!-- 	</select> -->
 	
 	
+<!-- 쿠폰페이지 쿠폰타입리스트 -->
+	<select id="getCouponTypeListSearch" resultType="itwillbs.p2c3.boogimovie.vo.CouponVO">
+		SELECT *	
+		FROM 
+			coupon_type
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				coupon_name LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		LIMIT 
+			#{startRow}
+			, #{listLimit}
+	</select>
+
+<!-- 쿠폰페이지 쿠폰타입리스트 수 -->
+	<select id="getCouponListCount" resultType="int">
+		SELECT count(*)	
+		FROM 
+			coupon_type
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				coupon_name LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+	</select>
+	
+<!-- 쿠폰 등록하기 -->
+	<insert id="insertCoupon">
+		INSERT INTO coupon_type
+		VALUES (
+			null
+			, #{coupon_name}
+			, #{coupon_value}
+		)
+	</insert>
+
+<!-- 쿠폰 삭제하기 -->
+	<delete id="deleteCoupon">
+		DELETE FROM coupon_type
+		where 
+			coupon_type_num = #{coupon_type_num}
+	</delete>
+	
 <!-- 쿠폰타입리스트 -->
 	<select id="getCouponTypeList" resultType="hashmap">
 		SELECT *	

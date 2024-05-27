@@ -121,7 +121,7 @@ public class MovieController {
 			}
 		} else {
 			model.addAttribute("msg", "죄송합니다 검색결과 없습니다.");
-			model.addAttribute("targetURL", "movie");
+			model.addAttribute("targetURL", "movie/movie_info");
 			return "error/fail";
 		}
 
@@ -166,10 +166,14 @@ public class MovieController {
 		//System.out.println("특정유저가 적은 댓글 "+ reviews);
 		
 		model.addAttribute("reviews", reviews);
+		if (reviews.size() > 0) {
+			return "movie/movie_info_member";
+		} else {
+			model.addAttribute("msg", "적으신 리뷰가 없습니다.");
+			//model.addAttribute("targetURL", "movie");
+			return "error/fail";
+		}
 		
-		
-		
-		return "movie/movie_info_member";
 	}
 	
 	

@@ -47,5 +47,12 @@
 		DELETE FROM screen_info
 		WHERE  screen_num = #{screen_num}
 	</delete>
-
+	
+	
+	<select id="selectNewCinemaNum" resultType="int">
+		SELECT MAX(screen_cinema_num)+1
+		FROM screen_info
+		WHERE theater_num = #{theater_num};
+	</select>
+	
 </mapper>

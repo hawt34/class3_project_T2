@@ -24,6 +24,9 @@ public interface ScreenMapper {
 	// 상영관 정보 삭제
 	int deleteScreeninfo(ScreenInfoVO screenInfo);
 	
+	// 조회된 극장의 cinema_num 최대값을 찾아 +1하여 새로 등록할 번호 리턴
+	int selectNewCinemaNum(int theater_num);
+	
 	
 	
 	

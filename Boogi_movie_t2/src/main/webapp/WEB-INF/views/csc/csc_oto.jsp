@@ -74,8 +74,8 @@
 					<div class="row mb-2">
 						<label for="inquiry_type" class="col-sm-2 col-form-label inquiry_warning_star">문의유형</label>
 						<div class="col-sm-10">
-							<select name="oto_category" class="form-select form-select-sm w-25" aria-label="Default select example" required>
-								<option selected disabled>문의 유형 선택</option>
+							<select name="oto_category" class="form-select form-select-sm w-25" id="oto_category" >
+								<option selected value="">문의 유형 선택</option>
 								<option value="예매/결제">예매/결제</option>
 								<option value="영화관이용">영화관이용</option>
 								<option value="쿠폰">쿠폰</option>
@@ -87,8 +87,8 @@
 					<div class="row mb-2">
 						<label for="inquiry_type" class="col-sm-2 col-form-label inquiry_warning_star">문의지점</label>
 						<div class="col-sm-10">
-							<select name="theater_name" id="theater_name" class="form-select form-select-sm w-25" required>
-								<option selected disabled>문의 지점 선택</option>
+							<select name="theater_name" id="theater_name" class="form-select form-select-sm w-25" >
+								<option selected value="">문의 지점 선택</option>
 								<option value="해운대점">해운대점</option>
 								<option value="센텀점">센텀점</option>
 								<option value="서면점">서면점</option>
@@ -140,11 +140,23 @@
 </footer>
 <script type="text/javascript">
 $(function () {
+	console.log($("#oto_category").val());
 	$("#csc_oto_form").submit(function(event) {
 		if(!$("#csc_checkbox").is(":checked")) {
 			alert("동의를 선택하셔야 문의가 가능합니다.");
+			$("#csc_checkbox").focus();
 			event.preventDefault();
-		}	
+		}
+		
+		if($("#oto_category").val() =='') {
+			alert("문의유형을 선택해 주세요.");
+			$("#oto_category").focus();
+			event.preventDefault();
+		} else if($("#theater_name").val() =='') {
+			alert("문의지점을 선택해 주세요.");
+			$("#theater_name").focus();
+			event.preventDefault();
+		}
 	});
 });
 

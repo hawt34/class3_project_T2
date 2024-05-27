@@ -35,7 +35,7 @@ public class HomeController {
 		//System.out.println("무비트레일러"+movieTrail);
 		model.addAttribute("movieTrail", movieTrail);
 		model.addAttribute("movieInfo", movieInfo);
-//		session.setAttribute("sId", "admin");
+		session.setAttribute("sId", "admin");
 		String member_id = (String) session.getAttribute("sId");
 		//System.out.println("현재로그인한 " +member_id);
 		model.addAttribute("member_id", member_id);

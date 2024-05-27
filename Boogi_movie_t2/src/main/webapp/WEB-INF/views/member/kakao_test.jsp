@@ -24,7 +24,7 @@
   displayToken()
   function displayToken() {
     var token = getCookie('authorize-access-token');
-
+	
     if(token) {
       Kakao.Auth.setAccessToken(token);
       Kakao.Auth.getStatusInfo()

@@ -121,7 +121,7 @@ public class MovieController {
 			}
 		} else {
 			model.addAttribute("msg", "죄송합니다 검색결과 없습니다.");
-			model.addAttribute("targetURL", "movie/movie_info");
+			
 			return "error/fail";
 		}
 

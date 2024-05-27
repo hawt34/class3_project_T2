@@ -94,7 +94,7 @@
 				<!--  메인 중앙 영역  -->
 				<!-- 헤드 부분 여기 검색 기능 넣을거임 -->
 				<div class="admin_store_head">
-					<div class="admin_store_title">스토어 관리</div>
+					<div class="admin_store_title">🍿스토어 관리</div>
 					<div class="admin_store_search">
 <!-- 						  <select id="categorySelect"> -->
 <!--                             <option value="전체">전체</option> 전체 카테고리를 선택하는 옵션을 추가할 수 있습니다. -->

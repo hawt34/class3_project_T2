@@ -182,12 +182,40 @@
 			member_id = #{member_id}
     </update>
     
-    <!-- 예매취소  -->
-<!--     <update id="updateMovieStatus"> -->
-<!--     	UPDATE -->
-<!--     	SET -->
-<!--     	WHERE -->
-<!--     		member_id = #{member_id} -->
-<!--     </update> -->
+    <!-- 예매취소 pay 테이블 업데이트 -->
+	<update id="updatePayStatus">
+	    UPDATE pay
+	    SET ticket_pay_status = '취소', ticket_pay_cancel_date = now()
+	        <set>
+	            <if test="coupon_num != null and use_point != 0"><!-- 쿠폰사용O, 포인트 사용O -->
+	                use_point = 0,
+	                save_point = 0,
+	                coupon_num = null
+	            </if>
+	            <if test="coupon_num != null and use_point == 0"><!-- 쿠폰사용O, 포인트 사용X -->
+	            	save_point = 0,
+	            	coupon_num = null
+	            </if>
+	            <if test="coupon_num == null and use_point != 0"><!-- 쿠폰사용X, 포인트 사용O -->
+	            	use_point = 0,
+	            	save_point = 0
+	            </if>
+	        </set>
+	</update>
+	
+    <!-- 예매취소 coupon 테이블 업데이트 -->
+	<update id="updateCouponStatus">
+	    UPDATE coupon
+	    SET coupon_status = 1
+	    WHERE member_id = #{member_id} AND coupon_num = #{coupon_num}
+	</update>
+	
+	<!-- 예매취소 member 테이블 업데이트 -->
+	<update id="updateMemberPoints">
+	    UPDATE member
+	    SET member_point = member_point + #{use_point} - #{save_point}
+	    WHERE member_id = #{member_id} AND
+	</update>
+    
     
 </mapper>

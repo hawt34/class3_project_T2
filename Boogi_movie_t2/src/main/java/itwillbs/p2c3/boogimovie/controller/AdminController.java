@@ -39,6 +39,7 @@ import itwillbs.p2c3.boogimovie.service.ScreenService;
 import itwillbs.p2c3.boogimovie.service.TheaterService;
 import itwillbs.p2c3.boogimovie.service.TicketingService;
 import itwillbs.p2c3.boogimovie.vo.CartVO;
+import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.FAQVO;
 import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
@@ -84,7 +85,15 @@ public class AdminController {
 	
 	// admin 메인 연결
 	@GetMapping("admin_main")
-	public String adminMain(Model model) {
+	public String adminMain(Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
 		
 		// 회원 수
 		int memberCount = service.countMemberList();
@@ -246,11 +255,15 @@ public class AdminController {
 	@PostMapping("admin_notice_pro")
 	public String adminNoticePro(NoticeVO notice, Model model, String theater_name) {
 		int theater_num = 0;
-		if(!theater_name.equals("")) {
-			theater_num = noticeService.getTheaterNum(theater_name);
-			System.out.println("극장번호: " + theater_num);
-		} else {
+//		System.out.println("극장 이름: " + theater_name);
+		
+		if(!theater_name.equals("") && theater_name != null) {
+			notice.setTheater_name(notice.getTheater_name().replace(",", ""));
+			theater_num = noticeService.getTheaterNum(notice.getTheater_name());
+//			System.out.println("극장번호: " + theater_num);
+		} else if(notice.getTheater_name().equals("none")){
 			notice.setNotice_num(0);
+//			System.out.println("셋극장 넘버: " + notice.getNotice_num());
 		}
 		
 		int noticeCount = service.InsertNotice(notice,theater_num);
@@ -262,7 +275,7 @@ public class AdminController {
 		}
 		
 		
-		return "redirect:admin_notice";
+		return "redirect:/admin_notice";
 	}
 	
 	//notice_modify 연결
@@ -273,6 +286,28 @@ public class AdminController {
 		
 		model.addAttribute("notice", notice);
 		return "admin/admin_csc/admin_notice_modify";
+	}
+	
+	//notice_modify 
+	@PostMapping("admin_notice_modify")
+	public String adminNoticeModifyPro(NoticeVO notice, Model model) {
+//		System.out.println("PRO notice: " + notice);
+//		if(!notice.getTheater_name().equals("")) {
+//			int theaterNum = noticeService.getTheaterNum(notice.getTheater_name());
+//			System.out.println("극장번호 : " + theaterNum);
+//			notice.setNotice_num(theaterNum);
+//		}
+		
+		int updateCount = noticeService.updateNotice(notice);
+		
+		if(updateCount == 0) {
+			model.addAttribute("msg", "수정 실패!");
+			return "error/fail";
+		}
+		
+		
+//		model.addAttribute("notice", notice);
+		return "redirect:/admin_notice";
 	}
 	
 	@GetMapping("admin_notice_delete")
@@ -377,7 +412,16 @@ public class AdminController {
 	// 2) 리뷰 페이지
 	@GetMapping("admin_review")
 	public String adminReview(@RequestParam(defaultValue = "1") int pageNum, 
-			  				  @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+			  				  @RequestParam(defaultValue = "") String searchKeyword, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		
 		
 		// 한 페이지에 표시할 갯수
 		int listLimit = 10;
@@ -403,7 +447,16 @@ public class AdminController {
 	
 	// 리뷰 삭제
 	@GetMapping("admin_review_delete")
-	public String adminReviewDelete(String review_num, Model model) {
+	public String adminReviewDelete(String review_num, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		int deleteCount = service.deleteReview(review_num);
 		if(deleteCount > 0) {
 			return "redirect:/admin_review";
@@ -416,7 +469,15 @@ public class AdminController {
 	// 3) 회원페이지
 	@GetMapping("admin_member")
 	public String adminMember(@RequestParam(defaultValue = "1") int pageNum, 
-							  @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+							  @RequestParam(defaultValue = "") String searchKeyword, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
 		// 한 페이지에 표시할 갯수
 		int listLimit = 10;
 		// 조회 시작 행 번호
@@ -444,7 +505,15 @@ public class AdminController {
 	
 	// 회원정보 상세
 	@GetMapping("admin_member_editForm")
-	public String adminMemberEditForm(MemberVO member , Model model) {
+	public String adminMemberEditForm(MemberVO member , Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
 		System.out.println(member.getMember_id());
 		member = service.SelectMember(member.getMember_id());
 		model.addAttribute("member", member);
@@ -454,7 +523,16 @@ public class AdminController {
 	
 	// 회원 삭제
 	@GetMapping("admin_member_withdraw")
-	public String adminMemberWithdraw(MemberVO member, Model model) {
+	public String adminMemberWithdraw(MemberVO member, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		int updateCount = service.deleteMember(member.getMember_id());
 		
 		if(updateCount > 0) {
@@ -468,7 +546,15 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 상영관리 페이지
 	@GetMapping("admin_moviePlan")
-	public String adminMoviePlan(@RequestParam(defaultValue = "1") int pageNum, Model model) {
+	public String adminMoviePlan(@RequestParam(defaultValue = "1") int pageNum, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
 		
 		List<Map<String, String>> movieList = service.getmovieList();
 		List<Map<String, String>> theaterNameList = service.getTheaterList();
@@ -502,8 +588,15 @@ public class AdminController {
 	
 	// 상영일정 등록
 	@PostMapping("admin_moviePlan_reg")
-	public String adminMoviePlanReg(ScreenSessionVO screenSession, Model model) {
-//		System.out.println(screenSession);
+	public String adminMoviePlanReg(ScreenSessionVO screenSession, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
 		
 		// 상영일정 등록시 빈자리값 계산해서 넣어주기
 		ScreenInfoVO seatInfo = service.getSeatInfo(screenSession);
@@ -534,7 +627,16 @@ public class AdminController {
 	
 	// 상영일정 삭제 
 	@GetMapping("admin_moviePlan_delete")
-	public String adminMoviePlanDelete(ScreenSessionVO screenSession, Model model) {
+	public String adminMoviePlanDelete(ScreenSessionVO screenSession, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		int deleteCount = service.deleteMoviePlan(screenSession.getScs_num());
 		if(deleteCount > 0) {
 			return "redirect:/admin_moviePlan";
@@ -640,7 +742,15 @@ public class AdminController {
 	// 영화 리스트 조회 
 	@GetMapping("admin_movie")
 	public String adminMovie(@RequestParam(defaultValue = "1") int pageNum, 
-						 	 @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+						 	 @RequestParam(defaultValue = "") String searchKeyword, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
 		
 		// 한 페이지에 표시할 갯수
 		int listLimit = 10;
@@ -669,7 +779,16 @@ public class AdminController {
 	
 	// 영화 삭제
 	@GetMapping("admin_movie_delete")
-	public String adminMovieDelete(@RequestParam String movie_num, Model model) {
+	public String adminMovieDelete(@RequestParam String movie_num, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		System.out.println("moviedelete");
 		int deleteCount = service.deleteMovie(movie_num);
 		
@@ -683,13 +802,31 @@ public class AdminController {
 	
 	// 영화 등록 폼
 	@GetMapping("admin_movie_reg_form")
-	public String adminMovieRegForm() {
+	public String adminMovieRegForm(HttpSession session, Model model) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		
 		return "admin/admin_movie/admin_movie_reg_form";
 	}
 	
 	// 영화 등록 프로
 	@PostMapping("admin_movie_reg_pro")
-	public String adminMovieGetPro(@ModelAttribute MovieVO movie, Model model) {
+	public String adminMovieGetPro(@ModelAttribute MovieVO movie, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		
 		// db에 영화가 있는지 판별
 		MovieVO dbMovie = service.getMovie(movie.getMovie_name()); 
 		if(dbMovie != null) {
@@ -709,7 +846,16 @@ public class AdminController {
 	
 	// 영화 수정 폼
 	@GetMapping("admin_movie_edit_form")
-	public String adminMovieEditForm(MovieVO movie, Model model) {
+	public String adminMovieEditForm(MovieVO movie, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		
 		movie = service.SelectMovie(movie.getMovie_num());
 		model.addAttribute("movie", movie);
 		
@@ -718,7 +864,16 @@ public class AdminController {
 	
 	// 영화 수정 프로
 	@PostMapping("admin_movie_edit_pro")
-	public String adminMovieEditPro(@ModelAttribute MovieVO movie, Model model) {
+	public String adminMovieEditPro(@ModelAttribute MovieVO movie, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		
 		int updateCount = service.UpdateMovie(movie);
 		System.out.println(movie);
 		
@@ -743,7 +898,15 @@ public class AdminController {
 	// 관리자 이벤트 
 	@GetMapping("admin_event")
 	public String adminEvent(@RequestParam(defaultValue = "1") int pageNum, 
-		 	 				 @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+		 	 				 @RequestParam(defaultValue = "") String searchKeyword, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
 		
 		// 한 페이지에 표시할 갯수
 		int listLimit = 10;
@@ -771,7 +934,15 @@ public class AdminController {
 	
 	// 이벤트 등록 폼
 	@GetMapping("admin_event_form")
-	public String adminEventForm(Model model) {
+	public String adminEventForm(Model model, HttpSession session) {
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		
 		List<Map<String, String>> couponTypeList = service.getCouponTypeList();
 		model.addAttribute("couponTypeList", couponTypeList);
 		
@@ -781,6 +952,14 @@ public class AdminController {
 	// 이벤트 등록 프로
 	@PostMapping("admin_event_pro")
 	public String adminEventPro(HttpServletRequest request, HttpSession session, EventVO event, Model model) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
 		
 		String uploadDir = "/resources/upload";
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
@@ -853,6 +1032,14 @@ public class AdminController {
 	public String adminEventModify(HttpSession session, EventVO event, Model model) {
 		event = eventService.getEvent(event.getEvent_num());
 		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		if(event == null) {
 			model.addAttribute("msg", "이벤트를 불러오는데 실패하였습니다");
 			return "error/fail";
@@ -866,7 +1053,16 @@ public class AdminController {
 	}
 	// 이벤트 등록 수정 프로
 	@PostMapping("admin_event_modify_pro")
-	public String adminEventModifyPro(EventVO event, Model model) {
+	public String adminEventModifyPro(EventVO event, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		int updateCount = service.updateEvent(event);
 		if(updateCount > 0) {
 			return "redirect:/admin_event";
@@ -878,6 +1074,15 @@ public class AdminController {
 	// 이벤트 삭제
 	@GetMapping("admin_event_delete")
 	public String adminEventDelete(HttpSession session, EventVO event, Model model) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		EventVO dbEvent = eventService.getEvent(event.getEvent_num());
 		
 		int deleteCount = service.deleteEvent(event);
@@ -907,12 +1112,114 @@ public class AdminController {
 			return "error/fail";
 		}
 	}
+	
+	// 쿠폰 페이지
+	@GetMapping("admin_coupon")
+	public String adminCoupon(HttpSession session, Model model, @RequestParam(defaultValue = "1") int pageNum, 
+				 @RequestParam(defaultValue = "") String searchKeyword) {
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		// 한 페이지에 표시할 갯수
+		int listLimit = 10;
+		// 조회 시작 행 번호
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 쿠폰목록 조회
+		List<CouponVO> couponTypeList = service.getCouponTypeListSearch(searchKeyword, startRow, listLimit);
+		
+		int listCount = service.getCouponListCount(searchKeyword, startRow, listLimit);
+		// 페이징 숫자 갯수
+		int pageListLimit = 5;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+		endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("couponTypeList", couponTypeList);
+		
+		return "admin/admin_event/admin_coupon";
+	}
+	
+	
+	// 쿠폰 등록 폼
+	@GetMapping("admin_coupon_form")
+	public String adminCouponForm(Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		
+		return "admin/admin_event/admin_coupon_form";
+	}
+
+	// 쿠폰 등록 프로
+	@PostMapping("admin_coupon_pro")
+	public String adminCouponPro(Model model, HttpSession session, CouponVO coupon) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		// 쿠폰등록
+		int insertCount = service.insertCoupon(coupon);
+		if(insertCount > 0) {
+			return "redirect:/admin_coupon";
+		} else {
+			model.addAttribute("msg", "쿠폰등록에 실패했습니다");
+			return "error/fail";
+		}
+		
+	}
+	
+	@GetMapping("admin_coupon_delete")
+	public String adminCouponDelete(CouponVO coupon, HttpSession session, Model model) {
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		} 
+		// 쿠폰 삭제
+		int deleteCount = service.deleteCoupon(coupon);
+		if(deleteCount > 0) {
+			return "redirect:/admin_coupon";
+		} else {
+			model.addAttribute("msg", "쿠폰삭제에 실패했습니다");
+			return "error/fail";
+		}
+		
+	}
 
 	//--------------------------------------------------------------------
 	// 관리자 결제 페이지
 	@GetMapping("admin_pay")
 	public String adminPay(@RequestParam(defaultValue = "1") int pageNum, 
-						   @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+						   @RequestParam(defaultValue = "") String searchKeyword, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
 		
 		// 한 페이지에 표시할 갯수
 		int listLimit = 10;
@@ -954,7 +1261,15 @@ public class AdminController {
 	//	예매관리 페이지
 	@GetMapping("admin_reserve")
 	public String adminReserve(@RequestParam(defaultValue = "1") int pageNum, 
-							   @RequestParam(defaultValue = "") String searchKeyword, Model model) {
+							   @RequestParam(defaultValue = "") String searchKeyword, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
 		
 		// 한 페이지에 표시할 갯수
 		int listLimit = 10;
@@ -981,7 +1296,16 @@ public class AdminController {
 	
 	// 예매 상세 페이지
 	@GetMapping("admin_reserve_detail")
-	public String adminReserveDetail(@RequestParam int ticket_num, @RequestParam int ticket_pay_num, Model model) {
+	public String adminReserveDetail(@RequestParam int ticket_num, @RequestParam int ticket_pay_num, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		// 예매정보 가져오기
 		Map<String, String> reserveDetail = service.selectReserveDetail(ticket_num);
 		// 좌석 정보 가져오기
@@ -1006,7 +1330,14 @@ public class AdminController {
 	//--------------------------------------------------------------------
 	// 관리자 스토어 페이지
 	@GetMapping("admin_store")
-	public String adminStore(Model model) {
+	public String adminStore(Model model, HttpSession session) {
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
 
 		//전체리스트를 담는 걸 하나 만듬.
 		
@@ -1018,6 +1349,7 @@ public class AdminController {
 	// 아이템 수정폼으로 일단 와서
 	@GetMapping("admin_store_modify")
 	public String adminStoreModify(@RequestParam String item_info_name, ItemInfoVO item, Model model) {
+		
 		//System.out.println("여기는 스토어 아이템수정 " + item_info_name);
 		item = service.getItem(item_info_name);
 		//System.out.println("여기는 스토어 아이템수정 "+ item);
@@ -1028,7 +1360,16 @@ public class AdminController {
 	// 여기서 아이템 업데이트 폼을 다시 리다이렉트
 	
 	@PostMapping("admin_store_modifyPro")
-	public String adminStoreForm(ItemInfoVO updateItem, Model model) {
+	public String adminStoreForm(ItemInfoVO updateItem, Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		//System.out.println("진짜 스낵수정폼 수정" + updateItem); 데이터 확인완료 주석처리
 		int updateCount = service.updateItem(updateItem);
 		if(updateCount > 0) {
@@ -1047,7 +1388,16 @@ public class AdminController {
 	
 	
 	@PostMapping("admin_store_pro")
-	public String adminStorePro(ItemInfoVO insertItem,Model model) {
+	public String adminStorePro(ItemInfoVO insertItem,Model model, HttpSession session) {
+		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
+		
 		//System.out.println("여기는 스토어프로 인설트 아이템 확인" + insertItem); 데이터 확인완료
 		ItemInfoVO dbItem =  service.getItem(insertItem.getItem_info_name());
 		
@@ -1068,9 +1418,16 @@ public class AdminController {
 	
 	
 	@GetMapping("admin_store_delete")
-	public String adminStoreDelete(@RequestParam String item_info_name, Model model) {
+	public String adminStoreDelete(@RequestParam String item_info_name, Model model, HttpSession session) {
 		System.out.println("storedelete");
 		
+		String id = (String)session.getAttribute("sId");
+		
+		if(id == null || !id.equals("admin")) { // 실패
+			model.addAttribute("msg", "잘못된 접근입니다");
+			model.addAttribute("targetURL", "member_login");
+			return "error/fail";
+		}
 		
 		int deleteCount = service.deleteItem(item_info_name);
 		if(deleteCount > 0) {

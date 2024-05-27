@@ -83,7 +83,6 @@ body {
 	padding: inherit;
 	border-right: solid 3px black;
 	border-top: solid 3px black;
-	border-right: solid 3px black;
 	border-bottom: solid 3px black;
 }
 
@@ -311,7 +310,7 @@ select[multiple] {
 }
 
 .tic_main {
-	width: 1500px;
+	width: 1400px;
 	margin: 0 auto;
 }
 
@@ -400,7 +399,7 @@ a {
 <form action="tic_choose_seat" method="post" id="fr">
 <section class="tic_main">
     <div class="tic_title">
-        <h3>영화 예매</h3>
+        <h2>영화 예매</h2>
             <hr>
     </div>
     <div class="row asdf">
@@ -481,7 +480,7 @@ a {
                 </div>
                 <!-- tic_theater 종료 -->
                 <!-- tic_final 시작 -->
-                <div class="col-md-6 tic" style="padding-left: 20px; padding-right: 20px;">
+                <div class="col-md-6 tic" style="padding-left: 20px;">
                     <div class="tic_final">
                         <!-- 설명영역 -->
                         <div class="explain" id="daySelected">

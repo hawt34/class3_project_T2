@@ -18,10 +18,10 @@
 }
 
 article {
-	margin-top: 50px;
+	margin-top: 30px;
+	margin-bottom: 50px;
 	width: 1400px;
 	height: 50px;
-	text-align: center;
 }
 
 section {
@@ -63,6 +63,7 @@ section {
 	height: 200px;
 	width: 300px;
 	float: right;
+	margin-top: 20px;
 }
 
 .snack1_image, .snack2_image, .snack3_image, .snack4_image {
@@ -91,7 +92,7 @@ section {
 
 .snack1_name, .snack2_name, .snack3_name, .snack4_name {
 	text-align: center;
-	font-size: 24px;
+/* 	font-size: 24px; */
 }
 
 .snack2 {
@@ -120,6 +121,9 @@ footer {
 	height: 100px;
 	/* 	background-color: #ffb300; */
 }
+.snackBtn{
+	margin-top: 10px;
+}
 </style>
 <title>부기무비 스토어</title>
 <link
@@ -136,10 +140,11 @@ footer {
 		<section>
 			<article>
 				<h1>부기 스토어</h1>
+				<hr>
 			</article>
 			<div class="content">
 				<div class="snack1">
-					<div class="snack1_name">부기스낵</div>
+					<div class="snack1_name"><h3>🥨부기스낵🥨</h3></div>
 					<div class="snack1_box">
 						<h4>종류 및 가격</h4>
 						<select name="category1_snack" id="category1_snack">
@@ -150,15 +155,15 @@ footer {
 									data-price="${item_snack.item_info_price}">
 									${item_snack.item_info_name} - ${item_snack.item_info_price}원</option>
 							</c:forEach>
-						</select><br> <input type="button" class="btn btn-outline-primary"
+						</select><br> <input type="button" class="btn btn-outline-primary snackBtn"
 							value="담기" id="snackbutton">
 					</div>
-					<div class="snack1_image">
+					<div class="snack1_image" align="right">
 						<img id="snack1_image" src="">
 					</div>
 				</div>
 				<div class="snack2">
-					<div class="snack2_name">부기팝콘</div>
+					<div class="snack2_name"><h3>🍿부기팝콘🍿</h3></div>
 					<div class="snack2_box">
 						<h4>종류 및 가격</h4>
 						<select name="category2_pop" id="category2_pop">
@@ -169,15 +174,15 @@ footer {
 									data-price="${item_pop.item_info_price}">
 									${item_pop.item_info_name} ${item_pop.item_info_price}원</option>
 							</c:forEach>
-						</select> <input type="button" class="btn btn-outline-primary" value="담기"
+						</select> <input type="button" class="btn btn-outline-primary snackBtn" value="담기"
 							id="snackpop">
 					</div>
-					<div class="snack2_image">
+					<div class="snack2_image" align="right">
 						<img id="snack2_image" src="">
 					</div>
 				</div>
 				<div class="snack3">
-					<div class="snack3_name">부기음료</div>
+					<div class="snack3_name"><h3>🥤부기음료🥤</h3></div>
 					<div class="snack3_box">
 						<h4>종류 및 가격</h4>
 						<select name="category3_juice" id="category3_juice">
@@ -188,15 +193,15 @@ footer {
 									data-price="${item_juice.item_info_price}">
 									${item_juice.item_info_name} ${item_juice.item_info_price}원</option>
 							</c:forEach>
-						</select> <input type="button" class="btn btn-outline-primary" value="담기"
+						</select> <input type="button" class="btn btn-outline-primary snackBtn" value="담기"
 							id="snackjuice">
 					</div>
-					<div class="snack3_image">
+					<div class="snack3_image" align="right">
 						<img id="snack3_image" src="">
 					</div>
 				</div>
 				<div class="snack4">
-					<div class="snack4_name">부기콤보</div>
+					<div class="snack4_name"><h3>😍부기콤보😍</h3></div>
 					<div class="snack4_box">
 						<h4>종류 및 가격</h4>
 						<select name="category4_combo" id="category4_combo">
@@ -207,10 +212,10 @@ footer {
 									data-price="${item_combo.item_info_price}">
 									${item_combo.item_info_name} ${item_combo.item_info_price}원</option>
 							</c:forEach>
-						</select> <input type="button" class="btn btn-outline-primary" value="담기"
+						</select> <input type="button" class="btn btn-outline-primary snackBtn" value="담기"
 							id="snackcombo">
 					</div>
-					<div class="snack4_image">
+					<div class="snack4_image" align="right">
 						<img id="snack4_image" src="">
 					</div>
 				</div>

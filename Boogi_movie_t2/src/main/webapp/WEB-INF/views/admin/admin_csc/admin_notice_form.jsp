@@ -36,6 +36,7 @@
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">공지사항등록</h4>
 				<form class="validation-form" novalidate action="admin_notice_pro" method="post" onsubmit="return confirm('공지를 등록하시겠습니까?');">
+					<input type="hidden" name="theater_name" id="hidden-disabled-select">
 					<input type="hidden" value="${param.pageNum }" name="pageNum">
 					<div class="mb-3">
 						<label for="movie_name">글제목</label> 
@@ -47,8 +48,8 @@
 							<option value="전체" >전체</option>
 							<option value="극장" >극장</option>
 						</select>
-						<select name="theater_name" id="theater_name">
-							<option value="">없음</option>
+						<select name="theater_name" id="theater_name_select">
+							<option value="none">없음</option>
 							<option value="해운대점">해운대점</option>
 							<option value="센텀점">센텀점</option>
 							<option value="서면점">서면점</option>
@@ -60,6 +61,7 @@
 							<option value="정관점">정관점</option>
 							<option value="사상점">사상점</option>
 						</select>
+						
 					</div>
 					<div class="mb-3">
 						<label for="movie_story">내용</label> 
@@ -82,32 +84,33 @@
 		</footer>
 	</div>
 <script>
+
 $(function () {
 	
 	if ($("#notice_category").val() == "전체") {
-        $("#theater_name").prop("disabled", true);
+        $("#theater_name_select").prop("disabled", true);
     } else {
-        $("#theater_name").prop("disabled", false);
+        $("#theater_name_select").prop("disabled", false);
     }
 	
 	$("#notice_category").change(function() {
 		if ($(this).val() == "전체") {
-		    $("#theater_name").val("");
-		    $("#theater_name").prop("disabled", true);
+		    $("#theater_name_select").val("none");
+		    $("#notice_name").val("");
+		    $("#theater_name_select").prop("disabled", true);
 		} else if ($(this).val() == "극장") {
 			
-		    $("#theater_name").val("해운대점");
+		    $("#theater_name_select").val("해운대점");
 		    $("#notice_name").val("[해운대점]");
-		    $("#theater_name").prop("disabled", false);
-		    $("#theater_name option:eq(0)").prop("disabled", true);
+		    $("#theater_name_select").prop("disabled", false);
+		    $("#theater_name_select option:eq(0)").prop("disabled", true);
 		}
 	});
-	$("#theater_name").change(function () {
-		let theaterName = $("#theater_name").val();
+	$("#theater_name_select").change(function () {
+		let theaterName = $("#theater_name_select").val();
 		$("#notice_name").val("[" + theaterName + "]");
 		
 	});
-	
 	
 	
 });
@@ -145,5 +148,13 @@ $(function () {
 	  ]
 	});
 </script>
+<script>
+	function copyDisabledSelectValue() {
+		var disabledSelect = document.getElementById("theater_name_select");
+		var hiddenInput = document.getElementById("hidden-disabled-select");
+		hiddenInput.value = disabledSelect.value;
+	}
+</script>
+
 </body>
 </html>

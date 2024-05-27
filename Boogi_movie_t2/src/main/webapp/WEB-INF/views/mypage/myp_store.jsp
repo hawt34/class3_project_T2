@@ -6,20 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부기무비 스토어 결제내역</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_reservation.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-body { 
-	font-family: "Noto Sans KR", sans-serif; 
-	font-optical-sizing: auto;
-	font-weight: 400;
-	font-style: normal;
-	
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 hr{
 	margin-top: 10px;
@@ -34,6 +33,30 @@ hr{
 }
 
 </style>
+
+<script type="text/javascript">
+	function cancelStore(member_id) {
+		$.ajax({
+			url : "myp_cancel_store",
+			type : "post",
+			dataType : "json",
+			data : {
+				"member_id" : member_id
+			},
+			success : function(result) {
+				console.log("ajax 성공" + result);
+			},
+			error : function() {
+				console.log("ajax 실패");
+			}
+			
+		});
+	}
+
+
+</script>
+
+
 </head>
 <body>
 
@@ -102,7 +125,7 @@ hr{
 										                <fmt:formatNumber value="${storePay.store_pay_price}" type="number" groupingUsed="true" />원
 										            </td>
 										            <td>${storePay.store_pay_type}</td>
-										            <td><input type="button" class="btn btn-outline-secondary" value="취소"></input></td>
+										            <td><input type="button" class="btn btn-outline-secondary" id="cancelStore" onclick="cancelStore('${storePay.member_id}')" value="취소"></input></td>
 										        </tr>
 										    </c:if>
 										</c:forEach>

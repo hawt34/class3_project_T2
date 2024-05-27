@@ -18,8 +18,11 @@ main {
 
 .event_title {
 	text-align: left;
-	margin: 30px 60px 0px;
+	margin: 30px 0px;
 	border-bottom: 1px solid lightgray;
+}
+.event_title > h1{
+	margin-bottom: 15px;
 }
 
 * {
@@ -165,7 +168,7 @@ main {
 
 	<main>
 		<div class="event_title">
-			<h2>이벤트페이지</h2>
+			<h1>이벤트페이지</h1>
 		</div>
 		
 		

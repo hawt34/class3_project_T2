@@ -51,7 +51,7 @@
 					<div class="mb-3">
 						<label for="movie_code">상영관 번호</label> 
 							<div class="input-group mb-3">	
-								<span class="input-group-text">자동 입력 값</span>
+								<span class="input-group-text">고정 값</span>
 								<input type="text" id="movie_code" name="screen_num" class="form-control" readonly value="${screenInfo.screen_num}"/> 
 							</div>	
 						<div class="invalid-feedback">상영관 번호 입력해주세요.</div>
@@ -61,6 +61,7 @@
 							<div class="input-group mb-3">	
 								<span class="input-group-text">관 번호</span>
 								<input type="text" id="movie_name" name="screen_cinema_num"  class="form-control" required value="${screenInfo.screen_cinema_num}"/> 
+								<span class="input-group-text">관</span>
 							</div>
 						<div class="invalid-feedback">상영관 이름을 입력해주세요.</div>
 					</div>

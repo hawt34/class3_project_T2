@@ -91,6 +91,9 @@ ul li {
 .csc_main_InquiryUl {
 	margin-top: 5px;
 	list-style-image: url("https://i.ibb.co/6Ng1m3P/thumb.png");
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .csc_main_noticeUl {
 	margin-top: 5px;

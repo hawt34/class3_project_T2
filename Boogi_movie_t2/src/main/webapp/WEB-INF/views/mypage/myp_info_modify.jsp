@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부기무비 회원정보수정</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myp_info_modify.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
@@ -14,15 +14,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-body { 
-	font-family: "Noto Sans KR", sans-serif; 
-	font-optical-sizing: auto;
-	font-weight: 400;
-	font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
 
-/* .form_item { margin-top : 0px; } */
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 </style>
 
 <body>
@@ -82,7 +80,7 @@ body {
 						</div>
 					  	<div class="form_item w-75">
 					    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" readonly required value="${member.member_birth}">
-			    	    	<span id="msg_birth"></span>
+			    	    	<span id="msg_birth" ></span>
 					    </div><!-- form item -->
 					    
 						<div class="box5">
@@ -94,7 +92,7 @@ body {
 								<input type="text" id="address1" name="member_address1" placeholder="기본주소" size="25" required value="${member.member_address1 }"  readonly onclick="search_address()"><br>
 								<input type="text" id="address2" name="member_address2" placeholder="상세주소" size="25" required pattern="^.{2,20}$" maxlength="20" value="${member.member_address2 }">
 					    	<div class="box4">
-					    		<span id="msg_addr"></span>	
+					    		<span id="msg_addr" style="color: red;"></span>	
 					    	</div>
 					    </div><!-- form item -->
 					
@@ -104,7 +102,7 @@ body {
 					  	<div class="form_item w-75">
 					    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required value="${member.member_email}">
 							<div class="box4">
-		 				    	<span id="msg_email"></span>
+		 				    	<span id="msg_email" style="color: red;"></span>
 		 				    </div>
 					    </div><!-- form item -->
 					
@@ -114,7 +112,7 @@ body {
 					  	<div class="form_item w-75">
 					    	<input type="text" placeholder="-제외한 전화번호를 입력해주세요" name="member_tel" required id="member_tel" value="${member.member_tel}">
 							<div class="box4">
-								<span id="msg_tel"></span>
+								<span id="msg_tel" style="color: red;"></span>
 							</div>
 					    </div><!-- form item -->
 					    
@@ -155,8 +153,66 @@ body {
 
 	    // 비밀번호 입력값 변경 시
 	    $("#member_pwd").on("input", function() {
-	        validatePassword();
+	        let pwd = $("#member_pwd").val();
+		    let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
+		    let message = document.getElementById("msg_pwd1");
+// 		    let msgPwd = document.getElementById("msg_pwd");
+
+		    // 초기화
+		    message.style.color = "red";
+		    
+		    // 패스워드 입력값 검증(복잡도 검사 포함)
+// 		    let msg = "";
+// 		    let color = "";
+// 		    let checkPasswdResult = false;
+
+		    if (pwd === "") {
+		        message.textContent = "비밀번호를 입력하세요"; // 메시지 설정
+		    } else if (!lengthRegx.test(pwd)) {
+		        message.textContent = "!,@,#,$ 영문자와 숫자조합 8~16자리를 입력해주세요";
+		    } else {
+		        // 패스워드 복잡도(안전도) 검사
+		        let engUpperRegex = /[A-Z]/;
+		        let engLowerRegex = /[a-z]/;
+		        let numRegex = /\d/; // /[0-9]/랑 동일
+		        let specRegex = /[!@#$%]/;
+		    }    
+	        let count = 0;
+	        
+	        if (engUpperRegex.test(pwd)) count++; // 대문자 포함할 경우
+	        if (engLowerRegex.test(pwd)) count++; // 소문자 포함할 경우
+	        if (numRegex.test(pwd)) count++;     // 숫자 포함할 경우
+	        if (specRegex.test(pwd)) count++;    // 특수문자 포함할 경우
+	        
+	        switch (count) {
+            case 4:
+                msg = "안전";
+                color = "Green";
+	                checkPasswdResult = true;
+                break;
+            case 3:
+                msg = "보통";
+                color = "Orange";
+	                checkPasswdResult = true;
+                break;
+            case 2:
+                msg = "위험";
+                color = "Red";
+	                checkPasswdResult = true;
+                break;
+            case 1:
+            case 0:
+                msg = "!,@,#,$ 영문자와 숫자조합 8~16자리를 입력해주세요";
+                color = "RED";
+	                checkPasswdResult = false;
+                break;
+       		}
+        
+	        message.textContent = msg;
+	        message.style.color = color;
 	        checkFormValidity(); // 폼 유효성 검사 실행
+//     	}
+// 	        validatePassword();
 	    });
 
 	    // 비밀번호2 입력값 변경 시
@@ -230,8 +286,8 @@ body {
 	                    riskCount = 0;
 	            }
 	        }
-	        $("#msg_pwd").text(msg);
-	        $("#msg_pwd").css("color", color);
+	        $("#msg_pwd1").text(msg);
+	        $("#msg_pwd1").css("color", color);
 	    }
 
 	    function validatePasswordConfirmation() {

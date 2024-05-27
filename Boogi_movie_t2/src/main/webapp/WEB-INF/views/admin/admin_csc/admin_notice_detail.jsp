@@ -74,7 +74,6 @@
     let nextLink = $("#nextLink");
 	
     //처음 게시물 또는 마지막 게시물일 때 a태그 비활성화
-    debugger;
     if (noticeNum === minNoticeNum) {
     	prevLink.removeAttr("href");
     	prevLink.css("pointer-events", "none"); 

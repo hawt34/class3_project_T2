@@ -153,7 +153,8 @@ public interface AdminMapper {
 	
 	// 상영 일정 조회
 	List<ScreenSessionVO> getMoivePlanList(@Param("theater_num") int theater_num, 
-										   @Param("scs_date") Date scs_date);
+										   @Param("scs_date") Date scs_date,
+											@Param("screen_cinema_num")int screen_cinema_num);
 
 //	// 상영 일정 조회 수
 //	int getMoivePlanListCount(@Param("theater_num") int theater_num, 

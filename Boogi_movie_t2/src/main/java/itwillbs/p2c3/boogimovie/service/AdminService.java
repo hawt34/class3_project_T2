@@ -197,8 +197,8 @@ public class AdminService {
 //		return mapper.getMoivePlanList(theater_num, scs_date, startRow, listLimit);
 //	}
 	// 상영조회
-	public List<ScreenSessionVO> getMoivePlanList(int theater_num, Date scs_date) {
-		return mapper.getMoivePlanList(theater_num, scs_date);
+	public List<ScreenSessionVO> getMoivePlanList(int theater_num, Date scs_date, int screen_cinema_num) {
+		return mapper.getMoivePlanList(theater_num, scs_date, screen_cinema_num);
 	}
 
 //	// 상영조회 수

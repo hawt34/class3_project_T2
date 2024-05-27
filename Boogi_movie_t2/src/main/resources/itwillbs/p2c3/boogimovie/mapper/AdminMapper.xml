@@ -490,6 +490,10 @@
 			t.theater_num = si.theater_num
 		WHERE
 			scs_date = #{scs_date} AND t.theater_num = #{theater_num} 
+		<if test="!screen_cinema_num == 0">
+			AND
+				screen_cinema_num = #{screen_cinema_num}
+		</if>
 		ORDER BY 
 			ss.scs_date
 <!-- 		LIMIT  -->

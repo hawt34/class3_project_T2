@@ -29,27 +29,27 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String home(Model model , HttpSession session,MemberVO member, MovieVO movieTrail) {
-		//System.out.println("현재 아이디" + member.getMember_id());
+		//System.out.println("�쁽�옱 �븘�씠�뵒" + member.getMember_id());
 		List<MovieVO> movieInfo = movieService.getMovieList();
 		movieTrail = movieService.getMovieTrail();
-		//System.out.println("무비트레일러"+movieTrail);
+		//System.out.println("臾대퉬�듃�젅�씪�윭"+movieTrail);
 		model.addAttribute("movieTrail", movieTrail);
 		model.addAttribute("movieInfo", movieInfo);
 //		session.setAttribute("sId", "admin");
 		String member_id = (String) session.getAttribute("sId");
-		//System.out.println("현재로그인한 " +member_id);
+		//System.out.println("�쁽�옱濡쒓렇�씤�븳 " +member_id);
 		model.addAttribute("member_id", member_id);
 		//System.out.println(movieInfo);
 		return "movie/movie";
 	}
 }
 
-//	@GetMapping("movieFuture")// 상영예정작리스트
+//	@GetMapping("movieFuture")// �긽�쁺�삁�젙�옉由ъ뒪�듃
 //	public String movieFuture(Model model) {
 //		
 //		List<MovieVO> movieFuture = movieService.getMovieFuture();
 //		model.addAttribute("movieFuture", movieFuture);
-//		//System.out.println("여기는 무비퓨처" + movieFuture);확인완료
+//		//System.out.println("�뿬湲곕뒗 臾대퉬�벂泥�" + movieFuture);�솗�씤�셿猷�
 //	    return "movie/movieFuture";
 //	}
 //}

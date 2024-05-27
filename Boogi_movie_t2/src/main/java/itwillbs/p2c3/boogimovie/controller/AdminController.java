@@ -707,7 +707,7 @@ public class AdminController {
 	// 상영일정 조회하기 ajax
 	@GetMapping("searchMoviePlanList")
 	@ResponseBody
-	public List<ScreenSessionVO> searchMoviePlanList(@RequestParam int searchTheater, @RequestParam Date searchDate, @RequestParam(defaultValue = "1") int pageNum) {
+	public List<ScreenSessionVO> searchMoviePlanList(@RequestParam int searchTheater, @RequestParam Date searchDate, @RequestParam(defaultValue = "0") int searchScreen) {
 //		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		// 한 페이지에 표시할 갯수
@@ -716,7 +716,7 @@ public class AdminController {
 //		int startRow = (pageNum - 1) * listLimit;
 		
 //		List<ScreenSessionVO> searchMovieList = service.getMoivePlanList(searchTheater, searchDate, startRow, listLimit);
-		List<ScreenSessionVO> searchMovieList = service.getMoivePlanList(searchTheater, searchDate);
+		List<ScreenSessionVO> searchMovieList = service.getMoivePlanList(searchTheater, searchDate, searchScreen);
 		
 //		int listCount = service.getMoivePlanListCount(searchTheater, searchDate, startRow, listLimit);
 //		

@@ -89,7 +89,7 @@ tbody tr:hover {
 	margin: 30px auto;
 }
 .moviePlanSearchBox > select{
-	width: 200px;
+	width: 130px;
 	margin-right: 10px;
 	margin-bottom: 20px;
 }
@@ -219,12 +219,16 @@ tbody tr:hover {
 					
 					<div class="moviePlanSearchBox">
 						<h3>상영일정 조회하기</h3>
+						
 						<select id="searchTheater" class="admin_moviePlan_search" name="theater_num">
-								<option value="0">미선택</option>
+								<option value="0">극장선택</option>
 							<c:forEach var="theaterName" items="${theaterNameList}">
 								<option value="${theaterName.theater_num}">${theaterName.theater_name}</option>
 							</c:forEach>
-						</select> 
+						</select>
+						
+						<select id="searchScreen" class="admin_moviePlan_search" name="screen_num" required></select> 
+						
 						<input type="date" class="admin_moviePlan_search" name="scs_date" id="searchDate">
 						<button type="submit" class="btn btn-outline-primary" id="searchBtn">조회하기</button>
 						<button type="submit" class="btn btn-outline-primary" id="searchBtn" onclick="location.href='admin_moviePlan'">목록으로</button>
@@ -500,6 +504,7 @@ tbody tr:hover {
 		    		data: {
 		    			searchTheater: $('#searchTheater').val(),
 		    			searchDate: $('#searchDate').val(),
+		    			searchScreen: $('#searchScreen').val()
 // 		    			pageNum: currentPage 
 		    		},
 		    		success: function(data) {
@@ -535,6 +540,26 @@ tbody tr:hover {
 		    	
 		    	
 		    }); // 상영 일정 조회 끝
+		    
+		 // 극장 선택시 상영관 선택
+		    $('#searchTheater').change(function() {
+		        var theater_num = $("#searchTheater").val();
+		        $.ajax({
+		            url: 'getScreens', // 상영관 정보를 가져오는 엔드포인트
+		            method: 'GET',
+		            data: { theater_num: theater_num },
+		            dataType: 'json', // 전달 데이터 타입 json
+		            success: function(response) {
+		            	// 기존옵션 제거
+		                $('#searchScreen').empty();
+		                // option 요소 생성하여 추가
+	                	$('#searchScreen').append('<option value="">상영관선택</option>');
+		                $.each(response, function(index, screen_info){
+		                	$('#searchScreen').append('<option value="' + screen_info.screen_cinema_num + '">' + screen_info.screen_cinema_num + '관</option>');
+		                });
+		            }
+		        });
+		    });
 		    
 // 		    function updatePagination(pageInfo) {
 // 		        $('#pageList').empty(); // 기존 내용을 비웁니다.

@@ -375,7 +375,6 @@ tbody tr:hover {
 					return;
 				}
 				if(movieSelect == ""){
-					alert("영화를 선택해주세요");
 					$('#scs_date').val("");
 					$('#movieSelect').focus();
 					return;
@@ -397,7 +396,7 @@ tbody tr:hover {
 						$('#hourSelect').val("");
 						// 이미 일정이 있는 시간 disabled
 		 				for(movieTime of data){
-		 					debugger;
+// 		 					debugger;
 		 					var time = movieTime.scs_start_time;
 		 					
 		 					// 9시 이전 시간이 넘어올때는 startTime을 9시로 설정

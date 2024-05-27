@@ -38,5 +38,10 @@ public interface FaqMapper {
 	
 	//ViewCount가 가장 높은 다섯개 
 	List<FAQVO> selectFaqViewCountList();
+	
+	//검색어를 통한 게시판 목록 조회
+	List<FAQVO> selectFaqKeywordList(@Param("listLimit")int listLimit,
+									 @Param("startRow")int startRow,
+									 @Param("faqSearchKeyword")String faqSearchKeyword);
 
 }

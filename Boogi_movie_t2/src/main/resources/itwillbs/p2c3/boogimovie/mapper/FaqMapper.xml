@@ -84,4 +84,23 @@
   		SET faq_read_count = faq_read_count + 1
   		WHERE faq_num = #{faq_num}
   	</update>
+  	
+  	<select id="selectFaqKeywordList" resultType="itwillbs.p2c3.boogimovie.vo.FAQVO">
+  		SELECT faq_num,
+  			   faq_subject,
+  			   faq_content,
+  			   faq_category,
+  			   faq_read_count
+  		FROM faq
+  		WHERE
+  		<if test="faqSearchKeyword != null and faqSearchKeyword != ''">
+  			faq_subject LIKE CONCAT('%', #{faqSearchKeyword}, '%') 
+			OR faq_content LIKE CONCAT('%', #{faqSearchKeyword}, '%')
+			OR faq_category LIKE CONCAT('%', #{faqSearchKeyword}, '%')
+  		</if>
+  		ORDER BY faq_num DESC
+  		<if test="startRow != null and listLimit != null">
+	  		LIMIT #{startRow}, #{listLimit}
+  		</if> 
+  	</select>
   </mapper>

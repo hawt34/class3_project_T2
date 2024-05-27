@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,28 +76,28 @@ public class CscController {
 	
 	@ResponseBody
 	@GetMapping("csc_faq.json")
-	public List<FAQVO> cscFaqJson(@RequestParam String parsedPageNum,
+	public String cscFaqJson(@RequestParam String parsedPageNum,
 								  @RequestParam String faqCategory,
-								  FAQVO faq) {
-//		System.out.println("@KWKL@@@" + faqCategory);
+								  FAQVO faq,
+								  @RequestParam String faqSearchKeyword) {
+		System.out.println("@KWKL@@@" + faqSearchKeyword);
 		int pageNum = Integer.parseInt(parsedPageNum);
-		System.out.println("PAGENUM!!" +  pageNum);
-		int listLimit = 7;
+		int listLimit = 5;
 		int startRow = (pageNum - 1) * listLimit;
 		int listCount = faqService.getFaqListCount(faqCategory); //총 공지사항 갯수
-//		int pageListLimit = 5; //뷰에 표시할 페이지갯수
-//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
-//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호
-//		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
-//		
-//		if(endPage > maxPage) { // 마지막 페이지가 최대 페이지를 넘어갈때 
-//			endPage = maxPage;
-//		}
-//		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);		
 		
-		List<FAQVO> faqList = faqService.getFaqList(listLimit, startRow, faqCategory);
+		List<FAQVO> faqList = null;
+		if(faqSearchKeyword.equals("")) {
+			faqList = faqService.getFaqList(listLimit, startRow, faqCategory);
+		} else {
+			faqList = faqService.getFaqKeywordList(listLimit, startRow, faqSearchKeyword);
+			System.out.println("키워드리스트: " + faqList);
+		}
 		
-		return faqList;
+		
+		JSONArray ja = new JSONArray(faqList);
+		
+		return ja.toString();
 	}
 	
 	@ResponseBody
@@ -166,8 +167,7 @@ public class CscController {
 			
 		} else {
 			noticeList = noticeService.getNoticeList(listLimit, startRow, theaterName);
-			System.out.println("로우넘버: " + noticeList.get(0));
-			System.out.println("로우넘버: " + noticeList.get(1));
+//			System.out.println("로우넘버: " + noticeList.get(0));
 		}
 		
 		//LocalDateTIme format

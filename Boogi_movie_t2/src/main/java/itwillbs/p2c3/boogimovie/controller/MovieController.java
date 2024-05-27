@@ -143,7 +143,7 @@ public class MovieController {
 		List<String> genreList = Arrays.asList(member_movie_genre.split(","));
 
 		// 맵에 리스트 추가
-		map = new HashMap<>();
+		map = new HashMap<String,Object>();
 		map.put("genreList", genreList);
 		List<MovieVO> genreMovieList = movieService.getMovieListGenre(map);
 		// System.out.println("맵의 내용: " + map);
@@ -163,7 +163,7 @@ public class MovieController {
 		MovieVO movie2 = movieService.getMovieInfo(movie);
 		model.addAttribute("movie", movie2);
 		List<ReviewVO> reviews = serviceReview.getMemberReview(member_id,movie_num); 
-		System.out.println("특정유저가 적은 댓글 "+ reviews);
+		//System.out.println("특정유저가 적은 댓글 "+ reviews);
 		
 		model.addAttribute("reviews", reviews);
 		

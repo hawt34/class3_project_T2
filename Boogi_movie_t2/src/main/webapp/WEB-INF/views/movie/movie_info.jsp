@@ -47,7 +47,7 @@ article {
 section {
 	overflow: hidden;
 	width: 1400px;
-	height: 1500px;
+	height: 1600px;
 	/* 	background-color: #ffca28; */
 	display: flex;
 	flex-wrap: wrap;
@@ -209,6 +209,24 @@ section h1 {
 	width: 1024px;
 	text-align: center;
 }
+#pageList > input[type=button]{
+	padding: 10px 20px;
+	background: white;
+	border: 1px solid #0078FF;
+	border-radius: 10px;
+	color: #0078FF;
+}
+
+#pageList > a{
+	text-decoration: none;
+	color: lightgray;
+	margin: 0 10px;
+}
+#pageList > b{
+	margin: 0 10px;
+	color: #1b1b1b;
+}
+
 
 .backButton {
 	margin-top: 20px;

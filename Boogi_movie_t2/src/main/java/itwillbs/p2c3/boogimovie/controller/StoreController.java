@@ -26,8 +26,7 @@ import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 
 @Controller
 public class StoreController {
-	@Autowired
-	private HttpServletRequest request;
+	
 
 	@Autowired
 	private ItemInfoService service;
@@ -56,8 +55,8 @@ public class StoreController {
 
 	@PostMapping("add_to_cart")
 	@ResponseBody
-	public ResponseEntity<?> addToCart(@RequestBody List<CartVO> cartItems) {
-		HttpSession session = request.getSession();
+	public ResponseEntity<?> addToCart(@RequestBody List<CartVO> cartItems, HttpSession session) {
+		
 		List<CartVO> cart = (List<CartVO>) session.getAttribute("cart");
 
 		if (cart == null) {
@@ -83,8 +82,7 @@ public class StoreController {
 	// 장바구니에서 상품 제거
 	@PostMapping("remove_from_cart")
 	@ResponseBody
-	public ResponseEntity<?> removeFromCart(@RequestParam int item_info_num) {
-		HttpSession session = request.getSession();
+	public ResponseEntity<?> removeFromCart(@RequestParam int item_info_num,HttpSession session) {
 		List<CartVO> cart = (List<CartVO>) session.getAttribute("cart");
 
 		if (cart != null) {

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -193,7 +194,10 @@
 									<td>${oto.oto_subject }</td>
 									<td>${oto.oto_category }</td>
 									<td>${oto.theater_name }</td>
-									<td>${oto.oto_date }</td>
+									<td>
+										<fmt:parseDate var="parseOtoDate" value="${oto.oto_date }" pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
+										<fmt:formatDate value="${parseOtoDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+									</td>
 									<td>${oto.oto_reply_status }</td> <!-- 답변 상태 -->
 									<td>
 										<c:choose>

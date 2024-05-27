@@ -230,6 +230,7 @@ $(function() {
     $("#faqSearch").submit(function() {
     	faqSearchKeyword = $("#csc_faq_search").val();
 //     	console.log(faqSearchKeyword);
+		pageNum = 1;
     	getScroll('', true, faqSearchKeyword);
     });
     

@@ -206,6 +206,7 @@ public class CscController {
 	public String cscOto(HttpSession session, Model model) {
 		if(session.getAttribute("sId") == null) {
 			model.addAttribute("msg", "로그인 후 이용바랍니다");
+			model.addAttribute("targetURL", "member_login");
 			return "error/fail";
 		}
 		return "csc/csc_oto";

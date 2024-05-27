@@ -330,7 +330,7 @@ footer {
 					
 					 $(".contentPay").on("change", ".quantity", function() {
 					    let newQuantity = parseInt($(this).val());
-					    let selectedItemPrice = parseFloat($(this).closest("tr").find("td:nth-child(2)").text()); // 선택된 품목의 가격
+					    let selectedItemPrice = parseInt($(this).closest("tr").find("td:nth-child(2)").text()); // 선택된 품목의 가격
 					    let newTotalPrice = selectedItemPrice * newQuantity;
 					    $(this).closest("tr").find("td:nth-child(4)").text(newTotalPrice.toLocaleString() + "원"); // 총 가격 업데이트
 					    updateTotalPrice(); // 수량 변경 후 전체 총 가격 업데이트

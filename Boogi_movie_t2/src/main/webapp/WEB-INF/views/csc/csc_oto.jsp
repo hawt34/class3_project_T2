@@ -12,6 +12,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 </head>
 <body>
 <header>
@@ -25,7 +27,7 @@
 		</div>
 		<!-- content 영역 -->
 		<div class="col-9">
-			<form action="csc_oto" method="post" enctype="multipart/form-data">
+			<form action="csc_oto" id="csc_oto_form" method="post" enctype="multipart/form-data">
 				<div id="csc_mainTitle">
 					<h1 class="csc-title">1 대 1 문의</h1>
 				</div>
@@ -41,7 +43,7 @@
 				<hr>
 				<div id="csc_agree">
 					<div class="csc_check_scope">
-						<input type="checkbox" id="csc_checkbox" required name="check_box">
+						<input type="checkbox" id="csc_checkbox" name="check_box" >
 						<label for="csc_checkbox">개인정보 수집에 대한 동의</label>
 					</div>
 					<hr>
@@ -132,12 +134,21 @@
 		</div>
 	</div>
 </div>
-
-
-
 <!-- footer -->
 <footer>
 	<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 </footer>
+<script type="text/javascript">
+$(function () {
+	$("#csc_oto_form").submit(function(event) {
+		if(!$("#csc_checkbox").is(":checked")) {
+			alert("동의를 선택하셔야 문의가 가능합니다.");
+			event.preventDefault();
+		}	
+	});
+});
+
+
+</script>
 </body>
 </html>

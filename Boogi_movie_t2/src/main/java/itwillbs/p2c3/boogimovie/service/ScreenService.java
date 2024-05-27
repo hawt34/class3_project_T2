@@ -39,6 +39,11 @@ public class ScreenService {
 	public int deleteScreenInfo(ScreenInfoVO screenInfo) {
 		return mapper.deleteScreeninfo(screenInfo);
 	}
+
+
+	public int getNewCinemaNum(int theater_num) {
+		return mapper.selectNewCinemaNum(theater_num);
+	}
 	
 	
 	

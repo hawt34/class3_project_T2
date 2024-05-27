@@ -51,6 +51,7 @@ h3{
 				dataType : "json",
 				success : function(result) {
 					if(result){
+						alret("취소가 완료되었습니다");
 						location.reload();
 					}
 				},

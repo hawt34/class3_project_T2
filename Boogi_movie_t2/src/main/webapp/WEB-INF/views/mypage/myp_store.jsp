@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
 
@@ -35,22 +36,29 @@ hr{
 </style>
 
 <script type="text/javascript">
-	function cancelStore(member_id) {
-		$.ajax({
-			url : "myp_cancel_store",
-			type : "post",
-			dataType : "json",
-			data : {
-				"member_id" : member_id
-			},
-			success : function(result) {
-				console.log("ajax 성공" + result);
-			},
-			error : function() {
-				console.log("ajax 실패");
-			}
-			
-		});
+	function cancelStore(store_pay_num) {
+		console.log(store_pay_num);
+		if(confirm("정말 취소하시겠습니까?")){
+			$.ajax({
+				url : "myp_cancel_store",
+				type : "post",
+				dataType : "json",
+				data : {
+					"store_pay_num" : store_pay_num
+				},
+				success : function(result) {
+					if(result){
+						alret("취소가 완료되었습니다");
+						location.reload();	
+					}
+				},
+				error : function() {
+					
+				}
+				
+			});
+		}
+
 	}
 
 
@@ -125,7 +133,7 @@ hr{
 										                <fmt:formatNumber value="${storePay.store_pay_price}" type="number" groupingUsed="true" />원
 										            </td>
 										            <td>${storePay.store_pay_type}</td>
-										            <td><input type="button" class="btn btn-outline-secondary" id="cancelStore" onclick="cancelStore('${storePay.member_id}')" value="취소"></input></td>
+										            <td><input type="button" class="btn btn-outline-secondary" id="cancelStore" onclick="cancelStore(${storePay.store_pay_num})" value="취소"></input></td>
 										        </tr>
 										    </c:if>
 										</c:forEach>

@@ -594,7 +594,7 @@ a {
                                 + "<div>" + finalList.movie_name + "</div>"
                                 + "<div class='row box1' style='width: 600px'>"
                                 + "<div class='col-md-3'>"
-                                + finalList.scs_start_time + " ~ " + finalList.scs_end_time
+                                + "<strong>" + finalList.scs_start_time + "</strong> ~ " + finalList.scs_end_time
                                 + "</div>"
                                 + "<div class='col-md-5'>"
                                 + finalList.screen_dimension + " || 총 " + finalList.total_seat + "석 ||"

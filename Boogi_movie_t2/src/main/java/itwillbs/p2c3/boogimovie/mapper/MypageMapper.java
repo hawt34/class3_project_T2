@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import itwillbs.p2c3.boogimovie.vo.CouponVO;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.MovieVO;
+import itwillbs.p2c3.boogimovie.vo.PayVO;
 import itwillbs.p2c3.boogimovie.vo.ReservationVO;
 import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
@@ -64,12 +65,18 @@ public interface MypageMapper {
 	int updateMemberForWithdraw(MemberVO member);
 	
 	// 예매취소 pay 테이블
-	int updatePayStatus(Map<String, Object> map);
+	int updatePayStatus(@Param("member_id") String id,@Param("ticket_pay_num") int ticket_pay_num);
 	
 	// 예매취소 coupon 테이블
-	void updateCouponStatus();
+	void updateCouponStatus(@Param("member_id") String id,@Param("coupon_num") int coupon_num);
 	
 	// 예매취소 member 테이블
-	void updateMemberPoint();
+	void updateMemberPoint(PayVO pay);
+
+	Integer selectCouponNum(int ticket_pay_num);
+
+	PayVO selectMemberPoint(@Param("member_id") String id,@Param("ticket_pay_num") int ticket_pay_num);
+	
+	
 	
 }

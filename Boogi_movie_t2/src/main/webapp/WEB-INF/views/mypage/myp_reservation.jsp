@@ -39,24 +39,27 @@ h3{
 
 
 <script type="text/javascript">
-
-	function cancelMovie(member_id) {
-		
-		$.ajax({
-			url : "myp_cancel_movie",
-			type : "post",
-			data : {
-				"member_id" : member_id
-			},
-			dataType : "json",
-			success : function(result) {
-				console.log("ajax 성공 result : " + result);
-			},
-			error : function() {
-				console.log("ajax 실패 ");
-				
-			}
-		});
+	console.log("${movieReservation}");
+	function cancelMovie(ticket_pay_num) {
+		if(confirm("정말 삭제하시겠습니까?")){
+			$.ajax({
+				url : "myp_cancel_movie",
+				type : "post",
+				data : {
+					"ticket_pay_num" : ticket_pay_num
+				},
+				dataType : "json",
+				success : function(result) {
+					if(result){
+						location.reload();
+					}
+				},
+				error : function() {
+					console.log("ajax 실패 ");
+					
+				}
+			});	
+		}
 	} // cancelMovie
 
 
@@ -130,7 +133,7 @@ h3{
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.total_ticket_price}">
                                             </div>
                                             <div class="col-md-1 d-grid gap-5">
-                                                <input type="button" class="btn btn-outline-secondary position-absolute bottom-75 w-25 box4" id="cancelMovie" onclick="cancelMovie('${map.member_id}')" type="text" value="취소" aria-label="Disabled input example" readonly>
+                                                <input type="button" class="btn btn-outline-secondary position-absolute bottom-75 w-25 box4" id="cancelMovie" onclick="cancelMovie(${map.ticket_pay_num})" type="text" value="취소" aria-label="Disabled input example" readonly>
                                              </div>
                                         </div>
                                     </div>

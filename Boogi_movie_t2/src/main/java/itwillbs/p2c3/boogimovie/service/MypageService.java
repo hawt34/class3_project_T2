@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import itwillbs.p2c3.boogimovie.mapper.MypageMapper;
 import itwillbs.p2c3.boogimovie.vo.MemberVO;
+import itwillbs.p2c3.boogimovie.vo.PayVO;
 import itwillbs.p2c3.boogimovie.vo.ReservationVO;
 import itwillbs.p2c3.boogimovie.vo.StorePayVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
@@ -124,11 +125,18 @@ public class MypageService {
 	
 	// 예매취소
 	@Transactional
-	public int removeMovie(Map<String, Object> map) {
+	public int removeMovie(String id,int ticket_pay_num) {
 		System.out.println("mypService - updateMovieStatus");
-		mapper.updateCouponStatus();
-		mapper.updateMemberPoint();
-		return mapper.updatePayStatus(map);
+		Integer coupon_num = mapper.selectCouponNum(ticket_pay_num);
+		if(coupon_num != null) {
+			mapper.updateCouponStatus(id, coupon_num);
+		}
+		
+		PayVO pay =  mapper.selectMemberPoint(id, ticket_pay_num);
+		pay.setMember_id(id);
+		pay.setTicket_pay_num(ticket_pay_num);
+		mapper.updateMemberPoint(pay);
+		return mapper.updatePayStatus(id,ticket_pay_num);
 	}
 	
 }

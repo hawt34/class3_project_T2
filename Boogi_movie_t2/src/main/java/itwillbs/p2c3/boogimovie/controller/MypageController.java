@@ -351,10 +351,10 @@ public class MypageController {
 	
 	@ResponseBody
 	@PostMapping("myp_cancel_movie")
-	public String mypCancelMovie(Map<String, Object> map, Model model, MemberVO member) {
+	public String mypCancelMovie(Model model, MemberVO member, int ticket_pay_num, HttpSession session) {
 		System.out.println("myp_cancel_movie controller");
 		String id = (String)session.getAttribute("sId");
-		
+		System.out.println(ticket_pay_num);
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			model.addAttribute("targetURL", "./");
@@ -363,8 +363,9 @@ public class MypageController {
 		
 		member.setMember_id(id);
 //		MemberVO dbMember = mypageService.getDbMember(member);
-		int removeMovie = mypageService.removeMovie(map);
-		
+		int removeMovie = mypageService.removeMovie(id, ticket_pay_num);
+//		ticket_pay_num, member_id
+
 		
 		if(removeMovie > 0) { // 성공 시  
 			

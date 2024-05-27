@@ -275,7 +275,7 @@
 	<select id="selectMovieList" resultType="hashmap">
 		select *
 		from movie
-		where  Current_Date() > movie_open_date 
+		WHERE Current_Date() BETWEEN movie_open_date AND movie_end_date 
 	</select>
 
 <!-- 영화 상세보기 -->

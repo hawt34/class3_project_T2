@@ -75,6 +75,12 @@ public interface MypageMapper {
 	Integer selectCouponNum(int ticket_pay_num);
 
 	PayVO selectMemberPoint(@Param("member_id") String id,@Param("ticket_pay_num") int ticket_pay_num);
+
+	StorePayVO selectStorePayPoint(@Param("member_id") String id,@Param("store_pay_num") int store_pay_num);
+
+	void updateMemberPointStore(StorePayVO dbStorePay);
+
+	int updateStorePayStatus(@Param("member_id") String id,@Param("store_pay_num") int store_pay_num);
 	
 	
 	

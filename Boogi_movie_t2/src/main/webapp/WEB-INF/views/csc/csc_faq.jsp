@@ -46,7 +46,7 @@
 			<div class="row">
 				<div class="csc_faq_search">
 					<div class="inner">
-						<form action="" method="get" name="search_faq">
+						<form action="javascript:void(0);" method="get" name="search_faq" id="faqSearch">
 							<label for="csc_faq_search">빠른검색</label>
 							<input type="text" id="csc_faq_search" name="faqSearchKeyword" placeholder="검색어 입력">
 							<input type="submit" value="검색">
@@ -99,12 +99,13 @@
 
 let isLoading = false;
 let isEmpty = false;
-let faqCategory = '';
 let pageNum = 1;
 let index = 0;
+let faqCategory = '';
+let faqSearchKeyword = '';
 
 
-function getScroll(newFaqCategory = "", isEmpty) {
+function getScroll(newFaqCategory = "", isEmpty, faqSearchKeyword = '') {
 	
 	if (isLoading) return; // 이미 데이터를 불러오고 있는 중이라면 중복 요청 방지
 	isLoading = true; // 데이터 요청 중 플래그 설정
@@ -114,15 +115,23 @@ function getScroll(newFaqCategory = "", isEmpty) {
         url: "csc_faq.json",
         data: {
             parsedPageNum: pageNum,
-            faqCategory: newFaqCategory || faqCategory
+            faqCategory: newFaqCategory || faqCategory,
+            faqSearchKeyword : faqSearchKeyword
         },
         dataType: "json",
         success: function(response) {
-            let faqList = response;
+            let faqList = response;  // [{},{}]
+            
+//             for(let faq of faqList) {
+// 	            console.log(JSON.stringify(faq));
+// 				console.log(faq.faq_num);
+// 				console.log(faq.faq_subject);
+//             }
+            
+            
 			//true면 기존 아코디언 비움
             if(isEmpty) {
 				$(".csc_accordion").empty();
-// 				pageNum = 2;
             }
 			//반복문을 통해 ajax를 통해 받아온 값을 아코디언div에 전달
             $.each(faqList, function(i, faq) {
@@ -173,7 +182,7 @@ function getScroll(newFaqCategory = "", isEmpty) {
         }
     });
 }
-
+//read_count 증가시키는 ajax & 쿠키 전달받기
 function updateView(faqNum) {
 	$.ajax({
 		type: "GET",
@@ -193,7 +202,7 @@ function updateView(faqNum) {
 
 $(function() {
 	//초기 로딩
-    getScroll("", false);
+    getScroll("", false, '');
     
     $("#faq_category").change(function() {
         let newFaqCategory = $(this).val();
@@ -214,11 +223,16 @@ $(function() {
         // 화면 하단까지 스크롤되었을 때 추가 데이터 가져오기
 		if (currentScroll >= documentHeight - windowHeight - bottom) {
 			console.log("스크롤 이벤트 발생 - pageNum = " + pageNum);
-			getScroll(faqCategory, false); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
+			getScroll(faqCategory, false, faqSearchKeyword); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
         }
     });
     
-    
+    $("#faqSearch").submit(function() {
+    	faqSearchKeyword = $("#csc_faq_search").val();
+//     	console.log(faqSearchKeyword);
+		pageNum = 1;
+    	getScroll('', true, faqSearchKeyword);
+    });
     
 });
 

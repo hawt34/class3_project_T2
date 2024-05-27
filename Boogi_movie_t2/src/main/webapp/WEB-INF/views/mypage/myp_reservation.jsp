@@ -41,7 +41,7 @@ h3{
 <script type="text/javascript">
 	console.log("${movieReservation}");
 	function cancelMovie(ticket_pay_num) {
-		if(confirm("정말 삭제하시겠습니까?")){
+		if(confirm("정말 취소하시겠습니까?")){
 			$.ajax({
 				url : "myp_cancel_movie",
 				type : "post",
@@ -51,6 +51,7 @@ h3{
 				dataType : "json",
 				success : function(result) {
 					if(result){
+						alret("취소가 완료되었습니다");
 						location.reload();
 					}
 				},

@@ -191,6 +191,16 @@
            	coupon_num = null
 		WHERE member_id = #{member_id} AND ticket_pay_num = #{ticket_pay_num}
 	</update>
+	<update id="updateStorePayStatus">
+		UPDATE store_pay
+		SET store_pay_status = '취소',
+			store_pay_cancel_date = now(),
+			use_point = 0,
+			save_point = null,
+			coupon_num = null
+		WHERE member_id = #{member_id}
+		AND  store_pay_num = #{store_pay_num}
+	</update>
 	<select id="selectCouponNum" resultType="Integer">
 			SELECT coupon_num
 			FROM pay
@@ -210,6 +220,13 @@
 		WHERE ticket_pay_num = #{ticket_pay_num}
 		AND member_id = #{member_id}
 	</select>
+	
+	<select id="selectStorePayPoint" resultType="itwillbs.p2c3.boogimovie.vo.StorePayVO">
+		SELECT use_point, save_point
+		FROM store_pay
+		WHERE store_pay_num = #{store_pay_num}
+		AND member_id = #{member_id}
+	</select>
 	<!-- 예매취소 member 테이블 업데이트 -->
 	<update id="updateMemberPoint">
 	    UPDATE member
@@ -218,5 +235,11 @@
 	    SET member_point = member_point + #{use_point} - #{save_point}
 	    WHERE member.member_id = #{member_id} 
 	    AND pay.ticket_pay_num = #{ticket_pay_num}
+	</update>
+	
+	<update id="updateMemberPointStore">
+		UPDATE member
+	    SET member_point = member_point + #{use_point} - #{save_point}
+	    WHERE member.member_id = #{member_id} 
 	</update>
 </mapper>

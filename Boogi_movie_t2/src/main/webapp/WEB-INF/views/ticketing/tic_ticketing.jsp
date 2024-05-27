@@ -844,6 +844,15 @@ a {
                 loadMovies(orderBy, sId);
             }
         });	
+        
+        
+        $('#fr').submit(function(event) {
+            let hiddenInput = $('#final_list_input');
+            if (hiddenInput.length === 0 || hiddenInput.val() === "") {
+                alert("선택된 데이터가 없습니다.");
+                event.preventDefault(); // 폼 제출 막기
+            }
+        });
     });
 </script>
 </body>

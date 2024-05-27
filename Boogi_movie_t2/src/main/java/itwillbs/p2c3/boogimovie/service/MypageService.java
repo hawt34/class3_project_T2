@@ -138,5 +138,22 @@ public class MypageService {
 		mapper.updateMemberPoint(pay);
 		return mapper.updatePayStatus(id,ticket_pay_num);
 	}
+
+	public int removeStore(StorePayVO storePay) {
+		String id = storePay.getMember_id();
+		int store_pay_num = storePay.getStore_pay_num();
+		Integer coupon_num = mapper.selectCouponNum(store_pay_num);
+		
+		if(coupon_num != null) {
+			mapper.updateCouponStatus(id, coupon_num);
+		}
+		StorePayVO dbStorePay = mapper.selectStorePayPoint(id, store_pay_num);
+		dbStorePay.setMember_id(id);
+		dbStorePay.setStore_pay_num(store_pay_num);
+		mapper.updateMemberPointStore(dbStorePay);
+		
+		
+		return mapper.updateStorePayStatus(id,store_pay_num);
+	}
 	
 }

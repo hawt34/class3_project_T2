@@ -16,6 +16,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.ResponseEntity;
@@ -1607,12 +1608,25 @@ public class AdminController {
 	
 	// 상영관 관리 > 새 상영관 등록 폼으로
 	@GetMapping("admin_booth_form")
-	public String adminBoothForm(TheaterVO theater, Model model) {
+	public String adminBoothForm(TheaterVO theater, ScreenInfoVO screenInfo, Model model) {
 		// 극장 리스트 조회
 		List<TheaterVO> theaterList = theaterService.getTheater();
+		// 기존 등록된 상영관의 극장별 마지막 번호+1 값 가져오기
+		
+		
 		model.addAttribute("theaterList", theaterList);
 		
 		return "admin/admin_theater/admin_booth_form";
+	}
+	
+	// 상영관 등록 폼 ajax
+	@ResponseBody
+	@GetMapping("new_cinema_num")
+	public String newCinemaNum(@RequestParam(defaultValue = "1") int theater_num) {
+		
+		int new_cinema_num = screenService.getNewCinemaNum(theater_num);
+		
+		return String.valueOf(new_cinema_num);
 	}
 	
 	// 상영관 관리 > 새 상영관 등록 비즈니스
@@ -1631,6 +1645,8 @@ public class AdminController {
 		
 		return "redirect:/admin_booth";
 	}
+	
+
 	
 	// 상영관 관리 > 상영관 삭제
 	@GetMapping("admin_booth_delete")

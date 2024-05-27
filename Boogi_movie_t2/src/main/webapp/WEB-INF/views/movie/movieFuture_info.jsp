@@ -9,6 +9,14 @@
 <meta charset="UTF-8">
 <title>부기무비 상영예정 상세보기</title>
 <style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -147,7 +155,7 @@ footer {
 							<li><span>개봉 : ${movieFutureInfo.movie_open_date} </span></li>
 							<li><span>감독 : ${movieFutureInfo.movie_director} </span></li>
 							<li><span>등급 : ${movieFutureInfo.movie_grade} </span></li>
-							<li><span>장르 : ${movieFutureInfo.movie_genre }</span></li>
+							<li><span>장르 : ${movieFutureInfo.movie_genre } 분</span></li>
 							<li><span>상영시간 : ${movieFutureInfo.movie_runtime }</span></li>
 							<li><span>줄거리 : ${movieFutureInfo.movie_summary}</span></li>
 						</ul>

@@ -34,6 +34,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	
 	@Autowired
 	private MailService mail_service;
 	
@@ -185,10 +186,6 @@ public class MemberController {
 		return "error/fail";
 	}
 	
-	
-	
-	
-	
 	@GetMapping("member_login")
 	public String memberLogin() {
 		System.out.println("MemberLogin()");
@@ -333,6 +330,11 @@ public class MemberController {
 	
 	@GetMapping("member_logout_pro")
 	public String memberLogoutPro(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "잘못된 접근입니다");
+			return "error/fail";
+		}
 		session.invalidate();
 		model.addAttribute("msg", "로그아웃 완료");
 		model.addAttribute("targetURL", "./");
@@ -340,8 +342,14 @@ public class MemberController {
 	}
 	
 	
-	@GetMapping("member_reg_member_complete")
+	@PostMapping("member_reg_member_complete")
 	public String memberRegMemberComplete(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("sId");
+		if(id == null) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			return "error/fail";
+			
+		}
 		System.out.println("회원가입처리완료");
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		session.removeAttribute("member");
@@ -363,16 +371,12 @@ public class MemberController {
 		return "redirect:/member_search_id_result";
 	}
 	
-	
-
-	
 	@PostMapping("Mytheater")
 	public String myTheaterRegist() {
 		
 		return "redirect:/theater";
 		
 	}
-	
 	
 	@ResponseBody
 	@GetMapping("dupId")
@@ -382,7 +386,6 @@ public class MemberController {
 		if(dbMember == null) {
 			return "true";
 		}
-		System.out.println("판별ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ " + id.equals(dbMember.getMember_id()));
 		if(id.equals(dbMember.getMember_id())) {
 			return "false";
 		}
@@ -390,7 +393,10 @@ public class MemberController {
 		return "true";
 	}
 	
-    
+    @GetMapping("kakao")
+    public String kakao() {
+    	return "member/kakao_test";
+    }
     
 	
 }

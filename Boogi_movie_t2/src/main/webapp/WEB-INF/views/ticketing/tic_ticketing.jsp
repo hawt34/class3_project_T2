@@ -7,6 +7,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+</style>
 <meta charset="UTF-8">
 <title>부기무비 빠른예매</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -25,9 +34,6 @@
 }
 
 body {
-	font-family: "Nanum Gothic Coding", monospace;
-	font-weight: 400;
-	font-style: normal;
 	margin: 0px;
 }
 
@@ -506,7 +512,7 @@ a {
                                 <div class="finalmovielist scroll" id="finalmovielist">
                                     <div style="height: 300px">
                                         <br>
-                                        <div align="center">영화 와 상영관 을 선택해주세요</div>
+                                        <div align="center">영화 상영관 날짜정보를 선택해주세요</div>
                                     </div>
                                 </div>
                             </div>
@@ -534,7 +540,7 @@ a {
     let selectedDay = "";
     let form = $("#fr");
 
-    function final_list_selected(movie_name, start_time, end_time, theater_name, selected_day) {
+    function final_list_selected(movie_name, start_time, end_time, theater_name, selected_day, element) {
         let final_list_selected_things = "/" + movie_name + "/"
             + start_time + "/"
             + end_time + "/"
@@ -555,66 +561,78 @@ a {
 
         // 선택된 final_list의 배경색 변경
         $(".final_list").removeClass("selected");
-        $(this).addClass("selected");
+        $(element).addClass("selected");
     }
 
     function finalList() {
-        $.ajax({
-            url: "api/finalList",
-            method: "GET",
-            data: {
-                selectedMovie: selectedMovie,
-                selectedTheater: selectedTheater,
-                selectedDay: selectedDay
-            },
-            dataType: "json",
-            success: function (response) {
-                var result = $("#finalmovielist");
-                result.empty();
+        // selectedMovie, selectedTheater, selectedDay가 모두 존재하는지 확인
+        if (selectedMovie && selectedTheater && selectedDay) {
+            $.ajax({
+                url: "api/finalList",
+                method: "GET",
+                data: {
+                    selectedMovie: selectedMovie,
+                    selectedTheater: selectedTheater,
+                    selectedDay: selectedDay
+                },
+                dataType: "json",
+                success: function (response) {
+                    var result = $("#finalmovielist");
+                    result.empty();
 
-                response.forEach(function (finalList) {
-                    var finalDiv = "<div class='final_list' onclick='final_list_selected(\""
-                        + finalList.movie_name
-                        + "\", \"" + finalList.scs_start_time
-                        + "\", \"" + finalList.scs_end_time
-                        + "\", \"" + finalList.theater_name
-                        + "\", \"" + selectedDay + "\")'>"
-                        + "<div>" + finalList.movie_name + "</div>"
-                        + "<div class='row box1' style='width: 600px'>"
-                        + "<div class='col-md-3'>"
-                        + finalList.scs_start_time + " ~ " + finalList.scs_end_time
-                        + "</div>"
-                        + "<div class='col-md-5'>"
-                        + finalList.screen_dimension + " || "
-                        + "총 " + finalList.total_seat + "석 ||"
-                        + finalList.scs_empty_seat + "석 남음"
-                        + "</div>"
-                        + "<div class='col-md-3'>"
-                        + finalList.theater_name + " || "
-                        + finalList.screen_cinema_num + " 관"
-                        + "</div>"
-                        + "</div>"
-                        + "</div>";
+                    if (response.length === 0) {
+                        // 결과가 없을 경우 메시지 출력
+                        result.append("<div style='height: 300px'><br> <div align='center'>입력 정보에 대한 일정이 없습니다.</div></div>");
+                    } else {
+                        response.forEach(function (finalList) {
+                            var finalDiv = "<div class='final_list' onclick='final_list_selected(\""
+                                + finalList.movie_name
+                                + "\", \"" + finalList.scs_start_time
+                                + "\", \"" + finalList.scs_end_time
+                                + "\", \"" + finalList.theater_name
+                                + "\", \"" + selectedDay + "\", this)'>"
+                                + "<div>" + finalList.movie_name + "</div>"
+                                + "<div class='row box1' style='width: 600px'>"
+                                + "<div class='col-md-3'>"
+                                + finalList.scs_start_time + " ~ " + finalList.scs_end_time
+                                + "</div>"
+                                + "<div class='col-md-5'>"
+                                + finalList.screen_dimension + " || 총 " + finalList.total_seat + "석 ||"
+                                + finalList.scs_empty_seat + "석 남음"
+                                + "</div>"
+                                + "<div class='col-md-3'>"
+                                + finalList.theater_name + " || " + finalList.screen_cinema_num + " 관"
+                                + "</div>"
+                                + "</div>"
+                                + "</div>";
 
-                    result.append(finalDiv);
-                });
+                            result.append(finalDiv);
+                        });
 
-                // 새롭게 생성된 final_list 항목에 클릭 이벤트 핸들러를 추가합니다.
-                $(".final_list").click(function () {
-                    $(".final_list").removeClass("selected");
-                    $(this).addClass("selected");
-                });
-            },
-            error: function () {
-                alert("영화 정보를 가져오는 데 실패했습니다.");
-            }
-        });
+                        // 새롭게 생성된 final_list 항목에 클릭 이벤트 핸들러를 추가합니다.
+                        $(".final_list").click(function () {
+                            $(".final_list").removeClass("selected");
+                            $(this).addClass("selected");
+                        });
+                    }
+                },
+                error: function () {
+                    alert("영화 정보를 가져오는 데 실패했습니다.");
+                }
+            });
+        } else {
+            // 필수 선택 항목이 누락된 경우 경고 메시지를 표시할 수 있습니다.
+            console.log("영화, 상영관, 날짜를 모두 선택해주세요.");
+        }
     }
 
     function theaterType(type, sId, element) {
         if (sId == null || sId == "") {
-            alert("로그인 후 이용해주세요");
-            return;
+        	if(confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
+        		location.href = "member_login";
+        	}else{
+        		return;
+        	}
         }
 
         // 전체극장 및 MY영화관 선택 시 이전 선택된 항목의 selected 클래스를 제거
@@ -669,24 +687,24 @@ a {
         // 선택된 영화의 배경색 변경
         $("#movielist .movie-link").removeClass("selected");
         $("#movie_" + movie_num + " .movie-link").addClass("selected");
-        
+
         $.ajax({
-        	type : "POST",
-        	url : "movieSearch",
-        	data : {
-        		"movie_num" : movie_num
-        	},
-        	dataType : "json",
-        	success : function(response) {
-        		appendMovieCountToTheaters(response); 
-        	},
-        	error : function(){
-        		console.log("error");
-        	}
-			        		
+            type : "POST",
+            url : "movieSearch",
+            data : {
+                "movie_num" : movie_num
+            },
+            dataType : "json",
+            success : function(response) {
+                appendMovieCountToTheaters(response); 
+            },
+            error : function(){
+                console.log("error");
+            }
         });
+        finalList();
     }
-    
+
     function appendMovieCountToTheaters(data) {
         // 기존 영화 개수 정보를 초기화
         $(".theater-movie-count").remove();
@@ -712,6 +730,7 @@ a {
         // 선택된 상영관의 배경색 변경
         $("#theaterlist .theater-link").removeClass("selected");
         $(element).addClass("selected");
+        finalList();
     }
 
     function dayClick(date, nowDay, element) {
@@ -719,14 +738,9 @@ a {
             alert("영화와 상영관을 선택해주세요.");
             return;
         }
-        
-        console.log("date ======================= " + date);
-        console.log("nowDay =======================" + nowDay);
-        var baseDate = new Date(date);
-        console.log("baseDate ==================== " + baseDate);
 
+        var baseDate = new Date(date);
         var currentDay = baseDate.getDate();
-        console.log("currentDay =======================" + currentDay);
 
         // nowDay가 현재 날짜의 일(day) 값보다 낮으면 한 달을 더해줌
         if (nowDay < currentDay) {
@@ -734,12 +748,10 @@ a {
         }
 
         baseDate.setDate(nowDay);
-        console.log("updated baseDate ==================== " + baseDate);
         var formattedDate = baseDate.toISOString().split('T')[0];
-        console.log("formattedDate =========================" + formattedDate);
         selectedDay = formattedDate;
         var result = $("#daySelected");
-        
+
         // 선택된 날짜의 배경색 변경
         $(".daylist input").removeClass("selected");
         $(element).addClass("selected");
@@ -749,7 +761,7 @@ a {
 
         finalList();
     }
-	
+
     function getGradeIcon(grade) {
         var contextPath = "${pageContext.request.contextPath}";
         switch (grade) {
@@ -807,22 +819,31 @@ a {
 
     $(document).ready(function () {
         var sId = '<%= session.getAttribute("sId") %>';
-
+		
         // 페이지 로드 시 전체극장이 선택되도록 설정
         $("#entireTheaterLink").addClass("selected");
         theaterType('EntireTheater', 'entire', $("#entireTheaterLink")[0]);
-
+        
         $("#like_movie").change(function () {
             var likeMovie = $(this).is(":checked");
             var orderBy = "LikeMovie";
-
+    		
             if (likeMovie) {
+            	debugger;
+            	console.log("sId : " + sId);
+            	if(sId == null || sId == ""){
+            		if(confirm("로그인이 필요한 서비스입니다 로그인하시겠습니까?")){
+            			location.href = "member_login";
+            		}else{
+            			return;
+            		}
+            	}
                 loadMovies(orderBy, sId);
             } else {
                 orderBy = "Abc";
                 loadMovies(orderBy, sId);
             }
-        });
+        });	
     });
 </script>
 </body>

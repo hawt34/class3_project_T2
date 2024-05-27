@@ -42,7 +42,10 @@ public class ReviewService {
 	        return mapper.countReviews(movie_num);
 	 }
 
-	
+	//특정유저 쓴 댓글
+	 public List<ReviewVO> getMemberReview(String member_id, int movie_num) {
+		 	return mapper.selectMemberReview(member_id, movie_num);
+	 }
 	
 	
 }

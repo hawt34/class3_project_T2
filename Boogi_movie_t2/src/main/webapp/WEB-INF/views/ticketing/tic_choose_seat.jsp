@@ -7,6 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>부기무비 빠른예매</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+</style>
 </head>
 <style>
     .seat.disabled {
@@ -17,7 +26,22 @@
     }
 </style>
 <script>
-	console.log("${keyword}");
+	function isFirstRoad(seat, firstRoad) {
+	    var seatNumber = seat.replace(/\D/g, ''); // 숫자 부분만 추출
+	    return seatNumber == firstRoad;
+	}
+	
+	function isSecondRoad(seat, endCol, secondRoadOffset) {
+	    var seatNumber = seat.replace(/\D/g, ''); // 숫자 부분만 추출
+	    var secondRoad = endCol - secondRoadOffset;
+	    return seatNumber == secondRoad;
+	}
+	
+	function insertSpacer(seat, firstRoad, endCol, secondRoadOffset) {
+	    if (isFirstRoad(seat, firstRoad) || isSecondRoad(seat, endCol, secondRoadOffset)) {
+	        document.write("<span class='spacer'>&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+	    }
+	}
 </script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
 " rel="stylesheet" type="text/css" />
@@ -283,14 +307,18 @@
 		
 		<div class="center">
 			<c:forEach var="seat" items="${seats}" varStatus="status">
-				<div class="seat" onclick="toggleSeat(this)" value="${seat}">${seat}</div>
-					<c:if test="${status.index % firstRoad eq firstRoad - 1 || status.index % secondRoad eq secondRoad - 1}">
-						<span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;</span> <!-- 복도에 공백 삽입 -->
-					</c:if>
-					<c:if test="${(status.index + 1) % endCol eq 0}">
-						<br/> <!-- 각 행의 끝에서 줄바꿈 -->
-					</c:if>
-			</c:forEach>   	
+			    <div class="seat" onclick="toggleSeat(this)" value="${seat}">${seat}</div>
+			    
+			    <!-- 공백 삽입을 위한 JavaScript 호출 -->
+			    <script>
+			        insertSpacer("${seat}", 3, ${endCol}, 3);
+			    </script>
+			    
+			    <!-- 각 행의 끝에서 줄바꿈 -->
+			    <c:if test="${(status.index + 1) % endCol eq 0}">
+			        <br/> <!-- 각 행의 끝에서 줄바꿈 -->
+			    </c:if>
+			</c:forEach>
 		</div>
 		<div class="final_pay row">
 		

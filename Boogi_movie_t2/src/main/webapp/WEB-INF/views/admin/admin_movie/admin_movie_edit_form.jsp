@@ -168,6 +168,12 @@ body {
 	      });
 	    }, false);
 	    
+		function movieWithdraw(movie_num){
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href = "admin_movie_delete?movie_num=" + movie_num;
+			}
+		}
+	    
  	</script>
 </body>
 </html>

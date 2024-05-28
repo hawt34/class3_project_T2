@@ -266,12 +266,6 @@ th:nth-child(7), td:nth-child(7) {
 		<jsp:include page="/WEB-INF/views/inc/admin_footer.jsp"></jsp:include>
 	</footer>
 
-	<script type="text/javascript">
-		function movieWithdraw(movie_num){
-			if(confirm("정말 삭제하시겠습니까?")){
-				location.href = "admin_movie_delete?movie_num=" + movie_num;
-			}
-		}
-	</script>
+
 </body>
 </html>

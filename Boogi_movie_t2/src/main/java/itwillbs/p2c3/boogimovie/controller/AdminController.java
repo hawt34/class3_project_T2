@@ -800,7 +800,9 @@ public class AdminController {
 		int deleteCount = service.deleteMovie(movie_num);
 		
 		if(deleteCount > 0) {
-			return "redirect:admin_movie";
+			model.addAttribute("msg", "영화가 삭제되었습니다");
+			model.addAttribute("targetURL", "admin_movie");
+			return "error/fail";
 		} else {
 			model.addAttribute("msg", "영화삭제 실패");
 			return "redirect:/error/fail";

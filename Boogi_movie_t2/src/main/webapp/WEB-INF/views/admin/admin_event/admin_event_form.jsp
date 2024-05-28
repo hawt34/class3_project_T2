@@ -133,6 +133,9 @@
 		            $('#event_end_date').attr('min', startDateValue);
 		        }
 			});
+	    	
+			var today = new Date().toISOString().split('T')[0];
+			$('#event_start_date').attr('min', today);
 			
 		    $('#event_start_date').change(function() {
 		        $('#event_end_date').attr('min', $(this).val());

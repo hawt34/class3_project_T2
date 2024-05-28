@@ -343,6 +343,29 @@
 			let discount_sum = parseInt(use_point) + parseInt(coupon_apply); 		// 결제란 적용된 비타민 + 쿠폰 항목
 			let final_amount = parseInt(total_fee) - parseInt(discount_sum); 		// 현재 최종 값 - 총 할인금액 
 			
+			
+			
+// 			if(use_point > $("#getMemberPoint").val()) {
+// 		 			alert("포인트를 사용할 수 없습니다.");
+// 		 		} else {
+// 		 			if(confirm ("포인트를 사용하시겠습니까?")){
+// 		 				if(discount_sum < parseInt(total_fee)) {
+// 				 			$("#point_apply").html(use_point);			// 적용할 포인트 값
+// 				 			$("#final_amount").html(final_amount+"원");		// 총 결제금액에  적용 값 
+// 				 			$("#discount_sum").html(discount_sum); 		// 총 할인 적용 값
+// 		 				} else {
+// 		 					alert("결제 금액을 초과할 수 없습니다.");
+// 		 					$("#useMemberPoint").val("");
+// 		 					$("#useMemberPoint").focus();
+// 		 				}
+// 		 			} else {
+// 		 				$("#useMemberPoint").val("");
+// 		 			}
+// 		 		}
+			
+			
+			
+			
 			$.ajax({
 				type : "GET",
 			 	url : "memberPoint",
@@ -352,8 +375,10 @@
 			 	},
 			 	dataType : "json",
 			 	success : function(checkDupPointResult) {
-			 		if(checkDupPointResult == "false") {
-			 			alert("포인트를 사용할 수 없습니다.");
+			 		if(!checkDupPointResult) {
+			 			alert("보유 포인트를 초과할 수 없습니다.");
+	 					$("#useMemberPoint").val("");
+	 					$("#useMemberPoint").focus();
 			 		} else {
 			 			if(confirm ("포인트를 사용하시겠습니까?")){
 			 				if(discount_sum < parseInt(total_fee)) {
@@ -375,7 +400,7 @@
 					alert("사용할 포인트를 입력하세요.");
 				}
 				
-			});
+			}); // ajax
 			
 		});
 		

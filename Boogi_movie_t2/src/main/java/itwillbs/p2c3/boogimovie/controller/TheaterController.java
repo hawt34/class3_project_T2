@@ -52,6 +52,7 @@ public class TheaterController {
 		if(sId != null) {
 			member.setMember_id(sId);
 			member = mypageService.getMyTheater(member);
+//			Map<String, String> myThaterMap = service.getMyTheater(member);
 			model.addAttribute("member", member);
 		}
 		

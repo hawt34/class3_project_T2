@@ -67,12 +67,16 @@ input[type=password] {
         <a href="#" class="social-button" id="naver-connect"> <span>네이버 로그인</span></a>
     </div>
 </div>
+
+<footer>
+    <jsp:include page="../inc/admin_footer.jsp"></jsp:include>
+</footer>
 <script>
 
 	window.onload = function() {
 	    var naverLogin = new naver.LoginWithNaverId({
 	        clientId: "YYIJQmFYT8uB2h0xYs1o",
-	        callbackUrl: "http://localhost:8081/test2/NaverLoginCallback",
+	        callbackUrl: "http://c3d2401t2.itwillbs.com/boogimovie/NaverLoginCallback",
 	        isPopup: false, // 팝업 방식으로 할 경우 true로 설정
 	    });
 	
@@ -80,7 +84,6 @@ input[type=password] {
 	    naverLogin.init();
 	    
         document.getElementById('naver-connect').onclick = function() {
-        	debugger;
             naverLogin.authorize();
             return false;
         };

@@ -94,7 +94,7 @@
 	</footer>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script>
+<script>
 	$(document).ready(function() {
 	    let riskCount = 0;
 	    let dupIdCnt = 0; 
@@ -102,39 +102,33 @@
 	    // 아이디 입력값 변경 시
 	    $("#member_id").on("input", function() {
 	        validateIdAndCheckDuplication();
-	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-
+	
 	    // 비밀번호 입력값 변경 시
 	    $("#member_pwd").on("input", function() {
 	        validatePassword();
-	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-
+	
 	    // 비밀번호2 입력값 변경 시
 	    $("#member_pwd2").on("input", function() {
 	        validatePasswordConfirmation();
-	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-
+	
 	    // 상세주소 입력값 변경 시
 	    $("#member_address2").on("input", function() {
 	        validateAddress2();
-	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-
+	
 	    // 이메일 입력값 변경 시
 	    $("#member_email").on("input", function() {
 	        validateEmail();
-	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-
+	
 	    // 전화번호 입력값 변경 시
 	    $("#member_tel").on("input", function() {
 	        validateTel();
-	        checkFormValidity(); // 폼 유효성 검사 실행
 	    });
-
+	
 	    // 초기 폼 유효성 검사
 	    checkFormValidity();
 	    
@@ -143,15 +137,17 @@
 	        let idRegx = /^[a-zA-Z가-힣0-9]{8,20}$/;
 	        let msg = "";
 	        let color = "";
-
+	
 	        if (!idRegx.test(id)) {
 	            msg = "아이디는 특수문자,한글을 제외한 8~20자리의 영어, 숫자만 입력 가능합니다.";
 	            color = "RED";
 	            $("#msg_id").text(msg);
 	            $("#msg_id").css("color", color);
+	            dupIdCnt = 1;
+	            checkFormValidity();
 	            return;
-	        } 
-
+	        }
+	
 	        $.ajax({
 	            type: "GET",
 	            url: "dupId",
@@ -170,94 +166,110 @@
 	                }
 	                $("#msg_id").text(msg);
 	                $("#msg_id").css("color", color);
+	                checkFormValidity();
 	            }
 	        });
 	    }
-
+	
 	    function validatePassword() {
 	        let pwd = $("#member_pwd").val();
 	        let msg = "";
 	        let color = "";
 	        let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
-
-	        if (!lengthRegx.exec(pwd)) {
+	
+	        if (!lengthRegx.test(pwd)) {
 	            msg = "영문자, 숫자, 특수문자(!, @, #, $, %) 8~16자리 입력해주세요.";
 	            color = "RED";
+	            riskCount = 1;
 	        } else {
 	            msg = "사용 가능한 비밀번호입니다.";
 	            color = "GREEN";
+	            riskCount = 0;
 	        }
 	        $("#msg_pwd").text(msg);
 	        $("#msg_pwd").css("color", color);
+	        checkFormValidity();
 	    }
-
+	
 	    function validatePasswordConfirmation() {
 	        let pwd = $("#member_pwd").val();
 	        let pwd2 = $("#member_pwd2").val();
 	        let msg = "";
 	        let color = "";
-
+	
 	        if (pwd !== pwd2) {
 	            msg = "비밀번호가 일치하지 않습니다.";
 	            color = "RED";
+	            riskCount = 1;
 	        } else {
 	            msg = "비밀번호가 일치합니다.";
 	            color = "GREEN";
+	            riskCount = 0;
 	        }
 	        $("#msg_pwd2").text(msg);
 	        $("#msg_pwd2").css("color", color);
+	        checkFormValidity();
 	    }
-
+	
 	    function validateAddress2() {
 	        let address2 = $("#member_address2").val();
 	        let msg = "";
 	        let color = "";
-
+	
 	        if (address2.length < 2 || address2.length > 20) {
 	            msg = "상세 주소는 2~20자리 입력해주세요.";
 	            color = "RED";
+	            riskCount = 1;
 	        } else {
 	            msg = "사용 가능한 상세 주소입니다.";
 	            color = "GREEN";
+	            riskCount = 0;
 	        }
 	        $("#msg_addr").text(msg);
 	        $("#msg_addr").css("color", color);
+	        checkFormValidity();
 	    }
-
+	
 	    function validateEmail() {
 	        let email = $("#member_email").val();
 	        let emailRegx = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 	        let msg = "";
 	        let color = "";
-
-	        if (!emailRegx.exec(email)) {
+	
+	        if (!emailRegx.test(email)) {
 	            msg = "올바른 이메일 형식이 아닙니다.";
 	            color = "RED";
+	            riskCount = 1;
 	        } else {
 	            msg = "사용 가능한 이메일입니다.";
 	            color = "GREEN";
+	            riskCount = 0;
 	        }
 	        $("#msg_email").text(msg);
 	        $("#msg_email").css("color", color);
+	        checkFormValidity();
 	    }
-
+	
 	    function validateTel() {
 	        let tel = $("#member_tel").val();
 	        let telRegx = /^01[016789][0-9]{7,8}$/;
 	        let msg = "";
 	        let color = "";
-
-	        if (!telRegx.exec(tel)) {
+	
+	        if (!telRegx.test(tel)) {
 	            msg = "올바른 전화번호 형식이 아닙니다.";
 	            color = "RED";
+	            riskCount = 1;
 	        } else {
 	            msg = "사용 가능한 전화번호입니다.";
 	            color = "GREEN";
+	            riskCount = 0;
 	        }
 	        $("#msg_tel").text(msg);
 	        $("#msg_tel").css("color", color);
+	        checkFormValidity();
 	    }
-
+	
 	    function checkFormValidity() {
 	        let isFormValid = (
 	            $("#member_name").val() &&
@@ -273,11 +285,12 @@
 	            dupIdCnt === 0 &&
 	            riskCount === 0
 	        );
-
+	
 	        $("button[type='submit']").prop('disabled', !isFormValid);
 	    }
 	});
-	</script>
+</script>
+
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	

@@ -109,7 +109,6 @@ input[type=text]:focus, input[type=password]:focus {
 
     // 폼을 서버로 전송할 때 이벤트를 처리하는 함수
     document.getElementById('withdrawForm').addEventListener('submit', function(event) {
-        // 폼의 기본 동작인 서버로의 제출을 막습니다.
         event.preventDefault();
 
         var passwordValue = document.getElementById('passwordInput').value;
@@ -119,13 +118,10 @@ input[type=text]:focus, input[type=password]:focus {
             return;
         }
 
-        // 비밀번호를 서버로 전송하여 비교하는 로직을 구현합니다.
-        // 여기서는 단순히 비밀번호를 가져오는 로직만을 작성합니다.
-        // 만약 비밀번호가 서버로 전송되어야 한다면, 비밀번호를 서버로 전송하는 코드를 추가해야 합니다.
-        // 여기서는 비밀번호를 서버로 전송하지 않고 클라이언트에서만 처리합니다.
+        // 비밀번호를 서버로 전송하여 비교하는 로직
+        // 여기서는 비밀번호를 서버로 전송하지 않고 클라이언트에서만 처리
         document.getElementById('withdrawForm').insertAdjacentHTML('beforeend', '<input type="hidden" name="password" value="' + passwordValue + '">');
 
-        // 폼을 서버로 제출합니다.
         document.getElementById('withdrawForm').submit();
     });
 

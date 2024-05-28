@@ -45,15 +45,12 @@
 					  	<div class="form_item w-75">
 					    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" readonly>
 					    </div><!-- form item -->
-					    
-					    
 						<div class="box5">
 				   			<label for="member_id">아이디</label>
 				   		</div>
 					  	<div class="form_item w-75">
 				    		<input type="text"  placeholder="아이디 입력" name="member_id" id="member_id" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" value="${member.member_id}" readonly required>
 					    </div><!-- form item -->
-		<!-- 				</form> -->
 						<div class="box5">
 			   				<label for="member_pwd">새 비밀번호</label>
 			   			</div>
@@ -86,7 +83,6 @@
 			   				<label for="member_addr">주소</label>
 			   			</div>
 					  	<div class="form_item w-75">
-<%-- 					    	<input type="text" id="member_addr" name="member_addr" size="6" onclick="search_address()" required value="${member.member_addr}" placeholder="클릭 시 주소검색"> --%>
 							    <input type="text" id="post_code" name="member_post_code" size="6" readonly onclick="search_address()" value="${member.member_post_code }"  required placeholder="클릭 시 주소검색">
 								<input type="text" id="address1" name="member_address1" placeholder="기본주소" size="25" required value="${member.member_address1 }"  readonly onclick="search_address()"><br>
 								<input type="text" id="address2" name="member_address2" placeholder="상세주소" size="25" required pattern="^.{2,20}$" maxlength="20" value="${member.member_address2 }">
@@ -200,7 +196,6 @@
 	            msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
 	            color = "RED";
 	            riskCount = 0;
-// 	            $("#member_pwd").css("background-color", "red");
 	        } else {
 	            let engUpperRegex = /[A-Z]/;
 	            let engLowerRegex = /[a-z]/;
@@ -218,25 +213,21 @@
 	                    msg = "안전";
 	                    color = "Green";
 	                    riskCount = 4;
-// 			            $("#member_pwd").css("background-color", "");
 	                    break;
 	                case 3:
 	                    msg = "보통";
 	                    color = "Orange";
 	                    riskCount = 3;
-// 			            $("#member_pwd").css("background-color", "");
 	                    break;
 	                case 2:
 	                    msg = "위험";
 	                    color = "RED";
 	                    riskCount = 2;
-// 			            $("#member_pwd").css("background-color", "");
 	                    break;
 	                default:
 	                    msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
 	                    color = "RED";
 	                    riskCount = 0;
-	                    
 	            }
 	        }
 	        $("#msg_pwd").text(msg);
@@ -248,15 +239,13 @@
 	        let pwd2 = $("#member_pwd2").val();
 			
             $("#msg_pwd2").css("color", "red");
-//             $("#member_pwd2").css("background-color", "red");
 			
 	        if (pwd2 != pwd) {
 	            $("#msg_pwd2").text("비밀번호가 일치하지 않습니다");
 	        } else if (pwd2 == ""){
-	            $("#msg_pwd2").text("");
+	            $("#msg_pwd2").empty();
 	        	
 	        }else {
-// 	            $("#member_pwd2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	            $("#msg_pwd2").text("비밀번호가 일치합니다");
 	            $("#msg_pwd2").css("color", "green");
 	        } 
@@ -265,12 +254,9 @@
 	        
 	    }
 	        
-	        
-	        
 	    function validateAddress2() {
 	        let address2 = $("#address2").val();
 	        let regex = /^.{2,20}$/g;
-//         	$("#address2").css("background-color", "red"); 
         	$("#msg_addr").css("color", "red");
 
 	        if(address2 == "") {
@@ -278,7 +264,6 @@
 	        } else if (!regex.test(address2)) {
 	        	$("#msg_addr").text("모든 문자 2~20 글자를 입력해주세요");
 	        } else {
-// 	        	$("#address2").css("background-color", "");
 	        	$("#msg_addr").empty();
 	        	
 	        }
@@ -290,11 +275,9 @@
 	        let length = email.split('@')[0].length;
 			
 	        if (email == ""){
-// 	            $("#member_email").css("background-color", "red");
 	            $("#msg_email").text("이메일 주소를 입력해주세요");
 	            $("#msg_email").css("color", "red");
 	        } else if (length < 4){
-// 	            $("#member_email").css("background-color", "red");
 	            $("#msg_email").text("이메일 주소는 최소 4글자 이상이여야 합니다");
 	            $("#msg_email").css("color", "red");
 	        } else {
@@ -302,11 +285,9 @@
 		        let regex = /^[a-zA-Z0-9._%+-]{4,20}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/g;
 		        
 		        if (!regex.test(email)) {
-// 		            $("#member_email").css("background-color", "red");
 	           		$("#msg_email").css("color", "red");
 		            $("#msg_email").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
 	        	} else {
-// 		            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 		            $("#msg_email").empty();
 		        }
 		        
@@ -318,11 +299,9 @@
 	        let regex = /^010\d{8}$/g;
 
 	        if (!regex.test(tel)) {
-// 	            $("#member_tel").css("background-color", "red");
 	            $("#msg_tel").text("전화번호 형식이 맞지 않습니다(예: 01000000000)");
 	            $("#msg_tel").css("color", "red");
 	        } else {
-// 	            $("#member_tel").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	            $("#msg_tel").empty();
 	        }
 	    }

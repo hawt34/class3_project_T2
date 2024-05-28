@@ -86,7 +86,6 @@ public class MypageController {
 		if(id == null) { // 실패
 			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
 			model.addAttribute("targetURL", "member_login");
-//			System.out.println("myp_main 실패");
 			return "error/fail";
 		} else { // 성공
 			
@@ -249,7 +248,6 @@ public class MypageController {
 		model.addAttribute("member", updateCount);
 		
 		if(updateCount > 0) { // 정보수정 성공 시
-//			model.addAttribute("member", member);
 			model.addAttribute("msg", "회원정보가 수정되었습니다");
 			model.addAttribute("targetURL", "myp_info_modify");
 			return "redirect:/myp_info_modify";
@@ -448,10 +446,7 @@ public class MypageController {
 	// 탈퇴처리
 	@PostMapping("myp_withdraw_finish_pro")
 	public String mypWithdrawFinishPro(@RequestParam("password")String password, MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
-		// 세션 아이디 존재 여부 판별
-		// 회원 정보 조회 후 아이디 일치 여부와 패스워드 일치 여부 확인
 		String id = (String)session.getAttribute("sId");
-		System.out.println("myp_withdraw_finish_pro");
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다");
 			model.addAttribute("targetURL", "./");
@@ -558,8 +553,6 @@ public class MypageController {
 	@ResponseBody
 	@PostMapping("otoDeleteFile")
 	public String otoDeleteFile(OTOVO oto, HttpSession session) {
-//		System.out.println("!!oto_num: " + oto.getOto_num());
-//		System.out.println("!!oto_file: " + oto.getOto_file1());
 		int removeCount = otoService.removeOtoFile(oto);
 		
 		if(removeCount > 0) {

@@ -44,12 +44,6 @@ public class MypageService {
 		return mapper.selectMovieReservation(param);
 	}
 	
-	
-	// 예매내역 페이징처리
-//	public List<Map<String, Object>> getResvList(int startRow, int listLimit, String member_id){
-//		return mapper.selectResvList(startRow, listLimit, member_id);
-//	}
-	
 	public int getResvCount(String member_id, String status) {
 		return mapper.selectResvCount(member_id, status);
 	}

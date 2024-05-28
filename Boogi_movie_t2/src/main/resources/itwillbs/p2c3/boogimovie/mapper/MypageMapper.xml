@@ -129,13 +129,9 @@
  		UPDATE member
 		SET
 			<!-- 새 패스워드(passwd) 입력 여부에 따라 패스워드 변경 여부 결정 -->
-			<!-- 마이바티스 동적 SQL 기능 중 <if></if> 활용하여 패스워드 변경 작업을 동적으로 처리 -->
-			<!-- 주의! 비교에 사용될 파라미터는 #{} 또는 ${} 제외하고 표현 -->
-			<!-- passwd 파라미터가 null 이 아니고 널스트링('')도 아닐 경우 패스워드 변경 -->
-			<!-- (실제로는 패스워드 미입력 시 널스트링이 전달되므로 null 값 판별 생략 가능) -->
-			<if test="member_pwd != null and !member_pwd.equals('')">
-				member_pwd = #{member_pwd},
-			</if>
+		<if test="member_pwd != null and !member_pwd.equals('')">
+			member_pwd = #{member_pwd},
+		</if>
 			member_birth = #{member_birth}
 			, member_addr = #{member_addr}
 			, member_email = #{member_email}
@@ -149,26 +145,25 @@
 	<update id="updateMyTheater">
 	    UPDATE member
 	    <set> <!-- 자동으로 쉼표 처리. 각 항목 뒤에 쉼표를 추가하고 조건이 충족되지 않으면 마지막 쉼표를 제거함  -->
-	   			<if test="checkedValues[0] != null and !checkedValues[0].equals('')">
-			    	member_my_theater1 = #{checkedValues[0]},
-			     </if>
-			    <if test="checkedValues[0] == null">
-			    	member_my_theater1 = null,
-			    </if>
-	   			<if test="checkedValues[1] != null and !checkedValues[1].equals('')">
-			        member_my_theater2 = #{checkedValues[1]},
-				</if>
-				<if test="checkedValues[1] == null">
-			  		member_my_theater2 = null,
-				</if>
-	   			<if test="checkedValues[2] != null and !checkedValues[2].equals('')">
-			        member_my_theater3 = #{checkedValues[2]}
-				</if>
-				<if test="checkedValues[2] == null">
-				    member_my_theater3 = null
-				</if>
+   			<if test="checkedValues[0] != null and !checkedValues[0].equals('')">
+		    	member_my_theater1 = #{checkedValues[0]},
+		     </if>
+		    <if test="checkedValues[0] == null">
+		    	member_my_theater1 = null,
+		    </if>
+   			<if test="checkedValues[1] != null and !checkedValues[1].equals('')">
+		        member_my_theater2 = #{checkedValues[1]},
+			</if>
+			<if test="checkedValues[1] == null">
+		  		member_my_theater2 = null,
+			</if>
+   			<if test="checkedValues[2] != null and !checkedValues[2].equals('')">
+		        member_my_theater3 = #{checkedValues[2]}
+			</if>
+			<if test="checkedValues[2] == null">
+			    member_my_theater3 = null
+			</if>
 			</set>
-<!-- 			SET member_my_theater = CASE WHEN member_my_theater = #{checkedValues[0]} THEN checkedValues[0] ELSE NULL, -->
 	    WHERE member_id = #{member_id}
 	</update>
 

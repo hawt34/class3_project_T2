@@ -61,7 +61,6 @@ hr{
 
 	}
 
-
 </script>
 
 
@@ -139,7 +138,6 @@ hr{
 										</c:forEach>
 									</c:when>
 									<c:otherwise>
-										<td>스토어 결제내역이 존재하지 않습니다.</td>
 										<td colspan="6" class="box3">스토어 결제내역이 존재하지 않습니다.</td>
 									</c:otherwise>
 								</c:choose>
@@ -187,10 +185,7 @@ hr{
 					</table>
 				</div><!-- tab-pane fade 탭2 끝-->
 				<!-- 취소탭 -->
-				
 				</div><!-- tab-content 탭1 끝 -->
-				
-				
 			</div><!-- col-md-9 box-in -->
 		</div> <!-- row -->
 	</div><!-- container2 -->

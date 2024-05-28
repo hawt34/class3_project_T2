@@ -16,7 +16,7 @@
   font-weight: 400;
   font-style: normal;
 }
-ㅇ
+
 * {
 	margin: 0;
 	padding: 0;

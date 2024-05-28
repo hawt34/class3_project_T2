@@ -76,7 +76,7 @@ hr{
 
 .csc_main_inquiry {
 	margin-top:30px;
-	margin-left:30px;
+/* 	margin-left:30px; */
 	width:400px;
 }
 
@@ -102,10 +102,31 @@ hr{
 ul li {
 	margin-bottom: 5px;
 }
-
 .csc_main_InquiryUl {
+	padding-left: 0;
+}
+
+.csc_main_InquiryUl li {
 	margin-top: 5px;
-	list-style-image: url("https://i.ibb.co/6Ng1m3P/thumb.png");
+/* 	list-style-image: url("https://i.ibb.co/6Ng1m3P/thumb.png"); */
+	white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+    overflow: hidden; /* 넘치는 텍스트를 숨김 */
+    text-overflow: ellipsis; /* 넘치는 텍스트를 ...로 표시 */
+    width: 100%; /* li 요소의 너비를 부모의 100%로 설정 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함하여 너비를 계산 */
+    position: relative;
+    padding-left: 20px;
+}
+
+.csc_main_InquiryUl li::before {
+    content: url("https://i.ibb.co/6Ng1m3P/thumb.png");
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px; /* 이미지 너비 조정 */
+    height: 16px; /* 이미지 높이 조정 */
+    
 }
 .csc_main_noticeUl {
 	margin-top: 5px;
@@ -140,19 +161,19 @@ ul li {
 			<div class="row">
 				<div class="csc_ffs">
 					<div class="csc_ffs_ps">
-						<a href="#" class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiSad.png"><br>
+						<a href="member_search_id" class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiSad.png"><br>
 						아이디/비밀번호<br>찾기</a>
 					</div>
 					<div class="csc_ffs_modify">
-						<a href="#"class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiHappy.png"><br>
+						<a href="myp_info_modify"class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiHappy.png"><br>
 						회원정보<br>수정</a>
 					</div>
 					<div class="csc_ffs_ticketing">
-						<a href="#" class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiLovely.png"><br>
+						<a href="tic_ticketing" class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiLovely.png"><br>
 						영화 예매<br>결제</a>
 					</div>
 					<div class="csc_ffs_faq">
-						<a href="#" class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiCurious.png"><br>
+						<a href="csc_faq" class="aTag"><img src="${pageContext.request.contextPath }/resources/images/boogiCurious.png"><br>
 						자주 묻는<br> 질문</a>
 					</div>
 				</div>

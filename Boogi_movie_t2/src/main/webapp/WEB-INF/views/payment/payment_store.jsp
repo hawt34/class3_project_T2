@@ -339,7 +339,7 @@
 			 			if(confirm ("포인트를 사용하시겠습니까?")){
 			 				if(discount_sum < parseInt(total_fee)) {
 					 			$("#point_apply").html(use_point);			// 적용할 포인트 값
-					 			$("#final_amount").html(final_amount+"원");		// 총 결제금액에  적용 값 
+					 			$("#final_amount").html(final_amount);		// 총 결제금액에  적용 값 
 					 			$("#discount_sum").html(discount_sum); 		// 총 할인 적용 값
 			 				} else {
 			 					alert("결제 금액을 초과할 수 없습니다.");

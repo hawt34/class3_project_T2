@@ -186,7 +186,7 @@ footer {
 			<br>
 			<div class="more">
 				<button id="moreMoviesBtn" type="button"
-					class="btn btn-outline-primary">검색결과 더보기</button>
+					class="btn btn-outline-primary">검색결과 더 보기</button>
 			</div>
 			<h2 class="end-message">모든 검색 영화가 다 출력되었습니다.</h2>
 		</section>

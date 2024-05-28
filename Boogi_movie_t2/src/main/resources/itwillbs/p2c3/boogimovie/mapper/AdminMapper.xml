@@ -495,7 +495,7 @@
 				screen_cinema_num = #{screen_cinema_num}
 		</if>
 		ORDER BY 
-			ss.scs_date
+			ss.scs_start_time
 <!-- 		LIMIT  -->
 <!-- 			#{startRow} -->
 <!-- 			, #{listLimit} -->
@@ -738,9 +738,9 @@
  	<select id="selectStorePay" resultType="itwillbs.p2c3.boogimovie.vo.StorePayVO">
  		SELECT s.store_pay_num ,s.member_id ,s.store_pay_type ,s.store_pay_date ,s.store_pay_price ,s.store_pay_status, s.store_pay_cancel_date , s.use_point , ct.coupon_value 
 		FROM store_pay s
-		JOIN coupon c  
+		LEFT JOIN coupon c  
 		ON  c.coupon_num = s.coupon_num 
-		JOIN coupon_type ct 
+		LEFT JOIN coupon_type ct 
 		ON c.coupon_type_num = ct.coupon_type_num
 		ORDER BY
 			store_pay_date desc
@@ -749,9 +749,9 @@
  	<select id="selectStorePayDetail" resultType="itwillbs.p2c3.boogimovie.vo.StorePayVO">
  		SELECT s.store_pay_num ,s.member_id ,s.store_pay_type ,s.store_pay_date ,s.store_pay_price ,s.store_pay_status, s.store_pay_cancel_date , s.use_point , ct.coupon_value 
 		FROM store_pay s
-		JOIN coupon c  
+		LEFT JOIN coupon c  
 		ON  c.coupon_num = s.coupon_num 
-		JOIN coupon_type ct 
+		LEFT JOIN coupon_type ct 
 		ON c.coupon_type_num = ct.coupon_type_num
 		WHERE store_pay_num = #{store_pay_num}
  	</select>

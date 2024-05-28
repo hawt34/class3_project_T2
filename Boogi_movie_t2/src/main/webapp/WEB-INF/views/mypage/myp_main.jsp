@@ -69,11 +69,9 @@ h6{
 						<hr>
 						<h6>보유중인 포인트 : ${member.member_point}</h6>
 					</div>
-<!-- 					<section class="content"> -->
 						<div class="col-6 box3">
 							<button type="button" class="btn btn-outline-primary btn-lg" style="left: 20px" onclick="location.href='myp_info_modify'">회원정보수정</button>
 						</div>
-<!-- 					</section> -->
 				</blockquote>
 				<hr>
 			</div><!-- col-md-10 -->
@@ -112,7 +110,7 @@ h6{
 									        <td>${map.theater_info}</td>
 									        <td>${map.session_time}</td>
 									        <td>${map.ticket_seat_info}</td>
-									        <td>${map.ticket_price}</td>
+									        <td>${map.ticket_pay_price}</td>
 									    </tr>
 								</c:forEach>
 							</c:when>
@@ -246,17 +244,15 @@ h6{
 	    }
     
    		var member_id = "${member.member_id}"; // memberId를 가져옴
-// 						        var member_id = document.getElementById("member_id").value;
 	    $.ajax({
 	        url: "api/myp_my_theater",
 	        type: "POST",
 	        dataType: "json",
 	        contentType: "application/json", // 서버에게 내용이 JSON임을 알려줌
 	        data: JSON.stringify({ member_id: member_id, checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
-	// 						            data: JSON.stringify({ member_id, checkedValues }),
 			success: function(response) {
 				if(response){
-					alert("영화 정보 등록을 성공하였습니다");
+					alert("나의 극장 정보 등록을 성공하였습니다");
 				    location.reload();	
 				}
 				  

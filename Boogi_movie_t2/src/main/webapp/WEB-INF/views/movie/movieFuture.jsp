@@ -9,12 +9,14 @@
 <meta charset="UTF-8">
 <title>부기무비 상영예정</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap')
+	;
 
 * {
-  font-family: "Nanum Gothic", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+	font-family: "Nanum Gothic", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 * {
@@ -101,6 +103,7 @@ footer {
 	height: 100%;
 	/* 	background-color: #ffb300; */
 }
+
 .nowMovie>form>input[type=text] {
 	font-size: 18px;
 	height: 40px;
@@ -119,7 +122,8 @@ footer {
 	vertical-align: middle;
 	padding: 0px;
 }
-.future_detail_button{
+
+.future_detail_button {
 	margin-bottom: 30px;
 }
 </style>
@@ -151,8 +155,8 @@ footer {
 					onclick="window.location.href='movie'">현재 상영작</button>
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.location.href='movieFuture'">상영예정작</button>
-				<button type="button" class="btn btn-outline-primary"
-					id="boxoffice">박스오피스 순위</button>
+				<button type="button" class="btn btn-outline-primary" id="boxoffice">박스오피스
+					순위</button>
 				<button type="button" class="btn btn-outline-primary"
 					id="recommendMovie">추천상영영화</button>
 				<form action="searchMovie">
@@ -213,11 +217,11 @@ footer {
 				}
 			}
 		});
-		
+
 		$("#boxoffice").on("click", function() {
-	        window.open('boxoffice', '_blank'); // 박스오피스 페이지를 새 창으로 열기
-	    });
-		
+			window.open('boxoffice', '_blank'); // 박스오피스 페이지를 새 창으로 열기
+		});
+
 		// 처음에는 4편의 영화만 보여주기
 		let numShown = 4;
 		$(".movie:gt(" + (numShown - 1) + ")").hide();
@@ -227,7 +231,7 @@ footer {
 			numShown += 4; // 4개씩 추가로 보여주기
 			$(".movie:lt(" + numShown + ")").show();
 
-			let newHeight = $("section").height() + 400;
+			let newHeight = $("section").height() + 500;
 			$("section").height(newHeight);
 			// 모든 영화를 보여주었을 경우 더보기 버튼 숨기기
 			// 상영 예정작은 영화 수가 작아서 일단 주석처리
@@ -236,7 +240,7 @@ footer {
 				$(".end-message").show();
 			}
 		});
-		
+
 		// 상세보기 버튼 클릭 이벤트 처리
 		$(".list").on("click", ".future_detail_button", function() {
 			let movie_num = $(this).siblings(".movie_num").val();

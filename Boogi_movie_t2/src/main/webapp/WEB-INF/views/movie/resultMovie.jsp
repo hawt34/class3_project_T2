@@ -9,12 +9,14 @@
 <meta charset="UTF-8">
 <title>부기무비 검색결과</title>
 <style type="text/css">
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap')
+	;
 
 * {
-  font-family: "Nanum Gothic", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+	font-family: "Nanum Gothic", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 * {
@@ -146,10 +148,10 @@ footer {
 					onclick="window.location.href='movie'">현재 상영작</button>
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.location.href='movieFuture'">상영예정작</button>
+				<button type="button" class="btn btn-outline-primary" id="boxoffice">박스오피스
+					순위</button>
 				<button type="button" class="btn btn-outline-primary"
-					id="boxoffice">박스오피스 순위</button>
-				<button type="button" class="btn btn-outline-primary"
-					id="recommendMovie" >추천상영영화</button>
+					id="recommendMovie">추천상영영화</button>
 				<form action="searchMovie">
 					<input type="text" name="searchKeyword" placeholder="영화제목 입력"
 						value="${param.searchKeyword}"> <input type="submit"
@@ -213,17 +215,17 @@ footer {
 						window.location.href = 'member_login';
 					}
 				} else {
-	                if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
-	                    window.location.href = 'recommand'; // 추천 영화 페이지로 이동
-	                }
-	            			
+					if (confirm("추천 영화 페이지로 이동하시겠습니까?")) {
+						window.location.href = 'recommand'; // 추천 영화 페이지로 이동
+					}
+
 				}
 			});
-			
+
 			$("#boxoffice").on("click", function() {
-		        window.open('boxoffice', '_blank'); // 박스오피스 페이지를 새 창으로 열기
-		    });
-			
+				window.open('boxoffice', '_blank'); // 박스오피스 페이지를 새 창으로 열기
+			});
+
 			$(".list").on("click", ".detail_button", function() {
 				let movie_num = $(this).siblings(".movie_num").val();
 				window.location.href = 'movieInfo?movie_num=' + movie_num; // 영화 상세 정보 페이지로 이동

@@ -103,10 +103,10 @@
 
 	<select id="selectTheaterEventList" resultType="itwillbs.p2c3.boogimovie.vo.EventVO">
 		SELECT *
-		FROM event
-		JOIN event_type 
-		ON event.event_type_num = event.event_type_num 
-		WHERE event.event_type_num = '2'
+		FROM event e
+		JOIN event_type et
+		ON e.event_type_num = et.event_type_num 
+		WHERE e.event_type_num = '2'
 		ORDER BY event_num DESC
 	</select>
 	

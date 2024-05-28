@@ -191,7 +191,7 @@ h6{
 								                <fmt:formatDate value="${parsedDate }" pattern="yyyy-MM-dd HH:mm"/>
 								            </td>
 								            <td>
-								                ${item.usePoints }
+								                -${item.usePoints }
 								            </td> 
 								        </tr>
 								    </c:if>

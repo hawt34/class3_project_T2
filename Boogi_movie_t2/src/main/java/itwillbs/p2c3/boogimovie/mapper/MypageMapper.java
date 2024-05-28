@@ -27,15 +27,9 @@ public interface MypageMapper {
 	MemberVO selectMyTheater(MemberVO member);
 	
 	// 예매내역
-//	List<Map<String , Object>> selectMovieReservation(MemberVO member);
-
     List<Map<String, Object>> selectMovieReservation(Map<String, Object> param);
-//    List<Map<String, Object>> selectResvList(Map<String, Object> params);
-//    int selectResvCount(String memberId);
 	
 	// 예매내역 페이징처리
-	List<Map<String, Object>> selectResvList(@Param("startRow") int startRow, @Param("listLimit") int listLimit, @Param("member_id") String member_id);
-	
 	int selectResvCount(@Param("member_id") String member_id, @Param("status") String status);
 	
 	// 스토어
@@ -72,14 +66,19 @@ public interface MypageMapper {
 	// 예매취소 member 테이블
 	void updateMemberPoint(PayVO pay);
 
+	
 	Integer selectCouponNum(int ticket_pay_num);
 
+	
 	PayVO selectMemberPoint(@Param("member_id") String id,@Param("ticket_pay_num") int ticket_pay_num);
 
+	
 	StorePayVO selectStorePayPoint(@Param("member_id") String id,@Param("store_pay_num") int store_pay_num);
 
+	
 	void updateMemberPointStore(StorePayVO dbStorePay);
 
+	
 	int updateStorePayStatus(@Param("member_id") String id,@Param("store_pay_num") int store_pay_num);
 	
 	

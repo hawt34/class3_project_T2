@@ -54,7 +54,7 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="coupon_type_num">할인쿠폰</label> 
-							<select name="coupon_type_num" id="coupon_type_num" class="form-control" required>
+							<select name="coupon_type_num" id="coupon_type_num" class="form-control" disabled>
 								<option value="0">미선택</option>
 								<c:forEach var="couponType" items="${couponTypeList}">
 									<option value="${couponType.coupon_type_num}">${couponType.coupon_name}</option>
@@ -120,8 +120,9 @@
 	      });
 	    }, false);
 	    
-	    // 이벤트 시작일, 종료일 처리
+	    
 	    $(function() {
+	    	// 이벤트 시작일, 종료일 처리
 			$("#event_end_date").change(function() {
 				if($("#event_start_date").val() == ""){
 					alert("이벤트 시작일을 먼저 선택해주세요");
@@ -132,6 +133,9 @@
 		            $('#event_end_date').attr('min', startDateValue);
 		        }
 			});
+	    	
+			var today = new Date().toISOString().split('T')[0];
+			$('#event_start_date').attr('min', today);
 			
 		    $('#event_start_date').change(function() {
 		        $('#event_end_date').attr('min', $(this).val());
@@ -140,6 +144,15 @@
 		        	$('#event_start_date').val('');
 		        }
 		    });
+		    $("#event_type_num").change(function() {
+				if($("#event_type_num").val() == 3){
+					$("#coupon_type_num").prop('disabled',false).css({"background": "white", "color" : "black"});
+				} else{
+					$("#coupon_type_num").prop('disabled',true);
+				}
+		    	
+			});
+		    
 		});    
 	    
  	</script>

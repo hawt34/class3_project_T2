@@ -80,7 +80,8 @@ public class TicketingController {
 		String start_time = final_list_data.split("/")[2];
 		String end_time = final_list_data.split("/")[3];
 		String theater_name = final_list_data.split("/")[4];
-		String selected_day = final_list_data.split("/")[5];
+		int screen_cinema_num = Integer.parseInt(final_list_data.split("/")[5]);
+		String selected_day = final_list_data.split("/")[6];
 		// 포스터 가져오기
 		MovieVO movie = new MovieVO();
 		movie.setMovie_name(movie_name);
@@ -124,7 +125,9 @@ public class TicketingController {
 		scs.setScs_start_time(start_time);
 		scs.setScs_end_time(end_time);
 		scs.setScs_date(date);
+		scs.setScreen_cinema_num(screen_cinema_num);
 		//db에서 값 가져오기
+		
 		ScreenSessionVO dbScs = ticketingService.chooseSeatSelect(scs);
 		//뷰에 가져갈 값 저장하기
 		dbScs.setMovie_poster(movie_poster);

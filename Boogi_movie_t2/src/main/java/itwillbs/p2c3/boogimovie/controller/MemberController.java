@@ -247,10 +247,19 @@ public class MemberController {
 	@RequestMapping(value = "member_reg_member")
 	public String memberRegMember(MemberVO inputMember, Model model) {
 		boolean isRegistedMember = false;
+		boolean isRegistedEmail = false;
 		isRegistedMember = service.IsRegisteredMember(inputMember);
 		
 		if(isRegistedMember) {
 			model.addAttribute("msg" , "이미 가입한 회원입니다.");
+			model.addAttribute("targetURL" , "member_login");
+			return "error/fail";
+		}
+		
+		isRegistedEmail = service.isRegistedEmail(inputMember); 
+		
+		if(isRegistedEmail) {
+			model.addAttribute("msg" , "이미 등록된 이메일입니다.");
 			model.addAttribute("targetURL" , "member_login");
 			return "error/fail";
 		}

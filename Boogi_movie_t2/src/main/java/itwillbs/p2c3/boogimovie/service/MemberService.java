@@ -31,8 +31,6 @@ public class MemberService {
 		MemberVO outputMember = mapper.preRegMember(inputMember);
 //		MemberVO outputMember = mapper.getMemberInfo(inputMember);
 		boolean isRegistedMember = false;
-		System.out.println("outputMember : " + outputMember);
-		System.out.println("service " + inputMember);
 		
 		if(outputMember != null) {
 			isRegistedMember = true;
@@ -87,5 +85,16 @@ public class MemberService {
 		return mapper.updateMemberPwd(member) > 0 ? true : false;
 	}
 
-
+	public boolean isRegistedEmail(MemberVO inputMember) {
+		MemberVO outputMember = mapper.preRegMemberEmail(inputMember);
+		boolean isRegistedEmail = false;
+		
+		if(outputMember != null) {
+			isRegistedEmail = true;
+		}
+		
+		
+		return isRegistedEmail;
+	}
+	
 }

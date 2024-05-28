@@ -131,7 +131,7 @@ h3{
                                             <div class="col-md-3 d-grid gap-5">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.ticket_seat_info}">
-                                                <input type="text" readonly class="form-control-plaintext" value="${map.ticket_price}">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.ticket_pay_price}">
                                             </div>
                                             <div class="col-md-1 d-grid gap-5">
                                                 <input type="button" class="btn btn-outline-secondary position-absolute bottom-75 w-25 box4" id="cancelMovie" onclick="cancelMovie(${map.ticket_pay_num})" type="text" value="취소" aria-label="Disabled input example" readonly>
@@ -193,7 +193,7 @@ h3{
                                                 <td>${map.theater_info}</td>
                                                 <td>${map.session_time}</td>
                                                 <td>${map.ticket_seat_info}</td>
-                                                <td>${map.ticket_price}</td>
+                                                <td>${map.ticket_pay_price}</td>
                                             </tr>
                                         </c:forEach>
                                     </c:when>
@@ -229,8 +229,6 @@ h3{
                                         </ul>
                                     </nav>
                                 </div>
-<%--                             </c:otherwise> --%>
-<%--                         </c:choose> --%>
                         
                        <!-- 탭 메뉴 -->
 						<div class="col-md-12">

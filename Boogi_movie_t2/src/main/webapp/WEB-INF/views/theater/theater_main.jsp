@@ -51,7 +51,7 @@
 				<c:forEach var="event" items="${eventList}" begin="0" end="2" >
 						<div class="col">
 							<a href="eventDetail?event_num=${event.event_num}">
-								<img src="${pageContext.request.contextPath}/resources/images/${event.event_thumbnail}" style="width:100%;">
+								<img src="${pageContext.request.contextPath}/resources/upload/${event.event_thumbnail}" style="width:100%;">
 							</a>
 						</div>
 				</c:forEach>

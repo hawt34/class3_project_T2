@@ -177,7 +177,7 @@ $(document).ready(function() {
         year += (year < 50) ? 2000 : 1900; // 2000년대 이후는 2000을 더하고, 1950년 이전은 1900을 더함
         let month = parseInt(birth.substring(2, 4), 10) - 1; // 월은 0부터 시작
         let day = parseInt(birth.substring(4, 6), 10);
-
+		
         if (month < 0 || month > 11) {
             return "존재하지 않는 달입니다."; // 유효하지 않은 월
         }

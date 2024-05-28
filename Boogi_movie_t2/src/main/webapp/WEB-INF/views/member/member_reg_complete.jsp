@@ -31,12 +31,7 @@
 
 	
 <div class="row container">
-	<div class="col-md-2">
-		<div class="side_var">
-			<jsp:include page="../inc/admin_aside.jsp"></jsp:include>
-		</div>
-	</div>
-	<div class="col-md-10" style="margin-top : 100px;">
+	<div class="col-md-12" style="margin-top : 100px;">
 		<div class="message">
 			<h3>${member_name }님 회원가입을 환영합니다!</h3>
 			<br>

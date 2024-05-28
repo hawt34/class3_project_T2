@@ -9,12 +9,14 @@
 <meta charset="UTF-8">
 <title>상영영화 상세보기</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap')
+	;
 
 * {
-  font-family: "Nanum Gothic", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+	font-family: "Nanum Gothic", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 * {
@@ -65,7 +67,7 @@ section h1 {
 	width: 1400px;
 }
 
-.movieTitle{
+.movieTitle {
 	border-bottom: 2px solid lightgray;
 	margin: 30px 60px 0px;
 }
@@ -78,8 +80,8 @@ section h1 {
 	text-align: center;
 }
 
-.movie > button {
-	margin-top: 10px; 
+.movie>button {
+	margin-top: 10px;
 }
 
 .movie img {
@@ -120,7 +122,8 @@ section h1 {
 	font-size: 30px;
 	margin-top: 200px;
 }
-.submitButton > button{
+
+.submitButton>button {
 	width: 250px;
 	padding: 10px;
 	margin-top: 10px;
@@ -275,9 +278,9 @@ footer {
 							<li><span>상영시간 : ${movie.movie_runtime } 분</span></li>
 							<li><span>줄거리 : ${movie.movie_summary}</span></li>
 						</ul>
-						<img src="${movie.movie_stillCut}"> 
-						<img src="${movie.movie_stillCut2}"> 
-						<img src="${movie.movie_stillCut3}">
+						<img src="${movie.movie_stillCut}"> <img
+							src="${movie.movie_stillCut2}"> <img
+							src="${movie.movie_stillCut3}">
 						<div class="backButton">
 							<button type="button" class="btn btn-outline-primary"
 								onclick="window.history.back()">뒤로가기</button>
@@ -300,11 +303,11 @@ footer {
 								<option value="5">★★★★★ 5점</option>
 							</select>
 						</div>
-						
+
 						<div class="review col-5">
 							<c:set var="pageNum"
 								value="${empty param.pageNum ? 1 : param.pageNum}" />
-	<!-- 						<p>관람평</p> -->
+							<!-- 						<p>관람평</p> -->
 							<c:choose>
 								<c:when test="${not empty sessionScope.sId}">
 									<textarea id="reviewText" name="review_text"
@@ -312,25 +315,25 @@ footer {
 										placeholder="50자 이내로 부탁드리겠습니다."></textarea>
 								</c:when>
 								<c:otherwise>
-									<textarea id="reviewText" class="form-control" rows="3" cols="5"
-										maxlength="50" placeholder="사랑하는 고객님 로그인먼저 부탁드리겠습니다."></textarea>
+									<textarea id="reviewText" class="form-control" rows="3"
+										cols="5" maxlength="50" placeholder="사랑하는 고객님 로그인먼저 부탁드리겠습니다."></textarea>
 								</c:otherwise>
 							</c:choose>
 						</div>
-						
+
 						<div class="submitButton col-3">
 							<button type="submit" class="btn btn-outline-primary"
 								id="submitReviewBtn">별점주기 & 관람평 남기기</button>
 						</div>
 					</div>
-					
+
 					<!-- hidden input으로 값을 추가 -->
 					<input type="hidden" id="movie_num" name="movie_num"
 						value="${movie.movie_num}"> <input type="hidden"
 						id="member_id" name="member_id" value="${sessionScope.sId}">
 
 				</form>
-				
+
 			</div>
 			<div class="showReview">
 				<c:forEach var="review" items="${reviews}">
@@ -348,9 +351,9 @@ footer {
 					</div>
 
 					<div class="reviewTexts">
-						<span class="review-text">${review.review_text}</span> 
-						<span class="member-id">${review.member_id}</span> 
-						<span class="review-date"><fmt:formatDate
+						<span class="review-text">${review.review_text}</span> <span
+							class="member-id">${review.member_id}</span> <span
+							class="review-date"><fmt:formatDate
 								value="${review.review_date}" pattern="yyyy-MM-dd" /></span>
 						<c:if test="${review.member_id eq sessionScope.sId}">
 							<button onclick="openReviewModify(${review.review_num})"
@@ -361,7 +364,7 @@ footer {
 					</div>
 				</c:forEach>
 			</div>
-		
+
 		</section>
 		<footer>
 			<jsp:include page="../inc/admin_footer.jsp"></jsp:include>

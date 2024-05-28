@@ -42,10 +42,10 @@ input[type=password] {
     <div class="col input-box">
         <form action="member_login_pro" method="post" name="fr">
             <label for="member_id">아이디</label>
-            <input type="text" id="member_id" name="member_id" placeholder="아이디를 입력하세요" value="<c:out value='${cookie.rememberId.value}'/>">
+            <input type="text" id="member_id" name="member_id" placeholder="아이디를 입력하세요" value="<c:out value='${cookie.rememberId.value}'/>" maxlength="20" required="required">
 
             <label for="member_pwd">비밀번호</label>
-            <input type="password" id="member_pwd" name="member_pwd" placeholder="비밀번호를 입력하세요">
+            <input type="password" id="member_pwd" name="member_pwd" placeholder="비밀번호를 입력하세요" maxlength="16" required="required">
 
             <div class="loginBtns">
                 <button type="submit" class="btn btn-outline-primary">로그인</button>
@@ -63,16 +63,20 @@ input[type=password] {
     </div>
     <div class="col login-box">
         <h2>소셜 로그인</h2>
-        <a href="#" class="social-button" id="google-connect"> <span>구글 로그인</span></a>
+<!--         <a href="#" class="social-button" id="google-connect"> <span>구글 로그인</span></a> -->
         <a href="#" class="social-button" id="naver-connect"> <span>네이버 로그인</span></a>
     </div>
 </div>
+
+<footer>
+    <jsp:include page="../inc/admin_footer.jsp"></jsp:include>
+</footer>
 <script>
 
 	window.onload = function() {
 	    var naverLogin = new naver.LoginWithNaverId({
 	        clientId: "YYIJQmFYT8uB2h0xYs1o",
-	        callbackUrl: "http://localhost:8081/test2/NaverLoginCallback",
+	        callbackUrl: "http://c3d2401t2.itwillbs.com/boogimovie/NaverLoginCallback",
 	        isPopup: false, // 팝업 방식으로 할 경우 true로 설정
 	    });
 	
@@ -80,7 +84,6 @@ input[type=password] {
 	    naverLogin.init();
 	    
         document.getElementById('naver-connect').onclick = function() {
-        	debugger;
             naverLogin.authorize();
             return false;
         };

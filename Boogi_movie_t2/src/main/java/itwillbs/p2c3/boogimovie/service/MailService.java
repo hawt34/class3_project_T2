@@ -25,9 +25,7 @@ public class MailService {
 			}
 		}).start();
 		
-		
 		MailAuthInfoVO mailAuth = new MailAuthInfoVO(member.getMember_id(), auth_code);
-		
 		
 		return mailAuth;
 	}

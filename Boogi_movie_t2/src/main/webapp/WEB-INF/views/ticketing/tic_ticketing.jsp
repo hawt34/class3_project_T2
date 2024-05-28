@@ -540,11 +540,12 @@
     let selectedDay = "";
     let form = $("#fr");
 
-    function final_list_selected(movie_name, start_time, end_time, theater_name, selected_day, element) {
+    function final_list_selected(movie_name, start_time, end_time, theater_name, screen_cinema_num, selected_day, element) {
         let final_list_selected_things = "/" + movie_name + "/"
             + start_time + "/"
             + end_time + "/"
             + theater_name + "/"
+            + screen_cinema_num + "/"
             + selected_day + "/";
 
         let hiddenInput = $('#final_list_input');
@@ -584,12 +585,14 @@
                         // 결과가 없을 경우 메시지 출력
                         result.append("<div style='height: 300px'><br> <div align='center'>입력 정보에 대한 일정이 없습니다.</div></div>");
                     } else {
+                    	
                         response.forEach(function (finalList) {
                             var finalDiv = "<div class='final_list' onclick='final_list_selected(\""
                                 + finalList.movie_name
                                 + "\", \"" + finalList.scs_start_time
                                 + "\", \"" + finalList.scs_end_time
                                 + "\", \"" + finalList.theater_name
+                                + "\", \"" + finalList.screen_cinema_num
                                 + "\", \"" + selectedDay + "\", this)'>"
                                 + "<div>" + finalList.movie_name + "</div>"
                                 + "<div class='row box1' style='width: 600px'>"

@@ -23,6 +23,7 @@
 		AND scs_date = #{scs_date}
 		AND scs_start_time = #{scs_start_time} 
 		AND scs_end_time = #{scs_end_time}
+		AND screen_cinema_num = #{screen_cinema_num}
 	</select>
 	
 	<select id="feeCalc" resultType="map" parameterType="map">

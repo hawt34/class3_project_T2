@@ -86,6 +86,5 @@ public class MemberService {
 	public boolean updateMemberPwd(MemberVO member) {
 		return mapper.updateMemberPwd(member) > 0 ? true : false;
 	}
-
-
+	
 }

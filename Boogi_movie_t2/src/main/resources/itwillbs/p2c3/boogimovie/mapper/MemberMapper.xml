@@ -97,7 +97,4 @@
 		SET member_pwd = #{member_pwd}
 		WHERE member_id = #{member_id}
 	</update>
-	
-
-	
 </mapper>

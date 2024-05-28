@@ -341,7 +341,7 @@ public class AdminController {
 		return "admin/admin_csc/admin_notice_detail";
 	}
 	
-	//----------------------------------------------------------
+	//---------------------------
 	//일대일 문의 controller
 	@GetMapping("admin_oto")
 	public String adminOto(@RequestParam(defaultValue = "1")int pageNum,
@@ -351,8 +351,6 @@ public class AdminController {
 						   @RequestParam(required = false)String id) {
 		int listLimit = 10;
 		int startRow = (pageNum  - 1) * listLimit;
-		System.out.println("$$@#@#" + theaterName);
-		System.out.println("$$@#@#" + faqCategory);
 		
 		List<OTOVO> otoList = otoService.getOtoList(startRow, listLimit, faqCategory, theaterName, id);
 		
@@ -364,8 +362,10 @@ public class AdminController {
 
 		PageInfo pageList = pageInfoCategory(pageNum, listLimit, startRow, faqCategory, theaterName, id); //faq 페이지네이션
 		
+		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("otoList", otoList);
+		
 		return "admin/admin_csc/admin_oto";
 	}
 
@@ -424,13 +424,20 @@ public class AdminController {
 		return "admin/admin_csc/admin_oto_modify";
 	}
 	@PostMapping("admin_oto_modify")
-	public String adminOtoModifyPro(OTOReplyVO reply, Model model,@RequestParam(defaultValue = "1")String pageNum) {
+	public String adminOtoModifyPro(OTOReplyVO reply, Model model,@RequestParam(defaultValue = "1")String pageNum, HttpSession session) {
 		System.out.println(reply.getOto_num());
-		int updateCount = otoService.updateOtoContent(reply);
-		model.addAttribute("pageNum", pageNum);
+		OTOVO oto = otoService.getOto(reply.getOto_num());
 		
-		return "redirect:/admin_oto";
+		int updateCount = otoService.updateOtoContent(reply);
+		
+		if (updateCount > 0) {
+	        session.setAttribute("updateMessage", oto.getOto_subject() + "의 답변이 수정되었습니다. 확인하시겠습니까?");
+	        System.out.println(session.getAttribute("updateMessage"));
+	    }
+		
+		return "redirect:/admin_oto?pageNum=" + pageNum;
 	}
+	
 	//관리자 고객센터 controller 끝 =========================================================
 
 	

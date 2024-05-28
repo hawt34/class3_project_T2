@@ -31,6 +31,20 @@ h6{
 <body>
 <header>
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
+	<c:if test="${not empty updateMessage}">
+	    <script>
+	        window.onload = function() {
+	        	let message = "<c:out value='${updateMessage}' />";
+// 	        	message = message.replace("/\\n/g", "\n");
+	        	if (confirm(message)) {
+	                // "확인"을 클릭했을 때의 동작
+	                location.href="myp_oto_breakdown";
+	            } else {
+	                // "취소"를 클릭했을 때의 동작
+	            }
+	        }
+	    </script>
+	</c:if>
 	
 	<script type="text/javascript">
 		var maxCount = 3;							
@@ -209,6 +223,7 @@ h6{
 <footer>
 	<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 </footer>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js">
 
 <script type="text/javascript">

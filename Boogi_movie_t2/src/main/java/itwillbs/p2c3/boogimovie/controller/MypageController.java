@@ -79,7 +79,7 @@ public class MypageController {
 	String uploadDir = "/resources/upload";
 	
 	@GetMapping("myp_main")
-	public String mypMain(Model model, MemberVO member) {
+	public String mypMain(Model model, MemberVO member, HttpSession session) {
 		String id = (String)session.getAttribute("sId");
 //		System.out.println( "session ID 값 : " + id);
 		
@@ -108,6 +108,13 @@ public class MypageController {
 			param.put("member_id", member_id);
 			List<Map<String , Object>> movieReservation = mypageService.getMovieReservation(param);
 			model.addAttribute("movieReservation", movieReservation);
+			
+			//답변문의 수정 시 해당 사항을 세션에 저장
+			String updateMessage = (String)session.getAttribute("updateMessage");
+			if(updateMessage != null) {
+				model.addAttribute("updateMessage", updateMessage);
+				session.removeAttribute("updateMessage");
+			}
 			
 			return"mypage/myp_main";
 		}
@@ -511,6 +518,8 @@ public class MypageController {
 			endPage = maxPage;
 		}
 		PageInfo pageList = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		
 		
 
 		model.addAttribute("pageList", pageList);

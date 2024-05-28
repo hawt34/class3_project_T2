@@ -60,7 +60,7 @@
 						  </thead>
 						  <tbody>
 							<c:choose>
-								<c:when test="${not empty coupon}">
+								<c:when test="${not empty list}">
 									<c:forEach var="coupon" items="${list}" varStatus="status">
 							   			<tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
 							        	<th scope="row">${status.index + 1}</th>

@@ -146,7 +146,7 @@
 				</div>
 				
 				<div class="admin_store_footer" align="center">
-					<button onclick="location.href='admin_store_form'">스낵 등록</button>
+					<button onclick="location.href='admin_store_form'">상품 등록</button>
 				</div>
 
 			</div>

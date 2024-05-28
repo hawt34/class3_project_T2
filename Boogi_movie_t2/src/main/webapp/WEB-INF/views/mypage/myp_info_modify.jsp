@@ -192,7 +192,11 @@
 	        let color = "";
 	        let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
 	        
-	        if (!lengthRegx.exec(pwd)) {
+	        
+	        if (pwd === "") {
+	            msg = "";
+	            color = "";
+	        } else if (!lengthRegx.exec(pwd)) {
 	            msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
 	            color = "RED";
 	            riskCount = 0;
@@ -248,10 +252,13 @@
 			
 	        if (pwd2 != pwd) {
 	            $("#msg_pwd2").text("비밀번호가 일치하지 않습니다");
-	        } else {
+	        } else if (pwd2 == ""){
+	            $("#msg_pwd2").text("");
+	        	
+	        }else {
 // 	            $("#member_pwd2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
 	            $("#msg_pwd2").text("비밀번호가 일치합니다");
-	            $("#msg_pwd2").css("color", "blue");
+	            $("#msg_pwd2").css("color", "green");
 	        } 
 	        
 	        message.style.color = color;

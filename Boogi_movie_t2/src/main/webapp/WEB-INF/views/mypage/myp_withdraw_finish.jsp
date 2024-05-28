@@ -39,7 +39,7 @@
 						<h2>탈퇴처리되었습니다.</h2>
 						<div class="row">
 							<div class="col-md-3"> </div>
-							<div class="col-md-5">
+							<div class="col-md-6">
 								<section class="content">
 									<div class="d-grid gap-2 d-md-block box2">
 									  <button class="btn btn-outline-primary btn-lg" type="button" onclick="location.href='myp_main'">메인페이지</button>

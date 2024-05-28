@@ -837,12 +837,14 @@ public class AdminController {
 		} 
 		
 		// db에 영화가 있는지 판별
-		MovieVO dbMovie = service.getMovie(movie.getMovie_name()); 
+		MovieVO dbMovie = service.getMovie(movie.getMovie_name().trim()); 
 		if(dbMovie != null) {
 			model.addAttribute("msg", "이미 등록된 영화입니다!");
 			return "error/fail";
 		}
-		// db에 영화 삽입		
+		// db에 영화 삽입
+		// 영화 이름에 공백 제거
+		movie.setMovie_name(movie.getMovie_name().trim());
 		int insertCount = service.InsertMovie(movie);
 		if(insertCount > 0) {
 			return "redirect:admin_movie";

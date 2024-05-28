@@ -354,7 +354,7 @@ footer {
 			<c:if test="${not empty sessionScope.sId}">
 			<div class="member_review_search">
 				<form action="member_review" method="post">
-					<input type="text" name="member_id" value="${sessionScope.sId}" readonly> 
+					<input type="hidden" name="member_id" value="${sessionScope.sId}" > 
 					<input type="hidden" id="movie_num" name="movie_num" value="${movie.movie_num}">
 					<input type="submit" class="btn btn-dark" value="내가 쓴 댓글 찾기">
 				</form>

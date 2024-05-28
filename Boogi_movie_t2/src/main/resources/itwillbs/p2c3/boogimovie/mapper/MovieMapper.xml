@@ -4,12 +4,15 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="itwillbs.p2c3.boogimovie.mapper.MovieMapper">
 	<select id="selectMovieInfo" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">
-		 <![CDATA[
-   			 SELECT *
-    		 FROM movie
-    		 WHERE movie_open_date <= CURRENT_DATE()
-    		 ORDER BY movie_open_date DESC
-    	]]>
+<!-- 		 <![CDATA[ -->
+<!--    			 SELECT * -->
+<!--     		 FROM movie -->
+<!--     		 WHERE movie_open_date <= CURRENT_DATE() -->
+<!--     		 ORDER BY movie_open_date DESC -->
+<!--     	]]> -->
+		select *
+		from movie
+		WHERE Current_Date() BETWEEN movie_open_date AND movie_end_date 
 	</select>
 	
 	<select id="selectMovie" resultType="itwillbs.p2c3.boogimovie.vo.MovieVO">

@@ -331,8 +331,10 @@
 			 	},
 			 	dataType : "json",
 			 	success : function(checkDupPointResult) {
-			 		if(checkDupPointResult == "false") {
-			 			alert("포인트를 사용할 수 없습니다.");
+			 		if(!checkDupPointResult) {
+			 			alert("보유 포인트를 초과할 수 없습니다.");
+	 					$("#useMemberPoint").val("");
+	 					$("#useMemberPoint").focus();
 			 		} else {
 			 			if(confirm ("포인트를 사용하시겠습니까?")){
 			 				if(discount_sum < parseInt(total_fee)) {

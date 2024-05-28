@@ -327,9 +327,21 @@ footer {
 				    let newQuantity = parseInt($(this).val());
 				    let selectedItemPrice = parseInt($(this).closest("tr").find("td:nth-child(2)").text()); // 선택된 품목의 가격
 				    let newTotalPrice = selectedItemPrice * newQuantity;
-				    $(this).closest("tr").find("td:nth-child(4)").text(newTotalPrice.toLocaleString() + "원"); // 총 가격 업데이트
-				    updateTotalPrice(); // 수량 변경 후 전체 총 가격 업데이트
-
+// 				    $(this).closest("tr").find("td:nth-child(4)").text(newTotalPrice.toLocaleString() + "원"); // 총 가격 업데이트
+// 				    updateTotalPrice(); // 수량 변경 후 전체 총 가격 업데이트
+					
+					if (isNaN(newQuantity) || newQuantity <= 0) {
+				     	   alert("올바른 수량을 입력해주세요."); // 경고 표시
+				        // 기존 수량으로 복구
+				        $(this).val(1);
+				        // 기존 수량에 해당하는 가격으로 총 가격 업데이트
+				        $(this).closest("tr").find("td:nth-child(4)").text(selectedItemPrice.toLocaleString() + "원");
+				    } else {
+				        // 수량이 0 초과일 때만 총 가격 업데이트
+				        $(this).closest("tr").find("td:nth-child(4)").text(newTotalPrice.toLocaleString() + "원");
+				        updateTotalPrice(); // 수량 변경 후 전체 총 가격 업데이트
+				    }
+					
 				});
                         
             },

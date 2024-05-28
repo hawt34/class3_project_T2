@@ -72,14 +72,14 @@ public class StoreController {
 
 		for (CartVO existingItem : cart) {
 			if (existingItem.getItem_info_num() == cartItems.getItem_info_num()) {
-				Map<String, String> response = new HashMap<>();
+				Map<String, String> response = new HashMap<String, String>();
 				response.put("msg", "이미 장바구니에 담은 품목입니다.");
 				return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
 			}
 		}
-		// 장바구니에 상품을 추가합니다.
+		// 장바구니에 상품을 추가
 		cart.add(cartItems);
-		// 정상적으로 장바구니에 추가되었음을 응답합니다.
+		// 정상적으로 추가 응딥
 		return ResponseEntity.ok().body(cartItems);
 	}
 

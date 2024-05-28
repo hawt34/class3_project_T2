@@ -59,7 +59,7 @@
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-4">새 상영관 등록</h4>
-				<form class="validation-form" novalidate action="admin_booth_pro" method="post" >
+				<form class="validation-form" novalidate action="admin_booth_pro" method="post" name="fr">
 					<div class="mb-3">
 						<label for="theater_name">극장 지점명</label> 
 							<div class="input-group mb-3">
@@ -86,28 +86,34 @@
 						<label for="screen_cinema_num">상영관 이름</label> 
 							<div class="input-group mb-3">	
 								<span class="input-group-text">관 번호</span>
-								<input type="text" id="screen_cinema_num" name="screen_cinema_num"  class="form-control" required readonly/> 
+								<input type="text" id="screen_cinema_num" name="screen_cinema_num"  class="form-control" 
+								  required readonly/> 
 								<span class="input-group-text">관</span>
 							</div>
 						<div class="invalid-feedback">상영관 이름을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_createDate">상영관 크기</label>
+						<label for="screen_seat_row">상영관 크기</label>
 						<div class="input-group mb-3">
-							<span class="input-group-text" >최대 행(row, 숫자)</span>
-							<input type="text" id="movie_createDate" name="screen_seat_row" class="form-control"  required />
+							<span class="input-group-text" >최대 행</span>
+							<input type="text" id="screen_seat_row" name="screen_seat_row" class="form-control"  required maxlength="2" placeholder="숫자 입력" />
 						</div>	
+						<div id="rowArea"></div>
 						<div class="input-group mb-3">	
-							<span class="input-group-text">최대 열(col, 알파벳)</span>
-							<input type="text" id="movie_createDate" name="screen_seat_col" class="form-control" required />
+							<span class="input-group-text">최대 열</span>
+							<input type="text" id="screen_seat_col" name="screen_seat_col" class="form-control" required maxlength="2" placeholder="숫자 입력"/>
 						</div>
+						<div id="colArea"></div>
 						<div class="invalid-feedback">상영관크기를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="movie_genre">운영 상태</label> 
+						<label for="screen_info_status">운영 상태</label> 
 							<div class="input-group mb-3">	
-								<span class="input-group-text">1 : 정상 / 2 : 휴관</span>
-								<input type="text" id="movie_genre" name="screen_status" class="form-control" required/>
+								<label class="input-group-text" for="screen_info_status">1 : 정상 / 2 : 휴관</label>
+								<select class="form-select form-control" id="screen_info_status" name="screen_status" required>
+									<option selected value="1">1</option>
+									<option value="2">2</option>
+								</select>
 							</div>
 							<div class="invalid-feedback">운영 상태를 입력해주세요.</div>
 					</div>
@@ -115,9 +121,9 @@
 					<hr class="mb-4">
 					
 					<div class="mb-4" align="center">
+						<input type="reset" value="다시작성" class="btn btn-secondary btn-lg btn-block" >
+						<input type="button" value="돌아가기" class="btn btn-secondary btn-lg btn-block" onclick="history.back()">
 						<input type="submit" value="등록하기" class="btn btn-primary btn-lg btn-block">
-						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
-						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 					</div>
 				</form>
 			</div>
@@ -149,6 +155,45 @@
 			
 			return false;
 		}
+
+		
+		$(function() {
+			$("#screen_seat_col").on("input", function() {
+				let inputNumber = $(this).val();
+				let regex = /^[1-9][0-9]?$/; // 두 자리 숫자 정규식
+				
+				if (!regex.test(inputNumber)) {
+				    $(this).val("");
+				    $("#colArea").text("2자리 숫자만 입력 가능");
+				    $("#colArea").css("color", "red");
+				} else {
+				    $("#colArea").text("");
+				}
+			}).on("blur", function() {
+				let inputNumber = $(this).val();
+				let regex = /^[1-9][0-9]?$/; // 두 자리 숫자 정규식
+				
+				if (regex.test(inputNumber)) {
+				    let alphabet = String.fromCharCode(64 + parseInt(inputNumber));
+				    $(this).val(alphabet);
+				}
+			});
+
+		
+		    $("#screen_seat_row").on("input", function() {
+		        let inputRow = $(this).val();
+		        let regex = /^[1-9][0-9]?$/; // 두 자리 숫자 정규식
+		        
+		        if (!regex.test(inputRow)) {
+		            $(this).val("");
+		            $("#rowArea").text("2자리 숫자만 입력 가능");
+		            $("#rowArea").css("color", "red");
+		        } else {
+		            $("#rowArea").text("");
+		        }
+		    });
+		});
+	    
  	</script>
 </body>
 </html>

@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin_form.css" rel="stylesheet" type="text/css">
-
+<!-- 제이쿼리 -->
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -25,23 +26,26 @@
 					</div>
 					<div class="mb-3">	
 						<label for="movie_name">극장명</label> 
-						<input type="text" id="movie_name" class="form-control" name="theater_name" required maxlength="30" value="${theater.theater_name}"/>
+						<input type="text" id="movie_name" class="form-control ping" name="theater_name" required maxlength="30" value="${theater.theater_name}"/>
 						<div class="invalid-feedback">극장명을 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="movie_director">극장 주소</label> 
-						<input type="text" id="movie_director" class="form-control" name="theater_address" required maxlength="100" value="${theater.theater_address}"/>
+						<input type="text" id="movie_director" class="form-control ping" name="theater_address" required maxlength="100" value="${theater.theater_address}"/>
 						<div class="invalid-feedback">극장 주소를 입력해주세요.</div>
 					</div>
 					<div class="mb-3"> 
-						<label for="movie_director">극장 좌표</label> 
+						<label for="movie_director" >극장 좌표</label> 
 						<div style="display: flex;">
+							<span class="input-group-text">X좌표</span>
 							<input type="text" id="movie_director" class="form-control" name="theater_map_x"  required 
 								value="${theater.theater_map_x}"  pattern="^[0-9]+(\.[0-9]+)?$" title="double 타입"  style="width: 300px; margin-right: 30px;" />
+							<span class="input-group-text">Y좌표</span>	
 							<input type="text" id="movie_director" class="form-control"  name="theater_map_y"  required 
 								 value="${theater.theater_map_y}"  pattern="^[0-9]+(\.[0-9]+)?$" title="double 타입" style="width: 300px;"/>
 						</div>
-						<div class="invalid-feedback">극장 좌표를 입력하세요</div>
+						<div class="invalid-feedback" id="pingArea">극장 좌표를 입력하세요</div>
+						<div id="pingArea"></div>
 					</div>
 					<div class="mb-3">
 						<label for="theater_floor_info">층 정보</label>
@@ -97,10 +101,10 @@
 					<hr class="mb-4">
 					
 					<div class="mb-4" align="center">
-						<input type="submit" value="수정하기" class="btn btn-primary btn-lg btn-block" > <!-- onclick="submitAlert()" -->
-						<input type="reset" value="다시작성" class="btn btn-primary btn-lg btn-block" >
-						<input type="button" value="돌아가기" class="btn btn-primary btn-lg btn-block" onclick="history.back()">
 						<input type="button" value="극장삭제" class="btn btn-danger btn-lg btn-block" onclick="theaterWithdraw(${theater.theater_num})">
+						<input type="reset" value="다시작성" class="btn btn-secondary btn-lg btn-block" >
+						<input type="button" value="돌아가기" class="btn btn-secondary btn-lg btn-block" onclick="history.back()">
+						<input type="submit" value="수정하기" class="btn btn-primary btn-lg btn-block" > <!-- onclick="submitAlert()" -->
 					</div>
 				</form>
 			</div>
@@ -138,6 +142,23 @@
 			}
 		}
 		
+		$(function() {
+			$(".ping").on("keyup",function() {
+				let ping = $(this).val();
+				let regex = /^[0-9]+(\.[0-9]+)?$/;
+				
+				if(!regex.exec(ping)) {
+					$("#pingArea").text("boolean 형식만 입력 가능");
+					$("#pingArea").css("color","red");
+				} else {
+					$("#pingArea").text("");
+				}
+				
+				
+			});
+			
+			
+		})
  	</script>
 </body>
 </html>

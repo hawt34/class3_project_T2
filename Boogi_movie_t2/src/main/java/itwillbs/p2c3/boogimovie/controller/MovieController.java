@@ -105,11 +105,11 @@ public class MovieController {
 	// 영화검색
 	@GetMapping("searchMovie")
 	public String searchMovie(@RequestParam(defaultValue = "") String searchKeyword, Model model) {
-		 if (searchKeyword.isEmpty()) {
-		        // 검색어가 없는 경우
-		        model.addAttribute("msg", "검색어를 입력해주세요.");
-		        return "error/fail";
-		    }
+		if (searchKeyword.isEmpty()) {
+			// 검색어가 없는 경우
+			model.addAttribute("msg", "검색어를 입력해주세요.");
+			return "error/fail";
+		}
 		List<MovieVO> movieList = movieService.searchMovie(searchKeyword);
 
 		if (!movieList.isEmpty()) {
@@ -125,7 +125,7 @@ public class MovieController {
 			}
 		} else {
 			model.addAttribute("msg", "죄송합니다 검색결과 없습니다.");
-			
+
 			return "error/fail";
 		}
 
@@ -147,7 +147,7 @@ public class MovieController {
 		List<String> genreList = Arrays.asList(member_movie_genre.split(","));
 
 		// 맵에 리스트 추가
-		map = new HashMap<String,Object>();
+		map = new HashMap<String, Object>();
 		map.put("genreList", genreList);
 		List<MovieVO> genreMovieList = movieService.getMovieListGenre(map);
 		// System.out.println("맵의 내용: " + map);
@@ -159,28 +159,25 @@ public class MovieController {
 
 		return "movie/recommandMovie";
 	}
-	//특정 영화에 대한 유저가 쓴 리뷰
-	
+	// 특정 영화에 대한 유저가 쓴 리뷰
+
 	@PostMapping("member_review")
-	public String memberReview(Model model,int movie_num, @RequestParam("member_id") String member_id , MovieVO movie) {
-		//System.out.println("특정유저 아이디" + member_id+ movie_num); 값은 잘 넘어옴.
+	public String memberReview(Model model, int movie_num, @RequestParam("member_id") String member_id, MovieVO movie) {
+		// System.out.println("특정유저 아이디" + member_id+ movie_num); 값은 잘 넘어옴.
 		MovieVO movie2 = movieService.getMovieInfo(movie);
 		model.addAttribute("movie", movie2);
-		List<ReviewVO> reviews = serviceReview.getMemberReview(member_id,movie_num); 
-		//System.out.println("특정유저가 적은 댓글 "+ reviews);
-		
+		List<ReviewVO> reviews = serviceReview.getMemberReview(member_id, movie_num);
+		// System.out.println("특정유저가 적은 댓글 "+ reviews);
+
 		model.addAttribute("reviews", reviews);
 		if (reviews.size() > 0) {
 			return "movie/movie_info_member";
 		} else {
 			model.addAttribute("msg", "적으신 리뷰가 없습니다.");
-			//model.addAttribute("targetURL", "movie");
+			// model.addAttribute("targetURL", "movie");
 			return "error/fail";
 		}
-		
+
 	}
-	
-	
-	
-	
+
 }

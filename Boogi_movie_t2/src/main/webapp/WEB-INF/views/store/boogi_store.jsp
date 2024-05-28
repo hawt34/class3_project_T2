@@ -6,12 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap')
+	;
 
 * {
-  font-family: "Nanum Gothic", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+	font-family: "Nanum Gothic", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 * {
@@ -100,7 +102,7 @@ section {
 
 .snack1_name, .snack2_name, .snack3_name, .snack4_name {
 	text-align: center;
-/* 	font-size: 24px; */
+	/* 	font-size: 24px; */
 }
 
 .snack2 {
@@ -129,7 +131,8 @@ footer {
 	height: 100px;
 	/* 	background-color: #ffb300; */
 }
-.snackBtn{
+
+.snackBtn {
 	margin-top: 10px;
 }
 </style>
@@ -152,7 +155,9 @@ footer {
 			</article>
 			<div class="content">
 				<div class="snack1">
-					<div class="snack1_name"><h3>🥨부기스낵🥨</h3></div>
+					<div class="snack1_name">
+						<h3>🥨부기스낵🥨</h3>
+					</div>
 					<div class="snack1_box">
 						<h4>종류 및 가격</h4>
 						<select name="category1_snack" id="category1_snack">
@@ -163,15 +168,18 @@ footer {
 									data-price="${item_snack.item_info_price}">
 									${item_snack.item_info_name} - ${item_snack.item_info_price}원</option>
 							</c:forEach>
-						</select><br> <input type="button" class="btn btn-outline-primary snackBtn"
-							value="담기" id="snackbutton">
+						</select><br> <input type="button"
+							class="btn btn-outline-primary snackBtn" value="담기"
+							id="snackbutton">
 					</div>
 					<div class="snack1_image" align="right">
 						<img id="snack1_image" src="">
 					</div>
 				</div>
 				<div class="snack2">
-					<div class="snack2_name"><h3>🍿부기팝콘🍿</h3></div>
+					<div class="snack2_name">
+						<h3>🍿부기팝콘🍿</h3>
+					</div>
 					<div class="snack2_box">
 						<h4>종류 및 가격</h4>
 						<select name="category2_pop" id="category2_pop">
@@ -182,15 +190,17 @@ footer {
 									data-price="${item_pop.item_info_price}">
 									${item_pop.item_info_name} ${item_pop.item_info_price}원</option>
 							</c:forEach>
-						</select> <input type="button" class="btn btn-outline-primary snackBtn" value="담기"
-							id="snackpop">
+						</select> <input type="button" class="btn btn-outline-primary snackBtn"
+							value="담기" id="snackpop">
 					</div>
 					<div class="snack2_image" align="right">
 						<img id="snack2_image" src="">
 					</div>
 				</div>
 				<div class="snack3">
-					<div class="snack3_name"><h3>🥤부기음료🥤</h3></div>
+					<div class="snack3_name">
+						<h3>🥤부기음료🥤</h3>
+					</div>
 					<div class="snack3_box">
 						<h4>종류 및 가격</h4>
 						<select name="category3_juice" id="category3_juice">
@@ -201,15 +211,17 @@ footer {
 									data-price="${item_juice.item_info_price}">
 									${item_juice.item_info_name} ${item_juice.item_info_price}원</option>
 							</c:forEach>
-						</select> <input type="button" class="btn btn-outline-primary snackBtn" value="담기"
-							id="snackjuice">
+						</select> <input type="button" class="btn btn-outline-primary snackBtn"
+							value="담기" id="snackjuice">
 					</div>
 					<div class="snack3_image" align="right">
 						<img id="snack3_image" src="">
 					</div>
 				</div>
 				<div class="snack4">
-					<div class="snack4_name"><h3>😍부기콤보😍</h3></div>
+					<div class="snack4_name">
+						<h3>😍부기콤보😍</h3>
+					</div>
 					<div class="snack4_box">
 						<h4>종류 및 가격</h4>
 						<select name="category4_combo" id="category4_combo">
@@ -220,8 +232,8 @@ footer {
 									data-price="${item_combo.item_info_price}">
 									${item_combo.item_info_name} ${item_combo.item_info_price}원</option>
 							</c:forEach>
-						</select> <input type="button" class="btn btn-outline-primary snackBtn" value="담기"
-							id="snackcombo">
+						</select> <input type="button" class="btn btn-outline-primary snackBtn"
+							value="담기" id="snackcombo">
 					</div>
 					<div class="snack4_image" align="right">
 						<img id="snack4_image" src="">

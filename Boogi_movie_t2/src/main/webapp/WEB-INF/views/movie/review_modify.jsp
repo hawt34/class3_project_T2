@@ -8,12 +8,14 @@
 <meta charset="UTF-8">
 <title>리뷰 수정</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap')
+	;
 
 * {
-  font-family: "Nanum Gothic", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+	font-family: "Nanum Gothic", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 body {
@@ -59,6 +61,7 @@ body {
 .mb-3 {
 	margin: 0 auto;
 }
+
 .mb-3>input {
 	width: 250px;
 	padding: 5px;
@@ -70,6 +73,7 @@ body {
 	appearance: none;
 	text-align: center;
 }
+
 .review-text {
 	width: 500px;
 	padding: 5px;
@@ -81,10 +85,12 @@ body {
 	appearance: none;
 	text-align: center;
 }
-.space{
+
+.space {
 	margin-top: 50px;
 }
-.form-control{
+
+.form-control {
 	border: 1px solid #bbb;
 }
 </style>
@@ -102,10 +108,10 @@ body {
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4>리뷰수정 페이지</h4>
-				<h6>  ${reviews.member_id}  님의 별점과 관람평</h6>
+				<h6>${reviews.member_id} 님의 별점과 관람평</h6>
 				<hr>
 				<div class="showReview">
-				
+
 					<form action="reviewUpdate" method="post">
 						<div class="ratingCover mb-4">
 							<div class="subject">내가 선택한 별점 : ${reviews.review_rating} 점</div>
@@ -139,9 +145,9 @@ body {
 								<button onclick="closeWindow()" class="btn btn-outline-primary">취소하기</button>
 							</div>
 						</div>
-						
+
 					</form>
-					
+
 				</div>
 			</div>
 		</div>

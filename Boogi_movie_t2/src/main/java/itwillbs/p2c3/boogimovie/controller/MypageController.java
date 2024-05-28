@@ -244,11 +244,6 @@ public class MypageController {
 		if(!member.getMember_pwd().equals("")) {
 			member.setMember_pwd(passwordEncoder.encode(member.getMember_pwd()));
 		}
-		//비밀번호 인코딩
-//		BCryptPasswordEncoder pwdEnoder = new BCryptPasswordEncoder();
-//		String pwd = member.getMember_pwd();
-//		String encodedPwd = pwdEnoder.encode(pwd);
-//		member.setMember_pwd(encodedPwd);
 		
 		int updateCount = mypageService.modifyMember(member);
 		model.addAttribute("member", updateCount);
@@ -326,7 +321,7 @@ public class MypageController {
 	    int listCount = mypageService.getResvCount(member_id,status);
 	    // -----------------------------------------------------------------------------------------
 	    System.out.println("listCount : sdkfjl@@@@@@@@@@@@@@@@" + listCount);
-		int pageListLimit = 2; // 뷰에 표시할 페이지 갯수
+		int pageListLimit = 3; // 뷰에 표시할 페이지 갯수
 		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0); //카운트 한 게시물 + 1 한 페이지
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1; // 첫번째 페이지 번호 
 		int endPage = startPage + pageListLimit - 1; //마지막 페이지 번호
@@ -348,9 +343,8 @@ public class MypageController {
 	@ResponseBody
 	@PostMapping("myp_cancel_movie")
 	public String mypCancelMovie(Model model, MemberVO member, int ticket_pay_num, HttpSession session) {
-		System.out.println("myp_cancel_movie controller");
 		String id = (String)session.getAttribute("sId");
-		System.out.println(ticket_pay_num);
+		
 		if(id == null) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			model.addAttribute("targetURL", "./");
@@ -358,13 +352,9 @@ public class MypageController {
 		}
 		
 		member.setMember_id(id);
-//		MemberVO dbMember = mypageService.getDbMember(member);
 		int removeMovie = mypageService.removeMovie(id, ticket_pay_num);
-//		ticket_pay_num, member_id
-
 		
 		if(removeMovie > 0) { // 성공 시  
-			
 			return "true";
 		} else { // 실패 시
 			return "false";
@@ -377,7 +367,6 @@ public class MypageController {
 	@ResponseBody
 	@PostMapping("myp_cancel_store")
 	public String cancelStore(StorePayVO storePay, Model model) {
-		System.out.println("myp_cancel_store controller");
 		String id = (String)session.getAttribute("sId");
 		
 		if(id == null) {
@@ -493,7 +482,6 @@ public class MypageController {
 	// 탈퇴 후 보여지는 페이지
 	@GetMapping("myp_withdraw_finish")
 	public String mypWithdrawFinish(MemberVO member, Model model, BCryptPasswordEncoder passwordEncoder) {
-		System.out.println("myp_withdraw_finish()");
 		return "mypage/myp_withdraw_finish";
 	}
 	

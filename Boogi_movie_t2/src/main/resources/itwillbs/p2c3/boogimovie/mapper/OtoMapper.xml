@@ -137,6 +137,11 @@
 		FROM oto_reply
 		WHERE oto_num = #{oto_num}
 	</select>
+	<update id="updateOtoContent">
+		UPDATE oto_reply
+		SET oto_reply_content = #{oto_reply_content}
+		WHERE oto_num = #{oto_num}
+	</update>
 	
 	
 	

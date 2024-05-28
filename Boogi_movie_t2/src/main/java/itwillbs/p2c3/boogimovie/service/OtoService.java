@@ -63,4 +63,8 @@ public class OtoService {
 	public OTOReplyVO getOtoReply(int oto_num) {
 		return mapper.selectOtoReply(oto_num);
 	}
+
+	public int updateOtoContent(OTOReplyVO reply) {
+		return mapper.updateOtoContent(reply);
+	}
 }

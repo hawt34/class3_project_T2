@@ -42,7 +42,6 @@
 	  background-color: white;
 	  text-align: center;
 	}
-	
 	 /* 테이블 행 */
 	th, td {
 	  padding: 8px;
@@ -92,6 +91,9 @@
 	td:nth-child(7) {
 	  width: 10%;
 	}
+	td:nth-child(7)>span {
+		color: red;
+	}
 	.admin_ono_head {
 	margin: 30px 0;
 	text-align: right;
@@ -111,6 +113,24 @@
 	.notice_pageArea nav {
 	    display: inline-block;
 	}
+	.admin_oto_search {
+		display: flex;
+		width: 600px;
+		float: right;
+	}
+	.admin_oto_search > input[type=button]{
+	background : white;
+	color: black;
+	border: 1px solid black;
+	padding: 0 10px;
+	margin-left: 10px;
+	}
+	.admin_oto_search > input[type=button]:hover{
+	background : black;
+	color: white;
+	transition-duration: .2s;
+	}
+	
 </style>
 </head>
 <body>
@@ -120,7 +140,7 @@
 
 <!-- 	<div class="container"> -->
 <div class="row">
-	<c:set var="pageNum" value="${empty pageNum ? 1 : param.pageNum }" />
+	<c:set var="pageNum" value="${empty param.pageNum ? 1 : param.pageNum }" />
 	<!-- side 영역 -->
 	<div class="col-2">
 		<jsp:include page="/WEB-INF/views/inc/admin_aside.jsp"></jsp:include>
@@ -128,42 +148,40 @@
 	<!-- content 영역 -->
 	<div class="col-9">
 		<div class="admin_ono_head">
-			<div class="admin_ono_title">🤷1대1 문의 관리</div>
-				<div class="admin_ono_search">
-					<table>
-						<tr>
-							<td>
-					<!-- 문의 유형 카테고리 -->
-								<select class="form-select form-select-sm w-50"
-									aria-label="Default select example" name="csc_category" id="admin_faq">
-									<option value = "">문의 유형 선택</option>
-									<option value="예매/결제">예매/결제</option>
-									<option value="영화관이용">영화관이용</option>
-									<option value="쿠폰">쿠폰</option>
-									<option value="스토어">스토어</option>
-									<option value="홈페이지/모바일">홈페이지/모바일</option>
-								</select> 
-							</td>
-							<td>
-								<select class="form-select form-select-sm w-50"
-									aria-label="Default select example" name="csc_theater" id="admin_theater">
-									<option value = "">문의 지점 선택</option>
-									<option value="해운대점">해운대점</option>
-									<option value="센텀점">센텀점</option>
-									<option value="서면점">서면점</option>
-									<option value="남포점">남포점</option>
-									<option value="부산대점">부산대점</option>
-									<option value="사직점">사직점</option>
-									<option value="영도점">영도점</option>
-									<option value="덕천점">덕천점</option>
-									<option value="정관점">정관점</option>
-									<option value="사상점">사상점</option>
-								</select>
-							</td>
-						</tr>
-					</table>
-				</div>
+			<div class="admin_ono_title">
+				🤷1대1 문의 관리
 			</div>
+			<div class="admin_oto_search">
+			
+				<select class="form-select form-select-sm w-25"
+					aria-label="Default select example" name="csc_category" id="admin_faq">
+					<option value = "">문의 유형 선택</option>
+					<option value="예매/결제" >예매/결제</option>
+					<option value="영화관이용">영화관이용</option>
+					<option value="쿠폰">쿠폰</option>
+					<option value="스토어">스토어</option>
+					<option value="홈페이지/모바일">홈페이지/모바일</option>
+				</select>
+				
+				<select class="form-select form-select-sm w-25"
+					aria-label="Default select example" name="csc_theater" id="admin_theater">
+					<option value = "">문의 지점 선택</option>
+					<option value="해운대점">해운대점</option>
+					<option value="센텀점">센텀점</option>
+					<option value="서면점">서면점</option>
+					<option value="남포점">남포점</option>
+					<option value="부산대점">부산대점</option>
+					<option value="사직점">사직점</option>
+					<option value="영도점">영도점</option>
+					<option value="덕천점">덕천점</option>
+					<option value="정관점">정관점</option>
+					<option value="사상점">사상점</option>
+				</select>
+				
+				<input type="button" value="초기화" onclick="resetAll()">
+				
+			</div>
+		</div>
 		
 		<div class="admin_ono_body">
 			<table>
@@ -198,11 +216,11 @@
 										<fmt:parseDate var="parseOtoDate" value="${oto.oto_date }" pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
 										<fmt:formatDate value="${parseOtoDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
 									</td>
-									<td>${oto.oto_reply_status }</td> <!-- 답변 상태 -->
+									<td><span>${oto.oto_reply_status }</span></td> <!-- 답변 상태 -->
 									<td>
 										<c:choose>
 											<c:when test="${oto.oto_reply_status eq '답변'}">
-												<button type="button" class="btn btn-outline-primary" onclick="admin_oto_reply(${oto.oto_num})" style="display: none;">답변하기</button>
+												<button type="button" class="btn btn-outline-primary" onclick="admin_oto_modify(${oto.oto_num},${param.pageNum })">답변수정</button>
 											</c:when>
 											<c:otherwise>
 												<button type="button" class="btn btn-outline-primary" onclick="admin_oto_reply(${oto.oto_num})">답변하기</button>
@@ -259,8 +277,9 @@
 </footer>
 	
 <script type="text/javascript">
+let pageNum = 1;
+
 $(function () {
-	let pageNum = 1;
 	$("#admin_faq").change(function() {
 		let faqCategory = $(this).val();
 		location.href="admin_oto?pageNum=" + pageNum + "&faqCategory=" + faqCategory;
@@ -272,11 +291,20 @@ $(function () {
 		location.href="admin_oto?pageNum=" + pageNum + "&theaterName=" + theaterName;		
 		console.log(theaterName);
 	});
+	
+	
 }); 
+
+function resetAll() {
+	location.href="admin_oto?pageNum=" + pageNum;
+}
 
 
 function admin_oto_reply(num) {
 	window.open("admin_oto_detail?oto_num=" + num, "_self");
+}
+function admin_oto_modify(num, pageNum) {
+	window.open("admin_oto_modify?oto_num=" + num + "&pageNum=" + pageNum, "_self");
 }
 function admin_notice_withdraw() {
 	location.href="admin_notice_delete";

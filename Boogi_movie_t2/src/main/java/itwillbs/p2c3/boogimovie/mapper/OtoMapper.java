@@ -46,4 +46,6 @@ public interface OtoMapper {
 	
 	//1대1 문의에 대한 답변 가져오기
 	OTOReplyVO selectOtoReply(int oto_num);
+
+	int updateOtoContent(OTOReplyVO reply);
 }

@@ -411,6 +411,26 @@ public class AdminController {
 		
 		return "redirect:/admin_oto";
 	}
+	@GetMapping("admin_oto_modify")
+	public String adminOtoModify(Model model, int oto_num, String pageNum) {
+		OTOVO oto = otoService.getOto(oto_num);
+		String otoDate = oto.getOto_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		OTOReplyVO reply = otoService.getOtoReply(oto_num);
+		
+		model.addAttribute("reply", reply);
+		model.addAttribute("otoDate", otoDate);
+		model.addAttribute("oto", oto);
+		model.addAttribute("pageNum", pageNum);
+		return "admin/admin_csc/admin_oto_modify";
+	}
+	@PostMapping("admin_oto_modify")
+	public String adminOtoModifyPro(OTOReplyVO reply, Model model,@RequestParam(defaultValue = "1")String pageNum) {
+		System.out.println(reply.getOto_num());
+		int updateCount = otoService.updateOtoContent(reply);
+		model.addAttribute("pageNum", pageNum);
+		
+		return "redirect:/admin_oto";
+	}
 	//관리자 고객센터 controller 끝 =========================================================
 
 	

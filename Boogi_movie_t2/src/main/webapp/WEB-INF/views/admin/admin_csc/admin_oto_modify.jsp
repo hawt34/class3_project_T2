@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의내역 답변작성</title>
+<title>문의내역 답변수정</title>
 <style>
 	.container {
 		width:850px;
@@ -77,8 +77,9 @@
 </header>
 	<div class="container">
 		<div>
-			<form action="admin_oto_detail" method="post" onsubmit="return confirm('답변을 등록하시겠습니까?');">
+			<form action="admin_oto_modify" method="post" onsubmit="return confirm('답변을 수정하시겠습니까?');">
 			<input type="hidden" value="${oto.oto_num }" name="oto_num">
+			<input type="hidden" value="${param.pageNum }" name="pageNum">
 				<table>
 					<tr>
 						<td>제목</td>
@@ -126,7 +127,7 @@
 				</table>
 				<div align="center">
 					<h2>답변 쓰기</h2>
-					<textarea name="oto_reply_content" rows="15" cols="100" style="resize: none"></textarea>
+					<textarea name="oto_reply_content" rows="15" cols="100" style="resize: none">${reply.oto_reply_content }</textarea>
 				</div>
 				<!-- 답변 버튼 -->
 				<div class="detail_button">

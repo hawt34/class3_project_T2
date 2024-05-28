@@ -350,7 +350,7 @@ public class MemberController {
 			return "error/fail";
 			
 		}
-		System.out.println("회원가입처리완료");
+		
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		session.removeAttribute("member");
 		model.addAttribute("member_name",member.getMember_name());

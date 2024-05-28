@@ -173,7 +173,7 @@ footer {
 									class="btn btn-outline-primary movieTicket">예매하기</button>
 							</c:when>
 							<c:otherwise>
-								<p>개봉예정작</p>
+								<p>상영예정작</p>
 							</c:otherwise>
 						</c:choose>
 						<button type="button"

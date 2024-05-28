@@ -30,11 +30,11 @@
 		    movie.movie_poster,
 		    movie.movie_name,
 		    screen_session.scs_date,
+		    pay.ticket_pay_price,
 		   	CONCAT(screen_session.scs_start_time, ' ~ ', screen_session.scs_end_time) AS session_time,
 		   	CONCAT(theater.theater_name, ' ', screen_info.screen_cinema_num, '관') AS theater_info,
-	   	    GROUP_CONCAT(ticket.ticket_seat_info ORDER BY ticket.ticket_seat_info SEPARATOR ', ') AS ticket_seat_info,
-	        SUM(pay.ticket_pay_price) AS ticket_price
-<!-- 	        ticket.ticket_price AS ticket_price -->
+	   	    GROUP_CONCAT(ticket.ticket_seat_info ORDER BY ticket.ticket_seat_info SEPARATOR ', ') AS ticket_seat_info
+	        
 		    
 		FROM
 		    pay

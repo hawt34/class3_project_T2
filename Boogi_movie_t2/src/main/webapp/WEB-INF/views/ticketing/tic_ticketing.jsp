@@ -26,354 +26,354 @@
         background-color: #FFD700; /* 선택된 항목의 배경색을 설정합니다. */
     }
 
-.final_list {
-	width: 100%;
-	margin-left: 5px;
-	margin-top: 5px;
-	padding-top: 20px;
-}
-
-body {
-	margin: 0px;
-}
-
-/* 스크롤바 설정*/
-.scroll::-webkit-scrollbar {
-	width: 18px;
-	height: 18px;
-}
-
-/* 스크롤바 막대 설정*/
-.scroll::-webkit-scrollbar-thumb {
-	background-color: rgba(255, 255, 255, 1);
-	/* 스크롤바 둥글게 설정    */
-	border-radius: 10px;
-	border: 7px solid rgba(0, 0, 0, 0.8);
-}
-
-/* 스크롤바 뒷 배경 설정*/
-.scroll::-webkit-scrollbar-track {
-	background-color: rgba(0, 0, 0, 0);
-}
-
-.tic {
-	padding-right: 0 !important;
-	padding-left: 0 !important;
-}
-
-.tic_movie {
-	background-color: white;
-	height: 800px;
-	border-left: solid 3px black;
-	border-top: solid 3px black;
-	border-bottom: solid 3px black;
-	margin-right: 0;
-}
-
-.tic_theater {
-	background-color: white;
-	height: 800px;
-	padding: 0px;
-	border: solid 3px black;
-}
-
-.tic_final {
-	background-color: white;
-	height: 800px;
-	padding: inherit;
-	border-right: solid 3px black;
-	border-top: solid 3px black;
-	border-bottom: solid 3px black;
-}
-
-.explain {
-	height: 10%;
-	border-bottom: solid 3px black;
-	padding: 20px;
-	text-align:center;
-	font-size: 22px;
-	word-break: keep-all;
-}
-
-.list {
-	height: calc(90% - 20px); /* 내부 padding과 border 높이를 고려한 계산 */
-	padding: 5px;
-}
-
-li {
-	list-style-type: none;
-}
-
-ul {
-	padding-left: 5px !important;
-}
-
-.daylist {
-	height: 10%;
-	border-bottom: solid 3px black;
-	display: flex; /* Flexbox 설정 */
-	align-items: center; /* 버튼을 수직으로 가운데 정렬 */
-}
-
-.scroll_button {
-	cursor: pointer;
-	padding: 5px;
-	border: none;
-	width: 50px;
-	height: 50px;
-	top: 50%;
-	transform: translateY(-50%);
-}
-
-.scroll-button.left {
-	left: 0;
-}
-
-.scroll-button.right {
-	right: 0;
-}
-
-button img {
-	height: 100%;
-	width: 100%;
-}
-
-.daylist button {
-	margin: 0 5px; /* 버튼들 사이의 간격 조절 */
-}
-
-.movielist {
-	height: calc(95% - 80px);
-	padding-left: 20px;
-	overflow-y: scroll;
-	white-space: nowrap;
-}
-
-.select_container {
-	margin-top: -15px;
-	position: relative;
-	height: 10%;
-	margin-left: 140px;
-	width: 200px;
-}
-
-.movie_atrbt {
-	height: 80px;
-}
-
-.theaterlist {
-	overflow-y: scroll; /* 세로 스크롤이 필요할 때만 스크롤을 표시합니다. */
-	max-height: 100%; /* 부모 요소의 높이에 맞게 조절합니다. */
-	white-space: nowrap;
-	padding-left: 10px;
-}
-
-.daylist {
-	white-space: nowrap; /* 일자 목록이 가로로 나열되도록 설정합니다. */
-	overflow-x: scroll; /* 가로 스크롤을 표시합니다. */
-}
-
-.finallist {
-	height: 95%;
-	padding: inherit;
-}
-
-.finalmovielist {
-	height: calc(90% - 50px);
-	padding-left: 10px;
-	overflow-y: scroll;
-	white-space: nowrap;
-}
-
-*, *::before, *::after {
-	box-sizing: border-box;
-}
-
-:root { -
-	-select-border: #777; -
-	-select-focus: blue; -
-	-select-arrow: var(- -select-border);
-}
-
-select {
-	appearance: none;
-	background-color: transparent;
-	border: none;
-	padding: 0 1em 0 0;
-	margin: 0;
-	width: 100%;
-	font-family: inherit;
-	font-size: 80%;
-	cursor: inherit;
-	line-height: inherit;
-	z-index: 1;
-	&::
-	-ms-expand
-	{
-	display
-	:
-	none;
-}
-
-outline
-:
- 
-none
-;
-
-
-}
-.select {
-	display: grid;
-	grid-template-areas: "select";
-	align-items: center;
-	position: relative;
-	select
-	,
-	&
-	:
-	:
-	after
-	{
+	.final_list {
+		width: 100%;
+		margin-left: 5px;
+		margin-top: 5px;
+		padding-top: 20px;
+	}
 	
-    
-	grid-area
+	body {
+		margin: 0px;
+	}
+	
+	/* 스크롤바 설정*/
+	.scroll::-webkit-scrollbar {
+		width: 18px;
+		height: 18px;
+	}
+	
+	/* 스크롤바 막대 설정*/
+	.scroll::-webkit-scrollbar-thumb {
+		background-color: rgba(255, 255, 255, 1);
+		/* 스크롤바 둥글게 설정    */
+		border-radius: 10px;
+		border: 7px solid rgba(0, 0, 0, 0.8);
+	}
+	
+	/* 스크롤바 뒷 배경 설정*/
+	.scroll::-webkit-scrollbar-track {
+		background-color: rgba(0, 0, 0, 0);
+	}
+	
+	.tic {
+		padding-right: 0 !important;
+		padding-left: 0 !important;
+	}
+	
+	.tic_movie {
+		background-color: white;
+		height: 800px;
+		border-left: solid 3px black;
+		border-top: solid 3px black;
+		border-bottom: solid 3px black;
+		margin-right: 0;
+	}
+	
+	.tic_theater {
+		background-color: white;
+		height: 800px;
+		padding: 0px;
+		border: solid 3px black;
+	}
+	
+	.tic_final {
+		background-color: white;
+		height: 800px;
+		padding: inherit;
+		border-right: solid 3px black;
+		border-top: solid 3px black;
+		border-bottom: solid 3px black;
+	}
+	
+	.explain {
+		height: 10%;
+		border-bottom: solid 3px black;
+		padding: 20px;
+		text-align:center;
+		font-size: 22px;
+		word-break: keep-all;
+	}
+	
+	.list {
+		height: calc(90% - 20px); /* 내부 padding과 border 높이를 고려한 계산 */
+		padding: 5px;
+	}
+	
+	li {
+		list-style-type: none;
+	}
+	
+	ul {
+		padding-left: 5px !important;
+	}
+	
+	.daylist {
+		height: 10%;
+		border-bottom: solid 3px black;
+		display: flex; /* Flexbox 설정 */
+		align-items: center; /* 버튼을 수직으로 가운데 정렬 */
+	}
+	
+	.scroll_button {
+		cursor: pointer;
+		padding: 5px;
+		border: none;
+		width: 50px;
+		height: 50px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	.scroll-button.left {
+		left: 0;
+	}
+	
+	.scroll-button.right {
+		right: 0;
+	}
+	
+	button img {
+		height: 100%;
+		width: 100%;
+	}
+	
+	.daylist button {
+		margin: 0 5px; /* 버튼들 사이의 간격 조절 */
+	}
+	
+	.movielist {
+		height: calc(95% - 80px);
+		padding-left: 20px;
+		overflow-y: scroll;
+		white-space: nowrap;
+	}
+	
+	.select_container {
+		margin-top: -15px;
+		position: relative;
+		height: 10%;
+		margin-left: 140px;
+		width: 200px;
+	}
+	
+	.movie_atrbt {
+		height: 80px;
+	}
+	
+	.theaterlist {
+		overflow-y: scroll; /* 세로 스크롤이 필요할 때만 스크롤을 표시합니다. */
+		max-height: 100%; /* 부모 요소의 높이에 맞게 조절합니다. */
+		white-space: nowrap;
+		padding-left: 10px;
+	}
+	
+	.daylist {
+		white-space: nowrap; /* 일자 목록이 가로로 나열되도록 설정합니다. */
+		overflow-x: scroll; /* 가로 스크롤을 표시합니다. */
+	}
+	
+	.finallist {
+		height: 95%;
+		padding: inherit;
+	}
+	
+	.finalmovielist {
+		height: calc(90% - 50px);
+		padding-left: 10px;
+		overflow-y: scroll;
+		white-space: nowrap;
+	}
+	
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
+	
+	:root { -
+		-select-border: #777; -
+		-select-focus: blue; -
+		-select-arrow: var(- -select-border);
+	}
+	
+	select {
+		appearance: none;
+		background-color: transparent;
+		border: none;
+		padding: 0 1em 0 0;
+		margin: 0;
+		width: 100%;
+		font-family: inherit;
+		font-size: 80%;
+		cursor: inherit;
+		line-height: inherit;
+		z-index: 1;
+		&::
+		-ms-expand
+		{
+		display
+		:
+		none;
+	}
+	
+	outline
 	:
 	 
-	select;
-}
-
-min-width: 15ch ;
-  max-width: 30ch ;
-
-  border: 1px solid var(--select-border) ;
-  border-radius: 0.25em ;
-  padding: 0.25em 0.5em ;
-
-  font-size: 1.25rem ;
-  cursor: pointer ;
-  line-height: 1.1 ;
-
-  background-color: #fff ;
-  background-image: linear-gradient(to top, #f9f9f9, #fff 33 %) ;
-
-
-
-select:focus+.focus {
-	position: absolute;
-	top: -1px;
-	left: -1px;
-	right: -1px;
-	bottom: -1px;
-	border: 2px solid var(- -select-focus);
-	border-radius: inherit;
-}
-
-select[multiple] {
-	padding-right: 0;
-	/*
-   * Safari will not reveal an option
-   * unless the select height has room to 
-   * show all of it
-   * Firefox and Chrome allow showing 
-   * a partial option
-   */
-	height: 6rem; option { white-space : normal;
-	outline-color: var(- -select-focus);
-}
-
-/* 
-   * Experimental - styling of selected options
-   * in the multiselect
-   * Not supported crossbrowser
-   */
-&
-:not(:disabled) option {
-	border-radius: 12px;
-	transition: 120ms all ease-in; &: checked { background :
-	linear-gradient( hsl( 242, 61%, 76%), hsl( 242, 61%, 71%));
-	padding-left: 0.5em;
-	color: black !important;
-}
-
-}
-}
-.select--disabled {
-	cursor: not-allowed;
-	background-color: #eee;
-	background-image: linear-gradient(to top, #ddd, #eee 33%);
-}
-
-}
-.side_var {
-	margin-right: 50px;
-}
-
-.tic_main {
-	width: 1400px;
-	margin: 0 auto;
-}
-
-.tic_title {
-	margin: 30px auto;
-}
-
-.tic_row {
-	margin-bottom: 100px;
-	margin-left: 300px;
-}
-
-.tic_button {
-	margin: 0 auto;
-	margin-bottom: 100px;
-	width: 150px;
-}
-
-a {
-	text-decoration: none !important;
-	color: black !important;
-}
-
-.col-sm-6> ul{
-	margin-top: 20px;
-	margin-left: 5px;
-}
-.daylistBtn > input[type=button]{
-	padding: 10px 20px;
-	border: none;
-	background: white;
-}
-.daylistBtn > input[type=button].selected{
-	background: #c7cdff;
-	transition-duration: .1s;
-	padding: 10px 30px;
-}
-.daylistBtn{
-	margin: 0 15px;
-}
-*.selected {
-	background-color: #c7cdff;
-	padding: 10px 10px;
-	transition-duration: .1s;
-}
-* {
-	font-size: 20px;
-}
-.finalmovielist{
-	padding: 0px;
-}
-.final_list{
-	border: 1px solid #c7cdff;
-	background: #c7cdff;
-	color: black;
-	padding: 10px 20px;
-}
-.final_list.selected{
-	border: 1px solid #c7cdff;
-	background: #181934;
-	color: #c7cdff;
-	padding: 20px 20px;
-}
+	none
+	;
+	
+	
+	}
+	.select {
+		display: grid;
+		grid-template-areas: "select";
+		align-items: center;
+		position: relative;
+		select
+		,
+		&
+		:
+		:
+		after
+		{
+		
+	    
+		grid-area
+		:
+		 
+		select;
+	}
+	
+	min-width: 15ch ;
+	  max-width: 30ch ;
+	
+	  border: 1px solid var(--select-border) ;
+	  border-radius: 0.25em ;
+	  padding: 0.25em 0.5em ;
+	
+	  font-size: 1.25rem ;
+	  cursor: pointer ;
+	  line-height: 1.1 ;
+	
+	  background-color: #fff ;
+	  background-image: linear-gradient(to top, #f9f9f9, #fff 33 %) ;
+	
+	
+	
+	select:focus+.focus {
+		position: absolute;
+		top: -1px;
+		left: -1px;
+		right: -1px;
+		bottom: -1px;
+		border: 2px solid var(- -select-focus);
+		border-radius: inherit;
+	}
+	
+	select[multiple] {
+		padding-right: 0;
+		/*
+	   * Safari will not reveal an option
+	   * unless the select height has room to 
+	   * show all of it
+	   * Firefox and Chrome allow showing 
+	   * a partial option
+	   */
+		height: 6rem; option { white-space : normal;
+		outline-color: var(- -select-focus);
+	}
+	
+	/* 
+	   * Experimental - styling of selected options
+	   * in the multiselect
+	   * Not supported crossbrowser
+	   */
+	&
+	:not(:disabled) option {
+		border-radius: 12px;
+		transition: 120ms all ease-in; &: checked { background :
+		linear-gradient( hsl( 242, 61%, 76%), hsl( 242, 61%, 71%));
+		padding-left: 0.5em;
+		color: black !important;
+	}
+	
+	}
+	}
+	.select--disabled {
+		cursor: not-allowed;
+		background-color: #eee;
+		background-image: linear-gradient(to top, #ddd, #eee 33%);
+	}
+	
+	}
+	.side_var {
+		margin-right: 50px;
+	}
+	
+	.tic_main {
+		width: 1400px;
+		margin: 0 auto;
+	}
+	
+	.tic_title {
+		margin: 30px auto;
+	}
+	
+	.tic_row {
+		margin-bottom: 100px;
+		margin-left: 300px;
+	}
+	
+	.tic_button {
+		margin: 0 auto;
+		margin-bottom: 100px;
+		width: 150px;
+	}
+	
+	a {
+		text-decoration: none !important;
+		color: black !important;
+	}
+	
+	.col-sm-6> ul{
+		margin-top: 20px;
+		margin-left: 5px;
+	}
+	.daylistBtn > input[type=button]{
+		padding: 10px 20px;
+		border: none;
+		background: white;
+	}
+	.daylistBtn > input[type=button].selected{
+		background: #c7cdff;
+		transition-duration: .1s;
+		padding: 10px 30px;
+	}
+	.daylistBtn{
+		margin: 0 15px;
+	}
+	*.selected {
+		background-color: #c7cdff;
+		padding: 10px 10px;
+		transition-duration: .1s;
+	}
+	* {
+		font-size: 20px;
+	}
+	.finalmovielist{
+		padding: 0px;
+	}
+	.final_list{
+		border: 1px solid #c7cdff;
+		background: #c7cdff;
+		color: black;
+		padding: 10px 20px;
+	}
+	.final_list.selected{
+		border: 1px solid #c7cdff;
+		background: #181934;
+		color: #c7cdff;
+		padding: 20px 20px;
+	}
 </style>
 </head>
 

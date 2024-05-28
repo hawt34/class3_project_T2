@@ -146,9 +146,7 @@ $(function () {
 			alert("동의를 선택하셔야 문의가 가능합니다.");
 			$("#csc_checkbox").focus();
 			event.preventDefault();
-		}
-		
-		if($("#oto_category").val() =='') {
+		} else if($("#oto_category").val() =='') {
 			alert("문의유형을 선택해 주세요.");
 			$("#oto_category").focus();
 			event.preventDefault();

@@ -54,7 +54,7 @@
 					</div>
 					<div class="mb-3">
 						<label for="movie_stillCut1">스낵이미지</label> 
-						<input type="text" id="item_info_image" name="item_info_image"  class="form-control" required />
+						<input type="file" id="item_info_image" name="item_info_image"  class="form-control" required />
 						<div class="invalid-feedback">스낵이미지를 선택해주세요.</div>
 					</div>
 					<div class="mb-4" align="center">

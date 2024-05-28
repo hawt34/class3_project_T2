@@ -22,7 +22,9 @@
   font-weight: 400;
   font-style: normal;
 }
-
+h6{ 
+ 	margin-top:30px; 
+} 
 
 </style>
 </head>
@@ -62,8 +64,10 @@
 				<hr>
 				<blockquote class="bluejeans">
 					<br>
-					<div class="main">
+					<div class="main col-5">
 						<h3>${member.member_name}님 안녕하세요!</h3>
+						<hr>
+						<h6>보유중인 포인트 : ${member.member_point}</h6>
 					</div>
 <!-- 					<section class="content"> -->
 						<div class="col-6 box3">
@@ -108,7 +112,7 @@
 									        <td>${map.theater_info}</td>
 									        <td>${map.session_time}</td>
 									        <td>${map.ticket_seat_info}</td>
-									        <td>${map.total_ticket_price}</td>
+									        <td>${map.ticket_price}</td>
 									    </tr>
 								</c:forEach>
 							</c:when>
@@ -154,73 +158,6 @@
 					      <div class="modal-footer"> <!-- 모달 폼 극장 전체 리스트 -->
 								<button type="button" onclick="sendCheckedValues(event)" class="btn btn-outline-primary btn-lg"  class="btn btn-secondary" data-bs-dismiss="modal" name="theaterIds">확인</button>
 					      </div><!--modal-footer  --> <!-- 모달 폼 극장 전체 리스트 -->
-					      
-<!-- <<<<<<< HEAD -->
-					      
-<!-- 					      <script type="text/javascript"> -->
-<!-- 					      function initializeModal() { -->
-<!-- 					    	    var myTheaters = [ -->
-<%-- 					    	      "${member.member_my_theater1}", --%>
-<%-- 					    	      "${member.member_my_theater2}", --%>
-<%-- 					    	      "${member.member_my_theater3}" --%>
-<!-- 					    	    ]; -->
-
-<!-- 					    	    $('.form-check-input').each(function() { -->
-<!-- 					    	      var theaterName = $(this).val(); -->
-<!-- 					    	      if (myTheaters.includes(theaterName)) { -->
-<!-- 					    	        $(this).prop('checked', true); -->
-<!-- 					    	        count++; -->
-<!-- 					    	      } else { -->
-<!-- 					    	        $(this).prop('checked', false); -->
-<!-- 					    	      } -->
-<!-- 					    	    }); -->
-<!-- 					    	  } -->
-					      
-					      
-<!-- 						    function sendCheckedValues(event) { -->
-<!-- 						        var checkedValues = []; // 선택된 체크박스의 값을 저장할 배열 -->
-<!-- 						        var checkboxes = document.querySelectorAll('.form-check-input:checked'); // 선택된 체크박스들을 가져옴 -->
-						        
-<!-- 						        checkboxes.forEach(function(checkbox) { -->
-<!-- 						            checkedValues.push(checkbox.value); // 배열에 선택된 체크박스의 값을 추가 -->
-<!-- 						        }); -->
-						        
-<!-- // 						        // checkedValues 배열의 길이가 3이 되도록 null 값 추가 -->
-<!-- 						        while (checkedValues.length < 3) { -->
-<!-- 						            checkedValues.push(null); -->
-<!-- 						        } -->
-						        
-<%-- 						        var member_id = "${member.member_id}"; // memberId를 가져옴 --%>
-<!-- // 						        var member_id = document.getElementById("member_id").value; -->
-<!-- 						        $.ajax({ -->
-<!-- 						            url: "api/myp_my_theater", -->
-<!-- 						            type: "POST", -->
-<!-- 						            dataType: "json", -->
-<!-- 						            contentType: "application/json", // 서버에게 내용이 JSON임을 알려줌 -->
-<!-- 						            data: JSON.stringify({ member_id: member_id, checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송 -->
-<!-- 						            success: function(response) { -->
-<!-- 						            	if(response){ -->
-<!-- 						            		alert("영화 정보 등록을 성공하였습니다"); -->
-<!-- 							                location.reload();	 -->
-<!-- 						            	} -->
-						                
-<!-- 						            }, -->
-<!-- 						            error: function(xhr, status, error) { -->
-<!-- 						                console.error("Error details:", xhr, status, error); // 디버깅 정보 출력 -->
-
-<!-- 						                alert("에러ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ : " + error); -->
-<!-- 						            } -->
-<!-- 						        }); -->
-<!-- 						    } -->
-<!-- 						</script> -->
-					      
-					      
-					      
-					      
-					      
-					      
-<!-- ======= -->
-<!-- >>>>>>> branch 'main' of https://github.com/hawt34/class3_project_T2.git -->
 					    </div><!-- modal-content -->
 					  </div> <!-- modal-dialog -->
 					</div><!-- modal fade 모달 div 끝 -->

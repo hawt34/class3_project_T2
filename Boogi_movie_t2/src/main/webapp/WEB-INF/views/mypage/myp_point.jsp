@@ -38,6 +38,11 @@
 }
 
 .text{text-align : center;}
+
+h6{
+	text-align : right;
+	padding-top : 20px;
+}
 </style>
 </head>
 <body>
@@ -52,7 +57,14 @@
 				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div>	<!-- col-md-2 사이드바  -->
 			<div class="col-md-9">
-				<h2>포인트</h2>
+				<div class="row">
+				<div class="col-9">
+					<h2>포인트</h2>
+				</div>
+				<div class="col-3">
+					<h6><b>보유중인 포인트 : ${member.member_point}</b></h6>
+				</div>
+				</div>
 				<hr>
 				<!-- 탭 메뉴 -->
 				<div class="row">
@@ -70,6 +82,9 @@
 						</li>
 					</ul>
 					</div>
+<!-- 					<div class="text1 col-3"> -->
+<%-- 						<b>보유중인 포인트 : ${member.member_point}</b> --%>
+<!-- 					</div> -->
 				</div>
 					<!-- 내용 -->
 					<!-- ----------------------------- -->
@@ -88,6 +103,7 @@
 						  <tbody>
 							  <c:choose>
 							  	<c:when test="${not empty combinedList }">
+<%-- 							  		<td colspan="5" class="text1"><b>보유중인 포인트 : ${member.member_point}</b></td> --%>
 								  	<c:forEach items="${combinedList}" var="item" varStatus="status">
 									<fmt:parseDate var="parsedDate" value="${item.date}" 
 									pattern="yyyy-MM-dd'T'HH:mm:ss" type="both"/>
@@ -122,6 +138,7 @@
 								  			 </td>
 								  		</tr>
 								  	</c:forEach>
+<%-- 							  		<td colspan="5" class="text1">보유중인 포인트 : ${member.member_point}</td> --%>
 						  		</c:when>
 							  	<c:otherwise>
 							  		<td colspan="5" class="text">적립한 포인트가 존재하지 않습니다.</td>

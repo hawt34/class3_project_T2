@@ -276,7 +276,7 @@
 			<label class="person_option">일반</label>
 			
 			<div class="custom-select">
-		  	<select onchange="updateSeatSelection(this.value, 'NP')">
+		  	<select onchange="updateSeatSelection(this.value, 'NP')" id ="focus">
 			    <option>0명</option>
 			    <option value="1">1명</option>
 			    <option value="2">2명</option>
@@ -364,8 +364,30 @@
 "></script>
 <script>
 //폼 제출 이벤트 처리
+// 폼 제출 이벤트 처리
 document.getElementById('fr').onsubmit = function (event) {
     event.preventDefault(); // 기본 제출 이벤트 방지
+
+    // 선택된 좌석 수와 총 인원 수 확인
+    var totalPersonCount = selectedPersonCount['NP'] + selectedPersonCount['YP'] + selectedPersonCount['OP'];
+
+    // 선택된 좌석이 없거나 모든 인원 선택이 0명인 경우 제출을 막음
+    if (totalPersonCount === 0) {
+        alert("인원을 선택해주세요.");
+        $("#focus").focus();
+        return;
+    }
+
+    if (selectedSeatNumbers.length === 0) {
+        alert("좌석을 선택해주세요.");
+        return;
+    }
+
+    // 선택된 좌석 수가 총 인원 수와 일치하지 않는 경우 제출을 막음
+    if (selectedSeatNumbers.length < totalPersonCount) {
+        alert("선택한 인원 수와 일치하는 좌석 수를 선택해주세요.");
+        return;
+    }
 
     // 선택된 좌석 정보 업데이트
     document.getElementById('selected_seats').value = selectedSeatNumbers.join(", ");

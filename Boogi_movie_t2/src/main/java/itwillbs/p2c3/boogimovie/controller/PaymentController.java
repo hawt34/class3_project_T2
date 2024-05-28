@@ -151,9 +151,11 @@ public class PaymentController {
 		System.out.println("아이디 : " + member.getMember_id() + ", use_point : " + use_point);
 		
 		member = service.getMember(member);
+		if(member.getMember_point() < use_point) {
+			return "false";
+		} 
 		
-		
-		return !(member.getMember_point() < use_point)+""; 
+		return "true"; 
 		
 	} // memberPoint()
 	

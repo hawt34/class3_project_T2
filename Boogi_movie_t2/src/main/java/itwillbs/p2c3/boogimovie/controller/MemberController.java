@@ -342,7 +342,7 @@ public class MemberController {
 	}
 	
 	
-	@PostMapping("member_reg_member_complete")
+	@GetMapping("member_reg_member_complete")
 	public String memberRegMemberComplete(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("sId");
 		if(id == null) {
@@ -350,7 +350,7 @@ public class MemberController {
 			return "error/fail";
 			
 		}
-		System.out.println("회원가입처리완료");
+		
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		session.removeAttribute("member");
 		model.addAttribute("member_name",member.getMember_name());

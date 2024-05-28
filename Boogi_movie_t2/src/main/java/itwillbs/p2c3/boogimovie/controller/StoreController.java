@@ -26,7 +26,6 @@ import itwillbs.p2c3.boogimovie.vo.ItemInfoVO;
 
 @Controller
 public class StoreController {
-	
 
 	@Autowired
 	private ItemInfoService service;
@@ -56,14 +55,14 @@ public class StoreController {
 	@PostMapping("add_to_cart")
 	@ResponseBody
 	public ResponseEntity<?> addToCart(@RequestBody CartVO cartItems, HttpSession session) {
-		
+
 		List<CartVO> cart = (List<CartVO>) session.getAttribute("cart");
 
 		if (cart == null) {
 			cart = new ArrayList<>();
 			session.setAttribute("cart", cart);
 		}
-		
+
 //		System.out.println("----- 클릭한 상품 ------");
 //		System.out.println(cartItems);
 //		
@@ -86,7 +85,7 @@ public class StoreController {
 	// 장바구니에서 상품 제거
 	@PostMapping("remove_from_cart")
 	@ResponseBody
-	public ResponseEntity<?> removeFromCart(@RequestParam int item_info_num,HttpSession session) {
+	public ResponseEntity<?> removeFromCart(@RequestParam int item_info_num, HttpSession session) {
 		List<CartVO> cart = (List<CartVO>) session.getAttribute("cart");
 
 		if (cart != null) {
@@ -103,7 +102,7 @@ public class StoreController {
 		}
 
 		// 아이템이 없는 경우
-		Map<String, String> response = new HashMap<String , String>();
+		Map<String, String> response = new HashMap<String, String>();
 		response.put("message", "장바구니에서 해당 상품을 찾을 수 없습니다.");
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 	}

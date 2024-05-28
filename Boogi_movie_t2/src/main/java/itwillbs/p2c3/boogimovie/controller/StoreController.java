@@ -55,7 +55,7 @@ public class StoreController {
 
 	@PostMapping("add_to_cart")
 	@ResponseBody
-	public ResponseEntity<?> addToCart(@RequestBody List<CartVO> cartItems, HttpSession session) {
+	public ResponseEntity<?> addToCart(@RequestBody CartVO cartItems, HttpSession session) {
 		
 		List<CartVO> cart = (List<CartVO>) session.getAttribute("cart");
 
@@ -63,18 +63,22 @@ public class StoreController {
 			cart = new ArrayList<>();
 			session.setAttribute("cart", cart);
 		}
+		
+//		System.out.println("----- 클릭한 상품 ------");
+//		System.out.println(cartItems);
+//		
+//		System.out.println("----- 세션안에 cart -----");
+//		System.out.println(cart);
 
-		for (CartVO newItem : cartItems) {
-			for (CartVO existingItem : cart) {
-				if (existingItem.getItem_info_num() == newItem.getItem_info_num()) {
-					Map<String, String> response = new HashMap<>();
-					response.put("msg", "이미 장바구니에 담은 품목입니다.");
-					return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
-				}
+		for (CartVO existingItem : cart) {
+			if (existingItem.getItem_info_num() == cartItems.getItem_info_num()) {
+				Map<String, String> response = new HashMap<>();
+				response.put("msg", "이미 장바구니에 담은 품목입니다.");
+				return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
 			}
-			// 장바구니에 상품을 추가합니다.
-			cart.add(newItem);
 		}
+		// 장바구니에 상품을 추가합니다.
+		cart.add(cartItems);
 		// 정상적으로 장바구니에 추가되었음을 응답합니다.
 		return ResponseEntity.ok().body(cartItems);
 	}

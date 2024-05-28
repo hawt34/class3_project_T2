@@ -342,7 +342,7 @@ public class MemberController {
 	}
 	
 	
-	@PostMapping("member_reg_member_complete")
+	@GetMapping("member_reg_member_complete")
 	public String memberRegMemberComplete(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("sId");
 		if(id == null) {

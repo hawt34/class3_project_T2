@@ -84,11 +84,8 @@ public class ReviewController {
 	public String deleteReview(int review_num, Model model, ReviewVO review, HttpSession session) {
 		// System.out.println("삭제리뷰"+ review_num);
 		String sessionId = (String) session.getAttribute("sId");
-
-		if (sessionId == null || !sessionId.equals(review.getMember_id())) {
-			model.addAttribute("msg", "삭제 권한이 없습니다!");
-			return "error/fail";
-		}
+		
+	
 
 		int deleteCount = service.deleteReview(review_num);
 		if (deleteCount > 0) {

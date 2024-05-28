@@ -105,7 +105,11 @@ public class MovieController {
 	// 영화검색
 	@GetMapping("searchMovie")
 	public String searchMovie(@RequestParam(defaultValue = "") String searchKeyword, Model model) {
-
+		 if (searchKeyword.isEmpty()) {
+		        // 검색어가 없는 경우
+		        model.addAttribute("msg", "검색어를 입력해주세요.");
+		        return "error/fail";
+		    }
 		List<MovieVO> movieList = movieService.searchMovie(searchKeyword);
 
 		if (!movieList.isEmpty()) {

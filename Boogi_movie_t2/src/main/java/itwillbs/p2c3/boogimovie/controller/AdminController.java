@@ -1345,12 +1345,13 @@ public class AdminController {
 			model.addAttribute("targetURL", "member_login");
 			return "error/fail";
 		}
-
+		
 		//전체리스트를 담는 걸 하나 만듬.
 		
 		List<ItemInfoVO> itemFull = service.getItmeListFull();
 		model.addAttribute("itemFull", itemFull);
 		//전체리스트 담는 거 확인완료
+				
 		return "admin/admin_store/admin_store";
 	}
 	// 아이템 수정폼으로 일단 와서
@@ -1395,7 +1396,7 @@ public class AdminController {
 	
 	
 	@PostMapping("admin_store_pro")
-	public String adminStorePro(ItemInfoVO insertItem,Model model, HttpSession session) {
+	public String adminStorePro(ItemInfoVO insertItem,Model model, HttpSession session, ItemInfoVO item) {
 		
 		String id = (String)session.getAttribute("sId");
 		
@@ -1407,6 +1408,21 @@ public class AdminController {
 		
 		//System.out.println("여기는 스토어프로 인설트 아이템 확인" + insertItem); 데이터 확인완료
 		ItemInfoVO dbItem =  service.getItem(insertItem.getItem_info_name());
+		String uploadDir = "resources/images"; 
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		System.out.println("실제 업로드 경로(session): " + saveDir);
+		// 실제 업로드 경로
+		
+		Path path = Paths.get(saveDir);
+		
+		try {
+			// Files 클래스의 createDirectories() 메서드 호출하여 실제 경로 생성
+			Files.createDirectories(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//MultipartFile mfile1 = insertItem.getItem_info_image();
 		
 		if(dbItem != null) {
 			model.addAttribute("msg", "이미 등록된 스토어 아이템입니다!");

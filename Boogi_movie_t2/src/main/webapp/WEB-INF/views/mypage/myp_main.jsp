@@ -252,7 +252,7 @@ h6{
 	        data: JSON.stringify({ member_id: member_id, checkedValues: checkedValues }), // JSON 문자열로 변환하여 전송
 			success: function(response) {
 				if(response){
-					alert("영화 정보 등록을 성공하였습니다");
+					alert("나의 극장 정보 등록을 성공하였습니다");
 				    location.reload();	
 				}
 				  

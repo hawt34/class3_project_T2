@@ -108,7 +108,7 @@
 									        <td>${map.theater_info}</td>
 									        <td>${map.session_time}</td>
 									        <td>${map.ticket_seat_info}</td>
-									        <td>${map.total_ticket_price}</td>
+									        <td>${map.ticket_price}</td>
 									    </tr>
 								</c:forEach>
 							</c:when>

@@ -227,7 +227,7 @@ footer {
 			numShown += 4; // 4개씩 추가로 보여주기
 			$(".movie:lt(" + numShown + ")").show();
 
-			let newHeight = $("section").height() + 400;
+			let newHeight = $("section").height() + 500;
 			$("section").height(newHeight);
 			// 모든 영화를 보여주었을 경우 더보기 버튼 숨기기
 			// 상영 예정작은 영화 수가 작아서 일단 주석처리

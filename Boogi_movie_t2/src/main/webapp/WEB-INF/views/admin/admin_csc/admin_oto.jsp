@@ -205,7 +205,7 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="oto" items="${otoList }">
+							<c:forEach var="oto" items="${otoList }" varStatus="status">
 								<tr>
 									<td>${oto.oto_num }</td>
 									<td>${oto.member_id }</td>
@@ -217,7 +217,7 @@
 										<fmt:formatDate value="${parseOtoDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
 									</td>
 									<td>
-										<span id="oto_reply_status">${oto.oto_reply_status }</span>
+										<span id="oto_reply_status${status.index }">${oto.oto_reply_status }</span>
 									</td> 
 									<td>
 										<c:choose>
@@ -294,9 +294,11 @@ $(function () {
 		console.log(theaterName);
 	});
 	
-	if($("#oto_reply_status").text() == '답변') {
-		$("#oto_reply_status").css("color", "green");
-	}
+	$("[id^='oto_reply_status']").each(function() {
+		if($(this).text() == '답변') {
+			$(this).css("color", "green");
+		}
+	});
 	
 	
 }); 

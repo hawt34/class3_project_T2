@@ -365,7 +365,7 @@ tbody tr:hover {
 				let screenSelect = $('#screenSelect').val();
 				let movieSelect = $('#movieSelect').val();
 				let scs_date = $('#scs_date').val();
-				
+				$('#movieEndTime').val(""); // 기존옵션 제거
 				if(theaterSelect == "" ){
 					alert("극장정보를 선택해주세요");
 					$('#scs_date').val("");
@@ -402,16 +402,20 @@ tbody tr:hover {
 		 				for(movieTime of data){
 // 		 					debugger;
 		 					var time = movieTime.scs_start_time;
-		 					
+		 					var endTime = movieTime.scs_end_time;
 		 					// 9시 이전 시간이 넘어올때는 startTime을 9시로 설정
 		 					if (time < 9){
 		 						time = 9;
 		 					} else {
 		 						time = movieTime.scs_start_time;
 		 					}
+		 					if(endTime < 9){
+		 						endTime = 24;
+		 					} else{
+		 						endTime = movieTime.scs_end_time;
+		 					}
 		 					
-		 					
-		 					for(let i = time; i < movieTime.scs_end_time; i++){
+		 					for(let i = time; i <= endTime; i++){
 		 						$("#hourSelect option[value='"+i+":00']").prop('disabled',true).css({"background": "lightgray", "color" : "white"});
 		 						console.log("i: " + i);
 		 					}

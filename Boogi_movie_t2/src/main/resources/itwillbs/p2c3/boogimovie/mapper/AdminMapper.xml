@@ -495,7 +495,7 @@
 				screen_cinema_num = #{screen_cinema_num}
 		</if>
 		ORDER BY 
-			ss.scs_date
+			ss.scs_start_time
 <!-- 		LIMIT  -->
 <!-- 			#{startRow} -->
 <!-- 			, #{listLimit} -->

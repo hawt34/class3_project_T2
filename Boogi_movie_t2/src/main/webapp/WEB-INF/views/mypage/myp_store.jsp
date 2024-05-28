@@ -119,7 +119,7 @@ hr{
 							</thead>
 							<tbody>
 								<c:choose>
-									<c:when test="${not empty storePay }">
+									<c:when test="${not empty storePay}">
 										<c:forEach var="storePay" items="${storePay}" varStatus="status">
 										    <c:if test="${storePay.store_pay_status == '결제'}">
 										        <tr class="${status.index % 2 == 0 ? 'table-secondary' : ''}">
@@ -139,6 +139,7 @@ hr{
 										</c:forEach>
 									</c:when>
 									<c:otherwise>
+										<td>스토어 결제내역이 존재하지 않습니다.</td>
 										<td colspan="6" class="box3">스토어 결제내역이 존재하지 않습니다.</td>
 									</c:otherwise>
 								</c:choose>
@@ -147,7 +148,6 @@ hr{
 					</div>
 					<!-- 결제 탭 -->
 				<!-- 취소 탭 -->
-<%--                 <div class="tab-pane fade ${status == '취소' ? 'show active' : ''}" id="storeCancel" role="tabpanel" aria-labelledby="storeCancel-tab"> --%>
 				<div class="tab-pane fade" id="storeCancel" role="tabpanel"aria-labelledby="storeCancel-tab">
 					<table class="table table-hover" >
 						<thead>

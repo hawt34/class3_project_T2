@@ -207,7 +207,7 @@ body {
 				</div>
 			</div>
 			<div class="dropdown">
-				<button class="dropdown-btn">예매</button>
+				<button class="dropdown-btn" onclick="location.href='tic_ticketing'">예매</button>
 				<div class="dropdown-submenu">
 					<a href="tic_ticketing">빠른예매</a> 
 <!-- 					<a href="#none">상영스케줄</a> -->

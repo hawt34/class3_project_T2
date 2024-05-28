@@ -36,27 +36,19 @@ public class MypageService {
 
 	// My극장 자주가는 영화관
 	public MemberVO getMyTheater(MemberVO member) {
-		System.out.println("MypageService - getMyTheater()");
 		return mapper.selectMyTheater(member);
 	}
 	
 	// 예매내역 
-//	public List<Map<String , Object>> getMovieReservation(MemberVO member) {
-//		System.out.println("MypageService - getMovieReservation()");
-//		return mapper.selectMovieReservation(member);
-//	}
 	public List<Map<String , Object>> getMovieReservation(Map<String, Object> param) {
-		System.out.println("MypageService - getMovieReservation()");
-		// 파라미터 맵에 member_id 추가
-//		param.put("member_id", member.getMember_id());
 		return mapper.selectMovieReservation(param);
 	}
 	
 	
 	// 예매내역 페이징처리
-	public List<Map<String, Object>> getResvList(int startRow, int listLimit, String member_id){
-		return mapper.selectResvList(startRow, listLimit, member_id);
-	}
+//	public List<Map<String, Object>> getResvList(int startRow, int listLimit, String member_id){
+//		return mapper.selectResvList(startRow, listLimit, member_id);
+//	}
 	
 	public int getResvCount(String member_id, String status) {
 		return mapper.selectResvCount(member_id, status);
@@ -72,15 +64,13 @@ public class MypageService {
 		return mapper.selectStorePayCount(member_id);
 	}
 	
-//	// 취소내역
+	// 취소내역
 	public List<Map<String, Object>> getCancelList(MemberVO member){
-		System.out.println("MypageService - getCancelList()");
 		return mapper.selectCancelList(member);
 	}
 	
 	// 회원정보
 	public MemberVO getDbMember(MemberVO member) {
-		System.out.println("MypageInfoService - getDbMember");
 		return mapper.selectDbMember(member);
 	}
 	
@@ -109,14 +99,12 @@ public class MypageService {
 	
 	// 탈퇴처리
 	public int withdrawMember(MemberVO member) {
-		System.out.println("MypageInfoService - withdrawMember()");
 		return mapper.updateMemberForWithdraw(member);
 	}
 	
 	// 예매취소
 	@Transactional
 	public int removeMovie(String id,int ticket_pay_num) {
-		System.out.println("mypService - updateMovieStatus");
 		Integer coupon_num = mapper.selectCouponNum(ticket_pay_num);
 		if(coupon_num != null) {
 			mapper.updateCouponStatus(id, coupon_num);
@@ -129,6 +117,7 @@ public class MypageService {
 		return mapper.updatePayStatus(id,ticket_pay_num);
 	}
 
+	// 스토어 취소
 	public int removeStore(StorePayVO storePay) {
 		String id = storePay.getMember_id();
 		int store_pay_num = storePay.getStore_pay_num();
@@ -137,6 +126,7 @@ public class MypageService {
 		if(coupon_num != null) {
 			mapper.updateCouponStatus(id, coupon_num);
 		}
+		
 		StorePayVO dbStorePay = mapper.selectStorePayPoint(id, store_pay_num);
 		dbStorePay.setMember_id(id);
 		dbStorePay.setStore_pay_num(store_pay_num);

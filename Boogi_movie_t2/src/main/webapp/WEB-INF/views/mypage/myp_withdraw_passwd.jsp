@@ -120,14 +120,9 @@ input[type=text]:focus, input[type=password]:focus {
         }
 
         // 비밀번호를 서버로 전송하여 비교하는 로직을 구현합니다.
-        // 이 코드는 실제로 서버에서 처리해야 합니다.
         // 여기서는 단순히 비밀번호를 가져오는 로직만을 작성합니다.
         // 만약 비밀번호가 서버로 전송되어야 한다면, 비밀번호를 서버로 전송하는 코드를 추가해야 합니다.
         // 여기서는 비밀번호를 서버로 전송하지 않고 클라이언트에서만 처리합니다.
-
-        // 비밀번호를 폼 데이터에 추가합니다.
-        // 이렇게 하면 컨트롤러로 비밀번호가 함께 전송됩니다.
-//         document.getElementById('withdrawForm').insertAdjacentHTML('beforeend', '<input type="hidden" name="member_pwd" value="' + passwordValue + '">');
         document.getElementById('withdrawForm').insertAdjacentHTML('beforeend', '<input type="hidden" name="password" value="' + passwordValue + '">');
 
         // 폼을 서버로 제출합니다.

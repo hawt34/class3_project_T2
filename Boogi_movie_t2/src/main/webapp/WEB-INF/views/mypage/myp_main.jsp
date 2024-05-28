@@ -152,7 +152,7 @@ h6{
 					    <div class="modal-content">
 					    
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLabel">자주가는 극장</h5>
+					        <h5 class="modal-title" id="exampleModalLabel">MY 극장</h5>
 					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					      </div><!-- modal-header -->
 					      

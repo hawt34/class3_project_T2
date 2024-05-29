@@ -1264,7 +1264,7 @@ public class AdminController {
 		// 조회 시작 행 번호
 		int startRow = (pageNum - 1) * listLimit;
 		
-		// 이거 주석 처리 해놓은거 풀고 쓰시면 됩니다
+//		 이거 주석 처리 해놓은거 풀고 쓰시면 됩니다
 //		List<Map<String, String>> payList = service.getPayList(searchKeyword, startRow, listLimit);
 //		
 //		int listCount = service.getPayListCount(searchKeyword, startRow, listLimit);
@@ -1279,10 +1279,11 @@ public class AdminController {
 //		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 //		model.addAttribute("payList", payList);
 //		model.addAttribute("pageInfo", pageInfo);
+		
 		StorePayVO store_pay = new StorePayVO();
 		
 		
-		List<StorePayVO> store_pay_list = service.selectStorePay(store_pay);
+		List<StorePayVO> store_pay_list = service.selectStorePay(store_pay, startRow, listLimit);
 		
 		model.addAttribute("store_pay_list", store_pay_list);
 		

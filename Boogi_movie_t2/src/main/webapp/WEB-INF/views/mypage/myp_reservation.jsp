@@ -121,7 +121,7 @@ h3{
                                             <div class="col-md-4 d-grid gap-5">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.movie_name}">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.scs_date}">
-                                                <input type="text" readonly class="form-control-plaintext" value="${map.theater_info}">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
                                             </div>
                                             <div class="col-md-4 d-grid gap-5">
                                                 <input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example" disabled readonly>
@@ -129,7 +129,7 @@ h3{
                                                 <input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example" disabled readonly>
                                             </div>
                                             <div class="col-md-3 d-grid gap-5">
-                                                <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.theater_info}">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.ticket_seat_info}">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.ticket_pay_price}">
                                             </div>
@@ -175,11 +175,13 @@ h3{
                                 <table class="table2 table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">구매 구분</th>
-                                            <th scope="col">구매 극장</th>
-                                            <th scope="col">적립일</th>
-                                            <th scope="col">적립</th>
+                                            <th scope="col"><b>#</b></th>
+                                            <th scope="col"><b>영화</b></th>
+                                            <th scope="col"><b>관람날짜</b></th>
+                                            <th scope="col"><b>상영시간</b></th>
+                                            <th scope="col"><b>상영관</b></th>
+                                            <th scope="col"><b>관람좌석</b></th>
+                                            <th scope="col"><b>취소금액</b></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -190,8 +192,8 @@ h3{
                                                 <th scope="row">${status.index + 1}</th>
                                                 <td>${map.movie_name}</td>
                                                 <td>${map.scs_date}</td>
-                                                <td>${map.theater_info}</td>
                                                 <td>${map.session_time}</td>
+                                                <td>${map.theater_info}</td>
                                                 <td>${map.ticket_seat_info}</td>
                                                 <td>${map.ticket_pay_price}</td>
                                             </tr>

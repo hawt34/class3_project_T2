@@ -292,7 +292,7 @@
 		WHERE movie_name = #{movie_name}
 	</select>
 	
-<!-- 	영화 등록하기 -->
+<!-- 영화 등록하기 -->
 	<insert id="insertMovie">
 		INSERT INTO movie
 		(	  movie_name

@@ -110,7 +110,7 @@ hr{
 							    <tr>
 								    <th scope="col"><b>#</b></th>
 								    <th scope="col"><b>구매일</b></th>
-								    <th scope="col"><b>결제내역</b></th>
+								    <th scope="col"><b>구매내역</b></th>
 								    <th scope="col"><b>결제금액</b></th>
 								    <th scope="col"><b>결제수단</b></th>
 								    <th scope="col"><b>취소</b></th>

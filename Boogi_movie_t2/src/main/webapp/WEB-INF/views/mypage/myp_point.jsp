@@ -90,11 +90,11 @@ h6{
 						<table class="table2 table table-hover" >
 						  <thead>
 						    <tr>
-						      <th scope="col">#</th>
-						      <th scope="col">구매 구분</th>
-						      <th scope="col">구매 극장</th>
-						      <th scope="col">적립일</th>
-						      <th scope="col">적립</th>
+						      <th scope="col"><b>#</b></th>
+						      <th scope="col"><b>구매 구분</b></th>
+						      <th scope="col"><b>구매 극장</b></th>
+						      <th scope="col"><b>적립일</b></th>
+						      <th scope="col"><b>적립</b></th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -148,11 +148,11 @@ h6{
 							<table class="table2 table table-hover" >
 							  <thead>
 							    <tr>
-							      <th scope="col">#</th>
-							      <th scope="col">사용 구분</th>
-							      <th scope="col">사용 극장</th>
-							      <th scope="col">사용일</th>
-							      <th scope="col">사용</th>
+							      <th scope="col"><b>#</b></th>
+							      <th scope="col"><b>사용 구분</b></th>
+							      <th scope="col"><b>사용 극장</b></th>
+							      <th scope="col"><b>사용일</b></th>
+							      <th scope="col"><b>사용</b></th>
 							    </tr>
 							  </thead>
 							  <tbody>

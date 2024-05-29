@@ -130,8 +130,10 @@ public class MemberController {
 		return "error/fail";
 		
 	}
+	
 	@GetMapping("Member_email_auth")
 	public String MemberEmailAuth(MailAuthInfoVO auth_info, Model model, HttpSession session) {
+		System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddd");
 		MailAuthInfoVO db_auth_info = service.selectAuthInfo(auth_info);
 		if(db_auth_info == null) {
 			model.addAttribute("msg", "인증정보조회실패");

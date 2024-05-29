@@ -13,7 +13,7 @@ public class MailService {
 	public MailAuthInfoVO sendAuthMail(MemberVO member) {
 		String auth_code = GenerateRandomCode.getRandomCode(50);
 		String subject = "(。O ⩊ O。)[BoogiMovie](。O ⩊ O。)";
-		String content = "<a href='http://localhost:8081/test2/Member_email_auth?member_id=" + member.getMember_id() 
+		String content = "<a href='http://c3d2401t2.itwillbs.com/boogimovie/Member_email_auth?member_id=" + member.getMember_id() 
 						+ "&auth_code=" + auth_code + "'>비밀번호 재설정 링크!</a>";
 		SendMailClient mailClient = new SendMailClient();
 		

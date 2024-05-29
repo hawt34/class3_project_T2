@@ -90,6 +90,7 @@
 											<td>
 												<c:choose>
 													<c:when test="${notice.notice_category eq '전체' }">
+														부기무비
 													</c:when>
 													<c:otherwise>
 														${notice.theater_name }

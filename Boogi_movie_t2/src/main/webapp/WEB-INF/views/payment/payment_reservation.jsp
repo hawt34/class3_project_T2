@@ -44,6 +44,12 @@
 		font-weight: bold;
 		color: #0054FF;
 	}
+	
+	#person_info {
+		font-size: 13px;
+	}
+	
+	
 </style>
 <script>
 	console.log("${keyword}");
@@ -173,38 +179,38 @@
 									<div class="col text-center">
 										<img src="${scs.movie_poster}" id="movie_poster" alt="포스터썸네일" style="width: 250px;" >
 									</div>
-									<div class="col">
+									<div class="col float-start">
 										<ul class="list-group list-group-flush">
-											<li class="list-group-item">
+											<li class="list-group-item float-start">
 												<p><!-- 영화 제목 -->
 													<span id="movie_name">${scs.movie_name}</span> | 
-													<span id="movie_name">${scs.screen_dimension}</span>
+													<span id="screen_dimension">${scs.screen_dimension}</span>
 												</p>
 											</li>
-											<li class="list-group-item">
+											<li class="list-group-item float-start">
 												<p><!-- 극장명, 상영관 명 -->
 													<span id="theater_name">${scs.theater_name} / </span>
 													<span id="screen_cinema_num">${scs.screen_cinema_num}관</span>
 												</p>
 											</li>
-											<li class="list-group-item">
+											<li class="list-group-item float-start">
 												<p>좌석 <!-- 선택된 좌석 -->
 													<span id="selected_seats">${selected_seats}</span>
 												</p>
 											</li>
-											<li class="list-group-item">
+											<li class="list-group-item float-start">
 												<p> <!-- 상영 시간 -->
 													<span id="select_date">${formattedDate}</span>
 												</p>
 											</li>
-											<li class="list-group-item">
+											<li class="list-group-item float-start">
 												<p><!-- 상영 시작 시간~ 끝나는 시간 -->
 													<img src="${pageContext.request.contextPath}/resources/images/pay_clock.svg" style="width: 15px;">
 													<span id="scs_start_time"> ${scs.scs_start_time}</span> ~
 													<span id="scs_end_time">${scs.scs_end_time}</span>
 												</p>
 											</li>
-											<li class="list-group-item">
+											<li class="list-group-item float-start">
 												<p><!-- 예매 인원 정보 -->
 													<span id="person_info">${person_info}</span>
 												</p>
@@ -300,6 +306,15 @@
 	</footer>
 	
 <script>
+	window.addEventListener('popstate', function(event) {
+	    history.pushState(null, null, location.href);
+	    let confirmation = confirm("이전 페이지로 이동할 수 없습니다.\n\n메인 화면으로 이동하시겠습니까?");
+	    if (confirmation) {
+	        location.href = "/"; // 메인화면 URL에는 실제로 메인 화면의 URL을 넣어주어야 합니다.
+	    } 
+	});
+	
+	
  	$(function() {
  		
 		// 포인트 조회 버튼 눌러서 포인트 가져오기
@@ -333,7 +348,15 @@
 				
 				return;
 			}
-
+			
+			let point = $("#useMemberPoint").val();
+			let regex = /^[1-9][0-9]*00$/; // 숫자만 입력 가능, 100원 단위로만(마지막 두 자리는 0으로만) 입력 가능
+			
+			if(!regex.exec(point)) {
+				alert("100원 단위 숫자만 입력 가능합니다.");
+				$("#useMemberPoint").val("");
+			} 
+			
 			let total_fee = document.querySelector("#total_fee").innerText; // 넘어온 총 결제 값
 			let use_point = $("#useMemberPoint").val();	// 입력된 사용할 포인트 값
 			
@@ -342,28 +365,6 @@
 // 			let use_coupon = $("#getMemberCoupon").val();
 			let discount_sum = parseInt(use_point) + parseInt(coupon_apply); 		// 결제란 적용된 비타민 + 쿠폰 항목
 			let final_amount = parseInt(total_fee) - parseInt(discount_sum); 		// 현재 최종 값 - 총 할인금액 
-			
-			
-			
-// 			if(use_point > $("#getMemberPoint").val()) {
-// 		 			alert("포인트를 사용할 수 없습니다.");
-// 		 		} else {
-// 		 			if(confirm ("포인트를 사용하시겠습니까?")){
-// 		 				if(discount_sum < parseInt(total_fee)) {
-// 				 			$("#point_apply").html(use_point);			// 적용할 포인트 값
-// 				 			$("#final_amount").html(final_amount+"원");		// 총 결제금액에  적용 값 
-// 				 			$("#discount_sum").html(discount_sum); 		// 총 할인 적용 값
-// 		 				} else {
-// 		 					alert("결제 금액을 초과할 수 없습니다.");
-// 		 					$("#useMemberPoint").val("");
-// 		 					$("#useMemberPoint").focus();
-// 		 				}
-// 		 			} else {
-// 		 				$("#useMemberPoint").val("");
-// 		 			}
-// 		 		}
-			
-			
 			
 			
 			$.ajax({
@@ -395,10 +396,11 @@
 			 			}
 			 		}
 					
-				}, 
-				error : function() {
-					alert("사용할 포인트를 입력하세요.");
 				}
+// 			 	, 
+// 				error : function() {
+// 					alert("사용할 포인트를 입력하세요.");
+// 				}
 				
 			}); // ajax
 			

@@ -323,6 +323,16 @@ public class AdminService {
 		return mapper.selectStorePay(store_pay, startRow, listLimit);
 	}
 
+	// 결제 리스트 조회
+	public List<StorePayVO> selectStorePayList(String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectStorePayList(searchKeyword, startRow, listLimit);
+	}
+	
+	// 결제 리스트 수
+	public int getStorePayListCount( String searchKeyword, int startRow, int listLimit) {
+		return mapper.getStorePayListCount(searchKeyword, startRow, listLimit);
+	}
+
 	public StorePayVO selectStorePayDetail(int store_pay_num) {
 		return mapper.selectStorePayDetail(store_pay_num);
 	}

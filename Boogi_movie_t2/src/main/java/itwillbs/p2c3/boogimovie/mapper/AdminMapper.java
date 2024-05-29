@@ -239,4 +239,10 @@ public interface AdminMapper {
 	StorePayVO selectStorePayDetail(int store_pay_num);
 
 	List<CartVO> selectCart(int store_pay_num);
+	
+	List<StorePayVO> selectStorePayList(@Param("searchKeyword") String searchKeyword,@Param("startRow") int startRow,@Param("listLimit") int listLimit);
+	
+	int getStorePayListCount(@Param("searchKeyword") String searchKeyword,@Param("startRow") int startRow,@Param("listLimit") int listLimit);
+	
+	
 }

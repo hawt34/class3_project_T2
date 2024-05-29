@@ -1264,26 +1264,26 @@ public class AdminController {
 		// 조회 시작 행 번호
 		int startRow = (pageNum - 1) * listLimit;
 		
+		List<StorePayVO> store_pay_list = service.selectStorePayList(searchKeyword, startRow, listLimit);
+		
 //		 이거 주석 처리 해놓은거 풀고 쓰시면 됩니다
 //		List<Map<String, String>> payList = service.getPayList(searchKeyword, startRow, listLimit);
 //		
-//		int listCount = service.getPayListCount(searchKeyword, startRow, listLimit);
+		int listCount = service.getStorePayListCount(searchKeyword, startRow, listLimit);
+//		
 //		// 페이징 숫자 갯수
-//		int pageListLimit = 5;
-//		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
-//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-//		int endPage = startPage + pageListLimit - 1;
-//		if(endPage > maxPage) {
-//		endPage = maxPage;
-//		}
-//		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
+		int pageListLimit = 5;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1: 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+		endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 //		model.addAttribute("payList", payList);
-//		model.addAttribute("pageInfo", pageInfo);
-		
-		StorePayVO store_pay = new StorePayVO();
+		model.addAttribute("pageInfo", pageInfo);
 		
 		
-		List<StorePayVO> store_pay_list = service.selectStorePay(store_pay, startRow, listLimit);
 		
 		model.addAttribute("store_pay_list", store_pay_list);
 		

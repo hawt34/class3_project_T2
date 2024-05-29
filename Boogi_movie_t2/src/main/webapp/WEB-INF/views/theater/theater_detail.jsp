@@ -30,8 +30,8 @@
 		
 		if (count > maxCount) {						// 만약 count 값이 maxCount 값보다 큰 경우라면
 			alert("최대 3개까지만 선택가능합니다!");	// alert 창을 띄움
-		field.checked = false;						// (마지막 onclick한)field 객체의 checked를 false(checked가 아닌 상태)로 만든다.
-		count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
+			field.checked = false;						// (마지막 onclick한)field 객체의 checked를 false(checked가 아닌 상태)로 만든다.
+			count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
 		}
 	}
 				      

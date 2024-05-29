@@ -271,15 +271,15 @@
 		<jsp:include page="../inc/admin_footer.jsp"></jsp:include>
 	</footer>
 <script>
+	window.addEventListener('popstate', function(event) {
+	    history.pushState(null, null, location.href);
+	    let confirmation = confirm("이전 페이지로 이동할 수 없습니다.\n\n메인 화면으로 이동하시겠습니까?");
+	    if (confirmation) {
+	        location.href = "/"; // 메인화면 URL에는 실제로 메인 화면의 URL을 넣어주어야 합니다.
+	    } 
+	});
+
  	$(function() {
- 		
- 		// 총 결제 금액 
-//  		let totalFee = 0;
-//  	    $(".total_price").each(function() {
-//  	        totalFee += parseInt($(this).text());
-//  	    });
-//  	    $("#total_fee").text(totalFee);
-//  	    $("#final_amount").text(totalFee);
 	
 		// 포인트 조회 버튼 눌러서 포인트 가져오기
 		$("#getMemberPointBtn").on("click", function() {
@@ -311,6 +311,14 @@
 				$("#useMemberPoint").focus();
 				return;
 			}
+			
+			let point = $("#useMemberPoint").val();
+			let regex = /^[1-9][0-9]*00$/; // 숫자만 입력 가능, 100원 단위로만(마지막 두 자리는 0으로만) 입력 가능
+			
+			if(!regex.exec(point)) {
+				alert("100원 단위 숫자만 입력 가능합니다.");
+				$("#useMemberPoint").val("");
+			} 
 
 			let total_fee = document.querySelector("#total_fee").innerText; // 넘어온 총 결제 값
 			let use_point = $("#useMemberPoint").val();	// 입력된 사용할 포인트 값
@@ -351,9 +359,6 @@
 			 			}
 			 		}
 					
-				}, 
-				error : function() {
-					alert("사용할 포인트를 입력하세요.");
 				}
 				
 			});
@@ -547,6 +552,7 @@
 	    }) // .ajax
 
 	} // savePayInfo
+	
 	
 
 </script>

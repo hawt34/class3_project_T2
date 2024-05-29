@@ -430,7 +430,8 @@ public class AdminController {
 		
 		int updateCount = otoService.updateOtoContent(reply);
 		
-		if (updateCount > 0) {
+		String id = (String)session.getAttribute("sId");
+		if (updateCount > 0 && id.equals(oto.getMember_id())) {
 	        session.setAttribute("updateMessage", oto.getOto_subject() + "의 답변이 수정되었습니다. 확인하시겠습니까?");
 	        System.out.println(session.getAttribute("updateMessage"));
 	    }

@@ -207,9 +207,10 @@ $(function() {
     $("#faq_category").change(function() {
         let newFaqCategory = $(this).val();
         faqCategory = newFaqCategory || ""; // faqCategory 업데이트
-        console.log(newFaqCategory);
+        
         pageNum = 1;
-        getScroll(newFaqCategory, true, "");
+        faqSearchKeyword = '';
+        getScroll(newFaqCategory, true, faqSearchKeyword);
         $("#csc_faq_search").val("");
     });
     
@@ -223,6 +224,7 @@ $(function() {
         // 화면 하단까지 스크롤되었을 때 추가 데이터 가져오기
 		if (currentScroll >= documentHeight - windowHeight - bottom) {
 			console.log("스크롤 이벤트 발생 - pageNum = " + pageNum);
+			
 			getScroll(faqCategory, false, faqSearchKeyword); // 스크롤 이벤트 발생 시 getScroll() 함수 호출
         }
     });

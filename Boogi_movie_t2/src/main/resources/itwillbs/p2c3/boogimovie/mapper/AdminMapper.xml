@@ -292,7 +292,7 @@
 		WHERE movie_name = #{movie_name}
 	</select>
 	
-<!-- 	영화 등록하기 -->
+<!-- 영화 등록하기 -->
 	<insert id="insertMovie">
 		INSERT INTO movie
 		(	  movie_name
@@ -744,6 +744,9 @@
 		ON c.coupon_type_num = ct.coupon_type_num
 		ORDER BY
 			store_pay_date desc
+		LIMIT 
+		#{startRow}
+		, #{listLimit}
  	</select>
  	
  	<select id="selectStorePayDetail" resultType="itwillbs.p2c3.boogimovie.vo.StorePayVO">

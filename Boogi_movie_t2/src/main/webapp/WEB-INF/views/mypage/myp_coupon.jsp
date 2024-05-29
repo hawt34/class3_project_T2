@@ -52,10 +52,10 @@
 						<table class="table table-hover" >
 						  <thead>
 						    <tr>
-						      <th scope="col">#</th>
-						      <th scope="col">번호</th>
-						      <th scope="col">쿠폰 이름</th>
-						      <th scope="col">할인율</th>
+						      <th scope="col"><b>#</b></th>
+						      <th scope="col"><b>번호</b></th>
+						      <th scope="col"><b>쿠폰 이름</b></th>
+						      <th scope="col"><b>할인율</b></th>
 						    </tr>
 						  </thead>
 						  <tbody>

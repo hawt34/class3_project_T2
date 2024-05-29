@@ -319,8 +319,8 @@ public class AdminService {
 		return mapper.updateItem(item);
 	}
 
-	public List<StorePayVO> selectStorePay(StorePayVO store_pay) {
-		return mapper.selectStorePay(store_pay);
+	public List<StorePayVO> selectStorePay(StorePayVO store_pay, int startRow, int listLimit) {
+		return mapper.selectStorePay(store_pay, startRow, listLimit);
 	}
 
 	public StorePayVO selectStorePayDetail(int store_pay_num) {

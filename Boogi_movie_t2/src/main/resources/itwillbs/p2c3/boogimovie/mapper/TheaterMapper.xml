@@ -131,6 +131,11 @@
 		ORDER BY m.movie_num;
 	</select>
 	
+	<select id="getMyTheater">
+		SELECT *
+		FROM my_theater
+		WHERE member_id = #{member_id}
+	</select>
 	
 	
 </mapper>

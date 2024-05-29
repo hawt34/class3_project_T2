@@ -121,7 +121,7 @@ h3{
                                             <div class="col-md-4 d-grid gap-5">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.movie_name}">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.scs_date}">
-                                                <input type="text" readonly class="form-control-plaintext" value="${map.theater_info}">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
                                             </div>
                                             <div class="col-md-4 d-grid gap-5">
                                                 <input class="form-control box3 w-75" type="text" value="상영관" aria-label="Disabled input example" disabled readonly>
@@ -129,7 +129,7 @@ h3{
                                                 <input class="form-control box3 w-75" type="text" value="결제금액" aria-label="Disabled input example" disabled readonly>
                                             </div>
                                             <div class="col-md-3 d-grid gap-5">
-                                                <input type="text" readonly class="form-control-plaintext" value="${map.session_time}">
+                                                <input type="text" readonly class="form-control-plaintext" value="${map.theater_info}">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.ticket_seat_info}">
                                                 <input type="text" readonly class="form-control-plaintext" value="${map.ticket_pay_price}">
                                             </div>
@@ -175,11 +175,13 @@ h3{
                                 <table class="table2 table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">구매 구분</th>
-                                            <th scope="col">구매 극장</th>
-                                            <th scope="col">적립일</th>
-                                            <th scope="col">적립</th>
+                                            <th scope="col"><b>#</b></th>
+                                            <th scope="col"><b>영화</b></th>
+                                            <th scope="col"><b>관람날짜</b></th>
+                                            <th scope="col"><b>상영시간</b></th>
+                                            <th scope="col"><b>상영관</b></th>
+                                            <th scope="col"><b>관람좌석</b></th>
+                                            <th scope="col"><b>취소금액</b></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -190,8 +192,8 @@ h3{
                                                 <th scope="row">${status.index + 1}</th>
                                                 <td>${map.movie_name}</td>
                                                 <td>${map.scs_date}</td>
-                                                <td>${map.theater_info}</td>
                                                 <td>${map.session_time}</td>
+                                                <td>${map.theater_info}</td>
                                                 <td>${map.ticket_seat_info}</td>
                                                 <td>${map.ticket_pay_price}</td>
                                             </tr>
@@ -258,7 +260,7 @@ h3{
 			결제 후 3일 이내 취소 시 당일 카드사에서 환불처리. 3일 이후 매입 취소 시 카드사에 따라 3~10일 이내 카드사에서 환불
 			
 			휴대폰 결제
-			결제 일자 기준 당월(1~말일)취소만 가능. 익월 취소 관련 문의는 CGV고객센터(1544-1122) 연락 요망
+			결제 일자 기준 당월(1~말일)취소만 가능. 익월 취소 관련 문의는 고객센터(1544-1122) 연락 요망
 			예매취소 후 당일 환불이 원칙이나 현장 취소 시 경우에 따라 익일 처리 될 수 있음.
 			
 			카카오페이
@@ -284,7 +286,6 @@ h3{
 			계좌이체
 			1. 예매일 이후 7일 이내 취소 시
 			- 자동 환불 은행: 취소 후 즉시 처리가능
-			- 조흥, 신한, 외한, 한미, 우리, 우체국, 전북, 경남, 광주, 대구, 새마을, 제주
 			- 우리은행의 경우 당일 취소분만 즉시 처리 가능
 			- 수동 환불 은행: 농협(취소 후 2~3일 이내 입금), 부산/제일/우리(취소 후 3~5일 이내 입금)
 			
@@ -305,9 +306,9 @@ h3{
 			홈페이지 예매 취소는 상영시간 20분전까지 가능합니다.(단, 씨네&포레관, 씨네&리빙룸, SUITE CINEMA 제외)
 			상영시간 이후 취소나 환불은 되지 않습니다
 			
-			모바일 앱/웹(m.cgv.co.kr)에서 예매 취소할 경우
+			모바일 앱/웹에서 예매 취소할 경우
 			부분 취소는 불가합니다.(ex. 4장을 인터넷으로 예매한 경우 4장 모두 취소만 가능)
-			모바일 앱/웹 예매 취소는 상영시간 15분전까지 가능합니다.(단, 씨네&포레관, 씨네&리빙룸, SUITE CINEMA 제외)
+			모바일 앱/웹 예매 취소는 상영시간 15분전까지 가능합니다.
 			상영시간 이후 취소나 환불은 되지 않습니다.
 			
 			단, 일부 행사의 경우 행사 당일 취소, 변경 불가 합니다.

@@ -234,7 +234,7 @@ public interface AdminMapper {
 	int deleteItem(String item_info_name);
 	int updateItem(ItemInfoVO item);
 
-	List<StorePayVO> selectStorePay(StorePayVO store_pay);
+	List<StorePayVO> selectStorePay(@Param("store_pay") StorePayVO store_pay,@Param("startRow") int startRow,@Param("listLimit") int listLimit);
 
 	StorePayVO selectStorePayDetail(int store_pay_num);
 

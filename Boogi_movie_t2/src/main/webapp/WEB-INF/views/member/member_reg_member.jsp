@@ -176,15 +176,48 @@
 	        let msg = "";
 	        let color = "";
 	        let lengthRegx = /^[A-Za-z0-9!@#$%]{8,16}$/;
-	
-	        if (!lengthRegx.test(pwd)) {
-	            msg = "영문자, 숫자, 특수문자(!, @, #, $, %) 8~16자리 입력해주세요.";
+	        
+	        
+	        if (pwd === "") {
+	            msg = "";
+	            color = "";
+	        } else if (!lengthRegx.exec(pwd)) {
+	            msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
 	            color = "RED";
-	            riskCount = 1;
-	        } else {
-	            msg = "사용 가능한 비밀번호입니다.";
-	            color = "GREEN";
 	            riskCount = 0;
+	        } else {
+	            let engUpperRegex = /[A-Z]/;
+	            let engLowerRegex = /[a-z]/;
+	            let numRegex = /\d/;
+	            let specRegex = /[!@#$%]/;
+	            let count = 0;
+
+	            if (engUpperRegex.exec(pwd)) count++;
+	            if (engLowerRegex.exec(pwd)) count++;
+	            if (numRegex.exec(pwd)) count++;
+	            if (specRegex.exec(pwd)) count++;
+
+	            switch (count) {
+	                case 4:
+	                    msg = "안전";
+	                    color = "Green";
+	                    riskCount = 4;
+	                    break;
+	                case 3:
+	                    msg = "보통";
+	                    color = "Orange";
+	                    riskCount = 3;
+	                    break;
+	                case 2:
+	                    msg = "위험";
+	                    color = "RED";
+	                    riskCount = 2;
+	                    break;
+	                default:
+	                    msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
+	                    color = "RED";
+	                    riskCount = 0;
+	            }
 	        }
 	        $("#msg_pwd").text(msg);
 	        $("#msg_pwd").css("color", color);

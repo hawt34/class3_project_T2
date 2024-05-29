@@ -21,13 +21,13 @@
 
 
 .container1{
-	height : 900px;
-	width: 1400px; /* 해상도 1200*/
-	margin : auto;
+	height : 1300px;
 }
 
 .container2{
 	margin-top: 20px;
+	width: 1400px; /* 해상도 1200*/
+	margin : 0 auto;
 }
 
 .text1{
@@ -38,6 +38,10 @@
 .box1{
 	margin-top: 40px;
 	margin-left: 140px;
+}
+
+.row{
+	margin-top : 20px;
 }
 
 * {box-sizing: border-box}
@@ -77,7 +81,7 @@ input[type=text]:focus, input[type=password]:focus {
 </header>
 <div class="container1">
 	<div class="container2">
-		<div class="row">
+		<div class="row box2">
 			<div class="col-md-2">
 				<jsp:include page="../inc/myp_aside.jsp"></jsp:include>
 			</div><!-- col-md-2  -->
@@ -87,7 +91,6 @@ input[type=text]:focus, input[type=password]:focus {
 				<hr>
 				<div class="text1">
 					<h5>고객님의 개인정보를 위해 비밀번호를 재입력 해주세요.</h5>
-<!-- 				<div class="member_row"> -->
 				    <div class="form_item w-75 box1">
 				    	<input type="password"  id="passwordInput" required>
 				    </div><!-- form item -->

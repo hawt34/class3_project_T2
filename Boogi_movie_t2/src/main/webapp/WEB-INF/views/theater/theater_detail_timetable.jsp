@@ -45,6 +45,7 @@
 	        });
 	    });
 		
+
 	    
 	    $('.day_list').on('click', function() {
 	    	
@@ -162,7 +163,7 @@
 						<a class="nav-link day_list_move text-black" href="#"><img src="${pageContext.request.contextPath}/resources/images/chevron-left.svg"></a>
 					</li>
 					<!-- 오늘 버튼 -->
-					<li class="nav-item time_schedule_day ">
+					<li class="nav-item time_schedule_day">
 						<%
 	                    java.util.Calendar cal = java.util.Calendar.getInstance();
 	                    java.text.SimpleDateFormat sdf_date = new java.text.SimpleDateFormat("MM/dd");

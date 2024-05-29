@@ -108,12 +108,12 @@ hr{
 						<table class="table table-hover" >
 							<thead>
 							    <tr>
-								    <th scope="col">#</th>
-								    <th scope="col">구매일</th>
-								    <th scope="col">결제내역</th>
-								    <th scope="col">결제금액</th>
-								    <th scope="col">결제수단</th>
-								    <th scope="col">취소</th>
+								    <th scope="col"><b>#</b></th>
+								    <th scope="col"><b>구매일</b></th>
+								    <th scope="col"><b>결제내역</b></th>
+								    <th scope="col"><b>결제금액</b></th>
+								    <th scope="col"><b>결제수단</b></th>
+								    <th scope="col"><b>취소</b></th>
 						    	</tr>
 							</thead>
 							<tbody>
@@ -150,11 +150,11 @@ hr{
 					<table class="table table-hover" >
 						<thead>
 						    <tr>
-								<th scope="col">#</th>
-							    <th scope="col">취소일</th>
-							    <th scope="col">취소내역</th>
-							    <th scope="col">결제취소 금액</th>
-							    <th scope="col">결제취소 수단</th>
+								<th scope="col"><b>#</b></th>
+							    <th scope="col"><b>취소일</b></th>
+							    <th scope="col"><b>취소내역</b></th>
+							    <th scope="col"><b>결제취소 금액</b></th>
+							    <th scope="col"><b>결제취소 수단</b></th>
 							</tr>
 						</thead>
 						<tbody>

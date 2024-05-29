@@ -40,19 +40,19 @@
 					<div class="box1">
 						
 						<div class="box5">
-				   			<label for="member_name">이름</label>
+				   			<label for="member_name"><b>이름</b></label>
 						</div>
 					  	<div class="form_item w-75">
 					    	<input type="text" name="member_name" id="member_name" value="${member.member_name}" placeholder="이름을 입력" readonly>
 					    </div><!-- form item -->
 						<div class="box5">
-				   			<label for="member_id">아이디</label>
+				   			<label for="member_id"><b>아이디</b></label>
 				   		</div>
 					  	<div class="form_item w-75">
 				    		<input type="text"  placeholder="아이디 입력" name="member_id" id="member_id" title="영문대소문자, 숫자, _ 조합 4~16자리" pattern="^[A-Za-z0-9]\w{3,15}$" value="${member.member_id}" readonly required>
 					    </div><!-- form item -->
 						<div class="box5">
-			   				<label for="member_pwd">새 비밀번호</label>
+			   				<label for="member_pwd"><b>새 비밀번호</b></label>
 			   			</div>
 					  	<div class="form_item w-75">
 					    	<input type="password" placeholder="비밀번호 입력" name="member_pwd" id="member_pwd">
@@ -62,7 +62,7 @@
 					    </div><!-- form item -->
 						
 						<div class="box5">
-			   				<label for="member_pwd2">새 비밀번호확인</label>
+			   				<label for="member_pwd2"><b>새 비밀번호확인</b></label>
 					  	</div>
 					  	<div class="form_item w-75 ">
 					    	<input type="password" placeholder="비밀번호 확인" name="member_pwd2" id="member_pwd2">
@@ -72,7 +72,7 @@
 					    </div><!-- form item -->
 						
 						<div class="box5">
-			   				<label for="member_birth">생년월일</label>
+			   				<label for="member_birth"><b>생년월일</b></label>
 						</div>
 					  	<div class="form_item w-75">
 					    	<input type="text" placeholder="생년월일" name="member_birth" id="member_birth" readonly required value="${member.member_birth}">
@@ -80,7 +80,7 @@
 					    </div><!-- form item -->
 					    
 						<div class="box5">
-			   				<label for="member_addr">주소</label>
+			   				<label for="member_addr"><b>주소</b></label>
 			   			</div>
 					  	<div class="form_item w-75">
 							    <input type="text" id="post_code" name="member_post_code" size="6" readonly onclick="search_address()" value="${member.member_post_code }"  required placeholder="클릭 시 주소검색">
@@ -92,7 +92,7 @@
 					    </div><!-- form item -->
 					
 						<div class="box5">
-				   			<label for="member_email">Email</label>
+				   			<label for="member_email"><b>Email</b></label>
 						</div>
 					  	<div class="form_item w-75">
 					    	<input type="text" placeholder="이메일 입력" name="member_email" id="member_email" required value="${member.member_email}">
@@ -102,7 +102,7 @@
 					    </div><!-- form item -->
 					
 						<div class="box5">
-			   				<label for="member_tel">전화번호</label>
+			   				<label for="member_tel"><b>전화번호</b></label>
 			   			</div>
 					  	<div class="form_item w-75">
 					    	<input type="text" placeholder="-를 제외한 전화번호를 입력해주세요" name="member_tel" required id="member_tel" value="${member.member_tel}">
@@ -113,7 +113,7 @@
 					    
 			    		<div class="row">
 							<div class="box5">
-								<label for="movie_genre">영화취향</label>
+								<label for="movie_genre"><b>영화취향</b></label>
 							</div>
 							<div class="col-md-6 box3">
 							    <c:set var="genres" value="${fn:split(member.member_movie_genre, '/')}"/>

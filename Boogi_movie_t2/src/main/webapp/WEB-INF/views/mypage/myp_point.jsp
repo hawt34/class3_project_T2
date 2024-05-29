@@ -152,7 +152,7 @@ h6{
 							      <th scope="col"><b>구매 구분</b></th>
 							      <th scope="col"><b>사용 극장</b></th>
 							      <th scope="col"><b>사용일</b></th>
-							      <th scope="col"><b>취소 포인트</b></th>
+							      <th scope="col"><b>사용 포인트</b></th>
 							    </tr>
 							  </thead>
 							  <tbody>

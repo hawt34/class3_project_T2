@@ -49,11 +49,11 @@ public class TheaterController {
 		// 로그인한 경우
 		String sId = (String)session.getAttribute("sId");
 		
+		
 		if(sId != null) {
 			member.setMember_id(sId);
-			member = mypageService.getMyTheater(member);
-//			Map<String, String> myThaterMap = service.getMyTheater(member);
-			model.addAttribute("member", member);
+			Map<String, String> myTheaterMap = service.getMyTheater(member);
+			model.addAttribute("myTheater", myTheaterMap);
 		}
 		
 		// 극장 카테고리 공지사항 리스트 조회
@@ -94,8 +94,10 @@ public class TheaterController {
 		String sId = (String)session.getAttribute("sId");
 		if(sId != null) {
 			member.setMember_id(sId);
-			member = mypageService.getDbMember(member);
-			model.addAttribute("member", member);
+//			member = mypageService.getDbMember(member);
+//			model.addAttribute("member", member);
+			Map<String, String> myTheaterMap = service.getMyTheater(member);
+			model.addAttribute("myTheater", myTheaterMap);
 		}
 		
 		List<TheaterVO> theaterList = service.getTheater();

@@ -32,24 +32,6 @@
 		count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
 		}
 	}
-	
-	function initializeModal() {
-		var myTheaters = [
-			"${member.member_my_theater1}",
-			"${member.member_my_theater2}",
-			"${member.member_my_theater3}"
-		];
-
-		$('.form-check-input').each(function() {
-			var theaterName = $(this).val();
-			if (myTheaters.includes(theaterName)) {
-				$(this).prop('checked', true);
-				count++;
-			} else {
-				$(this).prop('checked', false);
-			}
-		});
-	}
 				      
 				      
 	function sendCheckedValues(event) {
@@ -65,7 +47,7 @@
 		    checkedValues.push(null);
 		}
 					        
-		var member_id = "${member.member_id}"; // memberId를 가져옴
+		var member_id = "${sId}"; // memberId를 가져옴
 		$.ajax({
 		    url: "api/myp_my_theater",
 		    type: "POST",
@@ -91,9 +73,9 @@
 	
 	function initializeModal() {
 		var myTheaters = [
-			"${member.member_my_theater1}",
-			"${member.member_my_theater2}",
-			"${member.member_my_theater3}"
+			"${myTheater.member_my_theater1}",
+			"${myTheater.member_my_theater2}",
+			"${myTheater.member_my_theater3}"
 		];
 
 		$('.form-check-input').each(function() {
@@ -129,15 +111,15 @@
 							<li><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"  onclick="initializeModal()">
 								<img src="${pageContext.request.contextPath}/resources/images/set.svg"> MY 극장 관리</button>
 							</li>
-							<!-- 체크된 MY극장 리스트 / member.member_my_theater1~3 -->
-							<c:if test="${not empty member.member_my_theater1}">
-								<li><a class="dropdown-item" href="#">${member.member_my_theater1}</a></li>
+							<!-- 체크된 MY극장 리스트 / myTheater.member_my_theater1~3 -->
+							<c:if test="${not empty myTheater.member_my_theater1}">
+								<li><a class="dropdown-item" href="theater_detail?theater_num=${myTheater.theater_num1}">${myTheater.member_my_theater1}</a></li>
 							</c:if>
-							<c:if test="${not empty member.member_my_theater2}">
-								<li><a class="dropdown-item" href="#">${member.member_my_theater2}</a></li>
+							<c:if test="${not empty myTheater.member_my_theater2}">
+								<li><a class="dropdown-item" href="theater_detail?theater_num=${myTheater.theater_num2}">${myTheater.member_my_theater2}</a></li>
 							</c:if>
-							<c:if test="${not empty member.member_my_theater3}">
-								<li><a class="dropdown-item" href="#">${member.member_my_theater3}</a></li>
+							<c:if test="${not empty myTheater.member_my_theater3}">
+								<li><a class="dropdown-item" href="theater_detail?theater_num=${myTheater.theater_num1}">${myTheater.member_my_theater3}</a></li>
 							</c:if>
 					 	</c:otherwise>
 					 </c:choose>

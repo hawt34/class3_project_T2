@@ -65,7 +65,7 @@ public interface TheaterMapper {
 	List<Map<String, Object>> getTheaterScsList(@Param("theater_num") int theater_num, @Param("scs_date") String scs_date);
 
 
-	Map<String, String>  getMyTheater(MemberVO member);
+	Map<String, String> getMyTheater(MemberVO member);
 
 
 

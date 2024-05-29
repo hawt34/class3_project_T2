@@ -94,7 +94,7 @@ h6{
 						      <th scope="col"><b>구매 구분</b></th>
 						      <th scope="col"><b>구매 극장</b></th>
 						      <th scope="col"><b>적립일</b></th>
-						      <th scope="col"><b>적립</b></th>
+						      <th scope="col"><b>적립 포인트</b></th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -149,10 +149,10 @@ h6{
 							  <thead>
 							    <tr>
 							      <th scope="col"><b>#</b></th>
-							      <th scope="col"><b>사용 구분</b></th>
+							      <th scope="col"><b>구매 구분</b></th>
 							      <th scope="col"><b>사용 극장</b></th>
 							      <th scope="col"><b>사용일</b></th>
-							      <th scope="col"><b>사용</b></th>
+							      <th scope="col"><b>취소 포인트</b></th>
 							    </tr>
 							  </thead>
 							  <tbody>

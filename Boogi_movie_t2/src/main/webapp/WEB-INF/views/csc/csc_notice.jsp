@@ -174,7 +174,7 @@ function getTheaterList(pageNum = 1, theaterName = '', noticeSearchKeyword = '')
 			$.each(noticeList, function(index, notice) {
 				//null 처리
 				if(notice.theater_name == null) {
-					notice.theater_name = '';
+					notice.theater_name = "부기무비";
 				}
 				
 				let tr = $("<tr>");

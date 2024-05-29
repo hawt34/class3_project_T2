@@ -122,7 +122,7 @@ th:nth-child(6), td:nth-child(6) {
 				</div>
 				
 				<div class="admin_movie_footer" align="center">
-					<button onclick="theaterForm()" >상영관 등록</button>
+					<button onclick="theaterForm()" >극장 등록</button>
 				</div>
 
 			</div>

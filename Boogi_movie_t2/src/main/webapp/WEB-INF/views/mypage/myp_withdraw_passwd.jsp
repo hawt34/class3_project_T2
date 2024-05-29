@@ -26,7 +26,7 @@
 
 .container2{
 	margin-top: 20px;
-	width: 1400px; /* 해상도 1200*/
+	width: 1400px; 
 	margin : 0 auto;
 }
 

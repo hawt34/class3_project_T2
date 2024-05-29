@@ -135,10 +135,25 @@
 				if(!regex.exec(ping)) {
 					$("#pingArea").text("boolean 형식만 입력 가능");
 					$("#pingArea").css("color","red");
+					$(this).val("");
 				} else {
 					$("#pingArea").text("");
 				}
 				
+				
+			});
+			
+			$(".ping").on("change",function() {
+				let ping = $(this).val();
+				let regex = /^[0-9]+(\.[0-9]+)?$/;
+				
+				if(!regex.exec(ping)) {
+					$("#pingArea").text("boolean 형식만 입력 가능");
+					$("#pingArea").css("color","red");
+					$(this).val("");
+				} else {
+					$("#pingArea").text("");
+				}
 				
 			});
 			

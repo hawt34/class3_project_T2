@@ -306,14 +306,7 @@
 	</footer>
 	
 <script>
-	window.addEventListener('popstate', function(event) {
-	    history.pushState(null, null, location.href);
-	    let confirmation = confirm("이전 페이지로 이동할 수 없습니다.\n\n메인 화면으로 이동하시겠습니까?");
-	    if (confirmation) {
-	        location.href = "/"; // 메인화면 URL에는 실제로 메인 화면의 URL을 넣어주어야 합니다.
-	    } 
-	});
-	
+
 	
  	$(function() {
  		
@@ -432,7 +425,7 @@
 			if(confirm ("선택하신 쿠폰을 사용하시겠습니까?")){
 				
 				if(discount_sum < parseInt(total_fee)) {
-		 			$("#getMemberCoupon").val(selectedCoupon); 	// 사용한 쿠폰 인풋 박스에 출력
+		 			$("#getMemberCoupon").val(selectedCoupon); 	// 사용한 쿠폰의 이름을 인풋 박스에 출력
 		 			$("#coupon_apply").html(selectedCoupon);	// 적용할 쿠폰 값
 		 			$("#final_amount").html(final_amount+"원");		// 총 결제금액 적용 값
 		 			$("#discount_sum").html(discount_sum);		// 총 할인 적용 값

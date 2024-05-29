@@ -89,6 +89,7 @@ $(function () {
 	
 	if ($("#notice_category").val() == "전체") {
         $("#theater_name_select").prop("disabled", true);
+        $("#notice_name").val("[부기무비]");
     } else {
         $("#theater_name_select").prop("disabled", false);
     }
@@ -96,7 +97,7 @@ $(function () {
 	$("#notice_category").change(function() {
 		if ($(this).val() == "전체") {
 		    $("#theater_name_select").val("none");
-		    $("#notice_name").val("");
+		    $("#notice_name").val("[부기무비]");
 		    $("#theater_name_select").prop("disabled", true);
 		} else if ($(this).val() == "극장") {
 			

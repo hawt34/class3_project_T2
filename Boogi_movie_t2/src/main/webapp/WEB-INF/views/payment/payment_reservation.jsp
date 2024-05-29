@@ -306,14 +306,7 @@
 	</footer>
 	
 <script>
-	window.addEventListener('popstate', function(event) {
-	    history.pushState(null, null, location.href);
-	    let confirmation = confirm("이전 페이지로 이동할 수 없습니다.\n\n메인 화면으로 이동하시겠습니까?");
-	    if (confirmation) {
-	        location.href = "/"; // 메인화면 URL에는 실제로 메인 화면의 URL을 넣어주어야 합니다.
-	    } 
-	});
-	
+
 	
  	$(function() {
  		

@@ -748,6 +748,35 @@
 		#{startRow}
 		, #{listLimit}
  	</select>
+
+ 	<!-- 스토어 결제리스트 조회 -->
+ 	<select id="selectStorePayList" resultType="itwillbs.p2c3.boogimovie.vo.StorePayVO">
+ 		SELECT s.store_pay_num ,s.member_id ,s.store_pay_type ,s.store_pay_date ,s.store_pay_price ,s.store_pay_status, s.store_pay_cancel_date , s.use_point , ct.coupon_value 
+		FROM store_pay s
+		LEFT JOIN coupon c  
+		ON  c.coupon_num = s.coupon_num 
+		LEFT JOIN coupon_type ct 
+		ON c.coupon_type_num = ct.coupon_type_num
+		<if test="!searchKeyword.equals('')">
+			WHERE
+				s.member_id LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		ORDER BY
+			store_pay_date desc
+		LIMIT 
+		#{startRow}
+		, #{listLimit}
+ 	</select>
+
+ 	<!-- 스토어 결제 수 -->
+ 	<select id="getStorePayListCount">
+ 		SELECT count(s.store_pay_num) 
+		FROM store_pay s
+		LEFT JOIN coupon c  
+		ON  c.coupon_num = s.coupon_num 
+		LEFT JOIN coupon_type ct 
+		ON c.coupon_type_num = ct.coupon_type_num
+ 	</select>
  	
  	<select id="selectStorePayDetail" resultType="itwillbs.p2c3.boogimovie.vo.StorePayVO">
  		SELECT s.store_pay_num ,s.member_id ,s.store_pay_type ,s.store_pay_date ,s.store_pay_price ,s.store_pay_status, s.store_pay_cancel_date , s.use_point , ct.coupon_value 

@@ -34,7 +34,7 @@
 			<div id="map" style="width:70%; height:400px; margin: auto;"></div>
 		</div><!-- theater_map 끝 -->
 		
-		
+		<br>
 		<!-- 극장 관련 이벤트 불러오기 -->
 		<div class="theater_main_cont" id="theater-event">
 			<div class="row">
@@ -57,6 +57,7 @@
 				</c:forEach>
 			</div>
 		</div>
+		<br>
 		<!-- 극장 관련 공지사항 불러오기 -->
 		<div class="theater_main_cont" id="theater-notice">
 			<div class="row">

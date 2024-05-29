@@ -433,7 +433,7 @@ public class AdminController {
 		String id = (String)session.getAttribute("sId");
 		if (updateCount > 0 && id.equals(oto.getMember_id())) {
 	        session.setAttribute("updateMessage", oto.getOto_subject() + "의 답변이 수정되었습니다. 확인하시겠습니까?");
-	        System.out.println(session.getAttribute("updateMessage"));
+	        System.out.println("ㅇㅇㅇㅇㅇ: " + session.getAttribute("updateMessage"));
 	    }
 		
 		return "redirect:/admin_oto?pageNum=" + pageNum;

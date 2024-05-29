@@ -141,7 +141,7 @@
 					</tr>
 					<tr>
 						<td colspan="4">
-							<textarea name="oto_content" rows="18" cols="90" style="resize: none" readonly >${oto.oto_content }</textarea>
+							<textarea name="oto_content" rows="15" cols="90" style="resize: none" readonly >${oto.oto_content }</textarea>
 						</td>
 					</tr>
 				</table>
@@ -149,7 +149,7 @@
 					<div id="oto_reply_title">
 						<h2>문의에 대한 답변 </h2><img alt="느낌표" src="${pageContext.request.contextPath }/resources/images/exclamationMark.png">
 					</div>
-					<textarea name="oto_reply_content" rows="18" cols="90" style="resize: none" readonly>${oto_reply.oto_reply_content }</textarea>
+					<textarea name="oto_reply_content" rows="15" cols="90" style="resize: none" readonly>${oto_reply.oto_reply_content }</textarea>
 				</div>
 				<!-- 답변 버튼 -->
 				<div class="detail_button">

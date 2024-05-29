@@ -205,7 +205,7 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="oto" items="${otoList }">
+							<c:forEach var="oto" items="${otoList }" varStatus="status">
 								<tr>
 									<td>${oto.oto_num }</td>
 									<td>${oto.member_id }</td>
@@ -216,11 +216,13 @@
 										<fmt:parseDate var="parseOtoDate" value="${oto.oto_date }" pattern="yyyy-MM-dd'T'HH:mm:ss" type="both" />
 										<fmt:formatDate value="${parseOtoDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
 									</td>
-									<td><span>${oto.oto_reply_status }</span></td> <!-- 답변 상태 -->
+									<td>
+										<span id="oto_reply_status${status.index }">${oto.oto_reply_status }</span>
+									</td> 
 									<td>
 										<c:choose>
 											<c:when test="${oto.oto_reply_status eq '답변'}">
-												<button type="button" class="btn btn-outline-primary" onclick="admin_oto_modify(${oto.oto_num},${param.pageNum })">답변수정</button>
+												<button type="button" class="btn btn-outline-primary" onclick="admin_oto_modify(${oto.oto_num},${pageNum })">답변수정</button>
 											</c:when>
 											<c:otherwise>
 												<button type="button" class="btn btn-outline-primary" onclick="admin_oto_reply(${oto.oto_num})">답변하기</button>
@@ -244,7 +246,7 @@
 				<c:otherwise>
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
-							<li class="page-item <c:if test="${param.pageNum eq 1 }">disabled</c:if>" >
+							<li class="page-item <c:if test="${pageNum eq 1 }">disabled</c:if>" >
 								<a class="page-link" href="admin_oto?pageNum=${param.pageNum - 1}&faqCategory=${faqCategory}&theaterName=${theaterName }"  >
 								<span aria-hidden="true" >&laquo;</span>
 								</a>
@@ -259,7 +261,7 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-							<li class="page-item <c:if test="${param.pageNum eq pageList.maxPage}">disabled</c:if>">
+							<li class="page-item <c:if test="${pageNum eq pageList.maxPage}">disabled</c:if>">
 								<a class="page-link" href="admin_oto?pageNum=${param.pageNum + 1}&faqCategory=${faqCategory}&theaterName=${theaterName}" >
 								<span aria-hidden="true">&raquo;</span>
 								</a>
@@ -290,6 +292,12 @@ $(function () {
 		let theaterName = $(this).val();
 		location.href="admin_oto?pageNum=" + pageNum + "&theaterName=" + theaterName;		
 		console.log(theaterName);
+	});
+	
+	$("[id^='oto_reply_status']").each(function() {
+		if($(this).text() == '답변') {
+			$(this).css("color", "green");
+		}
 	});
 	
 	

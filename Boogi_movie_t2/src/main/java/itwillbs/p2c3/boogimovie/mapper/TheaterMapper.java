@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
+import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterFacilityVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
@@ -62,6 +63,9 @@ public interface TheaterMapper {
 
 
 	List<Map<String, Object>> getTheaterScsList(@Param("theater_num") int theater_num, @Param("scs_date") String scs_date);
+
+
+	Map<String, String>  getMyTheater(MemberVO member);
 
 
 

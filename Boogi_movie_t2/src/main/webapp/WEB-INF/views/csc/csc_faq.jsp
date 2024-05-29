@@ -105,7 +105,7 @@ let faqCategory = '';
 let faqSearchKeyword = '';
 
 
-function getScroll(newFaqCategory = "", isEmpty, faqSearchKeyword = '') {
+function getScroll(newFaqCategory = "", isEmpty, faqSearchKeyword = "") {
 	
 	if (isLoading) return; // 이미 데이터를 불러오고 있는 중이라면 중복 요청 방지
 	isLoading = true; // 데이터 요청 중 플래그 설정
@@ -202,15 +202,15 @@ function updateView(faqNum) {
 
 $(function() {
 	//초기 로딩
-    getScroll("", false, '');
+    getScroll("", false, "");
     
     $("#faq_category").change(function() {
         let newFaqCategory = $(this).val();
-        faqCategory = newFaqCategory || ''; // faqCategory 업데이트
+        faqCategory = newFaqCategory || ""; // faqCategory 업데이트
         console.log(newFaqCategory);
-        console.log(faqCategory);
         pageNum = 1;
-        getScroll(newFaqCategory, true);
+        getScroll(newFaqCategory, true, "");
+        $("#csc_faq_search").val("");
     });
     
     $(document).scroll(function() {

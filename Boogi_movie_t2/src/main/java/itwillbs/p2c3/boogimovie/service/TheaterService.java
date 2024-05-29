@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import itwillbs.p2c3.boogimovie.mapper.TheaterMapper;
 import itwillbs.p2c3.boogimovie.vo.EventVO;
 import itwillbs.p2c3.boogimovie.vo.FeeAgeVO;
+import itwillbs.p2c3.boogimovie.vo.MemberVO;
 import itwillbs.p2c3.boogimovie.vo.NoticeVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterFacilityVO;
 import itwillbs.p2c3.boogimovie.vo.TheaterVO;
@@ -85,6 +86,10 @@ public class TheaterService {
 
 	public List<Map<String, Object>> getTheaterScsList(int theater_num, String scs_date) {
 		return mapper.getTheaterScsList(theater_num, scs_date);
+	}
+
+	public Map<String, String> getMyTheater(MemberVO member) {
+		return mapper.getMyTheater(member);
 	}
 
 	

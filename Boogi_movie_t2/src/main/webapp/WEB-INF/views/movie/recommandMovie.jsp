@@ -173,7 +173,7 @@ footer {
 									class="btn btn-outline-primary movieTicket">예매하기</button>
 							</c:when>
 							<c:otherwise>
-								<p>개봉예정작</p>
+								<p>상영예정작</p>
 							</c:otherwise>
 						</c:choose>
 						<button type="button"
@@ -184,7 +184,7 @@ footer {
 			<br>
 			<div class="more">
 				<button id="moreMoviesBtn" type="button"
-					class="btn btn-outline-primary">추천 영화 더보기</button>
+					class="btn btn-outline-primary">추천 영화 더 보기</button>
 			</div>
 			<h2 class="end-message">추천 영화가 다 출력되었습니다.</h2>
 		</section>

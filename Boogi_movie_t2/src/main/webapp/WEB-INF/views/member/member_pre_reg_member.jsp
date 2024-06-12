@@ -107,7 +107,7 @@ $(document).ready(function() {
         let regex = /^[a-zA-Z가-힣]{2,10}$/g;
         
         if (!regex.test(name)) {
-            $("#member_name").css("background-color", "red");
+            $("#member_name").css("background-color", "#CD853F");
             $("#name_span").text("올바른 이름형식(특수문자 불가, 영어 한글 2~10글자)를 입력해주세요");
         } else {
             $("#member_name").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
@@ -124,12 +124,12 @@ $(document).ready(function() {
 
         if (birth.length === 6) { // member_birth의 길이가 6일 때만 실행
             if (!regex.test(birth)) {
-                $("#member_birth").css("background-color", "red");
+                $("#member_birth").css("background-color", "#CD853F");
                 $("#birth_span").text("생년월일 6자리를 정확히 입력해주세요(예시 : 950211)");
             } else {
                 let validationResult = isValidDate(birth);
                 if (validationResult !== true) {
-                    $("#member_birth").css("background-color", "red");
+                    $("#member_birth").css("background-color", "#CD853F");
                     $("#birth_span").text(validationResult); // 유효성 검사 결과 메시지 출력
                 } else {
                     $("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
@@ -147,7 +147,7 @@ $(document).ready(function() {
         let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
         
         if (!regex.test(email)) {
-            $("#member_email").css("background-color", "red");
+            $("#member_email").css("background-color", "#CD853F");
             $("#email_span").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
         } else {
             $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)

@@ -140,7 +140,7 @@
 	
 	        if (!idRegx.test(id)) {
 	            msg = "아이디는 특수문자,한글을 제외한 8~20자리의 영어, 숫자만 입력 가능합니다.";
-	            color = "RED";
+	            color = "#CD853F";
 	            $("#msg_id").text(msg);
 	            $("#msg_id").css("color", color);
 	            dupIdCnt = 1;
@@ -157,7 +157,7 @@
 	            success: function(response) {
 	                if(response === "false" || response === false){
 	                    msg = "중복된 아이디입니다.";
-	                    color = "RED";
+	                    color = "#CD853F";
 	                    dupIdCnt = 1;
 	                } else {
 	                    msg = "사용 가능한 아이디입니다.";
@@ -183,7 +183,7 @@
 	            color = "";
 	        } else if (!lengthRegx.exec(pwd)) {
 	            msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
-	            color = "RED";
+	            color = "#CD853F";
 	            riskCount = 0;
 	        } else {
 	            let engUpperRegex = /[A-Z]/;
@@ -210,12 +210,12 @@
 	                    break;
 	                case 2:
 	                    msg = "위험";
-	                    color = "RED";
+	                    color = "#CD853F";
 	                    riskCount = 2;
 	                    break;
 	                default:
 	                    msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
-	                    color = "RED";
+	                    color = "#CD853F";
 	                    riskCount = 0;
 	            }
 	        }
@@ -232,7 +232,7 @@
 	
 	        if (pwd !== pwd2) {
 	            msg = "비밀번호가 일치하지 않습니다.";
-	            color = "RED";
+	            color = "#CD853F";
 	            riskCount = 1;
 	        } else {
 	            msg = "비밀번호가 일치합니다.";
@@ -251,7 +251,7 @@
 	
 	        if (address2.length < 2 || address2.length > 20) {
 	            msg = "상세 주소는 2~20자리 입력해주세요.";
-	            color = "RED";
+	            color = "#CD853F";
 	            riskCount = 1;
 	        } else {
 	            msg = "사용 가능한 상세 주소입니다.";
@@ -271,7 +271,7 @@
 	
 	        if (!emailRegx.test(email)) {
 	            msg = "올바른 이메일 형식이 아닙니다.";
-	            color = "RED";
+	            color = "#CD853F";
 	            riskCount = 1;
 	        } else {
 	            msg = "사용 가능한 이메일입니다.";
@@ -291,7 +291,7 @@
 	
 	        if (!telRegx.test(tel)) {
 	            msg = "올바른 전화번호 형식이 아닙니다.";
-	            color = "RED";
+	            color = "#CD853F";
 	            riskCount = 1;
 	        } else {
 	            msg = "사용 가능한 전화번호입니다.";

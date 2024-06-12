@@ -65,7 +65,7 @@
 		
 		    if (!lengthRegx.exec(pwd)) {
 		        msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
-		        color = "RED";
+		        color = "#CD853F";
 		    } else {
 		        let engUpperRegex = /[A-Z]/;
 		        let engLowerRegex = /[a-z]/;
@@ -89,11 +89,11 @@
 		                break;
 		            case 2:
 		                msg = "위험";
-		                color = "RED";
+		                color = "#CD853F";
 		                break;
 		            default:
 		                msg = "영문자, 숫자, 특수문자(!, @, #, $)를 포함한 8~16자리를 입력해주세요";
-		                color = "RED";
+		                color = "#CD853F";
 		        }
 		    }
 		
@@ -109,7 +109,7 @@
 	        let pwd2 = $("#member_pwd2").val();
 	        
 	        if (pwd2 != pwd) {
-	            $("#member_pwd2").css("background-color", "red");
+	            $("#member_pwd2").css("background-color", "#CD853F");
 	            $("#msg_pwd2").text("비밀번호가 일치하지 않습니다");
 	        } else {
 	            $("#member_pwd2").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)

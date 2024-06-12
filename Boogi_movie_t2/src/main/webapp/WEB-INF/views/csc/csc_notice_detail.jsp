@@ -24,6 +24,9 @@
 		text-decoration: none;
 		color:black;
 	}
+	body{
+		color: white;
+	}
 </style>
 </head>
 <body>

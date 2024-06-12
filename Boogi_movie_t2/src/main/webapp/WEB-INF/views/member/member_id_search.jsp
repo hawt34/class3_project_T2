@@ -61,7 +61,7 @@
 	        let regex = /^[a-zA-Z가-힣]{2,10}$/g;
 	        
 	        if (!regex.test(name)) {
-	            $("#member_name").css("background-color", "red");
+	            $("#member_name").css("background-color", "#CD853F");
 	            $("#msg_name").text("올바른 이름형식(특수문자 불가, 영어 한글 2~10글자)를 입력해주세요");
 	        } else {
 	            $("#member_name").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
@@ -76,7 +76,7 @@
 	        let birth = $("#member_birth").val();
 	        let regex = /^\d{6}$/g;
 	        if (!regex.test(birth)) {
-	            $("#member_birth").css("background-color", "red");
+	            $("#member_birth").css("background-color", "#CD853F");
 	            $("#msg_birth").text("생년월일 6자리를 입력해주세요(예시 : 950211)");
 	        } else {
 	            $("#member_birth").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)

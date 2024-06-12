@@ -61,7 +61,7 @@
 	        let regex = /^[a-zA-Z0-9]{8,20}$/g;
 	        
 	        if (!regex.test(id)) {
-	            $("#member_id").css("background-color", "red");
+	            $("#member_id").css("background-color", "#CD853F");
 	            $("#msg_id").text("특수문자, 한글 제외 8~20글자를 입력해주세요");
 	        } else {
 	            $("#member_id").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)
@@ -78,7 +78,7 @@
 	        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
 	        
 	        if (!regex.test(email)) {
-	            $("#member_email").css("background-color", "red");
+	            $("#member_email").css("background-color", "#CD853F");
 	            $("#msg_email").text("이메일 형식을 맞춰 입력해주세요 (example@example.exam)");
 	        } else {
 	            $("#member_email").css("background-color", ""); // 원래의 배경색으로 돌아갑니다 (빈 문자열로 설정)

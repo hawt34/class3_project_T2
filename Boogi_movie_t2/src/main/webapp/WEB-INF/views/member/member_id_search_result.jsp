@@ -15,22 +15,22 @@
 	.message{
 		margin-left : 500px;
 	}
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
-
-* {
-  font-family: "Nanum Gothic", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-</style>
 	
+	@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Hahmlet:wght@100..900&family=Nanum+Gothic&display=swap');
+
+	* {
+	  font-family: "Nanum Gothic", sans-serif;
+	  font-weight: 400;
+	  font-style: normal;
+	}
+	
+</style>
 </head>
 <body>
 
 <header>
 	<jsp:include page="../inc/admin_header.jsp"></jsp:include>
 </header>
-
 	
 <div class="row container">
 	<div class="col-md-2">

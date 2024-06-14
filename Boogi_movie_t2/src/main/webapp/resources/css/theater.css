@@ -171,7 +171,7 @@ table {
 
 .timetable_movie_area{
 	background-color : skyblue;
-	height: 50px;
+	height: 60px;
 	display: flex;
     flex-direction: column;
     justify-content: center;
@@ -185,7 +185,7 @@ table {
 
 .timetable_booth_area{
 	
-	height: 150px;
+	height: 130px;
 	display: flex;
     flex-direction: column;
     justify-content: center;
@@ -203,7 +203,7 @@ table {
 /* } */
 
 .timetable_dimension{
-	height:80px;
+	height:50px;
 	width:130px;
 	background-color : #f0f0f0;
 	display: flex;
@@ -211,7 +211,7 @@ table {
 }
 
 .timetable_time_seat {
-	height:80px;
+	height:50px;
 	width:130px;
 	display: flex;
 	justify-content: center;

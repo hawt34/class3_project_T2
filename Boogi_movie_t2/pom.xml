@@ -330,6 +330,14 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            <!-- 첫 줄에서 다음 오류 발생 시 maven-war-plugin 추가 -->
+            <!-- Exception java.lang.ExceptionInInitializerError: Cannot access defaults field of Properties [in thread "Worker-0: Building"] -->
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
+            <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-war-plugin</artifactId>
+			    <version>3.4.0</version>
+			</plugin>
         </plugins>
     </build>
 </project>
